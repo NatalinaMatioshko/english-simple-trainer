@@ -207,7 +207,6 @@ h1 {
 .chips,
 .mode-switch,
 .stats,
-.verb-tags,
 .controls {
   display: flex;
   flex-wrap: wrap;
@@ -289,8 +288,7 @@ h1 {
   color: var(--color-text-muted);
 }
 
-.filter-btn,
-.verb-chip-button {
+.filter-btn {
   padding: 0.5rem 0.8rem;
   border-radius: var(--radius-full);
   background: var(--color-surface-2);
@@ -298,8 +296,7 @@ h1 {
   color: var(--color-text);
 }
 
-.filter-btn.active,
-.verb-chip-button.active {
+.filter-btn.active {
   background: var(--color-accent);
   color: #2f2300;
   border-color: transparent;
@@ -444,10 +441,6 @@ h1 {
 .rules {
   padding-left: 1.2rem;
   margin: 0;
-}
-
-.hidden {
-  display: none !important;
 }
 
 @media (max-width: 900px) {
