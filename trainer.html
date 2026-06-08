@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="uk" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Present Simple Trainer for Petro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root,
+      [data-theme="light"] {
+        --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+        --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+        --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+        --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+        --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+        --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.25rem;
+        --space-6: 1.5rem;
+        --space-8: 2rem;
+        --space-10: 2.5rem;
+        --space-12: 3rem;
+        --color-bg: #f7f6f2;
+        --color-surface: #f9f8f5;
+        --color-surface-2: #ffffff;
+        --color-border: #d4d1ca;
+        --color-text: #28251d;
+        --color-text-muted: #66635d;
+        --color-primary: #01696f;
+        --color-primary-hover: #0c4e54;
+        --color-accent: #d19900;
+        --color-success: #437a22;
+        --color-error: #a12c7b;
+        --radius-sm: 0.5rem;
+        --radius-md: 0.9rem;
+        --radius-lg: 1.25rem;
+        --radius-full: 999px;
+        --shadow-sm: 0 4px 10px rgba(40, 37, 29, 0.07);
+        --shadow-md: 0 12px 30px rgba(40, 37, 29, 0.1);
+        --font-body: "Nunito", sans-serif;
+        --font-display: "Fraunces", serif;
+      }
+      [data-theme="dark"] {
+        --color-bg: #171614;
+        --color-surface: #1c1b19;
+        --color-surface-2: #23211f;
+        --color-border: #393836;
+        --color-text: #ece7df;
+        --color-text-muted: #b0aaa0;
+        --color-primary: #4f98a3;
+        --color-primary-hover: #6cb4bf;
+        --color-accent: #edb336;
+        --color-success: #8ec56b;
+        --color-error: #e58bc0;
+        --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.22);
+        --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.35);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        min-height: 100vh;
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        line-height: 1.6;
+        background:
+          radial-gradient(
+            circle at top right,
+            rgba(1, 105, 111, 0.08),
+            transparent 30%
+          ),
+          var(--color-bg);
+        color: var(--color-text);
+        padding: var(--space-4);
+      }
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+        border: none;
+      }
+      .app {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 0;
+      }
+      .skip-link:focus {
+        left: 1rem;
+        top: 1rem;
+        background: var(--color-primary);
+        color: #fff;
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-sm);
+        z-index: 20;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-4);
+        margin-bottom: var(--space-6);
+        flex-wrap: wrap;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+      }
+      .logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: linear-gradient(
+          135deg,
+          var(--color-primary),
+          var(--color-accent)
+        );
+        display: grid;
+        place-items: center;
+        color: white;
+        box-shadow: var(--shadow-sm);
+      }
+      .logo svg {
+        width: 26px;
+        height: 26px;
+      }
+      h1 {
+        font-family: var(--font-display);
+        font-size: var(--text-2xl);
+        line-height: 1.05;
+      }
+      .subtitle {
+        color: var(--color-text-muted);
+        max-width: 65ch;
+      }
+      .theme-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        color: var(--color-text);
+        display: grid;
+        place-items: center;
+        box-shadow: var(--shadow-sm);
+      }
+      .hero,
+      .panel {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+      }
+      .hero {
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        margin-bottom: var(--space-6);
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: var(--space-6);
+        align-items: start;
+      }
+      .chips,
+      .mode-switch,
+      .stats,
+      .verb-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
+      .chip {
+        padding: 0.45rem 0.85rem;
+        border-radius: var(--radius-full);
+        background: rgba(1, 105, 111, 0.08);
+        color: var(--color-primary);
+        font-size: var(--text-sm);
+        font-weight: 700;
+      }
+      .mode-switch {
+        margin-top: var(--space-5);
+      }
+      .mode-btn {
+        padding: 0.85rem 1.1rem;
+        border-radius: var(--radius-full);
+        background: var(--color-surface-2);
+        color: var(--color-text);
+        border: 1px solid var(--color-border);
+        font-weight: 800;
+      }
+      .mode-btn.active {
+        background: var(--color-primary);
+        color: white;
+        border-color: transparent;
+      }
+      .mini-card {
+        background: var(--color-surface-2);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-4);
+      }
+      .mini-card strong {
+        display: block;
+        font-size: var(--text-lg);
+      }
+      main {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: var(--space-6);
+      }
+      .sidebar,
+      .content {
+        display: grid;
+        gap: var(--space-6);
+        align-self: start;
+      }
+      .panel {
+        padding: var(--space-5);
+      }
+      .panel h2 {
+        font-size: var(--text-lg);
+        margin-bottom: var(--space-3);
+      }
+      .panel h3 {
+        font-size: 1.05rem;
+        margin-bottom: var(--space-2);
+      }
+      .muted {
+        color: var(--color-text-muted);
+      }
+      .verb-tags button,
+      .filter-btn {
+        padding: 0.5rem 0.8rem;
+        border-radius: var(--radius-full);
+        background: var(--color-surface-2);
+        border: 1px solid var(--color-border);
+        color: var(--color-text);
+      }
+      .verb-tags button.active,
+      .filter-btn.active {
+        background: var(--color-accent);
+        color: #2f2300;
+        border-color: transparent;
+        font-weight: 800;
+      }
+      .study-layout,
+      .practice-layout {
+        display: none;
+      }
+      .study-layout.active,
+      .practice-layout.active {
+        display: grid;
+        gap: var(--space-6);
+      }
+      .study-grid,
+      .practice-grid {
+        display: grid;
+        gap: var(--space-6);
+        grid-template-columns: 1fr 1fr;
+      }
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: var(--space-3);
+      }
+      .verb-card {
+        background: var(--color-surface-2);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-4);
+      }
+      .verb-card .base {
+        font-weight: 800;
+      }
+      .verb-card .heform {
+        color: var(--color-primary);
+        font-weight: 700;
+      }
+      .exercise-box {
+        background: var(--color-surface-2);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-5);
+      }
+      .sentence {
+        font-size: var(--text-lg);
+        font-weight: 800;
+        margin-bottom: var(--space-3);
+      }
+      .controls {
+        display: flex;
+        gap: var(--space-3);
+        flex-wrap: wrap;
+        margin-top: var(--space-4);
+      }
+      .input,
+      .select {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--color-border);
+        background: var(--color-bg);
+        color: var(--color-text);
+      }
+      .btn {
+        padding: 0.9rem 1.15rem;
+        border-radius: var(--radius-md);
+        background: var(--color-primary);
+        color: white;
+        font-weight: 800;
+      }
+      .btn:hover {
+        background: var(--color-primary-hover);
+      }
+      .btn.secondary {
+        background: var(--color-surface-2);
+        color: var(--color-text);
+        border: 1px solid var(--color-border);
+      }
+      .feedback {
+        min-height: 1.6rem;
+        margin-top: var(--space-3);
+        font-weight: 700;
+      }
+      .feedback.success {
+        color: var(--color-success);
+      }
+      .feedback.error {
+        color: var(--color-error);
+      }
+      .question-line {
+        font-size: var(--text-lg);
+        margin-bottom: var(--space-3);
+      }
+      .answers {
+        display: grid;
+        gap: var(--space-2);
+      }
+      .option {
+        text-align: left;
+        padding: 0.85rem 1rem;
+        border-radius: var(--radius-md);
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        color: var(--color-text);
+      }
+      .option.correct {
+        border-color: var(--color-success);
+        background: rgba(67, 122, 34, 0.12);
+      }
+      .option.wrong {
+        border-color: var(--color-error);
+        background: rgba(161, 44, 123, 0.12);
+      }
+      .progress {
+        height: 12px;
+        background: var(--color-bg);
+        border-radius: var(--radius-full);
+        overflow: hidden;
+        border: 1px solid var(--color-border);
+      }
+      .progress > span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(
+          90deg,
+          var(--color-primary),
+          var(--color-accent)
+        );
+      }
+      .rules li {
+        margin-left: 1.1rem;
+      }
+      .hidden {
+        display: none !important;
+      }
+      @media (max-width: 900px) {
+        .hero-grid,
+        main,
+        .study-grid,
+        .practice-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 540px) {
+        body {
+          padding: var(--space-3);
+        }
+        .mode-btn,
+        .btn,
+        .option,
+        .theme-btn {
+          min-height: 44px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Перейти до тренажера</a>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo" aria-label="Present Simple Trainer logo">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 18V7.5a2.5 2.5 0 0 1 4.6-1.4L12 8l1.4-1.9A2.5 2.5 0 0 1 18 7.5V18"
+              />
+              <path d="M5 18h14" />
+            </svg>
+          </div>
+          <div>
+            <p class="muted">English A1-A2</p>
+            <h1>Present Simple Trainer for Petro</h1>
+          </div>
+        </div>
+        <button class="theme-btn" data-theme-toggle aria-label="Змінити тему">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="5" />
+            <path
+              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+            />
+          </svg>
+        </button>
+      </header>
+
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="chips">
+              <span class="chip">50 дієслів</span>
+              <span class="chip">he / she / it</span>
+              <span class="chip">do / does</span>
+              <span class="chip">adverbs of frequency</span>
+            </div>
+            <p class="subtitle" style="margin-top: 1rem">
+              Тренажер допомагає швидко повторити форму Present Simple, одразу
+              попрактикувати питання та перевірити знання прислівників частоти.
+            </p>
+            <div
+              class="mode-switch"
+              role="tablist"
+              aria-label="Перемикання режиму"
+            >
+              <button
+                class="mode-btn active"
+                data-mode="study"
+                role="tab"
+                aria-selected="true"
+              >
+                Режим вивчення
+              </button>
+              <button
+                class="mode-btn"
+                data-mode="practice"
+                role="tab"
+                aria-selected="false"
+              >
+                Режим практики
+              </button>
+            </div>
+          </div>
+          <div class="stats">
+            <div class="mini-card">
+              <span class="muted">Фокус</span><strong>Present Simple</strong
+              ><span>Щоденні дії та звички</span>
+            </div>
+            <div class="mini-card">
+              <span class="muted">Підходить для</span><strong>A1-A2</strong
+              ><span>Початковий та базовий рівень</span>
+            </div>
+            <div class="mini-card">
+              <span class="muted">Формат</span><strong>Study + Practice</strong
+              ><span>Пояснення, вправи і мінітест</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main id="main-content">
+        <aside class="sidebar">
+          <section class="panel">
+            <h2>Фільтр дієслів</h2>
+            <p class="muted">Обирайте тему, щоб швидше повторити лексику.</p>
+            <div class="controls" style="margin-top: 1rem">
+              <button class="filter-btn active" data-filter="all">Усі</button>
+              <button class="filter-btn" data-filter="daily">Рутина</button>
+              <button class="filter-btn" data-filter="study">Навчання</button>
+              <button class="filter-btn" data-filter="home">Дім</button>
+              <button class="filter-btn" data-filter="social">
+                Спілкування
+              </button>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h2>Підказка</h2>
+            <ul class="rules">
+              <li>Для he / she / it зазвичай додаємо -s.</li>
+              <li>Після do / does використовуємо базову форму дієслова.</li>
+              <li>
+                Always, usually, sometimes, never часто стоять перед основним
+                дієсловом.
+              </li>
+            </ul>
+          </section>
+
+          <section class="panel">
+            <h2>Прогрес тесту</h2>
+            <div class="progress" aria-label="Прогрес частотного тесту">
+              <span id="quizProgress"></span>
+            </div>
+            <p class="muted" id="quizMeta" style="margin-top: 0.75rem">
+              0 / 5 завершено
+            </p>
+          </section>
+        </aside>
+
+        <section class="content">
+          <div class="study-layout active" id="studyMode">
+            <section class="panel">
+              <h2>50 базових дієслів</h2>
+              <p class="muted">
+                Натисніть на картку, щоб побачити форму для he / she / it.
+              </p>
+              <div class="card-grid" id="verbGrid"></div>
+            </section>
+
+            <div class="study-grid">
+              <section class="panel">
+                <h2>Відмінювання he / she / it</h2>
+                <div class="exercise-box">
+                  <p class="sentence" id="conjugationPrompt">
+                    She ___ coffee every morning.
+                  </p>
+                  <label class="sr-only" for="conjugationInput"
+                    >Введіть правильну форму дієслова</label
+                  >
+                  <input
+                    id="conjugationInput"
+                    class="input"
+                    type="text"
+                    placeholder="Наприклад: drinks"
+                    autocomplete="off"
+                  />
+                  <div class="controls">
+                    <button class="btn" id="checkConjugation">
+                      Перевірити
+                    </button>
+                    <button class="btn secondary" id="nextConjugation">
+                      Наступне
+                    </button>
+                  </div>
+                  <div
+                    class="feedback"
+                    id="conjugationFeedback"
+                    aria-live="polite"
+                  ></div>
+                </div>
+              </section>
+
+              <section class="panel">
+                <h2>Генератор питань do / does</h2>
+                <div class="exercise-box">
+                  <p class="question-line" id="questionPrompt">
+                    you / play / chess ?
+                  </p>
+                  <label class="sr-only" for="questionInput"
+                    >Складіть питання</label
+                  >
+                  <input
+                    id="questionInput"
+                    class="input"
+                    type="text"
+                    placeholder="Наприклад: Do you play chess?"
+                    autocomplete="off"
+                  />
+                  <div class="controls">
+                    <button class="btn" id="checkQuestion">Перевірити</button>
+                    <button class="btn secondary" id="nextQuestion">
+                      Нове питання
+                    </button>
+                  </div>
+                  <div
+                    class="feedback"
+                    id="questionFeedback"
+                    aria-live="polite"
+                  ></div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div class="practice-layout" id="practiceMode">
+            <div class="practice-grid">
+              <section class="panel">
+                <h2>Швидка практика</h2>
+                <div class="exercise-box">
+                  <h3>Оберіть правильну форму</h3>
+                  <p class="sentence" id="mixedPrompt">
+                    He ___ to school by bus.
+                  </p>
+                  <div class="answers" id="mixedOptions"></div>
+                  <div
+                    class="feedback"
+                    id="mixedFeedback"
+                    aria-live="polite"
+                  ></div>
+                  <div class="controls">
+                    <button class="btn secondary" id="nextMixed">
+                      Наступне завдання
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="panel">
+                <h2>Тест: прислівники частоти</h2>
+                <div class="exercise-box">
+                  <p class="question-line" id="quizPrompt">
+                    I ___ drink tea in the morning. (100%)
+                  </p>
+                  <div class="answers" id="quizOptions"></div>
+                  <div
+                    class="feedback"
+                    id="quizFeedback"
+                    aria-live="polite"
+                  ></div>
+                  <div class="controls">
+                    <button class="btn secondary" id="nextQuiz">
+                      Наступне питання
+                    </button>
+                    <button class="btn secondary hidden" id="restartQuiz">
+                      Почати тест знову
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const verbs = [
+        { base: "wake up", third: "wakes up", ua: "прокидатися", cat: "daily" },
+        { base: "get up", third: "gets up", ua: "вставати", cat: "daily" },
+        { base: "wash", third: "washes", ua: "мити", cat: "daily" },
+        { base: "brush", third: "brushes", ua: "чистити", cat: "daily" },
+        { base: "eat", third: "eats", ua: "їсти", cat: "daily" },
+        { base: "drink", third: "drinks", ua: "пити", cat: "daily" },
+        { base: "cook", third: "cooks", ua: "готувати", cat: "home" },
+        {
+          base: "go to work",
+          third: "goes to work",
+          ua: "йти на роботу",
+          cat: "daily",
+        },
+        {
+          base: "go to school",
+          third: "goes to school",
+          ua: "йти до школи",
+          cat: "study",
+        },
+        { base: "study", third: "studies", ua: "вчитися", cat: "study" },
+        { base: "read", third: "reads", ua: "читати", cat: "study" },
+        { base: "write", third: "writes", ua: "писати", cat: "study" },
+        { base: "learn", third: "learns", ua: "вчити", cat: "study" },
+        { base: "speak", third: "speaks", ua: "говорити", cat: "social" },
+        { base: "listen", third: "listens", ua: "слухати", cat: "social" },
+        { base: "watch", third: "watches", ua: "дивитися", cat: "daily" },
+        { base: "play", third: "plays", ua: "грати", cat: "daily" },
+        { base: "walk", third: "walks", ua: "гуляти", cat: "daily" },
+        { base: "run", third: "runs", ua: "бігати", cat: "daily" },
+        { base: "sleep", third: "sleeps", ua: "спати", cat: "daily" },
+        { base: "work", third: "works", ua: "працювати", cat: "daily" },
+        { base: "live", third: "lives", ua: "жити", cat: "daily" },
+        {
+          base: "come home",
+          third: "comes home",
+          ua: "приходити додому",
+          cat: "daily",
+        },
+        { base: "clean", third: "cleans", ua: "прибирати", cat: "home" },
+        { base: "open", third: "opens", ua: "відкривати", cat: "home" },
+        { base: "close", third: "closes", ua: "закривати", cat: "home" },
+        { base: "help", third: "helps", ua: "допомагати", cat: "social" },
+        { base: "call", third: "calls", ua: "телефонувати", cat: "social" },
+        { base: "talk", third: "talks", ua: "розмовляти", cat: "social" },
+        { base: "meet", third: "meets", ua: "зустрічати", cat: "social" },
+        { base: "visit", third: "visits", ua: "відвідувати", cat: "social" },
+        { base: "buy", third: "buys", ua: "купувати", cat: "daily" },
+        { base: "make", third: "makes", ua: "робити / готувати", cat: "home" },
+        {
+          base: "have breakfast",
+          third: "has breakfast",
+          ua: "снідати",
+          cat: "daily",
+        },
+        { base: "have lunch", third: "has lunch", ua: "обідати", cat: "daily" },
+        {
+          base: "have dinner",
+          third: "has dinner",
+          ua: "вечеряти",
+          cat: "daily",
+        },
+        { base: "drive", third: "drives", ua: "водити", cat: "daily" },
+        {
+          base: "ride",
+          third: "rides",
+          ua: "їхати верхи / на велосипеді",
+          cat: "daily",
+        },
+        { base: "take", third: "takes", ua: "брати", cat: "daily" },
+        { base: "bring", third: "brings", ua: "приносити", cat: "home" },
+        { base: "put", third: "puts", ua: "класти", cat: "home" },
+        {
+          base: "wash dishes",
+          third: "washes dishes",
+          ua: "мити посуд",
+          cat: "home",
+        },
+        { base: "answer", third: "answers", ua: "відповідати", cat: "study" },
+        { base: "ask", third: "asks", ua: "запитувати", cat: "study" },
+        { base: "use", third: "uses", ua: "використовувати", cat: "study" },
+        { base: "start", third: "starts", ua: "починати", cat: "daily" },
+        { base: "finish", third: "finishes", ua: "закінчувати", cat: "daily" },
+        { base: "need", third: "needs", ua: "потребувати", cat: "daily" },
+        { base: "like", third: "likes", ua: "подобатися", cat: "daily" },
+        { base: "love", third: "loves", ua: "любити", cat: "daily" },
+      ];
+
+      const conjugationTasks = [
+        {
+          sentence: "She ___ coffee every morning.",
+          answer: "drinks",
+          hint: "drink",
+        },
+        {
+          sentence: "He ___ English at home.",
+          answer: "studies",
+          hint: "study",
+        },
+        {
+          sentence: "My brother ___ up at 7 a.m.",
+          answer: "gets",
+          hint: "get",
+        },
+        {
+          sentence: "Anna ___ TV in the evening.",
+          answer: "watches",
+          hint: "watch",
+        },
+        { sentence: "Tom ___ to work by bus.", answer: "goes", hint: "go" },
+        {
+          sentence: "My mother ___ dinner every day.",
+          answer: "makes",
+          hint: "make",
+        },
+        { sentence: "It ___ a lot of water.", answer: "needs", hint: "need" },
+        {
+          sentence: "She ___ books before bed.",
+          answer: "reads",
+          hint: "read",
+        },
+      ];
+
+      const questionTasks = [
+        { prompt: "you / play / chess ?", answer: "Do you play chess?" },
+        { prompt: "she / like / coffee ?", answer: "Does she like coffee?" },
+        {
+          prompt: "they / study / every day ?",
+          answer: "Do they study every day?",
+        },
+        {
+          prompt: "he / go to school / by bus ?",
+          answer: "Does he go to school by bus?",
+        },
+        {
+          prompt: "your friend / watch / films at night ?",
+          answer: "Does your friend watch films at night?",
+        },
+        { prompt: "we / need / a break ?", answer: "Do we need a break?" },
+      ];
+
+      const mixedTasks = [
+        {
+          text: "He ___ to school by bus.",
+          options: ["go", "goes", "does"],
+          correct: "goes",
+        },
+        {
+          text: "They ___ English on Monday.",
+          options: ["study", "studies", "does"],
+          correct: "study",
+        },
+        {
+          text: "She ___ breakfast at 8 o'clock.",
+          options: ["have", "has", "do"],
+          correct: "has",
+        },
+        {
+          text: "___ your sister like pizza?",
+          options: ["Do", "Does", "Is"],
+          correct: "Does",
+        },
+        {
+          text: "My cat ___ in the kitchen.",
+          options: ["sleep", "sleeps", "sleepes"],
+          correct: "sleeps",
+        },
+        {
+          text: "We ___ our teacher every week.",
+          options: ["meet", "meets", "meeting"],
+          correct: "meet",
+        },
+      ];
+
+      const quizTasks = [
+        {
+          text: "I ___ drink tea in the morning. (100%)",
+          options: ["always", "sometimes", "never", "usually"],
+          correct: "always",
+        },
+        {
+          text: "She ___ goes to bed at 11 p.m. (most days)",
+          options: ["never", "usually", "sometimes", "always"],
+          correct: "usually",
+        },
+        {
+          text: "We ___ play tennis on Sundays. (from time to time)",
+          options: ["sometimes", "always", "never", "usually"],
+          correct: "sometimes",
+        },
+        {
+          text: "He ___ eats meat. (0%)",
+          options: ["always", "usually", "sometimes", "never"],
+          correct: "never",
+        },
+        {
+          text: "They ___ watch TV after dinner. (many days, but not every day)",
+          options: ["usually", "always", "sometimes", "never"],
+          correct: "usually",
+        },
+      ];
+
+      const state = {
+        filter: "all",
+        conjugationIndex: 0,
+        questionIndex: 0,
+        mixedIndex: 0,
+        quizIndex: 0,
+        quizAnswered: 0,
+        quizScore: 0,
+        theme: "light",
+      };
+
+      const verbGrid = document.getElementById("verbGrid");
+      const quizProgress = document.getElementById("quizProgress");
+      const quizMeta = document.getElementById("quizMeta");
+
+      function shuffle(arr) {
+        return [...arr].sort(() => Math.random() - 0.5);
+      }
+
+      function renderVerbs() {
+        const filtered =
+          state.filter === "all"
+            ? verbs
+            : verbs.filter((v) => v.cat === state.filter);
+        verbGrid.innerHTML = filtered
+          .map(
+            (v) => `
+              <button class="verb-card" type="button" aria-label="${v.base}">
+                <span class="base">${v.base}</span>
+                <span class="muted">${v.ua}</span>
+                <span class="heform hidden">he / she / it: ${v.third}</span>
+              </button>
+            `,
+          )
+          .join("");
+
+        [...verbGrid.querySelectorAll(".verb-card")].forEach((card) => {
+          card.addEventListener("click", () => {
+            card.querySelector(".heform").classList.toggle("hidden");
+          });
+        });
+      }
+
+      function renderConjugation() {
+        const item = conjugationTasks[state.conjugationIndex];
+        document.getElementById("conjugationPrompt").textContent =
+          item.sentence + "  (" + item.hint + ")";
+        document.getElementById("conjugationInput").value = "";
+        resetFeedback("conjugationFeedback");
+      }
+
+      function renderQuestion() {
+        const item = questionTasks[state.questionIndex];
+        document.getElementById("questionPrompt").textContent = item.prompt;
+        document.getElementById("questionInput").value = "";
+        resetFeedback("questionFeedback");
+      }
+
+      function renderMixed() {
+        const item = mixedTasks[state.mixedIndex];
+        document.getElementById("mixedPrompt").textContent = item.text;
+        const wrap = document.getElementById("mixedOptions");
+        wrap.innerHTML = shuffle(item.options)
+          .map((opt) => `<button class="option" type="button">${opt}</button>`)
+          .join("");
+        resetFeedback("mixedFeedback");
+        wrap.querySelectorAll(".option").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const ok = btn.textContent === item.correct;
+            wrap.querySelectorAll(".option").forEach((b) => {
+              b.disabled = true;
+              if (b.textContent === item.correct) b.classList.add("correct");
+            });
+            if (!ok) btn.classList.add("wrong");
+            setFeedback(
+              "mixedFeedback",
+              ok
+                ? "Правильно! Чудово."
+                : `Правильна відповідь: ${item.correct}`,
+              ok,
+            );
+          });
+        });
+      }
+
+      function renderQuiz() {
+        if (state.quizIndex >= quizTasks.length) {
+          document.getElementById("quizPrompt").textContent =
+            `Тест завершено! Результат: ${state.quizScore} / ${quizTasks.length}`;
+          document.getElementById("quizOptions").innerHTML = "";
+          document.getElementById("nextQuiz").classList.add("hidden");
+          document.getElementById("restartQuiz").classList.remove("hidden");
+          setFeedback(
+            "quizFeedback",
+            state.quizScore >= 4
+              ? "Супер! Ви добре знаєте adverbs of frequency."
+              : "Непогано. Повторіть always / usually / sometimes / never і спробуйте ще раз.",
+            state.quizScore >= 4,
+          );
+          updateQuizProgress();
+          return;
+        }
+        document.getElementById("nextQuiz").classList.remove("hidden");
+        document.getElementById("restartQuiz").classList.add("hidden");
+        const item = quizTasks[state.quizIndex];
+        document.getElementById("quizPrompt").textContent = item.text;
+        const wrap = document.getElementById("quizOptions");
+        wrap.innerHTML = shuffle(item.options)
+          .map((opt) => `<button class="option" type="button">${opt}</button>`)
+          .join("");
+        resetFeedback("quizFeedback");
+        wrap.querySelectorAll(".option").forEach((btn) => {
+          btn.addEventListener(
+            "click",
+            () => {
+              if (wrap.dataset.locked === "true") return;
+              wrap.dataset.locked = "true";
+              const ok = btn.textContent === item.correct;
+              if (ok) state.quizScore += 1;
+              state.quizAnswered += 1;
+              wrap.querySelectorAll(".option").forEach((b) => {
+                b.disabled = true;
+                if (b.textContent === item.correct) b.classList.add("correct");
+              });
+              if (!ok) btn.classList.add("wrong");
+              setFeedback(
+                "quizFeedback",
+                ok ? "Правильно!" : `Правильний варіант: ${item.correct}`,
+                ok,
+              );
+              updateQuizProgress();
+            },
+            { once: true },
+          );
+        });
+        wrap.dataset.locked = "false";
+        updateQuizProgress();
+      }
+
+      function updateQuizProgress() {
+        const total = quizTasks.length;
+        const done = Math.min(state.quizAnswered, total);
+        quizProgress.style.width = `${(done / total) * 100}%`;
+        quizMeta.textContent = `${done} / ${total} завершено · Бал: ${state.quizScore}`;
+      }
+
+      function setFeedback(id, text, success) {
+        const el = document.getElementById(id);
+        el.textContent = text;
+        el.className = "feedback " + (success ? "success" : "error");
+      }
+
+      function resetFeedback(id) {
+        const el = document.getElementById(id);
+        el.textContent = "";
+        el.className = "feedback";
+      }
+
+      function normalize(str) {
+        return str
+          .trim()
+          .replace(/\s+/g, " ")
+          .replace(/\n/g, " ")
+          .toLowerCase();
+      }
+
+      document
+        .getElementById("checkConjugation")
+        .addEventListener("click", () => {
+          const val = normalize(
+            document.getElementById("conjugationInput").value,
+          );
+          const ans =
+            conjugationTasks[state.conjugationIndex].answer.toLowerCase();
+          setFeedback(
+            "conjugationFeedback",
+            val === ans ? "Так, правильно!" : `Правильна форма: ${ans}`,
+            val === ans,
+          );
+        });
+
+      document
+        .getElementById("nextConjugation")
+        .addEventListener("click", () => {
+          state.conjugationIndex =
+            (state.conjugationIndex + 1) % conjugationTasks.length;
+          renderConjugation();
+        });
+
+      document.getElementById("checkQuestion").addEventListener("click", () => {
+        const val = normalize(document.getElementById("questionInput").value);
+        const ans = normalize(questionTasks[state.questionIndex].answer);
+        setFeedback(
+          "questionFeedback",
+          val === ans
+            ? "Питання складено правильно."
+            : `Правильний варіант: ${questionTasks[state.questionIndex].answer}`,
+          val === ans,
+        );
+      });
+
+      document.getElementById("nextQuestion").addEventListener("click", () => {
+        state.questionIndex = (state.questionIndex + 1) % questionTasks.length;
+        renderQuestion();
+      });
+
+      document.getElementById("nextMixed").addEventListener("click", () => {
+        state.mixedIndex = (state.mixedIndex + 1) % mixedTasks.length;
+        renderMixed();
+      });
+
+      document.getElementById("nextQuiz").addEventListener("click", () => {
+        if (state.quizIndex < quizTasks.length) {
+          state.quizIndex += 1;
+          renderQuiz();
+        }
+      });
+
+      document.getElementById("restartQuiz").addEventListener("click", () => {
+        state.quizIndex = 0;
+        state.quizAnswered = 0;
+        state.quizScore = 0;
+        renderQuiz();
+      });
+
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.filter = btn.dataset.filter;
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderVerbs();
+        });
+      });
+
+      document.querySelectorAll(".mode-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const mode = btn.dataset.mode;
+          document.querySelectorAll(".mode-btn").forEach((b) => {
+            b.classList.toggle("active", b === btn);
+            b.setAttribute("aria-selected", b === btn ? "true" : "false");
+          });
+          document
+            .getElementById("studyMode")
+            .classList.toggle("active", mode === "study");
+          document
+            .getElementById("practiceMode")
+            .classList.toggle("active", mode === "practice");
+        });
+      });
+
+      (function () {
+        const toggle = document.querySelector("[data-theme-toggle]");
+        const root = document.documentElement;
+        let dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        state.theme = dark ? "dark" : "light";
+        root.setAttribute("data-theme", state.theme);
+        toggle.innerHTML =
+          state.theme === "dark"
+            ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+            : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+        toggle.addEventListener("click", () => {
+          state.theme = state.theme === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", state.theme);
+          toggle.innerHTML =
+            state.theme === "dark"
+              ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+              : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+        });
+      })();
+
+      renderVerbs();
+      renderConjugation();
+      renderQuestion();
+      renderMixed();
+      renderQuiz();
+    </script>
+  </body>
+</html>
