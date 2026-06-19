@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import YouTubeLessons from "../components/YouTubeLessons";
+import Lesson17Dialogues from "../components/Lesson17Dialogues";
 import "../styles/lesson17.css";
 
 export default function Lesson17() {
@@ -31,6 +32,7 @@ export default function Lesson17() {
       </article>
 
       <YouTubeLessons />
+      <Lesson17Dialogues />
 
       <section className="cards-grid lesson17-grid">
         <article className="panel lesson-card">
