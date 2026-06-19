@@ -97,7 +97,7 @@ export default function Lesson15() {
 
   const currentTruth = truthOrLieCards[truthIndex];
   const currentQuestion = interviewQuestions[quizIndex];
-  const currentSpeaking = speakingPrompts[routineIndex];
+  // const currentSpeaking = speakingPrompts[routineIndex];
 
   const orderedCorrect = useMemo(
     () => frequencyItems.map((item) => item.word),
@@ -153,7 +153,7 @@ export default function Lesson15() {
 
   const handleSpeakingCheck = () => {
     const answers = formAnswers.map(normalize);
-    const good = ["usually", "often", "always", "never"];
+    // const good = ["usually", "often", "always", "never"];
     const filled = answers.every(Boolean);
 
     if (!filled) {
@@ -192,7 +192,7 @@ export default function Lesson15() {
           Говоримо про рутину, ставимо прості питання і вчимося відповідати на
           How often...?
         </p>
-
+        <p>Useful adverbs: usually, often, always, never</p>
         <div className="lesson-meta">
           <span>Speaking lesson</span>
           <span>A1</span>
