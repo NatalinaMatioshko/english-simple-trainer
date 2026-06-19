@@ -34,6 +34,8 @@ const lessons = [
 ];
 
 export default function Lessons() {
+  const reversedLessons = [...lessons].reverse();
+
   return (
     <div className="page-shell">
       <header className="page-hero panel">
@@ -45,7 +47,7 @@ export default function Lessons() {
       </header>
 
       <section className="cards-grid">
-        {lessons.map((lesson) => (
+        {reversedLessons.map((lesson) => (
           <article className="lesson-card panel" key={lesson.id}>
             <div className="lesson-card-top">
               <span className="lesson-badge">Lesson {lesson.id}</span>
