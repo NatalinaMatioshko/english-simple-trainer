@@ -13,7 +13,7 @@ const videos: Video[] = [
     isShort: true,
   },
   {
-    id: "nuXyJazvm4U",
+    id: "4Q_SycFWuTs",
     title: "Lesson video",
   },
 ];

@@ -27,6 +27,7 @@ export default function Home() {
     <div className="page-shell">
       <header className="page-hero panel hero-home">
         <p className="page-kicker">English practice space</p>
+
         <h1>Present Simple Trainer</h1>
         <p className="page-subtitle">
           A simple learning hub for routines, questions, adverbs of frequency,
