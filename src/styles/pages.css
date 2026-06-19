@@ -151,3 +151,76 @@
     grid-template-columns: 1fr;
   }
 }
+/* HomeworkLesson */
+.homework-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.homework-card-link:hover {
+  transform: translateY(-2px);
+}
+
+.homework-open {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.homework-detail {
+  display: grid;
+  gap: 1rem;
+}
+
+.homework-fields {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.homework-field {
+  display: grid;
+  gap: 0.5rem;
+  font-weight: 700;
+}
+
+.homework-field textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  font: inherit;
+  resize: vertical;
+}
+
+.homework-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-weight: 600;
+}
+
+.homework-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.homework-saved {
+  font-weight: 700;
+  color: green;
+}
+
+.back-link {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--color-primary);
+}
