@@ -1,17 +1,50 @@
 import { Link } from "react-router-dom";
+import "../styles/pages.css";
+
+const shortcuts = [
+  {
+    title: "Trainer",
+    description: "Open the main Present Simple training page.",
+    path: "/trainer",
+    button: "Open trainer",
+  },
+  {
+    title: "Lessons",
+    description: "See current lessons in one clean overview.",
+    path: "/lessons",
+    button: "Open lessons",
+  },
+  {
+    title: "Homework",
+    description: "Check homework tasks for the current lessons.",
+    path: "/homework",
+    button: "Open homework",
+  },
+];
 
 export default function Home() {
   return (
-    <div style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto" }}>
-      <h1>English Trainer</h1>
-      <p>Choose a lesson or open the trainer.</p>
+    <div className="page-shell">
+      <header className="page-hero panel hero-home">
+        <p className="page-kicker">English practice space</p>
+        <h1>Present Simple Trainer</h1>
+        <p className="page-subtitle">
+          A simple learning hub for routines, questions, adverbs of frequency,
+          and speaking practice.
+        </p>
+      </header>
 
-      <nav style={{ display: "grid", gap: "1rem", marginTop: "1.5rem" }}>
-        <Link to="/trainer">Open trainer</Link>
-        <Link to="/lesson-15">
-          Lesson 15: Present Simple + Adverbs of frequency
-        </Link>
-      </nav>
+      <section className="cards-grid home-grid">
+        {shortcuts.map((item) => (
+          <article className="lesson-card panel home-card" key={item.title}>
+            <h2>{item.title}</h2>
+            <p className="lesson-desc">{item.description}</p>
+            <Link className="action-btn primary" to={item.path}>
+              {item.button}
+            </Link>
+          </article>
+        ))}
+      </section>
     </div>
   );
 }
