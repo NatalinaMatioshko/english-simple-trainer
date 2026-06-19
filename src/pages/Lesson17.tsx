@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import YouTubeLessons from "../components/YouTubeLessons";
 import Lesson17Dialogues from "../components/Lesson17Dialogues";
+import Lesson17Quiz from "../components/Lesson17Quiz";
 import "../styles/lesson17.css";
 
 export default function Lesson17() {
@@ -33,7 +34,7 @@ export default function Lesson17() {
 
       <YouTubeLessons />
       <Lesson17Dialogues />
-
+      <Lesson17Quiz />
       <section className="cards-grid lesson17-grid">
         <article className="panel lesson-card">
           <h2>Warm-up</h2>
