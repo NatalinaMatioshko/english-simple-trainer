@@ -289,3 +289,104 @@
   object-fit: cover;
   display: block;
 }
+/* =====VocabularyMatchGame========== */
+.vocab-match {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.vocab-match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.vocab-match-note,
+.vocab-match-stats {
+  margin: 0;
+  font-weight: 700;
+}
+
+.vocab-match-stats {
+  color: var(--color-text-muted);
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.match-card {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  perspective: 1000px;
+  min-height: 140px;
+}
+
+.match-card-inner {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.match-card.flipped .match-card-inner {
+  transform: rotateY(180deg);
+}
+
+.match-card-front,
+.match-card-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.match-card-front {
+  background: var(--color-surface-2);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-text);
+}
+
+.match-card-back {
+  transform: rotateY(180deg);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.match-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.match-card-back span {
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-align: center;
+  padding: 0.6rem;
+}
+
+@media (max-width: 900px) {
+  .match-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .match-card-inner {
+    height: 130px;
+  }
+}
