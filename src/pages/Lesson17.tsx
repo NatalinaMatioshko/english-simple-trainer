@@ -38,14 +38,20 @@ export default function Lesson17() {
       <Lesson17Dialogues />
       <Lesson17Quiz />
       <section className="cards-grid lesson17-grid">
-        {/* <article className="panel lesson-card">
-          <h2>Warm-up</h2>
-          <p>How are you today?</p>
-          <p>What time did you wake up?</p>
-          <p>What did you do this morning?</p>
+        <article className="panel lesson-card">
+          <h2>English Reading Test</h2>
+          <div>
+            <a
+              href="https://test-english.com/reading/a1/top-things-that-i-do-a1-english-reading-test/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open reading test
+            </a>
+          </div>
         </article>
 
-        <article className="panel lesson-card">
+        {/*  <article className="panel lesson-card">
           <h2>Do / Does</h2>
           <p>I → Do I work?</p>
           <p>He → Does he play?</p>
