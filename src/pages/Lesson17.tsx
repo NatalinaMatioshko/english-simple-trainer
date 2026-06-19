@@ -3,6 +3,8 @@ import YouTubeLessons from "../components/YouTubeLessons";
 import Lesson17Dialogues from "../components/Lesson17Dialogues";
 import Lesson17Quiz from "../components/Lesson17Quiz";
 import "../styles/lesson17.css";
+import ScrollToTopButton from "../components/ScrollToTopButton";
+import VocabularyFlashcards from "../components/VocabularyFlashcards";
 
 export default function Lesson17() {
   return (
@@ -36,7 +38,7 @@ export default function Lesson17() {
       <Lesson17Dialogues />
       <Lesson17Quiz />
       <section className="cards-grid lesson17-grid">
-        <article className="panel lesson-card">
+        {/* <article className="panel lesson-card">
           <h2>Warm-up</h2>
           <p>How are you today?</p>
           <p>What time did you wake up?</p>
@@ -60,8 +62,14 @@ export default function Lesson17() {
           <h2>Final speaking</h2>
           <p>Make 3 questions about your routine.</p>
           <p>Answer them with short answers.</p>
-        </article>
+        </article> */}
       </section>
+      <section>
+        {" "}
+        <VocabularyFlashcards />
+      </section>
+
+      <ScrollToTopButton />
     </div>
   );
 }
