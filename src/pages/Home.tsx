@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "../styles/pages.css";
-
+import RoadmapSection from "../components/RoadmapSection";
+import "../styles/roadmap.css";
 const shortcuts = [
   {
     title: "Trainer",
@@ -34,6 +35,9 @@ export default function Home() {
           and speaking practice.
         </p>
       </header>
+      <section>
+        <h2>"Циклічне повторення в різних контекстах"</h2>
+      </section>
 
       <section className="cards-grid home-grid">
         {shortcuts.map((item) => (
@@ -45,6 +49,9 @@ export default function Home() {
             </Link>
           </article>
         ))}
+      </section>
+      <section>
+        <RoadmapSection />
       </section>
     </div>
   );

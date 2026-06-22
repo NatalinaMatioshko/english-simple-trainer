@@ -3,6 +3,7 @@ import TrainerPage from "../pages/TrainerPage";
 import Lessons from "../pages/Lessons";
 import Homework from "../pages/Homework";
 import HomeworkLesson from "../pages/HomeworkLesson";
+import AdminSubmissions from "../pages/AdminSubmissions";
 import Lesson17 from "../pages/Lesson17";
 import Home from "../pages/Home";
 
@@ -16,6 +17,7 @@ export default function App() {
       <Route path="/lesson-17" element={<Lesson17 />} />
       <Route path="/homework" element={<Homework />} />
       <Route path="/homework/:id" element={<HomeworkLesson />} />
+      <Route path="/admin/submissions" element={<AdminSubmissions />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

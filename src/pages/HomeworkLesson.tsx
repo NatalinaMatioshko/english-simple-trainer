@@ -1,8 +1,11 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
 import "../styles/pages.css";
 
-type HomeworkData = {
+type HomeworkForm = {
+  studentName: string;
   writing: string;
   testDone: boolean;
   quizDone: boolean;
@@ -35,47 +38,54 @@ const homeworkInfo: Record<string, { title: string; tasks: string[] }> = {
   },
 };
 
-const defaultHomework: HomeworkData = {
-  writing: "",
-  testDone: false,
-  quizDone: false,
-};
-
-const getStorageKey = (id: string) => `homework-${id}`;
-
-const readHomework = (id: string): HomeworkData => {
-  const raw = localStorage.getItem(getStorageKey(id));
-  if (!raw) return defaultHomework;
-
-  try {
-    return JSON.parse(raw) as HomeworkData;
-  } catch {
-    return defaultHomework;
-  }
-};
-
 export default function HomeworkLesson() {
   const { id } = useParams();
   const lessonId = id ?? "";
   const lesson = homeworkInfo[lessonId];
-  const storageKey = useMemo(() => getStorageKey(lessonId), [lessonId]);
 
-  const initialData = readHomework(lessonId);
-
-  const [writing, setWriting] = useState(() => initialData.writing);
-  const [testDone, setTestDone] = useState(() => initialData.testDone);
-  const [quizDone, setQuizDone] = useState(() => initialData.quizDone);
+  const [studentName, setStudentName] = useState("");
+  const [writing, setWriting] = useState("");
+  const [testDone, setTestDone] = useState(false);
+  const [quizDone, setQuizDone] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSave = () => {
-    const data: HomeworkData = {
-      writing,
-      testDone,
-      quizDone,
-    };
+  const handleSave = async () => {
+    if (!studentName.trim()) {
+      setError("Please enter the student name.");
+      return;
+    }
 
-    localStorage.setItem(storageKey, JSON.stringify(data));
-    setSaved(true);
+    try {
+      setSaving(true);
+      setSaved(false);
+      setError("");
+
+      const payload: HomeworkForm & {
+        lessonId: string;
+        createdAt: ReturnType<typeof serverTimestamp>;
+      } = {
+        studentName: studentName.trim(),
+        writing: writing.trim(),
+        testDone,
+        quizDone,
+        lessonId,
+        createdAt: serverTimestamp(),
+      };
+
+      await addDoc(collection(db, "homeworkAnswers"), payload);
+      setSaved(true);
+
+      setStudentName("");
+      setWriting("");
+      setTestDone(false);
+      setQuizDone(false);
+    } catch {
+      setError("Failed to save homework. Please try again.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (!lesson) {
@@ -110,46 +120,49 @@ export default function HomeworkLesson() {
           ))}
         </ol>
 
-        {lessonId === "17" && (
-          <div className="homework-fields">
-            <label className="homework-field">
-              <span>Writing — My Daily Routine</span>
-              <textarea
-                value={writing}
-                onChange={(e) => setWriting(e.target.value)}
-                placeholder="Write 7–10 sentences about your daily routine..."
-                rows={10}
-              />
-            </label>
+        <div className="homework-fields">
+          <label className="homework-field">
+            <span>Student name</span>
+            <input
+              type="text"
+              value={studentName}
+              onChange={(e) => setStudentName(e.target.value)}
+              placeholder="Enter your name"
+            />
+          </label>
 
-            <label className="homework-check">
-              <input
-                type="checkbox"
-                checked={testDone}
-                onChange={(e) => setTestDone(e.target.checked)}
-              />
-              <span>
-                I completed the test on test-english.com and sent a screenshot.
-              </span>
-            </label>
+          <label className="homework-field">
+            <span>Writing answer</span>
+            <textarea
+              value={writing}
+              onChange={(e) => setWriting(e.target.value)}
+              placeholder="Write your homework here..."
+              rows={10}
+            />
+          </label>
 
-            <label className="homework-check">
-              <input
-                type="checkbox"
-                checked={quizDone}
-                onChange={(e) => setQuizDone(e.target.checked)}
-              />
-              <span>
-                I completed all 8 questions in Lesson17Quiz until Correct.
-              </span>
-            </label>
-          </div>
-        )}
+          <label className="homework-check">
+            <input
+              type="checkbox"
+              checked={testDone}
+              onChange={(e) => setTestDone(e.target.checked)}
+            />
+            <span>I completed the test on test-english.com.</span>
+          </label>
 
-        {lessonId !== "17" && (
-          <div className="homework-note">
-            <p>This page is ready for lesson-specific tasks.</p>
-          </div>
+          <label className="homework-check">
+            <input
+              type="checkbox"
+              checked={quizDone}
+              onChange={(e) => setQuizDone(e.target.checked)}
+            />
+            <span>I completed Lesson17Quiz until Correct.</span>
+          </label>
+        </div>
+
+        {error && <p className="homework-error">{error}</p>}
+        {saved && (
+          <p className="homework-saved">Homework saved successfully.</p>
         )}
 
         <div className="homework-actions">
@@ -157,11 +170,10 @@ export default function HomeworkLesson() {
             className="action-btn primary"
             onClick={handleSave}
             type="button"
+            disabled={saving}
           >
-            Save homework
+            {saving ? "Saving..." : "Save homework"}
           </button>
-
-          {saved && <span className="homework-saved">Saved</span>}
         </div>
       </section>
 

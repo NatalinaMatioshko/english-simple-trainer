@@ -38,17 +38,16 @@ export default function Homework() {
         <p className="page-kicker">Practice</p>
         <h1>Homework</h1>
         <p className="page-subtitle">
-          Click a lesson card to open the homework page and complete tasks
-          there.
+          Click a lesson card to open the homework page.
         </p>
       </header>
 
       <section className="homework-list">
         {homeworkByLesson.map((lesson) => (
           <Link
+            key={lesson.id}
             to={`/homework/${lesson.id}`}
             className="panel homework-card homework-card-link"
-            key={lesson.id}
           >
             <h2>Lesson {lesson.id}</h2>
             <p className="lesson-topic">{lesson.title}</p>
