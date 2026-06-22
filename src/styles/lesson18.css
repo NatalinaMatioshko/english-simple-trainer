@@ -1,0 +1,165 @@
+.lesson18-page {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.lesson18-hero {
+  padding: 1.5rem;
+  border-radius: 28px;
+}
+
+.lesson18-subtitle {
+  margin-top: 0.85rem;
+  max-width: 72ch;
+  line-height: 1.65;
+  color: var(--color-text-muted, #667085);
+}
+
+.lesson18-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.lesson18-hero-chips span,
+.lesson18-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(90, 110, 255, 0.08);
+  border: 1px solid rgba(90, 110, 255, 0.14);
+  font-weight: 600;
+}
+
+.lesson18-flow {
+  margin-top: 1.5rem;
+  padding: 1.35rem;
+  border-radius: 28px;
+}
+
+.lesson18-flow-head p {
+  margin-top: 0.45rem;
+  color: var(--color-text-muted, #667085);
+}
+
+.lesson18-steps {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.lesson18-step-card {
+  padding: 1.1rem;
+  border-radius: 22px;
+  background: var(--color-surface, #fff);
+  border: 1px solid rgba(100, 110, 140, 0.12);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.05);
+}
+
+.lesson18-step-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+}
+
+.lesson18-step-number {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--color-primary, #4a5cff);
+  margin-bottom: 0.3rem;
+}
+
+.lesson18-time {
+  flex-shrink: 0;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(71, 199, 181, 0.12);
+  color: #16816f;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.lesson18-goal {
+  margin: 0.8rem 0;
+  color: var(--color-text-muted, #667085);
+  line-height: 1.6;
+}
+
+.lesson18-step-card ul,
+.lesson18-note-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.lesson18-groups {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.lesson18-group-card {
+  padding: 1.15rem;
+  border-radius: 24px;
+}
+
+.lesson18-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 0.85rem;
+}
+
+.lesson18-bottom-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.lesson18-note-card {
+  padding: 1.2rem;
+  border-radius: 24px;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 900px) {
+  .lesson18-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lesson18-groups {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lesson18-bottom-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

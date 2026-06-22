@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "../styles/roadmap.css";
 
 type Lesson = {
@@ -188,6 +189,7 @@ export default function RoadmapSection() {
 
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
+
         const cardRect = card.getBoundingClientRect();
         const cardCenter = cardRect.top + cardRect.height / 2;
         const viewportCenter = windowHeight / 2;
@@ -247,6 +249,7 @@ export default function RoadmapSection() {
       <div className="roadmap-track">
         {roadmapLessons.map((lesson, index) => {
           const isActive = activeLesson === lesson.id;
+
           return (
             <article
               key={lesson.id}
@@ -295,6 +298,12 @@ export default function RoadmapSection() {
                     <strong>Review 1–17:</strong> {lesson.review}
                   </li>
                 </ul>
+
+                {lesson.id === 18 && (
+                  <Link to="/lesson-18" className="roadmap-open-link">
+                    Open lesson 18
+                  </Link>
+                )}
               </div>
             </article>
           );

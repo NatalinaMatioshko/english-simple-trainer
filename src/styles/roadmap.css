@@ -227,6 +227,28 @@
   line-height: 1.55;
 }
 
+.roadmap-open-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  padding: 0.72rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #6b7cff, #47c7b5);
+  box-shadow: 0 12px 24px rgba(75, 110, 255, 0.2);
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+.roadmap-open-link:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
 .roadmap-a2-card {
   margin-top: 1rem;
   padding: 1.4rem;
