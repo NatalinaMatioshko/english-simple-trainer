@@ -38,59 +38,63 @@ type PairCard = {
   pairKey: string;
 };
 
+const IMG_BASE = `${import.meta.env.BASE_URL}images/`;
+
+const getImagePath = (fileName: string) => `${IMG_BASE}${fileName}`;
+
 const flashcards: FlashcardItem[] = [
   {
     id: 1,
-    image: "/images/in-the-box.jpg",
+    image: "in-the-box.jpg",
     frontAlt: "A toy or object in a box",
     back: "in the box",
     type: "place",
   },
   {
     id: 2,
-    image: "/images/on-the-table.jpg",
+    image: "on-the-table.jpg",
     frontAlt: "A book or object on a table",
     back: "on the table",
     type: "place",
   },
   {
     id: 3,
-    image: "/images/at-school.jpg",
+    image: "at-school.jpg",
     frontAlt: "A student at school",
     back: "at school",
     type: "place",
   },
   {
     id: 4,
-    image: "/images/in-june.jpg",
+    image: "in-june.jpg",
     frontAlt: "A June calendar image",
     back: "in June",
     type: "time",
   },
   {
     id: 5,
-    image: "/images/on-monday.jpg",
+    image: "on-monday.jpg",
     frontAlt: "A Monday calendar image",
     back: "on Monday",
     type: "time",
   },
   {
     id: 6,
-    image: "/images/at-7-oclock.jpg",
+    image: "at-7-oclock.jpg",
     frontAlt: "A clock showing seven o’clock",
     back: "at 7 o’clock",
     type: "time",
   },
   {
     id: 7,
-    image: "/images/images (2).png",
+    image: "in-on-under.png",
     frontAlt: "Extra lesson flashcard image 1",
     back: "Look and say the phrase",
     type: "place",
   },
   {
     id: 8,
-    image: "/images/images (6).png",
+    image: "4-oclock.png",
     frontAlt: "Extra lesson flashcard image 2",
     back: "Look and say the phrase",
     type: "place",
@@ -170,17 +174,17 @@ const tfItems: TfItem[] = [
 
 const pictureQa = [
   {
-    image: "/images/in-the-box.jpg",
+    image: "in-the-box.jpg",
     q: "Where is the object?",
     a: "It is in the box.",
   },
   {
-    image: "/images/on-the-table.jpg",
+    image: "on-the-table.jpg",
     q: "Where is the object?",
     a: "It is on the table.",
   },
   {
-    image: "/images/at-school.jpg",
+    image: "at-school.jpg",
     q: "Where is the student?",
     a: "The student is at school.",
   },
@@ -316,7 +320,7 @@ export default function Lesson18() {
 
             <div className="lesson18-hero-image">
               <img
-                src="/images/images8.png"
+                src={getImagePath("images8.png")}
                 alt="Lesson 18 visual introduction"
               />
             </div>
@@ -422,7 +426,7 @@ export default function Lesson18() {
               >
                 <div className="flashcard-inner">
                   <div className="flashcard-face flashcard-front">
-                    <img src={card.image} alt={card.frontAlt} />
+                    <img src={getImagePath(card.image)} alt={card.frontAlt} />
                     <span className="flashcard-tag">{card.type}</span>
                   </div>
 
@@ -592,7 +596,7 @@ export default function Lesson18() {
             <div className="lesson18-picture-grid">
               {pictureQa.map((item) => (
                 <div className="lesson18-picture-card" key={item.image}>
-                  <img src={item.image} alt={item.q} />
+                  <img src={getImagePath(item.image)} alt={item.q} />
                   <p>
                     <strong>Q:</strong> {item.q}
                   </p>
@@ -657,32 +661,59 @@ export default function Lesson18() {
           <p>Use these links for more reading and writing practice.</p>
         </div>
 
-        <div className="lesson18-links-list">
+        <div className="lesson18-resources-grid">
           <a
             href="https://test-english.com/reading/a1/top-things-that-i-do-a1-english-reading-test/"
             target="_blank"
             rel="noopener noreferrer"
-            className="lesson18-link-card"
+            className="lesson18-resource-card"
           >
-            Test-English: Top things that I do
+            <div className="lesson18-resource-top">
+              <span className="lesson18-resource-badge">Reading</span>
+              <span className="lesson18-resource-arrow">↗</span>
+            </div>
+
+            <h3>Test-English</h3>
+            <p>
+              Top things that I do — short A1 reading practice about daily
+              routine.
+            </p>
           </a>
 
           <a
             href="https://promova.com/uk/my-plan/appBJb23Byfy5g6CE/379?unit=appBJb23Byfy5g6CE6"
             target="_blank"
             rel="noopener noreferrer"
-            className="lesson18-link-card"
+            className="lesson18-resource-card"
           >
-            Promova lesson link
+            <div className="lesson18-resource-top">
+              <span className="lesson18-resource-badge">Practice</span>
+              <span className="lesson18-resource-arrow">↗</span>
+            </div>
+
+            <h3>Promova</h3>
+            <p>
+              Extra app practice for prepositions, routine, and short sentence
+              work.
+            </p>
           </a>
 
           <a
             href="https://learnenglishkids.britishcouncil.org/read-write/writing-practice/level-1-writing/my-day"
             target="_blank"
             rel="noopener noreferrer"
-            className="lesson18-link-card"
+            className="lesson18-resource-card"
           >
-            British Council: My day
+            <div className="lesson18-resource-top">
+              <span className="lesson18-resource-badge">Writing</span>
+              <span className="lesson18-resource-arrow">↗</span>
+            </div>
+
+            <h3>British Council</h3>
+            <p>
+              My day — simple writing practice to connect routine and time
+              expressions.
+            </p>
           </a>
         </div>
       </section>
