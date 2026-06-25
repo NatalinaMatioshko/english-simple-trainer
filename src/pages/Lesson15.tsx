@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import type { Feedback } from "../types/trainer";
 import { shuffle } from "../utils/array";
+import { normalize } from "../utils/text";
+import "../styles/lesson15.css";
 
 const frequencyItems = [
   { word: "never", percent: "0%", label: "ніколи" },
@@ -68,10 +70,6 @@ const speakingPrompts = [
     hint: "We never go to bed late.",
   },
 ];
-
-function normalize(str: string): string {
-  return str.trim().replace(/\s+/g, " ").toLowerCase();
-}
 
 export default function Lesson15() {
   const [routineIndex, setRoutineIndex] = useState(0);

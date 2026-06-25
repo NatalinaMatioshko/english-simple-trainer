@@ -9,7 +9,7 @@ const lessons = [
     topic: "Speaking",
     description:
       "Учень уже вміє говорити what he does, а тепер вчиться how often he does it.",
-    lessonPath: "/trainer",
+    lessonPath: "/lesson-15",
     homeworkPath: "/homework",
   },
   {
@@ -29,6 +29,16 @@ const lessons = [
     topic: "Video lesson",
     description: "Watch the video, repeat the patterns, and speak fast.",
     lessonPath: "/lesson-17",
+    homeworkPath: "/homework",
+  },
+  {
+    id: "18",
+    title: "in / on / at / to",
+    level: "A1-A2",
+    topic: "Prepositions",
+    description:
+      "Practice prepositions in time, place, and movement through pictures, quick tasks, and speaking.",
+    lessonPath: "/lesson-18",
     homeworkPath: "/homework",
   },
 ];
