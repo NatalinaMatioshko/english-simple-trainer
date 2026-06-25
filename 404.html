@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>English Simple Trainer</title>
+    <!--
+      SPA redirect for GitHub Pages.
+      When GitHub Pages cannot find a file it serves this 404.html.
+      The script encodes the full URL as a query param and redirects
+      to the root index.html, which then restores the URL before React boots.
+      pathSegmentsToKeep = 1  →  keeps /english-simple-trainer as the base.
+      Source technique: https://github.com/rafgraph/spa-github-pages
+    -->
+    <script>
+      var pathSegmentsToKeep = 1;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

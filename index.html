@@ -11,8 +11,24 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@700&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/english-simple-trainer/assets/index-CI8nXFjU.js"></script>
-    <link rel="stylesheet" crossorigin href="/english-simple-trainer/assets/index-BULOd8mw.css">
+    <!--
+      Restore URL encoded by public/404.html after GitHub Pages redirect.
+      Must run before React boots so the router sees the correct path.
+    -->
+    <script>
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
+    <script type="module" crossorigin src="/english-simple-trainer/assets/index-NcWbvKS6.js"></script>
+    <link rel="stylesheet" crossorigin href="/english-simple-trainer/assets/index-CZPUGBqd.css">
   </head>
   <body>
     <div id="root"></div>
