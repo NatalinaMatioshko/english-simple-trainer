@@ -137,9 +137,13 @@ export default function Homework() {
         ))}
       </section>
 
-      <div className="homework-back">
+      <div className="homework-actions">
         <Link className="back-link" to="/lessons">
           Back to lessons
+        </Link>
+
+        <Link className="home-link" to="/">
+          Go to home
         </Link>
       </div>
     </div>

@@ -268,3 +268,48 @@
 .back-home-btn {
   width: fit-content;
 }
+.homework-actions {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.back-link,
+.home-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.back-link {
+  background: #ffffff;
+  color: #1c1c1c;
+  border: 1px solid rgba(28, 28, 28, 0.12);
+}
+
+.home-link {
+  background: #01696f;
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.back-link:hover,
+.home-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.back-link:focus-visible,
+.home-link:focus-visible {
+  outline: 3px solid rgba(1, 105, 111, 0.24);
+  outline-offset: 2px;
+}
