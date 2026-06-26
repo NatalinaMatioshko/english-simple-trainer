@@ -390,3 +390,24 @@
     grid-template-columns: 1fr;
   }
 }
+.lesson19-questions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.lesson19-question-card {
+  padding: 18px 20px;
+  border-radius: var(--lesson19-radius-md);
+  border: 1px solid var(--lesson19-border);
+  background: linear-gradient(180deg, #ffffff 0%, #f9f7f2 100%);
+  box-shadow: var(--lesson19-shadow);
+}
+
+.lesson19-question-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.35;
+  color: var(--lesson19-text);
+}

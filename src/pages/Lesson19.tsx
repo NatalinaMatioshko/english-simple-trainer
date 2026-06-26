@@ -299,7 +299,36 @@ export default function Lesson19() {
             У цьому уроці ми вчимо типові вирази з <strong>do</strong>.
           </p>
         </header>
+        <section className="lesson19-section">
+          <div className="lesson19-section-head">
+            <div>
+              <p className="lesson19-kicker">Warm-up</p>
+              <h2>Quick questions</h2>
+            </div>
+          </div>
 
+          <div className="lesson19-questions-grid">
+            <article className="lesson19-question-card">
+              <h3>How are you today?</h3>
+            </article>
+
+            <article className="lesson19-question-card">
+              <h3>How are you feeling?</h3>
+            </article>
+
+            <article className="lesson19-question-card">
+              <h3>How's work?</h3>
+            </article>
+
+            <article className="lesson19-question-card">
+              <h3>Anything interesting today?</h3>
+            </article>
+
+            <article className="lesson19-question-card">
+              <h3>How was your morning?</h3>
+            </article>
+          </div>
+        </section>
         <section className="lesson19-section">
           <p className="lesson19-kicker">Перша секція</p>
           <h2>Правило</h2>
