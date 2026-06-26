@@ -95,6 +95,91 @@ const allCards: Lesson19Card[] = [
   },
 ];
 
+const makeCards: Lesson19Card[] = [
+  {
+    en: "make coffee",
+    ua: "готувати каву",
+    group: "Їжа та напої",
+  },
+  {
+    en: "make tea",
+    ua: "заварювати чай",
+    group: "Їжа та напої",
+  },
+  {
+    en: "make breakfast",
+    ua: "готувати сніданок",
+    group: "Їжа та напої",
+  },
+  {
+    en: "make lunch",
+    ua: "готувати обід",
+    group: "Їжа та напої",
+  },
+  {
+    en: "make dinner",
+    ua: "готувати вечерю",
+    group: "Їжа та напої",
+  },
+  {
+    en: "make a cake",
+    ua: "робити / пекти торт",
+    group: "Їжа та напої",
+  },
+
+  {
+    en: "make a mistake",
+    ua: "зробити помилку",
+    group: "Результат / дія",
+  },
+  {
+    en: "make a decision",
+    ua: "прийняти рішення",
+    group: "Результат / дія",
+  },
+  {
+    en: "make a plan",
+    ua: "скласти план",
+    group: "Результат / дія",
+  },
+  {
+    en: "make a list",
+    ua: "скласти список",
+    group: "Результат / дія",
+  },
+  {
+    en: "make a phone call",
+    ua: "зробити телефонний дзвінок",
+    group: "Результат / дія",
+  },
+  {
+    en: "make money",
+    ua: "заробляти гроші",
+    group: "Результат / дія",
+  },
+
+  {
+    en: "make friends",
+    ua: "подружитися / знайти друзів",
+    group: "Люди та спілкування",
+  },
+  {
+    en: "make noise",
+    ua: "шуміти",
+    group: "Люди та спілкування",
+  },
+  {
+    en: "make progress",
+    ua: "робити прогрес",
+    group: "Люди та спілкування",
+  },
+  {
+    en: "make time",
+    ua: "знаходити час",
+    group: "Люди та спілкування",
+  },
+];
+
 const prepositionImageCards: ImageCard[] = [
   {
     image: "in-the-box.jpeg",
@@ -252,6 +337,8 @@ const prepositionImageCards: ImageCard[] = [
 export default function Lesson19() {
   const [activeGroup, setActiveGroup] = useState("all");
   const [flipped, setFlipped] = useState<Record<string, boolean>>({});
+  const [makeActiveGroup, setMakeActiveGroup] = useState("all");
+  const [makeFlipped, setMakeFlipped] = useState<Record<string, boolean>>({});
   const [imageFilter, setImageFilter] = useState<"all" | "in" | "on">("all");
   const [imageFlipped, setImageFlipped] = useState<Record<string, boolean>>({});
 
@@ -262,10 +349,22 @@ export default function Lesson19() {
     return ["all", ...uniqueGroups];
   }, []);
 
+  const makeGroups = useMemo(() => {
+    const uniqueGroups = Array.from(
+      new Set(makeCards.map((card) => card.group)),
+    );
+    return ["all", ...uniqueGroups];
+  }, []);
+
   const filteredCards = useMemo(() => {
     if (activeGroup === "all") return allCards;
     return allCards.filter((card) => card.group === activeGroup);
   }, [activeGroup]);
+
+  const filteredMakeCards = useMemo(() => {
+    if (makeActiveGroup === "all") return makeCards;
+    return makeCards.filter((card) => card.group === makeActiveGroup);
+  }, [makeActiveGroup]);
 
   const filteredImageCards = useMemo(() => {
     if (imageFilter === "all") return prepositionImageCards;
@@ -274,6 +373,10 @@ export default function Lesson19() {
 
   const handleToggleCard = (key: string) => {
     setFlipped((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const handleToggleMakeCard = (key: string) => {
+    setMakeFlipped((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   const handleToggleImageCard = (key: string) => {
@@ -299,6 +402,7 @@ export default function Lesson19() {
             У цьому уроці ми вчимо типові вирази з <strong>do</strong>.
           </p>
         </header>
+
         <section className="lesson19-section">
           <div className="lesson19-section-head">
             <div>
@@ -317,7 +421,7 @@ export default function Lesson19() {
             </article>
 
             <article className="lesson19-question-card">
-              <h3>How's work?</h3>
+              <h3>How&apos;s work?</h3>
             </article>
 
             <article className="lesson19-question-card">
@@ -329,6 +433,7 @@ export default function Lesson19() {
             </article>
           </div>
         </section>
+
         <section className="lesson19-section">
           <p className="lesson19-kicker">Перша секція</p>
           <h2>Правило</h2>
@@ -347,8 +452,8 @@ export default function Lesson19() {
         <section className="lesson19-section">
           <div className="lesson19-section-head">
             <div>
-              <p className="lesson19-kicker">Навчання та робота</p>
-              <h2>Картки</h2>
+              <p className="lesson19-kicker">DO expressions</p>
+              <h2>DO cards</h2>
               <p className="lesson19-muted">
                 Перша сторона — українською, зворот — англійською.
               </p>
@@ -358,7 +463,7 @@ export default function Lesson19() {
           <div
             className="lesson19-filters"
             role="tablist"
-            aria-label="Card groups"
+            aria-label="Do card groups"
           >
             {groups.map((group) => {
               const label = group === "all" ? "Усі" : group;
@@ -384,6 +489,46 @@ export default function Lesson19() {
         </section>
 
         <section className="lesson19-section">
+          <div className="lesson19-section-head">
+            <div>
+              <p className="lesson19-kicker">MAKE expressions</p>
+              <h2>MAKE cards</h2>
+              <p className="lesson19-muted">
+                Тут вчимо типові вирази з make. Перша сторона — українською,
+                зворот — англійською.
+              </p>
+            </div>
+          </div>
+
+          <div
+            className="lesson19-filters"
+            role="tablist"
+            aria-label="Make card groups"
+          >
+            {makeGroups.map((group) => {
+              const label = group === "all" ? "Усі" : group;
+
+              return (
+                <button
+                  key={group}
+                  type="button"
+                  className={`lesson19-filter ${makeActiveGroup === group ? "active" : ""}`}
+                  onClick={() => setMakeActiveGroup(group)}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+
+          <Lesson19Cards
+            cards={filteredMakeCards}
+            flipped={makeFlipped}
+            onToggle={handleToggleMakeCard}
+          />
+        </section>
+
+        <section className="lesson19-section">
           <p className="lesson19-kicker">Важливе правило</p>
           <h2>Do vs Make</h2>
           <p className="lesson19-text">
@@ -395,7 +540,7 @@ export default function Lesson19() {
           <div className="lesson19-compare">
             <div className="lesson19-compare-card do-card">
               <h3>DO</h3>
-              <p className="lesson19-muted">Дія, обов’язок, процес</p>
+              <p className="lesson19-muted">Дія, обов&apos;язок, процес</p>
               <ul className="lesson19-list">
                 <li>do homework</li>
                 <li>do the dishes</li>
@@ -493,6 +638,7 @@ export default function Lesson19() {
             })}
           </div>
         </section>
+
         <section className="lesson19-section">
           <div className="lesson19-section-head">
             <div>
