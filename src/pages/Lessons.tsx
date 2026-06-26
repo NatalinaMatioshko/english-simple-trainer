@@ -41,6 +41,25 @@ const lessons = [
     lessonPath: "/lesson-18",
     homeworkPath: "/homework",
   },
+  {
+    id: "19",
+    title: "IN, ON, AT",
+    level: "A1",
+    topic: "IN, ON, AT",
+    description:
+      "Talk about ability — what you can and can't do — through sorting, quick choices, speaking, and games.",
+    lessonPath: "/lesson-19",
+    homeworkPath: "/homework",
+  },
+  {
+    id: "19.1",
+    title: "about",
+    level: "A1",
+    topic: "about",
+    description: "about.",
+    lessonPath: "/about-me",
+    homeworkPath: "/homework",
+  },
 ];
 
 export default function Lessons() {
