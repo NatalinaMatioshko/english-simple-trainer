@@ -442,13 +442,40 @@ function getStatusLabel(status: Lesson["status"]) {
 export default function RoadmapSection() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
-  const [activeLesson, setActiveLesson] = useState<number>(19);
   const [progress, setProgress] = useState(0);
 
-  const lessonIds = useMemo(
-    () => roadmapLessons.map((lesson) => lesson.id),
+  const currentLesson = useMemo(
+    () =>
+      roadmapLessons.find((lesson) => lesson.status === "current") ??
+      roadmapLessons[0],
     [],
   );
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const updateProgress = () => {
+      const maxScroll = Math.max(
+        1,
+        container.scrollHeight - container.clientHeight,
+      );
+      const nextProgress = Math.max(
+        0,
+        Math.min(1, container.scrollTop / maxScroll),
+      );
+      setProgress(nextProgress);
+    };
+
+    updateProgress();
+    container.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+
+    return () => {
+      container.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, []);
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -457,82 +484,51 @@ export default function RoadmapSection() {
     const currentIndex = roadmapLessons.findIndex(
       (lesson) => lesson.status === "current",
     );
-
     const currentCard = cardRefs.current[currentIndex];
+    if (!currentCard) return;
 
-    if (currentCard) {
-      const containerHeight = container.clientHeight;
-      const targetTop =
-        currentCard.offsetTop -
-        containerHeight / 2 +
-        currentCard.clientHeight / 2;
+    const topOffset = 96;
 
+    const placeCurrentCardInView = () => {
+      const top = currentCard.offsetTop - topOffset;
       container.scrollTo({
-        top: Math.max(0, targetTop),
-        behavior: "smooth",
+        top: Math.max(0, top),
+        behavior: "auto",
       });
-    }
+    };
+
+    const timer = window.setTimeout(placeCurrentCardInView, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
 
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = container;
-      const maxScroll = Math.max(1, scrollHeight - clientHeight);
-      const nextProgress = Math.max(0, Math.min(1, scrollTop / maxScroll));
-      setProgress(nextProgress);
+    const supportsObserver = typeof IntersectionObserver !== "undefined";
 
-      let closestId = lessonIds[0];
-      let closestDistance = Infinity;
-      const containerRect = container.getBoundingClientRect();
-      const viewportCenter = containerRect.top + containerRect.height / 2;
-
-      cardRefs.current.forEach((card, index) => {
-        if (!card) return;
-
-        const cardRect = card.getBoundingClientRect();
-        const cardCenter = cardRect.top + cardRect.height / 2;
-        const distance = Math.abs(cardCenter - viewportCenter);
-
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestId = roadmapLessons[index].id;
-        }
+    if (!supportsObserver) {
+      cardRefs.current.forEach((card) => {
+        card?.classList.add("is-visible");
       });
-
-      setActiveLesson(closestId);
-    };
-
-    handleScroll();
-    container.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-
-    return () => {
-      container.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, [lessonIds]);
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const target = entry.target as HTMLElement;
-
           if (entry.isIntersecting) {
             target.classList.add("is-visible");
+          } else if (entry.boundingClientRect.top > 0) {
+            target.classList.remove("is-visible");
           }
         });
       },
       {
         root: container,
-        rootMargin: "0px 0px -10% 0px",
-        threshold: 0.16,
+        threshold: 0.14,
+        rootMargin: "0px 0px -8% 0px",
       },
     );
 
@@ -540,9 +536,7 @@ export default function RoadmapSection() {
       if (card) observer.observe(card);
     });
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -557,8 +551,8 @@ export default function RoadmapSection() {
         </p>
 
         <div className="roadmap-current">
-          <span className="roadmap-current-label">Active lesson</span>
-          <strong>Lesson {activeLesson}</strong>
+          <span className="roadmap-current-label">Current lesson</span>
+          <strong>Lesson {currentLesson.id}</strong>
         </div>
 
         <div className="roadmap-progress-shell" aria-hidden="true">
@@ -624,7 +618,6 @@ export default function RoadmapSection() {
 
             <div className="roadmap-track">
               {roadmapLessons.map((lesson, index) => {
-                const isActive = activeLesson === lesson.id;
                 const isCurrent = lesson.status === "current";
 
                 return (
@@ -633,9 +626,9 @@ export default function RoadmapSection() {
                     ref={(el) => {
                       cardRefs.current[index] = el;
                     }}
-                    className={`roadmap-card ${isActive ? "is-active" : ""} ${isCurrent ? "is-current" : ""} status-${lesson.status}`}
+                    className={`roadmap-card ${isCurrent ? "is-current" : ""} status-${lesson.status}`}
                   >
-                    <div className="roadmap-node">
+                    <div className="roadmap-node" aria-hidden="true">
                       <span>{lesson.id}</span>
                     </div>
 

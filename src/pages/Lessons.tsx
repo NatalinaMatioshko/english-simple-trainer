@@ -67,6 +67,12 @@ export default function Lessons() {
 
   return (
     <div className="page-shell">
+      <div className="page-top-actions">
+        <Link className="action-btn secondary back-home-btn" to="/">
+          ← Roadmap
+        </Link>
+      </div>
+
       <header className="page-hero panel">
         <p className="page-kicker">Course map</p>
         <h1>Lessons</h1>

@@ -259,3 +259,12 @@
 .homework-external-link:hover {
   text-decoration: underline;
 }
+.page-top-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 16px;
+}
+
+.back-home-btn {
+  width: fit-content;
+}
