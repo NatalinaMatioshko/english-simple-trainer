@@ -43,11 +43,11 @@ const lessons = [
   },
   {
     id: "19",
-    title: "IN, ON, AT",
-    level: "A1",
-    topic: "IN, ON, AT",
+    title: "Do expressions",
+    level: "A1-A2",
+    topic: "Vocabulary + speaking",
     description:
-      "Talk about ability — what you can and can't do — through sorting, quick choices, speaking, and games.",
+      "Learn common phrases with do, compare do vs make, and practise useful everyday expressions with cards and picture tasks.",
     lessonPath: "/lesson-19",
     homeworkPath: "/homework",
   },

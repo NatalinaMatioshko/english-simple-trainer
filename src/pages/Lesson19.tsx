@@ -16,6 +16,10 @@ type ImageCard = {
   group: "in" | "on";
 };
 
+const IMG_BASE = `${import.meta.env.BASE_URL}images/`;
+
+const getImagePath = (fileName: string) => `${IMG_BASE}${fileName}`;
+
 const allCards: Lesson19Card[] = [
   {
     en: "do homework",
@@ -93,152 +97,152 @@ const allCards: Lesson19Card[] = [
 
 const prepositionImageCards: ImageCard[] = [
   {
-    image: "/images/in-the-box.jpeg",
+    image: "in-the-box.jpeg",
     phrase: "in the box",
     hintUa: "в коробці",
     group: "in",
   },
   {
-    image: "/images/in-the-book.jfif",
+    image: "in-the-book.jfif",
     phrase: "in the book",
     hintUa: "в книзі",
     group: "in",
   },
   {
-    image: "/images/in-the-car.webp",
+    image: "in-the-car.webp",
     phrase: "in the car",
     hintUa: "в машині",
     group: "in",
   },
   {
-    image: "/images/in-the-house.jpg",
+    image: "in-the-house.jpg",
     phrase: "in the house",
     hintUa: "в будинку",
     group: "in",
   },
   {
-    image: "/images/in-the-office.jpg",
+    image: "in-the-office.jpg",
     phrase: "in the office",
     hintUa: "в офісі",
     group: "in",
   },
   {
-    image: "/images/in-the-room.jpg",
+    image: "in-the-room.jpg",
     phrase: "in the room",
     hintUa: "в кімнаті",
     group: "in",
   },
   {
-    image: "/images/at-the-park.jpg",
+    image: "at-the-park.jpg",
     phrase: "at the park",
     hintUa: "в парку",
     group: "in",
   },
   {
-    image: "/images/at-home.jpg",
+    image: "at-home.jpg",
     phrase: "at home",
     hintUa: "вдома",
     group: "in",
   },
   {
-    image: "/images/at-night.jpg",
+    image: "at-night.jpg",
     phrase: "at night",
     hintUa: "вночі",
     group: "in",
   },
   {
-    image: "/images/at-school.jpg",
+    image: "at-school.jpg",
     phrase: "at school",
     hintUa: "в школі",
     group: "in",
   },
   {
-    image: "/images/at-the-gym.webp",
+    image: "at-the-gym.webp",
     phrase: "at the gym",
     hintUa: "в спортзалі",
     group: "in",
   },
   {
-    image: "/images/at-work.webp",
+    image: "at-work.webp",
     phrase: "at work",
     hintUa: "на роботі",
     group: "in",
   },
   {
-    image: "/images/in-the-bag.jpg",
+    image: "in-the-bag.jpg",
     phrase: "in the bag",
     hintUa: "в сумці",
     group: "in",
   },
   {
-    image: "/images/in-the-afternoon.jfif",
+    image: "in-the-afternoon.jfif",
     phrase: "in the afternoon",
     hintUa: "після обіду",
     group: "in",
   },
   {
-    image: "/images/in-june.jpg",
+    image: "in-june.jpg",
     phrase: "in June",
     hintUa: "в червні",
     group: "in",
   },
   {
-    image: "/images/in-the-evening.jpg",
+    image: "in-the-evening.jpg",
     phrase: "in the evening",
     hintUa: "ввечері",
     group: "in",
   },
   {
-    image: "/images/in-the-morning.jpg",
+    image: "in-the-morning.jpg",
     phrase: "in the morning",
     hintUa: "вранці",
     group: "in",
   },
   {
-    image: "/images/in-the-summer.jfif",
+    image: "in-the-summer.jfif",
     phrase: "in summer",
     hintUa: "влітку",
     group: "in",
   },
 
   {
-    image: "/images/in-the-tablel.jpg",
+    image: "in-the-tablel.jpg",
     phrase: "on the table",
     hintUa: "на столі",
     group: "on",
   },
   {
-    image: "/images/on-monday.jpg",
+    image: "on-monday.jpg",
     phrase: "on Monday",
     hintUa: "в понеділок",
     group: "on",
   },
   {
-    image: "/images/on-the-bus.jpg",
+    image: "on-the-bus.jpg",
     phrase: "on the bus",
     hintUa: "в автобусі",
     group: "on",
   },
   {
-    image: "/images/on-the-chair.jpg",
+    image: "on-the-chair.jpg",
     phrase: "on the chair",
     hintUa: "на стільці",
     group: "on",
   },
   {
-    image: "/images/on-the-floor.webp",
+    image: "on-the-floor.webp",
     phrase: "on the floor",
     hintUa: "на підлозі",
     group: "on",
   },
   {
-    image: "/images/on-the-sofa.jpg",
+    image: "on-the-sofa.jpg",
     phrase: "on the sofa",
     hintUa: "на дивані",
     group: "on",
   },
   {
-    image: "/images/on-the-wall.webp",
+    image: "on-the-wall.webp",
     phrase: "on the wall",
     hintUa: "на стіні",
     group: "on",
@@ -439,7 +443,7 @@ export default function Lesson19() {
                   <span className="lesson19-image-card-inner">
                     <span className="lesson19-image-card-front">
                       <img
-                        src={card.image}
+                        src={getImagePath(card.image)}
                         alt={card.hintUa}
                         className="lesson19-image"
                         loading="lazy"
@@ -458,6 +462,47 @@ export default function Lesson19() {
                 </button>
               );
             })}
+          </div>
+        </section>
+        <section className="lesson19-section">
+          <div className="lesson19-section-head">
+            <div>
+              <p className="lesson19-kicker">Extra practice</p>
+              <h2>Practice and test</h2>
+              <p className="lesson19-muted">
+                Відкрий додаткову практику та короткий тест у новій вкладці.
+              </p>
+            </div>
+          </div>
+
+          <div className="lesson19-resource-grid">
+            <a
+              href="https://promova.com/uk/my-plan/appBJb23Byfy5g6CE/379?unit=appBJb23Byfy5g6CE6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="lesson19-resource-card"
+            >
+              <div className="lesson19-resource-top">
+                <span className="lesson19-resource-badge">Practice</span>
+                <span className="lesson19-resource-arrow">↗</span>
+              </div>
+              <h3>Promova</h3>
+              <p>Практика go та додаткові вправи для повторення.</p>
+            </a>
+
+            <a
+              href="https://test-english.com/grammar-points/a1/at-in-on-prepositions-time/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="lesson19-resource-card"
+            >
+              <div className="lesson19-resource-top">
+                <span className="lesson19-resource-badge">Test</span>
+                <span className="lesson19-resource-arrow">↗</span>
+              </div>
+              <h3>Test-English</h3>
+              <p>Короткий grammar test на at / in / on для часу.</p>
+            </a>
           </div>
         </section>
       </div>
