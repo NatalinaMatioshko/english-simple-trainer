@@ -1,1 +1,54 @@
-/* Lesson 20 styles */
+.lesson20-actions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lesson20-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.lesson20-button.primary {
+  background: #01696f;
+  color: #fff;
+}
+
+.lesson20-button.secondary {
+  background: #fff;
+  color: #1c1c1c;
+  border: 1px solid rgba(28, 28, 28, 0.12);
+}
+
+.lesson20-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.lesson20-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.lesson20-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(28, 28, 28, 0.08);
+}
+
+.lesson20-card h3,
+.lesson20-card p {
+  margin: 0;
+}

@@ -36,18 +36,18 @@ export const profiles: Profile[] = [
 export const sentenceOrderTasks: SentenceOrderTask[] = [
   {
     id: 1,
-    words: ["Lucas.", "name’s", "My"],
+    words: ["Lucas.", "name's", "My"],
     answer: "My name's Lucas.",
   },
   {
     id: 2,
-    words: ["years", "ten", "old.", "I’m"],
-    answer: "I’m ten years old.",
+    words: ["years", "ten", "old.", "I'm"],
+    answer: "I'm ten years old.",
   },
   {
     id: 3,
-    words: ["France.", "I’m", "from"],
-    answer: "I’m from France.",
+    words: ["France.", "I'm", "from"],
+    answer: "I'm from France.",
   },
   {
     id: 4,
@@ -56,20 +56,45 @@ export const sentenceOrderTasks: SentenceOrderTask[] = [
   },
   {
     id: 5,
-    words: ["got", "I’ve", "hair.", "short"],
-    answer: "I’ve got short hair.",
+    words: ["got", "I've", "hair.", "short"],
+    answer: "I've got short hair.",
   },
   {
     id: 6,
-    words: ["eyes.", "brown", "I’ve", "got"],
-    answer: "I’ve got brown eyes.",
+    words: ["eyes.", "brown", "I've", "got"],
+    answer: "I've got brown eyes.",
+  },
+  {
+    id: 7,
+    words: ['a', 'mum,', 'I', 'have', 'a', 'dad,', 'a', 'brother', 'and', 'a', 'sister.'],
+    answer: "I have a mum, a dad, a brother and a sister.",
+  },
+  {
+    id: 8,
+    words: ['a', 'I', 'am', 'teacher.'],
+    answer: "I am a teacher.",
+  },
+  {
+    id: 9,
+    words: ['dogs.', 'love', 'I'],
+    answer: "I love dogs.",
+  },
+  {
+    id: 10,
+    words: ['have', 'I', 'a', 'best', 'friend.'],
+    answer: "I have a best friend.",
+  },
+  {
+    id: 11,
+    words: ['like', 'We', 'shopping.', 'go'],
+    answer: "We like go shopping.",
   },
 ];
 
 export const fillInBlankTasks: FillInBlankTask[] = [
   { id: 1, sentence: "My ___ is Linh.", answer: "name" },
   { id: 2, sentence: "I'm twelve ___.", answer: "years old" },
-  { id: 3, sentence: "___ Antoni. I’m seven.", answer: "I'm" },
+  { id: 3, sentence: "___ Antoni. I'm seven.", answer: "I'm" },
   { id: 4, sentence: "I'm ___ Poland.", answer: "from" },
   { id: 5, sentence: "My name is Sofia. I ___ in Lima.", answer: "live" },
   { id: 6, sentence: "___ long, brown hair.", answer: "I've got" },
