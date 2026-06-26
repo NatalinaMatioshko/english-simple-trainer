@@ -1,104 +1,123 @@
-import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase";
 import "../styles/pages.css";
 
-type HomeworkForm = {
-  studentName: string;
-  writing: string;
-  testDone: boolean;
-  quizDone: boolean;
-};
-
-const homeworkInfo: Record<string, { title: string; tasks: string[] }> = {
-  "17": {
+const homeworkByLesson = [
+  {
+    id: "19",
+    title: "Do expressions + in / on / at practice",
+    tasks: [
+      {
+        type: "link",
+        label: "Test-English — Prepositions of time (page 3)",
+        href: "https://test-english.com/grammar-points/a1/at-in-on-prepositions-time/3/",
+      },
+      {
+        type: "link",
+        label: "Test-English — Prepositions of place (page 2)",
+        href: "https://test-english.com/grammar-points/a1/at-in-on-prepositions-of-place/2/",
+      },
+      {
+        type: "link",
+        label: "Test-English — Prepositions of place (page 3)",
+        href: "https://test-english.com/grammar-points/a1/at-in-on-prepositions-of-place/3/",
+      },
+      {
+        type: "text",
+        text: "Write 6 sentences about your real day using at / in / on, for example: at 7 o’clock, in the morning, on Monday.",
+      },
+      {
+        type: "text",
+        text: "Write 6 short collocations: 3 with do and 3 with make, then make your own 2 sentences with them.",
+      },
+      {
+        type: "text",
+        text: "Send a short voice message about your routine and use at least 3 prepositions and 2 phrases with do or make.",
+      },
+    ],
+  },
+  {
+    id: "18",
+    title: "in / on / at / to",
+    tasks: [
+      {
+        type: "text",
+        text: "Write 6 sentences about your real routine using in / on / at / to.",
+      },
+      {
+        type: "text",
+        text: "Make 4 short questions with time and place expressions, for example: What time do you wake up? / Are you at home in the evening?",
+      },
+      {
+        type: "text",
+        text: "Send a short voice message about your day and use at least 5 target phrases, for example: at 7 o’clock, on Monday, in the morning, at work, to the gym.",
+      },
+    ],
+  },
+  {
+    id: "17",
     title: "Present Simple + Speaking Video",
     tasks: [
-      "Writing — 'My Daily Routine'",
-      "Reading test on test-english.com",
-      "Quiz in the app: complete Lesson17Quiz until Correct",
+      { type: "text", text: "Writing — 'My Daily Routine'" },
+      { type: "text", text: "Reading test on test-english.com" },
+      {
+        type: "text",
+        text: "Quiz in the app: complete Lesson17Quiz until Correct",
+      },
     ],
   },
-  "16": {
+  {
+    id: "16",
     title: "Present Simple Practice",
     tasks: [
-      "Write 5 do/does questions about your routine.",
-      "Give short answers to each question.",
-      "Make 3 questions about your family or friends.",
+      {
+        type: "text",
+        text: "Write 5 do/does questions about your routine.",
+      },
+      {
+        type: "text",
+        text: "Give short answers to each question.",
+      },
+      {
+        type: "text",
+        text: "Make 3 questions about your family or friends.",
+      },
     ],
   },
-  "15": {
+  {
+    id: "15",
     title: "Present Simple + Adverbs of frequency",
     tasks: [
-      "Write 5 sentences about your routine using always / usually / often / sometimes / never.",
-      "Record yourself answering 5 How often... questions.",
-      "Make a mini routine about morning, work/school, evening, and bedtime.",
+      {
+        type: "text",
+        text: "Write 5 sentences about your routine using always / usually / often / sometimes / never.",
+      },
+      {
+        type: "text",
+        text: "Record yourself answering 5 How often... questions.",
+      },
+      {
+        type: "text",
+        text: "Make a mini routine about morning, work/school, evening, and bedtime.",
+      },
     ],
   },
-};
+];
 
 export default function HomeworkLesson() {
   const { id } = useParams();
-  const lessonId = id ?? "";
-  const lesson = homeworkInfo[lessonId];
-
-  const [studentName, setStudentName] = useState("");
-  const [writing, setWriting] = useState("");
-  const [testDone, setTestDone] = useState(false);
-  const [quizDone, setQuizDone] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleSave = async () => {
-    if (!studentName.trim()) {
-      setError("Please enter the student name.");
-      return;
-    }
-
-    try {
-      setSaving(true);
-      setSaved(false);
-      setError("");
-
-      const payload: HomeworkForm & {
-        lessonId: string;
-        createdAt: ReturnType<typeof serverTimestamp>;
-      } = {
-        studentName: studentName.trim(),
-        writing: writing.trim(),
-        testDone,
-        quizDone,
-        lessonId,
-        createdAt: serverTimestamp(),
-      };
-
-      await addDoc(collection(db, "homeworkAnswers"), payload);
-      setSaved(true);
-
-      setStudentName("");
-      setWriting("");
-      setTestDone(false);
-      setQuizDone(false);
-    } catch {
-      setError("Failed to save homework. Please try again.");
-    } finally {
-      setSaving(false);
-    }
-  };
+  const lesson = homeworkByLesson.find((item) => item.id === id);
 
   if (!lesson) {
     return (
       <div className="page-shell">
-        <header className="page-hero panel">
+        <div className="panel">
           <h1>Homework not found</h1>
-          <p className="page-subtitle">This homework page does not exist.</p>
-        </header>
-
-        <Link className="back-link" to="/homework">
-          Back to homework
-        </Link>
+          <div className="homework-back">
+            <Link className="back-link" to="/homework">
+              Back to homework
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
@@ -106,78 +125,35 @@ export default function HomeworkLesson() {
   return (
     <div className="page-shell">
       <header className="page-hero panel">
-        <p className="page-kicker">Homework</p>
-        <h1>Lesson {lessonId}</h1>
-        <p className="page-subtitle">{lesson.title}</p>
+        <p className="page-kicker">Lesson {lesson.id}</p>
+        <h1>{lesson.title}</h1>
+        <p className="page-subtitle">
+          Complete the tasks below and open the links for extra practice.
+        </p>
       </header>
 
-      <section className="panel homework-detail">
-        <h2>Tasks</h2>
-
+      <section className="panel homework-detail-card">
         <ol className="homework-steps">
-          {lesson.tasks.map((task) => (
-            <li key={task}>{task}</li>
+          {lesson.tasks.map((task, index) => (
+            <li key={`${lesson.id}-${index}`}>
+              {task.type === "link" ? (
+                <a
+                  href={task.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="homework-external-link"
+                >
+                  {task.label}
+                </a>
+              ) : (
+                task.text
+              )}
+            </li>
           ))}
         </ol>
-
-        <div className="homework-fields">
-          <label className="homework-field">
-            <span>Student name</span>
-            <input
-              type="text"
-              value={studentName}
-              onChange={(e) => setStudentName(e.target.value)}
-              placeholder="Enter your name"
-            />
-          </label>
-
-          <label className="homework-field">
-            <span>Writing answer</span>
-            <textarea
-              value={writing}
-              onChange={(e) => setWriting(e.target.value)}
-              placeholder="Write your homework here..."
-              rows={10}
-            />
-          </label>
-
-          <label className="homework-check">
-            <input
-              type="checkbox"
-              checked={testDone}
-              onChange={(e) => setTestDone(e.target.checked)}
-            />
-            <span>I completed the test on test-english.com.</span>
-          </label>
-
-          <label className="homework-check">
-            <input
-              type="checkbox"
-              checked={quizDone}
-              onChange={(e) => setQuizDone(e.target.checked)}
-            />
-            <span>I completed Lesson17Quiz until Correct.</span>
-          </label>
-        </div>
-
-        {error && <p className="homework-error">{error}</p>}
-        {saved && (
-          <p className="homework-saved">Homework saved successfully.</p>
-        )}
-
-        <div className="homework-actions">
-          <button
-            className="action-btn primary"
-            onClick={handleSave}
-            type="button"
-            disabled={saving}
-          >
-            {saving ? "Saving..." : "Save homework"}
-          </button>
-        </div>
       </section>
 
-      <div style={{ marginTop: "1.5rem" }}>
+      <div className="homework-back">
         <Link className="back-link" to="/homework">
           Back to homework
         </Link>

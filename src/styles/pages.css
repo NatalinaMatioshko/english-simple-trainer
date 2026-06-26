@@ -242,3 +242,20 @@
   font-weight: 700;
   color: var(--color-primary);
 }
+.homework-back {
+  margin-top: 1.5rem;
+}
+
+.homework-detail-card {
+  padding: 1.5rem;
+}
+
+.homework-external-link {
+  color: #01696f;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.homework-external-link:hover {
+  text-decoration: underline;
+}
