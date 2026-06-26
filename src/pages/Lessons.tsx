@@ -60,6 +60,24 @@ const lessons = [
     lessonPath: "/about-me",
     homeworkPath: "/homework",
   },
+  {
+    id: "20",
+    title: "Lesson 20",
+    level: "A1",
+    topic: "Coming soon",
+    description: "Coming soon.",
+    lessonPath: "/lesson-20",
+    homeworkPath: "/homework",
+  },
+  {
+    id: "21",
+    title: "Lesson 21",
+    level: "A1",
+    topic: "Coming soon",
+    description: "Coming soon.",
+    lessonPath: "/lesson-21",
+    homeworkPath: "/homework",
+  },
 ];
 
 export default function Lessons() {
