@@ -1,3 +1,590 @@
+/* Page layout */
+.lesson20-page {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+/* Hero */
+.lesson20-hero {
+  padding: 1.4rem;
+  border-radius: 28px;
+  background: var(--color-surface, #fff);
+  border: 1px solid rgba(100, 110, 140, 0.12);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+  margin-bottom: 1.5rem;
+}
+
+.lesson20-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.lesson20-subtitle {
+  margin-top: 0.7rem;
+  max-width: 68ch;
+  line-height: 1.65;
+  color: var(--color-text-muted, #667085);
+}
+
+.lesson20-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.lesson20-back-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  background: var(--color-primary, #4a5cff);
+  color: #fff;
+  transition: opacity 0.15s;
+}
+
+.lesson20-back-link:hover { opacity: 0.88; }
+
+.lesson20-back-link--ghost {
+  background: transparent;
+  color: var(--color-primary, #4a5cff);
+  border: 1px solid rgba(74, 92, 255, 0.3);
+}
+
+.lesson20-back-link--ghost:hover { background: var(--color-primary-soft, #eef0ff); opacity: 1; }
+
+.lesson20-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.lesson20-hero-chips span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: var(--color-primary-soft, #eef0ff);
+  color: var(--color-primary, #4a5cff);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+/* Shared block */
+.lesson20-block {
+  padding: 1.4rem;
+  border-radius: 28px;
+  background: var(--color-surface, #fff);
+  border: 1px solid rgba(100, 110, 140, 0.12);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+  margin-bottom: 1.5rem;
+}
+
+.lesson20-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.lesson20-section-desc {
+  margin-top: 0.4rem;
+  color: var(--color-text-muted, #667085);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* Warm-up prompt cards */
+.lesson20-prompt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.lesson20-prompt-card {
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+  background: var(--color-primary-soft, #eef0ff);
+  color: var(--color-primary, #4a5cff);
+  font-weight: 600;
+  font-size: 0.93rem;
+  line-height: 1.45;
+}
+
+/* Grammar rule boxes */
+.l20-rule-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.l20-rule-box {
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  background: #f7f9fc;
+  border: 1px solid #e4e9f2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.l20-rule-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #4a5cff;
+  margin-bottom: 4px;
+}
+
+/* Spelling table */
+.l20-spell-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.6fr;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e4e9f2;
+  margin: 1rem 0 1.2rem;
+  font-size: 0.92rem;
+}
+
+.l20-spell-head {
+  padding: 10px 14px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: #fff;
+}
+
+.l20-spell-head--inf  { background: #e05252; }
+.l20-spell-head--she  { background: #4a7cdc; }
+.l20-spell-head--rule { background: #3aac6e; }
+
+.l20-spell-cell,
+.l20-spell-rule {
+  padding: 10px 14px;
+  border-top: 1px solid #e4e9f2;
+  line-height: 1.7;
+  vertical-align: middle;
+}
+
+.l20-spell-cell {
+  text-align: center;
+  background: #fff;
+}
+
+.l20-spell-cell--she {
+  background: #f0f5ff;
+  color: #1e40af;
+}
+
+.l20-spell-cell--she strong {
+  color: #e05252;
+}
+
+.l20-spell-rule {
+  background: #f4fdf7;
+  color: #15803d;
+  font-size: 0.88rem;
+}
+
+.l20-spell-rule strong { color: #166534; }
+.l20-spell-rule em     { color: #e05252; font-style: normal; }
+
+/* Bottom note */
+.l20-spell-note {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 1.4rem;
+}
+
+.l20-spell-note-title {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: #92400e;
+}
+
+.l20-spell-examples {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+}
+
+.l20-spell-ex {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.88rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+.l20-spell-ex--bad { background: #fee2e2; color: #991b1b; }
+.l20-spell-ex--ok  { background: #dcfce7; color: #166534; }
+
+.l20-spell-icon { font-weight: 800; flex-shrink: 0; }
+
+@media (max-width: 560px) {
+  .l20-spell-examples { grid-template-columns: 1fr; }
+  .l20-spell-table {
+    grid-template-columns: 1fr 1fr;
+  }
+  .l20-spell-head--rule,
+  .l20-spell-rule { display: none; }
+}
+
+/* Flashcards grid */
+.l20-flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.l20-flashcard {
+  height: 160px;
+  perspective: 700px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 0;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.l20-flashcard:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(74, 92, 255, 0.18);
+  z-index: 1;
+}
+
+.l20-flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.42s ease;
+}
+
+.l20-flashcard--flipped .l20-flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.l20-flashcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(100,110,140,0.12);
+  box-shadow: 0 3px 10px rgba(15,23,42,0.07);
+  overflow: hidden;
+}
+
+.l20-flashcard-front {
+  background: #fff;
+  justify-content: flex-end;
+}
+
+.l20-flashcard-front img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.l20-fc-ua {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  padding: 5px 6px;
+  background: rgba(0, 0, 0, 0.48);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  backdrop-filter: blur(2px);
+}
+
+.l20-flashcard-back {
+  transform: rotateY(180deg);
+  background: #4a5cff;
+  color: #fff;
+  gap: 0.35rem;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.l20-fc-i {
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+.l20-fc-arrow {
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.l20-fc-she {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+/* Verb exercise */
+.l20-verb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.l20-verb-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 12px;
+  background: #f7f9fc;
+  border: 1px solid #e4e9f2;
+}
+
+.l20-verb-prompt {
+  min-width: 150px;
+  font-size: 0.95rem;
+}
+
+.l20-choice-btn--ok  { background: #dcfce7 !important; border-color: #16a34a !important; color: #15803d !important; }
+.l20-choice-btn--bad { background: #fee2e2 !important; border-color: #dc2626 !important; color: #dc2626 !important; }
+
+.l20-verb-hint {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+/* Drill rows */
+.l20-drill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.l20-drill-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  border: 1px solid #e4e9f2;
+  background: #f7f9fc;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.95rem;
+  transition: background 0.15s, border-color 0.15s;
+  width: 100%;
+}
+
+.l20-drill-row:hover { border-color: #4a5cff; background: #f0f3ff; }
+.l20-drill-row--open { background: #eef0ff; border-color: #4a5cff; }
+
+.l20-drill-i   { flex: 1; min-width: 160px; font-weight: 600; }
+.l20-drill-sep { color: #94a3b8; }
+.l20-drill-she { flex: 1; min-width: 160px; font-weight: 700; color: #4a5cff; }
+.l20-drill-row:not(.l20-drill-row--open) .l20-drill-she { color: #94a3b8; font-style: italic; font-weight: 400; }
+
+/* White prompt card variant */
+.lesson20-prompt-card--white {
+  background: #fff;
+  border: 1px solid #e4e9f2;
+  color: #1f2937;
+}
+
+@media (max-width: 860px) {
+  .l20-flashcard-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .l20-rule-row { grid-template-columns: 1fr; }
+  .l20-flashcard-grid { grid-template-columns: repeat(2, 1fr); }
+  .l20-flashcard { height: 130px; }
+}
+
+/* Review 19 interactive exercises */
+.l20-ex-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 24px 0 6px;
+}
+
+.l20-hint {
+  font-size: 0.9rem;
+  color: #667085;
+  margin-bottom: 12px;
+}
+
+/* Exercise 1 — prepositions */
+.l20-prep-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.l20-prep-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: #f7f9fc;
+  border: 1px solid #e4e9f2;
+}
+
+.l20-prep-text {
+  flex: 1;
+  min-width: 200px;
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+
+.l20-blank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  padding: 1px 8px;
+  border-radius: 7px;
+  border: 2px dashed #93c5fd;
+  background: #f0f7ff;
+  color: #1e40af;
+  font-weight: 700;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.l20-blank--filled { border-style: solid; border-color: #60a5fa; }
+.l20-blank--ok     { border-style: solid; border-color: #16a34a; background: #dcfce7; color: #15803d; }
+.l20-blank--bad    { border-style: solid; border-color: #dc2626; background: #fee2e2; color: #dc2626; }
+
+.l20-choices {
+  display: flex;
+  gap: 6px;
+}
+
+.l20-choice-btn {
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 2px solid #e2e5ef;
+  background: transparent;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.l20-choice-btn:hover { border-color: #4a5cff; color: #4a5cff; }
+.l20-choice-btn--on   { background: #4a5cff; border-color: #4a5cff; color: #fff; }
+
+/* Chips — exercises 2 & 3 */
+.l20-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.l20-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 2px solid #e2e5ef;
+  background: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.l20-chip:hover          { border-color: #4a5cff; color: #4a5cff; }
+.l20-chip--on            { background: #eef0ff; border-color: #4a5cff; color: #4a5cff; }
+.l20-chip--do            { background: #dbeafe; border-color: #3b82f6; color: #1e40af; }
+.l20-chip--make          { background: #f3e8ff; border-color: #a855f7; color: #7e22ce; }
+.l20-chip--ok            { background: #dcfce7; border-color: #16a34a; color: #15803d; }
+.l20-chip--bad           { background: #fee2e2; border-color: #dc2626; color: #dc2626; }
+.l20-chip--missed        { background: #fef9c3; border-color: #ca8a04; color: #854d0e; }
+
+.l20-chip-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* Actions */
+.l20-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.l20-btn {
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: none;
+  background: #4a5cff;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.l20-btn:hover    { opacity: 0.88; }
+.l20-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.l20-btn--ghost {
+  background: transparent;
+  border: 2px solid #e2e5ef;
+  color: #374151;
+}
+
+.l20-btn--ghost:hover { border-color: #4a5cff; color: #4a5cff; opacity: 1; }
+
+.l20-score {
+  font-weight: 700;
+  color: #4a5cff;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
 .lesson20-actions {
   margin-top: 18px;
   display: flex;
