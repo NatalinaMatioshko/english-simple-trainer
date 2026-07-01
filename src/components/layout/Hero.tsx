@@ -33,7 +33,7 @@ export function Hero({ mode, setMode }: HeroProps) {
               role="tab"
               aria-selected={mode === "study"}
             >
-              Режим вивчення
+              Вивчення
             </button>
 
             <button
@@ -42,7 +42,16 @@ export function Hero({ mode, setMode }: HeroProps) {
               role="tab"
               aria-selected={mode === "practice"}
             >
-              Режим практики
+              Практика
+            </button>
+
+            <button
+              className={`mode-btn ${mode === "vocab" ? "active" : ""}`}
+              onClick={() => setMode("vocab")}
+              role="tab"
+              aria-selected={mode === "vocab"}
+            >
+              Словник
             </button>
           </div>
         </div>

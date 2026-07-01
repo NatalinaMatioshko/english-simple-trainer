@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme="light"] {
   --lesson19-bg: #f7f6f2;
   --lesson19-surface: #fbfaf7;
   --lesson19-surface-2: #f1eee8;
@@ -12,6 +13,19 @@
   --lesson19-radius-lg: 24px;
   --lesson19-radius-md: 18px;
   --lesson19-radius-sm: 14px;
+}
+
+[data-theme="dark"] {
+  --lesson19-bg: #171614;
+  --lesson19-surface: #1c1b19;
+  --lesson19-surface-2: #23211f;
+  --lesson19-text: #ece7df;
+  --lesson19-muted: #b0aaa0;
+  --lesson19-border: #393836;
+  --lesson19-primary: #4f98a3;
+  --lesson19-primary-soft: rgba(79, 152, 163, 0.12);
+  --lesson19-accent: #edb336;
+  --lesson19-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
 *,

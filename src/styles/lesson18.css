@@ -471,3 +471,49 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+[data-theme="dark"] .lesson18-speaking-card,
+[data-theme="dark"] .lesson18-game-card,
+[data-theme="dark"] .lesson18-homework-card,
+[data-theme="dark"] .lesson18-speaking-box,
+[data-theme="dark"] .lesson18-picture-card {
+  background: var(--color-surface-2);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .flashcard-front,
+[data-theme="dark"] .flashcard-back {
+  background: var(--color-surface-2);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .flashcard-front img,
+[data-theme="dark"] .lesson18-picture-card img {
+  background: var(--color-surface);
+}
+
+[data-theme="dark"] .lesson18-pair-card {
+  background: var(--color-surface-2);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .lesson18-check.ok,
+[data-theme="dark"] .lesson18-answer.ok {
+  color: var(--color-success);
+}
+
+[data-theme="dark"] .lesson18-check.bad,
+[data-theme="dark"] .lesson18-answer.bad {
+  color: var(--color-error);
+}
+
+[data-theme="dark"] .lesson18-pair-card.matched {
+  background: rgba(79, 152, 163, 0.15);
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .lesson18-hero,
+[data-theme="dark"] .lesson18-block {
+  border-color: var(--color-border);
+}

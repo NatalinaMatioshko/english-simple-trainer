@@ -16,6 +16,7 @@ import { ConjugationCard } from "../components/study/ConjugationCard";
 import { QuestionBuilderCard } from "../components/study/QuestionBuilderCard";
 import { MixedPracticeCard } from "../components/practice/MixedPracticeCard";
 import { FrequencyQuizCard } from "../components/practice/FrequencyQuizCard";
+import { VocabSection } from "../components/vocab/VocabSection";
 
 export default function TrainerPage() {
   const [mode, setMode] = useState<Mode>("study");
@@ -29,7 +30,7 @@ export default function TrainerPage() {
   const quiz = useFrequencyQuiz();
 
   return (
-    <div className="app" data-theme={theme}>
+    <div className="app">
       <Header theme={theme} onToggleTheme={toggleTheme} />
       <Hero mode={mode} setMode={setMode} />
 
@@ -105,6 +106,8 @@ export default function TrainerPage() {
               </div>
             </div>
           )}
+
+          {mode === "vocab" && <VocabSection />}
         </section>
       </main>
     </div>
