@@ -5,6 +5,9 @@ import "../styles/lesson19.css";
 
 /* ─── Third person data ─────────────────────────────── */
 
+const LISTENING_TEST_URL =
+  "https://test-english.com/listening/a1/how-often-do-you-a1-english-listening-test/";
+
 const warmUpPrompts = [
   "What does your brother do every day?",
   "Where does your sister work?",
@@ -79,9 +82,18 @@ const rapidDrills = [
 ];
 
 const negativeQuestionDrills = [
-  { text: "He doesn't work on Sundays.", note: "negative → doesn't + base verb" },
-  { text: "Does she study French?", note: "question → Does + she + base verb?" },
-  { text: "She doesn't watch TV in the morning.", note: "doesn't + watch (no -s)" },
+  {
+    text: "He doesn't work on Sundays.",
+    note: "negative → doesn't + base verb",
+  },
+  {
+    text: "Does she study French?",
+    note: "question → Does + she + base verb?",
+  },
+  {
+    text: "She doesn't watch TV in the morning.",
+    note: "doesn't + watch (no -s)",
+  },
   { text: "Does he have a brother?", note: "Does he have…? (not has)" },
 ];
 
@@ -176,15 +188,31 @@ const canSortItems: SortItem[] = [
 ];
 
 const canChooseItems: ChooseItem[] = [
-  { sentence: "___ you help me?", options: ["Can", "Can't", "Does", "Do"], answer: "Can" },
-  { sentence: "I ___ ride a bike.", options: ["can", "can't", "cans", "do"], answer: "can" },
+  {
+    sentence: "___ you help me?",
+    options: ["Can", "Can't", "Does", "Do"],
+    answer: "Can",
+  },
+  {
+    sentence: "I ___ ride a bike.",
+    options: ["can", "can't", "cans", "do"],
+    answer: "can",
+  },
   {
     sentence: "She ___ speak English very well.",
     options: ["can", "can't", "doesn't", "isn't"],
     answer: "can",
   },
-  { sentence: "Fish ___ walk.", options: ["can", "can't", "don't", "isn't"], answer: "can't" },
-  { sentence: "___ he cook?", options: ["Can", "Can't", "Does", "Is"], answer: "Can" },
+  {
+    sentence: "Fish ___ walk.",
+    options: ["can", "can't", "don't", "isn't"],
+    answer: "can't",
+  },
+  {
+    sentence: "___ he cook?",
+    options: ["Can", "Can't", "Does", "Is"],
+    answer: "Can",
+  },
   {
     sentence: "I ___ hear you — it's too loud.",
     options: ["can", "can't", "don't", "am not"],
@@ -195,9 +223,12 @@ const canChooseItems: ChooseItem[] = [
 /* ─── Page ──────────────────────────────────────────── */
 
 function listenVerbOptions(correct: string): string[] {
+  if (correct === "has") return ["has", "have", "had"];
   const base = correct.endsWith("ies")
     ? correct.replace(/ies$/, "y")
-    : correct.replace(/es$/, "").replace(/s$/, "");
+    : correct.endsWith("es")
+      ? correct.replace(/es$/, "")
+      : correct.replace(/s$/, "");
   return [...new Set([correct, base, "have"])].slice(0, 3);
 }
 
@@ -227,8 +258,7 @@ export default function Lesson21() {
   };
 
   const sortScore = useMemo(
-    () =>
-      sortWords.filter((w) => sortPlaced[w.word] === w.bucket).length,
+    () => sortWords.filter((w) => sortPlaced[w.word] === w.bucket).length,
     [sortPlaced],
   );
 
@@ -244,12 +274,20 @@ export default function Lesson21() {
   );
 
   const [listenState, setListenState] = useState<
-    Record<number, { underlined: boolean; subject: string; verb: string; answered: boolean }>
+    Record<
+      number,
+      { underlined: boolean; subject: string; verb: string; answered: boolean }
+    >
   >({});
 
   const updateListen = (
     idx: number,
-    patch: Partial<{ underlined: boolean; subject: string; verb: string; answered: boolean }>,
+    patch: Partial<{
+      underlined: boolean;
+      subject: string;
+      verb: string;
+      answered: boolean;
+    }>,
   ) => setListenState((p) => ({ ...p, [idx]: { ...p[idx], ...patch } }));
 
   /* Can exercises state */
@@ -305,7 +343,10 @@ export default function Lesson21() {
             <Link className="lesson21-back-link" to="/">
               ← Roadmap
             </Link>
-            <Link className="lesson21-back-link lesson21-back-link--ghost" to="/lessons">
+            <Link
+              className="lesson21-back-link lesson21-back-link--ghost"
+              to="/lessons"
+            >
               All lessons
             </Link>
           </div>
@@ -326,8 +367,8 @@ export default function Lesson21() {
           <p className="page-kicker">Vocabulary</p>
           <h2>Word cards</h2>
           <p className="lesson21-section-desc">
-            Tap a card — front shows Ukrainian, back shows English and an example
-            sentence. Read each example aloud.
+            Tap a card — front shows Ukrainian, back shows English and an
+            example sentence. Read each example aloud.
           </p>
         </div>
         <div className="l21-vocab-grid">
@@ -373,8 +414,11 @@ export default function Lesson21() {
           <span>8 Homework</span>
         </div>
         <p className="lesson21-section-desc">
-          Sequence: <strong>input → drill → controlled output → short listening → short speaking</strong> —
-          so rules become automatic speech, not just theory.
+          Sequence:{" "}
+          <strong>
+            input → drill → controlled output → short listening → short speaking
+          </strong>{" "}
+          — so rules become automatic speech, not just theory.
         </p>
       </section>
 
@@ -402,7 +446,8 @@ export default function Lesson21() {
           <p className="page-kicker">3–4 minutes</p>
           <h2>Mini pronunciation & spelling block</h2>
           <p className="lesson21-section-desc">
-            Read each column <strong>out loud</strong>. Then say full sentences with he / she.
+            Read each column <strong>out loud</strong>. Then say full sentences
+            with he / she.
           </p>
         </div>
         <div className="l21-pron-grid">
@@ -440,7 +485,8 @@ export default function Lesson21() {
         <p className="l21-pron-note">
           Say aloud: <em>He works. She watches. He studies. She has coffee.</em>
           <br />
-          In questions & negatives use <strong>does / doesn't + base verb</strong> (no -s):{" "}
+          In questions & negatives use{" "}
+          <strong>does / doesn't + base verb</strong> (no -s):{" "}
           <em>Does she work? She doesn't work on Sunday.</em>
         </p>
       </section>
@@ -454,24 +500,40 @@ export default function Lesson21() {
         <div className="l21-can-rules">
           <div className="l21-can-rule">
             <h4>Ability</h4>
-            <p>I <strong>can</strong> swim.</p>
-            <p>She <strong>can't</strong> drive.</p>
-            <p><strong>Can</strong> you cook?</p>
+            <p>
+              I <strong>can</strong> swim.
+            </p>
+            <p>
+              She <strong>can't</strong> drive.
+            </p>
+            <p>
+              <strong>Can</strong> you cook?
+            </p>
           </div>
           <div className="l21-can-rule">
             <h4>Request</h4>
-            <p><strong>Can</strong> you help me, please?</p>
-            <p><strong>Can</strong> you open the window?</p>
+            <p>
+              <strong>Can</strong> you help me, please?
+            </p>
+            <p>
+              <strong>Can</strong> you open the window?
+            </p>
           </div>
           <div className="l21-can-rule">
             <h4>Permission</h4>
-            <p><strong>Can</strong> I sit here?</p>
+            <p>
+              <strong>Can</strong> I sit here?
+            </p>
             <p>Yes, you can. / No, you can't.</p>
           </div>
           <div className="l21-can-rule">
             <h4>Important</h4>
-            <p>After can → <strong>base verb</strong> (no -s)</p>
-            <p>✓ She <strong>can speak</strong> English</p>
+            <p>
+              After can → <strong>base verb</strong> (no -s)
+            </p>
+            <p>
+              ✓ She <strong>can speak</strong> English
+            </p>
             <p>✗ She can speaks English</p>
           </div>
         </div>
@@ -483,7 +545,8 @@ export default function Lesson21() {
           <p className="page-kicker">Controlled practice</p>
           <h2>1) Rapid transformation drill</h2>
           <p className="lesson21-section-desc">
-            Change <strong>I → he/she</strong> instantly. Tap to check the model answer.
+            Change <strong>I → he/she</strong> instantly. Tap to check the model
+            answer.
           </p>
         </div>
         <div className="l21-drill-list">
@@ -508,9 +571,20 @@ export default function Lesson21() {
         </h3>
         <div className="l21-drill-list">
           {negativeQuestionDrills.map((item) => (
-            <div key={item.text} className="l21-drill-row l21-drill-row--open" style={{ cursor: "default" }}>
+            <div
+              key={item.text}
+              className="l21-drill-row l21-drill-row--open"
+              style={{ cursor: "default" }}
+            >
               <span className="l21-drill-i">{item.text}</span>
-              <span className="l21-drill-she" style={{ fontStyle: "normal", fontWeight: 600, fontSize: "0.85rem" }}>
+              <span
+                className="l21-drill-she"
+                style={{
+                  fontStyle: "normal",
+                  fontWeight: 600,
+                  fontSize: "0.85rem",
+                }}
+              >
                 {item.note}
               </span>
             </div>
@@ -523,7 +597,8 @@ export default function Lesson21() {
         <div className="lesson21-section-head">
           <h2>2) Verb sorting</h2>
           <p className="lesson21-section-desc">
-            Click a verb, then click the correct column. After sorting — read each column aloud in full sentences.
+            Click a verb, then click the correct column. After sorting — read
+            each column aloud in full sentences.
           </p>
         </div>
 
@@ -568,8 +643,19 @@ export default function Lesson21() {
           ))}
         </div>
 
-        <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-          <button type="button" className="l21-btn" onClick={() => setSortChecked(true)}>
+        <div
+          style={{
+            marginTop: "1rem",
+            display: "flex",
+            gap: "0.5rem",
+            flexWrap: "wrap",
+          }}
+        >
+          <button
+            type="button"
+            className="l21-btn"
+            onClick={() => setSortChecked(true)}
+          >
             Check sorting
           </button>
           <button
@@ -590,7 +676,9 @@ export default function Lesson21() {
           </p>
         )}
 
-        <h3 style={{ marginTop: "1.25rem", fontSize: "1rem" }}>Read aloud — example sentences</h3>
+        <h3 style={{ marginTop: "1.25rem", fontSize: "1rem" }}>
+          Read aloud — example sentences
+        </h3>
         <div className="l21-can-rules">
           {Object.entries(sortSentences).map(([key, sents]) => (
             <div key={key} className="l21-can-rule">
@@ -635,7 +723,11 @@ export default function Lesson21() {
           })}
         </div>
         <div style={{ marginTop: "0.75rem", display: "flex", gap: "0.5rem" }}>
-          <button type="button" className="l21-btn" onClick={() => setGapChecked(true)}>
+          <button
+            type="button"
+            className="l21-btn"
+            onClick={() => setGapChecked(true)}
+          >
             Check
           </button>
           <button
@@ -662,25 +754,29 @@ export default function Lesson21() {
           <p className="page-kicker">Speaking</p>
           <h2>Task-based speaking</h2>
           <p className="lesson21-section-desc">
-            Complete both tasks out loud — not just describe, but fulfil the brief.
+            Complete both tasks out loud — not just describe, but fulfil the
+            brief.
           </p>
         </div>
         <div className="lesson21-prompt-grid">
           <div className="lesson21-prompt-card lesson21-prompt-card--task">
             <strong>Task 1</strong>
-            Tell me <strong>5 facts</strong> about your brother, sister, or a close friend.
+            Tell me <strong>5 facts</strong> about your brother, sister, or a
+            close friend.
             <br />
             <em>Use: works, lives, likes, has, goes…</em>
           </div>
           <div className="lesson21-prompt-card lesson21-prompt-card--task">
             <strong>Task 2 — Compare</strong>
-            Compare <strong>your routine</strong> with <strong>your sister's / brother's routine</strong>.
+            Compare <strong>your routine</strong> with{" "}
+            <strong>your sister's / brother's routine</strong>.
             <br />
             <em>I get up at… but she gets up at…</em>
           </div>
           <div className="lesson21-prompt-card lesson21-prompt-card--task">
             <strong>Can — ability</strong>
-            Say 3 things you <strong>can</strong> do and 2 things you <strong>can't</strong> do yet.
+            Say 3 things you <strong>can</strong> do and 2 things you{" "}
+            <strong>can't</strong> do yet.
           </div>
           <div className="lesson21-prompt-card lesson21-prompt-card--task">
             <strong>Can — request</strong>
@@ -693,11 +789,40 @@ export default function Lesson21() {
       <section className="lesson21-block panel reveal-on-scroll">
         <div className="lesson21-section-head">
           <p className="page-kicker">Listening</p>
-          <h2>Listen and reconstruct</h2>
+          <h2>Listening practice</h2>
           <p className="lesson21-section-desc">
-            Teacher reads the sentence. Student: underline the verb → say he/she/it → repeat with correct -s → answer the question.
+            First — online test on Test-English. Then — classroom listen & reconstruct
+            with he / she / it forms.
           </p>
         </div>
+
+        <div className="l21-listen-external">
+          <a
+            href={LISTENING_TEST_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="lesson19-resource-card l21-listen-link"
+          >
+            <div className="lesson19-resource-top">
+              <span className="lesson19-resource-badge">A1 Listening</span>
+              <span className="lesson19-resource-arrow">↗</span>
+            </div>
+            <h3>How often do you…?</h3>
+            <p>
+              Test-English listening test — adverbs of frequency and daily routines.
+              Open in a new tab, listen, and complete the tasks.
+            </p>
+          </a>
+          <p className="l21-listen-link-hint muted">
+            After the test, return here for the short reconstruct drill below.
+          </p>
+        </div>
+
+        <h3 className="l21-listen-subtitle">Listen and reconstruct</h3>
+        <p className="lesson21-section-desc">
+          Teacher reads the sentence. Student: underline the verb → say he/she/it →
+          repeat with correct -s → answer the question.
+        </p>
         <div className="l21-listen-list">
           {listenItems.map((item, idx) => {
             const st = listenState[idx] ?? {
@@ -721,16 +846,22 @@ export default function Lesson21() {
                 </p>
 
                 <div className="l21-listen-steps">
-                  <span className={`l21-listen-step ${st.underlined ? "done" : ""}`}>
+                  <span
+                    className={`l21-listen-step ${st.underlined ? "done" : ""}`}
+                  >
                     1 underline verb
                   </span>
-                  <span className={`l21-listen-step ${st.subject ? "done" : ""}`}>
+                  <span
+                    className={`l21-listen-step ${st.subject ? "done" : ""}`}
+                  >
                     2 he/she/it
                   </span>
                   <span className={`l21-listen-step ${st.verb ? "done" : ""}`}>
                     3 repeat verb
                   </span>
-                  <span className={`l21-listen-step ${st.answered ? "done" : ""}`}>
+                  <span
+                    className={`l21-listen-step ${st.answered ? "done" : ""}`}
+                  >
                     4 answer
                   </span>
                 </div>
@@ -774,7 +905,13 @@ export default function Lesson21() {
                     </div>
                   )}
                   {st.verb && st.verb !== item.verb && (
-                    <p style={{ margin: 0, color: "var(--color-error)", fontWeight: 700 }}>
+                    <p
+                      style={{
+                        margin: 0,
+                        color: "var(--color-error)",
+                        fontWeight: 700,
+                      }}
+                    >
                       Try again → correct: <strong>{item.verb}</strong>
                       <button
                         type="button"
@@ -797,8 +934,15 @@ export default function Lesson21() {
                   )}
                   {st.answered && (
                     <>
-                      <p style={{ margin: 0, fontWeight: 700 }}>{item.question}</p>
-                      <p style={{ margin: "0.35rem 0 0", color: "var(--color-text-muted)" }}>
+                      <p style={{ margin: 0, fontWeight: 700 }}>
+                        {item.question}
+                      </p>
+                      <p
+                        style={{
+                          margin: "0.35rem 0 0",
+                          color: "var(--color-text-muted)",
+                        }}
+                      >
                         Model: {item.answer}
                       </p>
                     </>
@@ -815,7 +959,9 @@ export default function Lesson21() {
         <div className="lesson21-section-head">
           <p className="page-kicker">Can practice</p>
           <h2>Can or can't?</h2>
-          <p className="lesson21-section-desc">Interactive exercises — choose the correct form.</p>
+          <p className="lesson21-section-desc">
+            Interactive exercises — choose the correct form.
+          </p>
         </div>
 
         <div className="lesson19-sort-grid">
@@ -840,7 +986,9 @@ export default function Lesson21() {
                   ))}
                 </div>
                 {selected && (
-                  <span className={`lesson19-check ${isCorrect ? "ok" : "bad"}`}>
+                  <span
+                    className={`lesson19-check ${isCorrect ? "ok" : "bad"}`}
+                  >
                     {isCorrect ? "✓" : "Try again"}
                   </span>
                 )}
@@ -848,7 +996,9 @@ export default function Lesson21() {
             );
           })}
         </div>
-        <p className="l21-score">Score: {canSortScore} / {canSortItems.length}</p>
+        <p className="l21-score">
+          Score: {canSortScore} / {canSortItems.length}
+        </p>
 
         <h3 style={{ marginTop: "1.5rem" }}>Choose the right word</h3>
         <div className="lesson19-choose-list">
@@ -873,7 +1023,9 @@ export default function Lesson21() {
                   ))}
                 </div>
                 {showCanChoose && (
-                  <div className={`lesson19-answer ${isCorrect ? "ok" : "bad"}`}>
+                  <div
+                    className={`lesson19-answer ${isCorrect ? "ok" : "bad"}`}
+                  >
                     Correct: <strong>{item.answer}</strong>
                   </div>
                 )}
@@ -890,7 +1042,9 @@ export default function Lesson21() {
           Check can answers
         </button>
         {showCanChoose && (
-          <p className="l21-score">Score: {canChooseScore} / {canChooseItems.length}</p>
+          <p className="l21-score">
+            Score: {canChooseScore} / {canChooseItems.length}
+          </p>
         )}
       </section>
 
@@ -925,11 +1079,21 @@ export default function Lesson21() {
             </ul>
           </div>
         </div>
-        <div style={{ marginTop: "1.25rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+        <div
+          style={{
+            marginTop: "1.25rem",
+            display: "flex",
+            gap: "0.75rem",
+            flexWrap: "wrap",
+          }}
+        >
           <Link className="lesson21-back-link" to="/trainer">
             Open trainer
           </Link>
-          <Link className="lesson21-back-link lesson21-back-link--ghost" to="/homework">
+          <Link
+            className="lesson21-back-link lesson21-back-link--ghost"
+            to="/homework"
+          >
             Homework page
           </Link>
         </div>

@@ -495,6 +495,26 @@
   background: rgba(161, 44, 123, 0.1);
 }
 
+.l21-listen-external {
+  margin-bottom: 1.5rem;
+}
+
+.l21-listen-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.l21-listen-link-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.88rem;
+}
+
+.l21-listen-subtitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
 /* Listening */
 .l21-listen-list {
   display: grid;
