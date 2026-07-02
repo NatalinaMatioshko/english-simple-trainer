@@ -62,21 +62,23 @@ const lessons = [
   },
   {
     id: "20",
-    title: "Lesson 20",
-    level: "A1",
-    topic: "Coming soon",
-    description: "Coming soon.",
+    title: "He / She / It + Present Simple",
+    level: "A1-A2",
+    topic: "Third person",
+    description:
+      "Flashcards, spelling -s/-es/-ies, I → he/she drills, and speaking about another person.",
     lessonPath: "/lesson-20",
-    homeworkPath: "/homework",
+    homeworkPath: "/homework/20",
   },
   {
     id: "21",
-    title: "Lesson 21",
-    level: "A1",
-    topic: "Coming soon",
-    description: "Coming soon.",
+    title: "Can + Third Person Review",
+    level: "A1-A2",
+    topic: "Can / can't + review",
+    description:
+      "Vocabulary cards, can for ability/request, third person drills, Test-English listening, and task-based speaking.",
     lessonPath: "/lesson-21",
-    homeworkPath: "/homework",
+    homeworkPath: "/homework/21",
   },
 ];
 

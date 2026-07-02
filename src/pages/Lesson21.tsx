@@ -1092,7 +1092,7 @@ export default function Lesson21() {
           </Link>
           <Link
             className="lesson21-back-link lesson21-back-link--ghost"
-            to="/homework"
+            to="/homework/21"
           >
             Homework page
           </Link>

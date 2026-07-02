@@ -48,18 +48,18 @@ const completedPath: StageSummary[] = [
   },
   {
     range: "Lessons 18–20",
-    title: "Practical accuracy, collocations and third person",
+    title: "Practical accuracy and third person",
     summary:
-      "The learner worked on in / on / at / to, do / make collocations, and is now practising he / she / it verb forms through pictures and speaking tasks.",
+      "The learner worked on in / on / at / to, do / make collocations, and he / she / it verb forms with flashcards, spelling rules, and speaking about another person.",
   },
 ];
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 20–24",
-    title: "People and connected speaking",
+    range: "Lessons 21–24",
+    title: "Can, review, and connected speaking",
     summary:
-      "The next step focuses on third person forms, family, describing people, and speaking about someone else in simple connected sentences.",
+      "The current step combines can / can't with third person review, vocabulary cards, Test-English listening, and task-based speaking about family and routines.",
   },
   {
     range: "Lessons 25–30",
@@ -290,26 +290,33 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 20,
-    title: "Third person singular in context",
-    grammar: "he / she / it + verb forms and -s endings",
-    vocabulary: "works, lives, likes, goes, watches, has",
-    speaking: "Describe a friend or family member in 5–7 simple sentences.",
-    listening: "Spot he / she / it forms in context.",
-    review: "Present Simple, routine verbs, family language.",
+    title: "He / She / It + Present Simple",
+    grammar: "he / she / it + -s / -es / -ies; does / doesn't; has",
+    vocabulary:
+      "routine flashcards: wake up, work, watch, study, have breakfast, go to work",
+    speaking:
+      "Describe a friend or family member using model sentences about work, routine, and likes.",
+    listening: "Spot he / she / it forms in short sentences.",
+    review: "Lesson 19 prepositions, do/make, Present Simple questions.",
     category: "people",
-    status: "current",
+    status: "completed",
     route: "/lesson-20",
   },
   {
     id: 21,
-    title: "Can + third person review",
-    grammar: "can / can't — ability, request, permission; he/she/it review",
-    vocabulary: "can, can't, works, goes, watches, studies, has",
-    speaking: "5 facts about a family member; compare routines; can/can't tasks.",
-    listening: "Listen and reconstruct: underline verb, repeat -s form, answer.",
-    review: "Third person -s/-es/-ies, does/doesn't, can + base verb.",
+    title: "Can + Third Person Review",
+    grammar:
+      "can / can't — ability, request, permission; third person -s / -es / -ies review",
+    vocabulary:
+      "backpack, book, wallet, TV, house, car, shoes, computer, mobile phone, umbrella",
+    speaking:
+      "5 facts about a family member; compare your routine with a sibling's; can / can't + Can you…?",
+    listening:
+      "Test-English: How often do you…? + listen and reconstruct with he / she / it.",
+    review:
+      "Third person spelling, does/doesn't, rapid transformation, can + base verb.",
     category: "general",
-    status: "next",
+    status: "current",
     route: "/lesson-21",
   },
   {

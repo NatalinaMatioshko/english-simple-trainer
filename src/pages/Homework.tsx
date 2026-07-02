@@ -3,6 +3,63 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "21",
+    title: "Can + Third Person Review",
+    tasks: [
+      {
+        type: "link",
+        label: "Test-English — How often do you…? (A1 Listening)",
+        href: "https://test-english.com/listening/a1/how-often-do-you-a1-english-listening-test/",
+      },
+      {
+        type: "text",
+        text: "Write 8 sentences about a family member using he / she + works, lives, likes, has, goes…",
+      },
+      {
+        type: "text",
+        text: "Write 4 questions with Does…? and 4 negative sentences with doesn't.",
+      },
+      {
+        type: "text",
+        text: "Write 5 sentences with can and 5 with can't about your real abilities.",
+      },
+      {
+        type: "text",
+        text: "Write 3 polite requests: Can you…?",
+      },
+      {
+        type: "text",
+        text: "Send a voice message: 5 facts about your brother/sister + compare your routine with theirs.",
+      },
+    ],
+  },
+  {
+    id: "20",
+    title: "He / She / It + Present Simple",
+    tasks: [
+      {
+        type: "text",
+        text: "Write 8 sentences about one person (he or she) using -s / -es / -ies forms: works, watches, studies, has…",
+      },
+      {
+        type: "text",
+        text: "Write 4 questions with Does he/she…? and short answers.",
+      },
+      {
+        type: "text",
+        text: "Write 4 negative sentences with doesn't + base verb.",
+      },
+      {
+        type: "text",
+        text: "Describe your mother's or father's daily routine in 6–8 sentences.",
+      },
+      {
+        type: "text",
+        text: "Send a short voice message describing a friend or family member (5–7 sentences).",
+      },
+    ],
+  },
+  {
     id: "19",
     title: "Do expressions + in / on / at practice",
     tasks: [
