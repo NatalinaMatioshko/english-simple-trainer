@@ -47,10 +47,10 @@ const completedPath: StageSummary[] = [
       "The course strengthened question forms, prepositions, pictures, listening, and short connected speaking with more confidence.",
   },
   {
-    range: "Lessons 18–19",
-    title: "Practical accuracy and collocations",
+    range: "Lessons 18–20",
+    title: "Practical accuracy, collocations and third person",
     summary:
-      "The learner worked on in / on / at / to in real-life contexts and then moved into do / make through pictures, flashcards, and speaking support.",
+      "The learner worked on in / on / at / to, do / make collocations, and is now practising he / she / it verb forms through pictures and speaking tasks.",
   },
 ];
 
@@ -285,7 +285,7 @@ const roadmapLessons: Lesson[] = [
     review:
       "Routine language, prepositions, picture description, sentence building.",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lesson-19",
   },
   {
@@ -297,18 +297,20 @@ const roadmapLessons: Lesson[] = [
     listening: "Spot he / she / it forms in context.",
     review: "Present Simple, routine verbs, family language.",
     category: "people",
-    status: "next",
+    status: "current",
+    route: "/lesson-20",
   },
   {
     id: 21,
-    title: "Longer listening: daily life",
-    grammar: "Present Simple review in connected speech",
-    vocabulary: "wake up, leave home, start work, lunch break, come back",
-    speaking: "Retell the main idea of a short audio in 3–4 sentences.",
-    listening: "Longer A1 listening for gist and key details.",
-    review: "Routines, time expressions, short answers.",
+    title: "Can + third person review",
+    grammar: "can / can't — ability, request, permission; he/she/it review",
+    vocabulary: "can, can't, works, goes, watches, studies, has",
+    speaking: "5 facts about a family member; compare routines; can/can't tasks.",
+    listening: "Listen and reconstruct: underline verb, repeat -s form, answer.",
+    review: "Third person -s/-es/-ies, does/doesn't, can + base verb.",
     category: "general",
     status: "next",
+    route: "/lesson-21",
   },
   {
     id: 22,
