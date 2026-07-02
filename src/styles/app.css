@@ -788,6 +788,55 @@ h1 {
   }
 }
 
+/* ── Vocab grid layout (alphabet) ────────────────── */
+
+.vocab-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: var(--space-2);
+}
+
+.vocab-grid-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-2);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.vocab-grid-card:hover {
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+}
+
+.vocab-grid-main {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.vocab-grid-sub {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* 2-column variant (numbers, no example) */
+
+.vocab-table-header--2col,
+.vocab-item--2col {
+  grid-template-columns: 1fr 2fr;
+}
+
 /* ── Vocab view switcher ──────────────────────────── */
 
 .vocab-view-switcher {

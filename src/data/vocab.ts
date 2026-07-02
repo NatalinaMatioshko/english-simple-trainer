@@ -1,7 +1,7 @@
 export type VocabItem = {
   en: string;
   ua: string;
-  example: string;
+  example?: string;
 };
 
 export type VocabGroup = {
@@ -15,10 +15,167 @@ export type VocabCategory = {
   badge: string;
   description?: string;
   grammar?: string[];
+  /** "grid" = compact visual grid (alphabet style), "table" = default row list */
+  layout?: "grid" | "table";
+  /** Override column headers [col1, col2, col3] */
+  columnLabels?: [string, string, string];
+  /** Override flashcard face labels */
+  frontLabel?: string;
+  backLabel?: string;
   groups: VocabGroup[];
 };
 
 export const vocabCategories: VocabCategory[] = [
+  {
+    id: "alphabet",
+    title: "Alphabet",
+    badge: "A–Z",
+    layout: "grid",
+    frontLabel: "Звук",
+    backLabel: "Буква",
+    groups: [
+      {
+        items: [
+          { en: "Aa", ua: "[ ei ]" },
+          { en: "Bb", ua: "[ biː ]" },
+          { en: "Cc", ua: "[ siː ]" },
+          { en: "Dd", ua: "[ diː ]" },
+          { en: "Ee", ua: "[ iː ]" },
+          { en: "Ff", ua: "[ ef ]" },
+          { en: "Gg", ua: "[ dʒiː ]" },
+          { en: "Hh", ua: "[ eitʃ ]" },
+          { en: "Ii", ua: "[ ai ]" },
+          { en: "Jj", ua: "[ dʒei ]" },
+          { en: "Kk", ua: "[ kei ]" },
+          { en: "Ll", ua: "[ el ]" },
+          { en: "Mm", ua: "[ em ]" },
+          { en: "Nn", ua: "[ en ]" },
+          { en: "Oo", ua: "[ ou ]" },
+          { en: "Pp", ua: "[ piː ]" },
+          { en: "Qq", ua: "[ kjuː ]" },
+          { en: "Rr", ua: "[ aː ]" },
+          { en: "Ss", ua: "[ es ]" },
+          { en: "Tt", ua: "[ tiː ]" },
+          { en: "Uu", ua: "[ juː ]" },
+          { en: "Vv", ua: "[ viː ]" },
+          { en: "Ww", ua: "[ ˈdʌbl juː ]" },
+          { en: "Xx", ua: "[ eks ]" },
+          { en: "Yy", ua: "[ wai ]" },
+          { en: "Zz", ua: "[ zed ]" },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "numbers",
+    title: "Numbers",
+    badge: "1–∞",
+    columnLabels: ["Цифра", "Слово + звук", ""],
+    frontLabel: "Слово + звук",
+    backLabel: "Цифра",
+    groups: [
+      {
+        label: "1–12",
+        items: [
+          { en: "1", ua: "one  [ wʌn ]" },
+          { en: "2", ua: "two  [ tuː ]" },
+          { en: "3", ua: "three  [ θriː ]" },
+          { en: "4", ua: "four  [ fɔː ]" },
+          { en: "5", ua: "five  [ faɪv ]" },
+          { en: "6", ua: "six  [ sɪks ]" },
+          { en: "7", ua: "seven  [ ˈsev(ə)n ]" },
+          { en: "8", ua: "eight  [ eɪt ]" },
+          { en: "9", ua: "nine  [ naɪn ]" },
+          { en: "10", ua: "ten  [ ten ]" },
+          { en: "11", ua: "eleven  [ ɪˈlev(ə)n ]" },
+          { en: "12", ua: "twelve  [ twelv ]" },
+        ],
+      },
+      {
+        label: "13–19",
+        items: [
+          { en: "13", ua: "thirteen  [ θɜːˈtiːn ]" },
+          { en: "14", ua: "fourteen  [ fɔːˈtiːn ]" },
+          { en: "15", ua: "fifteen  [ ˌfɪfˈtiːn ]" },
+          { en: "16", ua: "sixteen  [ ˌsɪkˈstiːn ]" },
+          { en: "17", ua: "seventeen  [ ˌsev(ə)nˈtiːn ]" },
+          { en: "18", ua: "eighteen  [ ˌeɪˈtiːn ]" },
+          { en: "19", ua: "nineteen  [ ˌnaɪnˈtiːn ]" },
+        ],
+      },
+      {
+        label: "20–∞",
+        items: [
+          { en: "20", ua: "twenty  [ ˈtwentɪ ]" },
+          { en: "21", ua: "twenty-one  [ ˌtwentɪˈwʌn ]" },
+          { en: "60", ua: "sixty  [ ˈsɪkstɪ ]" },
+          { en: "70", ua: "seventy  [ ˈsev(ə)ntɪ ]" },
+          { en: "80", ua: "eighty  [ ˈeɪtɪ ]" },
+          { en: "90", ua: "ninety  [ ˈnaɪntɪ ]" },
+          { en: "100", ua: "one hundred  [ ˈhʌndrəd ]" },
+          { en: "1 000", ua: "one thousand  [ ˈθauz(ə)nd ]" },
+          { en: "1 000 000", ua: "one million  [ ˈmɪljən ]" },
+          { en: "1 000 000 000", ua: "one billion  [ ˈbɪljən ]" },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "basic-words",
+    title: "Basic words",
+    badge: "A1",
+    groups: [
+      {
+        items: [
+          { en: "city", ua: "місто", example: "London is a big city." },
+          { en: "country", ua: "країна", example: "What country are you from?" },
+          {
+            en: "e-mail address",
+            ua: "електронна адреса",
+            example: "What is your e-mail address?",
+          },
+          { en: "fine", ua: "добре, чудово", example: "I'm fine, thank you." },
+          { en: "friend", ua: "друг", example: "She is my friend." },
+          { en: "good", ua: "гарний, добрий", example: "Good morning!" },
+          { en: "he", ua: "він", example: "He is a teacher." },
+          { en: "her", ua: "її, їй", example: "This is her book." },
+          { en: "his", ua: "його", example: "His name is Tom." },
+          {
+            en: "hobby",
+            ua: "хобі, улюблена справа",
+            example: "My hobby is reading.",
+          },
+          { en: "how", ua: "як", example: "How are you?" },
+          { en: "I", ua: "я", example: "I am a student." },
+          { en: "it", ua: "це, воно", example: "It is a good idea." },
+          { en: "job", ua: "робота, професія", example: "What is your job?" },
+          { en: "my", ua: "мій", example: "My name is Anna." },
+          { en: "name", ua: "ім'я", example: "What is your name?" },
+          { en: "nice", ua: "приємний", example: "Nice to meet you!" },
+          { en: "number", ua: "номер", example: "What is your phone number?" },
+          { en: "phone", ua: "телефон", example: "I have a new phone." },
+          { en: "she", ua: "вона", example: "She is from Ukraine." },
+          { en: "student", ua: "студент", example: "I am a student." },
+          { en: "surname", ua: "прізвище", example: "What is your surname?" },
+          { en: "teacher", ua: "вчитель", example: "He is a good teacher." },
+          { en: "they", ua: "вони", example: "They are my friends." },
+          {
+            en: "visiting card",
+            ua: "візитна картка",
+            example: "Here is my visiting card.",
+          },
+          { en: "we", ua: "ми", example: "We are students." },
+          { en: "what", ua: "що, який", example: "What is your name?" },
+          { en: "who", ua: "хто", example: "Who is she?" },
+          { en: "you", ua: "ти, ви", example: "You are my friend." },
+          { en: "your", ua: "твій, ваш", example: "Your English is great!" },
+        ],
+      },
+    ],
+  },
+
   {
     id: "do-make",
     title: "Do / Make",
@@ -98,6 +255,7 @@ export const vocabCategories: VocabCategory[] = [
       },
     ],
   },
+
   {
     id: "prepositions-place",
     title: "Prepositions",
@@ -165,6 +323,7 @@ export const vocabCategories: VocabCategory[] = [
       },
     ],
   },
+
   {
     id: "time-expressions",
     title: "Time",
@@ -208,6 +367,7 @@ export const vocabCategories: VocabCategory[] = [
       },
     ],
   },
+
   {
     id: "go-phrases",
     title: "Go phrases",
@@ -240,6 +400,7 @@ export const vocabCategories: VocabCategory[] = [
       },
     ],
   },
+
   {
     id: "useful",
     title: "Useful words",
@@ -291,6 +452,7 @@ export const vocabCategories: VocabCategory[] = [
       },
     ],
   },
+
   {
     id: "was-were",
     title: "Was / Were",

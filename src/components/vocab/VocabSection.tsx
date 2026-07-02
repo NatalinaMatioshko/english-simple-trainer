@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { vocabCategories, type VocabCategory, type VocabItem } from "../../data/vocab";
+import {
+  vocabCategories,
+  type VocabCategory,
+  type VocabItem,
+} from "../../data/vocab";
 import { shuffle } from "../../utils/array";
 
 type View = "table" | "cards";
@@ -15,6 +19,7 @@ export function VocabSection() {
   const handleTabChange = (id: string) => {
     setActiveId(id);
     setRevealed(new Set());
+    setPracticeMode(false);
   };
 
   const toggleReveal = (key: string) => {
@@ -35,6 +40,8 @@ export function VocabSection() {
   };
 
   const hideAll = () => setRevealed(new Set());
+
+  const isGrid = category.layout === "grid";
 
   return (
     <div className="vocab-section">
@@ -86,16 +93,20 @@ export function VocabSection() {
       </div>
 
       {view === "table" ? (
-        <CategoryView
-          category={category}
-          practiceMode={practiceMode}
-          revealed={revealed}
-          onToggle={toggleReveal}
-          onRevealAll={revealAll}
-          onHideAll={hideAll}
-          onSwitchToCards={() => setView("cards")}
-          setPracticeMode={setPracticeMode}
-        />
+        isGrid ? (
+          <GridView category={category} key={activeId} />
+        ) : (
+          <CategoryView
+            category={category}
+            practiceMode={practiceMode}
+            revealed={revealed}
+            onToggle={toggleReveal}
+            onRevealAll={revealAll}
+            onHideAll={hideAll}
+            onSwitchToCards={() => setView("cards")}
+            setPracticeMode={setPracticeMode}
+          />
+        )
       ) : (
         <FlashcardMode category={category} key={activeId} />
       )}
@@ -103,7 +114,39 @@ export function VocabSection() {
   );
 }
 
-/* ─── Table view ─────────────────────────────────────── */
+/* ─── Alphabet / special grid view ──────────────────── */
+
+function GridView({ category }: { category: VocabCategory }) {
+  const items = category.groups.flatMap((g) => g.items);
+
+  return (
+    <div className="vocab-category">
+      {category.description && (
+        <div className="vocab-rule-box">
+          {category.description.split("\n").map((line, i) => (
+            <p
+              key={i}
+              className={`vocab-rule-line ${i === 0 ? "vocab-rule-first" : ""}`}
+            >
+              {line}
+            </p>
+          ))}
+        </div>
+      )}
+
+      <div className="vocab-grid-layout">
+        {items.map((item) => (
+          <div key={item.en} className="vocab-grid-card">
+            <span className="vocab-grid-main">{item.en}</span>
+            <span className="vocab-grid-sub">{item.ua}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Standard table view ────────────────────────────── */
 
 type CategoryViewProps = {
   category: VocabCategory;
@@ -126,11 +169,21 @@ function CategoryView({
   onSwitchToCards,
   setPracticeMode,
 }: CategoryViewProps) {
-  const totalItems = category.groups.reduce((acc, g) => acc + g.items.length, 0);
+  const totalItems = category.groups.reduce(
+    (acc, g) => acc + g.items.length,
+    0,
+  );
   const revealedCount = category.groups.reduce(
     (acc, g) => acc + g.items.filter((i) => revealed.has(i.en)).length,
     0,
   );
+
+  const [col1, col2, col3] = category.columnLabels ?? [
+    "Українська",
+    "English",
+    "Example",
+  ];
+  const hasThirdCol = col3 !== "";
 
   return (
     <div className="vocab-category">
@@ -150,9 +203,7 @@ function CategoryView({
       <div className="vocab-controls-row">
         <button
           className={`vocab-practice-toggle ${practiceMode ? "active" : ""}`}
-          onClick={() => {
-            setPracticeMode(!practiceMode);
-          }}
+          onClick={() => setPracticeMode(!practiceMode)}
           aria-pressed={practiceMode}
         >
           {practiceMode ? "📖 Показати всі" : "🧠 Режим практики"}
@@ -188,10 +239,12 @@ function CategoryView({
               </div>
             )}
 
-            <div className="vocab-table-header">
-              <span>Українська</span>
-              <span>English</span>
-              <span>Example</span>
+            <div
+              className={`vocab-table-header ${!hasThirdCol ? "vocab-table-header--2col" : ""}`}
+            >
+              <span>{col1}</span>
+              <span>{col2}</span>
+              {hasThirdCol && <span>{col3}</span>}
             </div>
 
             <div className="vocab-table">
@@ -202,7 +255,7 @@ function CategoryView({
                 return (
                   <div
                     key={item.en}
-                    className={`vocab-item ${practiceMode && !isRevealed ? "vocab-item-hidden" : ""}`}
+                    className={`vocab-item ${!hasThirdCol ? "vocab-item--2col" : ""} ${practiceMode && !isRevealed ? "vocab-item-hidden" : ""}`}
                     onClick={practiceMode ? () => onToggle(item.en) : undefined}
                     role={practiceMode ? "button" : undefined}
                     tabIndex={practiceMode ? 0 : undefined}
@@ -216,13 +269,28 @@ function CategoryView({
                     }
                     aria-expanded={practiceMode ? isRevealed : undefined}
                   >
+                    {/* Col 1: always shown (col1 = Ukrainian by default) */}
                     <span className="vocab-ua">{item.ua}</span>
-                    <span className={`vocab-en ${!show ? "vocab-en-hidden" : ""}`}>
-                      {show ? item.en : <span className="vocab-reveal-hint">натисни →</span>}
+
+                    {/* Col 2: hidden in practice mode */}
+                    <span
+                      className={`vocab-en ${!show ? "vocab-en-hidden" : ""}`}
+                    >
+                      {show ? (
+                        item.en
+                      ) : (
+                        <span className="vocab-reveal-hint">натисни →</span>
+                      )}
                     </span>
-                    <span className={`vocab-example ${!show ? "vocab-example-hidden" : ""}`}>
-                      {show ? item.example : "—"}
-                    </span>
+
+                    {/* Col 3: example (only shown when hasThirdCol) */}
+                    {hasThirdCol && (
+                      <span
+                        className={`vocab-example ${!show ? "vocab-example-hidden" : ""}`}
+                      >
+                        {show ? (item.example ?? "—") : "—"}
+                      </span>
+                    )}
                   </div>
                 );
               })}
@@ -250,6 +318,9 @@ function CategoryView({
 function FlashcardMode({ category }: { category: VocabCategory }) {
   const allItems = category.groups.flatMap((g) => g.items);
   const total = allItems.length;
+
+  const frontLabel = category.frontLabel ?? "Українська";
+  const backLabel = category.backLabel ?? "English";
 
   const [queue, setQueue] = useState<VocabItem[]>(() => shuffle(allItems));
   const [known, setKnown] = useState<Set<string>>(new Set());
@@ -295,13 +366,13 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
     if (done) return;
     if (e.key === " " || e.key === "Enter") {
       e.preventDefault();
-      if (!flipped) {
-        flip();
-      }
+      if (!flipped) flip();
     }
     if (flipped) {
-      if (e.key === "ArrowRight" || e.key === "k" || e.key === "K") handleKnow();
-      if (e.key === "ArrowLeft" || e.key === "r" || e.key === "R") handleReview();
+      if (e.key === "ArrowRight" || e.key === "k" || e.key === "K")
+        handleKnow();
+      if (e.key === "ArrowLeft" || e.key === "r" || e.key === "R")
+        handleReview();
     }
   };
 
@@ -345,11 +416,12 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
       <div className="fc-top">
         <div className="fc-progress-wrap">
           <div className="fc-progress-bar">
-            <div className="fc-progress-fill" style={{ width: `${progress}%` }} />
+            <div
+              className="fc-progress-fill"
+              style={{ width: `${progress}%` }}
+            />
           </div>
-          <span className="fc-counter muted">
-            {knownCount} / {total} знаю
-          </span>
+          <span className="fc-counter muted">{knownCount} / {total} знаю</span>
         </div>
 
         <button
@@ -372,20 +444,22 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
           className={`fc-card ${flipped ? "fc-flipped" : ""}`}
           onClick={!flipped ? flip : undefined}
         >
-          {/* FRONT — Ukrainian */}
+          {/* FRONT */}
           <div className="fc-face fc-front">
-            <span className="fc-front-label muted">Українська</span>
+            <span className="fc-front-label muted">{frontLabel}</span>
             <p className="fc-front-word">{current?.ua}</p>
             <span className="fc-flip-hint muted">
               натисни або <kbd>Пробіл</kbd> щоб перевернути
             </span>
           </div>
 
-          {/* BACK — English */}
+          {/* BACK */}
           <div className="fc-face fc-back">
-            <span className="fc-back-label">English</span>
+            <span className="fc-back-label">{backLabel}</span>
             <p className="fc-back-word">{current?.en}</p>
-            <p className="fc-back-example">{current?.example}</p>
+            {current?.example && (
+              <p className="fc-back-example">{current.example}</p>
+            )}
           </div>
         </div>
       </div>
@@ -414,7 +488,8 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
       </div>
 
       <div className="fc-remaining muted">
-        Залишилось: {queue.length} {queue.length !== 1 ? "карток" : "картка"}
+        Залишилось: {queue.length}{" "}
+        {queue.length !== 1 ? "карток" : "картка"}
       </div>
     </div>
   );
