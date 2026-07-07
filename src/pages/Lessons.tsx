@@ -1,7 +1,38 @@
 import { Link } from "react-router-dom";
 import "../styles/pages.css";
 
-const lessons = [
+type LessonEntry =
+  | {
+      id: string;
+      title: string;
+      level: string;
+      topic: string;
+      description: string;
+      lessonPath: string;
+      practiceOnly: true;
+    }
+  | {
+      id: string;
+      title: string;
+      level: string;
+      topic: string;
+      description: string;
+      lessonPath: string;
+      homeworkPath: string;
+      practiceOnly?: false;
+    };
+
+const lessons: LessonEntry[] = [
+  {
+    id: "practice",
+    title: "To be + Present Simple + Routine",
+    level: "A1-A2",
+    topic: "Самостійна практика",
+    description:
+      "9 блоків: am/is/are, рутина, at/in/on, I → he/she, -s/-es/-ies, mixed quiz, sentence builder, fix mistakes + письмовий опис себе та сім'ї.",
+    lessonPath: "/self-study",
+    practiceOnly: true,
+  },
   {
     id: "15",
     title: "Present Simple + Adverbs of frequency",
@@ -80,19 +111,30 @@ const lessons = [
     lessonPath: "/lesson-21",
     homeworkPath: "/homework/21",
   },
+  {
+    id: "22",
+    title: "Present Simple Review + About Me",
+    level: "A1-A2",
+    topic: "Self-description + routine",
+    description:
+      "Review he/she/it and can, describe yourself in 5–7 sentences, routine vocabulary, YouTube + Test-English listening, mini writing.",
+    lessonPath: "/lesson-22",
+    homeworkPath: "/homework/22",
+  },
 ];
 
 export default function Lessons() {
-  const reversedLessons = [...lessons].reverse();
+  const practiceLesson = lessons.find(
+    (lesson): lesson is Extract<LessonEntry, { practiceOnly: true }> =>
+      Boolean(lesson.practiceOnly),
+  );
+  const regularLessons = [...lessons.filter((lesson) => !lesson.practiceOnly)].reverse();
+  const displayLessons = practiceLesson
+    ? [practiceLesson, ...regularLessons]
+    : regularLessons;
 
   return (
     <div className="page-shell">
-      <div className="page-top-actions">
-        <Link className="action-btn secondary back-home-btn" to="/">
-          ← Roadmap
-        </Link>
-      </div>
-
       <header className="page-hero panel">
         <p className="page-kicker">Course map</p>
         <h1>Lessons</h1>
@@ -102,10 +144,15 @@ export default function Lessons() {
       </header>
 
       <section className="cards-grid">
-        {reversedLessons.map((lesson) => (
-          <article className="lesson-card panel" key={lesson.id}>
+        {displayLessons.map((lesson) => (
+          <article
+            className={`lesson-card panel${lesson.practiceOnly ? " lesson-card--practice" : ""}`}
+            key={lesson.id}
+          >
             <div className="lesson-card-top">
-              <span className="lesson-badge">Lesson {lesson.id}</span>
+              <span className="lesson-badge">
+                {lesson.practiceOnly ? "Practice" : `Lesson ${lesson.id}`}
+              </span>
               <span className="lesson-badge secondary">{lesson.level}</span>
             </div>
 
@@ -115,11 +162,13 @@ export default function Lessons() {
 
             <div className="card-actions">
               <Link className="action-btn primary" to={lesson.lessonPath}>
-                Open lesson
+                {lesson.practiceOnly ? "Start practice" : "Open lesson"}
               </Link>
-              <Link className="action-btn secondary" to={lesson.homeworkPath}>
-                Open homework
-              </Link>
+              {!lesson.practiceOnly && (
+                <Link className="action-btn secondary" to={lesson.homeworkPath}>
+                  Open homework
+                </Link>
+              )}
             </div>
           </article>
         ))}

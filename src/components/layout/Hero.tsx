@@ -1,4 +1,5 @@
 import type { Mode } from "../../types/trainer";
+import { Link, useLocation } from "react-router-dom";
 
 type HeroProps = {
   mode: Mode;
@@ -6,6 +7,8 @@ type HeroProps = {
 };
 
 export function Hero({ mode, setMode }: HeroProps) {
+  const { pathname } = useLocation();
+
   return (
     <section className="hero">
       <div className="hero-grid">
@@ -45,14 +48,14 @@ export function Hero({ mode, setMode }: HeroProps) {
               Практика
             </button>
 
-            <button
-              className={`mode-btn ${mode === "vocab" ? "active" : ""}`}
-              onClick={() => setMode("vocab")}
+            <Link
+              className={`mode-btn ${pathname === "/vocab" ? "active" : ""}`}
+              to="/vocab"
               role="tab"
-              aria-selected={mode === "vocab"}
+              aria-selected={pathname === "/vocab"}
             >
               Словник
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -71,8 +74,8 @@ export function Hero({ mode, setMode }: HeroProps) {
 
           <div className="mini-card">
             <span className="muted">Формат</span>
-            <strong>Study + Practice</strong>
-            <span>Пояснення, вправи і мінітест</span>
+            <strong>Study + Practice + Vocab</strong>
+            <span>Пояснення, вправи, словник окремо</span>
           </div>
         </div>
       </div>

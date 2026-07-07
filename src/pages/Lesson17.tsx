@@ -3,7 +3,6 @@ import YouTubeLessons from "../components/YouTubeLessons";
 import Lesson17Dialogues from "../components/Lesson17Dialogues";
 import Lesson17Quiz from "../components/Lesson17Quiz";
 import "../styles/lesson17.css";
-import ScrollToTopButton from "../components/ScrollToTopButton";
 import VocabularyFlashcards from "../components/VocabularyFlashcards";
 import VocabularyMatchGame from "../components/VocabularyMatchGame";
 
@@ -75,8 +74,6 @@ export default function Lesson17() {
         <VocabularyFlashcards />
         <VocabularyMatchGame />
       </section>
-
-      <ScrollToTopButton />
     </div>
   );
 }

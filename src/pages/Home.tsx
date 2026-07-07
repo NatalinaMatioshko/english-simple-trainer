@@ -35,9 +35,13 @@ export default function Home() {
           and speaking practice.
         </p>
       </header>
-      <section>
-        <h2>"Циклічне повторення в різних контекстах"</h2>
-      </section>
+
+      <blockquote className="home-quote panel">
+        <p>
+          “Spiral repetition in different contexts — revisit the same grammar
+          in new situations until it becomes natural speech.”
+        </p>
+      </blockquote>
 
       <section className="cards-grid home-grid">
         {shortcuts.map((item) => (

@@ -1,14 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/app.css";
 import type { Mode } from "../types/trainer";
 import { quizTasks } from "../data/tasks";
-import { useTheme } from "../hooks/useTheme";
 import { useVerbFilter } from "../hooks/useVerbFilter";
 import { useConjugationExercise } from "../hooks/useConjugationExercise";
 import { useQuestionExercise } from "../hooks/useQuestionExercise";
 import { useMixedPractice } from "../hooks/useMixedPractice";
 import { useFrequencyQuiz } from "../hooks/useFrequencyQuiz";
-import { Header } from "../components/layout/Header";
 import { Hero } from "../components/layout/Hero";
 import { Sidebar } from "../components/layout/Sidebar";
 import { VerbList } from "../components/study/VerbList";
@@ -16,12 +14,10 @@ import { ConjugationCard } from "../components/study/ConjugationCard";
 import { QuestionBuilderCard } from "../components/study/QuestionBuilderCard";
 import { MixedPracticeCard } from "../components/practice/MixedPracticeCard";
 import { FrequencyQuizCard } from "../components/practice/FrequencyQuizCard";
-import { VocabSection } from "../components/vocab/VocabSection";
 
 export default function TrainerPage() {
   const [mode, setMode] = useState<Mode>("study");
 
-  const { theme, toggleTheme } = useTheme();
   const { filter, setFilter, filteredVerbs, revealedVerbs, toggleVerbReveal } =
     useVerbFilter();
   const conjugation = useConjugationExercise();
@@ -29,12 +25,15 @@ export default function TrainerPage() {
   const mixed = useMixedPractice();
   const quiz = useFrequencyQuiz();
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, []);
+
   return (
     <div className="app">
-      <Header theme={theme} onToggleTheme={toggleTheme} />
       <Hero mode={mode} setMode={setMode} />
 
-      <main id="main-content" className="main-layout">
+      <main className="main-layout">
         <Sidebar
           filter={filter}
           setFilter={setFilter}
@@ -107,7 +106,6 @@ export default function TrainerPage() {
             </div>
           )}
 
-          {mode === "vocab" && <VocabSection />}
         </section>
       </main>
     </div>

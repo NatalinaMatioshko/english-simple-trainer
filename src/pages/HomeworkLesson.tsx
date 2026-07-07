@@ -3,6 +3,37 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "22",
+    title: "Present Simple Review + About Me",
+    tasks: [
+      {
+        type: "link",
+        label: "Test-English — How often do you…? (A1 Listening)",
+        href: "https://test-english.com/listening/a1/how-often-do-you-a1-english-listening-test/",
+      },
+      {
+        type: "text",
+        text: "Write 5–7 sentences describing yourself: name, age, where you are from, where you live, hobbies, job or study.",
+      },
+      {
+        type: "text",
+        text: "Answer all 10 English questions from Lesson 22 in writing.",
+      },
+      {
+        type: "text",
+        text: "Write 4–5 sentences about your daily routine using wake up, get up, have breakfast, go to work…",
+      },
+      {
+        type: "text",
+        text: "Write 3 can and 2 can't sentences + 2 sentences about your mother, brother, or friend (he/she + -s).",
+      },
+      {
+        type: "text",
+        text: "Send a voice message: describe yourself and your daily routine (about 1 minute).",
+      },
+    ],
+  },
+  {
     id: "21",
     title: "Can + Third Person Review",
     tasks: [

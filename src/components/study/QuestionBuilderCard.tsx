@@ -19,8 +19,13 @@ export function QuestionBuilderCard({
   nextTask,
 }: QuestionBuilderCardProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const skipInitialFocus = useRef(true);
 
   useEffect(() => {
+    if (skipInitialFocus.current) {
+      skipInitialFocus.current = false;
+      return;
+    }
     inputRef.current?.focus();
   }, [currentTask]);
 

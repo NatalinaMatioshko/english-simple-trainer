@@ -30,5 +30,5 @@ export type WritingSubmission = {
   eyes: string;
   text: string;
   createdAt: string;
-  page: "about-me";
+  page: "about-me" | "self-study";
 };

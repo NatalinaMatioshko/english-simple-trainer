@@ -316,19 +316,24 @@ const roadmapLessons: Lesson[] = [
     review:
       "Third person spelling, does/doesn't, rapid transformation, can + base verb.",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lesson-21",
   },
   {
     id: 22,
-    title: "Family and relationships",
-    grammar: "Possessives, is / has, simple family structures",
-    vocabulary: "mother, father, sister, brother, cousin, husband, wife",
-    speaking: "Describe your family or talk about one family member.",
-    listening: "Short family dialogue or description.",
-    review: "to be, have/has, people vocabulary.",
+    title: "Present Simple Review + About Me",
+    grammar:
+      "Present Simple review; he / she / it + -s; can / can't — ability and request",
+    vocabulary:
+      "wake up, get up, have breakfast, go to work, go home, have lunch, have dinner, go to bed; brother, mother, friend, plant, job, home, work",
+    speaking:
+      "Describe yourself in 5–7 sentences (UA prompts → EN answers); daily routine questions; mini writing 4–5 sentences.",
+    listening:
+      "YouTube daily routine video + Test-English How often do you…?; retell in 3–4 sentences.",
+    review: "Present Simple, third person, can, to be, Lesson 21 vocabulary.",
     category: "people",
-    status: "next",
+    status: "current",
+    route: "/lesson-22",
   },
   {
     id: 23,

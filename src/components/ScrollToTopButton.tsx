@@ -6,7 +6,7 @@ export default function ScrollToTopButton() {
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 300);
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
     return () => window.removeEventListener("scroll", onScroll);
@@ -19,8 +19,27 @@ export default function ScrollToTopButton() {
   if (!visible) return null;
 
   return (
-    <button className="scroll-top-btn" onClick={scrollToTop} type="button">
-      ↑ Top
+    <button
+      className="scroll-top-btn"
+      onClick={scrollToTop}
+      type="button"
+      aria-label="Повернутися наверх"
+      title="Наверх"
+    >
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 19V5" />
+        <path d="M5 12l7-7 7 7" />
+      </svg>
     </button>
   );
 }

@@ -1,4 +1,4 @@
-export type Mode = "study" | "practice" | "vocab";
+export type Mode = "study" | "practice";
 export type Theme = "light" | "dark";
 export type Filter = "all" | "daily" | "study" | "home" | "social";
 

@@ -103,6 +103,115 @@ input {
   min-height: 100vh;
 }
 
+.site-layout {
+  min-height: 100vh;
+}
+
+.site-layout-content {
+  min-height: 0;
+}
+
+.site-header-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 0;
+}
+
+.site-topbar {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-4);
+}
+
+.brand-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-header-kicker {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.site-header-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: center;
+}
+
+.site-nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.site-nav-link:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.site-nav-link.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.scroll-top-btn {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 60;
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  transition:
+    transform 0.15s,
+    opacity 0.15s;
+}
+
+.scroll-top-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
 .app {
   max-width: 1100px;
   margin: 0 auto;
@@ -255,12 +364,16 @@ h1 {
 }
 
 .mode-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.85rem 1.1rem;
   border-radius: var(--radius-full);
   background: var(--color-surface-2);
   color: var(--color-text);
   border: 1px solid var(--color-border);
   font-weight: 800;
+  text-decoration: none;
 }
 
 .mode-btn.active {
@@ -491,6 +604,71 @@ h1 {
 }
 
 /* ── Vocab Section ──────────────────────────────────────────── */
+
+.vocab-page {
+  max-width: 1100px;
+}
+
+.vocab-page-hero {
+  margin-bottom: var(--space-6);
+  padding: var(--space-5);
+}
+
+.vocab-page-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.vocab-page-kicker {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.vocab-page-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+
+.vocab-page-subtitle {
+  margin: 0.6rem 0 0;
+  max-width: 58ch;
+}
+
+.vocab-page-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.vocab-page-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.vocab-page-link--ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+}
+
+.vocab-page-main {
+  display: block;
+}
 
 .vocab-section {
   display: grid;
@@ -1205,6 +1383,19 @@ h1 {
   .study-grid,
   .practice-grid {
     grid-template-columns: 1fr;
+  }
+
+  .site-topbar {
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+  }
+
+  .site-nav {
+    justify-content: flex-start;
+  }
+
+  .topbar-actions {
+    justify-content: flex-end;
   }
 }
 
