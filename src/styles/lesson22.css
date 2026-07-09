@@ -656,6 +656,33 @@
 }
 
 /* Can section wrapper — reuse lesson19 inner styles */
+.l22-picture-wrap {
+  margin: 0 0 1.25rem;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+}
+
+.l22-picture-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.l22-picture-wrap figcaption {
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  border-top: 1px solid var(--color-border);
+}
+
+.l22-park-vocab-title {
+  margin: 1.25rem 0 0.35rem;
+  font-size: 1rem;
+}
+
 .l22-video-wrap {
   position: relative;
   width: 100%;
