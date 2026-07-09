@@ -80,6 +80,49 @@ const listenRetellPrompts = [
   "What do they do in the evening?",
 ];
 
+const petroAboutParagraphs = [
+  `My name is Petro. I am thirty seven years old. I is from Sevastopol, but now live near (in?) Kyiv. I work in the barbershop, and I study English. My teacher is very good. She all time created interesting lessons and exercises for me in the website.`,
+  `I wake up at seven o'clock every morning. I get up at half past nine today. But usually I get up at eleven past nine in the morning.`,
+  `I do exercise and have a shower. I have a breakfast and before I brush my teeth, then  I go to work in the barbershop. At the work I do hearcuts and I wash hear my clients.`,
+  `I go home at eight o'clock. I have a dinner and go watch cinema on my laptop. I speak with my girlfriend.  And then I play video games with my friend. I go to bed at forty three pm.`,
+];
+
+const petroMistakeKey = [
+  { wrong: "thirty seven", fix: "thirty-seven", tag: "spelling" },
+  { wrong: "I is from", fix: "I am from", tag: "to be" },
+  { wrong: "but now live", fix: "but now I live", tag: "missing subject" },
+  { wrong: "near (in?) Kyiv", fix: "in Kyiv", tag: "preposition" },
+  { wrong: "in the barbershop", fix: "at a barbershop", tag: "preposition" },
+  {
+    wrong: "She all time created",
+    fix: "She always creates",
+    tag: "Present Simple",
+  },
+  { wrong: "in the website", fix: "on the website", tag: "preposition" },
+  {
+    wrong: "eleven past nine",
+    fix: "ten past nine / quarter past nine",
+    tag: "time",
+  },
+  { wrong: "I do exercise", fix: "I do exercises / I exercise", tag: "routine" },
+  { wrong: "have a breakfast", fix: "have breakfast", tag: "article" },
+  {
+    wrong: "have a breakfast and before I brush my teeth, then I go",
+    fix: "I brush my teeth, have breakfast, then I go",
+    tag: "word order",
+  },
+  { wrong: "At the work", fix: "At work", tag: "preposition" },
+  { wrong: "hearcuts", fix: "haircuts", tag: "spelling" },
+  {
+    wrong: "wash hear my clients",
+    fix: "wash my clients' hair",
+    tag: "spelling",
+  },
+  { wrong: "have a dinner", fix: "have dinner", tag: "article" },
+  { wrong: "go watch cinema", fix: "watch films / watch movies", tag: "routine" },
+  { wrong: "forty three pm", fix: "eleven pm / at 11 pm", tag: "time" },
+];
+
 type ChooseItem = { sentence: string; options: string[]; answer: string };
 
 const canChooseItems: ChooseItem[] = [
@@ -121,6 +164,8 @@ export default function Lesson22() {
   const [vocabFlipped, setVocabFlipped] = useState<number[]>([]);
   const [canChoose, setCanChoose] = useState<Record<number, string>>({});
   const [showCanChoose, setShowCanChoose] = useState(false);
+  const [showPetroKey, setShowPetroKey] = useState(false);
+  const [petroNotes, setPetroNotes] = useState("");
 
   const allVocab = [...routineVocab, ...usefulNouns];
 
@@ -209,6 +254,7 @@ export default function Lesson22() {
           <span>5 Listening</span>
           <span>6 Vocabulary</span>
           <span>7 Mini writing</span>
+          <span>8 Find mistakes</span>
         </div>
         <p className="lesson22-section-desc">
           Sequence: <strong>speak → drill → describe yourself → listen → write</strong>{" "}
@@ -510,6 +556,80 @@ export default function Lesson22() {
 
       <section className="lesson22-block panel reveal-on-scroll">
         <div className="lesson22-section-head">
+          <p className="page-kicker">Error hunt</p>
+          <h2>Find the mistakes — About me</h2>
+          <p className="lesson22-section-desc">
+            Прочитай текст про Петра. У ньому є помилки граматики, лексики,
+            прийменників і часу. Знайди їх <strong>самостійно</strong> — у
+            зошиті або в полі нижче. Потім натисни кнопку, щоб перевірити себе.
+          </p>
+        </div>
+
+        <article className="l22-error-text panel">
+          <h3 className="l22-error-text-title">About me</h3>
+          {petroAboutParagraphs.map((para) => (
+            <p key={para.slice(0, 24)}>{para}</p>
+          ))}
+        </article>
+
+        <div className="l22-error-notes">
+          <label htmlFor="petro-mistakes-notes">
+            Твої знайдені помилки (необов'язково)
+          </label>
+          <textarea
+            id="petro-mistakes-notes"
+            value={petroNotes}
+            onChange={(e) => setPetroNotes(e.target.value)}
+            placeholder={"1. I is → I am\n2. in the website → on the website\n..."}
+            spellCheck={false}
+          />
+        </div>
+
+        <div className="ss-actions">
+          <button
+            type="button"
+            className="l22-btn"
+            onClick={() => setShowPetroKey(true)}
+          >
+            I've finished — show answer key
+          </button>
+          <button
+            type="button"
+            className="l22-btn l22-btn--ghost"
+            onClick={() => {
+              setShowPetroKey(false);
+              setPetroNotes("");
+            }}
+          >
+            Reset
+          </button>
+        </div>
+
+        {showPetroKey && (
+          <div className="l22-error-key">
+            <p className="l22-score">
+              Answer key — {petroMistakeKey.length} mistakes to find
+            </p>
+            <ol className="l22-error-key-list">
+              {petroMistakeKey.map((item) => (
+                <li key={item.wrong}>
+                  <span className="l22-error-key-wrong">{item.wrong}</span>
+                  <span className="l22-error-key-arrow">→</span>
+                  <span className="l22-error-key-fix">{item.fix}</span>
+                  <span className="l22-error-key-tag">{item.tag}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="lesson22-section-desc" style={{ marginTop: "1rem" }}>
+              Перепиши текст правильно в 8–10 реченнях — як вправу для дому або
+              в кінці уроку.
+            </p>
+          </div>
+        )}
+      </section>
+
+      <section className="lesson22-block panel reveal-on-scroll">
+        <div className="lesson22-section-head">
           <p className="page-kicker">Homework</p>
           <h2>After class</h2>
         </div>
@@ -531,6 +651,7 @@ export default function Lesson22() {
           <div className="l22-homework-card">
             <h3>Listen + speak</h3>
             <ul>
+              <li>Rewrite Petro's text correctly (8–10 sentences).</li>
               <li>Complete the Test-English listening test again.</li>
               <li>Voice message: describe yourself + your routine (1 minute).</li>
             </ul>
