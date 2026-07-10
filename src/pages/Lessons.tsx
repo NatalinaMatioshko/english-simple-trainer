@@ -194,6 +194,26 @@ export default function Lessons() {
             </div>
           </article>
         ))}
+
+        <article className="lesson-card panel lesson-card--resources">
+          <div className="lesson-card-top">
+            <span className="lesson-badge">Extra</span>
+            <span className="lesson-badge secondary">Materials</span>
+          </div>
+
+          <h2>Extra resources</h2>
+          <p className="lesson-topic">Visual materials</p>
+          <p className="lesson-desc">
+            16 інфографік і worksheets: phrasal verbs, idioms, WH questions,
+            everyday actions, Harry Potter та ін.
+          </p>
+
+          <div className="card-actions">
+            <Link className="action-btn primary" to="/extra-resources">
+              Open visual materials
+            </Link>
+          </div>
+        </article>
       </section>
     </div>
   );

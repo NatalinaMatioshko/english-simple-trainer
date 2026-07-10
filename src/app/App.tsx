@@ -16,6 +16,7 @@ import Lesson21 from "../pages/Lesson21";
 import Lesson22 from "../pages/Lesson22";
 import Lesson23 from "../pages/Lesson23";
 import Lesson24 from "../pages/Lesson24";
+import ExtraResources from "../pages/ExtraResources";
 import VocabPage from "../pages/VocabPage";
 import SelfStudyReview from "../pages/SelfStudyReview";
 
@@ -30,6 +31,7 @@ function AppRoutes() {
         <Route path="/trainer" element={<TrainerPage />} />
         <Route path="/vocab" element={<VocabPage />} />
         <Route path="/lessons" element={<Lessons />} />
+        <Route path="/extra-resources" element={<ExtraResources />} />
         <Route path="/lesson-15" element={<Lesson15 />} />
         <Route path="/lesson-16" element={<Lesson16 />} />
         <Route path="/lesson-17" element={<Lesson17 />} />
