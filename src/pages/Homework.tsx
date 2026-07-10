@@ -3,6 +3,40 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "22",
+    title: "Present Simple Review + About Me",
+    tasks: [
+      {
+        type: "link",
+        label: "Завдання 1–2–3",
+        description:
+          "Відкрий посилання на Test-English і виконай завдання 1, 2 і 3 про can / can't.",
+        href: "https://test-english.com/grammar-points/a1/can-cant/",
+      },
+      {
+        type: "link",
+        label: "Завдання 4",
+        description:
+          "Відкрий посилання і виконай завдання 4: Present Simple, форми to be.",
+        href: "https://test-english.com/grammar-points/a1/present-simple-forms-of-to-be/4/",
+      },
+      {
+        type: "link",
+        label: "Читання і вправи під ним",
+        description:
+          "Прочитай текст Guess who? і виконай усі вправи під текстом.",
+        href: "https://test-english.com/reading/a1/guess-who-a1-english-reading-test/",
+      },
+      {
+        type: "link",
+        label: "Writing about my family",
+        description:
+          "Відкрий сторінку writing і напиши короткий текст про свою сім'ю за інструкцією на сайті.",
+        href: "https://test-english.com/writing/a1/writing-about-my-family/",
+      },
+    ],
+  },
+  {
     id: "21",
     title: "Can + Third Person Review",
     tasks: [
@@ -184,7 +218,16 @@ export default function Homework() {
             <ol className="homework-steps">
               {lesson.tasks.map((task, index) => (
                 <li key={`${lesson.id}-${index}`}>
-                  {task.type === "link" ? task.label : task.text}
+                  {task.type === "link" ? (
+                    <>
+                      <strong>{task.label}</strong>
+                      {"description" in task && task.description
+                        ? ` — ${task.description}`
+                        : null}
+                    </>
+                  ) : "text" in task ? (
+                    task.text
+                  ) : null}
                 </li>
               ))}
             </ol>

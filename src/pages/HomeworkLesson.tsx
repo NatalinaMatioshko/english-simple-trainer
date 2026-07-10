@@ -8,28 +8,31 @@ const homeworkByLesson = [
     tasks: [
       {
         type: "link",
-        label: "Test-English — How often do you…? (A1 Listening)",
-        href: "https://test-english.com/listening/a1/how-often-do-you-a1-english-listening-test/",
+        label: "Завдання 1–2–3",
+        description:
+          "Відкрий посилання на Test-English і виконай завдання 1, 2 і 3 про can / can't.",
+        href: "https://test-english.com/grammar-points/a1/can-cant/",
       },
       {
-        type: "text",
-        text: "Write 5–7 sentences describing yourself: name, age, where you are from, where you live, hobbies, job or study.",
+        type: "link",
+        label: "Завдання 4",
+        description:
+          "Відкрий посилання і виконай завдання 4: Present Simple, форми to be.",
+        href: "https://test-english.com/grammar-points/a1/present-simple-forms-of-to-be/4/",
       },
       {
-        type: "text",
-        text: "Answer all 10 English questions from Lesson 22 in writing.",
+        type: "link",
+        label: "Читання і вправи під ним",
+        description:
+          "Прочитай текст Guess who? і виконай усі вправи під текстом.",
+        href: "https://test-english.com/reading/a1/guess-who-a1-english-reading-test/",
       },
       {
-        type: "text",
-        text: "Write 4–5 sentences about your daily routine using wake up, get up, have breakfast, go to work…",
-      },
-      {
-        type: "text",
-        text: "Write 3 can and 2 can't sentences + 2 sentences about your mother, brother, or friend (he/she + -s).",
-      },
-      {
-        type: "text",
-        text: "Send a voice message: describe yourself and your daily routine (about 1 minute).",
+        type: "link",
+        label: "Writing about my family",
+        description:
+          "Відкрий сторінку writing і напиши короткий текст про свою сім'ю за інструкцією на сайті.",
+        href: "https://test-english.com/writing/a1/writing-about-my-family/",
       },
     ],
   },
@@ -225,17 +228,23 @@ export default function HomeworkLesson() {
           {lesson.tasks.map((task, index) => (
             <li key={`${lesson.id}-${index}`}>
               {task.type === "link" ? (
-                <a
-                  href={task.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="homework-external-link"
-                >
-                  {task.label}
-                </a>
-              ) : (
+                <div className="homework-task-block">
+                  <strong className="homework-task-label">{task.label}</strong>
+                  {"description" in task && task.description ? (
+                    <p className="homework-task-desc">{task.description}</p>
+                  ) : null}
+                  <a
+                    href={task.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="homework-external-link"
+                  >
+                    Open on Test-English ↗
+                  </a>
+                </div>
+              ) : "text" in task ? (
                 task.text
-              )}
+              ) : null}
             </li>
           ))}
         </ol>

@@ -284,6 +284,22 @@
   padding: 1.5rem;
 }
 
+.homework-task-block {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.homework-task-label {
+  display: block;
+  color: var(--color-text);
+}
+
+.homework-task-desc {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
 .homework-external-link {
   color: var(--color-primary);
   font-weight: 700;
