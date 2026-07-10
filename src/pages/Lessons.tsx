@@ -29,7 +29,7 @@ const lessons: LessonEntry[] = [
     level: "A1-A2",
     topic: "Самостійна практика",
     description:
-      "9 блоків: am/is/are, рутина, at/in/on, I → he/she, -s/-es/-ies, mixed quiz, sentence builder, fix mistakes + письмовий опис себе та сім'ї.",
+      "9 блоків для повторення: am/is/are, рутина, at/in/on, 3-тя особа, mixed quiz, sentence builder, fix mistakes і writing.",
     lessonPath: "/self-study",
     practiceOnly: true,
   },
@@ -37,11 +37,11 @@ const lessons: LessonEntry[] = [
     id: "15",
     title: "Present Simple + Adverbs of frequency",
     level: "A1",
-    topic: "Speaking",
+    topic: "Говоріння + частота",
     description:
-      "Учень уже вміє говорити what he does, а тепер вчиться how often he does it.",
+      "Як сказати не лише what you do, а й how often — always, usually, sometimes, never.",
     lessonPath: "/lesson-15",
-    homeworkPath: "/homework",
+    homeworkPath: "/homework/15",
   },
   {
     id: "16",
@@ -49,18 +49,19 @@ const lessons: LessonEntry[] = [
     level: "A1-A2",
     topic: "Speaking drills",
     description:
-      "Do / does, short answers, quick response, and routine speaking.",
+      "Do / does, short answers, швидкі відповіді та speaking про щоденну рутину.",
     lessonPath: "/lesson-16",
-    homeworkPath: "/homework",
+    homeworkPath: "/homework/16",
   },
   {
     id: "17",
     title: "Present Simple + Speaking Video",
     level: "A1-A2",
     topic: "Video lesson",
-    description: "Watch the video, repeat the patterns, and speak fast.",
+    description:
+      "Відео, повторення патернів Present Simple і швидке говоріння про свій день.",
     lessonPath: "/lesson-17",
-    homeworkPath: "/homework",
+    homeworkPath: "/homework/17",
   },
   {
     id: "18",
@@ -68,9 +69,9 @@ const lessons: LessonEntry[] = [
     level: "A1-A2",
     topic: "Prepositions",
     description:
-      "Practice prepositions in time, place, and movement through pictures, quick tasks, and speaking.",
+      "Прийменники часу, місця й руху: картинки, швидкі вправи та speaking.",
     lessonPath: "/lesson-18",
-    homeworkPath: "/homework",
+    homeworkPath: "/homework/18",
   },
   {
     id: "19",
@@ -78,16 +79,17 @@ const lessons: LessonEntry[] = [
     level: "A1-A2",
     topic: "Vocabulary + speaking",
     description:
-      "Learn common phrases with do, compare do vs make, and practise useful everyday expressions with cards and picture tasks.",
+      "Фрази з do, порівняння do vs make, картки та picture tasks для говоріння.",
     lessonPath: "/lesson-19",
-    homeworkPath: "/homework",
+    homeworkPath: "/homework/19",
   },
   {
-    id: "19.1",
-    title: "about",
+    id: "about-me",
+    title: "About Me",
     level: "A1",
-    topic: "about",
-    description: "about.",
+    topic: "To be + have got",
+    description:
+      "Інтерактивна сторінка: профілі людей, to be, I've got, порядок слів і writing про себе.",
     lessonPath: "/about-me",
     homeworkPath: "/homework",
   },
@@ -97,7 +99,7 @@ const lessons: LessonEntry[] = [
     level: "A1-A2",
     topic: "Third person",
     description:
-      "Flashcards, spelling -s/-es/-ies, I → he/she drills, and speaking about another person.",
+      "Flashcards, -s/-es/-ies, вправи I → he/she та speaking про іншу людину.",
     lessonPath: "/lesson-20",
     homeworkPath: "/homework/20",
   },
@@ -107,7 +109,7 @@ const lessons: LessonEntry[] = [
     level: "A1-A2",
     topic: "Can / can't + review",
     description:
-      "Vocabulary cards, can for ability/request, third person drills, Test-English listening, and task-based speaking.",
+      "Can для вмінь і прохань, 3-тя особа, Test-English listening і task-based speaking.",
     lessonPath: "/lesson-21",
     homeworkPath: "/homework/21",
   },
@@ -117,9 +119,29 @@ const lessons: LessonEntry[] = [
     level: "A1-A2",
     topic: "Self-description + routine",
     description:
-      "Review he/she/it and can, describe yourself in 5–7 sentences, routine vocabulary, YouTube + Test-English listening, mini writing.",
+      "Повтор Present Simple і can, опис себе, картинка парку, listening, лексика рутини та пошук помилок.",
     lessonPath: "/lesson-22",
     homeworkPath: "/homework/22",
+  },
+  {
+    id: "23",
+    title: "To be + Articles + Speaking",
+    level: "A1-A2",
+    topic: "a / an / the",
+    description:
+      "Активна практика am/is/are, правила артиклів, вправи на вибір і speaking з a/an/the.",
+    lessonPath: "/lesson-23",
+    homeworkPath: "/homework",
+  },
+  {
+    id: "24",
+    title: "Describing People",
+    level: "A1-A2",
+    topic: "Appearance + personality",
+    description:
+      "Відео, прикметники зовнішності й характеру, is / has got і speaking — опис людини.",
+    lessonPath: "/lesson-24",
+    homeworkPath: "/homework",
   },
 ];
 
