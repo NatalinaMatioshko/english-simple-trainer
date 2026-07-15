@@ -441,6 +441,7 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
         aria-label={`Картка: ${current?.ua ?? ""}. Натисніть Enter або Пробіл щоб перевернути.`}
       >
         <div
+          key={current?.en ?? "empty"}
           className={`fc-card ${flipped ? "fc-flipped" : ""}`}
           onClick={!flipped ? flip : undefined}
         >
