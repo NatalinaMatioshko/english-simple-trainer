@@ -1,17 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/lesson22.css";
+import "../styles/lesson19.css";
+
+const IMG = (name: string) => `${import.meta.env.BASE_URL}images/${name}`;
 
 const YOUTUBE_VIDEO_ID = "nZLNps2qsNk";
 
-const warmUpPrompts = [
-  "Опиши себе в 3 реченнях: вік, зовнішність, характер.",
-  "Опиши свого друга: he/she + is / has got.",
-  "Як виглядає твій брат або сестра?",
-  "Скажи 3 прикметники про людину, яку знаєш.",
-];
-
-const appearanceVocab = [
+const allVocab = [
+  { en: "a violin", ua: "скрипка" },
+  { en: "a pool", ua: "басейн" },
+  { en: "happy", ua: "щасливий" },
+  { en: "sad", ua: "сумний" },
+  { en: "tired", ua: "втомлений" },
+  { en: "scared", ua: "наляканий" },
+  { en: "angry", ua: "злий" },
+  { en: "nervous", ua: "знервований" },
+  { en: "shy", ua: "сором'язливий" },
+  { en: "excited", ua: "схвильований (в хорошому сенсі)" },
+  { en: "bored", ua: "нудьгуючий" },
+  { en: "curly", ua: "кучерявий" },
+  { en: "straight", ua: "прямий (про волосся)" },
+  { en: "long", ua: "довгий" },
+  { en: "fair", ua: "світлий (колір волосся / шкіри)" },
   { en: "tall", ua: "високий" },
   { en: "short", ua: "низький" },
   { en: "young", ua: "молодий" },
@@ -24,6 +35,28 @@ const appearanceVocab = [
   { en: "blonde hair", ua: "світле волосся" },
   { en: "glasses", ua: "окуляри" },
   { en: "a beard", ua: "борода" },
+  { en: "small — big", ua: "маленький — великий" },
+  { en: "short — tall", ua: "низький — високий" },
+  { en: "low — high", ua: "низько — високо" },
+  { en: "day — night", ua: "день — ніч" },
+  { en: "fast — slow", ua: "швидкий — повільний" },
+  { en: "sad — happy", ua: "сумний — щасливий" },
+  { en: "young — old", ua: "молодий — старий" },
+  { en: "full — empty", ua: "повний — порожній" },
+  { en: "dirty — clean", ua: "брудний — чистий" },
+  { en: "light — heavy", ua: "легкий — важкий" },
+  { en: "noisy — quiet", ua: "гучний — тихий" },
+  { en: "dry — wet", ua: "сухий — мокрий" },
+  { en: "thin — fat", ua: "худий — повний" },
+  { en: "inside — outside", ua: "всередині — зовні" },
+  { en: "tidy — untidy", ua: "охайний — неохайний" },
+];
+
+const warmUpPrompts = [
+  "Опиши себе в 3 реченнях: вік, зовнішність, характер.",
+  "Опиши свого друга: he/she + is / has got.",
+  "Як виглядає твій брат або сестра?",
+  "Скажи 3 прикметники про людину, яку знаєш.",
 ];
 
 const modelSentences = [
@@ -57,14 +90,43 @@ const videoRetellPrompts = [
   "Що вони роблять або де вони?",
 ];
 
+type ChooseItem = { sentence: string; options: string[]; answer: string };
+
+const articleChooseItems: ChooseItem[] = [
+  { sentence: "She is ___ teacher.", options: ["a", "an", "the"], answer: "a" },
+  { sentence: "He is ___ honest man.", options: ["a", "an", "the"], answer: "an" },
+  { sentence: "___ girl has got dark hair.", options: ["A", "An", "The"], answer: "The" },
+  { sentence: "I have ___ umbrella.", options: ["a", "an", "the"], answer: "an" },
+  { sentence: "She plays ___ violin.", options: ["a", "an", "the"], answer: "the" },
+  { sentence: "They are at ___ pool.", options: ["a", "an", "the"], answer: "the" },
+  { sentence: "My sister is ___ artist.", options: ["a", "an", "the"], answer: "an" },
+  { sentence: "He is ___ tall boy with ___ beard.", options: ["a", "an", "the"], answer: "a" },
+];
+
+const articleSpeakingPrompts = [
+  "Опиши свою кімнату: 4 речення з a / an / the.",
+  "Назви 3 речі в класі з the (the board, the window…).",
+  "Скажи: I am ___ student. / She is ___ engineer. / He is ___ old man.",
+  "Склади 2 речення: одне з a/an, одне з the.",
+];
+
 export default function Lesson24() {
   const pageRef = useRef<HTMLDivElement | null>(null);
   const [vocabFlipped, setVocabFlipped] = useState<number[]>([]);
+  const [articleChoose, setArticleChoose] = useState<Record<number, string>>({});
+  const [showArticleChoose, setShowArticleChoose] = useState(false);
 
   const toggleVocab = (idx: number) =>
     setVocabFlipped((p) =>
       p.includes(idx) ? p.filter((x) => x !== idx) : [...p, idx],
     );
+
+  const articleScore = useMemo(
+    () =>
+      articleChooseItems.filter((item, i) => articleChoose[i] === item.answer)
+        .length,
+    [articleChoose],
+  );
 
   useEffect(() => {
     const cards = pageRef.current?.querySelectorAll(".reveal-on-scroll");
@@ -89,17 +151,16 @@ export default function Lesson24() {
             <p className="page-kicker">Lesson 24</p>
             <h1>Describing People</h1>
             <p className="lesson22-topic-pill">
-              Appearance + personality + has got / is
+              Appearance + personality + a / an / the
             </p>
             <p className="lesson22-subtitle">
-              Learn words for appearance and character, watch the video, then
-              describe people in full sentences — how they look and what they are
-              like.
+              Вивчи слова, подивись відео — потім опишеш людей вголос:{" "}
+              зовнішність, характер і речі навколо з артиклями.
             </p>
             <ul className="l22-goals-list">
               <li>прикметники для зовнішності й характеру;</li>
               <li>is / has got у описі людей;</li>
-              <li>відео + speaking про людину з фото або з життя.</li>
+              <li>a / an / the у реченнях про людей і речі.</li>
             </ul>
           </div>
         </div>
@@ -108,23 +169,63 @@ export default function Lesson24() {
           <span>He has got glasses</span>
           <span>friendly</span>
           <span>dark hair</span>
-          <span>quiet</span>
-          <span>funny</span>
+          <span>a violin</span>
+          <span>the pool</span>
         </div>
       </section>
 
       <section className="lesson22-block panel reveal-on-scroll">
         <div className="lesson22-flow">
-          <span>1 Warm-up</span>
-          <span>2 Video</span>
-          <span>3 Vocabulary</span>
-          <span>4 Models</span>
-          <span>5 Speaking</span>
+          <span>1 Vocabulary</span>
+          <span>2 Warm-up</span>
+          <span>3 Video</span>
+          <span>4 Opposites</span>
+          <span>5 Models</span>
+          <span>6 Speaking</span>
+          <span>7 Grammar</span>
+          <span>8 Articles</span>
         </div>
         <p className="lesson22-section-desc">
           Послідовність:{" "}
-          <strong>відео → слова → зразки → опис вголос</strong>.
+          <strong>слова → відео → протилежності → зразки → говоріння → граматика → артиклі</strong>.
         </p>
+      </section>
+
+      <section className="lesson22-block panel reveal-on-scroll">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Vocabulary</p>
+          <h2>Words for this lesson</h2>
+          <p className="lesson22-section-desc">
+            Натисни картку, щоб перевернути. Прочитай вголос і склади речення з{" "}
+            <strong>is / has got</strong>.
+          </p>
+        </div>
+        <div className="l22-vocab-grid">
+          {allVocab.map((card, idx) => {
+            const flipped = vocabFlipped.includes(idx);
+            return (
+              <button
+                key={card.en}
+                type="button"
+                className={`l22-vocab-card ${flipped ? "l22-vocab-card--flipped" : ""}`}
+                onClick={() => toggleVocab(idx)}
+                aria-pressed={flipped}
+              >
+                <div className="l22-vocab-inner">
+                  <div className="l22-vocab-face l22-vocab-front">
+                    <span className="l22-vocab-label">Українська</span>
+                    <strong>{card.ua}</strong>
+                    <span className="l22-vocab-hint">tap to flip</span>
+                  </div>
+                  <div className="l22-vocab-face l22-vocab-back">
+                    <span className="l22-vocab-label">English</span>
+                    <strong>{card.en}</strong>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
       </section>
 
       <section className="lesson22-block panel reveal-on-scroll">
@@ -185,38 +286,28 @@ export default function Lesson24() {
       <section className="lesson22-block panel reveal-on-scroll">
         <div className="lesson22-section-head">
           <p className="page-kicker">Vocabulary</p>
-          <h2>Appearance & personality</h2>
+          <h2>Opposites</h2>
           <p className="lesson22-section-desc">
-            Прикметники та слова для опису людей. Натисни картку, щоб
-            перевернути, і прочитай вголос.
+            Пригадай протилежні слова з минулого уроку. Використай їх у описі
+            людей: <strong>tall — short, young — old, clean — dirty</strong>.
           </p>
         </div>
-        <div className="l22-vocab-grid">
-          {appearanceVocab.map((card, idx) => {
-            const flipped = vocabFlipped.includes(idx);
-            return (
-              <button
-                key={card.en}
-                type="button"
-                className={`l22-vocab-card ${flipped ? "l22-vocab-card--flipped" : ""}`}
-                onClick={() => toggleVocab(idx)}
-                aria-pressed={flipped}
-              >
-                <div className="l22-vocab-inner">
-                  <div className="l22-vocab-face l22-vocab-front">
-                    <span className="l22-vocab-label">Українська</span>
-                    <strong>{card.ua}</strong>
-                    <span className="l22-vocab-hint">tap to flip</span>
-                  </div>
-                  <div className="l22-vocab-face l22-vocab-back">
-                    <span className="l22-vocab-label">English</span>
-                    <strong>{card.en}</strong>
-                  </div>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+
+        <figure
+          className="l22-picture-wrap l22-picture-wrap--native l22-picture-wrap--flush l22-picture-wrap--w576"
+        >
+          <img
+            src={IMG("opposites-l24.jpg")}
+            alt="Opposites — small/big, short/tall, fast/slow, happy/sad and more"
+            width={650}
+            height={940}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            small — big, short — tall, fast — slow, sad — happy, dirty — clean…
+          </figcaption>
+        </figure>
       </section>
 
       <section className="lesson22-block panel reveal-on-scroll">
@@ -263,8 +354,8 @@ export default function Lesson24() {
           <p className="page-kicker">Speaking</p>
           <h2>Question practice</h2>
           <p className="lesson22-section-desc">
-            Відповідай на кожне питання вголос. Зверни увагу на мітку — appearance,
-            to be або has got.
+            Відповідай на кожне питання вголос. Зверни увагу на мітку —
+            appearance, to be або has got.
           </p>
         </div>
         <div className="l22-self-grid">
@@ -279,11 +370,201 @@ export default function Lesson24() {
 
       <section className="lesson22-block panel reveal-on-scroll">
         <div className="lesson22-section-head">
+          <p className="page-kicker">Grammar</p>
+          <h2>A/AN &amp; Plurals in English</h2>
+          <p className="lesson22-section-desc">
+            Прочитай таблицю, зверни увагу на виділені закінчення і виняткові форми.
+          </p>
+        </div>
+
+        <div className="l24-chart">
+          <div className="l24-chart-title">A/AN &amp; PLURALS IN ENGLISH</div>
+
+          {/* ── REGULAR PLURAL ── */}
+          <div className="l24-chart-section">
+            <div className="l24-chart-side l24-chart-side--reg">
+              <span>REGULAR PLURAL</span>
+            </div>
+            <div className="l24-chart-inner">
+              <div className="l24-chart-cols">
+                {/* Singular */}
+                <div className="l24-chart-col">
+                  <div className="l24-chart-col-head l24-head--sg">SINGULAR</div>
+                  {[
+                    ["a student", "an apple"],
+                    ["a bus", "a box"],
+                    ["a baby", "a country"],
+                    ["a day", "a toy"],
+                    ["a shelf", "a wife"],
+                  ].map(([a, b]) => (
+                    <div className="l24-chart-cell l24-cell--sg" key={a}>
+                      <span>{a}</span>
+                      <span>{b}</span>
+                    </div>
+                  ))}
+                </div>
+                {/* Plural */}
+                <div className="l24-chart-col">
+                  <div className="l24-chart-col-head l24-head--pl">PLURAL</div>
+                  {[
+                    [<>student<strong>s</strong></>, <>apple<strong>s</strong></>],
+                    [<>bus<strong>es</strong></>, <>box<strong>es</strong></>],
+                    [<>bab<strong>ies</strong></>, <>countr<strong>ies</strong></>],
+                    [<>day<strong>s</strong></>, <>toy<strong>s</strong></>],
+                    [<>shel<strong>ves</strong></>, <>wi<strong>ves</strong></>],
+                  ].map(([a, b], i) => (
+                    <div className="l24-chart-cell l24-cell--pl" key={i}>
+                      <span>{a}</span>
+                      <span>{b}</span>
+                    </div>
+                  ))}
+                </div>
+                {/* Spelling */}
+                <div className="l24-chart-col l24-chart-col--wide">
+                  <div className="l24-chart-col-head l24-head--sp">SPELLING</div>
+                  {[
+                    [<><strong>general rule</strong> — add <strong>-s</strong></>],
+                    [<>after <strong>-s, -ch, -sh, -x</strong> — add <strong>-es</strong></>],
+                    [<>after consonant + <strong>-y</strong> — delete -y, add <strong>-ies</strong></>],
+                    [<>after <strong>-ay, -ey, -oy</strong> — add <strong>-s</strong></>],
+                    [<>after <strong>-f / -fe</strong> — delete, add <strong>-ves</strong></>],
+                  ].map(([rule], i) => (
+                    <div className="l24-chart-cell l24-cell--sp" key={i}>
+                      <span className="l24-check">✅</span>
+                      <span>{rule}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── IRREGULAR PLURAL ── */}
+          <div className="l24-chart-section">
+            <div className="l24-chart-side l24-chart-side--irr">
+              <span>IRREGULAR PLURAL</span>
+            </div>
+            <div className="l24-chart-inner">
+              <div className="l24-chart-cols">
+                {/* Singular */}
+                <div className="l24-chart-col">
+                  <div className="l24-chart-col-head l24-head--sg">SINGULAR</div>
+                  {["a man","a woman","a child","a foot","a tooth","a fish","a mouse","a sheep"].map((w) => (
+                    <div className="l24-chart-cell l24-cell--sg" key={w}><span>{w}</span></div>
+                  ))}
+                </div>
+                {/* Plural */}
+                <div className="l24-chart-col">
+                  <div className="l24-chart-col-head l24-head--pl">PLURAL</div>
+                  {["men","women","children","feet","teeth","fish","mice","sheep"].map((w) => (
+                    <div className="l24-chart-cell l24-cell--pl" key={w}><span>{w}</span></div>
+                  ))}
+                </div>
+                {/* Notes */}
+                <div className="l24-chart-col l24-chart-col--wide">
+                  <div className="l24-chart-col-head l24-head--notes">NOTES</div>
+                  <div className="l24-notes-wrap">
+                    <div className="l24-note l24-note--amber">
+                      <div className="l24-note-title">✏️ USE AN + SILENT H-</div>
+                      <p><strong>an</strong> hour <em>(h is silent)</em></p>
+                      <p><strong>a</strong> hat <em>(h is pronounced)</em></p>
+                    </div>
+                    <div className="l24-note l24-note--amber">
+                      <div className="l24-note-title">✏️ USE A + U- PRONOUNCED [ju:]</div>
+                      <p><strong>an</strong> umbrella <em>([ʌ], NOT [ju:])</em></p>
+                      <p><strong>a</strong> university <em>([ju:])</em></p>
+                    </div>
+                    <div className="l24-note l24-note--danger">
+                      <div className="l24-note-title">⚠️ DO NOT USE A/AN WITH PLURALS</div>
+                      <p className="l24-eg-wrong">✗ These are <s>a</s> tables.</p>
+                      <p className="l24-eg-right">✓ These are tables.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="lesson22-block panel reveal-on-scroll">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Articles</p>
+          <h2>a / an / the — choose</h2>
+          <p className="lesson22-section-desc">
+            Обери правильний артикль. Пам'ятай:{" "}
+            <strong>a</strong> — приголосний звук,{" "}
+            <strong>an</strong> — голосний звук,{" "}
+            <strong>the</strong> — конкретна або відома річ.
+          </p>
+        </div>
+
+        <div className="lesson19-choose-list l23-article-choose-list">
+          {articleChooseItems.map((item, index) => {
+            const selected = articleChoose[index];
+            const isCorrect = selected === item.answer;
+            return (
+              <article className="lesson19-choose-card" key={item.sentence}>
+                <p className="lesson19-choose-sentence">{item.sentence}</p>
+                <div className="lesson19-choice-row">
+                  {item.options.map((opt) => (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`choice-btn ${selected === opt ? "selected" : ""}`}
+                      onClick={() =>
+                        setArticleChoose((p) => ({ ...p, [index]: opt }))
+                      }
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+                {showArticleChoose && (
+                  <div
+                    className={`lesson19-answer ${isCorrect ? "ok" : "bad"}`}
+                  >
+                    Correct: <strong>{item.answer}</strong>
+                  </div>
+                )}
+              </article>
+            );
+          })}
+        </div>
+        <button
+          type="button"
+          className="l22-btn"
+          style={{ marginTop: "0.75rem" }}
+          onClick={() => setShowArticleChoose(true)}
+        >
+          Check answers
+        </button>
+        {showArticleChoose && (
+          <p className="l22-score">
+            Score: {articleScore} / {articleChooseItems.length}
+          </p>
+        )}
+
+        <h3 className="l22-listen-subtitle">Speaking with articles</h3>
+        <div className="lesson22-prompt-grid">
+          {articleSpeakingPrompts.map((q) => (
+            <div
+              key={q}
+              className="lesson22-prompt-card lesson22-prompt-card--task"
+            >
+              {q}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="lesson22-block panel reveal-on-scroll">
+        <div className="lesson22-section-head">
           <p className="page-kicker">Homework</p>
           <h2>After class</h2>
           <p className="lesson22-section-desc">
-            Напиши 6–8 речень про людину, яку добре знаєш: зовнішність + характер
-            (is / has got).
+            Напиши 6–8 речень про людину, яку добре знаєш: зовнішність +
+            характер (is / has got) і 3 речення з a / an / the.
           </p>
         </div>
         <Link className="lesson22-back-link" to="/homework">

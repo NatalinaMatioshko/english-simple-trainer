@@ -1027,3 +1027,173 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Lesson 24 — A/AN & Plurals Chart ──────────────────────── */
+
+.l24-chart {
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.l24-chart-title {
+  background: linear-gradient(135deg, #1e88e5, #0d47a1);
+  color: #fff;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  font-style: italic;
+  padding: 0.65rem 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Section row (regular / irregular) */
+.l24-chart-section {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  border-top: 2px solid var(--color-border);
+}
+
+/* Vertical side label */
+.l24-chart-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0;
+}
+
+.l24-chart-side span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 0.58rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #fff;
+}
+
+.l24-chart-side--reg  { background: #388e3c; }
+.l24-chart-side--irr  { background: #7b1fa2; }
+
+/* Inner content area */
+.l24-chart-inner {
+  border-left: 2px solid var(--color-border);
+}
+
+/* Column layout */
+.l24-chart-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.55fr;
+  height: 100%;
+}
+
+.l24-chart-col {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-border);
+}
+
+.l24-chart-col--wide {
+  border-right: none;
+}
+
+/* Column headers */
+.l24-chart-col-head {
+  font-size: 0.64rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-align: center;
+  padding: 0.35rem 0.4rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.l24-head--sg    { background: #bbdefb; color: #0d47a1; }
+.l24-head--pl    { background: #ffccbc; color: #bf360c; }
+.l24-head--sp    { background: #c8e6c9; color: #1b5e20; }
+.l24-head--notes { background: #fff9c4; color: #f57f17; }
+
+/* Data cells */
+.l24-chart-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.38rem 0.55rem;
+  border-top: 1px solid var(--color-border);
+  flex: 1;
+}
+
+.l24-cell--sg span { color: #1565c0; font-style: italic; }
+.l24-cell--pl span { color: #bf360c; font-weight: 600; }
+
+.l24-cell--sp {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.35rem;
+  background: color-mix(in srgb, #c8e6c9 18%, transparent);
+}
+
+.l24-check { flex-shrink: 0; font-size: 0.8rem; margin-top: 0.05rem; }
+
+/* Irregular plural: notes column inner */
+.l24-notes-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.5rem 0.6rem;
+  flex: 1;
+}
+
+.l24-note {
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+}
+
+.l24-note--amber {
+  background: #fffde7;
+  border: 1px solid #f9a825;
+}
+
+.l24-note--danger {
+  background: #ffebee;
+  border: 1px solid #e53935;
+}
+
+.l24-note-title {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3rem;
+}
+
+.l24-note--amber .l24-note-title { color: #e65100; }
+.l24-note--danger .l24-note-title { color: #c62828; }
+
+.l24-note p {
+  margin: 0.12rem 0 0;
+  font-size: 0.78rem;
+}
+
+.l24-eg-wrong { color: #e53935; }
+.l24-eg-right { color: #388e3c; }
+
+/* Mobile: collapse side labels, stack cols */
+@media (max-width: 600px) {
+  .l24-chart-section {
+    grid-template-columns: 24px 1fr;
+  }
+
+  .l24-chart-cols {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .l24-chart-col--wide {
+    grid-column: 1 / -1;
+    border-right: none;
+    border-top: 1px solid var(--color-border);
+  }
+}
