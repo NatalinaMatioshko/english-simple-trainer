@@ -335,6 +335,19 @@ export default function Lesson24() {
             </div>
           ))}
         </div>
+
+        <h3 className="l22-listen-subtitle">Extra listening</h3>
+        <p className="lesson22-section-desc">
+          Listening test на тему "Describing people" — рівень A1.
+        </p>
+        <a
+          className="l22-external-link"
+          href="https://test-english.com/listening/a1/describing-people-a1-english-listening-test/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Describing people — A1 Listening Test ↗
+        </a>
       </section>
 
       <section className="lesson22-block panel reveal-on-scroll">

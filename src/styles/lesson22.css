@@ -1310,3 +1310,25 @@
     border-top: 1px solid var(--color-border);
   }
 }
+
+/* ── External link button ───────────────────────────────────── */
+.l22-external-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: var(--space-3);
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  transition: background 0.15s, color 0.15s;
+}
+
+.l22-external-link:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
