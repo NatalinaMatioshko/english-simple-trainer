@@ -92,6 +92,44 @@ const videoRetellPrompts = [
 
 type ChooseItem = { sentence: string; options: string[]; answer: string };
 
+type WorkCell = { text: string; fix?: string };
+type WorkRow = { grace: WorkCell; owen: WorkCell };
+
+const studentWorkRows: WorkRow[] = [
+  {
+    grace: { text: "It is Grace.", fix: "Her name is Grace." },
+    owen:  { text: "It is Owen.",  fix: "His name is Owen."  },
+  },
+  {
+    grace: { text: "She is nine years old." },
+    owen:  { text: "He is eleven years old." },
+  },
+  {
+    grace: { text: "She is from New York City." },
+    owen:  { text: "He is from Dallas, Texas." },
+  },
+  {
+    grace: { text: "Her hobby is ballet." },
+    owen:  { text: "His is hobyt basball.", fix: "His hobby is baseball." },
+  },
+  {
+    grace: { text: "Her favorite food is bagels." },
+    owen:  { text: "His favorite food is barbecue." },
+  },
+  {
+    grace: { text: "Her pet name's Kitten.", fix: "Her pet's name is Kitten." },
+    owen:  { text: "His pet is name Parakeet.", fix: "His pet's name is Parakeet." },
+  },
+  {
+    grace: { text: "She loves rides the subway.", fix: "She loves riding the subway." },
+    owen:  { text: "He's Colletct baseball cards.", fix: "He collects baseball cards." },
+  },
+  {
+    grace: { text: "Her weekend plan go to the art class.", fix: "Her weekend plan is to go to the art class." },
+    owen:  { text: "His plans at the weekend cookout.", fix: "His plan for the weekend is a cookout." },
+  },
+];
+
 const articleChooseItems: ChooseItem[] = [
   { sentence: "She is ___ teacher.", options: ["a", "an", "the"], answer: "a" },
   { sentence: "He is ___ honest man.", options: ["a", "an", "the"], answer: "an" },
@@ -115,6 +153,21 @@ export default function Lesson24() {
   const [vocabFlipped, setVocabFlipped] = useState<number[]>([]);
   const [articleChoose, setArticleChoose] = useState<Record<number, string>>({});
   const [showArticleChoose, setShowArticleChoose] = useState(false);
+  const [revealedCells, setRevealedCells] = useState<Set<string>>(new Set());
+
+  const toggleCell = (id: string) =>
+    setRevealedCells((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+
+  const revealAllCells = () =>
+    setRevealedCells(
+      new Set(studentWorkRows.flatMap((_, i) => [`${i}-grace`, `${i}-owen`])),
+    );
+
+  const hideAllCells = () => setRevealedCells(new Set());
 
   const toggleVocab = (idx: number) =>
     setVocabFlipped((p) =>
@@ -184,10 +237,11 @@ export default function Lesson24() {
           <span>6 Speaking</span>
           <span>7 Grammar</span>
           <span>8 Articles</span>
+          <span>9 Review</span>
         </div>
         <p className="lesson22-section-desc">
           Послідовність:{" "}
-          <strong>слова → відео → протилежності → зразки → говоріння → граматика → артиклі</strong>.
+          <strong>слова → відео → протилежності → зразки → говоріння → граматика → артиклі → перевірка помилок</strong>.
         </p>
       </section>
 
@@ -555,6 +609,66 @@ export default function Lesson24() {
               {q}
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="lesson22-block panel reveal-on-scroll">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Review — Lesson 23</p>
+          <h2>Student work — find &amp; fix mistakes</h2>
+          <p className="lesson22-section-desc">
+            Нижче — опис персонажів Grace і Owen. Знайдіть помилки разом.
+            Натисніть на речення, щоб перевірити — зелений значить правильно,
+            червоний показує виправлення.
+          </p>
+        </div>
+
+        <p className="lesson22-section-desc" style={{ marginBottom: "0.5rem" }}>
+          <em>
+            Emma, Jayden, Grace, Owen — опиши кожного в 4–5 реченнях.
+          </em>
+        </p>
+
+        <div className="l24-work-table">
+          <div className="l24-work-head">
+            <div className="l24-work-col-head l24-work-col-head--grace">Grace</div>
+            <div className="l24-work-col-head l24-work-col-head--owen">Owen</div>
+          </div>
+          {studentWorkRows.map((row, i) => (
+            <div className="l24-work-row" key={i}>
+              {(["grace", "owen"] as const).map((col) => {
+                const cell = row[col];
+                const id = `${i}-${col}`;
+                const revealed = revealedCells.has(id);
+                const hasError = !!cell.fix;
+                return (
+                  <button
+                    key={col}
+                    type="button"
+                    className={`l24-work-cell${revealed ? (hasError ? " l24-work-cell--error" : " l24-work-cell--ok") : ""}`}
+                    onClick={() => toggleCell(id)}
+                    title="Натисніть щоб перевірити"
+                  >
+                    <span className="l24-work-original">{cell.text}</span>
+                    {revealed && (
+                      <span className={`l24-work-verdict ${hasError ? "l24-work-verdict--error" : "l24-work-verdict--ok"}`}>
+                        {hasError ? <>✗ &rarr; {cell.fix}</> : "✓ Correct"}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+
+        <div className="l24-work-actions">
+          <button type="button" className="l22-btn" onClick={revealAllCells}>
+            Показати всі помилки
+          </button>
+          <button type="button" className="btn secondary" onClick={hideAllCells}>
+            Сховати
+          </button>
         </div>
       </section>
 

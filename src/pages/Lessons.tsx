@@ -151,7 +151,14 @@ export default function Lessons() {
       Boolean(lesson.practiceOnly),
   );
   const regularLessons = [...lessons.filter((lesson) => !lesson.practiceOnly)].reverse();
-  const displayLessons = practiceLesson
+  const insertAfterIdx = regularLessons.findIndex((l) => l.id === "23");
+  const displayLessons = practiceLesson && insertAfterIdx !== -1
+    ? [
+        ...regularLessons.slice(0, insertAfterIdx + 1),
+        practiceLesson,
+        ...regularLessons.slice(insertAfterIdx + 1),
+      ]
+    : practiceLesson
     ? [practiceLesson, ...regularLessons]
     : regularLessons;
 
