@@ -143,6 +143,16 @@ const lessons: LessonEntry[] = [
     lessonPath: "/lesson-24",
     homeworkPath: "/homework",
   },
+  {
+    id: "25",
+    title: "Hello! Countries & Nationalities",
+    level: "A1",
+    topic: "be: I / you / we / they",
+    description:
+      "Знайомство і розповідь про себе: 12 країн, am/is/are, short answers, діалоги, читання та рольова гра.",
+    lessonPath: "/lesson-25",
+    homeworkPath: "/hw-25",
+  },
 ];
 
 export default function Lessons() {
