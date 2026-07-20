@@ -514,19 +514,6 @@ const flagSelectOpts = [
 
 type StressColId = "o" | "Oo" | "oO" | "Ooo" | "ooOo";
 
-const stressAnswerMap: Record<string, StressColId> = {
-  Spain:     "o",
-  Poland:    "Oo",
-  Turkey:    "Oo",
-  Thailand:  "Oo",
-  Japan:     "oO",
-  Brazil:    "oO",
-  Mexico:    "Ooo",
-  Canada:    "Ooo",
-  Italy:     "Ooo",
-  Argentina: "ooOo",
-};
-
 type StressTblCol = {
   id: StressColId;
   countries: string[];
