@@ -3,6 +3,17 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "25",
+    title: "Hello! Countries & Nationalities",
+    href: "/hw-25",
+    tasks: [
+      { type: "text", text: "Grammar practice: Complete with the correct form of be" },
+      { type: "text", text: "Grammar practice: Fill in 're · are · aren't" },
+      { type: "text", text: "Reading: Me and my friends — True or False?" },
+      { type: "text", text: "Check & Reflect: sentence ordering, be forms, correct sentences, nationalities, alternatives, fill-in text" },
+    ],
+  },
+  {
     id: "22",
     title: "Present Simple Review + About Me",
     tasks: [
@@ -209,7 +220,7 @@ export default function Homework() {
         {homeworkByLesson.map((lesson) => (
           <Link
             key={lesson.id}
-            to={`/homework/${lesson.id}`}
+            to={"href" in lesson && lesson.href ? lesson.href : `/homework/${lesson.id}`}
             className="panel homework-card homework-card-link"
           >
             <h2>Lesson {lesson.id}</h2>
@@ -220,7 +231,7 @@ export default function Homework() {
                 <li key={`${lesson.id}-${index}`}>
                   {task.type === "link" ? (
                     <>
-                      <strong>{task.label}</strong>
+                      <strong>{"label" in task ? task.label : ""}</strong>
                       {"description" in task && task.description
                         ? ` — ${task.description}`
                         : null}

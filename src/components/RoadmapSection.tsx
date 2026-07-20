@@ -52,20 +52,20 @@ const completedPath: StageSummary[] = [
     summary:
       "The learner worked on in / on / at / to, do / make collocations, and he / she / it verb forms with flashcards, spelling rules, and speaking about another person.",
   },
-];
-
-const nextLessonsSummary: StageSummary[] = [
   {
     range: "Lessons 21–24",
     title: "Can, review, and connected speaking",
     summary:
-      "The current step combines can / can't with third person review, vocabulary cards, Test-English listening, and task-based speaking about family and routines.",
+      "Combined can / can't, Present Simple review, third person forms, articles a / an, and describing people — covering Roadmap A1 Unit 0 and the foundations of Unit 1.",
   },
+];
+
+const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 25–30",
+    range: "Lessons 26–31",
     title: "Real-life situations",
     summary:
-      "The final stage expands into shopping, food, transport, directions, health, and a practical speaking push toward A2 readiness.",
+      "The next stage expands into shopping, food, transport, directions, health, and a practical speaking push toward A2 readiness.",
   },
 ];
 
@@ -358,19 +358,24 @@ const roadmapLessons: Lesson[] = [
     listening: "YouTube video — watch and describe the people you see.",
     review: "Family, third person, appearance words, to be, articles.",
     category: "people",
-    status: "current",
+    status: "completed",
     route: "/lesson-24",
   },
   {
     id: 25,
-    title: "Talking about someone you know",
-    grammar: "Present Simple + simple descriptors in connected speech",
-    vocabulary: "works, lives, likes, plays, studies, visits",
-    speaking: "Give a short mini-presentation about a person you know.",
-    listening: "Dialogue about a person’s routine and personality.",
-    review: "he / she / it, routines, people language.",
-    category: "people",
-    status: "next",
+    title: "Hello! Countries & Nationalities",
+    grammar:
+      "am / is / are — I / you / we / they; positive, negative, question forms; short answers with be",
+    vocabulary:
+      "12 countries and nationalities: Spain, Canada, Japan, the US, Poland, Argentina, Thailand, the UK, Turkey, Mexico, Brazil, Italy",
+    speaking:
+      "Introduce yourself and others; roleplay conference conversations; describe where people are from.",
+    listening:
+      "Roadmap A1 R1–R15: country names, stress patterns, introductions, nationalities",
+    review: "to be basics, lesson 24 descriptions, articles, simple questions.",
+    category: "general",
+    status: "current",
+    route: "/lesson-25",
   },
   {
     id: 26,

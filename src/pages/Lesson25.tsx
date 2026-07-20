@@ -62,51 +62,6 @@ const roleplayCards = [
   { name: "Aleksander Nowicki", city: "Warsaw", country: "Poland" },
 ];
 
-/* ─── Reusable choose exercise ──────────────────────────────── */
-
-function ChooseExercise({
-  items,
-  answers,
-  onSelect,
-  showAnswers,
-}: {
-  items: FillItem[];
-  answers: Record<number, string>;
-  onSelect: (id: number, val: string) => void;
-  showAnswers: boolean;
-}) {
-  return (
-    <div className="lesson19-choose-list">
-      {items.map((item) => {
-        const selected = answers[item.id];
-        const isCorrect = selected === item.answer;
-        return (
-          <article className="lesson19-choose-card" key={item.id}>
-            <p className="lesson19-choose-sentence">{item.prompt}</p>
-            <div className="lesson19-choice-row">
-              {item.options.map((opt) => (
-                <button
-                  key={opt}
-                  type="button"
-                  className={`choice-btn ${selected === opt ? "selected" : ""}`}
-                  onClick={() => onSelect(item.id, opt)}
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-            {showAnswers && (
-              <div className={`lesson19-answer ${isCorrect ? "ok" : "bad"}`}>
-                Correct: <strong>{item.answer}</strong>
-              </div>
-            )}
-          </article>
-        );
-      })}
-    </div>
-  );
-}
-
 /* ─── Audio tracks ──────────────────────────────────────────── */
 
 const SOUND = (r: number) =>
@@ -558,7 +513,6 @@ const flagSelectOpts = [
 ];
 
 type StressColId = "o" | "Oo" | "oO" | "Ooo" | "ooOo";
-const stressCols: StressColId[] = ["o", "Oo", "oO", "Ooo", "ooOo"];
 
 const stressAnswerMap: Record<string, StressColId> = {
   Spain:     "o",
@@ -572,12 +526,6 @@ const stressAnswerMap: Record<string, StressColId> = {
   Italy:     "Ooo",
   Argentina: "ooOo",
 };
-
-const stressGiven: Record<string, StressColId> = { Poland: "Oo", Japan: "oO" };
-const stressFreeBank = Object.keys(stressAnswerMap).filter(
-  c => !(c in stressGiven)
-);
-// ["Spain","Turkey","Thailand","Brazil","Mexico","Canada","Italy","Argentina"]
 
 type StressTblCol = {
   id: StressColId;
