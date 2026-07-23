@@ -179,9 +179,8 @@ export const vocabCategories: VocabCategory[] = [
   {
     id: "jobs",
     title: "Jobs",
-    badge: "L26 · 1B",
-    description:
-      "Roadmap A1 Unit 1B — професії та пов'язані слова (be: he/she/it).",
+    badge: "L26",
+    description: "Професії та пов'язані слова (be: he/she/it).",
     grammar: [
       "He's a nurse. / She's a doctor. / It's a small hospital.",
       "He isn't from the UK. / She isn't from Canada.",

@@ -379,7 +379,7 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 26,
-    title: "1B Jobs",
+    title: "Jobs",
     grammar:
       "be: he / she / it — He's / She's / It's, isn't, Is he…?, Where's she from?",
     vocabulary:
@@ -387,8 +387,8 @@ const roadmapLessons: Lesson[] = [
     speaking:
       "Ask and answer about jobs and origin; profile cards; mini dialogues (job & where from).",
     listening:
-      "Roadmap A1 R6–R8: job stress, he/she/it short forms, Patrick dialogue (listen and complete)",
-    review: "Unit 1A countries / the UK·the US; to be; articles with jobs (a / an).",
+      "R6–R8: job stress, he/she/it short forms, Patrick dialogue (listen and complete)",
+    review: "Countries / the UK·the US; to be; articles with jobs (a / an).",
     category: "people",
     status: "current",
     route: "/lesson-26",

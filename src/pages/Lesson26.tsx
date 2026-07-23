@@ -226,32 +226,112 @@ const warmUpQs = [
 ];
 
 const grammarDrill = [
-  { from: "I'm a teacher.", to: "He's a teacher." },
-  { from: "She's a nurse.", to: "Is she a nurse?" },
-  { from: "He isn't from the UK.", to: "Where's he from?" },
-  { from: "It's a small hospital.", to: "Is it a big hospital?" },
+  {
+    from: "I'm a teacher.",
+    answer: "He's a teacher.",
+    options: ["He's a teacher.", "She's a teacher.", "I'm a teacher."],
+  },
+  {
+    from: "She's a nurse.",
+    answer: "Is she a nurse?",
+    options: ["Is she a nurse?", "She is a nurse?", "Are she a nurse?"],
+  },
+  {
+    from: "He isn't from the UK.",
+    answer: "Where's he from?",
+    options: ["Where's he from?", "Where he from?", "Is he from?"],
+  },
+  {
+    from: "It's a small hospital.",
+    answer: "Is it a big hospital?",
+    options: [
+      "Is it a big hospital?",
+      "It is a big hospital?",
+      "Are it a big hospital?",
+    ],
+  },
 ];
 
 const substitutionDrill = [
-  "He is a doctor.",
-  "She is a doctor.",
-  "It is a hospital.",
-  "She is a nurse.",
-  "He is a pilot.",
+  {
+    cue: "he + doctor",
+    answer: "He is a doctor.",
+    options: ["He is a doctor.", "She is a doctor.", "They is a doctor."],
+  },
+  {
+    cue: "she + doctor",
+    answer: "She is a doctor.",
+    options: ["She is a doctor.", "He is a doctor.", "She are a doctor."],
+  },
+  {
+    cue: "it + hospital",
+    answer: "It is a hospital.",
+    options: ["It is a hospital.", "He is a hospital.", "It are a hospital."],
+  },
+  {
+    cue: "she + nurse",
+    answer: "She is a nurse.",
+    options: ["She is a nurse.", "She is nurse.", "She are a nurse."],
+  },
+  {
+    cue: "he + pilot",
+    answer: "He is a pilot.",
+    options: ["He is a pilot.", "He are a pilot.", "He is pilot."],
+  },
 ];
 
 const qaDrill = [
-  { q: "Is Paul a nurse?", a: "Yes, he is." },
-  { q: "Is Lucy a nurse?", a: "No, she isn't. She's a doctor." },
-  { q: "Is Mila an office worker?", a: "Yes, she is." },
-  { q: "Is the hospital in London?", a: "No, it isn't. It's in Manchester." },
+  {
+    q: "Is Paul a nurse?",
+    answer: "Yes, he is.",
+    options: ["Yes, he is.", "No, he isn't.", "Yes, she is."],
+  },
+  {
+    q: "Is Lucy a nurse?",
+    answer: "No, she isn't. She's a doctor.",
+    options: [
+      "No, she isn't. She's a doctor.",
+      "Yes, she is.",
+      "No, he isn't. He's a doctor.",
+    ],
+  },
+  {
+    q: "Is Mila an office worker?",
+    answer: "Yes, she is.",
+    options: ["Yes, she is.", "No, she isn't.", "Yes, he is."],
+  },
+  {
+    q: "Is the hospital in London?",
+    answer: "No, it isn't. It's in Manchester.",
+    options: [
+      "No, it isn't. It's in Manchester.",
+      "Yes, it is.",
+      "No, it isn't. It's in London.",
+    ],
+  },
 ];
 
 const correctionDrill = [
-  { wrong: "He are a pilot.", right: "He is a pilot." },
-  { wrong: "She is doctor.", right: "She is a doctor." },
-  { wrong: "Is he from UK?", right: "Is he from the UK?" },
-  { wrong: "Where she from?", right: "Where's she from?" },
+  {
+    wrong: "He are a pilot.",
+    answer: "He is a pilot.",
+    options: ["He is a pilot.", "He are a pilot.", "He's are a pilot."],
+  },
+  {
+    wrong: "She is doctor.",
+    answer: "She is a doctor.",
+    options: ["She is a doctor.", "She is doctor.", "She a doctor."],
+  },
+  {
+    wrong: "Is he from UK?",
+    answer: "Is he from the UK?",
+    options: ["Is he from the UK?", "Is he from UK?", "Is he from a UK?"],
+  },
+  {
+    wrong: "Where she from?",
+    answer: "Where's she from?",
+    options: ["Where's she from?", "Where she from?", "Where is from she?"],
+  },
 ];
 
 type HospitalQ = {
@@ -304,7 +384,7 @@ type AudioTrackData = {
 const tracksUnit1B: AudioTrackData[] = [
   {
     r: 6,
-    exercise: "1B · stress",
+    exercise: "Pronunciation",
     title: "Jobs — stressed syllables",
     transcript: (
       <>
@@ -325,7 +405,7 @@ const tracksUnit1B: AudioTrackData[] = [
   },
   {
     r: 7,
-    exercise: "1B · be",
+    exercise: "Grammar",
     title: "be: he/she/it — short forms",
     transcript: (
       <ol>
@@ -340,7 +420,7 @@ const tracksUnit1B: AudioTrackData[] = [
   },
   {
     r: 8,
-    exercise: "1B · dialogue",
+    exercise: "Dialogue",
     title: "Patrick — job & origin",
     transcript: (
       <p>
@@ -439,7 +519,22 @@ export default function Lesson26() {
   const [hospChecked, setHospChecked] = useState(false);
   const [r8Ans, setR8Ans] = useState<Record<number, string>>({});
   const [r8Checked, setR8Checked] = useState(false);
-  const [fixRevealed, setFixRevealed] = useState<number[]>([]);
+  const [transformAns, setTransformAns] = useState<string[]>(
+    () => Array(grammarDrill.length).fill(""),
+  );
+  const [transformChecked, setTransformChecked] = useState(false);
+  const [subAns, setSubAns] = useState<string[]>(
+    () => Array(substitutionDrill.length).fill(""),
+  );
+  const [subChecked, setSubChecked] = useState(false);
+  const [qaAns, setQaAns] = useState<string[]>(
+    () => Array(qaDrill.length).fill(""),
+  );
+  const [qaChecked, setQaChecked] = useState(false);
+  const [fixAns, setFixAns] = useState<string[]>(
+    () => Array(correctionDrill.length).fill(""),
+  );
+  const [fixChecked, setFixChecked] = useState(false);
 
   function toggleVocab(idx: number) {
     setVocabFlipped((prev) =>
@@ -447,10 +542,15 @@ export default function Lesson26() {
     );
   }
 
-  function toggleFix(idx: number) {
-    setFixRevealed((prev) =>
-      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx],
-    );
+  function drillSelClass(
+    checked: boolean,
+    value: string,
+    answer: string,
+  ): string {
+    if (!checked) return "l25-cr-sel";
+    if (value === answer) return "l25-cr-sel l25-cr-sel--ok";
+    if (value) return "l25-cr-sel l25-cr-sel--err";
+    return "l25-cr-sel";
   }
 
   function toggleStressSyl(jobIdx: number, sylIdx: number) {
@@ -490,6 +590,16 @@ export default function Lesson26() {
   const stressScore = jobStressItems.filter((j, i) =>
     sameIdxSet(stressSel[i] ?? [], j.stressed),
   ).length;
+  const transformScore = grammarDrill.filter(
+    (d, i) => transformAns[i] === d.answer,
+  ).length;
+  const subScore = substitutionDrill.filter(
+    (d, i) => subAns[i] === d.answer,
+  ).length;
+  const qaScore = qaDrill.filter((d, i) => qaAns[i] === d.answer).length;
+  const fixScore = correctionDrill.filter(
+    (d, i) => fixAns[i] === d.answer,
+  ).length;
   const hospScore = hospitalQs.filter((q) => hospAns[q.id] === q.answer).length;
   const r8Score = r8Gaps.filter((g) => r8Ans[g.id] === g.answer).length;
 
@@ -507,8 +617,8 @@ export default function Lesson26() {
       <section className="lesson22-hero panel reveal-on-scroll is-visible">
         <div className="lesson22-hero-top">
           <div>
-            <p className="page-kicker">Lesson 26 · Roadmap A1 Unit 1B</p>
-            <h1>1B Jobs</h1>
+            <p className="page-kicker">Lesson 26</p>
+            <h1>Jobs</h1>
             <p className="lesson22-topic-pill">
               Goal: ask and answer about jobs · Grammar: be he/she/it ·
               Vocabulary: jobs
@@ -541,6 +651,7 @@ export default function Lesson26() {
       {/* ── Flow ─────────────────────────────────────────────── */}
       <section className="lesson22-block panel reveal-on-scroll">
         <div className="lesson22-flow">
+          <span>0 Review</span>
           <span>1 Warm-up</span>
           <span>2 Vocab</span>
           <span>3 Grammar</span>
@@ -552,6 +663,26 @@ export default function Lesson26() {
         <p className="lesson22-section-desc">
           Менше matching — більше усного результату. Кожен блок → speaking.
         </p>
+      </section>
+
+      {/* ── 0. Review previous lesson ─────────────────────────── */}
+      <section className="lesson22-block panel reveal-on-scroll">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Review · Lesson 25</p>
+          <h2>Countries, nationalities &amp; languages</h2>
+          <p className="lesson22-section-desc">
+            Перед jobs — коротке повторення минулого уроку. Listening test A1:
+            країни, національності та мови.
+          </p>
+        </div>
+        <a
+          className="l22-external-link"
+          href="https://test-english.com/listening/a1/countries-nationalities-and-languages-a1-english-listening-test/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Countries, nationalities and languages — A1 Listening Test ↗
+        </a>
       </section>
 
       {/* ── 1. Warm-up · 5 min ───────────────────────────────── */}
@@ -591,7 +722,7 @@ export default function Lesson26() {
       {/* ── 2. Vocabulary · Jobs ──────────────────────────────── */}
       <section className="lesson22-block panel reveal-on-scroll">
         <div className="lesson22-section-head">
-          <p className="page-kicker">Vocabulary · 1B Jobs</p>
+          <p className="page-kicker">Vocabulary</p>
           <h2>Jobs</h2>
           <p className="lesson22-section-desc">
             Картки з перекладом → вправи 1a–1c як у підручнику (map, jobs a–h,
@@ -938,13 +1069,66 @@ export default function Lesson26() {
         </div>
 
         <h3 className="l22-listen-subtitle">Transform drill</h3>
-        <div className="l22-self-grid">
-          {grammarDrill.map((d) => (
-            <div key={d.from} className="l22-self-card">
-              <strong>{d.from}</strong>
-              <span>→ {d.to}</span>
+        <p className="lesson22-section-desc">
+          Скажи нову репліку вголос, потім обери правильний варіант.
+        </p>
+        <div className="l26-drill-list">
+          {grammarDrill.map((d, i) => (
+            <div key={d.from} className="l26-drill-row">
+              <strong className="l26-drill-prompt">{d.from}</strong>
+              <span className="l26-drill-arrow" aria-hidden="true">
+                →
+              </span>
+              <select
+                value={transformAns[i]}
+                onChange={(e) => {
+                  setTransformChecked(false);
+                  setTransformAns((prev) => {
+                    const next = [...prev];
+                    next[i] = e.target.value;
+                    return next;
+                  });
+                }}
+                className={drillSelClass(
+                  transformChecked,
+                  transformAns[i],
+                  d.answer,
+                )}
+                aria-label={`Transform: ${d.from}`}
+              >
+                <option value="">___</option>
+                {d.options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
             </div>
           ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setTransformChecked(true)}
+          >
+            Check
+          </button>
+          {transformChecked && (
+            <span className="l22-score">
+              {transformScore} / {grammarDrill.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setTransformAns(Array(grammarDrill.length).fill(""));
+              setTransformChecked(false);
+            }}
+          >
+            Reset
+          </button>
         </div>
 
         <div className="l25-audio-list" style={{ marginTop: "1rem" }}>
@@ -962,54 +1146,179 @@ export default function Lesson26() {
           <p className="page-kicker">4 · Controlled practice · 10 min</p>
           <h2>Three drills</h2>
           <p className="lesson22-section-desc">
-            Кажи вголос. Мета — автоматизм <strong>is / isn't / Is…?</strong>
+            Обери відповідь. Мета — автоматизм <strong>is / isn't / Is…?</strong>
           </p>
         </div>
 
         <h3 className="l22-listen-subtitle">1 · Substitution</h3>
-        <div className="l25-1a-bank">
-          {substitutionDrill.map((s) => (
-            <span key={s} className="l25-1a-word">
-              {s}
-            </span>
-          ))}
-        </div>
-
-        <h3 className="l22-listen-subtitle">2 · Question–answer</h3>
-        <div className="l22-self-grid">
-          {qaDrill.map((item) => (
-            <div key={item.q} className="l22-self-card">
-              <strong>{item.q}</strong>
-              <span>{item.a}</span>
+        <p className="lesson22-section-desc">
+          Збери речення за підказкою (cue).
+        </p>
+        <div className="l26-drill-list">
+          {substitutionDrill.map((d, i) => (
+            <div key={d.cue} className="l26-drill-row">
+              <strong className="l26-drill-prompt">{d.cue}</strong>
+              <span className="l26-drill-arrow" aria-hidden="true">
+                →
+              </span>
+              <select
+                value={subAns[i]}
+                onChange={(e) => {
+                  setSubChecked(false);
+                  setSubAns((prev) => {
+                    const next = [...prev];
+                    next[i] = e.target.value;
+                    return next;
+                  });
+                }}
+                className={drillSelClass(subChecked, subAns[i], d.answer)}
+                aria-label={`Substitution: ${d.cue}`}
+              >
+                <option value="">___</option>
+                {d.options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
             </div>
           ))}
         </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setSubChecked(true)}
+          >
+            Check
+          </button>
+          {subChecked && (
+            <span className="l22-score">
+              {subScore} / {substitutionDrill.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setSubAns(Array(substitutionDrill.length).fill(""));
+              setSubChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
 
-        <h3 className="l22-listen-subtitle">3 · Correction — tap to check</h3>
-        <div className="l22-self-grid">
-          {correctionDrill.map((item, idx) => {
-            const open = fixRevealed.includes(idx);
-            return (
-              <button
-                key={item.wrong}
-                type="button"
-                className="l22-self-card"
-                onClick={() => toggleFix(idx)}
-                style={{ cursor: "pointer", textAlign: "left" }}
+        <h3 className="l22-listen-subtitle">2 · Question–answer</h3>
+        <div className="l26-drill-list">
+          {qaDrill.map((item, i) => (
+            <div key={item.q} className="l26-drill-row">
+              <strong className="l26-drill-prompt">{item.q}</strong>
+              <select
+                value={qaAns[i]}
+                onChange={(e) => {
+                  setQaChecked(false);
+                  setQaAns((prev) => {
+                    const next = [...prev];
+                    next[i] = e.target.value;
+                    return next;
+                  });
+                }}
+                className={drillSelClass(qaChecked, qaAns[i], item.answer)}
+                aria-label={`Answer: ${item.q}`}
               >
-                <strong>{item.wrong}</strong>
-                <span>
-                  {open ? (
-                    <>
-                      → <em>{item.right}</em>
-                    </>
-                  ) : (
-                    "tap to fix"
-                  )}
-                </span>
-              </button>
-            );
-          })}
+                <option value="">___</option>
+                {item.options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setQaChecked(true)}
+          >
+            Check
+          </button>
+          {qaChecked && (
+            <span className="l22-score">
+              {qaScore} / {qaDrill.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setQaAns(Array(qaDrill.length).fill(""));
+              setQaChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+
+        <h3 className="l22-listen-subtitle">3 · Correction</h3>
+        <p className="lesson22-section-desc">Виправ помилку в реченні.</p>
+        <div className="l26-drill-list">
+          {correctionDrill.map((item, i) => (
+            <div key={item.wrong} className="l26-drill-row">
+              <strong className="l26-drill-prompt l26-drill-prompt--wrong">
+                {item.wrong}
+              </strong>
+              <span className="l26-drill-arrow" aria-hidden="true">
+                →
+              </span>
+              <select
+                value={fixAns[i]}
+                onChange={(e) => {
+                  setFixChecked(false);
+                  setFixAns((prev) => {
+                    const next = [...prev];
+                    next[i] = e.target.value;
+                    return next;
+                  });
+                }}
+                className={drillSelClass(fixChecked, fixAns[i], item.answer)}
+                aria-label={`Fix: ${item.wrong}`}
+              >
+                <option value="">___</option>
+                {item.options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setFixChecked(true)}
+          >
+            Check
+          </button>
+          {fixChecked && (
+            <span className="l22-score">
+              {fixScore} / {correctionDrill.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setFixAns(Array(correctionDrill.length).fill(""));
+              setFixChecked(false);
+            }}
+          >
+            Reset
+          </button>
         </div>
       </section>
 

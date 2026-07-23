@@ -155,7 +155,7 @@ const lessons: LessonEntry[] = [
   },
   {
     id: "26",
-    title: "1B Jobs",
+    title: "Jobs",
     level: "A1",
     topic: "be: he/she/it · jobs",
     description:
