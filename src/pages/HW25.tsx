@@ -640,7 +640,11 @@ export default function HW25() {
                     onClick={() =>
                       setCrEx2aOpen((prev) => {
                         const next = new Set(prev);
-                        if (next.has(i)) { next.delete(i); } else { next.add(i); }
+                        if (next.has(i)) {
+                          next.delete(i);
+                        } else {
+                          next.add(i);
+                        }
                         return next;
                       })
                     }
@@ -886,7 +890,11 @@ export default function HW25() {
                     onClick={() =>
                       setCrEx6Open((prev) => {
                         const next = new Set(prev);
-                        if (next.has(i)) { next.delete(i); } else { next.add(i); }
+                        if (next.has(i)) {
+                          next.delete(i);
+                        } else {
+                          next.add(i);
+                        }
                         return next;
                       })
                     }

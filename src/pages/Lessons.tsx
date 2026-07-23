@@ -153,6 +153,16 @@ const lessons: LessonEntry[] = [
     lessonPath: "/lesson-25",
     homeworkPath: "/hw-25",
   },
+  {
+    id: "26",
+    title: "1B Jobs",
+    level: "A1",
+    topic: "be: he/she/it · jobs",
+    description:
+      "Ask and answer about jobs: warm-up, 8 jobs + stress, be he/she/it drills, profile speaking, Green Cross Hospital, homework.",
+    lessonPath: "/lesson-26",
+    homeworkPath: "/homework",
+  },
 ];
 
 export default function Lessons() {

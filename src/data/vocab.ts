@@ -177,6 +177,167 @@ export const vocabCategories: VocabCategory[] = [
   },
 
   {
+    id: "jobs",
+    title: "Jobs",
+    badge: "L26 · 1B",
+    description:
+      "Roadmap A1 Unit 1B — професії та пов'язані слова (be: he/she/it).",
+    grammar: [
+      "He's a nurse. / She's a doctor. / It's a small hospital.",
+      "He isn't from the UK. / She isn't from Canada.",
+      "Is he from the UK? Yes, he is. / No, he isn't.",
+      "Where's she from? She's from Spain.",
+    ],
+    groups: [
+      {
+        label: "Jobs (1b)",
+        items: [
+          {
+            en: "football player",
+            ua: "футболіст",
+            example: "Santiago is a football player.",
+          },
+          {
+            en: "doctor",
+            ua: "лікар",
+            example: "She's a doctor.",
+          },
+          {
+            en: "school teacher",
+            ua: "шкільний вчитель",
+            example: "Mali is a school teacher.",
+          },
+          {
+            en: "pilot",
+            ua: "пілот",
+            example: "Lidia is a pilot.",
+          },
+          {
+            en: "farmer",
+            ua: "фермер",
+            example: "Amy is a farmer.",
+          },
+          {
+            en: "nurse",
+            ua: "медсестра / медбрат",
+            example: "He's a nurse.",
+          },
+          {
+            en: "taxi driver",
+            ua: "таксист",
+            example: "Josh is a taxi driver.",
+          },
+          {
+            en: "office worker",
+            ua: "офісний працівник",
+            example: "Mila's an office worker.",
+          },
+        ],
+      },
+      {
+        label: "Vocabulary Bank",
+        items: [
+          {
+            en: "student",
+            ua: "студент",
+            example: "I'm a student.",
+          },
+          {
+            en: "police officer",
+            ua: "поліцейський / поліцейська",
+            example: "He's a police officer.",
+          },
+          {
+            en: "manager",
+            ua: "менеджер, керівник",
+            example: "Is the manager nice?",
+          },
+          {
+            en: "soldier",
+            ua: "солдат",
+            example: "My brother is a soldier.",
+          },
+          {
+            en: "artist",
+            ua: "художник / митець",
+            example: "She's an artist.",
+          },
+          {
+            en: "writer",
+            ua: "письменник",
+            example: "He's a writer.",
+          },
+          {
+            en: "tennis player",
+            ua: "тенісист",
+            example: "She's a tennis player.",
+          },
+          {
+            en: "shop assistant",
+            ua: "продавець / продавчиня",
+            example: "He's a shop assistant.",
+          },
+          {
+            en: "bus driver",
+            ua: "водій автобуса",
+            example: "She's a bus driver.",
+          },
+          {
+            en: "waiter / waitress",
+            ua: "офіціант / офіціантка",
+            example: "He's a waiter. / She's a waitress.",
+          },
+          {
+            en: "receptionist",
+            ua: "адміністратор (ресепшн)",
+            example: "She's a receptionist.",
+          },
+          {
+            en: "tour guide",
+            ua: "гід / екскурсовод",
+            example: "He's a tour guide.",
+          },
+          {
+            en: "engineer",
+            ua: "інженер",
+            example: "She's an engineer.",
+          },
+          {
+            en: "chef",
+            ua: "шеф-кухар",
+            example: "He's a chef.",
+          },
+          {
+            en: "firefighter",
+            ua: "пожежник",
+            example: "She's a firefighter.",
+          },
+          {
+            en: "dentist",
+            ua: "стоматолог",
+            example: "He's a dentist.",
+          },
+        ],
+      },
+      {
+        label: "Related words",
+        items: [
+          {
+            en: "hospital",
+            ua: "лікарня",
+            example: "It's a small hospital.",
+          },
+          {
+            en: "team",
+            ua: "команда",
+            example: "Is it a good team?",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
     id: "do-make",
     title: "Do / Make",
     badge: "Фрази",
