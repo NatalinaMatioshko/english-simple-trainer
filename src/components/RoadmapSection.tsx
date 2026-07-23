@@ -53,19 +53,19 @@ const completedPath: StageSummary[] = [
       "The learner worked on in / on / at / to, do / make collocations, and he / she / it verb forms with flashcards, spelling rules, and speaking about another person.",
   },
   {
-    range: "Lessons 21–24",
-    title: "Can, review, and connected speaking",
+    range: "Lessons 21–25",
+    title: "Can, review, and Unit 1A",
     summary:
-      "Combined can / can't, Present Simple review, third person forms, articles a / an, and describing people — covering Roadmap A1 Unit 0 and the foundations of Unit 1.",
+      "Combined can / can't, Present Simple review, articles a / an, describing people, then Roadmap A1 Unit 1A — countries, nationalities, and be with I / you / we / they.",
   },
 ];
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 26–31",
+    range: "Lessons 27–32",
     title: "Real-life situations",
     summary:
-      "The next stage expands into shopping, food, transport, directions, health, and a practical speaking push toward A2 readiness.",
+      "After jobs: shopping, food, transport, directions, health, and a practical speaking push toward A2 readiness.",
   },
 ];
 
@@ -374,11 +374,27 @@ const roadmapLessons: Lesson[] = [
       "Roadmap A1 R1–R15: country names, stress patterns, introductions, nationalities",
     review: "to be basics, lesson 24 descriptions, articles, simple questions.",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lesson-25",
   },
   {
     id: 26,
+    title: "1B Jobs",
+    grammar:
+      "be: he / she / it — He's / She's / It's, isn't, Is he…?, Where's she from?",
+    vocabulary:
+      "8 core jobs: football player, doctor, school teacher, pilot, farmer, nurse, taxi driver, office worker (+ Vocabulary Bank)",
+    speaking:
+      "Ask and answer about jobs and origin; profile cards; mini dialogues (job & where from).",
+    listening:
+      "Roadmap A1 R6–R8: job stress, he/she/it short forms, Patrick dialogue (listen and complete)",
+    review: "Unit 1A countries / the UK·the US; to be; articles with jobs (a / an).",
+    category: "people",
+    status: "current",
+    route: "/lesson-26",
+  },
+  {
+    id: 27,
     title: "Shopping 1: food and prices",
     grammar: "like / don’t like, some / any basics",
     vocabulary: "apples, bread, eggs, milk, water, price",
@@ -389,7 +405,7 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 27,
+    id: 28,
     title: "Shopping 2: clothes",
     grammar: "Can I have…?, size, price, try on",
     vocabulary: "shirt, shoes, jacket, size, cheap, expensive",
@@ -400,7 +416,7 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 28,
+    id: 29,
     title: "Food and ordering",
     grammar: "I’d like…, do you want…?, Can I have…?",
     vocabulary: "menu, soup, tea, coffee, chicken, bill",
@@ -411,7 +427,7 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 29,
+    id: 30,
     title: "Transport",
     grammar: "go by, take, drive, ride, walk to",
     vocabulary: "bus, train, station, taxi, car, stop, ticket",
@@ -422,7 +438,7 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 30,
+    id: 31,
     title: "Directions and places",
     grammar: "there is / there are, place prepositions, directions",
     vocabulary: "left, right, next to, opposite, near, bank, café",
@@ -433,7 +449,7 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 31,
+    id: 32,
     title: "Health and final speaking project",
     grammar: "have got, should basics, mixed A1 review",
     vocabulary: "headache, fever, cough, cold, tired, doctor",
@@ -577,11 +593,11 @@ export default function RoadmapSection() {
     <section className="roadmap-layout">
       <aside className="roadmap-sidebar panel">
         <p className="page-kicker">Learning path</p>
-        <h2>Roadmap for Lessons 1–30</h2>
+        <h2>Roadmap for Lessons 1–32</h2>
         <p className="roadmap-lead">
           The course moves from self-introduction and <strong>to be</strong> to
-          daily routines, prepositions, do/make, family, shopping, transport,
-          health, and stronger real-life speaking.
+          daily routines, countries, jobs, shopping, transport, health, and
+          stronger real-life speaking.
         </p>
 
         <div className="roadmap-current">
@@ -643,7 +659,7 @@ export default function RoadmapSection() {
           <section className="roadmap-block">
             <div className="roadmap-block-head">
               <p className="roadmap-mini-label">Full timeline</p>
-              <h3>Lessons 1–30</h3>
+              <h3>Lessons 1–32</h3>
               <p>
                 This is the complete course line from the first lesson to the
                 latest discussed stage.
