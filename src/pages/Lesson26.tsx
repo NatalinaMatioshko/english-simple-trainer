@@ -602,7 +602,6 @@ export default function Lesson26() {
   ).length;
   const hospScore = hospitalQs.filter((q) => hospAns[q.id] === q.answer).length;
   const r8Score = r8Gaps.filter((g) => r8Ans[g.id] === g.answer).length;
-
   function r8SelClass(id: number, answer: string) {
     const v = r8Ans[id] ?? "";
     if (!r8Checked) return "l25-cr-sel";
@@ -1748,7 +1747,11 @@ export default function Lesson26() {
           </div>
         </div>
         <p className="lesson22-section-desc" style={{ marginTop: "0.75rem" }}>
-          Усі слова уроку також у{" "}
+          Інтерактивні вправи:{" "}
+          <Link className="lesson22-back-link" to="/hw-26">
+            Homework → Lesson 26
+          </Link>
+          . Усі слова уроку також у{" "}
           <Link className="lesson22-back-link" to="/vocab">
             Vocab → Jobs
           </Link>

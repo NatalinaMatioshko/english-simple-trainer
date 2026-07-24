@@ -161,7 +161,7 @@ const lessons: LessonEntry[] = [
     description:
       "Ask and answer about jobs: warm-up, 8 jobs + stress, be he/she/it drills, profile speaking, Green Cross Hospital, homework.",
     lessonPath: "/lesson-26",
-    homeworkPath: "/homework",
+    homeworkPath: "/hw-26",
   },
 ];
 

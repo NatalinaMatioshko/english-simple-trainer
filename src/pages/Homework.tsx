@@ -3,6 +3,16 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "26",
+    title: "Jobs",
+    href: "/hw-26",
+    tasks: [
+      { type: "text", text: "Transform drill — be: he/she/it" },
+      { type: "text", text: "Three drills: substitution, Q–A, correction" },
+      { type: "text", text: "Listening R8: Patrick — listen and complete" },
+    ],
+  },
+  {
     id: "25",
     title: "Hello! Countries & Nationalities",
     href: "/hw-25",
