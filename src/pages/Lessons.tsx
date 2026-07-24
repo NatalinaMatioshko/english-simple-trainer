@@ -163,6 +163,16 @@ const lessons: LessonEntry[] = [
     lessonPath: "/lesson-26",
     homeworkPath: "/hw-26",
   },
+  {
+    id: "27",
+    title: "About you & your family",
+    level: "A1",
+    topic: "profile · family · jobs · place of work · possessives",
+    description:
+      "Tell me about yourself and your family: warm-up, profile speaking, family tree, job+place, reading chunks, mini production.",
+    lessonPath: "/lesson-27",
+    homeworkPath: "/hw-26",
+  },
 ];
 
 export default function Lessons() {

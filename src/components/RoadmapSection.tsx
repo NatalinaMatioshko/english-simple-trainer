@@ -395,14 +395,17 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 27,
-    title: "Shopping 1: food and prices",
-    grammar: "like / don’t like, some / any basics",
-    vocabulary: "apples, bread, eggs, milk, water, price",
-    speaking: "Role play: buy simple food in a shop.",
-    listening: "Shop dialogue with prices and items.",
-    review: "Numbers, questions, daily life.",
-    category: "shopping",
+    title: "About you & your family",
+    grammar: "possessive 's; my / his / her / their; job + place of work",
+    vocabulary:
+      "family (mother, father, brother, sister, husband, wife, son, daughter) · jobs · hospital / school / office",
+    speaking:
+      "Tell me about yourself and your family — profile from homework + family jobs/places",
+    listening: "— (listening later)",
+    review: "Lesson 26 jobs; countries; personal profile writing",
+    category: "people",
     status: "next",
+    route: "/lesson-27",
   },
   {
     id: 28,

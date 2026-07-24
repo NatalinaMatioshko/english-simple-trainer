@@ -175,6 +175,14 @@
   content: none;
 }
 
+.home-quote p.home-quote-ua {
+  margin-top: 0.75rem;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-style: normal;
+  color: var(--color-muted, #64748b);
+  line-height: 1.5;
+}
+
 .home-card {
   min-height: 220px;
   display: grid;

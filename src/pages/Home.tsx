@@ -41,6 +41,10 @@ export default function Home() {
           “Spiral repetition in different contexts — revisit the same grammar
           in new situations until it becomes natural speech.”
         </p>
+        <p className="home-quote-ua">
+          «Спіральне повторення в різних контекстах — повертайся до тієї ж
+          граматики в нових ситуаціях, доки вона не стане природним мовленням.»
+        </p>
       </blockquote>
 
       <section className="cards-grid home-grid">
