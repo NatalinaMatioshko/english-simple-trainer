@@ -725,8 +725,8 @@ export default function Lesson26() {
           <p className="page-kicker">Vocabulary</p>
           <h2>Jobs</h2>
           <p className="lesson22-section-desc">
-            Картки з перекладом → вправи 1a–1c як у підручнику (map, jobs a–h,
-            stress R6) → like / not like.
+            Лицьова — українською, зворот — англійською. Далі вправи 1a–1c
+            (map, jobs a–h, stress R6) → like / not like.
           </p>
         </div>
 
@@ -743,13 +743,13 @@ export default function Lesson26() {
               >
                 <div className="l22-vocab-inner">
                   <div className="l22-vocab-face l22-vocab-front">
-                    <span className="l22-vocab-label">Job</span>
-                    <strong>{item.en}</strong>
+                    <span className="l22-vocab-label">Українською</span>
+                    <strong>{item.ua}</strong>
                     <span className="l22-vocab-hint">tap to flip</span>
                   </div>
                   <div className="l22-vocab-face l22-vocab-back">
-                    <span className="l22-vocab-label">Українською</span>
-                    <strong>{item.ua}</strong>
+                    <span className="l22-vocab-label">English</span>
+                    <strong>{item.en}</strong>
                   </div>
                 </div>
               </button>
