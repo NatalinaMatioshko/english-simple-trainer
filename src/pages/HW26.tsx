@@ -700,6 +700,75 @@ export default function HW26() {
           </button>
         </div>
       </section>
+
+      {/* Online tasks · after grammar */}
+      <section className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Extra practice</p>
+          <h2>Online tasks</h2>
+          <p className="lesson22-section-desc">
+            Після граматики — відкрий кожне посилання окремо і виконай усі
+            вправи на сторінці.
+          </p>
+        </div>
+
+        <div className="l26-hw-links">
+          <article className="l26-hw-link-card">
+            <h3>1 · Countries and nationalities</h3>
+            <p>
+              Повтори країни та національності (A1). Відкрий посилання, прочитай
+              пояснення і зроби <strong>Exercise: 1</strong>.
+            </p>
+            <a
+              className="l22-external-link"
+              href="https://test-english.com/vocabulary/a1/countries-and-nationalities-a1-english-vocabulary/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Countries and nationalities — A1 Vocabulary ↗
+            </a>
+          </article>
+
+          <article className="l26-hw-link-card">
+            <h3>2 · this / that / these / those</h3>
+            <p>
+              Вивчи покажчики <strong>this, that, these, those</strong>. Відкрий
+              посилання, прочитай правило і виконай{" "}
+              <strong>усі 3 grammar exercises</strong> під текстом.
+            </p>
+            <a
+              className="l22-external-link"
+              href="https://test-english.com/grammar-points/a1/this-that-these-those/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              this / that / these / those — A1 Grammar ↗
+            </a>
+          </article>
+
+          <article className="l26-hw-link-card">
+            <h3>3 · Writing a personal profile</h3>
+            <p>
+              Напиши короткий особистий профіль (A1). Відкрий посилання, прочитай
+              модель і поради, потім виконай <strong>writing exercises</strong>{" "}
+              і напиши свій профіль за зразком (ім'я, звідки ти, job / student,
+              сім'я тощо).
+            </p>
+            <a
+              className="l22-external-link"
+              href="https://test-english.com/writing/a1/how-to-write-a-personal-profile-a1-english-writing/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              How to write a personal profile — A1 Writing ↗
+            </a>
+          </article>
+        </div>
+        <p className="lesson22-section-desc" style={{ marginTop: "1rem" }}>
+          Після кожної вправи перевір відповіді — натисни <strong>Check</strong>
+          .
+        </p>
+      </section>
     </div>
   );
 }

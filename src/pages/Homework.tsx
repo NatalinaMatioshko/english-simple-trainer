@@ -10,6 +10,18 @@ const homeworkByLesson = [
       { type: "text", text: "Transform drill — be: he/she/it" },
       { type: "text", text: "Three drills: substitution, Q–A, correction" },
       { type: "text", text: "Listening R8: Patrick — listen and complete" },
+      {
+        type: "text",
+        text: "Online: Countries and nationalities (test-english vocabulary)",
+      },
+      {
+        type: "text",
+        text: "Online: this / that / these / those (test-english grammar)",
+      },
+      {
+        type: "text",
+        text: "Online: Write a personal profile (test-english writing)",
+      },
     ],
   },
   {
