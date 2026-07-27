@@ -401,7 +401,8 @@ const roadmapLessons: Lesson[] = [
       "family (mother, father, brother, sister, husband, wife, son, daughter) · jobs · hospital / school / office",
     speaking:
       "Tell me about yourself and your family — profile from homework + family jobs/places",
-    listening: "— (listening later)",
+    listening:
+      "R1–R4: family words, photo captions, they're/their etc., Yasemin & Tara dialogue",
     review: "Lesson 26 jobs; countries; personal profile writing",
     category: "people",
     status: "next",

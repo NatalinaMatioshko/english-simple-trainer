@@ -169,7 +169,7 @@ const lessons: LessonEntry[] = [
     level: "A1",
     topic: "profile · family · jobs · place of work · possessives",
     description:
-      "Tell me about yourself and your family: warm-up, profile speaking, family tree, job+place, reading chunks, mini production.",
+      "Tell me about yourself and your family: profile, family tree, Unit 2 R1–R4 listening, job+place, reading chunks, speaking.",
     lessonPath: "/lesson-27",
     homeworkPath: "/hw-26",
   },

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
@@ -9,6 +9,9 @@ import "../styles/lesson27.css";
 
 const IMG = (file: string) =>
   `${import.meta.env.BASE_URL}images/lesson27/${file}`;
+
+const SOUND = (r: number) =>
+  `${import.meta.env.BASE_URL}sounds/Unit_2/RM_A1_SB_U2_R${r}.mp3`;
 
 const warmUpQs = [
   "What's your name?",
@@ -223,6 +226,43 @@ const readingQs = [
   },
 ];
 
+/** My family — reading with toggleable chunk highlights */
+const myFamilyLines: { chunks: string[] }[] = [
+  { chunks: ["This is", "my family."] },
+  { chunks: ["My mom", "is a teacher."] },
+  { chunks: ["She has got", "blue eyes", "and long, brown hair."] },
+  { chunks: ["She is", "beautiful."] },
+  { chunks: ["My dad", "is a firefighter."] },
+  { chunks: ["He is tall."] },
+  { chunks: ["He has got", "brown eyes."] },
+  { chunks: ["He is", "handsome."] },
+  { chunks: ["I've got", "two sisters."] },
+  { chunks: ["Their names", "are Anna and Stacy."] },
+  { chunks: ["They've got", "blue eyes."] },
+  { chunks: ["I love", "my sisters", "a lot."] },
+  { chunks: ["We've got", "a pet."] },
+  { chunks: ["It's a cat."] },
+  { chunks: ["It's got", "a long tail", "and orange eyes."] },
+  { chunks: ["My family", "is awesome."] },
+];
+
+const myFamilyGaps = [
+  { id: 1, before: "His mom is a", after: ".", answer: "teacher" },
+  { id: 2, before: "Her eyes are", after: ".", answer: "blue" },
+  { id: 3, before: "She has got brown", after: ".", answer: "hair" },
+  { id: 4, before: "His dad is a", after: ".", answer: "firefighter" },
+  { id: 5, before: "He has got", after: "eyes.", answer: "brown" },
+  { id: 6, before: "He is", after: ".", answer: "handsome" },
+  { id: 7, before: "He has got two", after: ".", answer: "sisters" },
+  { id: 8, before: "They've got", after: ".", answer: "blue eyes" },
+  { id: 9, before: "His pet is a", after: ".", answer: "cat" },
+  { id: 10, before: "It's got long", after: ".", answer: "tail" },
+];
+
+function normAns(s: string) {
+  return s.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
 const productionPrompts = [
   "My name is… I'm from…",
   "I'm a… / I'm a student. I work in / at…",
@@ -230,6 +270,275 @@ const productionPrompts = [
   "My father / mother is a… He/She works…",
   "My brother / sister / husband / wife…",
 ];
+
+/** Ex 4b — listen (R2) and complete photo captions */
+const familyPhotoGaps = [
+  {
+    id: "a",
+    label: "Photo A",
+    hint: "man + little boy",
+    parts: [
+      { text: "This is my family. This is my ", gap: true, answer: "husband" },
+      { text: ", Jon, and our ", gap: true, answer: "son" },
+      { text: ". His name is James.", gap: false },
+    ],
+    options: ["husband", "son", "father", "brother", "friend"],
+  },
+  {
+    id: "b",
+    label: "Photo B",
+    hint: "two boys + dog",
+    parts: [
+      { text: "This is a photo of my ", gap: true, answer: "brothers" },
+      {
+        text: ". Their names are Yuriko and Shinya. And this is our dog. Its name is Aki.",
+        gap: false,
+      },
+    ],
+    options: ["brothers", "parents", "friends", "children", "sons"],
+  },
+  {
+    id: "c",
+    label: "Photo C",
+    hint: "three young men",
+    parts: [
+      { text: "This is a photo of my ", gap: true, answer: "friends" },
+      {
+        text: ". Their names are Jan, Karol and Tomasz.",
+        gap: false,
+      },
+    ],
+    options: ["friends", "brothers", "parents", "sons", "children"],
+  },
+  {
+    id: "d",
+    label: "Photo D",
+    hint: "older couple",
+    parts: [
+      { text: "This is a photo of my ", gap: true, answer: "parents" },
+      { text: ". My ", gap: true, answer: "father" },
+      {
+        text: ", Tony, is from Canada. His family are in Vancouver. My ",
+        gap: false,
+      },
+      { text: "", gap: true, answer: "mother" },
+      { text: "'s name is Lily.", gap: false },
+    ],
+    options: ["parents", "father", "mother", "husband", "wife", "friends"],
+  },
+];
+
+const soundPairs = [
+  {
+    a: "They're from the UK.",
+    b: "Their mother is English.",
+    tip: "They're = They are · Their = possessive",
+  },
+  {
+    a: "He's an office worker.",
+    b: "His sister is a nurse.",
+    tip: "He's = He is · His = possessive",
+  },
+  {
+    a: "Your family is great.",
+    b: "You're from a big family.",
+    tip: "Your = possessive · You're = You are",
+  },
+];
+
+const familyDialogueGaps = [
+  {
+    id: 1,
+    speaker: "Y",
+    before: "This is a photo of ",
+    after: " family.",
+    answer: "my",
+    options: ["my", "you"],
+  },
+  {
+    id: 2,
+    speaker: "T",
+    before: "Wow! Is this ",
+    after: " mother and father?",
+    answer: "your",
+    options: ["you", "your"],
+  },
+  {
+    id: 3,
+    speaker: "T",
+    before: "What are ",
+    after: " names?",
+    answer: "their",
+    options: ["they're", "their"],
+  },
+  {
+    id: 4,
+    speaker: "Y",
+    before: "My ",
+    after: " name is Emir.",
+    answer: "father's",
+    options: ["father's", "father"],
+  },
+  {
+    id: 5,
+    speaker: "Y",
+    before: "",
+    after: " from Turkey.",
+    answer: "He's",
+    options: ["He's", "His"],
+  },
+  {
+    id: 6,
+    speaker: "Y",
+    before: "My mother's English. ",
+    after: " name's Linda.",
+    answer: "Her",
+    options: ["His", "Her"],
+  },
+  {
+    id: 7,
+    speaker: "T",
+    before: "OK. So is this ",
+    after: " brother?",
+    answer: "your",
+    options: ["you", "your"],
+  },
+  {
+    id: 8,
+    speaker: "Y",
+    before: "No, it isn't. That's ",
+    after: " friend from Ankara.",
+    answer: "our",
+    options: ["our", "we"],
+  },
+  {
+    id: 9,
+    speaker: "Y",
+    before: "This is my brother here. ",
+    after: " name's Ali.",
+    answer: "His",
+    options: ["Her", "His"],
+  },
+  {
+    id: 10,
+    speaker: "T",
+    before: "Right. What's your ",
+    after: " name?",
+    answer: "friend's",
+    options: ["friends", "friend's"],
+  },
+];
+
+type AudioTrackData = {
+  r: number;
+  exercise: string;
+  title: string;
+  transcript: ReactNode;
+};
+
+const tracksUnit2A: AudioTrackData[] = [
+  {
+    r: 1,
+    exercise: "2.1 · Vocabulary",
+    title: "Family words — listen and check",
+    transcript: (
+      <p>
+        mother / mum · father / dad · parents · daughter · son · children ·
+        sister · brother · wife · husband · family · friend
+      </p>
+    ),
+  },
+  {
+    r: 2,
+    exercise: "2.2 · Listening",
+    title: "Family photo captions",
+    transcript: (
+      <ol>
+        <li>
+          This is my family. This is my husband, Jon, and our son. His name is
+          James.
+        </li>
+        <li>
+          This is a photo of my brothers. Their names are Yuriko and Shinya. And
+          this is our dog. Its name is Aki.
+        </li>
+        <li>
+          This is a photo of my friends. Their names are Jan, Karol and Tomasz.
+        </li>
+        <li>
+          This is a photo of my parents. My father, Tony, is from Canada. His
+          family are in Vancouver. My mother's name is Lily.
+        </li>
+      </ol>
+    ),
+  },
+  {
+    r: 3,
+    exercise: "2.3 · Pronunciation",
+    title: "Family words that sound the same",
+    transcript: (
+      <ol>
+        <li>
+          They're from the UK. / Their mother is English.
+        </li>
+        <li>
+          He's an office worker. / His sister is a nurse.
+        </li>
+        <li>
+          Your family is great. / You're from a big family.
+        </li>
+      </ol>
+    ),
+  },
+  {
+    r: 4,
+    exercise: "2.4 · Dialogue",
+    title: "Yasemin & Tara — family photo",
+    transcript: (
+      <p>
+        Y: This is a photo of my family.
+        <br />
+        T: Wow! Is this your mother and father? What are their names?
+        <br />
+        Y: My father's name is Emir. He's from Turkey. My mother's English. Her
+        name's Linda.
+        <br />
+        T: OK. So is this your brother?
+        <br />
+        Y: No, it isn't. That's our friend from Ankara. This is my brother here.
+        His name's Ali.
+        <br />
+        T: Right. What's your friend's name?
+        <br />
+        Y: Yusuf. He's a student in the UK.
+      </p>
+    ),
+  },
+];
+
+function AudioPlayer({ track }: { track: AudioTrackData }) {
+  return (
+    <div className="l25-audio-item">
+      <div className="l25-audio-meta">
+        <span className="l25-audio-num">R{track.r}</span>
+        <div className="l25-audio-info">
+          <span className="l25-audio-ex">{track.exercise}</span>
+          <span className="l25-audio-title">{track.title}</span>
+        </div>
+      </div>
+      <audio
+        controls
+        className="l25-audio-ctrl"
+        src={SOUND(track.r)}
+        preload="none"
+      />
+      <details className="l25-details">
+        <summary className="l25-details-toggle">📄 Транскрипція</summary>
+        <div className="l25-details-body">{track.transcript}</div>
+      </details>
+    </div>
+  );
+}
 
 function drillSelClass(
   checked: boolean,
@@ -242,6 +551,10 @@ function drillSelClass(
   return "l25-cr-sel";
 }
 
+function trackByR(r: number) {
+  return tracksUnit2A.find((t) => t.r === r)!;
+}
+
 /* ─── Page ─────────────────────────────────────────────────── */
 
 export default function Lesson27() {
@@ -252,15 +565,22 @@ export default function Lesson27() {
   const [treeChecked, setTreeChecked] = useState(false);
   const [relAns, setRelAns] = useState<Record<number, string>>({});
   const [relChecked, setRelChecked] = useState(false);
+  const [photoGapAns, setPhotoGapAns] = useState<Record<string, string>>({});
+  const [photoGapChecked, setPhotoGapChecked] = useState(false);
   const [placeAns, setPlaceAns] = useState<Record<number, string>>({});
   const [placeChecked, setPlaceChecked] = useState(false);
   const [possAns, setPossAns] = useState<string[]>(
     () => Array(possAdjGaps.length).fill(""),
   );
   const [possChecked, setPossChecked] = useState(false);
+  const [dlgAns, setDlgAns] = useState<Record<number, string>>({});
+  const [dlgChecked, setDlgChecked] = useState(false);
   const [readAns, setReadAns] = useState<Record<number, string>>({});
   const [readChecked, setReadChecked] = useState(false);
   const [openChunk, setOpenChunk] = useState<string>("a");
+  const [showChunks, setShowChunks] = useState(false);
+  const [myFamAns, setMyFamAns] = useState<Record<number, string>>({});
+  const [myFamChecked, setMyFamChecked] = useState(false);
 
   function toggleFamVocab(idx: number) {
     setFamVocabFlipped((prev) =>
@@ -285,11 +605,29 @@ export default function Lesson27() {
   const treeScore = treeNameGaps.filter((g) => treeAns[g.id] === g.answer)
     .length;
   const relScore = familyRelQs.filter((q) => relAns[q.id] === q.answer).length;
+  const photoGapScore = familyPhotoGaps.reduce((sum, p) => {
+    return (
+      sum +
+      p.parts.reduce((s, part, i) => {
+        if (!part.gap || !part.answer) return s;
+        return s + (photoGapAns[`${p.id}-${i}`] === part.answer ? 1 : 0);
+      }, 0)
+    );
+  }, 0);
+  const photoGapTotal = familyPhotoGaps.reduce(
+    (n, p) => n + p.parts.filter((x) => x.gap).length,
+    0,
+  );
   const placeScore = jobPlaceItems.filter((q) => placeAns[q.id] === q.answer)
     .length;
   const possScore = possAdjGaps.filter((g, i) => possAns[i] === g.answer)
     .length;
+  const dlgScore = familyDialogueGaps.filter((g) => dlgAns[g.id] === g.answer)
+    .length;
   const readScore = readingQs.filter((q) => readAns[q.id] === q.answer).length;
+  const myFamScore = myFamilyGaps.filter(
+    (g) => normAns(myFamAns[g.id] ?? "") === normAns(g.answer),
+  ).length;
 
   return (
     <div className="lesson22-page" ref={pageRef}>
@@ -304,13 +642,14 @@ export default function Lesson27() {
               work · possessives
             </p>
             <p className="lesson22-subtitle">
-              Profile → family tree → job + place → short reading → speaking.
-              Без listening у цьому уроці.
+              Profile → family tree → listening → job + place → reading →
+              speaking. Audio: Unit 2 · R1–R4.
             </p>
             <ul className="l22-goals-list">
               <li>speaking: personal profile + family;</li>
               <li>vocabulary: family · jobs · place of work;</li>
               <li>grammar: possessive 's · my / his / her / their;</li>
+              <li>listening: R1–R4 (vocab, photos, pronunciation, dialogue);</li>
               <li>reading: short chunks about Cristina's family.</li>
             </ul>
           </div>
@@ -329,12 +668,12 @@ export default function Lesson27() {
 
       <section className="lesson22-block panel reveal-on-scroll">
         <div className="lesson22-flow">
-          <span>1 Warm-up</span>
-          <span>2 Profile</span>
-          <span>3 Family</span>
-          <span>4 Job + place</span>
-          <span>5 Reading</span>
-          <span>6 Speaking</span>
+          <a href="#l27-family">3 Family</a>
+          <a href="#l27-listening">Listening R1–R4</a>
+          <a href="#l27-jobs">4 Jobs</a>
+          <a href="#l27-reading">5 Reading</a>
+          <a href="#l27-my-family">My family</a>
+          <a href="#l27-speaking">6 Speaking</a>
         </div>
       </section>
 
@@ -407,7 +746,10 @@ export default function Lesson27() {
       </section>
 
       {/* ── 3. Family extension ──────────────────────────────── */}
-      <section className="lesson22-block panel reveal-on-scroll">
+      <section
+        id="l27-family"
+        className="lesson22-block panel reveal-on-scroll is-visible"
+      >
         <div className="lesson22-section-head">
           <p className="page-kicker">3 · Family · extension to profile</p>
           <h2>Cristina's family</h2>
@@ -451,7 +793,12 @@ export default function Lesson27() {
         <h3 className="l22-listen-subtitle">1 · Photos &amp; family tree</h3>
         <p className="lesson22-section-desc">
           Подивись на фото. Заповни імена в дереві: Maria, José, Luisa, Alonzo.
+          Потім послухай <strong>R1</strong> і перевір сімейні слова.
         </p>
+
+        <div className="l25-audio-list" style={{ margin: "0.75rem 0 1rem" }}>
+          <AudioPlayer track={trackByR(1)} />
+        </div>
 
         <div className="l27-photo-bank" aria-label="People photos">
           {photoBank.map((p) => (
@@ -780,10 +1127,205 @@ export default function Lesson27() {
             </span>
           )}
         </div>
+
+      </section>
+
+      {/* ── Listening · Unit 2 R2–R4 ─────────────────────────── */}
+      <section
+        id="l27-listening"
+        className="lesson22-block panel reveal-on-scroll is-visible"
+      >
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Listening · Unit 2</p>
+          <h2>Family listening · R2–R4</h2>
+          <p className="lesson22-section-desc">
+            Photo captions, pronunciation pairs, and Yasemin &amp; Tara dialogue.
+            (R1 — вище, біля family tree.)
+          </p>
+        </div>
+
+        <h3 className="l22-listen-subtitle">Listening · photo captions · R2</h3>
+        <p className="lesson22-section-desc">
+          Послухай <strong>R2</strong> і заповни пропуски в підписах до фото
+          A–D.
+        </p>
+        <div className="l25-audio-list" style={{ margin: "0.75rem 0 1rem" }}>
+          <AudioPlayer track={trackByR(2)} />
+        </div>
+        <div className="l27-photo-gaps">
+          {familyPhotoGaps.map((block) => (
+            <article key={block.id} className="l27-photo-gap-card">
+              <header>
+                <strong>{block.label}</strong>
+                <span>{block.hint}</span>
+              </header>
+              <p>
+                {block.parts.map((part, i) => {
+                  if (!part.gap) {
+                    return <span key={i}>{part.text}</span>;
+                  }
+                  const key = `${block.id}-${i}`;
+                  return (
+                    <span key={key}>
+                      {part.text}
+                      <select
+                        value={photoGapAns[key] ?? ""}
+                        onChange={(e) => {
+                          setPhotoGapChecked(false);
+                          setPhotoGapAns((p) => ({
+                            ...p,
+                            [key]: e.target.value,
+                          }));
+                        }}
+                        className={drillSelClass(
+                          photoGapChecked,
+                          photoGapAns[key] ?? "",
+                          part.answer ?? "",
+                        )}
+                        aria-label={`${block.label} gap ${i}`}
+                      >
+                        <option value="">___</option>
+                        {block.options.map((o) => (
+                          <option key={o} value={o}>
+                            {o}
+                          </option>
+                        ))}
+                      </select>
+                    </span>
+                  );
+                })}
+              </p>
+            </article>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setPhotoGapChecked(true)}
+          >
+            Check captions
+          </button>
+          {photoGapChecked && (
+            <span className="l22-score">
+              {photoGapScore} / {photoGapTotal}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setPhotoGapAns({});
+              setPhotoGapChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+
+        <h3 className="l22-listen-subtitle">Pronunciation · same sound? · R3</h3>
+        <p className="lesson22-section-desc">
+          Послухай <strong>R3</strong>. Пари звучать майже однаково — значення
+          різне.
+        </p>
+        <div className="l25-audio-list" style={{ margin: "0.75rem 0 1rem" }}>
+          <AudioPlayer track={trackByR(3)} />
+        </div>
+        <div className="l27-sound-pairs">
+          {soundPairs.map((p) => (
+            <div key={p.a} className="l27-sound-card">
+              <p>
+                <strong>a)</strong> {p.a}
+              </p>
+              <p>
+                <strong>b)</strong> {p.b}
+              </p>
+              <span className="l27-sound-tip">{p.tip}</span>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="l22-listen-subtitle">Dialogue · Yasemin &amp; Tara · R4</h3>
+        <p className="lesson22-section-desc">
+          Послухай <strong>R4</strong> і обери правильне слово в кожному
+          пропуску.
+        </p>
+        <div className="l25-audio-list" style={{ margin: "0.75rem 0 1rem" }}>
+          <AudioPlayer track={trackByR(4)} />
+        </div>
+        <div className="l25-conv-card" style={{ maxWidth: 640 }}>
+          <div className="l25-conv-title">Photo chat</div>
+          <div className="l25-dialogue">
+            {familyDialogueGaps.map((g) => (
+              <div key={g.id} className="l25-line">
+                <span
+                  className={`l25-spk ${g.speaker === "Y" ? "l25-spk--a" : "l25-spk--b"}`}
+                >
+                  {g.speaker}
+                </span>
+                <span>
+                  {g.before}
+                  <select
+                    value={dlgAns[g.id] ?? ""}
+                    onChange={(e) => {
+                      setDlgChecked(false);
+                      setDlgAns((p) => ({ ...p, [g.id]: e.target.value }));
+                    }}
+                    className={drillSelClass(
+                      dlgChecked,
+                      dlgAns[g.id] ?? "",
+                      g.answer,
+                    )}
+                    aria-label={`Dialogue gap ${g.id}`}
+                  >
+                    <option value="">___</option>
+                    {g.options.map((o) => (
+                      <option key={o} value={o}>
+                        {o}
+                      </option>
+                    ))}
+                  </select>
+                  {g.after}
+                </span>
+              </div>
+            ))}
+            <div className="l25-line">
+              <span className="l25-spk l25-spk--a">Y</span>
+              <span>Yusuf. He's a student in the UK.</span>
+            </div>
+          </div>
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setDlgChecked(true)}
+          >
+            Check dialogue
+          </button>
+          {dlgChecked && (
+            <span className="l22-score">
+              {dlgScore} / {familyDialogueGaps.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setDlgAns({});
+              setDlgChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
       </section>
 
       {/* ── 4. Jobs + place of work ──────────────────────────── */}
-      <section className="lesson22-block panel reveal-on-scroll">
+      <section
+        id="l27-jobs"
+        className="lesson22-block panel reveal-on-scroll is-visible"
+      >
         <div className="lesson22-section-head">
           <p className="page-kicker">4 · Jobs + place of work</p>
           <h2>Who works where?</h2>
@@ -886,7 +1428,10 @@ export default function Lesson27() {
       </section>
 
       {/* ── 5. Reading in chunks ─────────────────────────────── */}
-      <section className="lesson22-block panel reveal-on-scroll">
+      <section
+        id="l27-reading"
+        className="lesson22-block panel reveal-on-scroll is-visible"
+      >
         <div className="lesson22-section-head">
           <p className="page-kicker">5 · Reading · short chunks</p>
           <h2>Cristina's profile</h2>
@@ -972,8 +1517,130 @@ export default function Lesson27() {
         </div>
       </section>
 
+      {/* ── 5b. My family reading + gaps ─────────────────────── */}
+      <section
+        id="l27-my-family"
+        className="lesson22-block panel reveal-on-scroll is-visible"
+      >
+        <div className="lesson22-section-head">
+          <p className="page-kicker">5b · Reading · My family</p>
+          <h2>My family</h2>
+          <p className="lesson22-section-desc">
+            Спочатку прочитай текст звичайно. Натисни кнопку, щоб побачити
+            reading chunks — як групувати слова при читанні. Потім заповни
+            пропуски.
+          </p>
+        </div>
+
+        <div className="l27-myfam">
+          <div className="l27-myfam-text-wrap">
+            <div className="l25-cr-actions" style={{ marginBottom: "0.65rem" }}>
+              <button
+                type="button"
+                className={`l22-check-btn${showChunks ? " l27-chunk-toggle--on" : ""}`}
+                onClick={() => setShowChunks((v) => !v)}
+                aria-pressed={showChunks}
+              >
+                {showChunks ? "Hide chunks" : "Show chunks"}
+              </button>
+            </div>
+            <div
+              className={`l27-myfam-text${showChunks ? " l27-myfam-text--chunks" : ""}`}
+            >
+              {myFamilyLines.map((line, li) => (
+                <p key={li} className="l27-myfam-line">
+                  {line.chunks.map((chunk, ci) => (
+                    <span key={`${li}-${ci}`}>
+                      {ci > 0 ? " " : null}
+                      <span
+                        className={`l27-read-chunk${showChunks ? " is-on" : ""}`}
+                      >
+                        {chunk}
+                      </span>
+                    </span>
+                  ))}
+                </p>
+              ))}
+            </div>
+          </div>
+          <figure className="l27-myfam-photo">
+            <img
+              src={IMG("my-family.jpg")}
+              alt="A family smiling together"
+              loading="lazy"
+              width={900}
+              height={600}
+            />
+            <figcaption>My family</figcaption>
+          </figure>
+        </div>
+
+        <h3 className="l22-listen-subtitle">Complete the sentences</h3>
+        <div className="l26-drill-list">
+          {myFamilyGaps.map((g) => {
+            const val = myFamAns[g.id] ?? "";
+            const ok = normAns(val) === normAns(g.answer);
+            let inputClass = "l27-gap-input";
+            if (myFamChecked) {
+              inputClass += ok
+                ? " l27-gap-input--ok"
+                : val
+                  ? " l27-gap-input--err"
+                  : " l27-gap-input--err";
+            }
+            return (
+              <div key={g.id} className="l26-drill-row">
+                <span className="l26-drill-prompt">
+                  {g.id}. {g.before}{" "}
+                  <input
+                    type="text"
+                    value={val}
+                    onChange={(e) => {
+                      setMyFamChecked(false);
+                      setMyFamAns((p) => ({ ...p, [g.id]: e.target.value }));
+                    }}
+                    className={inputClass}
+                    aria-label={`Gap ${g.id}`}
+                    autoComplete="off"
+                    spellCheck={false}
+                  />{" "}
+                  {g.after}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setMyFamChecked(true)}
+          >
+            Check
+          </button>
+          {myFamChecked && (
+            <span className="l22-score">
+              {myFamScore} / {myFamilyGaps.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setMyFamAns({});
+              setMyFamChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+      </section>
+
       {/* ── 6. Mini production ───────────────────────────────── */}
-      <section className="lesson22-block panel reveal-on-scroll">
+      <section
+        id="l27-speaking"
+        className="lesson22-block panel reveal-on-scroll is-visible"
+      >
         <div className="lesson22-section-head">
           <p className="page-kicker">6 · Mini production · 5–7 min</p>
           <h2>Tell me about yourself and your family</h2>
@@ -1017,7 +1684,7 @@ export default function Lesson27() {
             <Link className="lesson22-back-link" to="/hw-26">
               Homework · Lesson 26
             </Link>{" "}
-            (profile writing + drills). Listening для цього уроку додамо пізніше.
+            (profile writing + drills). У Lesson 27 слухай Unit 2 · R1–R4.
           </p>
         </div>
       </section>
