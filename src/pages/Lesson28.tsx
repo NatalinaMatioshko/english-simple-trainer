@@ -769,18 +769,19 @@ export default function Lesson28() {
         <div className="lesson22-hero-top">
           <div>
             <p className="page-kicker">Lesson 28</p>
-            <h1>Shopping 2: clothes</h1>
+            <h1>Everyday things</h1>
             <p className="lesson22-topic-pill">
-              Can I have…? · size · price · try on
+              this / that / these / those · everyday objects
             </p>
             <p className="lesson22-subtitle">
               Part 1 — speaking (ask back + tell your story). Part 2 —
-              vocabulary: match pictures with words.
+              vocabulary, listening, and demonstratives.
             </p>
             <div className="chips" style={{ marginTop: "0.75rem" }}>
               <span className="chip">Speaking</span>
               <span className="chip">Vocabulary</span>
-              <span className="chip">Things</span>
+              <span className="chip">Listening</span>
+              <span className="chip">Grammar</span>
             </div>
           </div>
           <div

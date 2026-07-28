@@ -390,7 +390,7 @@ const roadmapLessons: Lesson[] = [
       "R6–R8: job stress, he/she/it short forms, Patrick dialogue (listen and complete)",
     review: "Countries / the UK·the US; to be; articles with jobs (a / an).",
     category: "people",
-    status: "current",
+    status: "completed",
     route: "/lesson-26",
   },
   {
@@ -405,19 +405,22 @@ const roadmapLessons: Lesson[] = [
       "R1–R4: family words, photo captions, they're/their etc., Yasemin & Tara dialogue",
     review: "Lesson 26 jobs; countries; personal profile writing",
     category: "people",
-    status: "next",
+    status: "completed",
     route: "/lesson-27",
   },
   {
     id: 28,
-    title: "Shopping 2: clothes",
-    grammar: "Can I have…?, size, price, try on",
-    vocabulary: "shirt, shoes, jacket, size, cheap, expensive",
-    speaking: "Shop dialogue for clothes.",
-    listening: "Listening in a clothes shop.",
-    review: "Clothes, colors, numbers, questions.",
-    category: "shopping",
-    status: "next",
+    title: "Everyday things",
+    grammar: "this, that, these and those",
+    vocabulary:
+      "everyday objects (book, phone, desk, key, table, clock, photo, computer, box, chair, cup, pen) · home office words",
+    speaking:
+      "Ask back + tell your story; What’s number…?; What’s that? / What are those?",
+    listening:
+      "R5–R8: match pictures, Max & Carla office tour, this/these contrast, picture dialogues",
+    review: "Personal info speaking; jobs/family from L26–27; object names",
+    category: "general",
+    status: "current",
     route: "/lesson-28",
   },
   {

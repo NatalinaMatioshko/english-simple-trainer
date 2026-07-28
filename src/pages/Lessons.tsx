@@ -175,11 +175,11 @@ const lessons: LessonEntry[] = [
   },
   {
     id: "28",
-    title: "Everyday things · this / that",
+    title: "Everyday things",
     level: "A1",
-    topic: "objects · listening · this/that/these/those",
+    topic: "this / that / these / those · everyday objects",
     description:
-      "Part 2: vocabulary, Max & Carla listening, demonstratives. Homework: flashcards + quiz.",
+      "Speaking + Part 2: vocabulary, Max & Carla listening, demonstratives. HW: flashcards + quiz.",
     lessonPath: "/lesson-28",
     homeworkPath: "/hw-28",
   },

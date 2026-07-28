@@ -38,9 +38,10 @@ export default function HW28() {
         <div className="lesson22-hero-top">
           <div>
             <p className="page-kicker">Homework · Lesson 28</p>
-            <h1>Everyday things · this / that / these / those</h1>
+            <h1>Everyday things</h1>
             <p className="lesson22-subtitle">
-              Закріплення Part 2: vocabulary · listening · grammar · quiz.
+              Закріплення Part 2: vocabulary · listening · grammar · quiz
+              (this / that / these / those).
             </p>
           </div>
           <div

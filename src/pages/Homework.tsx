@@ -16,7 +16,7 @@ const homeworkByLesson = [
   },
   {
     id: "28",
-    title: "Everyday things · this / that / these / those",
+    title: "Everyday things",
     href: "/hw-28",
     tasks: [
       {
