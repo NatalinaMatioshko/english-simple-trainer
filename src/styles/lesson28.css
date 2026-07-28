@@ -1,0 +1,317 @@
+/* Lesson 28 — Speaking bank */
+
+.l28-ask-examples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.l28-ask-example {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  min-width: 0;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  width: 100%;
+}
+
+.l28-ask-example:hover,
+.l28-ask-example:focus-visible {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.l28-ask-example.is-open {
+  border-color: var(--color-primary);
+}
+
+.l28-ask-hidden {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  opacity: 0.75;
+}
+
+.l28-ask-cue,
+.l28-ask-ask {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem 0.6rem;
+}
+
+.l28-ask-ask {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.l28-ask-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.l28-ask-tag--you {
+  background: color-mix(in srgb, var(--color-primary) 18%, transparent);
+  color: var(--color-primary);
+}
+
+.l28-task-note {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-primary);
+  background: var(--color-surface-2);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--color-text);
+}
+
+.l28-speak-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.l28-speak-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  min-width: 0;
+}
+
+.l28-speak-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.l28-speak-num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-sm);
+  line-height: 1;
+}
+
+.l28-speak-title {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--color-text);
+}
+
+.l28-speak-hint {
+  margin: 0.25rem 0 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.l28-speak-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.l28-speak-list li {
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+@media (max-width: 760px) {
+  .l28-ask-examples,
+  .l28-speak-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Match pictures 1–12 with a–l ── */
+
+.l28-match-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.l28-match-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  min-width: 0;
+  height: auto;
+}
+
+.l28-match-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-text-muted);
+  line-height: 1;
+}
+
+.l28-match-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-border);
+}
+
+.l28-match-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.l28-match-sel {
+  width: 100%;
+  min-width: 0;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+/* ── Match numbers in the office scene ── */
+
+.l28-scene {
+  margin: 0 0 var(--space-4);
+}
+
+.l28-scene-img {
+  display: block;
+  width: 100%;
+  max-width: 920px;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+}
+
+.l28-word-bank {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 1.25rem;
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.l28-word-bank-item {
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.l28-word-bank-item strong {
+  color: var(--color-primary);
+  margin-right: 0.25rem;
+}
+
+.l28-closeup-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.l28-closeup-card {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  aspect-ratio: 1 / 1;
+}
+
+.l28-closeup-num {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  z-index: 1;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: #0f4c5c;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.l28-closeup-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .l28-match-grid,
+  .l28-closeup-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .l28-match-grid,
+  .l28-word-bank,
+  .l28-closeup-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
