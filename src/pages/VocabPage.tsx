@@ -17,7 +17,8 @@ export default function VocabPage() {
             <h2 className="vocab-page-title">Словник</h2>
             <p className="vocab-page-subtitle muted">
               Окрема сторінка для таблиці, флешкарток і режиму практики —
-              зручніше тренувати слова без відволікань від вправ.
+              зручніше тренувати слова без відволікань від вправ. У кожного
+              слова є IPA-транскрипція.
             </p>
           </div>
           <div className="vocab-page-nav">
@@ -32,6 +33,7 @@ export default function VocabPage() {
         <div className="chips">
           <span className="chip">Таблиця</span>
           <span className="chip">Флешкартки</span>
+          <span className="chip">IPA</span>
           <span className="chip">Режим практики</span>
         </div>
       </section>

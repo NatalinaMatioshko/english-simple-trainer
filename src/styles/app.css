@@ -992,12 +992,81 @@ h1 {
   font-weight: 800;
   font-size: var(--text-sm);
   color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .vocab-en {
   font-weight: 700;
   color: var(--color-primary);
   font-size: var(--text-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.vocab-en-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.vocab-en-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.vocab-en-word {
+  display: inline;
+}
+
+.vocab-speak-btn {
+  flex-shrink: 0;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.12s;
+}
+
+.vocab-speak-btn:hover,
+.vocab-speak-btn:focus-visible {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  outline: none;
+}
+
+.vocab-speak-btn.is-playing,
+.vocab-speak-btn:active {
+  transform: scale(0.94);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.vocab-ipa {
+  display: block;
+  font-weight: 600;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+}
+
+.fc-back-ipa {
+  margin: 0.35rem 0 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .vocab-en-hidden {
@@ -1140,17 +1209,6 @@ h1 {
 .vocab-grid-card--audio.is-playing .vocab-grid-sound {
   opacity: 1;
   color: var(--color-primary);
-}
-
-.fc-speak-btn {
-  margin-top: var(--space-3);
-  pointer-events: auto;
-}
-
-.fc-speak-row {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--space-3);
 }
 
 /* 2-column variant (numbers, no example) */

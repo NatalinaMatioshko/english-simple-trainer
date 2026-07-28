@@ -8,6 +8,7 @@ import { shuffle } from "../../utils/array";
 import {
   letterSpeakText,
   speakEnglish,
+  vocabSpeakText,
   warmUpSpeechVoices,
 } from "../../utils/speech";
 
@@ -242,6 +243,12 @@ function CategoryView({
   onSwitchToCards,
   setPracticeMode,
 }: CategoryViewProps) {
+  const [playing, setPlaying] = useState<string | null>(null);
+
+  useEffect(() => {
+    warmUpSpeechVoices();
+  }, []);
+
   const totalItems = category.groups.reduce(
     (acc, g) => acc + g.items.length,
     0,
@@ -257,6 +264,14 @@ function CategoryView({
     "Example",
   ];
   const hasThirdCol = col3 !== "";
+
+  const playItem = (e: React.MouseEvent, item: VocabItem) => {
+    e.stopPropagation();
+    const text = vocabSpeakText(item, category.id);
+    setPlaying(item.en);
+    speakEnglish(text, 0.9);
+    window.setTimeout(() => setPlaying(null), 900);
+  };
 
   return (
     <div className="vocab-category">
@@ -343,14 +358,41 @@ function CategoryView({
                     aria-expanded={practiceMode ? isRevealed : undefined}
                   >
                     {/* Col 1: always shown (col1 = Ukrainian by default) */}
-                    <span className="vocab-ua">{item.ua}</span>
+                    <span className="vocab-ua">
+                      {item.ua}
+                      {category.id === "numbers" && item.ipa && (
+                        <span className="vocab-ipa">[ {item.ipa} ]</span>
+                      )}
+                    </span>
 
                     {/* Col 2: hidden in practice mode */}
                     <span
                       className={`vocab-en ${!show ? "vocab-en-hidden" : ""}`}
                     >
                       {show ? (
-                        item.en
+                        <span className="vocab-en-row">
+                          <span className="vocab-en-text">
+                            <span className="vocab-en-word">{item.en}</span>
+                            {category.id !== "numbers" &&
+                              category.id !== "alphabet" &&
+                              item.ipa && (
+                                <span className="vocab-ipa">
+                                  [ {item.ipa} ]
+                                </span>
+                              )}
+                          </span>
+                          <button
+                            type="button"
+                            className={`vocab-speak-btn${
+                              playing === item.en ? " is-playing" : ""
+                            }`}
+                            onClick={(e) => playItem(e, item)}
+                            title={`Почути: ${vocabSpeakText(item, category.id)}`}
+                            aria-label={`Почути вимову: ${vocabSpeakText(item, category.id)}`}
+                          >
+                            ♪
+                          </button>
+                        </span>
                       ) : (
                         <span className="vocab-reveal-hint">натисни →</span>
                       )}
@@ -391,7 +433,7 @@ function CategoryView({
 function FlashcardMode({ category }: { category: VocabCategory }) {
   const allItems = category.groups.flatMap((g) => g.items);
   const total = allItems.length;
-  const isAlphabet = category.id === "alphabet";
+  const isNumbers = category.id === "numbers";
 
   const frontLabel = category.frontLabel ?? "Українська";
   const backLabel = category.backLabel ?? "English";
@@ -401,10 +443,6 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
   const [flipped, setFlipped] = useState(false);
 
   const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    warmUpSpeechVoices();
-  }, []);
 
   useEffect(() => {
     cardRef.current?.focus();
@@ -417,14 +455,9 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
 
   const flip = () => setFlipped((f) => !f);
 
-  const playCurrent = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (!current) return;
-    speakEnglish(
-      isAlphabet ? letterSpeakText(current.en) : current.en,
-      0.85,
-    );
-  };
+  // Numbers: front = digit, back = word + IPA
+  const frontWord = isNumbers ? current?.en : current?.ua;
+  const backWord = isNumbers ? current?.ua : current?.en;
 
   const handleKnow = () => {
     if (!current) return;
@@ -525,7 +558,7 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
         onKeyDown={handleKeyDown}
         tabIndex={0}
         ref={cardRef}
-        aria-label={`Картка: ${current?.ua ?? ""}. Натисніть Enter або Пробіл щоб перевернути.`}
+        aria-label={`Картка: ${frontWord ?? ""}. Натисніть Enter або Пробіл щоб перевернути.`}
       >
         <div
           key={current?.en ?? "empty"}
@@ -535,7 +568,7 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
           {/* FRONT */}
           <div className="fc-face fc-front">
             <span className="fc-front-label muted">{frontLabel}</span>
-            <p className="fc-front-word">{current?.ua}</p>
+            <p className="fc-front-word">{frontWord}</p>
             <span className="fc-flip-hint muted">
               натисни або <kbd>Пробіл</kbd> щоб перевернути
             </span>
@@ -544,26 +577,16 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
           {/* BACK */}
           <div className="fc-face fc-back">
             <span className="fc-back-label">{backLabel}</span>
-            <p className="fc-back-word">{current?.en}</p>
+            <p className="fc-back-word">{backWord}</p>
+            {current?.ipa && category.id !== "alphabet" && (
+              <p className="fc-back-ipa">[ {current.ipa} ]</p>
+            )}
             {current?.example && (
               <p className="fc-back-example">{current.example}</p>
             )}
           </div>
         </div>
       </div>
-
-      {isAlphabet && current && (
-        <div className="fc-speak-row">
-          <button
-            type="button"
-            className="btn secondary"
-            onClick={playCurrent}
-            title="Почути вимову букви"
-          >
-            ♪ Почути вимову
-          </button>
-        </div>
-      )}
 
       {flipped && (
         <div className="fc-actions">

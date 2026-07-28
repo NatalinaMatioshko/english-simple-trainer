@@ -22,6 +22,19 @@ export function letterSpeakText(en: string): string {
   return letter ? letter.toUpperCase() : en;
 }
 
+/** Text to speak for a dictionary item (category-aware). */
+export function vocabSpeakText(
+  item: { en: string; ua: string },
+  categoryId: string,
+): string {
+  if (categoryId === "alphabet") return letterSpeakText(item.en);
+  // Numbers store the English word in `ua` and the digit in `en`
+  if (categoryId === "numbers" || /^\d/.test(item.en.trim())) {
+    return item.ua;
+  }
+  return item.en.replace(/\s*\/\s*/g, " or ");
+}
+
 /** Warm up voices (some browsers load them asynchronously). */
 export function warmUpSpeechVoices() {
   if (typeof window === "undefined" || !window.speechSynthesis) return;
