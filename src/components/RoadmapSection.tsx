@@ -418,6 +418,7 @@ const roadmapLessons: Lesson[] = [
     review: "Clothes, colors, numbers, questions.",
     category: "shopping",
     status: "next",
+    route: "/lesson-28",
   },
   {
     id: 29,
@@ -429,6 +430,7 @@ const roadmapLessons: Lesson[] = [
     review: "like / don’t like, prices, polite requests.",
     category: "food",
     status: "next",
+    route: "/lesson-29",
   },
   {
     id: 30,
@@ -440,6 +442,7 @@ const roadmapLessons: Lesson[] = [
     review: "in / to, routine, time, movement.",
     category: "transport",
     status: "next",
+    route: "/lesson-30",
   },
   {
     id: 31,

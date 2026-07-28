@@ -171,7 +171,34 @@ const lessons: LessonEntry[] = [
     description:
       "Tell me about yourself and your family: profile, family tree, Unit 2 R1–R4 listening, job+place, reading chunks, speaking.",
     lessonPath: "/lesson-27",
-    homeworkPath: "/hw-26",
+    homeworkPath: "/hw-27",
+  },
+  {
+    id: "28",
+    title: "Shopping 2: clothes",
+    level: "A1",
+    topic: "Can I have…? · size · price · try on",
+    description: "Placeholder — content coming soon.",
+    lessonPath: "/lesson-28",
+    homeworkPath: "/hw-28",
+  },
+  {
+    id: "29",
+    title: "Food and ordering",
+    level: "A1",
+    topic: "I'd like… · Can I have…? · menu",
+    description: "Placeholder — content coming soon.",
+    lessonPath: "/lesson-29",
+    homeworkPath: "/hw-29",
+  },
+  {
+    id: "30",
+    title: "Transport",
+    level: "A1",
+    topic: "go by · take · drive · walk to",
+    description: "Placeholder — content coming soon.",
+    lessonPath: "/lesson-30",
+    homeworkPath: "/hw-30",
   },
 ];
 

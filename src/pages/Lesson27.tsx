@@ -1680,11 +1680,11 @@ export default function Lesson27() {
           <p className="page-kicker">After class</p>
           <h2>Homework link</h2>
           <p className="lesson22-section-desc">
-            Продовжуй практику на{" "}
-            <Link className="lesson22-back-link" to="/hw-26">
-              Homework · Lesson 26
-            </Link>{" "}
-            (profile writing + drills). У Lesson 27 слухай Unit 2 · R1–R4.
+            Домашка: writing про себе і сім'ю + listening Exercise 1 —{" "}
+            <Link className="lesson22-back-link" to="/hw-27">
+              Homework · Lesson 27
+            </Link>
+            .
           </p>
         </div>
       </section>

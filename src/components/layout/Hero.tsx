@@ -14,15 +14,17 @@ export function Hero({ mode, setMode }: HeroProps) {
       <div className="hero-grid">
         <div>
           <div className="chips">
-            <span className="chip">50 дієслів</span>
-            <span className="chip">he / she / it</span>
-            <span className="chip">do / does</span>
-            <span className="chip">adverbs of frequency</span>
+            <span className="chip">Present Simple</span>
+            <span className="chip">to be · jobs</span>
+            <span className="chip">family · 's</span>
+            <span className="chip">a / an / the</span>
+            <span className="chip">can / can't</span>
           </div>
 
           <p className="subtitle" style={{ marginTop: "1rem" }}>
-            Тренажер допомагає швидко повторити форму Present Simple, одразу
-            попрактикувати питання та перевірити знання прислівників частоти.
+            Тренажер для повторення пройденого: Present Simple, to be + jobs,
+            family &amp; possessives, articles/countries і can — плюс словник
+            окремо.
           </p>
 
           <div
@@ -62,20 +64,20 @@ export function Hero({ mode, setMode }: HeroProps) {
         <div className="stats">
           <div className="mini-card">
             <span className="muted">Фокус</span>
-            <strong>Present Simple</strong>
-            <span>Щоденні дії та звички</span>
+            <strong>Lessons 15–27</strong>
+            <span>Від Present Simple до family profile</span>
           </div>
 
           <div className="mini-card">
             <span className="muted">Підходить для</span>
-            <strong>A1-A2</strong>
-            <span>Початковий та базовий рівень</span>
+            <strong>A1</strong>
+            <span>Повторення після уроків курсу</span>
           </div>
 
           <div className="mini-card">
             <span className="muted">Формат</span>
             <strong>Study + Practice + Vocab</strong>
-            <span>Пояснення, вправи, словник окремо</span>
+            <span>Колоди тем + checkpoint-тест</span>
           </div>
         </div>
       </div>

@@ -3,6 +3,47 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "30",
+    title: "Transport",
+    href: "/hw-30",
+    tasks: [{ type: "text", text: "Empty for now — coming soon" }],
+  },
+  {
+    id: "29",
+    title: "Food and ordering",
+    href: "/hw-29",
+    tasks: [{ type: "text", text: "Empty for now — coming soon" }],
+  },
+  {
+    id: "28",
+    title: "Shopping 2: clothes",
+    href: "/hw-28",
+    tasks: [{ type: "text", text: "Empty for now — coming soon" }],
+  },
+  {
+    id: "27",
+    title: "About you & your family",
+    href: "/hw-27",
+    tasks: [
+      {
+        type: "text",
+        text: "Writing: 6–10 sentences about you and your family",
+      },
+      {
+        type: "text",
+        text: "Listening: My family — Exercise 1 only (test-english)",
+      },
+      {
+        type: "text",
+        text: "Flashcards: Lessons 25–26–27 (countries, jobs, family)",
+      },
+      {
+        type: "text",
+        text: "Test: Lessons 25–26–27 checkpoint",
+      },
+    ],
+  },
+  {
     id: "26",
     title: "Jobs",
     href: "/hw-26",

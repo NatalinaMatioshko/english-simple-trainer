@@ -21,6 +21,13 @@ import HW25 from "../pages/HW25";
 import Lesson26 from "../pages/Lesson26";
 import HW26 from "../pages/HW26";
 import Lesson27 from "../pages/Lesson27";
+import HW27 from "../pages/HW27";
+import Lesson28 from "../pages/Lesson28";
+import HW28 from "../pages/HW28";
+import Lesson29 from "../pages/Lesson29";
+import HW29 from "../pages/HW29";
+import Lesson30 from "../pages/Lesson30";
+import HW30 from "../pages/HW30";
 import ExtraResources from "../pages/ExtraResources";
 import VocabPage from "../pages/VocabPage";
 import SelfStudyReview from "../pages/SelfStudyReview";
@@ -52,6 +59,13 @@ function AppRoutes() {
         <Route path="/lesson-26" element={<Lesson26 />} />
         <Route path="/hw-26" element={<HW26 />} />
         <Route path="/lesson-27" element={<Lesson27 />} />
+        <Route path="/hw-27" element={<HW27 />} />
+        <Route path="/lesson-28" element={<Lesson28 />} />
+        <Route path="/hw-28" element={<HW28 />} />
+        <Route path="/lesson-29" element={<Lesson29 />} />
+        <Route path="/hw-29" element={<HW29 />} />
+        <Route path="/lesson-30" element={<Lesson30 />} />
+        <Route path="/hw-30" element={<HW30 />} />
         <Route path="/self-study" element={<SelfStudyReview />} />
         <Route path="/about-me" element={<AboutMePage />} />
         <Route path="/homework" element={<Homework />} />

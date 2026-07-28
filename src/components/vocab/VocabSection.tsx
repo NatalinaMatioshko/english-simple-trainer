@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   vocabCategories,
   type VocabCategory,
@@ -8,13 +8,48 @@ import { shuffle } from "../../utils/array";
 
 type View = "table" | "cards";
 
+const ALL_WORDS_ID = "__all__";
+
+function buildAllWordsCategory(): VocabCategory {
+  const seen = new Set<string>();
+  const groups = vocabCategories
+    .filter((c) => c.id !== "alphabet")
+    .map((cat) => {
+      const items: VocabItem[] = [];
+      for (const g of cat.groups) {
+        for (const item of g.items) {
+          if (seen.has(item.en)) continue;
+          seen.add(item.en);
+          items.push(item);
+        }
+      }
+      return { label: cat.title, items };
+    })
+    .filter((g) => g.items.length > 0);
+
+  const total = groups.reduce((n, g) => n + g.items.length, 0);
+
+  return {
+    id: ALL_WORDS_ID,
+    title: "Усі слова",
+    badge: String(total),
+    description:
+      "Усі категорії словника, крім Alphabet. Зручно для загального повторення.",
+    groups,
+  };
+}
+
 export function VocabSection() {
+  const allWordsCategory = useMemo(() => buildAllWordsCategory(), []);
   const [activeId, setActiveId] = useState(vocabCategories[0].id);
   const [view, setView] = useState<View>("table");
   const [practiceMode, setPracticeMode] = useState(false);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
 
-  const category = vocabCategories.find((c) => c.id === activeId)!;
+  const category =
+    activeId === ALL_WORDS_ID
+      ? allWordsCategory
+      : vocabCategories.find((c) => c.id === activeId)!;
 
   const handleTabChange = (id: string) => {
     setActiveId(id);
@@ -51,7 +86,7 @@ export function VocabSection() {
             <h2 className="vocab-title">Словник</h2>
             <p className="vocab-subtitle muted">
               {view === "cards"
-                ? "Флешкартки: переверни картку і познач — знаєш чи ні."
+                ? "Флешкартки: переверни картку і познач — знаєш чи ні. Можна одну категорію або всі слова."
                 : "Вирази та фрази. У режимі практики ховайте переклад і перевіряйте себе."}
             </p>
           </div>
@@ -77,6 +112,15 @@ export function VocabSection() {
           role="tablist"
           aria-label="Категорії словника"
         >
+          <button
+            className={`vocab-tab vocab-tab--all ${activeId === ALL_WORDS_ID ? "active" : ""}`}
+            onClick={() => handleTabChange(ALL_WORDS_ID)}
+            role="tab"
+            aria-selected={activeId === ALL_WORDS_ID}
+          >
+            <span className="vocab-tab-title">{allWordsCategory.title}</span>
+            <span className="vocab-tab-badge">{allWordsCategory.badge}</span>
+          </button>
           {vocabCategories.map((cat) => (
             <button
               key={cat.id}
