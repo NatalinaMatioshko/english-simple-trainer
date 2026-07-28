@@ -2,33 +2,48 @@ import { useEffect, useState } from "react";
 import type { Feedback, QuizTask } from "../types/trainer";
 import { shuffle } from "../utils/array";
 
+function buildQueue(tasks: QuizTask[]) {
+  const queue = shuffle(tasks);
+  return {
+    queue,
+    options: shuffle(queue[0]?.options ?? []),
+  };
+}
+
 export function useScoredQuiz(tasks: QuizTask[], quizKey: string) {
+  const [queue, setQueue] = useState<QuizTask[]>([]);
   const [index, setIndex] = useState(0);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState<Feedback>({ text: "", type: "" });
   const [selected, setSelected] = useState<string | null>(null);
   const [locked, setLocked] = useState(false);
-  const [options, setOptions] = useState<string[]>(() =>
-    shuffle(tasks[0]?.options ?? []),
-  );
+  const [options, setOptions] = useState<string[]>([]);
+  const [ready, setReady] = useState(false);
 
-  useEffect(() => {
+  const resetWith = (nextQueue: QuizTask[]) => {
+    setQueue(nextQueue);
     setIndex(0);
     setAnsweredCount(0);
     setScore(0);
     setFeedback({ text: "", type: "" });
     setSelected(null);
     setLocked(false);
-    setOptions(shuffle(tasks[0]?.options ?? []));
+    setOptions(shuffle(nextQueue[0]?.options ?? []));
+    setReady(true);
+  };
+
+  useEffect(() => {
+    resetWith(buildQueue(tasks).queue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quizKey]);
 
-  const finished = index >= tasks.length;
-  const currentTask = !finished ? tasks[index] : null;
-  const progress = tasks.length
-    ? `${(answeredCount / tasks.length) * 100}%`
-    : "0%";
+  const finished = ready && index >= queue.length;
+  const currentTask = ready && !finished ? queue[index] : null;
+  const progress =
+    ready && queue.length
+      ? `${(answeredCount / queue.length) * 100}%`
+      : "0%";
 
   const handleAnswer = (option: string) => {
     if (locked || !currentTask) return;
@@ -49,8 +64,8 @@ export function useScoredQuiz(tasks: QuizTask[], quizKey: string) {
   };
 
   const nextTask = () => {
-    if (index >= tasks.length - 1) {
-      setIndex(tasks.length);
+    if (index >= queue.length - 1) {
+      setIndex(queue.length);
       return;
     }
 
@@ -59,17 +74,17 @@ export function useScoredQuiz(tasks: QuizTask[], quizKey: string) {
     setSelected(null);
     setLocked(false);
     setFeedback({ text: "", type: "" });
-    setOptions(shuffle(tasks[nextIndex].options));
+    setOptions(shuffle(queue[nextIndex].options));
   };
 
+  /** Restart with the same question order */
   const restart = () => {
-    setIndex(0);
-    setAnsweredCount(0);
-    setScore(0);
-    setFeedback({ text: "", type: "" });
-    setSelected(null);
-    setLocked(false);
-    setOptions(shuffle(tasks[0]?.options ?? []));
+    resetWith([...queue]);
+  };
+
+  /** Shuffle all questions and start from the beginning */
+  const shuffleQuestions = () => {
+    resetWith(buildQueue(tasks).queue);
   };
 
   return {
@@ -85,6 +100,7 @@ export function useScoredQuiz(tasks: QuizTask[], quizKey: string) {
     handleAnswer,
     nextTask,
     restart,
-    total: tasks.length,
+    shuffleQuestions,
+    total: queue.length,
   };
 }

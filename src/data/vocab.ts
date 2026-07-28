@@ -33,6 +33,8 @@ export const vocabCategories: VocabCategory[] = [
     layout: "grid",
     frontLabel: "Звук",
     backLabel: "Буква",
+    description:
+      "Натисніть на букву, щоб почути вимову назви літери (англійська, en-GB).",
     groups: [
       {
         items: [
@@ -316,6 +318,11 @@ export const vocabCategories: VocabCategory[] = [
             ua: "стоматолог",
             example: "He's a dentist.",
           },
+          {
+            en: "barber",
+            ua: "барбер / перукар (чоловічий)",
+            example: "He's a barber.",
+          },
         ],
       },
       {
@@ -330,6 +337,31 @@ export const vocabCategories: VocabCategory[] = [
             en: "team",
             ua: "команда",
             example: "Is it a good team?",
+          },
+          {
+            en: "haircut",
+            ua: "стрижка",
+            example: "I need a haircut.",
+          },
+          {
+            en: "hairstyle",
+            ua: "зачіска",
+            example: "I like your hairstyle.",
+          },
+          {
+            en: "hair",
+            ua: "волосся",
+            example: "He has short hair.",
+          },
+          {
+            en: "beard",
+            ua: "борода",
+            example: "He has a beard.",
+          },
+          {
+            en: "barbershop",
+            ua: "барбершоп",
+            example: "He works in a barbershop.",
           },
         ],
       },

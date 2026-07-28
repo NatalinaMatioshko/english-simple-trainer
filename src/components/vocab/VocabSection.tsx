@@ -5,6 +5,11 @@ import {
   type VocabItem,
 } from "../../data/vocab";
 import { shuffle } from "../../utils/array";
+import {
+  letterSpeakText,
+  speakEnglish,
+  warmUpSpeechVoices,
+} from "../../utils/speech";
 
 type View = "table" | "cards";
 
@@ -162,6 +167,18 @@ export function VocabSection() {
 
 function GridView({ category }: { category: VocabCategory }) {
   const items = category.groups.flatMap((g) => g.items);
+  const [playing, setPlaying] = useState<string | null>(null);
+
+  useEffect(() => {
+    warmUpSpeechVoices();
+  }, []);
+
+  const playLetter = (item: VocabItem) => {
+    const text = letterSpeakText(item.en);
+    setPlaying(item.en);
+    speakEnglish(text, 0.85);
+    window.setTimeout(() => setPlaying(null), 700);
+  };
 
   return (
     <div className="vocab-category">
@@ -180,10 +197,22 @@ function GridView({ category }: { category: VocabCategory }) {
 
       <div className="vocab-grid-layout">
         {items.map((item) => (
-          <div key={item.en} className="vocab-grid-card">
+          <button
+            key={item.en}
+            type="button"
+            className={`vocab-grid-card vocab-grid-card--audio${
+              playing === item.en ? " is-playing" : ""
+            }`}
+            onClick={() => playLetter(item)}
+            title={`Почути: ${letterSpeakText(item.en)}`}
+            aria-label={`Почути вимову букви ${item.en}`}
+          >
             <span className="vocab-grid-main">{item.en}</span>
             <span className="vocab-grid-sub">{item.ua}</span>
-          </div>
+            <span className="vocab-grid-sound" aria-hidden="true">
+              ♪
+            </span>
+          </button>
         ))}
       </div>
     </div>
@@ -362,6 +391,7 @@ function CategoryView({
 function FlashcardMode({ category }: { category: VocabCategory }) {
   const allItems = category.groups.flatMap((g) => g.items);
   const total = allItems.length;
+  const isAlphabet = category.id === "alphabet";
 
   const frontLabel = category.frontLabel ?? "Українська";
   const backLabel = category.backLabel ?? "English";
@@ -373,6 +403,10 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    warmUpSpeechVoices();
+  }, []);
+
+  useEffect(() => {
     cardRef.current?.focus();
   }, [queue.length, flipped]);
 
@@ -382,6 +416,15 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
   const progress = Math.round((knownCount / total) * 100);
 
   const flip = () => setFlipped((f) => !f);
+
+  const playCurrent = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!current) return;
+    speakEnglish(
+      isAlphabet ? letterSpeakText(current.en) : current.en,
+      0.85,
+    );
+  };
 
   const handleKnow = () => {
     if (!current) return;
@@ -508,6 +551,19 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
           </div>
         </div>
       </div>
+
+      {isAlphabet && current && (
+        <div className="fc-speak-row">
+          <button
+            type="button"
+            className="btn secondary"
+            onClick={playCurrent}
+            title="Почути вимову букви"
+          >
+            ♪ Почути вимову
+          </button>
+        </div>
+      )}
 
       {flipped && (
         <div className="fc-actions">

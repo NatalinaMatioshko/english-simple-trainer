@@ -105,6 +105,12 @@ export const hw27Flashcards: Hw27Flashcard[] = [
   { id: "j7", front: "пілот", back: "pilot", deck: "jobs" },
   { id: "j8", front: "фермер", back: "farmer", deck: "jobs" },
   { id: "j9", front: "студент", back: "student", deck: "jobs" },
+  { id: "j10", front: "барбер / перукар (чоловічий)", back: "barber", deck: "jobs" },
+  { id: "j11", front: "стрижка", back: "haircut", deck: "jobs" },
+  { id: "j12", front: "зачіска", back: "hairstyle", deck: "jobs" },
+  { id: "j13", front: "волосся", back: "hair", deck: "jobs" },
+  { id: "j14", front: "борода", back: "beard", deck: "jobs" },
+  { id: "j15", front: "барбершоп", back: "barbershop", deck: "jobs" },
 
   /* be + jobs + place (L26) */
   {
@@ -141,6 +147,24 @@ export const hw27Flashcards: Hw27Flashcard[] = [
     id: "bj6",
     front: "Ні, він не лікар.",
     back: "No, he isn't. / He isn't a doctor.",
+    deck: "be-jobs",
+  },
+  {
+    id: "bj7",
+    front: "Він барбер.",
+    back: "He's a barber.",
+    deck: "be-jobs",
+  },
+  {
+    id: "bj8",
+    front: "працювати в барбершопі",
+    back: "work in a barbershop",
+    deck: "be-jobs",
+  },
+  {
+    id: "bj9",
+    front: "Мені потрібна стрижка.",
+    back: "I need a haircut.",
     deck: "be-jobs",
   },
 
@@ -325,6 +349,18 @@ export const hw27TestTasks: Hw27TestTask[] = [
     text: "I ___ a student.",
     options: ["am", "is", "are"],
     correct: "am",
+  },
+  {
+    block: "jobs-be",
+    text: "He's a ___. He works in a barbershop.",
+    options: ["barber", "farmer", "pilot"],
+    correct: "barber",
+  },
+  {
+    block: "jobs-be",
+    text: "I need a ___.",
+    options: ["haircut", "hairstyle", "beard"],
+    correct: "haircut",
   },
 
   /* Family words · relationships */

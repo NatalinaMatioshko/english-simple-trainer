@@ -16,6 +16,7 @@ type ScoredQuizCardProps = {
   handleAnswer: (option: string) => void;
   nextTask: () => void;
   restart: () => void;
+  shuffleQuestions?: () => void;
   total: number;
 };
 
@@ -35,12 +36,27 @@ export function ScoredQuizCard({
   handleAnswer,
   nextTask,
   restart,
+  shuffleQuestions,
   total,
 }: ScoredQuizCardProps) {
   return (
     <section className="panel">
-      <h2>{title}</h2>
-      {subtitle && <p className="muted">{subtitle}</p>}
+      <div className="fc-top" style={{ marginBottom: "0.5rem" }}>
+        <div>
+          <h2 style={{ marginBottom: subtitle ? "0.35rem" : 0 }}>{title}</h2>
+          {subtitle && <p className="muted" style={{ margin: 0 }}>{subtitle}</p>}
+        </div>
+        {shuffleQuestions && (
+          <button
+            type="button"
+            className="btn secondary fc-shuffle-btn"
+            onClick={shuffleQuestions}
+            title="Перемішати питання і почати знову"
+          >
+            ⇄ Перемішати
+          </button>
+        )}
+      </div>
 
       <div className="exercise-box">
         {!finished && currentTask ? (
@@ -92,6 +108,11 @@ export function ScoredQuizCard({
               <button className="btn secondary" onClick={restart}>
                 Почати тест знову
               </button>
+              {shuffleQuestions && (
+                <button className="btn secondary" onClick={shuffleQuestions}>
+                  ⇄ Перемішати і знову
+                </button>
+              )}
             </div>
           </>
         )}

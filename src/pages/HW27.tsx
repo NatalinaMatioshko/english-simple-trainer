@@ -183,7 +183,8 @@ export default function HW27() {
           <h2>Перевірка</h2>
           <p className="lesson22-section-desc">
             Практикуй окрему тему або пройди <strong>весь тест</strong> відразу.
-            Після відповіді — <strong>Наступне питання</strong>.
+            Кнопка <strong>Перемішати</strong> змінює порядок питань. Після
+            відповіді — <strong>Наступне питання</strong>.
           </p>
         </div>
 
@@ -227,6 +228,7 @@ export default function HW27() {
           handleAnswer={test.handleAnswer}
           nextTask={test.nextTask}
           restart={test.restart}
+          shuffleQuestions={test.shuffleQuestions}
           total={test.total}
         />
       </section>

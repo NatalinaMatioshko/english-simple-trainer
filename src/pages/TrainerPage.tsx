@@ -174,6 +174,7 @@ export default function TrainerPage() {
                       handleAnswer={checkpoint.handleAnswer}
                       nextTask={checkpoint.nextTask}
                       restart={checkpoint.restart}
+                      shuffleQuestions={checkpoint.shuffleQuestions}
                       total={checkpoint.total}
                     />
                   ) : (
@@ -193,6 +194,7 @@ export default function TrainerPage() {
                       handleAnswer={frequency.handleAnswer}
                       nextTask={frequency.nextTask}
                       restart={frequency.restart}
+                      shuffleQuestions={frequency.shuffleQuestions}
                       total={frequency.total}
                     />
                   )}

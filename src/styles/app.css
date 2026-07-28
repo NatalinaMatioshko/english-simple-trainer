@@ -1082,7 +1082,28 @@ h1 {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   text-align: center;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.15s, background 0.15s, transform 0.12s;
+}
+
+.vocab-grid-card--audio {
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  position: relative;
+}
+
+.vocab-grid-card--audio:hover,
+.vocab-grid-card--audio:focus-visible {
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+  outline: none;
+}
+
+.vocab-grid-card--audio:active,
+.vocab-grid-card--audio.is-playing {
+  transform: scale(0.97);
+  border-color: var(--color-primary);
 }
 
 .vocab-grid-card:hover {
@@ -1103,6 +1124,33 @@ h1 {
   color: var(--color-text-muted);
   font-weight: 600;
   letter-spacing: 0.01em;
+}
+
+.vocab-grid-sound {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  opacity: 0.55;
+  line-height: 1;
+}
+
+.vocab-grid-card--audio:hover .vocab-grid-sound,
+.vocab-grid-card--audio.is-playing .vocab-grid-sound {
+  opacity: 1;
+  color: var(--color-primary);
+}
+
+.fc-speak-btn {
+  margin-top: var(--space-3);
+  pointer-events: auto;
+}
+
+.fc-speak-row {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-3);
 }
 
 /* 2-column variant (numbers, no example) */
