@@ -175,10 +175,11 @@ const lessons: LessonEntry[] = [
   },
   {
     id: "28",
-    title: "Shopping 2: clothes",
+    title: "Everyday things · this / that",
     level: "A1",
-    topic: "Can I have…? · size · price · try on",
-    description: "Placeholder — content coming soon.",
+    topic: "objects · listening · this/that/these/those",
+    description:
+      "Part 2: vocabulary, Max & Carla listening, demonstratives. Homework: flashcards + quiz.",
     lessonPath: "/lesson-28",
     homeworkPath: "/hw-28",
   },

@@ -16,9 +16,22 @@ const homeworkByLesson = [
   },
   {
     id: "28",
-    title: "Shopping 2: clothes",
+    title: "Everyday things · this / that / these / those",
     href: "/hw-28",
-    tasks: [{ type: "text", text: "Empty for now — coming soon" }],
+    tasks: [
+      {
+        type: "text",
+        text: "Flashcards: objects a–l · office · this/that/these/those",
+      },
+      {
+        type: "text",
+        text: "Quiz / Test: Vocabulary · Listening (Max & Carla) · Grammar",
+      },
+      {
+        type: "text",
+        text: "Writing: 6–8 sentences about things in your room",
+      },
+    ],
   },
   {
     id: "27",
