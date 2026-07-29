@@ -1,8 +1,23 @@
 # English Simple Trainer
 
-A personal English teaching SPA for Present Simple lessons — adverbs of frequency, prepositions, speaking drills, vocabulary flashcards, and homework submissions.
+Personal A1 English teaching SPA for one-to-one lessons: roadmap, interactive lessons, vocabulary, quizzes, audio drills, and homework submissions.
 
 Built with **React 19 + Vite 8 + TypeScript**, deployed to **GitHub Pages**.
+
+**Current lesson:** Lesson 28 — Everyday things (`this / that / these / those`, everyday objects). Route: `/lesson-28`.
+
+---
+
+## Features
+
+- **Roadmap** — curriculum overview (lessons 1–32), current / completed / next status
+- **Lessons 15–28** — full interactive pages (speaking, vocab matching, listening, grammar)
+- **Lessons 29–30** — placeholders (routes ready)
+- **Homework** — `/hw-25`…`/hw-28` with flashcards and scored quizzes; older `/homework/:id` still used for early lessons
+- **Vocab** — dictionary with IPA + Web Speech pronunciation
+- **Trainer** — Present Simple / frequency practice decks
+- **Self-study / About me** — writing practice saved to Firestore
+- **Admin** — teacher view of homework submissions (Google Sign-In)
 
 ---
 
@@ -17,64 +32,53 @@ Opens at `http://localhost:5173/english-simple-trainer/`
 
 ---
 
-## Build
+## Scripts
 
-```bash
-npm run build
-```
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Vite dev server |
+| `npm run build` | Typecheck (`tsc -b`) + production build → `dist/` |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | ESLint |
+| `npm run deploy` | Build, then publish `dist/` to `gh-pages` |
 
-Output goes to `dist/`. The production base path is `/english-simple-trainer/` (configured in `vite.config.ts`).
+Production base path: `/english-simple-trainer/` (see `vite.config.ts`).
 
----
-
-## Deploy to GitHub Pages
-
-```bash
-npm run deploy
-```
-
-This runs `npm run build` then pushes `dist/` to the `gh-pages` branch via the `gh-pages` package.
-
-Live at: `https://<your-github-username>.github.io/english-simple-trainer/`
+Live: `https://<your-github-username>.github.io/english-simple-trainer/`
 
 ---
 
 ## Environment variables
 
-Create a `.env.local` file in the project root (not committed to git):
+Create a `.env.local` file in the project root (not committed):
 
 ```env
-# Teacher email for the /admin/submissions page.
-# Used for a client-side "wrong account" UX check only — shows a clear message
-# if the wrong Google account is signed in before attempting a Firestore read.
-# Real access control is enforced by Firestore Security Rules on request.auth.token.email.
+# Teacher email for /admin/submissions.
+# Client-side "wrong account" UX check only.
+# Real access control: Firestore Security Rules on request.auth.token.email.
 VITE_TEACHER_EMAIL=your-teacher-email@gmail.com
 ```
 
-If `VITE_TEACHER_EMAIL` is not set, the wrong-account check is skipped and any
-signed-in Google account will attempt the Firestore read — which the Rules will deny
-if it is not the teacher account.
+If `VITE_TEACHER_EMAIL` is not set, the wrong-account check is skipped; any signed-in Google account may attempt the Firestore read (Rules still deny non-teacher accounts).
 
 ---
 
-## Firebase Console setup required before deploy
+## Firebase Console setup (before deploy)
 
-Two manual steps are needed in the Firebase Console for Google Sign-In to work on GitHub Pages:
-
-**1. Enable Google Sign-In provider**
+**1. Enable Google Sign-In**
 
 `Firebase Console → Authentication → Sign-in method → Google → Enable`
 
-Without this, `signInWithPopup` throws `auth/operation-not-allowed`.
+Without this: `auth/operation-not-allowed`.
 
-**2. Add the GitHub Pages domain to Authorized domains**
+**2. Authorize GitHub Pages domain**
 
 `Firebase Console → Authentication → Settings → Authorized domains → Add domain`
 
 Add: `<your-github-username>.github.io`
 
-Without this, `signInWithPopup` throws `auth/unauthorized-domain` on the deployed site.
-`localhost` is already authorized by default, so local dev works without this step.
+Without this on the live site: `auth/unauthorized-domain`.  
+`localhost` is authorized by default.
 
 ---
 
@@ -82,22 +86,44 @@ Without this, `signInWithPopup` throws `auth/unauthorized-domain` on the deploye
 
 ```
 src/
-  app/          # App router
-  components/   # UI components (layout, study, practice, lesson-specific)
-  data/         # Static task and verb data
-  hooks/        # Custom exercise hooks
-  pages/        # Route-level pages (Lesson15–18, Homework, Admin…)
-  styles/       # CSS files
-  types/        # Shared TypeScript types
-  utils/        # shuffle(), normalize()
+  app/            # React Router (App.tsx)
+  components/     # Layout, practice cards, roadmap, vocab UI, …
+  context/        # Theme (light / dark)
+  data/           # Vocab, verbs, HW review decks (hw27/hw28), practice tasks
+  hooks/          # Quiz / practice hooks (useScoredQuiz, …)
+  pages/          # Route pages: Home, Lessons, Lesson15–30, HW25–30, Vocab, Trainer, Admin…
+  services/       # Firestore helpers (e.g. writingSubmissions)
+  styles/         # Global + per-lesson CSS
+  types/          # Shared TypeScript types
+  utils/          # shuffle, text helpers, speech (TTS)
+  firebase.ts     # Public Firebase web config
 public/
-  images/       # Lesson images (prepositions, vocabulary)
-  sounds/       # Match game sound
+  images/         # Lesson posters, vocab photos, extras
+  sounds/         # Unit audio (Roadmap A1 SB R-tracks) + UI sounds
 ```
 
 ---
 
 ## Firebase
 
-Homework submissions are stored in **Firestore** (`homeworkAnswers` collection).  
-The Firebase web config in `src/firebase.ts` is intentionally public — security is enforced via **Firestore Security Rules** in the Firebase Console.
+| Collection | Used for |
+|------------|----------|
+| `homeworkAnswers` | Homework submissions (teacher admin page) |
+| `writingSubmissions` | About me / self-study writing saves |
+
+The Firebase web config in `src/firebase.ts` is intentionally public. Security is enforced via **Firestore Security Rules** in the Firebase Console.
+
+---
+
+## Useful routes
+
+| Path | Page |
+|------|------|
+| `/` | Home |
+| `/lessons` | Lessons list |
+| `/lesson-28` | Current lesson (Everyday things) |
+| `/hw-28` | Homework for Lesson 28 |
+| `/vocab` | Vocabulary |
+| `/trainer` | Practice trainer |
+| `/homework` | Homework index |
+| `/admin/submissions` | Teacher: submissions |
