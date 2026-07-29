@@ -4,8 +4,6 @@ Personal A1 English teaching SPA for one-to-one lessons: roadmap, interactive le
 
 Built with **React 19 + Vite 8 + TypeScript**, deployed to **GitHub Pages**.
 
-**Current lesson:** Lesson 28 — Everyday things (`this / that / these / those`, everyday objects). Route: `/lesson-28`.
-
 ---
 
 ## Features
@@ -121,8 +119,8 @@ The Firebase web config in `src/firebase.ts` is intentionally public. Security i
 |------|------|
 | `/` | Home |
 | `/lessons` | Lessons list |
-| `/lesson-28` | Current lesson (Everyday things) |
-| `/hw-28` | Homework for Lesson 28 |
+| `/lesson-28` | Everyday things |
+| `/hw-28` | Homework · Lesson 28 |
 | `/vocab` | Vocabulary |
 | `/trainer` | Practice trainer |
 | `/homework` | Homework index |
