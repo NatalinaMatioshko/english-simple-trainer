@@ -1161,6 +1161,507 @@ export const vocabCategories: VocabCategory[] = [
   },
 
   {
+    id: "everyday-things",
+    title: "Everyday things",
+    badge: "L28",
+    description:
+      "Предмети щодня, home office та this / that / these / those.",
+    grammar: [
+      "What's that? It's a pen. / What are those? They're keys.",
+      "this / these = near · that / those = far",
+      "Is this your cup? Yes, it is. / No, it isn't.",
+    ],
+    groups: [
+      {
+        label: "Objects (a–l)",
+        items: [
+          {
+            en: "book",
+            ua: "книга",
+            ipa: "bʊk",
+            example: "That's my book.",
+          },
+          {
+            en: "phone",
+            ua: "телефон",
+            ipa: "fəʊn",
+            example: "Is this your phone?",
+          },
+          {
+            en: "desk",
+            ua: "письмовий стіл",
+            ipa: "desk",
+            example: "This is your desk.",
+          },
+          {
+            en: "key",
+            ua: "ключ",
+            ipa: "kiː",
+            example: "Where are my keys?",
+          },
+          {
+            en: "table",
+            ua: "стіл",
+            ipa: "ˈteɪbl",
+            example: "The book is on the table.",
+          },
+          {
+            en: "clock",
+            ua: "годинник",
+            ipa: "klɒk",
+            example: "Look at the clock.",
+          },
+          {
+            en: "photo",
+            ua: "фото",
+            ipa: "ˈfəʊtəʊ",
+            example: "That's a photo of my family.",
+          },
+          {
+            en: "computer",
+            ua: "комп'ютер",
+            ipa: "kəmˈpjuːtə",
+            example: "This is your computer.",
+          },
+          {
+            en: "box",
+            ua: "коробка",
+            ipa: "bɒks",
+            example: "What's in this box?",
+          },
+          {
+            en: "chair",
+            ua: "стілець",
+            ipa: "tʃeə",
+            example: "Please sit on the chair.",
+          },
+          {
+            en: "cup",
+            ua: "чашка",
+            ipa: "kʌp",
+            example: "Is that your cup?",
+          },
+          {
+            en: "pen",
+            ua: "ручка",
+            ipa: "pen",
+            example: "Can I use your pen?",
+          },
+        ],
+      },
+      {
+        label: "Home office",
+        items: [
+          {
+            en: "window",
+            ua: "вікно",
+            ipa: "ˈwɪndəʊ",
+            example: "Open the window, please.",
+          },
+          {
+            en: "plant",
+            ua: "рослина",
+            ipa: "plɑːnt",
+            example: "There's a plant on the desk.",
+          },
+          {
+            en: "printer",
+            ua: "принтер",
+            ipa: "ˈprɪntə",
+            example: "The printer is next to the computer.",
+          },
+          {
+            en: "wall clock",
+            ua: "настінний годинник",
+            ipa: "wɔːl klɒk",
+            example: "The wall clock is above the map.",
+          },
+          {
+            en: "calendar",
+            ua: "календар",
+            ipa: "ˈkælɪndə",
+            example: "Look at the calendar.",
+          },
+          {
+            en: "map",
+            ua: "карта",
+            ipa: "mæp",
+            example: "There's a map on the wall.",
+          },
+          {
+            en: "monitor",
+            ua: "монітор",
+            ipa: "ˈmɒnɪtə",
+            example: "The monitor is on the desk.",
+          },
+          {
+            en: "drawers",
+            ua: "шухляди",
+            ipa: "ˈdrɔːəz",
+            example: "The pens are in the drawers.",
+          },
+          {
+            en: "light",
+            ua: "лампа / світло",
+            ipa: "laɪt",
+            example: "It's a light.",
+          },
+          {
+            en: "bench",
+            ua: "лавка",
+            ipa: "bentʃ",
+            example: "There's a bench in the park.",
+          },
+          {
+            en: "coffee",
+            ua: "кава",
+            ipa: "ˈkɒfi",
+            example: "Do you like coffee?",
+          },
+          {
+            en: "password",
+            ua: "пароль",
+            ipa: "ˈpɑːswɜːd",
+            example: "This is the password.",
+          },
+        ],
+      },
+      {
+        label: "this / that / these / those",
+        items: [
+          {
+            en: "this",
+            ua: "це (близько, 1)",
+            ipa: "ðɪs",
+            example: "What's this? It's a key.",
+          },
+          {
+            en: "that",
+            ua: "те (далеко, 1)",
+            ipa: "ðæt",
+            example: "What's that? It's a clock.",
+          },
+          {
+            en: "these",
+            ua: "ці (близько, багато)",
+            ipa: "ðiːz",
+            example: "What are these? They're pens.",
+          },
+          {
+            en: "those",
+            ua: "ті (далеко, багато)",
+            ipa: "ðəʊz",
+            example: "What are those? They're books.",
+          },
+        ],
+      },
+      {
+        label: "Daily verbs",
+        items: [
+          {
+            en: "have breakfast",
+            ua: "снідати",
+            ipa: "hæv ˈbrekfəst",
+            example: "I usually have breakfast at home.",
+          },
+          {
+            en: "go / walk",
+            ua: "йти / гуляти",
+            ipa: "ɡəʊ / wɔːk",
+            example: "I walk to work.",
+          },
+          {
+            en: "play",
+            ua: "грати",
+            ipa: "pleɪ",
+            example: "I play football.",
+          },
+          {
+            en: "write",
+            ua: "писати",
+            ipa: "raɪt",
+            example: "I write emails at work.",
+          },
+          {
+            en: "read",
+            ua: "читати",
+            ipa: "riːd",
+            example: "I read books in the evening.",
+          },
+          {
+            en: "sleep",
+            ua: "спати",
+            ipa: "sliːp",
+            example: "I sleep at 11 o'clock.",
+          },
+          {
+            en: "work",
+            ua: "працювати",
+            ipa: "wɜːk",
+            example: "I work in an office.",
+          },
+          {
+            en: "cook",
+            ua: "готувати",
+            ipa: "kʊk",
+            example: "I cook dinner at home.",
+          },
+          {
+            en: "draw",
+            ua: "малювати",
+            ipa: "drɔː",
+            example: "My daughter likes to draw.",
+          },
+          {
+            en: "ride / go by bike",
+            ua: "їхати на велосипеді",
+            ipa: "raɪd / ɡəʊ baɪ baɪk",
+            example: "I go by bike to school.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "question-words",
+    title: "Question words",
+    badge: "L29",
+    description: "Питальні слова (Who…Whom) — значення та приклади.",
+    grammar: [
+      "Question word + be + subject → Where is she from?",
+      "What's her name? / How old is he? / What's his job?",
+    ],
+    groups: [
+      {
+        label: "WH words",
+        items: [
+          {
+            en: "who",
+            ua: "хто (людина)",
+            ipa: "huː",
+            example: "Who is coming to the party?",
+          },
+          {
+            en: "what",
+            ua: "що / який (інформація)",
+            ipa: "wɒt",
+            example: "What do you want to eat?",
+          },
+          {
+            en: "where",
+            ua: "де (місце)",
+            ipa: "weə",
+            example: "Where do you live?",
+          },
+          {
+            en: "when",
+            ua: "коли (час)",
+            ipa: "wen",
+            example: "When does the movie start?",
+          },
+          {
+            en: "why",
+            ua: "чому (причина)",
+            ipa: "waɪ",
+            example: "Why are you laughing?",
+          },
+          {
+            en: "how",
+            ua: "як (спосіб / процес)",
+            ipa: "haʊ",
+            example: "How can I get to the station?",
+          },
+          {
+            en: "which",
+            ua: "який (вибір)",
+            ipa: "wɪtʃ",
+            example: "Which dress should I wear?",
+          },
+          {
+            en: "whose",
+            ua: "чий (власність)",
+            ipa: "huːz",
+            example: "Whose car is parked outside?",
+          },
+          {
+            en: "whom",
+            ua: "кого (об'єкт дії)",
+            ipa: "huːm",
+            example: "Whom should I call for help?",
+          },
+        ],
+      },
+      {
+        label: "Useful with be",
+        items: [
+          {
+            en: "What's your name?",
+            ua: "Як тебе звати?",
+            ipa: "wɒts jɔː neɪm",
+            example: "What's your name? My name is Anna.",
+          },
+          {
+            en: "How old are you?",
+            ua: "Скільки тобі років?",
+            ipa: "haʊ əʊld ɑː juː",
+            example: "How old are you? I'm 25.",
+          },
+          {
+            en: "Where are you from?",
+            ua: "Звідки ти?",
+            ipa: "weər ɑː juː frɒm",
+            example: "Where are you from? I'm from Ukraine.",
+          },
+          {
+            en: "What's his / her job?",
+            ua: "Яка в нього / неї робота?",
+            ipa: "wɒts hɪz / hɜː dʒɒb",
+            example: "What's her job? She's a teacher.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "in-a-shop",
+    title: "In a shop",
+    badge: "L29",
+    description: "Корисні фрази та слова для діалогу в магазині.",
+    grammar: [
+      "How much is this / that…? → It's £…",
+      "How much are these / those…? → They're £… / It's £… for four.",
+      "Cash or card?",
+    ],
+    groups: [
+      {
+        label: "Customer",
+        items: [
+          {
+            en: "Excuse me.",
+            ua: "Перепрошую.",
+            ipa: "ɪkˈskjuːz miː",
+            example: "Excuse me. How much is this book?",
+          },
+          {
+            en: "How much is this / that?",
+            ua: "Скільки це коштує? (однина)",
+            ipa: "haʊ mʌtʃ ɪz ðɪs / ðæt",
+            example: "How much is that clock?",
+          },
+          {
+            en: "How much are these / those?",
+            ua: "Скільки це коштує? (множина)",
+            ipa: "haʊ mʌtʃ ɑː ðiːz / ðəʊz",
+            example: "How much are those cups?",
+          },
+          {
+            en: "Can I pay by card?",
+            ua: "Можна карткою?",
+            ipa: "kæn aɪ peɪ baɪ kɑːd",
+            example: "Can I pay by card?",
+          },
+          {
+            en: "Here you are.",
+            ua: "Ось, будь ласка.",
+            ipa: "hɪə juː ɑː",
+            example: "Cash, please. Here you are.",
+          },
+          {
+            en: "Here's my card.",
+            ua: "Ось моя картка.",
+            ipa: "hɪəz maɪ kɑːd",
+            example: "Here's my card.",
+          },
+        ],
+      },
+      {
+        label: "Shop assistant",
+        items: [
+          {
+            en: "It's £…",
+            ua: "Це коштує £…",
+            ipa: "ɪts",
+            example: "It's £15.99.",
+          },
+          {
+            en: "That's £…, please.",
+            ua: "Разом £…, будь ласка.",
+            ipa: "ðæts",
+            example: "That's £27.99, please.",
+          },
+          {
+            en: "Cash or card?",
+            ua: "Готівка чи картка?",
+            ipa: "kæʃ ɔː kɑːd",
+            example: "Cash or card?",
+          },
+          {
+            en: "Here's your change.",
+            ua: "Ось ваша решта.",
+            ipa: "hɪəz jɔː tʃeɪndʒ",
+            example: "Thank you. Here's your change.",
+          },
+          {
+            en: "Here's your card.",
+            ua: "Ось ваша картка.",
+            ipa: "hɪəz jɔː kɑːd",
+            example: "Here's your card.",
+          },
+        ],
+      },
+      {
+        label: "Shop words",
+        items: [
+          {
+            en: "cash",
+            ua: "готівка",
+            ipa: "kæʃ",
+            example: "Cash, please.",
+          },
+          {
+            en: "card",
+            ua: "картка",
+            ipa: "kɑːd",
+            example: "Can I pay by card?",
+          },
+          {
+            en: "change",
+            ua: "решта",
+            ipa: "tʃeɪndʒ",
+            example: "Here's your change.",
+          },
+          {
+            en: "laptop",
+            ua: "ноутбук",
+            ipa: "ˈlæptɒp",
+            example: "How much is this laptop?",
+          },
+          {
+            en: "picture",
+            ua: "картина / малюнок",
+            ipa: "ˈpɪktʃə",
+            example: "I like that picture.",
+          },
+          {
+            en: "shelf",
+            ua: "полиця",
+            ipa: "ʃelf",
+            example: "The books are on the shelf.",
+          },
+          {
+            en: "counter",
+            ua: "прилавок",
+            ipa: "ˈkaʊntə",
+            example: "The pens are on the counter.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
     id: "was-were",
     title: "Was / Were",
     badge: "Past be",
