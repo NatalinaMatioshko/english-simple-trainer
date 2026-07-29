@@ -439,6 +439,21 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 30,
+    title: "Check & Reflect",
+    grammar:
+      "Mixed A1: to be · do/does · have/has · possessives · a/an · this/that · can · prepositions · Present Simple",
+    vocabulary:
+      "Family · jobs · nationalities · appearance · routine · objects · numbers · shop phrases (full review)",
+    speaking:
+      "15 topic stations + personal profile; family/jobs photos; describe a person",
+    listening: "R4 Unit 2 — Yasemin & Tara family photo (comprehension)",
+    review: "ALL Lessons 1–29 topics: identity → shop English",
+    category: "general",
+    status: "next",
+    route: "/lesson-30",
+  },
+  {
+    id: 31,
     title: "Transport",
     grammar: "go by, take, drive, ride, walk to",
     vocabulary: "bus, train, station, taxi, car, stop, ticket",
@@ -447,10 +462,9 @@ const roadmapLessons: Lesson[] = [
     review: "in / to, routine, time, movement.",
     category: "transport",
     status: "next",
-    route: "/lesson-30",
   },
   {
-    id: 31,
+    id: 32,
     title: "Directions and places",
     grammar: "there is / there are, place prepositions, directions",
     vocabulary: "left, right, next to, opposite, near, bank, café",
@@ -461,7 +475,7 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 32,
+    id: 33,
     title: "Health and final speaking project",
     grammar: "have got, should basics, mixed A1 review",
     vocabulary: "headache, fever, cough, cold, tired, doctor",

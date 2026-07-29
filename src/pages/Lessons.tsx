@@ -195,10 +195,11 @@ const lessons: LessonEntry[] = [
   },
   {
     id: "30",
-    title: "Transport",
+    title: "Check & Reflect",
     level: "A1",
-    topic: "go by · take · drive · walk to",
-    description: "Placeholder — content coming soon.",
+    topic: "A1 foundation review · speaking · reading · listening · writing",
+    description:
+      "Повна перевірка A1: 15 topic stations (me→shop) · do/does · have/has · speaking · reading · R4 · writing · reflect.",
     lessonPath: "/lesson-30",
     homeworkPath: "/hw-30",
   },

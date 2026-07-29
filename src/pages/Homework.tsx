@@ -4,9 +4,26 @@ import "../styles/pages.css";
 const homeworkByLesson = [
   {
     id: "30",
-    title: "Transport",
+    title: "Check & Reflect",
     href: "/hw-30",
-    tasks: [{ type: "text", text: "Empty for now — coming soon" }],
+    tasks: [
+      {
+        type: "text",
+        text: "Topic stations: me · family · nationalities · jobs · appearance · routine · do/does · prepositions · do/make · can · articles · objects · numbers · shop · have/has",
+      },
+      {
+        type: "text",
+        text: "Speaking: personal profile + family (from Lesson 30)",
+      },
+      {
+        type: "text",
+        text: "Writing: short personal profile covering all A1 themes",
+      },
+      {
+        type: "text",
+        text: "Reflect: confidence 1–5 on full A1 foundation",
+      },
+    ],
   },
   {
     id: "29",

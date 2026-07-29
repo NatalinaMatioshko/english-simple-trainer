@@ -43,5 +43,5 @@ function EmptyHwPage({ n, title }: EmptyHwProps) {
 }
 
 export default function HW30() {
-  return <EmptyHwPage n={30} title="Transport" />;
+  return <EmptyHwPage n={30} title="Check & Reflect" />;
 }

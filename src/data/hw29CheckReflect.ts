@@ -11,7 +11,13 @@ export const cr1FamilyBank = [
   "wife",
 ] as const;
 
-export const cr1Family = [
+export type CrFamilyItem = {
+  prompt: string;
+  answer: string;
+  example?: boolean;
+};
+
+export const cr1Family: CrFamilyItem[] = [
   {
     prompt: "Catherine is Michael's wife. Michael is Catherine's",
     answer: "husband",
@@ -46,16 +52,22 @@ export const cr1Family = [
     prompt: "Pedro is Paulo's son. Paulo is Pedro's",
     answer: "father",
   },
-] as const;
+];
 
-export const cr2Possessive = [
+export type CrPossessiveItem = {
+  from: string;
+  answer: string;
+  example?: boolean;
+};
+
+export const cr2Possessive: CrPossessiveItem[] = [
   { from: "the sister of Peter", answer: "Peter's sister", example: true },
   { from: "the family of Julie", answer: "Julie's family" },
   { from: "the parents of Martin", answer: "Martin's parents" },
   { from: "the dog of my friend", answer: "my friend's dog" },
   { from: "the pen of my teacher", answer: "my teacher's pen" },
   { from: "the book of my brother", answer: "my brother's book" },
-] as const;
+];
 
 export type CrChoicePart = { choices: string[]; answer: string };
 export type CrChoiceLine = (string | CrChoicePart)[];
@@ -114,7 +126,14 @@ export const cr4Mistakes = [
   },
 ] as const;
 
-export const cr5Scramble = [
+export type CrScrambleItem = {
+  letters: string;
+  hint: string;
+  answer: string;
+  example?: boolean;
+};
+
+export const cr5Scramble: CrScrambleItem[] = [
   { letters: "blate", hint: "t", answer: "table", example: true },
   { letters: "haric", hint: "c", answer: "chair" },
   { letters: "nophe", hint: "p", answer: "phone" },
@@ -127,7 +146,7 @@ export const cr5Scramble = [
   { letters: "kobo", hint: "b", answer: "book" },
   { letters: "oxb", hint: "b", answer: "box" },
   { letters: "lkocc", hint: "c", answer: "clock" },
-] as const;
+];
 
 export const cr6Demonstratives: CrChoiceLine[] = [
   [
@@ -151,7 +170,13 @@ export const cr6Demonstratives: CrChoiceLine[] = [
   ],
 ];
 
-export const cr7aNumbers = [
+export type CrNumberItem = {
+  expr: string;
+  answer: string;
+  example?: boolean;
+};
+
+export const cr7aNumbers: CrNumberItem[] = [
   { expr: "5 × 5 =", answer: "twenty-five", example: true },
   { expr: "6 + 7 =", answer: "thirteen" },
   { expr: "3 × 10 =", answer: "thirty" },
@@ -164,9 +189,16 @@ export const cr7aNumbers = [
   { expr: "9 × 9 =", answer: "eighty-one" },
   { expr: "15 + 15 + 6 =", answer: "thirty-six" },
   { expr: "9 × 7 =", answer: "sixty-three" },
-] as const;
+];
 
-export const cr7bAges = [
+export type CrAgeItem = {
+  first: string;
+  secondStart: string;
+  answer: string;
+  example?: boolean;
+};
+
+export const cr7bAges: CrAgeItem[] = [
   {
     first: "My son's 10.",
     secondStart: "He's",
@@ -188,7 +220,7 @@ export const cr7bAges = [
     secondStart: "He's",
     answer: "thirty-three years old",
   },
-] as const;
+];
 
 export const cr8aQuestions = [
   {
