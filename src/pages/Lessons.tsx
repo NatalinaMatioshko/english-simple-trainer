@@ -185,10 +185,11 @@ const lessons: LessonEntry[] = [
   },
   {
     id: "29",
-    title: "Food and ordering",
+    title: "Numbers",
     level: "A1",
-    topic: "I'd like… · Can I have…? · menu",
-    description: "Placeholder — content coming soon.",
+    topic: "Question words with be · Numbers 1–100",
+    description:
+      "Speaking warm-up + Part 2: numbers matching, listening R9–R14, grammar, profiles. HW: flashcards + quiz.",
     lessonPath: "/lesson-29",
     homeworkPath: "/hw-29",
   },

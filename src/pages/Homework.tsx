@@ -10,9 +10,22 @@ const homeworkByLesson = [
   },
   {
     id: "29",
-    title: "Food and ordering",
+    title: "Numbers",
     href: "/hw-29",
-    tasks: [{ type: "text", text: "Empty for now — coming soon" }],
+    tasks: [
+      {
+        type: "text",
+        text: "Flashcards: numbers 1–100 · teens · question words with be",
+      },
+      {
+        type: "text",
+        text: "Quiz: numbers · teen/ty & profiles · grammar (Who/How/What/Where)",
+      },
+      {
+        type: "text",
+        text: "Writing: 3 people — age, from, job",
+      },
+    ],
   },
   {
     id: "28",

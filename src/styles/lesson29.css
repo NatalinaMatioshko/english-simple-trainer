@@ -1,0 +1,410 @@
+/* Lesson 29 — Numbers */
+
+.l29-goals {
+  padding: 0;
+  overflow: hidden;
+  background: var(--color-primary);
+  border-color: color-mix(in srgb, var(--color-primary) 75%, #000);
+}
+
+.l29-goals-list {
+  list-style: none;
+  margin: 0;
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  color: #fff;
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  line-height: 1.45;
+}
+
+.l29-goals-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.l29-goals-chevron {
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.l29-goals-list strong {
+  font-weight: 800;
+}
+
+.l29-goals-list em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.l29-word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-primary) 6%, var(--color-surface-2));
+}
+
+.l29-word-bank span {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: var(--text-sm);
+}
+
+.l29-match-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.l29-match-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.l29-match-frame {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  aspect-ratio: 1;
+}
+
+.l29-match-num {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  z-index: 1;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.35rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.l29-match-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.l29-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+}
+
+.l29-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  color: #fff;
+}
+
+.l29-chip--teens {
+  background: #0e8a90;
+}
+
+.l29-chip--tens {
+  background: #c45a7a;
+}
+
+.l29-chip:hover,
+.l29-chip:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.l29-chip strong {
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+.l29-pair-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.l29-pair-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.l29-pair-num {
+  min-width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.4rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.l29-pair-opts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.l29-pair-btn {
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+}
+
+.l29-pair-btn.is-selected {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface-2));
+}
+
+.l29-pair-btn.is-ok {
+  border-color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 12%, var(--color-surface-2));
+}
+
+.l29-pair-btn.is-err {
+  border-color: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 10%, var(--color-surface-2));
+}
+
+.l29-sequence {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+}
+
+.l29-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.l29-profile {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 2px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface-2));
+}
+
+.l29-profile h3 {
+  margin: 0 0 var(--space-3);
+  color: var(--color-primary);
+}
+
+.l29-profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.65rem;
+  font-size: var(--text-sm);
+}
+
+.l29-profile-field input {
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  font: inherit;
+  background: #fff;
+}
+
+.l29-profile-field input.is-ok {
+  border-color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 8%, #fff);
+}
+
+.l29-profile-field input.is-err {
+  border-color: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 8%, #fff);
+}
+
+.l29-grammar-box {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  margin-bottom: var(--space-4);
+}
+
+.l29-grammar-box h3 {
+  margin: 0 0 var(--space-3);
+  color: var(--color-primary);
+}
+
+.l29-grammar-rule {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.l29-grammar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.l29-grammar-table td {
+  padding: 0.45rem 0.55rem;
+  border-top: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.l29-grammar-table strong {
+  color: var(--color-primary);
+}
+
+.l29-pron-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.l29-pron-list li {
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+}
+
+.l29-pron-list .be {
+  color: #1565c0;
+  font-weight: 800;
+}
+
+.l29-write-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.l29-write-row {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.l29-write-row input {
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  font: inherit;
+}
+
+.l29-write-row input.is-ok {
+  border-color: var(--color-success);
+}
+
+.l29-write-row input.is-err {
+  border-color: var(--color-error);
+}
+
+.l29-write-answer {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.l29-mini-dlg {
+  margin-top: 0.75rem;
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-primary);
+  background: var(--color-surface-2);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.l29-mini-dlg p {
+  margin: 0.15rem 0;
+  font-size: var(--text-sm);
+}
+
+.l29-mini-dlg em {
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+.l29-family-inputs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.l29-family-inputs input {
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  font: inherit;
+}
+
+.l29-scene {
+  margin: 0 0 var(--space-4);
+}
+
+.l29-scene img {
+  display: block;
+  width: 100%;
+  max-width: 920px;
+  height: auto;
+  border-radius: 1.1rem;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 900px) {
+  .l29-match-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .l29-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .l29-match-grid,
+  .l29-family-inputs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .l29-pair-opts {
+    grid-template-columns: 1fr;
+  }
+}

@@ -425,13 +425,15 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 29,
-    title: "Food and ordering",
-    grammar: "I’d like…, do you want…?, Can I have…?",
-    vocabulary: "menu, soup, tea, coffee, chicken, bill",
-    speaking: "Order in a café.",
-    listening: "Short restaurant dialogue.",
-    review: "like / don’t like, prices, polite requests.",
-    category: "food",
+    title: "Numbers",
+    grammar: "Question words with be (Who / How old / What / Where / When)",
+    vocabulary: "Numbers 1–100 · teens · tens · a hundred",
+    speaking:
+      "Ask about age, job, and where people are from; family names pair work",
+    listening:
+      "R9–R14: numbers 1–19, tens, teen/ty pairs, 21–…, profiles (Anna / Bill / Satoru), 's pronunciation",
+    review: "Everyday objects (L28); family & jobs (L27); be questions",
+    category: "general",
     status: "next",
     route: "/lesson-29",
   },
