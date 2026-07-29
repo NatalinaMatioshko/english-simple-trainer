@@ -10,6 +10,82 @@ const IMG = (file: string) =>
 const SOUND = (r: number) =>
   `${import.meta.env.BASE_URL}sounds/Unit_2/RM_A1_SB_U2_R${r}.mp3`;
 
+/** ELLLO A1-06 · Present Simple third person — bridge before Part 2 */
+const VIDEO_ID = "1mKeXz5Bf7c";
+
+const videoQuiz = [
+  {
+    id: 1,
+    prompt: "Where does his mom work?",
+    options: ["in a factory", "in a shop in the mall", "at home"],
+    answer: "in a shop in the mall",
+  },
+  {
+    id: 2,
+    prompt: "Does she sell clothing for teens?",
+    options: ["Yes, she does.", "No, only for adults.", "We don't know."],
+    answer: "No, only for adults.",
+  },
+  {
+    id: 3,
+    prompt: "What does her brother study?",
+    options: ["medicine", "engineering", "art"],
+    answer: "engineering",
+  },
+  {
+    id: 4,
+    prompt: "Does he live at home?",
+    options: ["Yes, he does.", "No — he has a small apartment.", "With friends."],
+    answer: "No — he has a small apartment.",
+  },
+  {
+    id: 5,
+    prompt: "Who watches her daughter after school?",
+    options: ["her dad", "her mom / grandma", "a teacher"],
+    answer: "her mom / grandma",
+  },
+  {
+    id: 6,
+    prompt: "When does the movie start?",
+    options: ["in about ten minutes", "tomorrow", "it already ended"],
+    answer: "in about ten minutes",
+  },
+] as const;
+
+const videoGrammarQuiz = [
+  {
+    id: 1,
+    prompt: "She ___ women’s clothing. (sell)",
+    options: ["sell", "sells", "selling"],
+    answer: "sells",
+  },
+  {
+    id: 2,
+    prompt: "He ___ engineering. (study)",
+    options: ["study", "studys", "studies"],
+    answer: "studies",
+  },
+  {
+    id: 3,
+    prompt: "___ she live at home?",
+    options: ["Do", "Does", "Is"],
+    answer: "Does",
+  },
+  {
+    id: 4,
+    prompt: "He ___ have much free time.",
+    options: ["don't", "doesn't", "isn't"],
+    answer: "doesn't",
+  },
+] as const;
+
+const videoSpeakPrompts = [
+  "What does your mom / dad do?",
+  "Where does he / she work?",
+  "Does your brother / sister live at home?",
+  "Talk about a friend: He / She works… / studies… / lives…",
+] as const;
+
 type SpeakingTopic = {
   id: number;
   title: string;
@@ -729,6 +805,10 @@ export default function Lesson28() {
   const [keyPhraseChecked, setKeyPhraseChecked] = useState(false);
   const [hearFirstAns, setHearFirstAns] = useState<Record<number, string>>({});
   const [hearFirstChecked, setHearFirstChecked] = useState(false);
+  const [videoAns, setVideoAns] = useState<Record<number, string>>({});
+  const [videoChecked, setVideoChecked] = useState(false);
+  const [videoGramAns, setVideoGramAns] = useState<Record<number, string>>({});
+  const [videoGramChecked, setVideoGramChecked] = useState(false);
 
   const toggleAsk = (index: number) => {
     setRevealedAsk((prev) => {
@@ -762,6 +842,11 @@ export default function Lesson28() {
   const hearFirstScore = hearFirstItems.filter(
     (item) => hearFirstAns[item.id] === item.answer,
   ).length;
+  const videoScore = videoQuiz.filter((q) => videoAns[q.id] === q.answer)
+    .length;
+  const videoGramScore = videoGrammarQuiz.filter(
+    (q) => videoGramAns[q.id] === q.answer,
+  ).length;
 
   return (
     <div className="lesson22-page lesson28-page">
@@ -774,11 +859,13 @@ export default function Lesson28() {
               this / that / these / those · everyday objects
             </p>
             <p className="lesson22-subtitle">
-              Part 1 — speaking (ask back + tell your story). Part 2 —
-              vocabulary, listening, and demonstratives.
+              Part 1 — speaking (ask back + tell your story). Video bridge —
+              Present Simple he/she/it. Part 2 — vocabulary, listening, and
+              demonstratives.
             </p>
             <div className="chips" style={{ marginTop: "0.75rem" }}>
               <span className="chip">Speaking</span>
+              <span className="chip">Video</span>
               <span className="chip">Vocabulary</span>
               <span className="chip">Listening</span>
               <span className="chip">Grammar</span>
@@ -983,6 +1070,184 @@ export default function Lesson28() {
             evening I cook dinner and then I read or sleep.
           </em>
         </div>
+      </section>
+
+      {/* ── Video bridge · before Part 2 ── */}
+      <section id="l28-video" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Video · Present Simple · he / she / it</p>
+          <h2>Listening quiz · third person singular</h2>
+          <p className="lesson22-section-desc">
+            Подивись відео (ELLLO A1-06). Послухай короткі діалоги з{" "}
+            <strong>he / she / it + -s</strong>. Потім виконай listening quiz і
+            grammar check — місток до Part 2 (everyday things).
+          </p>
+        </div>
+
+        <div className="l22-video-wrap">
+          <iframe
+            src={`https://www.youtube.com/embed/${VIDEO_ID}`}
+            title="Beginner English Listening Quiz — Present Simple third person singular"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
+
+        <div className="l25-conf-card" style={{ maxWidth: 640, marginBottom: "1rem" }}>
+          <div className="l25-conf-header">Remember</div>
+          <div className="l25-conf-fields">
+            <p style={{ margin: 0, fontSize: "var(--text-sm)", lineHeight: 1.55 }}>
+              <strong>He / She / It</strong> + verb<strong>-s / -es</strong>: She
+              sell<strong>s</strong>… · He stud<strong>ies</strong>…
+              <br />
+              Questions: <em>Does</em> she work…? — Yes, she <em>does</em>. /
+              No, she <em>doesn't</em>.
+            </p>
+          </div>
+        </div>
+
+        <h3 className="l22-listen-subtitle">1 · Listening quiz</h3>
+        <p className="lesson22-section-desc">
+          Обери правильну відповідь за відео.
+        </p>
+        <div className="l26-drill-list">
+          {videoQuiz.map((q) => (
+            <div key={q.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">
+                {q.id}. {q.prompt}
+              </strong>
+              <select
+                value={videoAns[q.id] ?? ""}
+                onChange={(e) => {
+                  setVideoChecked(false);
+                  setVideoAns((p) => ({ ...p, [q.id]: e.target.value }));
+                }}
+                className={drillSelClass(
+                  videoChecked,
+                  videoAns[q.id] ?? "",
+                  q.answer,
+                )}
+                aria-label={q.prompt}
+              >
+                <option value="">___</option>
+                {q.options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setVideoChecked(true)}
+          >
+            Check
+          </button>
+          {videoChecked && (
+            <span className="l22-score">
+              {videoScore} / {videoQuiz.length}
+            </span>
+          )}
+        </div>
+
+        <h3 className="l22-listen-subtitle">2 · Grammar · third person</h3>
+        <div className="l26-drill-list">
+          {videoGrammarQuiz.map((q) => (
+            <div key={q.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">
+                {q.id}. {q.prompt}
+              </strong>
+              <select
+                value={videoGramAns[q.id] ?? ""}
+                onChange={(e) => {
+                  setVideoGramChecked(false);
+                  setVideoGramAns((p) => ({ ...p, [q.id]: e.target.value }));
+                }}
+                className={drillSelClass(
+                  videoGramChecked,
+                  videoGramAns[q.id] ?? "",
+                  q.answer,
+                )}
+                aria-label={q.prompt}
+              >
+                <option value="">___</option>
+                {q.options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setVideoGramChecked(true)}
+          >
+            Check
+          </button>
+          {videoGramChecked && (
+            <span className="l22-score">
+              {videoGramScore} / {videoGrammarQuiz.length}
+            </span>
+          )}
+        </div>
+
+        <h3 className="l22-listen-subtitle">3 · Speak</h3>
+        <p className="lesson22-section-desc">
+          Відповідай уголос. Використай <em>he / she + -s</em> і{" "}
+          <em>does / doesn't</em>.
+        </p>
+        <div className="lesson22-prompt-grid">
+          {videoSpeakPrompts.map((q) => (
+            <div
+              key={q}
+              className="lesson22-prompt-card lesson22-prompt-card--task"
+            >
+              {q}
+            </div>
+          ))}
+        </div>
+
+        <details className="l25-details" style={{ marginTop: "1rem" }}>
+          <summary className="l25-details-toggle">📄 Sample ideas from the video</summary>
+          <div className="l25-details-body">
+            <p>
+              <strong>Mom:</strong> She sells women’s clothing. She has a small
+              shop in the mall.
+            </p>
+            <p>
+              <strong>Brother:</strong> He studies engineering. He has a small
+              apartment. He doesn't have much free time.
+            </p>
+            <p>
+              <strong>Daughter:</strong> Grandma watches her. She walks there
+              after school.
+            </p>
+            <p>
+              <strong>Movie:</strong> It starts in about ten minutes. Brad Pitt
+              plays a policeman.
+            </p>
+          </div>
+        </details>
+
+        <p className="l25-cr-hint" style={{ marginTop: "0.85rem" }}>
+          Source:{" "}
+          <a
+            href={`https://youtu.be/${VIDEO_ID}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ELLLO · Beginner Listening Quiz #6 ↗
+          </a>
+        </p>
       </section>
 
       <section

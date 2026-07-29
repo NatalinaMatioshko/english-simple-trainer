@@ -182,6 +182,300 @@ export const readingChunks = [
   },
 ] as const;
 
+/** Reading comprehension · A Horse */
+export type HorsePos =
+  | "subject"
+  | "verb"
+  | "object"
+  | "adjective"
+  | "noun"
+  | "article"
+  | "adverb"
+  | "preposition"
+  | "conjunction"
+  | "auxiliary"
+  | "pronoun";
+
+export const horsePosMeta: Record<
+  HorsePos,
+  { ua: string; en: string; color: string }
+> = {
+  subject: { ua: "підмет", en: "subject", color: "#2563eb" },
+  verb: { ua: "присудок", en: "predicate / verb", color: "#dc2626" },
+  object: { ua: "додаток", en: "object", color: "#7c3aed" },
+  adjective: { ua: "прикметник", en: "adjective", color: "#16a34a" },
+  noun: { ua: "іменник", en: "noun", color: "#ea580c" },
+  article: { ua: "артикль", en: "article", color: "#64748b" },
+  adverb: { ua: "прислівник", en: "adverb", color: "#0891b2" },
+  preposition: { ua: "прийменник", en: "preposition", color: "#a16207" },
+  conjunction: { ua: "сполучник", en: "conjunction", color: "#db2777" },
+  auxiliary: { ua: "допоміжне дієслово", en: "auxiliary", color: "#be123c" },
+  pronoun: { ua: "займенник", en: "pronoun", color: "#4f46e5" },
+};
+
+export type HorseToken = {
+  w: string;
+  pos?: HorsePos;
+  /** trailing punctuation kept outside the clickable word */
+  after?: string;
+};
+
+export type HorseSentence = { tokens: HorseToken[] };
+
+/** Annotated sentences for click → POS underline */
+export const horseSentences: HorseSentence[] = [
+  {
+    tokens: [
+      { w: "This", pos: "subject" },
+      { w: "is", pos: "verb" },
+      { w: "a", pos: "article" },
+      { w: "horse", pos: "noun", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "It", pos: "subject" },
+      { w: "is", pos: "verb" },
+      { w: "a", pos: "article" },
+      { w: "strong", pos: "adjective" },
+      { w: "and", pos: "conjunction" },
+      { w: "beautiful", pos: "adjective" },
+      { w: "animal", pos: "noun", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "It", pos: "subject" },
+      { w: "is", pos: "verb" },
+      { w: "a", pos: "article" },
+      { w: "farm", pos: "adjective" },
+      { w: "and", pos: "conjunction" },
+      { w: "domestic", pos: "adjective" },
+      { w: "animal", pos: "noun", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "It", pos: "subject" },
+      { w: "has", pos: "verb" },
+      { w: "four", pos: "adjective" },
+      { w: "strong", pos: "adjective" },
+      { w: "legs", pos: "object", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "It", pos: "subject" },
+      { w: "has", pos: "verb" },
+      { w: "two", pos: "adjective" },
+      { w: "ears", pos: "object", after: "," },
+      { w: "two", pos: "adjective" },
+      { w: "eyes", pos: "object" },
+      { w: "and", pos: "conjunction" },
+      { w: "a", pos: "article" },
+      { w: "long", pos: "adjective" },
+      { w: "tail", pos: "object", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "It", pos: "subject" },
+      { w: "usually", pos: "adverb" },
+      { w: "has", pos: "verb" },
+      { w: "brown", pos: "adjective", after: "," },
+      { w: "black", pos: "adjective", after: "," },
+      { w: "white", pos: "adjective" },
+      { w: "or", pos: "conjunction" },
+      { w: "grey", pos: "adjective" },
+      { w: "fur", pos: "object", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "It", pos: "subject" },
+      { w: "has", pos: "verb" },
+      { w: "a", pos: "article" },
+      { w: "long", pos: "adjective" },
+      { w: "neck", pos: "object" },
+      { w: "and", pos: "conjunction" },
+      { w: "a", pos: "article" },
+      { w: "strong", pos: "adjective" },
+      { w: "body", pos: "object", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "It", pos: "subject" },
+      { w: "eats", pos: "verb" },
+      { w: "grass", pos: "object", after: "," },
+      { w: "hay", pos: "object" },
+      { w: "and", pos: "conjunction" },
+      { w: "grains", pos: "object", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "It", pos: "subject" },
+      { w: "drinks", pos: "verb" },
+      { w: "plenty", pos: "noun" },
+      { w: "of", pos: "preposition" },
+      { w: "water", pos: "object", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "It", pos: "subject" },
+      { w: "can", pos: "auxiliary" },
+      { w: "run", pos: "verb" },
+      { w: "fast", pos: "adverb" },
+      { w: "and", pos: "conjunction" },
+      { w: "carry", pos: "verb" },
+      { w: "heavy", pos: "adjective" },
+      { w: "loads", pos: "object", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "People", pos: "subject" },
+      { w: "ride", pos: "verb" },
+      { w: "on", pos: "preposition" },
+      { w: "it", pos: "object", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "It", pos: "subject" },
+      { w: "helps", pos: "verb" },
+      { w: "farmers", pos: "object" },
+      { w: "in", pos: "preposition" },
+      { w: "many", pos: "adjective" },
+      { w: "works", pos: "object", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "The", pos: "article" },
+      { w: "horse", pos: "subject" },
+      { w: "is", pos: "verb" },
+      { w: "very", pos: "adverb" },
+      { w: "loyal", pos: "adjective" },
+      { w: "and", pos: "conjunction" },
+      { w: "intelligent", pos: "adjective", after: "." },
+    ],
+  },
+  {
+    tokens: [
+      { w: "We", pos: "subject" },
+      { w: "should", pos: "auxiliary" },
+      { w: "take", pos: "verb" },
+      { w: "care", pos: "noun" },
+      { w: "of", pos: "preposition" },
+      { w: "it", pos: "object", after: "." },
+    ],
+  },
+];
+
+/** Plain lines (kept for any non-interactive use) */
+export const horseText = horseSentences.map((s) =>
+  s.tokens.map((t) => `${t.w}${t.after ?? ""}`).join(" "),
+);
+
+export type HorseQuestion = {
+  id: number;
+  prompt: string;
+  /** Accepted answers (lowercase, flexible) */
+  answers: string[];
+};
+
+export const horseQuestions: HorseQuestion[] = [
+  {
+    id: 1,
+    prompt: "What animal are we talking about?",
+    answers: ["a horse", "horse", "the horse", "horses"],
+  },
+  {
+    id: 2,
+    prompt: "Where does the horse live?",
+    answers: [
+      "on a farm",
+      "farm",
+      "a farm",
+      "on the farm",
+      "at a farm",
+      "it is a farm animal",
+      "on farms",
+    ],
+  },
+  {
+    id: 3,
+    prompt: "What does the horse eat?",
+    answers: [
+      "grass, hay and grains",
+      "grass hay and grains",
+      "grass, hay, and grains",
+      "grass and hay",
+      "grass, hay, grains",
+      "hay and grass",
+      "grass hay grains",
+    ],
+  },
+  {
+    id: 4,
+    prompt: "What does the horse help farmers do?",
+    answers: [
+      "many works",
+      "many works on the farm",
+      "it helps farmers in many works",
+      "farm work",
+      "work on the farm",
+      "helps farmers",
+      "carry heavy loads",
+    ],
+  },
+  {
+    id: 5,
+    prompt: "What can people do on a horse?",
+    answers: [
+      "ride",
+      "ride on it",
+      "people ride on it",
+      "they can ride",
+      "ride a horse",
+      "ride on a horse",
+    ],
+  },
+  {
+    id: 6,
+    prompt: "Why is the horse a useful animal?",
+    answers: [
+      "it can run fast and carry heavy loads",
+      "it can run fast, carry loads and help farmers",
+      "it helps farmers",
+      "it is loyal and intelligent",
+      "loyal and intelligent",
+      "it can run fast and help farmers",
+      "because it helps farmers",
+      "it can carry heavy loads",
+    ],
+  },
+];
+
+export const horseFunFact = "Horses can sleep standing up!";
+
+export function checkHorseAnswer(value: string, answers: string[]): boolean {
+  const n = value
+    .trim()
+    .toLowerCase()
+    .replace(/['’]/g, "'")
+    .replace(/[.,!?]/g, "")
+    .replace(/\s+/g, " ");
+  if (!n) return false;
+  return answers.some((a) => {
+    const target = a.toLowerCase().replace(/[.,!?]/g, "").replace(/\s+/g, " ");
+    return n === target || n.includes(target) || target.includes(n);
+  });
+}
+
 export const listenQs: MatchItem[] = [
   {
     id: 1,
@@ -823,5 +1117,106 @@ export const topicStations: TopicStation[] = [
         answer: "have",
       },
     ],
+  },
+];
+
+/** One short speaking card per topic — quick tour of all A1 themes */
+export type SpeakingTourCard = {
+  id: string;
+  topic: string;
+  prompt: string;
+  model: string;
+};
+
+export const speakingTour: SpeakingTourCard[] = [
+  {
+    id: "me-be",
+    topic: "Me · to be",
+    prompt: "Say 3 sentences about yourself with am / is / are.",
+    model: "I'm Olena. I'm 28. I'm a teacher.",
+  },
+  {
+    id: "family",
+    topic: "Family",
+    prompt: "Name 3 people in your family. Use my / his / her.",
+    model: "My mother's name is… His name is… Her name is…",
+  },
+  {
+    id: "nationalities",
+    topic: "Nationalities",
+    prompt: "Say where you are from and your nationality.",
+    model: "I'm from Ukraine. I'm Ukrainian.",
+  },
+  {
+    id: "jobs",
+    topic: "Jobs",
+    prompt: "Say your job (or studies) and place of work.",
+    model: "I'm a student. / I work as a… I work in a…",
+  },
+  {
+    id: "appearance",
+    topic: "Appearance",
+    prompt: "Describe yourself in 2–3 short sentences.",
+    model: "I'm tall. I have dark hair. I wear glasses.",
+  },
+  {
+    id: "routine",
+    topic: "Routine",
+    prompt: "Say 3 things you do every day.",
+    model: "I get up at 7. I have breakfast. I go to work.",
+  },
+  {
+    id: "do-does",
+    topic: "Do / does",
+    prompt: "Ask your partner 2 do/does questions.",
+    model: "Do you like coffee? Does he live near you?",
+  },
+  {
+    id: "prepositions",
+    topic: "in / on / at / to",
+    prompt: "Say where you are and where you go (use in/on/at/to).",
+    model: "I'm at home. I go to school on Monday.",
+  },
+  {
+    id: "do-make",
+    topic: "Do / make",
+    prompt: "Say one thing you do and one thing you make.",
+    model: "I do my homework. I make dinner.",
+  },
+  {
+    id: "can",
+    topic: "Can / can't",
+    prompt: "Say 2 things you can do and 1 you can't.",
+    model: "I can cook. I can swim. I can't drive.",
+  },
+  {
+    id: "articles",
+    topic: "a / an / the",
+    prompt: "Name 3 things near you with a / an / the.",
+    model: "a book · an apple · the door",
+  },
+  {
+    id: "objects",
+    topic: "Objects · this/that",
+    prompt: "Point and say: What's this / that? What are these / those?",
+    model: "What's this? It's a pen. Those are my keys.",
+  },
+  {
+    id: "numbers-wh",
+    topic: "Numbers · WH",
+    prompt: "Ask: How old…? Where… from? What's … job?",
+    model: "How old is she? Where is he from? What's her job?",
+  },
+  {
+    id: "shop",
+    topic: "In a shop",
+    prompt: "Roleplay: How much is this? Cash or card?",
+    model: "How much is this book? — It's £9.99. Cash or card?",
+  },
+  {
+    id: "have-has",
+    topic: "Have / has",
+    prompt: "Say what you have and what a friend has.",
+    model: "I have a phone. She has a car.",
   },
 ];

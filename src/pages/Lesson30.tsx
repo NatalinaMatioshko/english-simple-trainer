@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
@@ -11,12 +11,19 @@ import {
   correctionItems,
   familyCards,
   familyJobMatch,
+  checkHorseAnswer,
+  horseFunFact,
+  horsePosMeta,
+  horseQuestions,
+  horseSentences,
+  type HorsePos,
   jobCards,
   listenQs,
   profileModel,
   profileScaffold,
   readingChunks,
   reflectItems,
+  speakingTour,
   topicStations,
   warmUpQs,
 } from "../data/lesson30Review";
@@ -105,6 +112,11 @@ export default function Lesson30() {
   const [topicAns, setTopicAns] = useState<Record<string, string>>({});
   const [topicChecked, setTopicChecked] = useState(false);
   const [topicsDone, setTopicsDone] = useState<Set<string>>(new Set());
+  const [speakDone, setSpeakDone] = useState<Set<string>>(new Set());
+  const [horseAns, setHorseAns] = useState<Record<number, string>>({});
+  const [horseChecked, setHorseChecked] = useState(false);
+  const [horsePosFilter, setHorsePosFilter] = useState<HorsePos | null>(null);
+  const [horseActiveWord, setHorseActiveWord] = useState<string | null>(null);
 
   const activeTopic = useMemo(
     () => topicStations.find((t) => t.id === topicId)!,
@@ -127,6 +139,9 @@ export default function Lesson30() {
   ).length;
   const corrScore = correctionItems.filter(
     (q) => corrAns[q.id] === q.answer,
+  ).length;
+  const horseScore = horseQuestions.filter((q) =>
+    checkHorseAnswer(horseAns[q.id] ?? "", q.answers),
   ).length;
 
   const topicScore = activeTopic.quiz.filter(
@@ -168,6 +183,7 @@ export default function Lesson30() {
               listening → writing → correction → reflect.
             </p>
             <ul className="l22-goals-list">
+              <li>пройти speaking tour по всіх темах (1–3 речення);</li>
               <li>пройти всі теми фундаменту A1 по станціях;</li>
               <li>згадати do/does і have/has;</li>
               <li>говорити про себе, сім’ю, роботу, рутину;</li>
@@ -200,13 +216,15 @@ export default function Lesson30() {
         <div className="lesson22-flow">
           <a href="#l30-grammar">Grammar</a>
           <a href="#l30-topics">All topics</a>
-          <a href="#l30-warmup">1 Warm-up</a>
-          <a href="#l30-profile">2 Profile</a>
-          <a href="#l30-family">3 Family &amp; jobs</a>
-          <a href="#l30-reading">4 Reading</a>
-          <a href="#l30-listening">5 Listening</a>
-          <a href="#l30-writing">6 Writing</a>
-          <a href="#l30-correction">7 Correction</a>
+          <a href="#l30-speak-tour">Speaking tour</a>
+          <a href="#l30-warmup">Warm-up</a>
+          <a href="#l30-profile">Profile</a>
+          <a href="#l30-family">Family &amp; jobs</a>
+          <a href="#l30-reading">Reading</a>
+          <a href="#l30-horse">A Horse</a>
+          <a href="#l30-listening">Listening</a>
+          <a href="#l30-writing">Writing</a>
+          <a href="#l30-correction">Correction</a>
           <a href="#l30-reflect">Reflect</a>
         </div>
       </section>
@@ -502,14 +520,70 @@ export default function Lesson30() {
         </div>
       </section>
 
+      {/* ── Speaking tour · all topics ── */}
+      <section id="l30-speak-tour" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Speaking tour · all topics</p>
+          <h2>Short speaking on every theme</h2>
+          <p className="lesson22-section-desc">
+            Невеличкий спікінг по <strong>кожній</strong> пройденій темі: 1
+            коротке завдання → 1–3 речення вголос. Партнер слухає / ставить 1
+            питання. Відміть картку, коли сказав.
+          </p>
+        </div>
+
+        <p className="l30-topic-progress">
+          Spoken: {speakDone.size} / {speakingTour.length}
+        </p>
+
+        <div className="l30-speak-tour">
+          {speakingTour.map((card, i) => {
+            const done = speakDone.has(card.id);
+            return (
+              <article
+                key={card.id}
+                className={`l30-speak-card${done ? " is-done" : ""}`}
+              >
+                <header className="l30-speak-card-head">
+                  <span className="l30-speak-num">{i + 1}</span>
+                  <span className="l30-speak-topic">{card.topic}</span>
+                </header>
+                <p className="l30-speak-prompt">{card.prompt}</p>
+                <p className="l30-speak-model">
+                  <em>Model:</em> {card.model}
+                </p>
+                <button
+                  type="button"
+                  className={`l30-speak-mark${done ? " is-on" : ""}`}
+                  onClick={() =>
+                    setSpeakDone((prev) => {
+                      const next = new Set(prev);
+                      if (next.has(card.id)) next.delete(card.id);
+                      else next.add(card.id);
+                      return next;
+                    })
+                  }
+                >
+                  {done ? "✓ Said" : "Mark as said"}
+                </button>
+              </article>
+            );
+          })}
+        </div>
+
+        <p className="l25-cr-hint" style={{ marginTop: "0.85rem" }}>
+          Tip: 20–30 секунд на картку. Не перекладай слово-в-слово — кажи прості
+          фрази.
+        </p>
+      </section>
+
       {/* ── 1 Warm-up ── */}
       <section id="l30-warmup" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">1 · Speaking warm-up</p>
+          <p className="page-kicker">1 · Extra warm-up</p>
           <h2>Very easy questions — no script</h2>
           <p className="lesson22-section-desc">
-            Відповідай вголос. Мета — побачити, чи можеш говорити{" "}
-            <strong>без опори на текст</strong>.
+            Додатково після tour: швидкі питання без опори на текст.
           </p>
         </div>
         <div className="lesson22-prompt-grid">
@@ -758,6 +832,222 @@ export default function Lesson30() {
           After all chunks: summarize Marco in{" "}
           <strong>one or two sentences</strong> (name, job, family).
         </p>
+      </section>
+
+      {/* ── Reading comprehension · A Horse ── */}
+      <section id="l30-horse" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">4b · Reading comprehension</p>
+          <h2>Worksheet · A Horse</h2>
+          <p className="lesson22-section-desc">
+            Прочитай текст і напиши короткі відповіді. Потім натисни Check.
+          </p>
+        </div>
+
+        <div className="l30-ws">
+          <header className="l30-ws-header">
+            <div className="l30-ws-deco l30-ws-deco--cloud" aria-hidden="true" />
+            <div className="l30-ws-deco l30-ws-deco--sun" aria-hidden="true" />
+            <h3 className="l30-ws-title">A Horse</h3>
+            <p className="l30-ws-badge">Reading Comprehension</p>
+          </header>
+
+          <div className="l30-ws-body">
+            <div className="l30-ws-left">
+              <figure className="l30-ws-photo">
+                <img
+                  src={IMG30("horse.jpg")}
+                  alt="A horse in a green field"
+                  width={1200}
+                  height={800}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <div className="l30-ws-pos-legend" aria-label="Parts of speech">
+                <p className="l30-ws-pos-hint">
+                  Натисни на слово — підкреслиться частина мови (підмет,
+                  присудок…). Натисни знову або на лейбл, щоб скинути / показати
+                  всі такі слова.
+                </p>
+                <div className="l30-ws-pos-chips">
+                  {(Object.keys(horsePosMeta) as HorsePos[]).map((pos) => {
+                    const meta = horsePosMeta[pos];
+                    const on = horsePosFilter === pos;
+                    return (
+                      <button
+                        key={pos}
+                        type="button"
+                        className={`l30-ws-pos-chip${on ? " is-on" : ""}`}
+                        style={
+                          {
+                            "--pos-color": meta.color,
+                          } as CSSProperties
+                        }
+                        onClick={() => {
+                          setHorsePosFilter((prev) =>
+                            prev === pos ? null : pos,
+                          );
+                          setHorseActiveWord(null);
+                        }}
+                      >
+                        <span className="l30-ws-pos-swatch" />
+                        {meta.ua}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              <article className="l30-ws-text" aria-label="Reading text">
+                {horseSentences.map((sentence, si) => (
+                  <p key={si} className="l30-ws-sent">
+                    {sentence.tokens.map((tok, ti) => {
+                      const key = `${si}-${ti}`;
+                      const activePos = tok.pos;
+                      const isFiltered =
+                        horsePosFilter != null && activePos === horsePosFilter;
+                      const isClicked = horseActiveWord === key;
+                      const show = isFiltered || isClicked;
+                      const color = activePos
+                        ? horsePosMeta[activePos].color
+                        : undefined;
+                      return (
+                        <span key={key} className="l30-ws-tok-wrap">
+                          {tok.pos ? (
+                            <button
+                              type="button"
+                              className={`l30-ws-word${show ? " is-marked" : ""}${isClicked ? " is-focus" : ""}`}
+                              style={
+                                show && color
+                                  ? ({
+                                      "--pos-color": color,
+                                    } as CSSProperties)
+                                  : undefined
+                              }
+                              title={`${horsePosMeta[tok.pos].ua} (${horsePosMeta[tok.pos].en})`}
+                              onClick={() => {
+                                if (horseActiveWord === key) {
+                                  setHorseActiveWord(null);
+                                  setHorsePosFilter(null);
+                                  return;
+                                }
+                                setHorseActiveWord(key);
+                                setHorsePosFilter(tok.pos ?? null);
+                              }}
+                            >
+                              {tok.w}
+                              {isClicked && tok.pos && (
+                                <span className="l30-ws-word-tag">
+                                  {horsePosMeta[tok.pos].ua}
+                                </span>
+                              )}
+                            </button>
+                          ) : (
+                            <span>{tok.w}</span>
+                          )}
+                          {tok.after ?? ""}
+                          {ti < sentence.tokens.length - 1 ? " " : ""}
+                        </span>
+                      );
+                    })}
+                  </p>
+                ))}
+              </article>
+            </div>
+
+            <aside className="l30-ws-questions">
+              <div className="l30-ws-q-head">
+                <span>Questions</span>
+              </div>
+              <ol className="l30-ws-q-list">
+                {horseQuestions.map((q) => {
+                  const val = horseAns[q.id] ?? "";
+                  const ok = checkHorseAnswer(val, q.answers);
+                  let lineClass = "l30-ws-line";
+                  if (horseChecked) {
+                    lineClass += ok
+                      ? " l30-ws-line--ok"
+                      : val.trim()
+                        ? " l30-ws-line--err"
+                        : " l30-ws-line--err";
+                  }
+                  return (
+                    <li key={q.id} className="l30-ws-q-item">
+                      <div className="l30-ws-q-prompt">
+                        <span
+                          className={`l30-ws-num l30-ws-num--${q.id}`}
+                          aria-hidden="true"
+                        >
+                          {q.id}
+                        </span>
+                        <span>{q.prompt}</span>
+                      </div>
+                      <input
+                        type="text"
+                        className={lineClass}
+                        value={val}
+                        onChange={(e) => {
+                          setHorseChecked(false);
+                          setHorseAns((p) => ({
+                            ...p,
+                            [q.id]: e.target.value,
+                          }));
+                        }}
+                        placeholder="Write your answer…"
+                        aria-label={q.prompt}
+                        autoComplete="off"
+                        spellCheck={false}
+                      />
+                      {horseChecked && !ok && (
+                        <span className="l30-ws-hint">
+                          e.g. {q.answers[0]}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ol>
+              <div className="l25-cr-actions" style={{ marginTop: "0.85rem" }}>
+                <button
+                  type="button"
+                  className="l22-check-btn"
+                  onClick={() => setHorseChecked(true)}
+                >
+                  Check answers
+                </button>
+                <button
+                  type="button"
+                  className="l25-cr-mini-btn"
+                  onClick={() => {
+                    setHorseAns({});
+                    setHorseChecked(false);
+                  }}
+                >
+                  Reset
+                </button>
+                {horseChecked && (
+                  <span className="l22-score">
+                    {horseScore} / {horseQuestions.length}
+                  </span>
+                )}
+              </div>
+            </aside>
+          </div>
+
+          <footer className="l30-ws-footer">
+            <span className="l30-ws-shoe" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M7 3c-2.2 0-4 2.2-4 5v4c0 1.7.7 3.2 1.8 4.2L3 21h3.2l1.3-3.5c.5.2 1 .3 1.5.3h2c.5 0 1-.1 1.5-.3L13.8 21H17l-1.8-4.8C16.3 15.2 17 13.7 17 12V8c0-2.8-1.8-5-4-5-1.2 0-2.3.6-3 1.5C9.3 3.6 8.2 3 7 3zm0 2.5c.8 0 1.5.9 1.5 2v4.2c0 .8-.3 1.4-.8 1.8L6.5 18H5.2l1.1-2.9c-.8-.8-1.3-1.9-1.3-3.1V8c0-1.5.9-2.5 2-2.5zm6 0c1.1 0 2 1 2 2.5v3.8c0 1.2-.5 2.3-1.3 3.1l1.1 2.9h-1.3l-1.2-3.5c-.5-.4-.8-1-.8-1.8V7.5c0-1.1.7-2 1.5-2z" />
+              </svg>
+            </span>
+            <p>
+              <strong>Fun fact:</strong> {horseFunFact}
+            </p>
+          </footer>
+          <div className="l30-ws-flowers" aria-hidden="true">
+            <span /><span /><span /><span /><span /><span />
+          </div>
+        </div>
       </section>
 
       {/* ── 5 Listening ── */}
