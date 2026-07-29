@@ -882,8 +882,8 @@ export default function Lesson28() {
             />
           </article>
 
-          {speakingTopics.map((topic) => (
-            <article key={topic.id} className="l28-speak-card">
+          {speakingTopics.map((topic) => {
+            const head = (
               <header className="l28-speak-card-head">
                 <span className="l28-speak-num">{topic.id}</span>
                 <div>
@@ -891,13 +891,39 @@ export default function Lesson28() {
                   <p className="l28-speak-hint">{topic.hint}</p>
                 </div>
               </header>
+            );
+            const list = (
               <ol className="l28-speak-list">
                 {topic.questions.map((q) => (
                   <li key={q}>{q}</li>
                 ))}
               </ol>
-            </article>
-          ))}
+            );
+
+            if (topic.id === 1) {
+              return (
+                <article key={topic.id} className="l28-speak-card">
+                  {head}
+                  {list}
+                </article>
+              );
+            }
+
+            return (
+              <details
+                key={topic.id}
+                className="l28-speak-card l28-speak-card--collapsible"
+              >
+                <summary className="l28-speak-summary">
+                  {head}
+                  <span className="l28-speak-chevron" aria-hidden="true">
+                    ▾
+                  </span>
+                </summary>
+                {list}
+              </details>
+            );
+          })}
         </div>
       </section>
 

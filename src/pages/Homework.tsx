@@ -15,15 +15,23 @@ const homeworkByLesson = [
     tasks: [
       {
         type: "text",
-        text: "Flashcards: numbers 1–100 · teens · question words with be",
+        text: "Match: numbers 1–10 (картинки → one…ten)",
       },
       {
         type: "text",
-        text: "Quiz: numbers · teen/ty & profiles · grammar (Who/How/What/Where)",
+        text: "Shop dialogue: Complete the conversation (Rosa / Assistant)",
+      },
+      {
+        type: "text",
+        text: "Quiz: numbers · teen/ty & profiles · grammar · WH words (Who…Whom)",
       },
       {
         type: "text",
         text: "Writing: 3 people — age, from, job",
+      },
+      {
+        type: "text",
+        text: "Check & Reflect: family · 's · possessives · objects · this/that · numbers · questions",
       },
     ],
   },

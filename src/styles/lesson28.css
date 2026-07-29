@@ -172,6 +172,42 @@
   color: var(--color-text);
 }
 
+.l28-speak-card--collapsible > .l28-speak-summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.l28-speak-card--collapsible > .l28-speak-summary::-webkit-details-marker {
+  display: none;
+}
+
+.l28-speak-card--collapsible > .l28-speak-summary .l28-speak-card-head {
+  flex: 1;
+  min-width: 0;
+}
+
+.l28-speak-chevron {
+  flex-shrink: 0;
+  margin-top: 0.35rem;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.l28-speak-card--collapsible[open] > .l28-speak-summary .l28-speak-chevron {
+  transform: rotate(180deg);
+}
+
+.l28-speak-card--collapsible > .l28-speak-list {
+  margin-top: var(--space-3);
+}
+
 @media (max-width: 760px) {
   .l28-ask-examples,
   .l28-speak-grid {

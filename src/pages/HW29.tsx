@@ -1,21 +1,140 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/app.css";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
+import "../styles/lesson29.css";
 import {
-  cardsForDeck,
-  hw29DeckMeta,
   hw29TestMeta,
   tasksForTest,
-  type Hw29DeckId,
-  type Hw29Flashcard,
   type Hw29TestId,
 } from "../data/hw29Review";
 import { useScoredQuiz } from "../hooks/useScoredQuiz";
 import { ScoredQuizCard } from "../components/practice/ScoredQuizCard";
-import { shuffle } from "../utils/array";
+import Hw29CheckReflect from "../components/Hw29CheckReflect";
+
+const IMG = (file: string) =>
+  `${import.meta.env.BASE_URL}images/lesson29/${file}`;
+
+const numberWords = [
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten",
+] as const;
+
+const numberBank = numberWords.map((word, i) => ({ value: i + 1, word }));
+
+/** Same shuffled order as Lesson 29 · Vocabulary · 1a */
+const numberPictures = [
+  { pos: 1, value: 7 },
+  { pos: 2, value: 3 },
+  { pos: 3, value: 10 },
+  { pos: 4, value: 1 },
+  { pos: 5, value: 8 },
+  { pos: 6, value: 4 },
+  { pos: 7, value: 9 },
+  { pos: 8, value: 2 },
+  { pos: 9, value: 6 },
+  { pos: 10, value: 5 },
+] as const;
+
+function drillSelClass(
+  checked: boolean,
+  value: string,
+  answer: string,
+): string {
+  if (!checked) return "l25-cr-sel";
+  if (value === answer) return "l25-cr-sel l25-cr-sel--ok";
+  if (value) return "l25-cr-sel l25-cr-sel--err";
+  return "l25-cr-sel";
+}
+
+type ShopGap = {
+  id: number;
+  before: string;
+  after: string;
+  options: string[];
+  answer: string;
+  speaker: "Rosa" | "Assistant";
+};
+
+const shopDialogueGaps: ShopGap[] = [
+  {
+    id: 1,
+    speaker: "Rosa",
+    before: "Excuse me.",
+    after: "that chair?",
+    options: ["How much is", "How much are", "What’s"],
+    answer: "How much is",
+  },
+  {
+    id: 2,
+    speaker: "Assistant",
+    before: "",
+    after: "£45.",
+    options: ["It’s", "They’re", "Here’s"],
+    answer: "It’s",
+  },
+  {
+    id: 3,
+    speaker: "Rosa",
+    before: "And",
+    after: "this box?",
+    options: ["how much is", "how much are", "where’s"],
+    answer: "how much is",
+  },
+  {
+    id: 4,
+    speaker: "Rosa",
+    before: "OK.",
+    after: "these cups?",
+    options: ["How much are", "How much is", "What are"],
+    answer: "How much are",
+  },
+  {
+    id: 5,
+    speaker: "Assistant",
+    before: "",
+    after: "£6, please.",
+    options: ["That’s", "They’re", "Here’s"],
+    answer: "That’s",
+  },
+  {
+    id: 6,
+    speaker: "Assistant",
+    before: "",
+    after: "?",
+    options: ["Cash or card", "Here you are", "Thank you"],
+    answer: "Cash or card",
+  },
+  {
+    id: 7,
+    speaker: "Rosa",
+    before: "Card, please.",
+    after: "",
+    options: ["Here’s my card.", "Here’s your change.", "That’s £6."],
+    answer: "Here’s my card.",
+  },
+  {
+    id: 8,
+    speaker: "Assistant",
+    before: "Thank you.",
+    after: "",
+    options: ["Here’s your card.", "Here’s my card.", "Cash, please."],
+    answer: "Here’s your card.",
+  },
+];
+
+const SOUND = (r: number) =>
+  `${import.meta.env.BASE_URL}sounds/Unit_2/RM_A1_SB_U2_R${r}.mp3`;
 
 const writingPrompts = [
   "How old is…? He’s / She’s…",
@@ -27,10 +146,22 @@ const writingPrompts = [
 
 export default function HW29() {
   const [draft, setDraft] = useState("");
+  const [numAns, setNumAns] = useState<Record<number, string>>({});
+  const [numChecked, setNumChecked] = useState(false);
+  const [shopGaps, setShopGaps] = useState<Record<number, string>>({});
+  const [shopGapsChecked, setShopGapsChecked] = useState(false);
   const [testId, setTestId] = useState<Hw29TestId>("all");
   const testTasks = useMemo(() => tasksForTest(testId), [testId]);
   const testMeta = hw29TestMeta.find((t) => t.id === testId)!;
   const test = useScoredQuiz(testTasks, `hw29-test-${testId}`);
+
+  const numScore = numberPictures.filter(
+    (p) => numAns[p.pos] === numberWords[p.value - 1],
+  ).length;
+
+  const shopGapScore = shopDialogueGaps.filter(
+    (g) => shopGaps[g.id] === g.answer,
+  ).length;
 
   return (
     <div className="lesson22-page">
@@ -40,8 +171,8 @@ export default function HW29() {
             <p className="page-kicker">Homework · Lesson 29</p>
             <h1>Numbers</h1>
             <p className="lesson22-subtitle">
-              Закріплення Part 2: numbers 1–100 · teen vs -ty · question words
-              with <em>be</em> · quiz.
+              Закріплення: matching 1–10 · shop dialogue · quiz · Check &amp;
+              Reflect (Unit 2).
             </p>
           </div>
           <div
@@ -56,31 +187,186 @@ export default function HW29() {
           </div>
         </div>
         <div className="lesson22-hero-chips">
-          <span>1–100</span>
-          <span>teen / ty</span>
-          <span>Who / How / What / Where</span>
+          <span>match 1–10</span>
+          <span>in a shop</span>
           <span>quiz</span>
+          <span>Check &amp; Reflect</span>
         </div>
       </section>
 
       <section className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">1 · Flashcards</p>
-          <h2>Повтори числа і питання</h2>
+          <p className="page-kicker">1 · Vocabulary · Match</p>
+          <h2>Numbers 1–10</h2>
           <p className="lesson22-section-desc">
-            Обери колоду або <strong>Усі картки</strong>. Переверни (Space /
-            Enter), потім <strong>Знаю</strong> / <strong>Ще раз</strong>.
+            З’єднай цифру на картці зі словом. Обери правильне слово зі списку
+            під кожною карткою.
           </p>
         </div>
-        <Hw29Flashcards />
+
+        <div className="l29-match-grid">
+          {numberPictures.map((pic) => {
+            const chosen = numAns[pic.pos] ?? "";
+            const answer = numberWords[pic.value - 1];
+            return (
+              <div key={pic.pos} className="l29-match-card">
+                <div className="l29-match-frame">
+                  <span className="l29-match-num">{pic.pos}</span>
+                  <img
+                    className="l29-match-img"
+                    src={IMG(`n${pic.value}.svg`)}
+                    alt={`Number card ${pic.pos}`}
+                    loading="lazy"
+                  />
+                </div>
+                <select
+                  value={chosen}
+                  onChange={(e) => {
+                    setNumChecked(false);
+                    setNumAns((prev) => ({
+                      ...prev,
+                      [pic.pos]: e.target.value,
+                    }));
+                  }}
+                  className={drillSelClass(numChecked, chosen, answer)}
+                  aria-label={`Word for card ${pic.pos}`}
+                >
+                  <option value="">select…</option>
+                  {numberBank.map((n) => (
+                    <option key={n.word} value={n.word}>
+                      {n.word}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
+          <button
+            className="l22-check-btn"
+            type="button"
+            onClick={() => setNumChecked(true)}
+          >
+            Check answers
+          </button>
+          <button
+            className="l29-reset-btn"
+            type="button"
+            onClick={() => {
+              setNumAns({});
+              setNumChecked(false);
+            }}
+          >
+            Reset
+          </button>
+          {numChecked && (
+            <span className="l22-score">
+              {numScore} / {numberPictures.length}
+            </span>
+          )}
+        </div>
       </section>
 
       <section className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">2 · Quiz / Test</p>
+          <p className="page-kicker">2 · English in Action · 3a</p>
+          <h2>Complete the conversation</h2>
+          <p className="lesson22-section-desc">
+            Послухай <strong>R20</strong> і заповни діалог. Обери правильний
+            варіант у кожному пропуску.
+          </p>
+        </div>
+
+        <div className="l25-audio-list" style={{ margin: "0 0 1rem" }}>
+          <div className="l25-audio-item">
+            <div className="l25-audio-meta">
+              <span className="l25-audio-num">R20</span>
+              <div className="l25-audio-info">
+                <span className="l25-audio-ex">English in Action · 3a</span>
+                <span className="l25-audio-title">In a shop — listen</span>
+              </div>
+            </div>
+            <audio
+              controls
+              className="l25-audio-ctrl"
+              src={SOUND(20)}
+              preload="none"
+            />
+          </div>
+        </div>
+
+        <div className="l29-shop-dlg">
+          {shopDialogueGaps.map((g) => (
+            <div key={g.id} className="l29-shop-dlg-line">
+              <strong>{g.speaker}:</strong>{" "}
+              {g.before && <span>{g.before} </span>}
+              <select
+                value={shopGaps[g.id] ?? ""}
+                onChange={(e) => {
+                  setShopGapsChecked(false);
+                  setShopGaps((prev) => ({
+                    ...prev,
+                    [g.id]: e.target.value,
+                  }));
+                }}
+                className={drillSelClass(
+                  shopGapsChecked,
+                  shopGaps[g.id] ?? "",
+                  g.answer,
+                )}
+                aria-label={`Gap ${g.id}`}
+              >
+                <option value="">({g.id}) …</option>
+                {g.options.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </select>{" "}
+              {g.after && <span>{g.after}</span>}
+            </div>
+          ))}
+          <p className="l29-shop-dlg-line">
+            <strong>Rosa:</strong> Thank you.
+          </p>
+        </div>
+
+        <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
+          <button
+            className="l22-check-btn"
+            type="button"
+            onClick={() => setShopGapsChecked(true)}
+          >
+            Check answers
+          </button>
+          <button
+            className="l29-reset-btn"
+            type="button"
+            onClick={() => {
+              setShopGaps({});
+              setShopGapsChecked(false);
+            }}
+          >
+            Reset
+          </button>
+          {shopGapsChecked && (
+            <span className="l22-score">
+              {shopGapScore} / {shopDialogueGaps.length}
+            </span>
+          )}
+        </div>
+      </section>
+
+      <section className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">3 · Quiz / Test</p>
           <h2>Перевірка Part 2</h2>
           <p className="lesson22-section-desc">
-            Практикуй окремий блок або пройди <strong>весь тест</strong>. Кнопка{" "}
+            Практикуй окремий блок або пройди <strong>весь тест</strong>. Для
+            таблиці Question words обери вкладку <strong>WH words</strong> —
+            значення (person / place / time…) і приклади речень. Кнопка{" "}
             <strong>Перемішати</strong> змінює порядок питань.
           </p>
         </div>
@@ -116,8 +402,8 @@ export default function HW29() {
         <ScoredQuizCard
           title={testMeta.title}
           subtitle={testMeta.desc}
-          successText="Чудово! Numbers і питання з be закріплені."
-          retryText="Повторіть картки цього блоку — і спробуйте ще раз."
+          successText="Чудово! Numbers і question words закріплені."
+          retryText="Подивіться таблицю Question words у Lesson 29 — і спробуйте ще раз."
           passScore={testMeta.passScore}
           currentTask={test.currentTask}
           finished={test.finished}
@@ -136,7 +422,7 @@ export default function HW29() {
 
       <section className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">3 · Speaking / Writing</p>
+          <p className="page-kicker">4 · Speaking / Writing</p>
           <h2>People you know</h2>
           <p className="lesson22-section-desc">
             Напиши про <strong>3 людей</strong> (сім’я / друзі). Для кожного:
@@ -185,6 +471,8 @@ export default function HW29() {
         />
       </section>
 
+      <Hw29CheckReflect />
+
       <section className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">After homework</p>
@@ -215,203 +503,6 @@ export default function HW29() {
           </Link>
         </div>
       </section>
-    </div>
-  );
-}
-
-/* ─── Flashcards ─────────────────────────────────────────── */
-
-function Hw29Flashcards() {
-  const [deckId, setDeckId] = useState<Hw29DeckId>("all");
-  const deckCards = useMemo(() => cardsForDeck(deckId), [deckId]);
-  const [queue, setQueue] = useState<Hw29Flashcard[]>(() =>
-    shuffle(cardsForDeck("all")),
-  );
-  const [known, setKnown] = useState<Set<string>>(new Set());
-  const [flipped, setFlipped] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setQueue(shuffle(deckCards));
-    setKnown(new Set());
-    setFlipped(false);
-  }, [deckId, deckCards]);
-
-  useEffect(() => {
-    cardRef.current?.focus();
-  }, [queue.length, flipped]);
-
-  const total = deckCards.length;
-  const current = queue[0] ?? null;
-  const done = queue.length === 0;
-  const knownCount = known.size;
-  const progress = total ? Math.round((knownCount / total) * 100) : 0;
-
-  const flip = () => setFlipped((f) => !f);
-
-  const handleKnow = () => {
-    if (!current) return;
-    setKnown((prev) => new Set([...prev, current.id]));
-    setQueue((prev) => prev.slice(1));
-    setFlipped(false);
-  };
-
-  const handleReview = () => {
-    setQueue((prev) => [...prev.slice(1), prev[0]]);
-    setFlipped(false);
-  };
-
-  const handleRestart = () => {
-    setQueue(shuffle(deckCards));
-    setKnown(new Set());
-    setFlipped(false);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (done) return;
-    if (e.key === " " || e.key === "Enter") {
-      e.preventDefault();
-      if (!flipped) flip();
-    }
-    if (flipped) {
-      if (e.key === "ArrowRight" || e.key === "k" || e.key === "K")
-        handleKnow();
-      if (e.key === "ArrowLeft" || e.key === "r" || e.key === "R")
-        handleReview();
-    }
-  };
-
-  return (
-    <div className="fc-wrapper">
-      <div className="trainer-deck-tabs hw27-fc-tabs" role="tablist">
-        {hw29DeckMeta.map((d) => (
-          <button
-            key={d.id}
-            type="button"
-            role="tab"
-            aria-selected={deckId === d.id}
-            className={`trainer-deck-tab ${deckId === d.id ? "active" : ""}`}
-            onClick={() => setDeckId(d.id)}
-          >
-            <span className="trainer-deck-tab-title">{d.title}</span>
-            <span className="trainer-deck-tab-badge">{d.badge}</span>
-            <span className="trainer-deck-tab-lessons">{d.desc}</span>
-          </button>
-        ))}
-      </div>
-
-      {done ? (
-        <div className="fc-done panel" style={{ marginTop: "1rem" }}>
-          <div className="fc-done-icon">🎉</div>
-          <h3 className="fc-done-title">Колоду пройдено!</h3>
-          <p className="fc-done-score">
-            Знаєте <strong>{knownCount}</strong> з <strong>{total}</strong>{" "}
-            карток
-          </p>
-          <div className="fc-done-bar-wrap">
-            <div className="fc-done-bar" style={{ width: `${progress}%` }} />
-          </div>
-          <div className="fc-done-actions">
-            <button className="btn" type="button" onClick={handleRestart}>
-              Почати знову
-            </button>
-            {knownCount < total && (
-              <button
-                className="btn secondary"
-                type="button"
-                onClick={() => {
-                  const reviewItems = deckCards.filter((c) => !known.has(c.id));
-                  setQueue(shuffle(reviewItems));
-                  setKnown(new Set());
-                  setFlipped(false);
-                }}
-              >
-                Повторити невідомі ({total - knownCount})
-              </button>
-            )}
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className="fc-top" style={{ marginTop: "1rem" }}>
-            <div className="fc-progress-wrap">
-              <div className="fc-progress-bar">
-                <div
-                  className="fc-progress-fill"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-              <span className="fc-counter muted">
-                {knownCount} / {total} знаю
-              </span>
-            </div>
-            <button
-              type="button"
-              className="btn secondary fc-shuffle-btn"
-              onClick={() => {
-                setQueue((prev) => shuffle(prev));
-                setFlipped(false);
-              }}
-            >
-              ⇄ Перемішати
-            </button>
-          </div>
-
-          <div
-            className="fc-scene"
-            onKeyDown={handleKeyDown}
-            tabIndex={0}
-            ref={cardRef}
-            aria-label={`Картка: ${current?.front ?? ""}. Space — перевернути.`}
-          >
-            <div
-              key={current?.id ?? "empty"}
-              className={`fc-card ${flipped ? "fc-flipped" : ""}`}
-              onClick={!flipped ? flip : undefined}
-            >
-              <div className="fc-face fc-front">
-                <span className="fc-front-label muted">{current?.deck}</span>
-                <p className="fc-front-word">{current?.front}</p>
-                <span className="fc-flip-hint muted">
-                  натисни або <kbd>Space</kbd>
-                </span>
-              </div>
-              <div className="fc-face fc-back">
-                <span className="fc-back-label">English</span>
-                <p className="fc-back-word">{current?.back}</p>
-              </div>
-            </div>
-          </div>
-
-          {flipped && (
-            <div className="fc-actions">
-              <button
-                type="button"
-                className="fc-btn-review"
-                onClick={handleReview}
-              >
-                ↺ Ще раз
-              </button>
-              <button type="button" className="fc-btn-know" onClick={handleKnow}>
-                ✓ Знаю
-              </button>
-            </div>
-          )}
-
-          <div className="fc-keyboard-hint muted">
-            {flipped ? (
-              <>
-                <kbd>←</kbd> Ще раз &nbsp;·&nbsp; <kbd>→</kbd> Знаю
-              </>
-            ) : (
-              <>
-                <kbd>Space</kbd> / <kbd>Enter</kbd> — перевернути
-              </>
-            )}
-          </div>
-          <div className="fc-remaining muted">Залишилось: {queue.length}</div>
-        </>
-      )}
     </div>
   );
 }

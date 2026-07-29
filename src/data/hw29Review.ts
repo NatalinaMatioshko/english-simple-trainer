@@ -1,143 +1,8 @@
 import type { QuizTask } from "../types/trainer";
 
-export type Hw29Flashcard = {
-  id: string;
-  front: string;
-  back: string;
-  deck: Hw29DeckId;
-};
-
-export type Hw29DeckId = "all" | "numbers" | "teens" | "questions";
-
-export type Hw29TestId = "all" | "numbers" | "listening" | "grammar";
+export type Hw29TestId = "all" | "numbers" | "listening" | "grammar" | "qw";
 
 export type Hw29TestTask = QuizTask & { block: Exclude<Hw29TestId, "all"> };
-
-/** Flashcards — Lesson 29 Part 2 */
-export const hw29Flashcards: Hw29Flashcard[] = [
-  { id: "n1", front: "1", back: "one", deck: "numbers" },
-  { id: "n2", front: "2", back: "two", deck: "numbers" },
-  { id: "n3", front: "3", back: "three", deck: "numbers" },
-  { id: "n4", front: "4", back: "four", deck: "numbers" },
-  { id: "n5", front: "5", back: "five", deck: "numbers" },
-  { id: "n6", front: "6", back: "six", deck: "numbers" },
-  { id: "n7", front: "7", back: "seven", deck: "numbers" },
-  { id: "n8", front: "8", back: "eight", deck: "numbers" },
-  { id: "n9", front: "9", back: "nine", deck: "numbers" },
-  { id: "n10", front: "10", back: "ten", deck: "numbers" },
-  { id: "n20", front: "20", back: "twenty", deck: "numbers" },
-  { id: "n30", front: "30", back: "thirty", deck: "numbers" },
-  { id: "n40", front: "40", back: "forty", deck: "numbers" },
-  { id: "n50", front: "50", back: "fifty", deck: "numbers" },
-  { id: "n60", front: "60", back: "sixty", deck: "numbers" },
-  { id: "n70", front: "70", back: "seventy", deck: "numbers" },
-  { id: "n80", front: "80", back: "eighty", deck: "numbers" },
-  { id: "n90", front: "90", back: "ninety", deck: "numbers" },
-  { id: "n100", front: "100", back: "one hundred / a hundred", deck: "numbers" },
-
-  { id: "t11", front: "11", back: "eleven", deck: "teens" },
-  { id: "t12", front: "12", back: "twelve", deck: "teens" },
-  { id: "t13", front: "13", back: "thirteen", deck: "teens" },
-  { id: "t14", front: "14", back: "fourteen", deck: "teens" },
-  { id: "t15", front: "15", back: "fifteen", deck: "teens" },
-  { id: "t16", front: "16", back: "sixteen", deck: "teens" },
-  { id: "t17", front: "17", back: "seventeen", deck: "teens" },
-  { id: "t18", front: "18", back: "eighteen", deck: "teens" },
-  { id: "t19", front: "19", back: "nineteen", deck: "teens" },
-  {
-    id: "t13vs30",
-    front: "thirteen vs thirty",
-    back: "13 = thirTEEN · 30 = THIRty",
-    deck: "teens",
-  },
-  {
-    id: "t15vs50",
-    front: "fifteen vs fifty",
-    back: "15 = fifTEEN · 50 = FIFty",
-    deck: "teens",
-  },
-
-  {
-    id: "q1",
-    front: "Як звати? (її)",
-    back: "What’s her name?",
-    deck: "questions",
-  },
-  {
-    id: "q2",
-    front: "Скільки йому років?",
-    back: "How old is he?",
-    deck: "questions",
-  },
-  {
-    id: "q3",
-    front: "Звідки вона?",
-    back: "Where’s she from? / Where is she from?",
-    deck: "questions",
-  },
-  {
-    id: "q4",
-    front: "Яка в нього робота?",
-    back: "What’s his job? / What is his job?",
-    deck: "questions",
-  },
-  {
-    id: "q5",
-    front: "Хто ти?",
-    back: "Who are you?",
-    deck: "questions",
-  },
-  {
-    id: "q6",
-    front: "Коли урок?",
-    back: "When is your class?",
-    deck: "questions",
-  },
-  {
-    id: "q7",
-    front: "Question word + be: порядок",
-    back: "Question word → be → subject (Where is she from?)",
-    deck: "questions",
-  },
-  {
-    id: "q8",
-    front: "He’s from Thailand. → питання",
-    back: "Where is he from? / Where’s he from?",
-    deck: "questions",
-  },
-];
-
-export const hw29DeckMeta: {
-  id: Hw29DeckId;
-  title: string;
-  badge: string;
-  desc: string;
-}[] = [
-  { id: "all", title: "Усі картки", badge: "All", desc: "Part 2 разом" },
-  {
-    id: "numbers",
-    title: "Numbers",
-    badge: "1–100",
-    desc: "one · twenty · a hundred",
-  },
-  {
-    id: "teens",
-    title: "Teens",
-    badge: "11–19",
-    desc: "thirteen vs thirty…",
-  },
-  {
-    id: "questions",
-    title: "Questions",
-    badge: "be",
-    desc: "Who / How / What / Where",
-  },
-];
-
-export function cardsForDeck(deck: Hw29DeckId): Hw29Flashcard[] {
-  if (deck === "all") return hw29Flashcards;
-  return hw29Flashcards.filter((c) => c.deck === deck);
-}
 
 export const hw29TestTasks: Hw29TestTask[] = [
   {
@@ -364,6 +229,116 @@ export const hw29TestTasks: Hw29TestTask[] = [
     options: ["She’s 99.", "She’s Canada.", "She’s a teacher."],
     correct: "She’s 99.",
   },
+
+  /* ── Question words table (WHO…WHOM) ───────────────────── */
+  {
+    block: "qw",
+    text: "Used to ask about a person. →",
+    options: ["WHO", "WHAT", "WHERE", "WHOM"],
+    correct: "WHO",
+  },
+  {
+    block: "qw",
+    text: "Used to ask for information. →",
+    options: ["WHAT", "WHEN", "WHICH", "WHO"],
+    correct: "WHAT",
+  },
+  {
+    block: "qw",
+    text: "Used to ask about a place. →",
+    options: ["WHERE", "WHEN", "WHY", "WHOSE"],
+    correct: "WHERE",
+  },
+  {
+    block: "qw",
+    text: "Used to ask about time. →",
+    options: ["WHEN", "WHERE", "HOW", "WHAT"],
+    correct: "WHEN",
+  },
+  {
+    block: "qw",
+    text: "Used to ask for a reason. →",
+    options: ["WHY", "HOW", "WHICH", "WHO"],
+    correct: "WHY",
+  },
+  {
+    block: "qw",
+    text: "Used to explain a process / manner. →",
+    options: ["HOW", "WHY", "WHICH", "WHEN"],
+    correct: "HOW",
+  },
+  {
+    block: "qw",
+    text: "Used to ask about choices. →",
+    options: ["WHICH", "WHAT", "WHOSE", "WHO"],
+    correct: "WHICH",
+  },
+  {
+    block: "qw",
+    text: "Used to ask about possession. →",
+    options: ["WHOSE", "WHO", "WHOM", "WHICH"],
+    correct: "WHOSE",
+  },
+  {
+    block: "qw",
+    text: "Asking about the object of a verb. →",
+    options: ["WHOM", "WHO", "WHOSE", "WHAT"],
+    correct: "WHOM",
+  },
+  {
+    block: "qw",
+    text: "___ is coming to the party?",
+    options: ["Who", "What", "Where", "Whose"],
+    correct: "Who",
+  },
+  {
+    block: "qw",
+    text: "___ do you want to eat?",
+    options: ["What", "Which", "Who", "Why"],
+    correct: "What",
+  },
+  {
+    block: "qw",
+    text: "___ do you live?",
+    options: ["Where", "When", "Who", "How"],
+    correct: "Where",
+  },
+  {
+    block: "qw",
+    text: "___ does the movie start?",
+    options: ["When", "Where", "Why", "Which"],
+    correct: "When",
+  },
+  {
+    block: "qw",
+    text: "___ are you laughing?",
+    options: ["Why", "How", "Who", "What"],
+    correct: "Why",
+  },
+  {
+    block: "qw",
+    text: "___ can I get to the station?",
+    options: ["How", "Where", "Why", "Which"],
+    correct: "How",
+  },
+  {
+    block: "qw",
+    text: "___ dress should I wear?",
+    options: ["Which", "What", "Whose", "Who"],
+    correct: "Which",
+  },
+  {
+    block: "qw",
+    text: "___ car is parked outside?",
+    options: ["Whose", "Who", "Whom", "Which"],
+    correct: "Whose",
+  },
+  {
+    block: "qw",
+    text: "___ should I call for help?",
+    options: ["Whom", "Whose", "Which", "Where"],
+    correct: "Whom",
+  },
 ];
 
 export const hw29TestMeta: {
@@ -377,8 +352,8 @@ export const hw29TestMeta: {
     id: "all",
     title: "Увесь тест",
     badge: "All",
-    desc: "numbers · listening · grammar",
-    passScore: 26,
+    desc: "numbers · listening · grammar · WH words",
+    passScore: 40,
   },
   {
     id: "numbers",
@@ -400,6 +375,13 @@ export const hw29TestMeta: {
     badge: "3",
     desc: "question words with be",
     passScore: 9,
+  },
+  {
+    id: "qw",
+    title: "WH words",
+    badge: "4",
+    desc: "Who / What / Where / When / Why…",
+    passScore: 14,
   },
 ];
 

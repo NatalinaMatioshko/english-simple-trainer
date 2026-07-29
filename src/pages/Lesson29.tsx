@@ -326,12 +326,12 @@ const profiles: Profile[] = [
 ];
 
 const pronSentences = [
-  "What’s your name?",
-  "Where’s he from?",
-  "He’s a taxi driver.",
-  "She’s from Poland.",
-  "Who’s that?",
+  "What’s her name?",
+  "What’s his name?",
+  "What’s her job?",
   "What’s his job?",
+  "Where’s she from?",
+  "Where’s he from?",
 ] as const;
 
 type WriteItem = {
@@ -367,6 +367,239 @@ const writeItems: WriteItem[] = [
     answers: ["where are they from"],
   },
 ];
+
+/** Reference table — Question words (meanings + examples) */
+const questionWordRows = [
+  {
+    word: "WHO",
+    color: "#e67e22",
+    desc: "Used to ask about a person.",
+    exampleRest: " is coming to the party?",
+    icon: "person",
+  },
+  {
+    word: "WHAT",
+    color: "#9b7bb8",
+    desc: "Used to ask for information.",
+    exampleRest: " do you want to eat?",
+    icon: "info",
+  },
+  {
+    word: "WHERE",
+    color: "#27ae60",
+    desc: "Used to ask about a place.",
+    exampleRest: " do you live?",
+    icon: "place",
+  },
+  {
+    word: "WHEN",
+    color: "#5dade2",
+    desc: "Used to ask about time.",
+    exampleRest: " does the movie start?",
+    icon: "time",
+  },
+  {
+    word: "WHY",
+    color: "#d4ac0d",
+    desc: "Used to ask for a reason.",
+    exampleRest: " are you laughing?",
+    icon: "reason",
+  },
+  {
+    word: "HOW",
+    color: "#e74c3c",
+    desc: "Used to explain a process.",
+    exampleRest: " can I get to the station?",
+    icon: "how",
+  },
+  {
+    word: "WHICH",
+    color: "#5c6bc0",
+    desc: "Used to ask about choices.",
+    exampleRest: " dress should I wear?",
+    icon: "choice",
+  },
+  {
+    word: "WHOSE",
+    color: "#58d68d",
+    desc: "Used to ask about possession.",
+    exampleRest: " car is parked outside?",
+    icon: "own",
+  },
+  {
+    word: "WHOM",
+    color: "#1abc9c",
+    desc: "Asking about the object of a verb.",
+    exampleRest: " should I call for help?",
+    icon: "object",
+  },
+] as const;
+
+function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
+  switch (kind) {
+    case "person":
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="14" r="8" fill="currentColor" opacity="0.85" />
+          <path
+            d="M8 42c2-10 10-15 16-15s14 5 16 15"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
+          <circle cx="36" cy="10" r="2.2" fill="currentColor" />
+          <circle cx="41" cy="16" r="1.8" fill="currentColor" />
+        </svg>
+      );
+    case "info":
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <rect x="8" y="10" width="22" height="28" rx="3" fill="currentColor" opacity="0.2" />
+          <rect x="12" y="16" width="14" height="2.5" rx="1" fill="currentColor" />
+          <rect x="12" y="22" width="10" height="2.5" rx="1" fill="currentColor" />
+          <circle cx="34" cy="30" r="9" fill="currentColor" opacity="0.85" />
+          <circle cx="34" cy="26" r="2" fill="#fff" />
+          <rect x="32.5" y="29" width="3" height="8" rx="1.5" fill="#fff" />
+        </svg>
+      );
+    case "place":
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path
+            d="M24 6c-7 0-12 5.2-12 12 0 9 12 24 12 24s12-15 12-24c0-6.8-5-12-12-12z"
+            fill="currentColor"
+            opacity="0.85"
+          />
+          <circle cx="24" cy="18" r="5" fill="#fff" />
+        </svg>
+      );
+    case "time":
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="24" r="16" fill="currentColor" opacity="0.18" />
+          <circle
+            cx="24"
+            cy="24"
+            r="14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+          />
+          <path
+            d="M24 14v11l8 5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "reason":
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="20" r="12" fill="currentColor" opacity="0.85" />
+          <path
+            d="M18 18c1-3 4-4 6-4s5 1 6 4"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M17 26c2 3 5 4 7 4s5-1 7-4"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          <text x="38" y="14" fontSize="14" fontWeight="700" fill="currentColor">
+            ?
+          </text>
+        </svg>
+      );
+    case "how":
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="16" r="8" fill="currentColor" opacity="0.85" />
+          <path
+            d="M10 42c2-10 9-15 14-15s12 5 14 15"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
+          <text x="34" y="14" fontSize="12" fontWeight="700" fill="currentColor">
+            ?
+          </text>
+          <text x="6" y="18" fontSize="11" fontWeight="700" fill="currentColor">
+            ?
+          </text>
+        </svg>
+      );
+    case "choice":
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="16" r="7" fill="currentColor" opacity="0.85" />
+          <path
+            d="M12 42c2-9 8-14 12-14s10 5 12 14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8 22h10M30 22h10"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+          <path
+            d="M10 22l-3 4M8 22l-3-4M38 22l3 4M40 22l3-4"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "own":
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <rect x="8" y="20" width="14" height="18" rx="2" fill="currentColor" opacity="0.75" />
+          <path d="M8 20l7-8 7 8" fill="currentColor" opacity="0.9" />
+          <circle cx="34" cy="28" r="8" fill="none" stroke="currentColor" strokeWidth="3" />
+          <path
+            d="M34 36v6"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "object":
+      return (
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="14" r="8" fill="currentColor" opacity="0.85" />
+          <path
+            d="M10 42c2-10 9-15 14-15s12 5 14 15"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M18 18c0 0 2 4 6 4s6-4 6-4"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
 
 type AudioTrackData = {
   r: number;
@@ -420,13 +653,43 @@ const trackR13: AudioTrackData = {
   exercise: "Listening · 4",
   title: "Anna, Bill and Satoru — listen",
   transcript: (
-    <p>
-      Anna Chubb is ninety-nine. She’s from Canada. She’s a teacher.
-      <br />
-      Bill Gooch is eighty-five. He’s from the UK. He’s a taxi driver.
-      <br />
-      Satoru Goto is fifty-one. He’s from Japan. He’s a football player.
-    </p>
+    <div>
+      <p>
+        <strong>A:</strong> Look at this. These people are great.
+        <br />
+        <strong>B:</strong> Oh yeah.
+        <br />
+        <strong>A:</strong> Yes. Look at this photo. This is Anna Chubb. She’s
+        from Canada. She’s a teacher.
+        <br />
+        <strong>B:</strong> How old is she?
+        <br />
+        <strong>A:</strong> She’s 99.
+        <br />
+        <strong>B:</strong> Really? Wow.
+      </p>
+      <p>
+        <strong>A:</strong> And this is Bill Gooch. He’s from the UK.
+        <br />
+        <strong>B:</strong> How old is he?
+        <br />
+        <strong>A:</strong> He’s 85 years old.
+        <br />
+        <strong>B:</strong> What’s his job?
+        <br />
+        <strong>A:</strong> He’s a taxi driver.
+        <br />
+        <strong>B:</strong> Amazing.
+      </p>
+      <p>
+        <strong>A:</strong> Yeah. And what’s his name? His name is Satoru Goto.
+        He’s 51 and he’s a football player.
+        <br />
+        <strong>B:</strong> Wow. Where’s he from?
+        <br />
+        <strong>A:</strong> He’s from Japan.
+      </p>
+    </div>
   ),
 };
 
@@ -435,11 +698,123 @@ const trackR14: AudioTrackData = {
   exercise: "Pronunciation · 6",
   title: "’s in questions — listen and repeat",
   transcript: (
-    <ul>
+    <ol>
       {pronSentences.map((s) => (
         <li key={s}>{s}</li>
       ))}
-    </ul>
+    </ol>
+  ),
+};
+
+/* ── Part 3 · English in Action — shop ───────────────────────── */
+
+const shopObjects = [
+  { id: "books", label: "books", price: "on the shelf" },
+  { id: "dog", label: "a dog (figurine)", price: "£9.99" },
+  { id: "clock", label: "a grandfather clock", price: "£120" },
+  { id: "picture", label: "a picture", price: "£19.99" },
+  { id: "laptop", label: "a laptop", price: "£389" },
+  { id: "chair-g", label: "a green chair", price: "£45" },
+  { id: "chair-b", label: "a brown chair / phone", price: "£52" },
+  { id: "boxes", label: "boxes", price: "£5 / £14" },
+  { id: "cups", label: "cups", price: "£2" },
+  { id: "pens", label: "pens", price: "on the counter" },
+] as const;
+
+/** R20 — objects the man buys */
+const buyAnswers = ["clock", "cups"] as const;
+
+const customerPhrases = [
+  "How much is this book?",
+  "How much are those cups?",
+  "How much is this?",
+  "How much is that?",
+  "Can I pay by card?",
+  "Here you are.",
+  "Here’s my card.",
+] as const;
+
+const assistantPhrases = [
+  "It’s £12 (for four cups).",
+  "That’s £9.99.",
+  "It’s £15.99.",
+  "That’s £27.99, please.",
+  "Cash or card?",
+  "Here’s your change.",
+  "Here’s your card.",
+] as const;
+
+/** Phrases heard in R20 (from the Useful phrases box) */
+const heardInR20 = new Set([
+  "How much is this book?",
+  "How much are those cups?",
+  "How much is this?",
+  "How much is that?",
+  "Here you are.",
+  "It’s £12 (for four cups).",
+  "That’s £9.99.",
+  "It’s £15.99.",
+  "That’s £27.99, please.",
+  "Cash or card?",
+  "Here’s your change.",
+]);
+
+const trackR20: AudioTrackData = {
+  r: 20,
+  exercise: "English in Action · 2",
+  title: "In a shop — listen",
+  transcript: (
+    <div>
+      <p>
+        <strong>Customer:</strong> Excuse me. How much is this book?
+        <br />
+        <strong>Assistant:</strong> That’s £9.99.
+        <br />
+        <strong>Customer:</strong> And how much are those cups?
+        <br />
+        <strong>Assistant:</strong> It’s £12 for four cups.
+        <br />
+        <strong>Customer:</strong> And how much is that? The clock.
+        <br />
+        <strong>Assistant:</strong> Yes. It’s £15.99.
+      </p>
+      <p>
+        <strong>Customer:</strong> OK. The clock and the cups, please.
+        <br />
+        <strong>Assistant:</strong> OK.
+        <br />
+        <strong>Customer:</strong> Oh. And how much is this?
+        <br />
+        <strong>Assistant:</strong> That pen is £2.
+        <br />
+        <strong>Customer:</strong> Oh. OK. So how much for the clock and the
+        cups?
+        <br />
+        <strong>Assistant:</strong> That’s £27.99, please. Cash or card?
+        <br />
+        <strong>Customer:</strong> Cash, please. Here you are.
+        <br />
+        <strong>Assistant:</strong> Thank you. Here’s your change.
+        <br />
+        <strong>Customer:</strong> Thank you.
+      </p>
+    </div>
+  ),
+};
+
+const trackR21: AudioTrackData = {
+  r: 21,
+  exercise: "English in Action · 2c",
+  title: "Useful phrases — listen and repeat",
+  transcript: (
+    <div>
+      <p>
+        <strong>Customer:</strong> {customerPhrases.join(" · ")}
+      </p>
+      <p>
+        <strong>Shop assistant:</strong> {assistantPhrases.join(" · ")}
+      </p>
+    </div>
   ),
 };
 
@@ -522,6 +897,12 @@ export default function Lesson29() {
 
   const [classmateNames, setClassmateNames] = useState(["", "", ""]);
 
+  const [seeObj, setSeeObj] = useState<Record<string, boolean>>({});
+  const [buyObj, setBuyObj] = useState<Record<string, boolean>>({});
+  const [buyChecked, setBuyChecked] = useState(false);
+  const [phraseTick, setPhraseTick] = useState<Record<string, boolean>>({});
+  const [phraseChecked, setPhraseChecked] = useState(false);
+
   const numScore = numberPictures.filter(
     (p) => numAns[p.pos] === numberWords[p.value - 1],
   ).length;
@@ -550,6 +931,18 @@ export default function Lesson29() {
       .includes(normalizeQuestion(writeAns[item.id] ?? "")),
   ).length;
 
+  const buyScore = buyAnswers.filter((id) => buyObj[id]).length;
+  const buyWrong = Object.keys(buyObj).filter(
+    (id) => buyObj[id] && !(buyAnswers as readonly string[]).includes(id),
+  ).length;
+  const buyOk =
+    buyChecked && buyScore === buyAnswers.length && buyWrong === 0;
+
+  const phraseScore = [...heardInR20].filter((p) => phraseTick[p]).length;
+  const phraseExtra = Object.keys(phraseTick).filter(
+    (p) => phraseTick[p] && !heardInR20.has(p),
+  ).length;
+
   return (
     <div className="lesson22-page lesson28-page">
       <section className="lesson22-hero panel">
@@ -569,7 +962,7 @@ export default function Lesson29() {
               <span className="chip">Speaking</span>
               <span className="chip">Numbers</span>
               <span className="chip">Listening</span>
-              <span className="chip">Grammar</span>
+              <span className="chip">In a shop</span>
             </div>
           </div>
           <div
@@ -622,8 +1015,8 @@ export default function Lesson29() {
             />
           </article>
 
-          {speakingTopics.map((topic) => (
-            <article key={topic.id} className="l28-speak-card">
+          {speakingTopics.map((topic) => {
+            const head = (
               <header className="l28-speak-card-head">
                 <span className="l28-speak-num">{topic.id}</span>
                 <div>
@@ -631,13 +1024,39 @@ export default function Lesson29() {
                   <p className="l28-speak-hint">{topic.hint}</p>
                 </div>
               </header>
+            );
+            const list = (
               <ol className="l28-speak-list">
                 {topic.questions.map((q) => (
                   <li key={q}>{q}</li>
                 ))}
               </ol>
-            </article>
-          ))}
+            );
+
+            if (topic.id === 1) {
+              return (
+                <article key={topic.id} className="l28-speak-card">
+                  {head}
+                  {list}
+                </article>
+              );
+            }
+
+            return (
+              <details
+                key={topic.id}
+                className="l28-speak-card l28-speak-card--collapsible"
+              >
+                <summary className="l28-speak-summary">
+                  {head}
+                  <span className="l28-speak-chevron" aria-hidden="true">
+                    ▾
+                  </span>
+                </summary>
+                {list}
+              </details>
+            );
+          })}
         </div>
       </section>
 
@@ -686,23 +1105,6 @@ export default function Lesson29() {
           </p>
         </div>
 
-        <figure className="l29-scene" style={{ maxWidth: 360 }}>
-          <img
-            src={IMG("field-scene.png")}
-            alt="Decorative illustration — count the objects in the scene"
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
-
-        <div className="l29-word-bank" aria-label="Word bank">
-          {numberBank.map((n) => (
-            <span key={n.value}>
-              {n.value} {n.word}
-            </span>
-          ))}
-        </div>
-
         <div className="l29-match-grid">
           {numberPictures.map((pic) => {
             const chosen = numAns[pic.pos] ?? "";
@@ -747,7 +1149,7 @@ export default function Lesson29() {
             Check answers
           </button>
           <button
-            className="btn secondary"
+            className="l29-reset-btn"
             type="button"
             onClick={() => {
               setNumAns({});
@@ -873,7 +1275,7 @@ export default function Lesson29() {
             Check answers
           </button>
           <button
-            className="btn secondary"
+            className="l29-reset-btn"
             type="button"
             onClick={() => {
               setPairAns({});
@@ -937,7 +1339,7 @@ export default function Lesson29() {
             Check
           </button>
           <button
-            className="btn secondary"
+            className="l29-reset-btn"
             type="button"
             onClick={() => {
               setNextNumAns("");
@@ -1014,7 +1416,7 @@ export default function Lesson29() {
             Check answers
           </button>
           <button
-            className="btn secondary"
+            className="l29-reset-btn"
             type="button"
             onClick={() => {
               setProfileAns({});
@@ -1131,6 +1533,94 @@ export default function Lesson29() {
             </span>
           )}
         </div>
+
+        <table className="l29-grammar-examples" aria-label="Question words with be — examples">
+          <tbody>
+            <tr>
+              <td>
+                <strong>Who are</strong> you?
+              </td>
+              <td>I’m your new teacher.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>How old is</strong> he?
+              </td>
+              <td>He’s 99 years old!</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>What is</strong> her name?
+              </td>
+              <td>Her name is Anna Chubb.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Where are</strong> they from?
+              </td>
+              <td>They’re from Canada.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>When is</strong> your class?
+              </td>
+              <td>At 9.30 a.m.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div className="l29-wh-posters" aria-label="WH questions posters">
+          <figure className="l29-wh-poster">
+            <img
+              src={IMG("wh-questions-meanings.png")}
+              alt="WH-Questions: What — things, Who — people, When — time, Where — place, Why — reason"
+              width={1126}
+              height={1594}
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>What / Who / When / Where / Why — коротко про значення</figcaption>
+          </figure>
+          <figure className="l29-wh-poster">
+            <img
+              src={IMG("wh-questions-cards.png")}
+              alt="WH Questions cards with examples: Who, Which, Where, Whose, How, What, Why, When, How old, How much, How many, How often, What kind, What time"
+              width={682}
+              height={1024}
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>WH questions — приклади речень</figcaption>
+          </figure>
+        </div>
+
+        <div className="l29-qw-ref" aria-label="Question words reference">
+          <h3 className="l29-qw-ref-title">Question words</h3>
+          <div className="l29-qw-ref-table" role="table">
+            {questionWordRows.map((row) => (
+              <div
+                key={row.word}
+                className="l29-qw-ref-row"
+                role="row"
+                style={{ ["--qw-color" as string]: row.color }}
+              >
+                <div className="l29-qw-ref-word" role="cell">
+                  {row.word}
+                </div>
+                <div className="l29-qw-ref-info" role="cell">
+                  <p className="l29-qw-ref-desc">{row.desc}</p>
+                  <p className="l29-qw-ref-ex">
+                    <span className="l29-qw-ref-ex-word">{row.word}</span>
+                    {row.exampleRest}
+                  </p>
+                </div>
+                <div className="l29-qw-ref-icon" role="cell" aria-hidden="true">
+                  <QwIcon kind={row.icon} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section id="l29-pronunciation" className="lesson22-block panel">
@@ -1138,12 +1628,15 @@ export default function Lesson29() {
           <p className="page-kicker">Part 2 · Pronunciation · 6</p>
           <h2>’s in questions</h2>
           <p className="lesson22-section-desc">
-            Послухай <strong>R14</strong>. Зверни увагу на коротку форму{" "}
-            <span className="be">’s</span> (is). Слухай ще раз і повторюй.
+            <strong>6a.</strong> Послухай <strong>R14</strong>. Зверни увагу на
+            вимову форм <em>be</em>, виділених синім (
+            <span className="be">’s</span>).
+            <br />
+            <strong>6b.</strong> Послухай ще раз і повтори.
           </p>
         </div>
 
-        <ul className="l29-pron-list">
+        <ol className="l29-pron-list">
           {pronSentences.map((s) => {
             const idx = s.indexOf("’s");
             if (idx === -1) return <li key={s}>{s}</li>;
@@ -1155,14 +1648,14 @@ export default function Lesson29() {
               </li>
             );
           })}
-        </ul>
+        </ol>
 
         <div className="l25-audio-list" style={{ margin: "1rem 0 0" }}>
           <AudioPlayer track={trackR14} />
         </div>
 
         <div className="l28-task-note" style={{ marginTop: "1rem" }}>
-          <strong>Task:</strong> Listen again and repeat.
+          <strong>6b:</strong> Listen again and repeat.
         </div>
       </section>
 
@@ -1224,7 +1717,7 @@ export default function Lesson29() {
             Check answers
           </button>
           <button
-            className="btn secondary"
+            className="l29-reset-btn"
             type="button"
             onClick={() => {
               setWriteAns({});
@@ -1246,7 +1739,7 @@ export default function Lesson29() {
           <p className="page-kicker">Part 2 · Grammar · 8</p>
           <h2>Ask about people you know</h2>
           <p className="lesson22-section-desc">
-            Впиши імена трьох людей з групи (або вигаданих людей). Потім
+            Впиши імена трьох людей з сім’ї (або вигаданих людей). Потім
             постав про кожного 2–3 питання з <em>be</em>, як у прикладі.
           </p>
         </div>
@@ -1265,7 +1758,7 @@ export default function Lesson29() {
                 });
               }}
               placeholder={`Name ${i + 1}`}
-              aria-label={`Classmate name ${i + 1}`}
+              aria-label={`Family name ${i + 1}`}
             />
           ))}
         </div>
@@ -1286,31 +1779,283 @@ export default function Lesson29() {
         </div>
       </section>
 
-      <section id="l29-speaking2" className="lesson22-block panel">
+      {/* ── Part 3 · English in Action — shop ───────────────── */}
+
+      <section
+        id="l29-shop-goal"
+        className="lesson22-block panel l29-goals"
+        aria-label="English in Action goal"
+      >
+        <ul className="l29-goals-list">
+          <li>
+            <span className="l29-goals-chevron" aria-hidden="true">
+              ›
+            </span>
+            <span>
+              <strong>Goal:</strong> pay for things in a shop
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="l29-shop-look" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">Part 2 · Speaking · 9–10</p>
-          <h2>Ask your partner</h2>
+          <p className="page-kicker">Part 3 · English in Action · 1</p>
+          <h2>In a shop</h2>
           <p className="lesson22-section-desc">
-            Робота в парах. Спочатку підготуй 3–4 питання про партнера, потім
-            поговоріть.
+            Подивись на картинку. Які речі ти бачиш? Відміть об’єкти зі списку.
           </p>
         </div>
 
-        <div className="l28-task-note">
-          <strong>9 · Prepare:</strong> Напиши 3–4 питання з{" "}
-          <em>be</em> та question words про партнера — вік, звідки він/вона,
-          робота/навчання. Наприклад: <em>How old are you? Where are you
-          from? What’s your job?</em>
+        <figure className="l29-scene">
+          <img
+            src={IMG("shop-scene.png")}
+            alt="Second-hand shop: customer and assistant, chairs, clock, laptop, cups, boxes and price tags"
+            width={919}
+            height={524}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption className="l28-scene-cap" style={{ marginTop: "0.4rem" }}>
+            Look at the picture. What objects can you see?
+          </figcaption>
+        </figure>
+
+        <div className="l29-shop-checks">
+          {shopObjects.map((o) => (
+            <label key={o.id} className="l29-shop-check">
+              <input
+                type="checkbox"
+                checked={!!seeObj[o.id]}
+                onChange={(e) =>
+                  setSeeObj((prev) => ({ ...prev, [o.id]: e.target.checked }))
+                }
+              />
+              <span>
+                {o.label} <em>({o.price})</em>
+              </span>
+            </label>
+          ))}
+        </div>
+      </section>
+
+      <section id="l29-shop-listen" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Part 3 · English in Action · 2a–2b</p>
+          <h2>Listen in the shop</h2>
+          <p className="lesson22-section-desc">
+            <strong>2a.</strong> Послухай <strong>R20</strong>. Які речі купує
+            чоловік? Відміть правильні.
+          </p>
         </div>
 
-        <div className="l28-task-note">
-          <strong>10 · Speak:</strong> Задай партнеру свої питання і запиши
-          відповіді. Потім розкажи класу 2–3 речення про партнера:{" "}
-          <em>
-            This is Olena. She’s twenty-five. She’s from Lviv. She’s a
-            designer.
-          </em>
+        <div className="l25-audio-list" style={{ margin: "0 0 1rem" }}>
+          <AudioPlayer track={trackR20} />
         </div>
+
+        <h3 className="l29-shop-subh">2a · What does he buy?</h3>
+        <div className="l29-shop-checks">
+          {(["book", "cups", "clock", "pen", "chair"] as const).map((id) => {
+            const labels: Record<string, string> = {
+              book: "a book",
+              cups: "cups",
+              clock: "a clock",
+              pen: "a pen",
+              chair: "a chair",
+            };
+            let cls = "l29-shop-check";
+            if (buyChecked) {
+              const selected = !!buyObj[id];
+              const correct = (buyAnswers as readonly string[]).includes(id);
+              if (selected && correct) cls += " is-ok";
+              else if (selected && !correct) cls += " is-err";
+              else if (!selected && correct) cls += " is-miss";
+            }
+            return (
+              <label key={id} className={cls}>
+                <input
+                  type="checkbox"
+                  checked={!!buyObj[id]}
+                  onChange={(e) => {
+                    setBuyChecked(false);
+                    setBuyObj((prev) => ({
+                      ...prev,
+                      [id]: e.target.checked,
+                    }));
+                  }}
+                />
+                <span>{labels[id]}</span>
+              </label>
+            );
+          })}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            className="l22-check-btn"
+            type="button"
+            onClick={() => setBuyChecked(true)}
+          >
+            Check 2a
+          </button>
+          <button
+            className="l29-reset-btn"
+            type="button"
+            onClick={() => {
+              setBuyObj({});
+              setBuyChecked(false);
+            }}
+          >
+            Reset
+          </button>
+          {buyChecked && (
+            <span className="l22-score">
+              {buyOk
+                ? "✓ clock + cups"
+                : `${buyScore} correct · ${buyWrong} wrong`}
+            </span>
+          )}
+        </div>
+
+        <p className="lesson22-section-desc" style={{ marginTop: "1rem" }}>
+          <strong>2b.</strong> Послухай ще раз і познач у рамці{" "}
+          <em>Useful phrases</em> фрази, які ти чуєш.
+        </p>
+
+        <div className="l29-phrases-box">
+          <h3>Useful phrases</h3>
+          <div className="l29-phrases-cols">
+            <div>
+              <h4>Customer</h4>
+              <ul className="l29-phrases-ticklist">
+                {customerPhrases.map((p) => {
+                  let cls = "l29-phrases-tick";
+                  if (phraseChecked) {
+                    const selected = !!phraseTick[p];
+                    const correct = heardInR20.has(p);
+                    if (selected && correct) cls += " is-ok";
+                    else if (selected && !correct) cls += " is-err";
+                    else if (!selected && correct) cls += " is-miss";
+                  }
+                  return (
+                    <li key={p}>
+                      <label className={cls}>
+                        <input
+                          type="checkbox"
+                          checked={!!phraseTick[p]}
+                          onChange={(e) => {
+                            setPhraseChecked(false);
+                            setPhraseTick((prev) => ({
+                              ...prev,
+                              [p]: e.target.checked,
+                            }));
+                          }}
+                        />
+                        <span>{p}</span>
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div>
+              <h4>Shop assistant</h4>
+              <ul className="l29-phrases-ticklist">
+                {assistantPhrases.map((p) => {
+                  let cls = "l29-phrases-tick";
+                  if (phraseChecked) {
+                    const selected = !!phraseTick[p];
+                    const correct = heardInR20.has(p);
+                    if (selected && correct) cls += " is-ok";
+                    else if (selected && !correct) cls += " is-err";
+                    else if (!selected && correct) cls += " is-miss";
+                  }
+                  return (
+                    <li key={p}>
+                      <label className={cls}>
+                        <input
+                          type="checkbox"
+                          checked={!!phraseTick[p]}
+                          onChange={(e) => {
+                            setPhraseChecked(false);
+                            setPhraseTick((prev) => ({
+                              ...prev,
+                              [p]: e.target.checked,
+                            }));
+                          }}
+                        />
+                        <span>{p}</span>
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            className="l22-check-btn"
+            type="button"
+            onClick={() => setPhraseChecked(true)}
+          >
+            Check 2b
+          </button>
+          <button
+            className="l29-reset-btn"
+            type="button"
+            onClick={() => {
+              setPhraseTick({});
+              setPhraseChecked(false);
+            }}
+          >
+            Reset
+          </button>
+          {phraseChecked && (
+            <span className="l22-score">
+              {phraseScore} / {heardInR20.size}
+              {phraseExtra ? ` · ${phraseExtra} extra` : ""}
+            </span>
+          )}
+        </div>
+      </section>
+
+      <section id="l29-shop-repeat" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Part 3 · English in Action · 2c</p>
+          <h2>Listen and repeat</h2>
+          <p className="lesson22-section-desc">
+            Послухай <strong>R21</strong> і повтори корисні фрази вголос.
+          </p>
+        </div>
+        <div className="l25-audio-list">
+          <AudioPlayer track={trackR21} />
+        </div>
+      </section>
+
+      <section id="l29-shop-roleplay" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Part 3 · English in Action · 3b–4</p>
+          <h2>Roleplay</h2>
+          <p className="lesson22-section-desc">
+            Попрактикуй діалог. Один — покупець, другий — продавець. Використай
+            ціни з картинки.
+          </p>
+        </div>
+
+        <figure className="l29-scene">
+          <img
+            src={IMG("shop-scene.png")}
+            alt="In a shop — objects and prices for roleplay"
+            width={919}
+            height={524}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption className="l28-scene-cap" style={{ marginTop: "0.4rem" }}>
+            In a shop
+          </figcaption>
+        </figure>
       </section>
 
       <section className="lesson22-block panel">
