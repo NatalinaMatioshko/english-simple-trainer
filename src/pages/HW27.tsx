@@ -15,6 +15,7 @@ import {
 } from "../data/hw27Review";
 import { useScoredQuiz } from "../hooks/useScoredQuiz";
 import { ScoredQuizCard } from "../components/practice/ScoredQuizCard";
+import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { shuffle } from "../utils/array";
 
 const writingPrompts = [
@@ -230,6 +231,22 @@ export default function HW27() {
           restart={test.restart}
           shuffleQuestions={test.shuffleQuestions}
           total={test.total}
+        />
+      </section>
+
+      <section className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Submit</p>
+          <h2>Send your homework</h2>
+          <p className="lesson22-section-desc">
+            Коли текст і тест готові — надішли роботу вчителю.
+          </p>
+        </div>
+        <HomeworkSubmit
+          lessonId="27"
+          writing={draft}
+          quizDone={test.finished}
+          quizScore={test.finished ? test.score : undefined}
         />
       </section>
 

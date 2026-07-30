@@ -48,16 +48,30 @@ Live: `https://<your-github-username>.github.io/english-simple-trainer/`
 
 ## Environment variables
 
-Create a `.env.local` file in the project root (not committed):
-
-```env
-# Teacher email for /admin/submissions.
-# Client-side "wrong account" UX check only.
-# Real access control: Firestore Security Rules on request.auth.token.email.
-VITE_TEACHER_EMAIL=your-teacher-email@gmail.com
+```bash
+cp .env.example .env.local
 ```
 
+Fill values from **Firebase Console → Project settings → Your apps** (web app).  
+`.env.local` is gitignored — do not commit it.
+
+**Next step if Auth fails (`API_KEY_INVALID`):** Google Cloud Console → APIs & Services → Credentials → create/regenerate a Browser key → paste into `VITE_FIREBASE_API_KEY` in `.env.local` → restart `npm run dev` → test `/admin/submissions`.
+
+| Variable | Purpose |
+|----------|---------|
+| `VITE_TEACHER_EMAIL` | Teacher email for `/admin/submissions` (client UX check only) |
+| `VITE_FIREBASE_API_KEY` | Firebase web API key |
+| `VITE_FIREBASE_AUTH_DOMAIN` | Auth domain |
+| `VITE_FIREBASE_PROJECT_ID` | Project ID |
+| `VITE_FIREBASE_STORAGE_BUCKET` | Storage bucket |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Messaging sender ID |
+| `VITE_FIREBASE_APP_ID` | Web app ID |
+
 If `VITE_TEACHER_EMAIL` is not set, the wrong-account check is skipped; any signed-in Google account may attempt the Firestore read (Rules still deny non-teacher accounts).
+
+Missing Firebase `VITE_*` vars throw a clear error at startup.
+
+**GitHub Pages deploy:** `npm run deploy` runs `predeploy` → `npm run build` (`tsc -b` + `vite build`), then `gh-pages -d dist`. Vite bakes `VITE_*` into the bundle at **build time**, so `.env.local` must be present on the machine that runs `npm run deploy` (or inject the same vars in CI before `vite build`). Restrict the API key by HTTP referrer in Google Cloud Console; enforce access with Firestore rules — the web `apiKey` is still visible in the client bundle by design.
 
 ---
 
@@ -94,7 +108,7 @@ src/
   styles/         # Global + per-lesson CSS
   types/          # Shared TypeScript types
   utils/          # shuffle, text helpers, speech (TTS)
-  firebase.ts     # Public Firebase web config
+  firebase.ts     # Firebase init (config from VITE_* env)
 public/
   images/         # Lesson posters, vocab photos, extras
   sounds/         # Unit audio (Roadmap A1 SB R-tracks) + UI sounds
@@ -109,7 +123,7 @@ public/
 | `homeworkAnswers` | Homework submissions (teacher admin page) |
 | `writingSubmissions` | About me / self-study writing saves |
 
-The Firebase web config in `src/firebase.ts` is intentionally public. Security is enforced via **Firestore Security Rules** in the Firebase Console.
+Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `apiKey` is still public in the client bundle after build — that is expected. Security is enforced via **Firestore Security Rules** and API key HTTP referrer restrictions, not by hiding the key in `.env`.
 
 ---
 

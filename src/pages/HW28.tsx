@@ -15,6 +15,7 @@ import {
 } from "../data/hw28Review";
 import { useScoredQuiz } from "../hooks/useScoredQuiz";
 import { ScoredQuizCard } from "../components/practice/ScoredQuizCard";
+import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { shuffle } from "../utils/array";
 
 const writingPrompts = [
@@ -182,6 +183,14 @@ export default function HW28() {
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           placeholder="This is my desk. That is my computer. These are my pens…"
+        />
+
+        <HomeworkSubmit
+          lessonId="28"
+          writing={draft}
+          quizDone={test.finished}
+          quizScore={test.finished ? test.score : undefined}
+          showListeningCheck={false}
         />
       </section>
 

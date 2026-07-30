@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Replace PLACEHOLDER with the same email as VITE_TEACHER_EMAIL
+    function isTeacher() {
+      return request.auth != null
+        && request.auth.token.email == 'PLACEHOLDER_TEACHER_EMAIL@gmail.com';
+    }
+
+    match /homeworkAnswers/{id} {
+      allow create: if
+        request.resource.data.studentName is string
+        && request.resource.data.studentName.size() >= 2
+        && request.resource.data.studentName.size() <= 80
+        && request.resource.data.lessonId is string
+        && request.resource.data.lessonId.size() > 0
+        && request.resource.data.lessonId.size() <= 20
+        && request.resource.data.writing is string
+        && request.resource.data.writing.size() >= 10
+        && request.resource.data.writing.size() <= 8000
+        && request.resource.data.testDone is bool
+        && request.resource.data.quizDone is bool
+        && (!('quizScore' in request.resource.data)
+            || request.resource.data.quizScore is int)
+        && request.resource.data.keys().hasAll([
+          'studentName', 'lessonId', 'writing', 'testDone', 'quizDone', 'createdAt'
+        ]);
+
+      allow read, list: if isTeacher();
+      allow update, delete: if false;
+    }
+
+    match /writingSubmissions/{id} {
+      allow create: if true;
+      allow read, list: if isTeacher();
+      allow update, delete: if false;
+    }
+  }
+}

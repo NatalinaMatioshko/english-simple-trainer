@@ -1,0 +1,79 @@
+.hw-submit {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  gap: 0.85rem;
+  max-width: 40rem;
+}
+
+.hw-submit__head {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.hw-submit__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.hw-submit__desc {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm, 0.95rem);
+  line-height: 1.5;
+}
+
+.hw-submit__field {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 700;
+}
+
+.hw-submit__field input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  font: inherit;
+  background: var(--color-surface-2, var(--color-surface));
+  color: var(--color-text);
+}
+
+.hw-submit__check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hw-submit__check input {
+  margin-top: 0.2rem;
+}
+
+.hw-submit__meta {
+  margin: 0;
+  font-size: var(--text-sm, 0.95rem);
+  color: var(--color-text-muted);
+}
+
+.hw-submit__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.hw-submit__ok {
+  margin: 0;
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+.hw-submit__err {
+  margin: 0;
+  color: var(--color-error);
+  font-weight: 700;
+}

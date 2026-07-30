@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FirebaseError } from "firebase/app";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import {
   GoogleAuthProvider,
@@ -26,8 +27,50 @@ type Submission = {
   writing?: string;
   testDone?: boolean;
   quizDone?: boolean;
+  quizScore?: number;
   createdAt?: { seconds?: number };
 };
+
+function formatCreatedAt(createdAt?: { seconds?: number }) {
+  if (typeof createdAt?.seconds !== "number") return null;
+  return new Date(createdAt.seconds * 1000).toLocaleString();
+}
+
+function signInErrorMessage(err: unknown): string {
+  const code =
+    err instanceof FirebaseError
+      ? err.code
+      : err && typeof err === "object" && "code" in err
+        ? String((err as { code: unknown }).code)
+        : "";
+  const message =
+    err instanceof Error ? err.message : typeof err === "string" ? err : "";
+  const haystack = `${code} ${message}`.toLowerCase();
+
+  if (
+    haystack.includes("api_key_invalid") ||
+    haystack.includes("api-key-not-valid") ||
+    haystack.includes("invalid-api-key")
+  ) {
+    return "Invalid Firebase API key (API_KEY_INVALID). Paste a new key into VITE_FIREBASE_API_KEY in .env.local and restart Vite. / Невірний API ключ — встав новий у .env.local і перезапусти Vite.";
+  }
+  if (code === "auth/operation-not-allowed") {
+    return "Google Sign-In is disabled. Enable it in Firebase Console → Authentication → Sign-in method. / Увімкни Google у Firebase Console.";
+  }
+  if (code === "auth/unauthorized-domain") {
+    return "This domain is not authorized. Add it in Firebase Console → Authentication → Settings → Authorized domains. / Додай домен у Authorized domains.";
+  }
+  if (
+    code === "auth/popup-closed-by-user" ||
+    code === "auth/cancelled-popup-request"
+  ) {
+    return "Sign-in popup was closed. Try again. / Вікно входу закрито — спробуй ще раз.";
+  }
+  if (code === "auth/popup-blocked") {
+    return "Sign-in popup was blocked by the browser. Allow popups and try again. / Браузер заблокував вікно — дозволь popups.";
+  }
+  return "Sign-in failed or was cancelled. / Вхід не вдався або скасований.";
+}
 
 export default function AdminSubmissions() {
   const [phase, setPhase] = useState<AuthPhase>("loading");
@@ -87,8 +130,8 @@ export default function AdminSubmissions() {
     setSignInError("");
     try {
       await signInWithPopup(auth, provider);
-    } catch {
-      setSignInError("Sign-in failed or was cancelled.");
+    } catch (err) {
+      setSignInError(signInErrorMessage(err));
     }
   };
 
@@ -177,21 +220,28 @@ export default function AdminSubmissions() {
               <p>No submissions yet.</p>
             </article>
           ) : (
-            items.map((item) => (
-              <article className="panel homework-card" key={item.id}>
-                <h2>
-                  {item.studentName || "Unknown student"} — Lesson{" "}
-                  {item.lessonId || "?"}
-                </h2>
-                <p className="lesson-topic">
-                  Test: {item.testDone ? "Done" : "Not done"} | Quiz:{" "}
-                  {item.quizDone ? "Done" : "Not done"}
-                </p>
-                <pre className="homework-pre">
-                  {item.writing?.trim() || "No writing answer."}
-                </pre>
-              </article>
-            ))
+            items.map((item) => {
+              const when = formatCreatedAt(item.createdAt);
+              return (
+                <article className="panel homework-card" key={item.id}>
+                  <h2>
+                    {item.studentName || "Unknown student"} — Lesson{" "}
+                    {item.lessonId || "?"}
+                  </h2>
+                  <p className="lesson-topic">
+                    Test: {item.testDone ? "Done" : "Not done"} | Quiz:{" "}
+                    {item.quizDone ? "Done" : "Not done"}
+                    {typeof item.quizScore === "number"
+                      ? ` (score ${item.quizScore})`
+                      : ""}
+                    {when ? ` · ${when}` : ""}
+                  </p>
+                  <pre className="homework-pre">
+                    {item.writing?.trim() || "No writing answer."}
+                  </pre>
+                </article>
+              );
+            })
           )}
         </section>
       )}

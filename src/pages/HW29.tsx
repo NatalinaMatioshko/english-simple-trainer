@@ -12,6 +12,7 @@ import {
 } from "../data/hw29Review";
 import { useScoredQuiz } from "../hooks/useScoredQuiz";
 import { ScoredQuizCard } from "../components/practice/ScoredQuizCard";
+import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import Hw29CheckReflect from "../components/Hw29CheckReflect";
 
 const IMG = (file: string) =>
@@ -468,6 +469,14 @@ export default function HW29() {
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           placeholder="Her name is… How old is she? She’s… Where is she from?…"
+        />
+
+        <HomeworkSubmit
+          lessonId="29"
+          writing={draft}
+          quizDone={test.finished}
+          quizScore={test.finished ? test.score : undefined}
+          showListeningCheck={false}
         />
       </section>
 
