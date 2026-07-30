@@ -199,7 +199,7 @@ const lessons: LessonEntry[] = [
     level: "A1",
     topic: "A1 foundation review · speaking · reading · listening · writing",
     description:
-      "Повна перевірка A1: 15 topic stations (me→shop) · do/does · have/has · speaking · reading · R4 · writing · reflect.",
+      "Повна перевірка A1: topic stations (me→shop + days) · speaking · reading · R4 · writing. HW: A1 Level Test.",
     lessonPath: "/lesson-30",
     homeworkPath: "/hw-30",
   },

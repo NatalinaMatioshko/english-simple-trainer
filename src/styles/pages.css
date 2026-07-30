@@ -183,6 +183,10 @@
   line-height: 1.5;
 }
 
+.home-covered-roadmap {
+  margin-top: 1.5rem;
+}
+
 .home-card {
   min-height: 220px;
   display: grid;

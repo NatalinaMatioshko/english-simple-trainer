@@ -3,7 +3,7 @@
   grid-template-columns: 360px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
-  min-height: calc(100dvh - 96px);
+  min-height: 0;
   margin-top: 24px;
 }
 
@@ -12,8 +12,8 @@
   top: 24px;
   padding: 24px;
   border-radius: 28px;
-  height: calc(100dvh - 48px);
-  overflow: hidden;
+  height: min(720px, 78vh);
+  overflow: auto;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -86,7 +86,7 @@
 
 .roadmap-viewport {
   min-width: 0;
-  height: calc(100dvh - 48px);
+  height: min(720px, 78vh);
   overflow: hidden;
   border-radius: 28px;
 }

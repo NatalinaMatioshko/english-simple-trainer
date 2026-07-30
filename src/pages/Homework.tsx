@@ -4,24 +4,16 @@ import "../styles/pages.css";
 const homeworkByLesson = [
   {
     id: "30",
-    title: "Check & Reflect",
+    title: "A1 Level Test",
     href: "/hw-30",
     tasks: [
       {
         type: "text",
-        text: "Topic stations: me · family · nationalities · jobs · appearance · routine · do/does · prepositions · do/make · can · articles · objects · numbers · shop · have/has",
+        text: "Full-screen A1 placement: one question at a time (all topics in sequence)",
       },
       {
         type: "text",
-        text: "Speaking: personal profile + family (from Lesson 30)",
-      },
-      {
-        type: "text",
-        text: "Writing: short personal profile covering all A1 themes",
-      },
-      {
-        type: "text",
-        text: "Reflect: confidence 1–5 on full A1 foundation",
+        text: "Result bands: Pre-A1 · Emerging A1 · A1 · Strong A1",
       },
     ],
   },

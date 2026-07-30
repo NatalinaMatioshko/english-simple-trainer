@@ -1,5 +1,11 @@
-import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import {
+  useMemo,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import { Link } from "react-router-dom";
+import CoveredTopicsRoadmap from "../components/CoveredTopicsRoadmap";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -9,6 +15,11 @@ import "../styles/lesson30.css";
 import {
   canChecklist,
   correctionItems,
+  daysOfWeek,
+  daysWeekGrammar,
+  daysWeekMatch,
+  daysWeekOrder,
+  daysWeekSpeak,
   familyCards,
   familyJobMatch,
   checkHorseAnswer,
@@ -118,6 +129,13 @@ export default function Lesson30() {
   const [horsePosFilter, setHorsePosFilter] = useState<HorsePos | null>(null);
   const [horseActiveWord, setHorseActiveWord] = useState<string | null>(null);
 
+  const [daysMatchAns, setDaysMatchAns] = useState<Record<number, string>>({});
+  const [daysMatchChecked, setDaysMatchChecked] = useState(false);
+  const [daysOrderAns, setDaysOrderAns] = useState<Record<number, string>>({});
+  const [daysOrderChecked, setDaysOrderChecked] = useState(false);
+  const [daysGramAns, setDaysGramAns] = useState<Record<number, string>>({});
+  const [daysGramChecked, setDaysGramChecked] = useState(false);
+
   const activeTopic = useMemo(
     () => topicStations.find((t) => t.id === topicId)!,
     [topicId],
@@ -142,6 +160,15 @@ export default function Lesson30() {
   ).length;
   const horseScore = horseQuestions.filter((q) =>
     checkHorseAnswer(horseAns[q.id] ?? "", q.answers),
+  ).length;
+  const daysMatchScore = daysWeekMatch.filter(
+    (q) => daysMatchAns[q.id] === q.answer,
+  ).length;
+  const daysOrderScore = daysWeekOrder.filter(
+    (q) => daysOrderAns[q.id] === q.answer,
+  ).length;
+  const daysGramScore = daysWeekGrammar.filter(
+    (q) => daysGramAns[q.id] === q.answer,
   ).length;
 
   const topicScore = activeTopic.quiz.filter(
@@ -196,7 +223,7 @@ export default function Lesson30() {
             style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
           >
             <Link className="lesson22-back-link" to="/hw-30">
-              Homework → Lesson 30
+              A1 Level Test →
             </Link>
             <Link className="lesson22-back-link" to="/lessons">
               ← Back to lessons
@@ -204,17 +231,21 @@ export default function Lesson30() {
           </div>
         </div>
         <div className="lesson22-hero-chips">
-          <span>15 topic stations</span>
+          <span>{topicStations.length} topic stations</span>
+          <span>days of the week</span>
           <span>do / does</span>
           <span>have / has</span>
-          <span>routine</span>
           <span>shop</span>
         </div>
       </section>
 
+      <CoveredTopicsRoadmap id="l30-covered" className="lesson22-block" />
+
       <section className="lesson22-block panel">
         <div className="lesson22-flow">
+          <a href="#l30-covered">Covered</a>
           <a href="#l30-grammar">Grammar</a>
+          <a href="#l30-days">Days</a>
           <a href="#l30-topics">All topics</a>
           <a href="#l30-speak-tour">Speaking tour</a>
           <a href="#l30-warmup">Warm-up</a>
@@ -394,6 +425,185 @@ export default function Lesson30() {
             <strong>Have</strong> → I, you, we, they &nbsp;·&nbsp;{" "}
             <strong>Has</strong> → he, she, it
           </p>
+        </div>
+      </section>
+
+      {/* ── Days of the week ── */}
+      <section id="l30-days" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Vocabulary check · Days of the week</p>
+          <h2>Days of the week</h2>
+          <p className="lesson22-section-desc">
+            Згадай дні тижня англійською: match UA → EN, порядок днів, і{" "}
+            <strong>on Monday</strong> / <strong>at the weekend</strong>.
+          </p>
+        </div>
+
+        <div className="l30-days-strip" aria-label="Days of the week">
+          {daysOfWeek.map((d, i) => (
+            <div key={d.en} className="l30-day-chip">
+              <span className="l30-day-num">{i + 1}</span>
+              <strong>{d.en}</strong>
+              <span>{d.ua}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="l25-conf-card" style={{ maxWidth: 640, marginBottom: "1rem" }}>
+          <div className="l25-conf-header">Remember</div>
+          <div className="l25-conf-fields">
+            <p style={{ margin: 0, fontSize: "var(--text-sm)", lineHeight: 1.55 }}>
+              <strong>on</strong> + day: on Monday, on Friday, on Sundays
+              <br />
+              <strong>at</strong> the weekend
+              <br />
+              Saturday + Sunday = the <strong>weekend</strong>
+            </p>
+          </div>
+        </div>
+
+        <h3 className="l22-listen-subtitle">1 · Match · UA → EN</h3>
+        <div className="l26-drill-list">
+          {daysWeekMatch.map((q) => (
+            <div key={q.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">
+                {q.id}. {q.prompt}
+              </strong>
+              <select
+                value={daysMatchAns[q.id] ?? ""}
+                onChange={(e) => {
+                  setDaysMatchChecked(false);
+                  setDaysMatchAns((p) => ({ ...p, [q.id]: e.target.value }));
+                }}
+                className={drillSelClass(
+                  daysMatchChecked,
+                  daysMatchAns[q.id] ?? "",
+                  q.answer,
+                )}
+                aria-label={q.prompt}
+              >
+                <option value="">___</option>
+                {q.options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setDaysMatchChecked(true)}
+          >
+            Check
+          </button>
+          {daysMatchChecked && (
+            <span className="l22-score">
+              {daysMatchScore} / {daysWeekMatch.length}
+            </span>
+          )}
+        </div>
+
+        <h3 className="l22-listen-subtitle">2 · Order</h3>
+        <div className="l26-drill-list">
+          {daysWeekOrder.map((q) => (
+            <div key={q.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">
+                {q.id}. {q.prompt}
+              </strong>
+              <select
+                value={daysOrderAns[q.id] ?? ""}
+                onChange={(e) => {
+                  setDaysOrderChecked(false);
+                  setDaysOrderAns((p) => ({ ...p, [q.id]: e.target.value }));
+                }}
+                className={drillSelClass(
+                  daysOrderChecked,
+                  daysOrderAns[q.id] ?? "",
+                  q.answer,
+                )}
+                aria-label={q.prompt}
+              >
+                <option value="">___</option>
+                {q.options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setDaysOrderChecked(true)}
+          >
+            Check
+          </button>
+          {daysOrderChecked && (
+            <span className="l22-score">
+              {daysOrderScore} / {daysWeekOrder.length}
+            </span>
+          )}
+        </div>
+
+        <h3 className="l22-listen-subtitle">3 · Grammar · on / at</h3>
+        <div className="l26-drill-list">
+          {daysWeekGrammar.map((q) => (
+            <div key={q.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">
+                {q.id}. {q.prompt}
+              </strong>
+              <select
+                value={daysGramAns[q.id] ?? ""}
+                onChange={(e) => {
+                  setDaysGramChecked(false);
+                  setDaysGramAns((p) => ({ ...p, [q.id]: e.target.value }));
+                }}
+                className={drillSelClass(
+                  daysGramChecked,
+                  daysGramAns[q.id] ?? "",
+                  q.answer,
+                )}
+                aria-label={q.prompt}
+              >
+                <option value="">___</option>
+                {q.options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setDaysGramChecked(true)}
+          >
+            Check
+          </button>
+          {daysGramChecked && (
+            <span className="l22-score">
+              {daysGramScore} / {daysWeekGrammar.length}
+            </span>
+          )}
+        </div>
+
+        <h3 className="l22-listen-subtitle">4 · Speak</h3>
+        <div className="lesson22-prompt-grid">
+          {daysWeekSpeak.map((q) => (
+            <div key={q} className="lesson22-prompt-card lesson22-prompt-card--task">
+              {q}
+            </div>
+          ))}
         </div>
       </section>
 
@@ -1309,7 +1519,7 @@ export default function Lesson30() {
             className="lesson22-prompt-card lesson22-prompt-card--task"
             to="/hw-30"
           >
-            Homework 30 →
+            A1 Level Test →
           </Link>
           <Link
             className="lesson22-prompt-card lesson22-prompt-card--task"

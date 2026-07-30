@@ -1,0 +1,243 @@
+/* Animated theme switch — scoped, header-sized */
+
+.theme-toggle {
+  --tt-sz: 12px;
+  --tt-on: #1aa3a8;
+  --tt-off: #f44336;
+  --tt-lg: var(--tt-off);
+  --tt-sp: 0.85s;
+
+  position: relative;
+  width: calc(var(--tt-sz) * 5.55);
+  height: calc(var(--tt-sz) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.theme-toggle.is-on {
+  --tt-lg: var(--tt-on);
+}
+
+.theme-toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.theme-toggle-track {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--tt-sz);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(
+      circle at 50% calc(var(--tt-sz) / 0.085),
+      transparent calc(var(--tt-sz) / 0.1),
+      #000 calc(var(--tt-sz) / 0.1 + 1px) calc(var(--tt-sz) / 0.0875),
+      transparent calc(var(--tt-sz) / 0.0875 + 1px) 100%
+    ),
+    radial-gradient(
+      circle at 50% calc(var(--tt-sz) / -0.1025),
+      transparent calc(var(--tt-sz) / 0.1),
+      #000 calc(var(--tt-sz) / 0.1 + 1px) calc(var(--tt-sz) / 0.0875),
+      transparent calc(var(--tt-sz) / 0.0875 + 1px) 100%
+    );
+}
+
+.theme-toggle-track::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--tt-sz);
+  background:
+    radial-gradient(
+      circle at 50% calc(var(--tt-sz) / 0.0845),
+      transparent calc(var(--tt-sz) / 0.1),
+      #121212 calc(var(--tt-sz) / 0.1 + 1px) calc(var(--tt-sz) / 0.0875),
+      transparent calc(var(--tt-sz) / 0.0875 + 1px) 100%
+    ),
+    radial-gradient(
+      circle at 50% calc(var(--tt-sz) / -0.1015),
+      transparent calc(var(--tt-sz) / 0.1),
+      #121212 calc(var(--tt-sz) / 0.1 + 1px) calc(var(--tt-sz) / 0.0875),
+      transparent calc(var(--tt-sz) / 0.0875 + 1px) 100%
+    );
+  filter:
+    drop-shadow(0 -1px 1px #000)
+    drop-shadow(0 1px 1px #fff6);
+  pointer-events: none;
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  z-index: 1;
+  width: calc(var(--tt-sz) * 2 - var(--tt-sz) / 8);
+  height: calc(var(--tt-sz) * 2 - var(--tt-sz) / 8);
+  margin-top: calc(var(--tt-sz) / 10 - var(--tt-sz) / 7);
+  left: calc(var(--tt-sz) / 10 - var(--tt-sz) / 30);
+  border-radius: var(--tt-sz);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(0deg, #212121, transparent 35% 65%, #474747),
+    radial-gradient(
+      transparent 0 calc(var(--tt-sz) / 3),
+      #393939 calc(var(--tt-sz) / 3 + 1px) calc(var(--tt-sz) / 1),
+      #474747
+    );
+  box-shadow:
+    0 0 calc(var(--tt-sz) / 3) calc(var(--tt-sz) / -8) var(--tt-lg),
+    0 0 calc(var(--tt-sz) / 5) calc(var(--tt-sz) / -15) var(--tt-lg) inset,
+    calc(var(--tt-sz) / -50) calc(var(--tt-sz) / 50) calc(var(--tt-sz) / 30) 0 #fff2 inset,
+    0 0 calc(var(--tt-sz) / 10) calc(var(--tt-sz) / 50) #000c,
+    0 calc(var(--tt-sz) / 4) calc(var(--tt-sz) / 5) 0 #000d;
+  transition:
+    left var(--tt-sp) ease,
+    box-shadow var(--tt-sp) ease,
+    background var(--tt-sp) ease;
+}
+
+.theme-toggle-input:checked + .theme-toggle-track .theme-toggle-thumb {
+  --tt-lg: var(--tt-on);
+  left: calc(
+    100% - (var(--tt-sz) * 2 - var(--tt-sz) / 3) - (var(--tt-sz) / 10 + var(--tt-sz) / 6)
+  );
+  animation: theme-toggle-grow 0.28s ease 0s 2 alternate;
+}
+
+.theme-toggle-thumb::before {
+  content: "";
+  width: calc(var(--tt-sz) / 1.65);
+  height: calc(var(--tt-sz) / 1.65);
+  border-radius: 100%;
+  background: transparent;
+  box-shadow:
+    0 calc(var(--tt-sz) / -1) calc(var(--tt-sz) / 2) var(--tt-lg),
+    0 calc(var(--tt-sz) / 1) calc(var(--tt-sz) / 2) var(--tt-lg),
+    0 0 8px 2px var(--tt-lg) inset,
+    0 0 14px 6px var(--tt-lg),
+    0 0 calc(var(--tt-sz) / 5) 0 #fff;
+  transition: box-shadow var(--tt-sp) ease;
+}
+
+@keyframes theme-toggle-grow {
+  80%,
+  100% {
+    height: calc(var(--tt-sz) * 2 - var(--tt-sz) / 2.5);
+    width: calc(var(--tt-sz) * 2 + var(--tt-sz) * 0.5);
+  }
+}
+
+.theme-toggle-lights {
+  position: absolute;
+  z-index: 0;
+  width: calc(100% - var(--tt-sz) * 1.425);
+  height: calc(var(--tt-sz) / 1.75);
+  margin-top: -1px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.theme-toggle-light {
+  position: relative;
+  width: calc(var(--tt-sz) / 1.75);
+  height: calc(var(--tt-sz) / 1.75);
+  border-radius: var(--tt-sz);
+  background: #121212;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 calc(var(--tt-sz) / 50) calc(var(--tt-sz) / 50) #0008,
+    0 calc(var(--tt-sz) / -20) calc(var(--tt-sz) / 10) calc(var(--tt-sz) / 500) #000,
+    0 calc(var(--tt-sz) / 20) calc(var(--tt-sz) / 10) calc(var(--tt-sz) / 500) #fff8,
+    0 0 calc(var(--tt-sz) / 20) calc(var(--tt-sz) / 25) #000;
+}
+
+.theme-toggle-light::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--tt-sz) / 50);
+  width: calc(100% - var(--tt-sz) / 15);
+  height: calc(100% - var(--tt-sz) / 15);
+  border-radius: var(--tt-sz);
+  background: radial-gradient(
+    circle at 50% 32%,
+    #fff5 0 calc(var(--tt-sz) / 20),
+    #000 calc(var(--tt-sz) / 3) calc(var(--tt-sz) / 3)
+  );
+  transition:
+    box-shadow var(--tt-sp) ease,
+    background var(--tt-sp) ease;
+}
+
+/* Light theme = red "off" lamp lit */
+.theme-toggle-light--off::after {
+  box-shadow:
+    0 0 calc(var(--tt-sz) / 2.5) 0 var(--tt-off),
+    0 0 calc(var(--tt-sz) / 3) calc(var(--tt-sz) / 20) var(--tt-off) inset,
+    0 calc(var(--tt-sz) / -20) calc(var(--tt-sz) / 10) calc(var(--tt-sz) / 10) #000 inset;
+  background: radial-gradient(
+    circle at 50% 32%,
+    #fff 0 calc(var(--tt-sz) / 20),
+    #fff8 calc(var(--tt-sz) / 3) calc(var(--tt-sz) / 3)
+  );
+}
+
+.theme-toggle-input:checked ~ .theme-toggle-lights .theme-toggle-light--off::after {
+  box-shadow:
+    0 0 calc(var(--tt-sz) / 3) 0 #f5000020,
+    0 0 calc(var(--tt-sz) / 3) calc(var(--tt-sz) / 20) #f5000020 inset;
+  background: radial-gradient(
+    circle at 50% 32%,
+    #fff5 0 calc(var(--tt-sz) / 20),
+    #000 calc(var(--tt-sz) / 3) calc(var(--tt-sz) / 3)
+  );
+}
+
+/* Dark theme = green "on" lamp lit */
+.theme-toggle-light--on::after {
+  box-shadow:
+    0 0 calc(var(--tt-sz) / 3) 0 color-mix(in srgb, var(--tt-on) 18%, transparent),
+    0 0 calc(var(--tt-sz) / 3) calc(var(--tt-sz) / 20)
+      color-mix(in srgb, var(--tt-on) 18%, transparent) inset;
+}
+
+.theme-toggle-input:checked ~ .theme-toggle-lights .theme-toggle-light--on::after {
+  box-shadow:
+    0 0 calc(var(--tt-sz) / 2.5) 0 var(--tt-on),
+    0 0 calc(var(--tt-sz) / 3) calc(var(--tt-sz) / 20) var(--tt-on) inset,
+    0 calc(var(--tt-sz) / -20) calc(var(--tt-sz) / 10) calc(var(--tt-sz) / 10) #000 inset;
+  background: radial-gradient(
+    circle at 50% 32%,
+    #fff 0 calc(var(--tt-sz) / 20),
+    color-mix(in srgb, var(--tt-on) 35%, #fff) calc(var(--tt-sz) / 3)
+      calc(var(--tt-sz) / 3)
+  );
+}
+
+.theme-toggle-input:focus-visible + .theme-toggle-track {
+  outline: 2px solid var(--color-primary, #0d9488);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-thumb,
+  .theme-toggle-thumb::before,
+  .theme-toggle-light::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

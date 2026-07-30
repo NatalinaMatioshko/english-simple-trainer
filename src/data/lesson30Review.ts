@@ -645,11 +645,129 @@ export const canChecklist = [
   "say 3–5 sentences about work or studies",
   "describe a person from a photo",
   "talk about my daily routine",
+  "say the days of the week and use on Monday / at the weekend",
   "ask and answer basic questions (do/does + WH)",
   "use can / can't",
   "name everyday objects and say prices",
   "answer simple listening questions",
   "read a short text phrase by phrase",
+] as const;
+
+/** Days of the week — A1 check (L18 / prepositions) */
+export const daysOfWeek = [
+  { en: "Monday", ua: "понеділок" },
+  { en: "Tuesday", ua: "вівторок" },
+  { en: "Wednesday", ua: "середа" },
+  { en: "Thursday", ua: "четвер" },
+  { en: "Friday", ua: "п'ятниця" },
+  { en: "Saturday", ua: "субота" },
+  { en: "Sunday", ua: "неділя" },
+] as const;
+
+export const daysWeekMatch: MatchItem[] = [
+  {
+    id: 1,
+    prompt: "понеділок →",
+    options: ["Monday", "Sunday", "Friday"],
+    answer: "Monday",
+  },
+  {
+    id: 2,
+    prompt: "вівторок →",
+    options: ["Thursday", "Tuesday", "Saturday"],
+    answer: "Tuesday",
+  },
+  {
+    id: 3,
+    prompt: "середа →",
+    options: ["Wednesday", "Monday", "Sunday"],
+    answer: "Wednesday",
+  },
+  {
+    id: 4,
+    prompt: "четвер →",
+    options: ["Tuesday", "Thursday", "Friday"],
+    answer: "Thursday",
+  },
+  {
+    id: 5,
+    prompt: "п'ятниця →",
+    options: ["Friday", "Wednesday", "Saturday"],
+    answer: "Friday",
+  },
+  {
+    id: 6,
+    prompt: "субота →",
+    options: ["Sunday", "Saturday", "Monday"],
+    answer: "Saturday",
+  },
+  {
+    id: 7,
+    prompt: "неділя →",
+    options: ["Monday", "Sunday", "Thursday"],
+    answer: "Sunday",
+  },
+];
+
+export const daysWeekOrder: MatchItem[] = [
+  {
+    id: 1,
+    prompt: "After Monday comes…",
+    options: ["Sunday", "Tuesday", "Friday"],
+    answer: "Tuesday",
+  },
+  {
+    id: 2,
+    prompt: "After Thursday comes…",
+    options: ["Wednesday", "Friday", "Sunday"],
+    answer: "Friday",
+  },
+  {
+    id: 3,
+    prompt: "Before Sunday comes…",
+    options: ["Monday", "Saturday", "Friday"],
+    answer: "Saturday",
+  },
+  {
+    id: 4,
+    prompt: "Weekdays are Monday to…",
+    options: ["Saturday", "Friday", "Sunday"],
+    answer: "Friday",
+  },
+];
+
+export const daysWeekGrammar: MatchItem[] = [
+  {
+    id: 1,
+    prompt: "I work ___ Monday.",
+    options: ["in", "on", "at"],
+    answer: "on",
+  },
+  {
+    id: 2,
+    prompt: "She doesn't work ___ Sundays.",
+    options: ["in", "on", "at"],
+    answer: "on",
+  },
+  {
+    id: 3,
+    prompt: "We go shopping ___ the weekend.",
+    options: ["in", "on", "at"],
+    answer: "at",
+  },
+  {
+    id: 4,
+    prompt: "Saturday and Sunday are the…",
+    options: ["weekdays", "weekend", "mornings"],
+    answer: "weekend",
+  },
+];
+
+export const daysWeekSpeak = [
+  "Say the days from Monday to Sunday.",
+  "What do you do on Monday?",
+  "What do you do on Friday evening?",
+  "What do you do at the weekend?",
 ] as const;
 
 /** All A1 foundation topics covered by Lessons 1–29 */
@@ -688,8 +806,8 @@ export const topicStations: TopicStation[] = [
       {
         id: 3,
         prompt: "They ___ not in class today.",
-        options: ["am", "is", "aren't"],
-        answer: "aren't",
+        options: ["am", "is", "are"],
+        answer: "are",
       },
     ],
   },
@@ -719,7 +837,7 @@ export const topicStations: TopicStation[] = [
         id: 3,
         prompt: "We have two children. ___ names are…",
         options: ["Our", "Their", "His"],
-        answer: "Our",
+        answer: "Their",
       },
     ],
   },
@@ -808,7 +926,7 @@ export const topicStations: TopicStation[] = [
       {
         id: 3,
         prompt: "He wears ___ .",
-        options: ["beard", "glasses", "blond"],
+        options: ["a beard", "glasses", "blond"],
         answer: "glasses",
       },
     ],
@@ -861,7 +979,7 @@ export const topicStations: TopicStation[] = [
       },
       {
         id: 2,
-        prompt: "She ___ like cats.",
+        prompt: "She ___ like cats. (ні)",
         options: ["don't", "doesn't", "isn't"],
         answer: "doesn't",
       },
@@ -905,6 +1023,48 @@ export const topicStations: TopicStation[] = [
         id: 4,
         prompt: "She's ___ home now.",
         options: ["in", "at", "to"],
+        answer: "at",
+      },
+    ],
+  },
+  {
+    id: "days",
+    title: "Days of the week",
+    lessons: "L8–9 · L18",
+    speak: [
+      "Say the days from Monday to Sunday.",
+      "What do you do on Monday / on Friday?",
+      "What do you do at the weekend?",
+    ],
+    quiz: [
+      {
+        id: 1,
+        prompt: "понеділок →",
+        options: ["Monday", "Sunday", "Friday"],
+        answer: "Monday",
+      },
+      {
+        id: 2,
+        prompt: "After Tuesday comes…",
+        options: ["Monday", "Wednesday", "Thursday"],
+        answer: "Wednesday",
+      },
+      {
+        id: 3,
+        prompt: "I study English ___ Friday.",
+        options: ["in", "on", "at"],
+        answer: "on",
+      },
+      {
+        id: 4,
+        prompt: "Saturday + Sunday = the…",
+        options: ["weekday", "weekend", "morning"],
+        answer: "weekend",
+      },
+      {
+        id: 5,
+        prompt: "We meet ___ the weekend.",
+        options: ["in", "on", "at"],
         answer: "at",
       },
     ],
@@ -1052,7 +1212,7 @@ export const topicStations: TopicStation[] = [
       },
       {
         id: 3,
-        prompt: "___ old is your phone?",
+        prompt: "___ old are you?",
         options: ["What", "How", "Which"],
         answer: "How",
       },
@@ -1178,6 +1338,12 @@ export const speakingTour: SpeakingTourCard[] = [
     model: "I'm at home. I go to school on Monday.",
   },
   {
+    id: "days",
+    topic: "Days of the week",
+    prompt: "Say all 7 days. Then: What do you do on Friday / at the weekend?",
+    model: "Monday, Tuesday… On Friday I… At the weekend I…",
+  },
+  {
     id: "do-make",
     topic: "Do / make",
     prompt: "Say one thing you do and one thing you make.",
@@ -1220,3 +1386,177 @@ export const speakingTour: SpeakingTourCard[] = [
     model: "I have a phone. She has a car.",
   },
 ];
+
+/** Curriculum map — everything covered in Lessons 1–29 (intro animation) */
+export type CoveredCategory = {
+  id: string;
+  titleUa: string;
+  titleEn: string;
+  accent: string;
+  /** Short label on roadmap node */
+  node: string;
+  items: string[];
+};
+
+export const coveredTopics: CoveredCategory[] = [
+  {
+    id: "grammar",
+    titleUa: "Граматика",
+    titleEn: "Grammar",
+    accent: "#2dd4bf",
+    node: "1",
+    items: [
+      "to be: am / is / are у ствердженнях, питаннях і запереченнях",
+      "Present Simple у базових структурах",
+      "can / can’t для вміння і невміння",
+      "a / an / the",
+      "possessive adjectives: my, your, his, her, our, their, its",
+      "possessive ’s: father’s name, friend’s name",
+      "demonstratives: this, that, these, those",
+      "різниця між it’s / its, they’re / their, you’re / your",
+      "базові правила do / make у сталих сполученнях",
+      "злічувані / незлічувані іменники у простих прикладах",
+    ],
+  },
+  {
+    id: "vocab",
+    titleUa: "Лексика",
+    titleEn: "Vocabulary",
+    accent: "#60a5fa",
+    node: "2",
+    items: [
+      "personal information: name, age, origin, job, student, place of work",
+      "family: mother, father, parents, brother, sister, son, daughter, husband, wife, children, uncle",
+      "jobs: doctor, nurse, pilot, farmer, taxi driver, office worker, police officer, artist, writer, receptionist, tour guide, engineer, dentist, football player, student, manager, soldier",
+      "nationalities and countries: British, American, Canadian, Polish, Spanish, Japanese, Mexican, Brazilian, Argentinian, Turkish…",
+      "appearance: tall, short, thin, fat, plump, curly, straight, blond/fair, dark, beard, glasses",
+      "feelings and character: happy, nervous, excited, friendly, quiet, shy, angry, bored, clever, kind, tidy",
+      "hobbies and interests: reading, dancing, swimming, singing, cooking, gaming",
+      "food: pizza, coffee, fried potatoes, fast food",
+    ],
+  },
+  {
+    id: "speaking",
+    titleUa: "Speaking",
+    titleEn: "Speaking",
+    accent: "#fb923c",
+    node: "3",
+    items: [
+      "представляти себе",
+      "розповідати про сім’ю",
+      "описувати людину за фото або карткою",
+      "говорити про роботу і місце роботи",
+      "говорити про хобі та вподобання",
+      "коротко розповідати про себе як personal profile",
+      "ставити прості питання про іншу людину",
+    ],
+  },
+  {
+    id: "listening",
+    titleUa: "Listening",
+    titleEn: "Listening",
+    accent: "#c084fc",
+    node: "4",
+    items: [
+      "короткі діалоги про стан, опис людей, сім’ю, професії",
+      "аудіо про країни та національності",
+      "аудіювання з вибором правильної відповіді",
+      "розуміння основної думки, а не кожного слова",
+    ],
+  },
+  {
+    id: "reading",
+    titleUa: "Reading",
+    titleEn: "Reading",
+    accent: "#f472b6",
+    node: "5",
+    items: [
+      "читання фразами / chunks",
+      "короткі тексти про сім’ю",
+      "тексти про професії та відомих людей",
+      "короткі профілі людей",
+      "виділення головної інформації з тексту",
+    ],
+  },
+  {
+    id: "writing",
+    titleUa: "Writing",
+    titleEn: "Writing",
+    accent: "#facc15",
+    node: "6",
+    items: [
+      "personal profile",
+      "короткий опис себе",
+      "простий текст про сім’ю",
+      "заповнення пропусків у тексті",
+      "базові домашні завдання на платформі",
+    ],
+  },
+  {
+    id: "phonetics",
+    titleUa: "Фонетика і вимова",
+    titleEn: "Pronunciation",
+    accent: "#22d3ee",
+    node: "7",
+    items: [
+      "word stress у назвах країн",
+      "вимова професій",
+      "різниця між British та American pronunciation у простих прикладах",
+      "чітке читання кінцевих звуків",
+      "відпрацювання наголосу в can / can’t",
+    ],
+  },
+  {
+    id: "comms",
+    titleUa: "Комунікативні теми",
+    titleEn: "Topics",
+    accent: "#4ade80",
+    node: "8",
+    items: [
+      "знайомство",
+      "опис себе",
+      "сім’я",
+      "робота",
+      "національність",
+      "місце проживання",
+      "зовнішність",
+      "хобі",
+      "улюблена їжа",
+      "короткі історії про людей",
+    ],
+  },
+];
+
+export type CoveredStep = {
+  globalIndex: number;
+  catIndex: number;
+  itemIndex: number;
+  cat: CoveredCategory;
+  text: string;
+};
+
+export const coveredSteps: CoveredStep[] = coveredTopics.flatMap(
+  (cat, catIndex) =>
+    cat.items.map((text, itemIndex) => ({
+      globalIndex:
+        coveredTopics
+          .slice(0, catIndex)
+          .reduce((n, c) => n + c.items.length, 0) + itemIndex,
+      catIndex,
+      itemIndex,
+      cat,
+      text,
+    })),
+);
+
+/** % positions along the winding roadmap (viewBox 0 0 1000 560) */
+export const coveredNodePoints = [
+  { x: 90, y: 480 },
+  { x: 250, y: 400 },
+  { x: 150, y: 290 },
+  { x: 360, y: 210 },
+  { x: 540, y: 280 },
+  { x: 710, y: 175 },
+  { x: 800, y: 85 },
+  { x: 920, y: 50 },
+] as const;

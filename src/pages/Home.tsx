@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "../styles/pages.css";
 import RoadmapSection from "../components/RoadmapSection";
+import CoveredTopicsRoadmap from "../components/CoveredTopicsRoadmap";
 import "../styles/roadmap.css";
 const shortcuts = [
   {
@@ -60,6 +61,9 @@ export default function Home() {
       </section>
       <section>
         <RoadmapSection />
+      </section>
+      <section className="home-covered-roadmap">
+        <CoveredTopicsRoadmap id="home-a1-covered" />
       </section>
     </div>
   );
