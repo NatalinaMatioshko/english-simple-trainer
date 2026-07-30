@@ -1,0 +1,574 @@
+/* 404 · caveman scene (adapted from CodePen / SofiaSergio) */
+
+.nf-page {
+  --nf-black: #13242c;
+  --nf-white: #fff;
+  --nf-red-1: #d13433;
+  --nf-red-2: #932422;
+  --nf-skin-1: #eab08c;
+  --nf-skin-2: #d9766c;
+  --nf-skin-3: #b2524d;
+  --nf-hair: #13242c;
+  --nf-wood-1: #601513;
+  --nf-bg: #ff7f2e;
+
+  position: relative;
+  min-height: calc(100dvh - 8rem);
+  margin: -0.5rem -0.25rem 0;
+  overflow: hidden;
+  background-color: var(--nf-bg);
+  color: var(--nf-black);
+  border-radius: var(--radius-lg, 1.25rem);
+}
+
+.nf-text {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+  color: rgba(19, 36, 44, 0.12);
+  font-family: var(--font-display, "Fraunces", serif);
+  font-size: clamp(8rem, 28vw, 18rem);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.nf-text p {
+  margin: 0;
+}
+
+.nf-container {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  height: 300px;
+  width: min(500px, 92vw);
+  z-index: 1;
+}
+
+.nf-container::after {
+  content: "";
+  position: absolute;
+  background-color: rgba(19, 36, 44, 0.1);
+  border-radius: 12px;
+  bottom: 40px;
+  height: 12px;
+  left: 80px;
+  width: 350px;
+  z-index: -1;
+  animation: nf-shadow-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
+  animation-delay: 0.1s;
+}
+
+.nf-caveman {
+  height: 300px;
+  position: absolute;
+  width: 250px;
+}
+
+.nf-caveman:nth-child(1) {
+  right: 20px;
+}
+
+.nf-caveman:nth-child(2) {
+  left: 20px;
+  transform: rotateY(180deg);
+}
+
+.nf-head {
+  position: absolute;
+  background-color: var(--nf-hair);
+  border-radius: 50px;
+  height: 140px;
+  left: 60px;
+  top: 25px;
+  width: 65px;
+}
+
+.nf-head::after,
+.nf-head::before {
+  content: "";
+  position: absolute;
+  background-color: var(--nf-black);
+  border-radius: 10px;
+  height: 20px;
+  width: 7px;
+}
+
+.nf-head::after {
+  left: 35px;
+  top: -8px;
+  transform: rotate(20deg);
+}
+
+.nf-head::before {
+  left: 30px;
+  top: -8px;
+  transform: rotate(-20deg);
+}
+
+.nf-eye {
+  position: absolute;
+  left: 45%;
+  transform: translateX(-50%);
+  background-color: var(--nf-skin-1);
+  border-radius: 50px;
+  height: 16px;
+  top: 40px;
+  width: 48px;
+}
+
+.nf-eye::after,
+.nf-eye::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--nf-black);
+  border-radius: 50%;
+  height: 5px;
+  width: 5px;
+}
+
+.nf-eye::after {
+  left: 5px;
+}
+
+.nf-eye::before {
+  right: 9px;
+}
+
+.nf-nose {
+  position: absolute;
+  left: 45%;
+  top: 12px;
+  transform: translate(-50%, -50%);
+  background-color: var(--nf-skin-2);
+  border-left: 8px solid rgba(19, 36, 44, 0.1);
+  border-radius: 10px;
+  box-sizing: border-box;
+  height: 35px;
+  width: 15px;
+}
+
+.nf-shape {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  height: 140px;
+  overflow: hidden;
+  top: 70px;
+  width: 140px;
+}
+
+.nf-circle {
+  position: absolute;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+}
+
+.nf-circle::after,
+.nf-circle::before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+}
+
+.nf-circle::after {
+  left: 50px;
+  top: 10px;
+}
+
+.nf-circle::before {
+  left: 60px;
+  top: 45px;
+}
+
+.nf-circle:nth-child(1) {
+  left: -12px;
+  top: 80px;
+}
+
+.nf-circle:nth-child(2) {
+  right: 10px;
+  top: 0;
+  transform: rotate(90deg);
+}
+
+.nf-circle:nth-child(2)::after {
+  left: 65px;
+  top: 10px;
+}
+
+.nf-circle:nth-child(2)::before {
+  display: none;
+}
+
+.nf-caveman:nth-child(1) .nf-shape {
+  background-color: var(--nf-red-1);
+}
+
+.nf-caveman:nth-child(1) .nf-circle,
+.nf-caveman:nth-child(1) .nf-circle::after,
+.nf-caveman:nth-child(1) .nf-circle::before {
+  background-color: var(--nf-red-2);
+}
+
+.nf-caveman:nth-child(2) .nf-shape {
+  background-color: var(--nf-red-2);
+}
+
+.nf-caveman:nth-child(2) .nf-circle,
+.nf-caveman:nth-child(2) .nf-circle::after,
+.nf-caveman:nth-child(2) .nf-circle::before {
+  background-color: var(--nf-red-1);
+}
+
+.nf-arm-right {
+  position: absolute;
+  background-color: var(--nf-skin-1);
+  border-left: 8px solid rgba(19, 36, 44, 0.1);
+  border-radius: 50px;
+  box-sizing: border-box;
+  height: 180px;
+  left: 135px;
+  top: 80px;
+  transform-origin: 30px 30px;
+  width: 60px;
+  z-index: 1;
+}
+
+.nf-club {
+  position: absolute;
+  border-bottom: 110px solid var(--nf-wood-1);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  height: 0;
+  left: -60px;
+  top: 120px;
+  transform: rotate(70deg);
+  width: 20px;
+}
+
+.nf-club::after,
+.nf-club::before {
+  position: absolute;
+  content: "";
+  background-color: var(--nf-wood-1);
+  border-radius: 50%;
+  left: 0;
+}
+
+.nf-club::after {
+  height: 20px;
+  width: 20px;
+  top: -10px;
+}
+
+.nf-club::before {
+  height: 40px;
+  width: 40px;
+  left: -10px;
+  top: 90px;
+}
+
+.nf-leg {
+  position: absolute;
+  border-radius: 10px;
+  height: 55px;
+  top: 200px;
+  width: 10px;
+}
+
+.nf-leg::after {
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+  height: 10px;
+  left: -5px;
+  top: 15px;
+  width: 10px;
+}
+
+.nf-foot {
+  position: absolute;
+  border-radius: 25px 25px 0 0;
+  height: 25px;
+  left: -38px;
+  top: 30px;
+  width: 50px;
+}
+
+.nf-foot::after,
+.nf-foot::before,
+.nf-fingers,
+.nf-fingers::after {
+  position: absolute;
+  background-color: var(--nf-skin-1);
+  border-radius: 50%;
+  bottom: 0;
+  height: 15px;
+  transform-origin: bottom;
+  width: 15px;
+}
+
+.nf-foot::after {
+  left: -6px;
+  content: "";
+}
+
+.nf-foot::before {
+  left: 8px;
+  transform: scale(0.6);
+  content: "";
+}
+
+.nf-fingers {
+  left: 15px;
+  transform: scale(0.6);
+}
+
+.nf-fingers::after {
+  left: 11px;
+  content: "";
+}
+
+.nf-leg:nth-child(1) {
+  background-color: var(--nf-skin-3);
+  left: 95px;
+}
+
+.nf-leg:nth-child(1)::after,
+.nf-leg:nth-child(1) .nf-foot,
+.nf-leg:nth-child(1) .nf-foot::after {
+  background-color: var(--nf-skin-3);
+}
+
+.nf-leg:nth-child(1) .nf-foot::before {
+  display: none;
+}
+
+.nf-leg:nth-child(2) {
+  background-color: var(--nf-skin-2);
+  left: 115px;
+}
+
+.nf-leg:nth-child(2)::after,
+.nf-leg:nth-child(2) .nf-foot {
+  background-color: var(--nf-skin-2);
+}
+
+.nf-caveman:nth-child(1) .nf-arm-right {
+  animation: nf-arm-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
+}
+
+.nf-caveman:nth-child(2) .nf-arm-right {
+  animation: nf-arm-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
+  animation-delay: 0.6s;
+}
+
+@keyframes nf-arm-anima {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.nf-caveman:nth-child(2) .nf-head {
+  animation: nf-head-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
+}
+
+.nf-caveman:nth-child(1) .nf-head {
+  animation: nf-head-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
+  animation-delay: 0.6s;
+}
+
+@keyframes nf-head-anima {
+  0% {
+    top: 25px;
+  }
+  42% {
+    top: 25px;
+  }
+  45% {
+    top: 50px;
+  }
+  100% {
+    top: 25px;
+  }
+}
+
+.nf-caveman:nth-child(2) .nf-eye::after,
+.nf-caveman:nth-child(2) .nf-eye::before {
+  animation: nf-eye-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
+}
+
+.nf-caveman:nth-child(1) .nf-eye::after,
+.nf-caveman:nth-child(1) .nf-eye::before {
+  animation: nf-eye-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
+  animation-delay: 0.6s;
+}
+
+@keyframes nf-eye-anima {
+  0% {
+    height: 5px;
+  }
+  42% {
+    height: 5px;
+  }
+  45% {
+    height: 1px;
+  }
+  100% {
+    height: 5px;
+  }
+}
+
+@keyframes nf-shadow-anima {
+  0% {
+    width: 350px;
+    left: 80px;
+  }
+  25% {
+    width: 450px;
+    left: 80px;
+  }
+  50% {
+    width: 350px;
+    left: 80px;
+  }
+  75% {
+    width: 450px;
+    left: 0;
+  }
+  100% {
+    width: 350px;
+    left: 80px;
+  }
+}
+
+.nf-copy {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(4.5rem, 12vh, 7rem);
+  transform: translateX(-50%);
+  z-index: 2;
+  width: min(420px, 90vw);
+  text-align: center;
+}
+
+.nf-kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(19, 36, 44, 0.7);
+}
+
+.nf-copy h1 {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-display, "Fraunces", serif);
+  font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+  line-height: 1.2;
+  color: var(--nf-black);
+}
+
+.nf-desc {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: rgba(19, 36, 44, 0.85);
+}
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: center;
+}
+
+.nf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: var(--nf-black);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.88rem;
+  text-decoration: none;
+  border: 2px solid var(--nf-black);
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.nf-btn:hover {
+  transform: translateY(-1px);
+  background: #0b1a20;
+}
+
+.nf-btn--ghost {
+  background: transparent;
+  color: var(--nf-black);
+}
+
+.nf-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.nf-credit {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.35);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nf-credit:hover {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+@media (max-width: 700px) {
+  .nf-page {
+    min-height: calc(100dvh - 10rem);
+  }
+
+  .nf-container {
+    top: 40%;
+    transform: translate(-50%, -50%) scale(0.78);
+  }
+
+  .nf-copy {
+    bottom: 3.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-caveman .nf-arm-right,
+  .nf-caveman .nf-head,
+  .nf-eye::after,
+  .nf-eye::before,
+  .nf-container::after {
+    animation: none !important;
+  }
+}

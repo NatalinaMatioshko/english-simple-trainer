@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "../context/ThemeContext";
 import { SiteLayout } from "../components/layout/SiteLayout";
 import TrainerPage from "../pages/TrainerPage";
@@ -31,6 +31,7 @@ import HW30 from "../pages/HW30";
 import ExtraResources from "../pages/ExtraResources";
 import VocabPage from "../pages/VocabPage";
 import SelfStudyReview from "../pages/SelfStudyReview";
+import NotFound from "../pages/NotFound";
 
 import Home from "../pages/Home";
 import { AboutMePage } from "../components/AboutMePage/AboutMePage";
@@ -71,7 +72,7 @@ function AppRoutes() {
         <Route path="/homework" element={<Homework />} />
         <Route path="/homework/:id" element={<HomeworkLesson />} />
         <Route path="/admin/submissions" element={<AdminSubmissions />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
