@@ -1595,12 +1595,12 @@ h1 {
   }
 
   .site-topbar {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) auto;
     justify-items: stretch;
   }
 
   .site-nav {
-    justify-content: flex-start;
+    display: none;
   }
 
   .topbar-actions {
