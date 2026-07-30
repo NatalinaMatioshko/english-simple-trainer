@@ -10,6 +10,8 @@ type Props = {
   quizScore?: number;
   /** Show checkbox for external listening / Test-English task */
   showListeningCheck?: boolean;
+  title?: string;
+  description?: string;
 };
 
 export function HomeworkSubmit({
@@ -18,6 +20,8 @@ export function HomeworkSubmit({
   quizDone = false,
   quizScore,
   showListeningCheck = true,
+  title = "Надіслати домашнє",
+  description = "Текст береться з поля вище. Додай ім’я і натисни «Надіслати».",
 }: Props) {
   const [studentName, setStudentName] = useState("");
   const [testDone, setTestDone] = useState(false);
@@ -64,10 +68,8 @@ export function HomeworkSubmit({
     <div className="hw-submit">
       <div className="hw-submit__head">
         <p className="page-kicker">Send to teacher</p>
-        <h3 className="hw-submit__title">Надіслати домашнє</h3>
-        <p className="hw-submit__desc">
-          Текст береться з поля вище. Додай ім’я і натисни «Надіслати».
-        </p>
+        <h3 className="hw-submit__title">{title}</h3>
+        <p className="hw-submit__desc">{description}</p>
       </div>
 
       <label className="hw-submit__field">

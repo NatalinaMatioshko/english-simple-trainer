@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FirebaseError } from "firebase/app";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -20,20 +20,36 @@ const provider = new GoogleAuthProvider();
 
 type AuthPhase = "loading" | "signed-out" | "wrong-account" | "ready";
 
-type Submission = {
+type FeedItem = {
   id: string;
-  studentName?: string;
-  lessonId?: string;
-  writing?: string;
-  testDone?: boolean;
-  quizDone?: boolean;
-  quizScore?: number;
-  createdAt?: { seconds?: number };
+  source: "homework" | "writing";
+  title: string;
+  meta: string;
+  body: string;
+  sortMs: number;
 };
 
-function formatCreatedAt(createdAt?: { seconds?: number }) {
-  if (typeof createdAt?.seconds !== "number") return null;
-  return new Date(createdAt.seconds * 1000).toLocaleString();
+function timestampToMs(
+  value: unknown,
+): number {
+  if (
+    value &&
+    typeof value === "object" &&
+    "seconds" in value &&
+    typeof (value as { seconds: unknown }).seconds === "number"
+  ) {
+    return (value as { seconds: number }).seconds * 1000;
+  }
+  if (typeof value === "string") {
+    const ms = Date.parse(value);
+    return Number.isNaN(ms) ? 0 : ms;
+  }
+  return 0;
+}
+
+function formatMs(ms: number) {
+  if (!ms) return null;
+  return new Date(ms).toLocaleString();
 }
 
 function signInErrorMessage(err: unknown): string {
@@ -75,7 +91,7 @@ function signInErrorMessage(err: unknown): string {
 export default function AdminSubmissions() {
   const [phase, setPhase] = useState<AuthPhase>("loading");
   const [user, setUser] = useState<User | null>(null);
-  const [items, setItems] = useState<Submission[]>([]);
+  const [items, setItems] = useState<FeedItem[]>([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [error, setError] = useState("");
   const [signInError, setSignInError] = useState("");
@@ -103,20 +119,71 @@ export default function AdminSubmissions() {
     setDataLoading(true);
     const load = async () => {
       try {
-        const q = query(
-          collection(db, "homeworkAnswers"),
-          orderBy("createdAt", "desc"),
-        );
-        const snapshot = await getDocs(q);
+        const [hwSnap, writingSnap] = await Promise.all([
+          getDocs(query(collection(db, "homeworkAnswers"))),
+          getDocs(query(collection(db, "writingSubmissions"))),
+        ]);
+
+        const homework: FeedItem[] = hwSnap.docs.map((docSnap) => {
+          const d = docSnap.data();
+          const sortMs = timestampToMs(d.createdAt);
+          const when = formatMs(sortMs);
+          return {
+            id: `hw-${docSnap.id}`,
+            source: "homework",
+            title: `${d.studentName || "Unknown student"} — Lesson ${d.lessonId || "?"}`,
+            meta: [
+              `Test: ${d.testDone ? "Done" : "Not done"}`,
+              `Quiz: ${d.quizDone ? "Done" : "Not done"}`,
+              typeof d.quizScore === "number" ? `score ${d.quizScore}` : null,
+              when,
+            ]
+              .filter(Boolean)
+              .join(" · "),
+            body:
+              typeof d.writing === "string" && d.writing.trim()
+                ? d.writing
+                : "No writing answer.",
+            sortMs,
+          };
+        });
+
+        const writing: FeedItem[] = writingSnap.docs.map((docSnap) => {
+          const d = docSnap.data();
+          const sortMs =
+            timestampToMs(d.serverCreatedAt) || timestampToMs(d.createdAt);
+          const when = formatMs(sortMs);
+          const page =
+            d.page === "self-study"
+              ? "Self-study"
+              : d.page === "about-me"
+                ? "About me"
+                : "Writing";
+          return {
+            id: `wr-${docSnap.id}`,
+            source: "writing",
+            title: `${d.name || "Unknown student"} — ${page}`,
+            meta: [
+              d.age ? `age ${d.age}` : null,
+              [d.city, d.country].filter(Boolean).join(", ") || null,
+              when,
+            ]
+              .filter(Boolean)
+              .join(" · "),
+            body:
+              typeof d.text === "string" && d.text.trim()
+                ? d.text
+                : "No writing answer.",
+            sortMs,
+          };
+        });
+
         setItems(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...(doc.data() as Omit<Submission, "id">),
-          })),
+          [...homework, ...writing].sort((a, b) => b.sortMs - a.sortMs),
         );
       } catch {
         setError(
-          "Firestore denied access. Verify that the signed-in account matches the teacher email in your Rules.",
+          "Firestore denied access. Verify that the signed-in account matches the teacher email in your Rules, and that writingSubmissions is readable by the teacher.",
         );
       } finally {
         setDataLoading(false);
@@ -185,7 +252,6 @@ export default function AdminSubmissions() {
     );
   }
 
-  // phase === "ready" — teacher confirmed, Firestore read in progress or done
   return (
     <div className="page-shell">
       <header className="page-hero panel">
@@ -193,6 +259,8 @@ export default function AdminSubmissions() {
         <h1>Submissions</h1>
         <p className="page-subtitle">
           Signed in as <strong>{user?.email}</strong>
+          <br />
+          Homework (HW27–30) + About me / Self-study writing.
         </p>
         <button
           className="action-btn secondary"
@@ -220,28 +288,16 @@ export default function AdminSubmissions() {
               <p>No submissions yet.</p>
             </article>
           ) : (
-            items.map((item) => {
-              const when = formatCreatedAt(item.createdAt);
-              return (
-                <article className="panel homework-card" key={item.id}>
-                  <h2>
-                    {item.studentName || "Unknown student"} — Lesson{" "}
-                    {item.lessonId || "?"}
-                  </h2>
-                  <p className="lesson-topic">
-                    Test: {item.testDone ? "Done" : "Not done"} | Quiz:{" "}
-                    {item.quizDone ? "Done" : "Not done"}
-                    {typeof item.quizScore === "number"
-                      ? ` (score ${item.quizScore})`
-                      : ""}
-                    {when ? ` · ${when}` : ""}
-                  </p>
-                  <pre className="homework-pre">
-                    {item.writing?.trim() || "No writing answer."}
-                  </pre>
-                </article>
-              );
-            })
+            items.map((item) => (
+              <article className="panel homework-card" key={item.id}>
+                <p className="page-kicker" style={{ marginBottom: "0.35rem" }}>
+                  {item.source === "homework" ? "Homework" : "Writing"}
+                </p>
+                <h2>{item.title}</h2>
+                <p className="lesson-topic">{item.meta}</p>
+                <pre className="homework-pre">{item.body}</pre>
+              </article>
+            ))
           )}
         </section>
       )}

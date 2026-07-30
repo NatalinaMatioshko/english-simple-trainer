@@ -10,6 +10,7 @@ import {
   type Hw30LevelTask,
 } from "../data/hw30LevelTest";
 import { useScoredQuiz } from "../hooks/useScoredQuiz";
+import { HomeworkSubmit } from "../components/HomeworkSubmit";
 
 export default function HW30() {
   const quiz = useScoredQuiz(a1LevelTasks, "hw30-a1-level");
@@ -23,6 +24,17 @@ export default function HW30() {
       : quiz.answeredCount + 1;
   const isLastQuestion = quiz.answeredCount >= quiz.total && quiz.locked;
   const a1Confirmed = quiz.score >= passScore;
+  const resultSummary = quiz.finished
+    ? [
+        `A1 Level Test result`,
+        `Score: ${quiz.score} / ${quiz.total} (${percent}%)`,
+        `Band: ${band.labelUa} · CEFR ${band.cefr}`,
+        a1Confirmed
+          ? `A1 confirmed (pass score ${passScore}+).`
+          : `A1 not confirmed yet (need ${passScore}+).`,
+        band.advice,
+      ].join("\n")
+    : "";
 
   return (
     <div className="hw30-immersive">
@@ -186,6 +198,16 @@ export default function HW30() {
                 Vocabulary →
               </Link>
             </div>
+
+            <HomeworkSubmit
+              lessonId="30"
+              writing={resultSummary}
+              quizDone
+              quizScore={quiz.score}
+              showListeningCheck={false}
+              title="Надіслати результат вчителю"
+              description="Додай ім’я — вчитель побачить твій бал і рівень A1."
+            />
           </section>
         )}
       </main>
