@@ -7,6 +7,12 @@ service cloud.firestore {
         && request.auth.token.email == 'PLACEHOLDER_TEACHER_EMAIL@gmail.com';
     }
 
+    function teacherReviewOnly() {
+      return isTeacher()
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['reviewed', 'reviewedAt']);
+    }
+
     match /homeworkAnswers/{id} {
       allow create: if
         request.resource.data.studentName is string
@@ -27,13 +33,23 @@ service cloud.firestore {
         ]);
 
       allow read, list: if isTeacher();
-      allow update, delete: if false;
+      allow update: if teacherReviewOnly();
+      allow delete: if false;
     }
 
     match /writingSubmissions/{id} {
-      allow create: if true;
+      allow create: if
+        request.resource.data.name is string
+        && request.resource.data.name.size() >= 1
+        && request.resource.data.name.size() <= 80
+        && request.resource.data.text is string
+        && request.resource.data.text.size() >= 1
+        && request.resource.data.text.size() <= 8000
+        && request.resource.data.page in ['about-me', 'self-study'];
+
       allow read, list: if isTeacher();
-      allow update, delete: if false;
+      allow update: if teacherReviewOnly();
+      allow delete: if false;
     }
   }
 }

@@ -92,6 +92,27 @@ Add: `<your-github-username>.github.io`
 Without this on the live site: `auth/unauthorized-domain`.  
 `localhost` is authorized by default.
 
+**3. Browser API key HTTP referrers (if restricted)**
+
+Google Sign-In popup runs on your Firebase Auth domain, not only on GitHub Pages.  
+If the key has Application restrictions → HTTP referrers, include **all** of:
+
+```
+http://localhost:5173/*
+http://127.0.0.1:5173/*
+https://natalinamatioshko.github.io/*
+https://natalinamatioshko.github.io/english-simple-trainer/*
+https://english-simple-trainer.firebaseapp.com/*
+https://english-simple-trainer.web.app/*
+```
+
+Missing `*.firebaseapp.com` / `*.web.app` often shows: **The requested action is invalid.**
+
+**4. Firestore Rules — teacher review**
+
+Keep your real teacher email in Console `isTeacher()`.  
+To enable **Mark as reviewed** in `/admin/submissions`, allow teacher updates that only touch `reviewed` + `reviewedAt` (see repo `firestore.rules` → `teacherReviewOnly()`). Publish after editing.
+
 ---
 
 ## Project structure

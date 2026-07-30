@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FirebaseError } from "firebase/app";
 import { collection, getDocs, query } from "firebase/firestore";
 import {
@@ -10,28 +10,35 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { Loader } from "../components/Loader";
+import {
+  markSubmissionReviewed,
+  type SubmissionCollection,
+} from "../services/submissionReview";
 import "../styles/pages.css";
+import "../styles/adminSubmissions.css";
 
-// VITE_TEACHER_EMAIL provides an early client-side "wrong account" check (UX only).
-// Actual access is enforced server-side by Firestore Rules on request.auth.token.email.
 const TEACHER_EMAIL = import.meta.env.VITE_TEACHER_EMAIL as string | undefined;
 
 const provider = new GoogleAuthProvider();
 
 type AuthPhase = "loading" | "signed-out" | "wrong-account" | "ready";
+type SourceFilter = "all" | "homework" | "writing";
+type StatusFilter = "all" | "new" | "reviewed";
 
 type FeedItem = {
-  id: string;
+  key: string;
+  docId: string;
+  collectionName: SubmissionCollection;
   source: "homework" | "writing";
+  lessonId: string;
   title: string;
   meta: string;
   body: string;
+  reviewed: boolean;
   sortMs: number;
 };
 
-function timestampToMs(
-  value: unknown,
-): number {
+function timestampToMs(value: unknown): number {
   if (
     value &&
     typeof value === "object" &&
@@ -68,24 +75,37 @@ function signInErrorMessage(err: unknown): string {
     haystack.includes("api-key-not-valid") ||
     haystack.includes("invalid-api-key")
   ) {
-    return "Invalid Firebase API key (API_KEY_INVALID). Paste a new key into VITE_FIREBASE_API_KEY in .env.local and restart Vite. / Невірний API ключ — встав новий у .env.local і перезапусти Vite.";
+    return "Invalid Firebase API key (API_KEY_INVALID). Paste a new key into VITE_FIREBASE_API_KEY in .env.local and restart Vite.";
   }
   if (code === "auth/operation-not-allowed") {
-    return "Google Sign-In is disabled. Enable it in Firebase Console → Authentication → Sign-in method. / Увімкни Google у Firebase Console.";
+    return "Google Sign-In is disabled. Enable it in Firebase Console → Authentication → Sign-in method.";
   }
   if (code === "auth/unauthorized-domain") {
-    return "This domain is not authorized. Add it in Firebase Console → Authentication → Settings → Authorized domains. / Додай домен у Authorized domains.";
+    return "This domain is not authorized. Add natalinamatioshko.github.io in Authentication → Authorized domains.";
   }
   if (
     code === "auth/popup-closed-by-user" ||
     code === "auth/cancelled-popup-request"
   ) {
-    return "Sign-in popup was closed. Try again. / Вікно входу закрито — спробуй ще раз.";
+    return "Sign-in popup was closed. Try again.";
   }
   if (code === "auth/popup-blocked") {
-    return "Sign-in popup was blocked by the browser. Allow popups and try again. / Браузер заблокував вікно — дозволь popups.";
+    return "Sign-in popup was blocked. Allow popups and try again.";
   }
-  return "Sign-in failed or was cancelled. / Вхід не вдався або скасований.";
+  if (
+    haystack.includes("requested action is invalid") ||
+    haystack.includes("auth/invalid-action") ||
+    haystack.includes("unauthorized-continue-uri")
+  ) {
+    return "Google Sign-In rejected this origin. Add Pages domain + english-simple-trainer.firebaseapp.com/* to API key HTTP referrers.";
+  }
+  if (
+    haystack.includes("referrer") ||
+    haystack.includes("api_key_http_referrer_blocked")
+  ) {
+    return "API key HTTP referrer blocked. Add localhost, github.io, and firebaseapp.com referrers.";
+  }
+  return "Sign-in failed or was cancelled.";
 }
 
 export default function AdminSubmissions() {
@@ -94,7 +114,13 @@ export default function AdminSubmissions() {
   const [items, setItems] = useState<FeedItem[]>([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [error, setError] = useState("");
+  const [warning, setWarning] = useState("");
   const [signInError, setSignInError] = useState("");
+  const [sourceFilter, setSourceFilter] = useState<SourceFilter>("all");
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+  const [lessonFilter, setLessonFilter] = useState("all");
+  const [reviewingId, setReviewingId] = useState<string | null>(null);
+  const [actionError, setActionError] = useState("");
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
@@ -117,21 +143,30 @@ export default function AdminSubmissions() {
     if (phase !== "ready") return;
 
     setDataLoading(true);
-    const load = async () => {
-      try {
-        const [hwSnap, writingSnap] = await Promise.all([
-          getDocs(query(collection(db, "homeworkAnswers"))),
-          getDocs(query(collection(db, "writingSubmissions"))),
-        ]);
+    setError("");
+    setWarning("");
+    setActionError("");
 
-        const homework: FeedItem[] = hwSnap.docs.map((docSnap) => {
+    const load = async () => {
+      const feed: FeedItem[] = [];
+      let homeworkOk = false;
+      let writingOk = false;
+
+      try {
+        const hwSnap = await getDocs(query(collection(db, "homeworkAnswers")));
+        homeworkOk = true;
+        for (const docSnap of hwSnap.docs) {
           const d = docSnap.data();
           const sortMs = timestampToMs(d.createdAt);
           const when = formatMs(sortMs);
-          return {
-            id: `hw-${docSnap.id}`,
+          const lessonId = String(d.lessonId ?? "");
+          feed.push({
+            key: `hw-${docSnap.id}`,
+            docId: docSnap.id,
+            collectionName: "homeworkAnswers",
             source: "homework",
-            title: `${d.studentName || "Unknown student"} — Lesson ${d.lessonId || "?"}`,
+            lessonId,
+            title: `${d.studentName || "Unknown student"} — Lesson ${lessonId || "?"}`,
             meta: [
               `Test: ${d.testDone ? "Done" : "Not done"}`,
               `Quiz: ${d.quizDone ? "Done" : "Not done"}`,
@@ -144,11 +179,22 @@ export default function AdminSubmissions() {
               typeof d.writing === "string" && d.writing.trim()
                 ? d.writing
                 : "No writing answer.",
+            reviewed: Boolean(d.reviewed),
             sortMs,
-          };
-        });
+          });
+        }
+      } catch {
+        setError(
+          "Cannot read homeworkAnswers (403). Publish teacher read rules or sign in as teacher.",
+        );
+      }
 
-        const writing: FeedItem[] = writingSnap.docs.map((docSnap) => {
+      try {
+        const writingSnap = await getDocs(
+          query(collection(db, "writingSubmissions")),
+        );
+        writingOk = true;
+        for (const docSnap of writingSnap.docs) {
           const d = docSnap.data();
           const sortMs =
             timestampToMs(d.serverCreatedAt) || timestampToMs(d.createdAt);
@@ -159,9 +205,12 @@ export default function AdminSubmissions() {
               : d.page === "about-me"
                 ? "About me"
                 : "Writing";
-          return {
-            id: `wr-${docSnap.id}`,
+          feed.push({
+            key: `wr-${docSnap.id}`,
+            docId: docSnap.id,
+            collectionName: "writingSubmissions",
             source: "writing",
+            lessonId: page,
             title: `${d.name || "Unknown student"} — ${page}`,
             meta: [
               d.age ? `age ${d.age}` : null,
@@ -174,24 +223,52 @@ export default function AdminSubmissions() {
               typeof d.text === "string" && d.text.trim()
                 ? d.text
                 : "No writing answer.",
+            reviewed: Boolean(d.reviewed),
             sortMs,
-          };
-        });
-
-        setItems(
-          [...homework, ...writing].sort((a, b) => b.sortMs - a.sortMs),
-        );
+          });
+        }
       } catch {
-        setError(
-          "Firestore denied access. Verify that the signed-in account matches the teacher email in your Rules, and that writingSubmissions is readable by the teacher.",
-        );
-      } finally {
-        setDataLoading(false);
+        if (homeworkOk) {
+          setWarning(
+            "writingSubmissions denied (403). Add teacher read/list in Rules and Publish.",
+          );
+        } else {
+          setError(
+            "Firestore denied (403). Check teacher email and Rules for both collections.",
+          );
+        }
       }
+
+      if (!homeworkOk && !writingOk) {
+        setError(
+          "Firestore denied (403). Sign in as teacher and publish Rules.",
+        );
+      }
+
+      setItems(feed.sort((a, b) => b.sortMs - a.sortMs));
+      setDataLoading(false);
     };
 
-    load();
+    void load();
   }, [phase]);
+
+  const lessonOptions = useMemo(() => {
+    const set = new Set<string>();
+    for (const item of items) {
+      if (item.lessonId) set.add(item.lessonId);
+    }
+    return Array.from(set).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+  }, [items]);
+
+  const filtered = useMemo(() => {
+    return items.filter((item) => {
+      if (sourceFilter !== "all" && item.source !== sourceFilter) return false;
+      if (statusFilter === "new" && item.reviewed) return false;
+      if (statusFilter === "reviewed" && !item.reviewed) return false;
+      if (lessonFilter !== "all" && item.lessonId !== lessonFilter) return false;
+      return true;
+    });
+  }, [items, sourceFilter, statusFilter, lessonFilter]);
 
   const handleSignIn = async () => {
     setSignInError("");
@@ -203,6 +280,26 @@ export default function AdminSubmissions() {
   };
 
   const handleSignOut = () => void signOut(auth);
+
+  const handleMarkReviewed = async (item: FeedItem) => {
+    setActionError("");
+    setReviewingId(item.key);
+    try {
+      await markSubmissionReviewed(item.collectionName, item.docId);
+      setItems((prev) =>
+        prev.map((row) =>
+          row.key === item.key ? { ...row, reviewed: true } : row,
+        ),
+      );
+    } catch (err) {
+      console.error(err);
+      setActionError(
+        "Could not mark as reviewed (403?). Publish Rules that allow teacher update of reviewed/reviewedAt only.",
+      );
+    } finally {
+      setReviewingId(null);
+    }
+  };
 
   if (phase === "loading") {
     return <Loader label="Checking authentication…" />;
@@ -271,6 +368,56 @@ export default function AdminSubmissions() {
         </button>
       </header>
 
+      {!dataLoading && (
+        <section className="panel">
+          <div className="admin-filters">
+            <label className="admin-filter">
+              <span>Source</span>
+              <select
+                value={sourceFilter}
+                onChange={(e) =>
+                  setSourceFilter(e.target.value as SourceFilter)
+                }
+              >
+                <option value="all">All</option>
+                <option value="homework">Homework</option>
+                <option value="writing">Writing</option>
+              </select>
+            </label>
+            <label className="admin-filter">
+              <span>Status</span>
+              <select
+                value={statusFilter}
+                onChange={(e) =>
+                  setStatusFilter(e.target.value as StatusFilter)
+                }
+              >
+                <option value="all">All</option>
+                <option value="new">New</option>
+                <option value="reviewed">Reviewed</option>
+              </select>
+            </label>
+            <label className="admin-filter">
+              <span>Lesson / page</span>
+              <select
+                value={lessonFilter}
+                onChange={(e) => setLessonFilter(e.target.value)}
+              >
+                <option value="all">All</option>
+                {lessonOptions.map((id) => (
+                  <option key={id} value={id}>
+                    {id}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <p className="admin-empty" style={{ marginTop: "0.75rem" }}>
+            Showing {filtered.length} of {items.length}
+          </p>
+        </section>
+      )}
+
       {dataLoading && (
         <Loader variant="inline" label="Loading submissions…" />
       )}
@@ -281,21 +428,56 @@ export default function AdminSubmissions() {
         </section>
       )}
 
-      {!dataLoading && !error && (
+      {warning && (
+        <section className="panel">
+          <p className="homework-error" style={{ color: "var(--color-accent)" }}>
+            {warning}
+          </p>
+        </section>
+      )}
+
+      {actionError && (
+        <section className="panel">
+          <p className="homework-error">{actionError}</p>
+        </section>
+      )}
+
+      {!dataLoading && (
         <section className="homework-list">
-          {items.length === 0 ? (
+          {filtered.length === 0 && !error ? (
             <article className="panel homework-card">
-              <p>No submissions yet.</p>
+              <p className="admin-empty">No submissions match these filters.</p>
             </article>
           ) : (
-            items.map((item) => (
-              <article className="panel homework-card" key={item.id}>
-                <p className="page-kicker" style={{ marginBottom: "0.35rem" }}>
-                  {item.source === "homework" ? "Homework" : "Writing"}
-                </p>
+            filtered.map((item) => (
+              <article className="panel homework-card" key={item.key}>
+                <div className="admin-card-top">
+                  <p className="page-kicker" style={{ margin: 0 }}>
+                    {item.source === "homework" ? "Homework" : "Writing"}
+                  </p>
+                  <span
+                    className={`admin-badge ${item.reviewed ? "admin-badge--done" : "admin-badge--new"}`}
+                  >
+                    {item.reviewed ? "Reviewed" : "New"}
+                  </span>
+                </div>
                 <h2>{item.title}</h2>
                 <p className="lesson-topic">{item.meta}</p>
                 <pre className="homework-pre">{item.body}</pre>
+                <div className="admin-card-actions">
+                  {!item.reviewed && (
+                    <button
+                      type="button"
+                      className="action-btn primary"
+                      disabled={reviewingId === item.key}
+                      onClick={() => void handleMarkReviewed(item)}
+                    >
+                      {reviewingId === item.key
+                        ? "Saving…"
+                        : "Mark as reviewed"}
+                    </button>
+                  )}
+                </div>
               </article>
             ))
           )}
