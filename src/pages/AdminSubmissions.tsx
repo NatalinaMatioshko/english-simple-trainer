@@ -8,6 +8,7 @@ import {
   type User,
 } from "firebase/auth";
 import { auth, db } from "../firebase";
+import { Loader } from "../components/Loader";
 import "../styles/pages.css";
 
 // VITE_TEACHER_EMAIL provides an early client-side "wrong account" check (UX only).
@@ -94,15 +95,7 @@ export default function AdminSubmissions() {
   const handleSignOut = () => void signOut(auth);
 
   if (phase === "loading") {
-    return (
-      <div className="page-shell">
-        <header className="page-hero panel">
-          <p className="page-kicker">Admin</p>
-          <h1>Submissions</h1>
-          <p className="page-subtitle">Checking authentication…</p>
-        </header>
-      </div>
-    );
+    return <Loader label="Checking authentication…" />;
   }
 
   if (phase === "signed-out") {
@@ -168,9 +161,7 @@ export default function AdminSubmissions() {
       </header>
 
       {dataLoading && (
-        <section className="panel">
-          <p>Loading submissions…</p>
-        </section>
+        <Loader variant="inline" label="Loading submissions…" />
       )}
 
       {error && (

@@ -40,7 +40,7 @@ export function Header() {
 
             <div>
               <p className="muted site-header-kicker">English A1-A2</p>
-              <p className="site-header-title">Present Simple Trainer</p>
+              <p className="site-header-title">English Simple Trainer</p>
             </div>
           </Link>
 

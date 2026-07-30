@@ -2,7 +2,17 @@ import { Link } from "react-router-dom";
 import "../styles/pages.css";
 import RoadmapSection from "../components/RoadmapSection";
 import CoveredTopicsRoadmap from "../components/CoveredTopicsRoadmap";
+import { RotatingWord, type RotatingWordItem } from "../components/RotatingWord";
 import "../styles/roadmap.css";
+
+const heroRotateWords: RotatingWordItem[] = [
+  { text: "Trainer", tone: "primary" },
+  { text: "Speaking", tone: "accent" },
+  { text: "Listening", tone: "success" },
+  { text: "Reading", tone: "error" },
+  { text: "Progress", tone: "night" },
+];
+
 const shortcuts = [
   {
     title: "Trainer",
@@ -30,7 +40,10 @@ export default function Home() {
       <header className="page-hero panel hero-home">
         <p className="page-kicker">English practice space</p>
 
-        <h1>Present Simple Trainer for Petro</h1>
+        <h1 className="home-hero-title">
+          English Simple{" "}
+          <RotatingWord words={heroRotateWords} className="home-hero-rotate" />
+        </h1>
         <p className="page-subtitle">
           A simple learning hub for routines, questions, adverbs of frequency,
           and speaking practice.
@@ -38,14 +51,7 @@ export default function Home() {
       </header>
 
       <blockquote className="home-quote panel">
-        <p>
-          “Spiral repetition in different contexts — revisit the same grammar
-          in new situations until it becomes natural speech.”
-        </p>
-        <p className="home-quote-ua">
-          «Спіральне повторення в різних контекстах — повертайся до тієї ж
-          граматики в нових ситуаціях, доки вона не стане природним мовленням.»
-        </p>
+        <p>«Циклічне повторення в різних контекстах»</p>
       </blockquote>
 
       <section className="cards-grid home-grid">

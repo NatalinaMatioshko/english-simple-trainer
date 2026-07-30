@@ -25,6 +25,15 @@
   font-size: clamp(2rem, 4vw, 3.2rem);
 }
 
+.home-hero-title {
+  margin: 0;
+  line-height: 1.15;
+}
+
+.home-hero-rotate {
+  min-width: 9.5ch;
+}
+
 .page-subtitle {
   margin-top: 0.75rem;
   max-width: 65ch;

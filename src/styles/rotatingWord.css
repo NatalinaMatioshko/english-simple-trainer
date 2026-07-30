@@ -1,0 +1,91 @@
+/* Letter-flip word cycle — same mechanics as the original pen */
+
+.rw-slot {
+  display: inline-block;
+  position: relative;
+  vertical-align: baseline;
+  min-width: calc(var(--rw-ch, 10) * 0.62em);
+  height: 1em;
+}
+
+.rw-slot .word {
+  position: absolute;
+  left: 0;
+  right: auto;
+  top: auto;
+  bottom: 0;
+  opacity: 0;
+  white-space: nowrap;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: inherit;
+  line-height: 1;
+}
+
+.rw-slot .word--primary {
+  color: var(--color-primary);
+}
+
+.rw-slot .word--accent {
+  color: var(--color-accent);
+}
+
+.rw-slot .word--success {
+  color: var(--color-success);
+}
+
+.rw-slot .word--error {
+  color: var(--color-error);
+}
+
+.rw-slot .word--night {
+  color: #2c3e50;
+}
+
+[data-theme="dark"] .rw-slot .word--night {
+  color: #6cb4bf;
+}
+
+.rw-slot--static {
+  height: auto;
+  min-width: 0;
+}
+
+.rw-slot--static .word.is-static {
+  position: static;
+  opacity: 1;
+  float: none;
+  display: inline;
+}
+
+.rw-slot .letter {
+  display: inline-block;
+  position: relative;
+  float: left;
+  transform: translateZ(25px);
+  transform-origin: 50% 50% 25px;
+}
+
+.rw-slot .letter.out {
+  transform: rotateX(90deg);
+  transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.rw-slot .letter.behind {
+  transform: rotateX(-90deg);
+}
+
+.rw-slot .letter.in {
+  transform: rotateX(0deg);
+  transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rw-slot .letter,
+  .rw-slot .letter.out,
+  .rw-slot .letter.behind,
+  .rw-slot .letter.in {
+    transform: none !important;
+    transition: none !important;
+  }
+}
