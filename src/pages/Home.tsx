@@ -3,6 +3,7 @@ import "../styles/pages.css";
 import RoadmapSection from "../components/RoadmapSection";
 import CoveredTopicsRoadmap from "../components/CoveredTopicsRoadmap";
 import { RotatingWord, type RotatingWordItem } from "../components/RotatingWord";
+import { FaceButton } from "../components/FaceButton";
 import "../styles/roadmap.css";
 
 const heroRotateWords: RotatingWordItem[] = [
@@ -38,16 +39,19 @@ export default function Home() {
   return (
     <div className="page-shell">
       <header className="page-hero panel hero-home">
-        <p className="page-kicker">English practice space</p>
+        <div className="hero-home__copy">
+          <p className="page-kicker">English practice space</p>
 
-        <h1 className="home-hero-title">
-          English Simple{" "}
-          <RotatingWord words={heroRotateWords} className="home-hero-rotate" />
-        </h1>
-        <p className="page-subtitle">
-          A simple learning hub for routines, questions, adverbs of frequency,
-          and speaking practice.
-        </p>
+          <h1 className="home-hero-title">
+            English Simple{" "}
+            <RotatingWord words={heroRotateWords} className="home-hero-rotate" />
+          </h1>
+          <p className="page-subtitle">
+            A simple learning hub for routines, questions, adverbs of frequency,
+            and speaking practice.
+          </p>
+        </div>
+        <FaceButton />
       </header>
 
       <blockquote className="home-quote panel">

@@ -10,6 +10,35 @@
   padding: 1.5rem;
 }
 
+.hero-home {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hero-home__copy {
+  min-width: 0;
+  flex: 1;
+}
+
+@media (min-width: 901px) {
+  .hero-home {
+    padding-right: 1.25rem;
+  }
+
+  .hero-home .face-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .hero-home__copy {
+    padding-right: 5.5rem;
+  }
+}
+
 .page-kicker {
   margin: 0 0 0.5rem;
   text-transform: uppercase;
