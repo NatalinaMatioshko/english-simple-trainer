@@ -1,37 +1,110 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/app.css";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
-import {
-  cardsForDeck,
-  hw28DeckMeta,
-  hw28TestMeta,
-  tasksForTest,
-  type Hw28DeckId,
-  type Hw28Flashcard,
-  type Hw28TestId,
-} from "../data/hw28Review";
-import { useScoredQuiz } from "../hooks/useScoredQuiz";
-import { ScoredQuizCard } from "../components/practice/ScoredQuizCard";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
-import { shuffle } from "../utils/array";
+
+const VIDEO_ID = "1mKeXz5Bf7c";
+
+const videoQuiz = [
+  {
+    id: 1,
+    prompt: "Where does his mom work?",
+    options: ["in a factory", "in a shop in the mall", "at home"],
+    answer: "in a shop in the mall",
+  },
+  {
+    id: 2,
+    prompt: "Does she sell clothing for teens?",
+    options: ["Yes, she does.", "No, only for adults.", "We don't know."],
+    answer: "No, only for adults.",
+  },
+  {
+    id: 3,
+    prompt: "What does her brother study?",
+    options: ["medicine", "engineering", "art"],
+    answer: "engineering",
+  },
+  {
+    id: 4,
+    prompt: "Does he live at home?",
+    options: ["Yes, he does.", "No — he has a small apartment.", "With friends."],
+    answer: "No — he has a small apartment.",
+  },
+  {
+    id: 5,
+    prompt: "Who watches her daughter after school?",
+    options: ["her dad", "her mom / grandma", "a teacher"],
+    answer: "her mom / grandma",
+  },
+  {
+    id: 6,
+    prompt: "When does the movie start?",
+    options: ["in about ten minutes", "tomorrow", "it already ended"],
+    answer: "in about ten minutes",
+  },
+] as const;
+
+const videoGrammarQuiz = [
+  {
+    id: 1,
+    prompt: "She ___ women's clothing. (sell)",
+    options: ["sell", "sells", "selling"],
+    answer: "sells",
+  },
+  {
+    id: 2,
+    prompt: "He ___ engineering. (study)",
+    options: ["study", "studys", "studies"],
+    answer: "studies",
+  },
+  {
+    id: 3,
+    prompt: "___ she live at home?",
+    options: ["Do", "Does", "Is"],
+    answer: "Does",
+  },
+  {
+    id: 4,
+    prompt: "He ___ have much free time.",
+    options: ["don't", "doesn't", "isn't"],
+    answer: "doesn't",
+  },
+] as const;
+
+const videoSpeakPrompts = [
+  "What does your mom / dad do?",
+  "Where does he / she work?",
+  "Does your brother / sister live at home?",
+  "Talk about a friend: He / She works… / studies… / lives…",
+] as const;
 
 const writingPrompts = [
-  "What’s that? It’s a…",
-  "What are those? They’re…",
-  "This is my… / That is my…",
-  "These are my… / Those are my…",
-  "In my room there is a desk, a chair, a computer…",
+  "She works in a… / He studies…",
+  "Does she/he live at home?",
+  "She doesn't… / He doesn't…",
+  "What does your … do?",
+  "Tell me about a person you know.",
 ];
+
+function drillSelClass(checked: boolean, value: string, answer: string): string {
+  if (!checked) return "l25-cr-sel";
+  if (value === answer) return "l25-cr-sel l25-cr-sel--ok";
+  if (value) return "l25-cr-sel l25-cr-sel--err";
+  return "l25-cr-sel";
+}
 
 export default function HW28() {
   const [draft, setDraft] = useState("");
-  const [testId, setTestId] = useState<Hw28TestId>("all");
-  const testTasks = useMemo(() => tasksForTest(testId), [testId]);
-  const testMeta = hw28TestMeta.find((t) => t.id === testId)!;
-  const test = useScoredQuiz(testTasks, `hw28-test-${testId}`);
+  const [videoAns, setVideoAns] = useState<Record<number, string>>({});
+  const [videoChecked, setVideoChecked] = useState(false);
+  const [videoGramAns, setVideoGramAns] = useState<Record<number, string>>({});
+  const [videoGramChecked, setVideoGramChecked] = useState(false);
+
+  const videoScore = videoQuiz.filter((q) => videoAns[q.id] === q.answer).length;
+  const videoGramScore = videoGrammarQuiz.filter((q) => videoGramAns[q.id] === q.answer).length;
 
   return (
     <div className="lesson22-page">
@@ -39,10 +112,10 @@ export default function HW28() {
         <div className="lesson22-hero-top">
           <div>
             <p className="page-kicker">Homework · Lesson 28</p>
-            <h1>Everyday things</h1>
+            <h1>Present Simple · he / she / it</h1>
             <p className="lesson22-subtitle">
-              Закріплення Part 2: vocabulary · listening · grammar · quiz
-              (this / that / these / those).
+              Відео-quiz: listening comprehension + third person grammar drill +
+              speaking practice.
             </p>
           </div>
           <div
@@ -57,117 +130,188 @@ export default function HW28() {
           </div>
         </div>
         <div className="lesson22-hero-chips">
-          <span>objects a–l</span>
-          <span>Max &amp; Carla</span>
-          <span>this / that / these / those</span>
-          <span>quiz</span>
+          <span>video quiz</span>
+          <span>he / she / it + -s</span>
+          <span>does / doesn't</span>
+          <span>speaking</span>
         </div>
       </section>
 
+      {/* ── 1 · Video ── */}
       <section className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">1 · Flashcards</p>
-          <h2>Повтори слова і покажчики</h2>
+          <p className="page-kicker">1 · Video · Present Simple · he / she / it</p>
+          <h2>Listening quiz · third person singular</h2>
           <p className="lesson22-section-desc">
-            Обери колоду або <strong>Усі картки</strong>. Переверни (Space /
-            Enter), потім <strong>Знаю</strong> / <strong>Ще раз</strong>.
-          </p>
-        </div>
-        <Hw28Flashcards />
-      </section>
-
-      <section className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">2 · Quiz / Test</p>
-          <h2>Перевірка Part 2</h2>
-          <p className="lesson22-section-desc">
-            Практикуй окремий блок або пройди <strong>весь тест</strong>. Кнопка{" "}
-            <strong>Перемішати</strong> змінює порядок питань.
+            Подивись відео (ELLLO A1-06). Послухай короткі діалоги з{" "}
+            <strong>he / she / it + -s</strong>. Потім виконай listening quiz і
+            grammar check.
           </p>
         </div>
 
-        <div className="trainer-deck-tabs hw27-fc-tabs" role="tablist">
-          {hw28TestMeta.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              role="tab"
-              aria-selected={testId === t.id}
-              className={`trainer-deck-tab ${testId === t.id ? "active" : ""}`}
-              onClick={() => setTestId(t.id)}
-            >
-              <span className="trainer-deck-tab-title">{t.title}</span>
-              <span className="trainer-deck-tab-badge">{t.badge}</span>
-              <span className="trainer-deck-tab-lessons">{t.desc}</span>
-            </button>
+        <div className="l22-video-wrap">
+          <iframe
+            src={`https://www.youtube.com/embed/${VIDEO_ID}`}
+            title="Beginner English Listening Quiz — Present Simple third person singular"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
+
+        <div className="l25-conf-card" style={{ maxWidth: 640, marginBottom: "1rem" }}>
+          <div className="l25-conf-header">Remember</div>
+          <div className="l25-conf-fields">
+            <p style={{ margin: 0, fontSize: "var(--text-sm)", lineHeight: 1.55 }}>
+              <strong>He / She / It</strong> + verb<strong>-s / -es</strong>: She
+              sell<strong>s</strong>… · He stud<strong>ies</strong>…
+              <br />
+              Questions: <em>Does</em> she work…? — Yes, she <em>does</em>. /
+              No, she <em>doesn't</em>.
+            </p>
+          </div>
+        </div>
+
+        <h3 className="l22-listen-subtitle">1a · Listening quiz</h3>
+        <p className="lesson22-section-desc">Обери правильну відповідь за відео.</p>
+        <div className="l26-drill-list">
+          {videoQuiz.map((q) => (
+            <div key={q.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">
+                {q.id}. {q.prompt}
+              </strong>
+              <select
+                value={videoAns[q.id] ?? ""}
+                onChange={(e) => {
+                  setVideoChecked(false);
+                  setVideoAns((p) => ({ ...p, [q.id]: e.target.value }));
+                }}
+                className={drillSelClass(videoChecked, videoAns[q.id] ?? "", q.answer)}
+                aria-label={q.prompt}
+              >
+                <option value="">___</option>
+                {q.options.map((o) => (
+                  <option key={o} value={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button type="button" className="l22-check-btn" onClick={() => setVideoChecked(true)}>
+            Check
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => { setVideoAns({}); setVideoChecked(false); }}
+          >
+            Reset
+          </button>
+          {videoChecked && (
+            <span className="l22-score">{videoScore} / {videoQuiz.length}</span>
+          )}
+        </div>
+
+        <h3 className="l22-listen-subtitle" style={{ marginTop: "1.25rem" }}>
+          1b · Grammar · third person
+        </h3>
+        <div className="l26-drill-list">
+          {videoGrammarQuiz.map((q) => (
+            <div key={q.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">
+                {q.id}. {q.prompt}
+              </strong>
+              <select
+                value={videoGramAns[q.id] ?? ""}
+                onChange={(e) => {
+                  setVideoGramChecked(false);
+                  setVideoGramAns((p) => ({ ...p, [q.id]: e.target.value }));
+                }}
+                className={drillSelClass(videoGramChecked, videoGramAns[q.id] ?? "", q.answer)}
+                aria-label={q.prompt}
+              >
+                <option value="">___</option>
+                {q.options.map((o) => (
+                  <option key={o} value={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button type="button" className="l22-check-btn" onClick={() => setVideoGramChecked(true)}>
+            Check
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => { setVideoGramAns({}); setVideoGramChecked(false); }}
+          >
+            Reset
+          </button>
+          {videoGramChecked && (
+            <span className="l22-score">{videoGramScore} / {videoGrammarQuiz.length}</span>
+          )}
+        </div>
+
+        <h3 className="l22-listen-subtitle" style={{ marginTop: "1.25rem" }}>1c · Speak</h3>
+        <p className="lesson22-section-desc">
+          Відповідай уголос. Використай <em>he / she + -s</em> і{" "}
+          <em>does / doesn't</em>.
+        </p>
+        <div className="lesson22-prompt-grid">
+          {videoSpeakPrompts.map((q) => (
+            <div key={q} className="lesson22-prompt-card lesson22-prompt-card--task">
+              {q}
+            </div>
           ))}
         </div>
 
-        <div
-          className="progress"
-          aria-label="Прогрес тесту HW28"
-          style={{ marginTop: "1rem" }}
-        >
-          <span style={{ width: test.progress }} />
-        </div>
-        <p className="muted" style={{ margin: "0.5rem 0 1rem" }}>
-          {test.answeredCount} / {test.total} · Бал: {test.score}
-        </p>
+        <details className="l25-details" style={{ marginTop: "1rem" }}>
+          <summary className="l25-details-toggle">📄 Sample ideas from the video</summary>
+          <div className="l25-details-body">
+            <p><strong>Mom:</strong> She sells women's clothing. She has a small shop in the mall.</p>
+            <p><strong>Brother:</strong> He studies engineering. He has a small apartment. He doesn't have much free time.</p>
+            <p><strong>Daughter:</strong> Grandma watches her. She walks there after school.</p>
+            <p><strong>Movie:</strong> It starts in about ten minutes. Brad Pitt plays a policeman.</p>
+          </div>
+        </details>
 
-        <ScoredQuizCard
-          title={testMeta.title}
-          subtitle={testMeta.desc}
-          successText="Чудово! Part 2 добре закріплена."
-          retryText="Повторіть картки цього блоку — і спробуйте ще раз."
-          passScore={testMeta.passScore}
-          currentTask={test.currentTask}
-          finished={test.finished}
-          score={test.score}
-          selected={test.selected}
-          locked={test.locked}
-          options={test.options}
-          feedback={test.feedback}
-          handleAnswer={test.handleAnswer}
-          nextTask={test.nextTask}
-          restart={test.restart}
-          shuffleQuestions={test.shuffleQuestions}
-          total={test.total}
-        />
+        <p className="l25-cr-hint" style={{ marginTop: "0.85rem" }}>
+          Source:{" "}
+          <a href={`https://youtu.be/${VIDEO_ID}`} target="_blank" rel="noopener noreferrer">
+            ELLLO · Beginner Listening Quiz #6 ↗
+          </a>
+        </p>
       </section>
 
+      {/* ── 2 · Speaking / Writing ── */}
       <section className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">3 · Speaking / Writing</p>
-          <h2>Things in your room</h2>
+          <p className="page-kicker">2 · Speaking / Writing</p>
+          <h2>Tell me about someone you know</h2>
           <p className="lesson22-section-desc">
-            Напиши <strong>6–8 речень</strong> про речі в кімнаті. Використай{" "}
-            <em>this / that / these / those</em> і слова з Part 2 (desk, chair,
-            computer, phone, books…).
+            Напиши <strong>6–8 речень</strong> про людину з сім'ї або друга.
+            Використай <em>he / she + -s</em>, <em>does / doesn't</em> і{" "}
+            <em>have / has</em>.
           </p>
         </div>
 
-        <div
-          className="l25-conf-card"
-          style={{ maxWidth: 640, marginBottom: "1rem" }}
-        >
+        <div className="l25-conf-card" style={{ maxWidth: 640, marginBottom: "1rem" }}>
           <div className="l25-conf-header">Model</div>
           <div className="l25-conf-fields">
-            <p
-              style={{ margin: 0, fontSize: "var(--text-sm)", lineHeight: 1.55 }}
-            >
-              This is my desk. That is my chair. These are my books. Those are
-              photos of my family. What’s that? It’s a lamp. What are those?
-              They’re plants.
+            <p style={{ margin: 0, fontSize: "var(--text-sm)", lineHeight: 1.55 }}>
+              My friend's name is Taras. He's from Lviv. He studies engineering at
+              university. He lives in a small apartment. He doesn't have a car. He
+              likes coffee and football. He doesn't like mornings.
             </p>
           </div>
         </div>
 
         <div className="lesson22-prompt-grid" style={{ marginBottom: "1rem" }}>
           {writingPrompts.map((p) => (
-            <div
-              key={p}
-              className="lesson22-prompt-card lesson22-prompt-card--task"
-            >
+            <div key={p} className="lesson22-prompt-card lesson22-prompt-card--task">
               {p}
             </div>
           ))}
@@ -182,245 +326,42 @@ export default function HW28() {
           rows={8}
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
-          placeholder="This is my desk. That is my computer. These are my pens…"
+          placeholder="My friend's name is… He / She works… / studies… He / She doesn't…"
         />
 
         <HomeworkSubmit
           lessonId="28"
           writing={draft}
-          quizDone={test.finished}
-          quizScore={test.finished ? test.score : undefined}
+          quizDone={videoChecked && videoGramChecked}
+          quizScore={videoChecked && videoGramChecked ? videoScore + videoGramScore : undefined}
           showListeningCheck={false}
         />
       </section>
 
+      {/* ── 3 · After ── */}
       <section className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">After homework</p>
+          <p className="page-kicker">3 · After homework</p>
           <h2>Done?</h2>
           <p className="lesson22-section-desc">
-            Повернись до уроку 28 (Part 2) або словника для додаткового
-            повторення.
+            Повернись до уроку 28 або відкрий урок 29 для продовження.
           </p>
         </div>
         <div className="lesson22-prompt-grid">
-          <Link
-            className="lesson22-prompt-card lesson22-prompt-card--task"
-            to="/lesson-28"
-          >
+          <Link className="lesson22-prompt-card lesson22-prompt-card--task" to="/lesson-28">
             ← Lesson 28
           </Link>
-          <Link
-            className="lesson22-prompt-card lesson22-prompt-card--task"
-            to="/vocab"
-          >
-            Vocab →
+          <Link className="lesson22-prompt-card lesson22-prompt-card--task" to="/lesson-29">
+            Lesson 29 →
           </Link>
-          <Link
-            className="lesson22-prompt-card lesson22-prompt-card--task"
-            to="/trainer"
-          >
-            Trainer practice →
+          <Link className="lesson22-prompt-card lesson22-prompt-card--task" to="/hw-29">
+            HW 29 →
+          </Link>
+          <Link className="lesson22-prompt-card lesson22-prompt-card--task" to="/vocab">
+            Vocab →
           </Link>
         </div>
       </section>
-    </div>
-  );
-}
-
-/* ─── Flashcards ─────────────────────────────────────────── */
-
-function Hw28Flashcards() {
-  const [deckId, setDeckId] = useState<Hw28DeckId>("all");
-  const deckCards = useMemo(() => cardsForDeck(deckId), [deckId]);
-  const [queue, setQueue] = useState<Hw28Flashcard[]>(() =>
-    shuffle(cardsForDeck("all")),
-  );
-  const [known, setKnown] = useState<Set<string>>(new Set());
-  const [flipped, setFlipped] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setQueue(shuffle(deckCards));
-    setKnown(new Set());
-    setFlipped(false);
-  }, [deckId, deckCards]);
-
-  useEffect(() => {
-    cardRef.current?.focus();
-  }, [queue.length, flipped]);
-
-  const total = deckCards.length;
-  const current = queue[0] ?? null;
-  const done = queue.length === 0;
-  const knownCount = known.size;
-  const progress = total ? Math.round((knownCount / total) * 100) : 0;
-
-  const flip = () => setFlipped((f) => !f);
-
-  const handleKnow = () => {
-    if (!current) return;
-    setKnown((prev) => new Set([...prev, current.id]));
-    setQueue((prev) => prev.slice(1));
-    setFlipped(false);
-  };
-
-  const handleReview = () => {
-    setQueue((prev) => [...prev.slice(1), prev[0]]);
-    setFlipped(false);
-  };
-
-  const handleRestart = () => {
-    setQueue(shuffle(deckCards));
-    setKnown(new Set());
-    setFlipped(false);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (done) return;
-    if (e.key === " " || e.key === "Enter") {
-      e.preventDefault();
-      if (!flipped) flip();
-    }
-    if (flipped) {
-      if (e.key === "ArrowRight" || e.key === "k" || e.key === "K")
-        handleKnow();
-      if (e.key === "ArrowLeft" || e.key === "r" || e.key === "R")
-        handleReview();
-    }
-  };
-
-  return (
-    <div className="fc-wrapper">
-      <div className="trainer-deck-tabs hw27-fc-tabs" role="tablist">
-        {hw28DeckMeta.map((d) => (
-          <button
-            key={d.id}
-            type="button"
-            role="tab"
-            aria-selected={deckId === d.id}
-            className={`trainer-deck-tab ${deckId === d.id ? "active" : ""}`}
-            onClick={() => setDeckId(d.id)}
-          >
-            <span className="trainer-deck-tab-title">{d.title}</span>
-            <span className="trainer-deck-tab-badge">{d.badge}</span>
-            <span className="trainer-deck-tab-lessons">{d.desc}</span>
-          </button>
-        ))}
-      </div>
-
-      {done ? (
-        <div className="fc-done panel" style={{ marginTop: "1rem" }}>
-          <div className="fc-done-icon">🎉</div>
-          <h3 className="fc-done-title">Колоду пройдено!</h3>
-          <p className="fc-done-score">
-            Знаєте <strong>{knownCount}</strong> з <strong>{total}</strong>{" "}
-            карток
-          </p>
-          <div className="fc-done-bar-wrap">
-            <div className="fc-done-bar" style={{ width: `${progress}%` }} />
-          </div>
-          <div className="fc-done-actions">
-            <button className="btn" type="button" onClick={handleRestart}>
-              Почати знову
-            </button>
-            {knownCount < total && (
-              <button
-                className="btn secondary"
-                type="button"
-                onClick={() => {
-                  const reviewItems = deckCards.filter((c) => !known.has(c.id));
-                  setQueue(shuffle(reviewItems));
-                  setKnown(new Set());
-                  setFlipped(false);
-                }}
-              >
-                Повторити невідомі ({total - knownCount})
-              </button>
-            )}
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className="fc-top" style={{ marginTop: "1rem" }}>
-            <div className="fc-progress-wrap">
-              <div className="fc-progress-bar">
-                <div
-                  className="fc-progress-fill"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-              <span className="fc-counter muted">
-                {knownCount} / {total} знаю
-              </span>
-            </div>
-            <button
-              type="button"
-              className="btn secondary fc-shuffle-btn"
-              onClick={() => {
-                setQueue((prev) => shuffle(prev));
-                setFlipped(false);
-              }}
-            >
-              ⇄ Перемішати
-            </button>
-          </div>
-
-          <div
-            className="fc-scene"
-            onKeyDown={handleKeyDown}
-            tabIndex={0}
-            ref={cardRef}
-            aria-label={`Картка: ${current?.front ?? ""}. Space — перевернути.`}
-          >
-            <div
-              key={current?.id ?? "empty"}
-              className={`fc-card ${flipped ? "fc-flipped" : ""}`}
-              onClick={!flipped ? flip : undefined}
-            >
-              <div className="fc-face fc-front">
-                <span className="fc-front-label muted">{current?.deck}</span>
-                <p className="fc-front-word">{current?.front}</p>
-                <span className="fc-flip-hint muted">
-                  натисни або <kbd>Space</kbd>
-                </span>
-              </div>
-              <div className="fc-face fc-back">
-                <span className="fc-back-label">English</span>
-                <p className="fc-back-word">{current?.back}</p>
-              </div>
-            </div>
-          </div>
-
-          {flipped && (
-            <div className="fc-actions">
-              <button
-                type="button"
-                className="fc-btn-review"
-                onClick={handleReview}
-              >
-                ↺ Ще раз
-              </button>
-              <button type="button" className="fc-btn-know" onClick={handleKnow}>
-                ✓ Знаю
-              </button>
-            </div>
-          )}
-
-          <div className="fc-keyboard-hint muted">
-            {flipped ? (
-              <>
-                <kbd>←</kbd> Ще раз &nbsp;·&nbsp; <kbd>→</kbd> Знаю
-              </>
-            ) : (
-              <>
-                <kbd>Space</kbd> / <kbd>Enter</kbd> — перевернути
-              </>
-            )}
-          </div>
-          <div className="fc-remaining muted">Залишилось: {queue.length}</div>
-        </>
-      )}
     </div>
   );
 }

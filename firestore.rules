@@ -4,7 +4,7 @@ service cloud.firestore {
     // Replace PLACEHOLDER with the same email as VITE_TEACHER_EMAIL
     function isTeacher() {
       return request.auth != null
-        && request.auth.token.email == 'PLACEHOLDER_TEACHER_EMAIL@gmail.com';
+        && request.auth.token.email == 'YOUR_TEACHER_EMAIL@gmail.com';
     }
 
     function teacherReviewOnly() {

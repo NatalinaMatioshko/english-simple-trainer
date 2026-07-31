@@ -410,29 +410,31 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 28,
-    title: "Everyday things",
-    grammar: "this, that, these and those",
+    title: "Speaking · he/she/it",
+    grammar: "Present Simple he / she / it: verb -s/-es · does / doesn't",
     vocabulary:
-      "everyday objects (book, phone, desk, key, table, clock, photo, computer, box, chair, cup, pen) · home office words",
+      "Everyday activity verbs (have breakfast, go, play, write, read, sleep, work, cook, draw, ride a bike)",
     speaking:
-      "Ask back + tell your story; What’s number…?; What’s that? / What are those?",
+      "Ask back: listen → ask the question; tell your story (4–8 sentences on chosen topic)",
     listening:
-      "R5–R8: match pictures, Max & Carla office tour, this/these contrast, picture dialogues",
-    review: "Personal info speaking; jobs/family from L26–27; object names",
+      "Video ELLLO A1-06: listening quiz (6 questions) + grammar drill · does / doesn't",
+    review: "Personal info, family, jobs, routines, hobbies (L25–27)",
     category: "general",
     status: "current",
     route: "/lesson-28",
   },
   {
     id: 29,
-    title: "Numbers",
-    grammar: "Question words with be (Who / How old / What / Where / When)",
-    vocabulary: "Numbers 1–100 · teens · tens · a hundred",
+    title: "Everyday Objects · Numbers",
+    grammar:
+      "this / that / these / those; question words with be (Who / How old / What / Where / When)",
+    vocabulary:
+      "Everyday objects a–l (book, phone, desk, key, table, clock, photo, computer, box, chair, cup, pen) · numbers 1–100 (teens / tens)",
     speaking:
-      "Ask about age, job, and where people are from; family names pair work",
+      "What’s this/that? / What are these/those?; ask about age, job, nationality; shop dialogue",
     listening:
-      "R9–R14: numbers 1–19, tens, teen/ty pairs, 21–…, profiles (Anna / Bill / Satoru), 's pronunciation",
-    review: "Everyday objects (L28); family & jobs (L27); be questions",
+      "R5–R8: objects match, Max & Carla office, this/these contrast, picture dialogues; R9–R14: numbers, profiles (Anna / Bill / Satoru), 's pronunciation",
+    review: "he/she/it (L28); family & jobs (L27); be questions",
     category: "general",
     status: "next",
     route: "/lesson-29",
@@ -443,11 +445,11 @@ const roadmapLessons: Lesson[] = [
     grammar:
       "Mixed A1: to be · do/does · have/has · possessives · a/an · this/that · can · prepositions · Present Simple",
     vocabulary:
-      "Family · jobs · nationalities · appearance · routine · objects · numbers · shop phrases (full review)",
+      "Family · jobs · nationalities · appearance · routine · objects · numbers · days of the week · shop phrases (full review)",
     speaking:
       "15 topic stations + personal profile; family/jobs photos; describe a person",
     listening: "R4 Unit 2 — Yasemin & Tara family photo (comprehension)",
-    review: "ALL Lessons 1–29 topics: identity → shop English",
+    review: "Numbers + question words (L29); ALL Lessons 1–29 topics: identity → shop English",
     category: "general",
     status: "next",
     route: "/lesson-30",

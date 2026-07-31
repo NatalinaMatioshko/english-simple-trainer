@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 import "../styles/pages.css";
 import RoadmapSection from "../components/RoadmapSection";
 import CoveredTopicsRoadmap from "../components/CoveredTopicsRoadmap";
-import { RotatingWord, type RotatingWordItem } from "../components/RotatingWord";
+import {
+  RotatingWord,
+  type RotatingWordItem,
+} from "../components/RotatingWord";
 import { FaceButton } from "../components/FaceButton";
 import "../styles/roadmap.css";
 
@@ -44,7 +47,10 @@ export default function Home() {
 
           <h1 className="home-hero-title">
             English Simple{" "}
-            <RotatingWord words={heroRotateWords} className="home-hero-rotate" />
+            <RotatingWord
+              words={heroRotateWords}
+              className="home-hero-rotate"
+            />
           </h1>
           <p className="page-subtitle">
             A simple learning hub for routines, questions, adverbs of frequency,
@@ -75,6 +81,24 @@ export default function Home() {
       <section className="home-covered-roadmap">
         <CoveredTopicsRoadmap id="home-a1-covered" />
       </section>
+
+      <div style={{ textAlign: "center", padding: "0.5rem 0 1.5rem" }}>
+        <Link
+          to="/admin/submissions"
+          style={{
+            fontSize: "0.7rem",
+            color: "var(--muted)",
+            opacity: 0.45,
+            textDecoration: "none",
+            padding: "0.25rem 0.6rem",
+            borderRadius: "0.4rem",
+            border: "1px solid currentColor",
+            letterSpacing: "0.04em",
+          }}
+        >
+          teacher
+        </Link>
+      </div>
     </div>
   );
 }

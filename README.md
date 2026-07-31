@@ -38,11 +38,39 @@ Opens at `http://localhost:5173/english-simple-trainer/`
 | `npm run build` | Typecheck (`tsc -b`) + production build → `dist/` |
 | `npm run preview` | Preview the production build |
 | `npm run lint` | ESLint |
-| `npm run deploy` | Build, then publish `dist/` to `gh-pages` |
+| `npm run deploy` | **Optional local fallback** — build + `gh-pages` branch (prefer GitHub Actions) |
 
 Production base path: `/english-simple-trainer/` (see `vite.config.ts`).
 
-Live: `https://<your-github-username>.github.io/english-simple-trainer/`
+Live: `https://natalinamatioshko.github.io/english-simple-trainer/`
+
+---
+
+## CI/CD — GitHub Actions → Pages
+
+Production deploys run automatically on every push to **`main`** (workflow: `.github/workflows/deploy.yml`).
+
+### One-time setup
+
+1. **Repo → Settings → Secrets and variables → Actions** — add:
+
+| Secret | Example / notes |
+|--------|-----------------|
+| `VITE_TEACHER_EMAIL` | teacher Gmail (same as Firestore Rules) |
+| `VITE_FIREBASE_API_KEY` | Browser key from Google Cloud Credentials |
+| `VITE_FIREBASE_AUTH_DOMAIN` | `english-simple-trainer.firebaseapp.com` |
+| `VITE_FIREBASE_PROJECT_ID` | `english-simple-trainer` |
+| `VITE_FIREBASE_STORAGE_BUCKET` | `english-simple-trainer.firebasestorage.app` |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | from Firebase Project settings |
+| `VITE_FIREBASE_APP_ID` | from Firebase Project settings |
+
+2. **Settings → Pages → Build and deployment → Source:** choose **GitHub Actions** (not “Deploy from a branch”).
+
+3. Push to `main` (or **Actions → Deploy GitHub Pages → Run workflow**).
+
+4. Open the run → confirm **build** + **deploy** are green. Site URL stays the same project Pages URL.
+
+Vite bakes `VITE_*` into the client at **build time** in CI — same as local. The web `apiKey` will appear in the bundle (expected for Firebase); security = Rules + key restrictions.
 
 ---
 
@@ -71,7 +99,7 @@ If `VITE_TEACHER_EMAIL` is not set, the wrong-account check is skipped; any sign
 
 Missing Firebase `VITE_*` vars throw a clear error at startup.
 
-**GitHub Pages deploy:** `npm run deploy` runs `predeploy` → `npm run build` (`tsc -b` + `vite build`), then `gh-pages -d dist`. Vite bakes `VITE_*` into the bundle at **build time**, so `.env.local` must be present on the machine that runs `npm run deploy` (or inject the same vars in CI before `vite build`). Restrict the API key by HTTP referrer in Google Cloud Console; enforce access with Firestore rules — the web `apiKey` is still visible in the client bundle by design.
+**Local deploy fallback:** `npm run deploy` still publishes to the `gh-pages` branch if needed. Prefer the Actions workflow above once Pages Source is set to **GitHub Actions**.
 
 ---
 
