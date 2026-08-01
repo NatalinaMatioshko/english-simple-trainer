@@ -451,6 +451,40 @@
   border-top: 1px solid var(--color-border);
 }
 
+/* ── Home · Roadmap collapsible ────────────────────────────── */
+.home-roadmap-details {
+  margin: 0;
+}
+
+.home-roadmap-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.25rem;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  margin: 0 var(--page-pad);
+}
+
+.home-roadmap-summary::-webkit-details-marker { display: none; }
+
+.home-roadmap-chevron {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+  color: var(--muted);
+}
+
+.home-roadmap-details[open] .home-roadmap-chevron {
+  transform: rotate(180deg);
+}
+
 .lessons-material-card figcaption strong {
   color: var(--color-text);
   font-size: 1rem;

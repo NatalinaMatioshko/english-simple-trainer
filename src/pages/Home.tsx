@@ -75,9 +75,13 @@ export default function Home() {
           </article>
         ))}
       </section>
-      <section>
+      <details className="home-roadmap-details">
+        <summary className="home-roadmap-summary">
+          <span>Roadmap</span>
+          <span className="home-roadmap-chevron" aria-hidden="true">▾</span>
+        </summary>
         <RoadmapSection />
-      </section>
+      </details>
       <section className="home-covered-roadmap">
         <CoveredTopicsRoadmap id="home-a1-covered" />
       </section>
