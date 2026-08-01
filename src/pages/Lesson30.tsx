@@ -1,9 +1,4 @@
-import {
-  useMemo,
-  useState,
-  type CSSProperties,
-  type ReactNode,
-} from "react";
+import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import CoveredTopicsRoadmap from "../components/CoveredTopicsRoadmap";
 import "../styles/lesson22.css";
@@ -54,8 +49,16 @@ const IMG29 = (file: string) =>
 /* ── Lesson 29 Part 2 data (duplicated for review) ──────────────── */
 
 const numberWords = [
-  "one", "two", "three", "four", "five",
-  "six", "seven", "eight", "nine", "ten",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten",
 ] as const;
 
 const numberBank = numberWords.map((word, i) => ({ value: i + 1, word }));
@@ -74,13 +77,27 @@ const numberPictures = [
 ] as const;
 
 const teenWords = [
-  "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-  "sixteen", "seventeen", "eighteen", "nineteen",
+  "eleven",
+  "twelve",
+  "thirteen",
+  "fourteen",
+  "fifteen",
+  "sixteen",
+  "seventeen",
+  "eighteen",
+  "nineteen",
 ] as const;
 
 const tensWords = [
-  "twenty", "thirty", "forty", "fifty", "sixty",
-  "seventy", "eighty", "ninety", "one hundred",
+  "twenty",
+  "thirty",
+  "forty",
+  "fifty",
+  "sixty",
+  "seventy",
+  "eighty",
+  "ninety",
+  "one hundred",
 ] as const;
 
 const choosePairs = [
@@ -114,7 +131,10 @@ const numProfiles: NumProfile[] = [
     fields: {
       age: { label: "Age", answers: ["99"] },
       from: { label: "From", answers: ["canada"] },
-      job: { label: "Job", answers: ["teacher", "she's a teacher", "shes a teacher"] },
+      job: {
+        label: "Job",
+        answers: ["teacher", "she's a teacher", "shes a teacher"],
+      },
     },
   },
   {
@@ -125,7 +145,10 @@ const numProfiles: NumProfile[] = [
     fields: {
       age: { label: "Age", answers: ["85"] },
       from: { label: "From", answers: ["the uk", "uk"] },
-      job: { label: "Job", answers: ["taxi driver", "he's a taxi driver", "hes a taxi driver"] },
+      job: {
+        label: "Job",
+        answers: ["taxi driver", "he's a taxi driver", "hes a taxi driver"],
+      },
     },
   },
   {
@@ -138,7 +161,11 @@ const numProfiles: NumProfile[] = [
       from: { label: "From", answers: ["japan"] },
       job: {
         label: "Job",
-        answers: ["football player", "he's a football player", "hes a football player"],
+        answers: [
+          "football player",
+          "he's a football player",
+          "hes a football player",
+        ],
       },
     },
   },
@@ -160,23 +187,93 @@ type WriteItem = {
 };
 
 const writeItems: WriteItem[] = [
-  { id: 1, prompt: "He's from Thailand.", answers: ["where is he from", "where's he from"] },
-  { id: 2, prompt: "He's a doctor.", answers: ["what is his job", "what's his job"] },
-  { id: 3, prompt: "Her name is Lidia Nowicki.", answers: ["what is her name", "what's her name"] },
-  { id: 4, prompt: "She's from Kraków in Poland.", answers: ["where is she from", "where's she from"] },
+  {
+    id: 1,
+    prompt: "He's from Thailand.",
+    answers: ["where is he from", "where's he from"],
+  },
+  {
+    id: 2,
+    prompt: "He's a doctor.",
+    answers: ["what is his job", "what's his job"],
+  },
+  {
+    id: 3,
+    prompt: "Her name is Lidia Nowicki.",
+    answers: ["what is her name", "what's her name"],
+  },
+  {
+    id: 4,
+    prompt: "She's from Kraków in Poland.",
+    answers: ["where is she from", "where's she from"],
+  },
   { id: 5, prompt: "They're from the US.", answers: ["where are they from"] },
 ];
 
 const questionWordRows = [
-  { word: "WHO",   color: "#e67e22", desc: "Used to ask about a person.",        exampleRest: " is coming to the party?",      icon: "person" },
-  { word: "WHAT",  color: "#9b7bb8", desc: "Used to ask for information.",        exampleRest: " do you want to eat?",           icon: "info"   },
-  { word: "WHERE", color: "#27ae60", desc: "Used to ask about a place.",          exampleRest: " do you live?",                  icon: "place"  },
-  { word: "WHEN",  color: "#5dade2", desc: "Used to ask about time.",             exampleRest: " does the movie start?",         icon: "time"   },
-  { word: "WHY",   color: "#d4ac0d", desc: "Used to ask for a reason.",           exampleRest: " are you laughing?",             icon: "reason" },
-  { word: "HOW",   color: "#e74c3c", desc: "Used to explain a process.",          exampleRest: " can I get to the station?",     icon: "how"    },
-  { word: "WHICH", color: "#5c6bc0", desc: "Used to ask about choices.",          exampleRest: " dress should I wear?",          icon: "choice" },
-  { word: "WHOSE", color: "#58d68d", desc: "Used to ask about possession.",       exampleRest: " car is parked outside?",        icon: "own"    },
-  { word: "WHOM",  color: "#1abc9c", desc: "Asking about the object of a verb.", exampleRest: " should I call for help?",       icon: "object" },
+  {
+    word: "WHO",
+    color: "#e67e22",
+    desc: "Used to ask about a person.",
+    exampleRest: " is coming to the party?",
+    icon: "person",
+  },
+  {
+    word: "WHAT",
+    color: "#9b7bb8",
+    desc: "Used to ask for information.",
+    exampleRest: " do you want to eat?",
+    icon: "info",
+  },
+  {
+    word: "WHERE",
+    color: "#27ae60",
+    desc: "Used to ask about a place.",
+    exampleRest: " do you live?",
+    icon: "place",
+  },
+  {
+    word: "WHEN",
+    color: "#5dade2",
+    desc: "Used to ask about time.",
+    exampleRest: " does the movie start?",
+    icon: "time",
+  },
+  {
+    word: "WHY",
+    color: "#d4ac0d",
+    desc: "Used to ask for a reason.",
+    exampleRest: " are you laughing?",
+    icon: "reason",
+  },
+  {
+    word: "HOW",
+    color: "#e74c3c",
+    desc: "Used to explain a process.",
+    exampleRest: " can I get to the station?",
+    icon: "how",
+  },
+  {
+    word: "WHICH",
+    color: "#5c6bc0",
+    desc: "Used to ask about choices.",
+    exampleRest: " dress should I wear?",
+    icon: "choice",
+  },
+  {
+    word: "WHOSE",
+    color: "#58d68d",
+    desc: "Used to ask about possession.",
+    exampleRest: " car is parked outside?",
+    icon: "own",
+  },
+  {
+    word: "WHOM",
+    color: "#1abc9c",
+    desc: "Asking about the object of a verb.",
+    exampleRest: " should I call for help?",
+    icon: "object",
+  },
 ] as const;
 
 function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
@@ -185,7 +282,13 @@ function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
           <circle cx="24" cy="14" r="8" fill="currentColor" opacity="0.85" />
-          <path d="M8 42c2-10 10-15 16-15s14 5 16 15" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
+          <path
+            d="M8 42c2-10 10-15 16-15s14 5 16 15"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
           <circle cx="36" cy="10" r="2.2" fill="currentColor" />
           <circle cx="41" cy="16" r="1.8" fill="currentColor" />
         </svg>
@@ -193,9 +296,31 @@ function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
     case "info":
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
-          <rect x="8" y="10" width="22" height="28" rx="3" fill="currentColor" opacity="0.2" />
-          <rect x="12" y="16" width="14" height="2.5" rx="1" fill="currentColor" />
-          <rect x="12" y="22" width="10" height="2.5" rx="1" fill="currentColor" />
+          <rect
+            x="8"
+            y="10"
+            width="22"
+            height="28"
+            rx="3"
+            fill="currentColor"
+            opacity="0.2"
+          />
+          <rect
+            x="12"
+            y="16"
+            width="14"
+            height="2.5"
+            rx="1"
+            fill="currentColor"
+          />
+          <rect
+            x="12"
+            y="22"
+            width="10"
+            height="2.5"
+            rx="1"
+            fill="currentColor"
+          />
           <circle cx="34" cy="30" r="9" fill="currentColor" opacity="0.85" />
           <circle cx="34" cy="26" r="2" fill="#fff" />
           <rect x="32.5" y="29" width="3" height="8" rx="1.5" fill="#fff" />
@@ -204,7 +329,11 @@ function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
     case "place":
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
-          <path d="M24 6c-7 0-12 5.2-12 12 0 9 12 24 12 24s12-15 12-24c0-6.8-5-12-12-12z" fill="currentColor" opacity="0.85" />
+          <path
+            d="M24 6c-7 0-12 5.2-12 12 0 9 12 24 12 24s12-15 12-24c0-6.8-5-12-12-12z"
+            fill="currentColor"
+            opacity="0.85"
+          />
           <circle cx="24" cy="18" r="5" fill="#fff" />
         </svg>
       );
@@ -212,52 +341,149 @@ function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
           <circle cx="24" cy="24" r="16" fill="currentColor" opacity="0.18" />
-          <circle cx="24" cy="24" r="14" fill="none" stroke="currentColor" strokeWidth="3" />
-          <path d="M24 14v11l8 5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+          <circle
+            cx="24"
+            cy="24"
+            r="14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+          />
+          <path
+            d="M24 14v11l8 5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
         </svg>
       );
     case "reason":
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
           <circle cx="24" cy="20" r="12" fill="currentColor" opacity="0.85" />
-          <path d="M18 18c1-3 4-4 6-4s5 1 6 4" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
-          <path d="M17 26c2 3 5 4 7 4s5-1 7-4" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
-          <text x="38" y="14" fontSize="14" fontWeight="700" fill="currentColor">?</text>
+          <path
+            d="M18 18c1-3 4-4 6-4s5 1 6 4"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M17 26c2 3 5 4 7 4s5-1 7-4"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          <text
+            x="38"
+            y="14"
+            fontSize="14"
+            fontWeight="700"
+            fill="currentColor"
+          >
+            ?
+          </text>
         </svg>
       );
     case "how":
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
           <circle cx="24" cy="16" r="8" fill="currentColor" opacity="0.85" />
-          <path d="M10 42c2-10 9-15 14-15s12 5 14 15" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
-          <text x="34" y="14" fontSize="12" fontWeight="700" fill="currentColor">?</text>
-          <text x="6" y="18" fontSize="11" fontWeight="700" fill="currentColor">?</text>
+          <path
+            d="M10 42c2-10 9-15 14-15s12 5 14 15"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
+          <text
+            x="34"
+            y="14"
+            fontSize="12"
+            fontWeight="700"
+            fill="currentColor"
+          >
+            ?
+          </text>
+          <text x="6" y="18" fontSize="11" fontWeight="700" fill="currentColor">
+            ?
+          </text>
         </svg>
       );
     case "choice":
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
           <circle cx="24" cy="16" r="7" fill="currentColor" opacity="0.85" />
-          <path d="M12 42c2-9 8-14 12-14s10 5 12 14" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
-          <path d="M8 22h10M30 22h10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-          <path d="M10 22l-3 4M8 22l-3-4M38 22l3 4M40 22l3-4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+          <path
+            d="M12 42c2-9 8-14 12-14s10 5 12 14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8 22h10M30 22h10"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+          <path
+            d="M10 22l-3 4M8 22l-3-4M38 22l3 4M40 22l3-4"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
         </svg>
       );
     case "own":
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
-          <rect x="8" y="20" width="14" height="18" rx="2" fill="currentColor" opacity="0.75" />
+          <rect
+            x="8"
+            y="20"
+            width="14"
+            height="18"
+            rx="2"
+            fill="currentColor"
+            opacity="0.75"
+          />
           <path d="M8 20l7-8 7 8" fill="currentColor" opacity="0.9" />
-          <circle cx="34" cy="28" r="8" fill="none" stroke="currentColor" strokeWidth="3" />
-          <path d="M34 36v6" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+          <circle
+            cx="34"
+            cy="28"
+            r="8"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+          />
+          <path
+            d="M34 36v6"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
         </svg>
       );
     case "object":
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
           <circle cx="24" cy="14" r="8" fill="currentColor" opacity="0.85" />
-          <path d="M10 42c2-10 9-15 14-15s12 5 14 15" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
-          <path d="M18 18c0 0 2 4 6 4s6-4 6-4" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+          <path
+            d="M10 42c2-10 9-15 14-15s12 5 14 15"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M18 18c0 0 2 4 6 4s6-4 6-4"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
         </svg>
       );
     default:
@@ -266,7 +492,9 @@ function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
 }
 
 function normalizeLoose(s: string): string {
-  return s.toLowerCase().trim()
+  return s
+    .toLowerCase()
+    .trim()
     .replace(/^(he's|she's|it's|a |an |the )/g, "")
     .replace(/[^a-z0-9]/g, "");
 }
@@ -528,7 +756,9 @@ export default function Lesson30() {
   const numScore = numberPictures.filter(
     (p) => numAns[p.pos] === numberWords[p.value - 1],
   ).length;
-  const pairScore = choosePairs.filter((p) => pairAns[p.id] === p.answer).length;
+  const pairScore = choosePairs.filter(
+    (p) => pairAns[p.id] === p.answer,
+  ).length;
   const nextNumOk =
     ["24", "twentyfour"].includes(normalizeLoose(nextNumAns)) &&
     nextNumAns.trim() !== "";
@@ -542,7 +772,9 @@ export default function Lesson30() {
     f.answers.includes(normalizeLoose(profileAns[f.key] ?? "")),
   ).length;
   const writeScore = writeItems.filter((item) =>
-    item.answers.map(normalizeQuestion).includes(normalizeQuestion(writeAns[item.id] ?? "")),
+    item.answers
+      .map(normalizeQuestion)
+      .includes(normalizeQuestion(writeAns[item.id] ?? "")),
   ).length;
 
   // Part 3 · Shop scores
@@ -589,8 +821,7 @@ export default function Lesson30() {
             </p>
             <p className="lesson22-subtitle">
               Повторення: numbers + question words з L29 · days of the week.
-              Потім урок-рефлексія по{" "}
-              <strong>усіх пройдених темах</strong>{" "}
+              Потім урок-рефлексія по <strong>усіх пройдених темах</strong>{" "}
               (L1–29): speaking tour → family/jobs → reading → listening R4 →
               writing → correction → reflect.
             </p>
@@ -822,16 +1053,28 @@ export default function Lesson30() {
       >
         <ul className="l29-goals-list">
           <li>
-            <span className="l29-goals-chevron" aria-hidden="true">›</span>
-            <span><strong>Goal:</strong> questions about other people</span>
+            <span className="l29-goals-chevron" aria-hidden="true">
+              ›
+            </span>
+            <span>
+              <strong>Goal:</strong> questions about other people
+            </span>
           </li>
           <li>
-            <span className="l29-goals-chevron" aria-hidden="true">›</span>
-            <span><strong>Grammar:</strong> question words with <em>be</em></span>
+            <span className="l29-goals-chevron" aria-hidden="true">
+              ›
+            </span>
+            <span>
+              <strong>Grammar:</strong> question words with <em>be</em>
+            </span>
           </li>
           <li>
-            <span className="l29-goals-chevron" aria-hidden="true">›</span>
-            <span><strong>Vocabulary:</strong> numbers 1–100</span>
+            <span className="l29-goals-chevron" aria-hidden="true">
+              ›
+            </span>
+            <span>
+              <strong>Vocabulary:</strong> numbers 1–100
+            </span>
           </li>
         </ul>
       </section>
@@ -841,8 +1084,8 @@ export default function Lesson30() {
           <p className="page-kicker">Part 2 · Vocabulary · 1a</p>
           <h2>Numbers 1–10</h2>
           <p className="lesson22-section-desc">
-            З'єднай цифру на картці зі словом. Обери правильне слово зі
-            списку під кожною карткою.
+            З'єднай цифру на картці зі словом. Обери правильне слово зі списку
+            під кожною карткою.
           </p>
         </div>
 
@@ -865,14 +1108,19 @@ export default function Lesson30() {
                   value={chosen}
                   onChange={(e) => {
                     setNumChecked(false);
-                    setNumAns((prev) => ({ ...prev, [pic.pos]: e.target.value }));
+                    setNumAns((prev) => ({
+                      ...prev,
+                      [pic.pos]: e.target.value,
+                    }));
                   }}
                   className={drillSelClass(numChecked, chosen, answer)}
                   aria-label={`Word for card ${pic.pos}`}
                 >
                   <option value="">select…</option>
                   {numberBank.map((n) => (
-                    <option key={n.word} value={n.word}>{n.word}</option>
+                    <option key={n.word} value={n.word}>
+                      {n.word}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -881,16 +1129,23 @@ export default function Lesson30() {
         </div>
 
         <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
-          <button className="l22-check-btn" onClick={() => setNumChecked(true)}>Check answers</button>
+          <button className="l22-check-btn" onClick={() => setNumChecked(true)}>
+            Check answers
+          </button>
           <button
             className="l29-reset-btn"
             type="button"
-            onClick={() => { setNumAns({}); setNumChecked(false); }}
+            onClick={() => {
+              setNumAns({});
+              setNumChecked(false);
+            }}
           >
             Reset
           </button>
           {numChecked && (
-            <span className="l22-score">{numScore} / {numberPictures.length}</span>
+            <span className="l22-score">
+              {numScore} / {numberPictures.length}
+            </span>
           )}
         </div>
 
@@ -940,7 +1195,11 @@ export default function Lesson30() {
             Послухай <strong>R10</strong> і повтори десятки та сто вголос.
           </p>
         </div>
-        <div className="l29-chip-row" role="list" aria-label="Tens and one hundred">
+        <div
+          className="l29-chip-row"
+          role="list"
+          aria-label="Tens and one hundred"
+        >
           {tensWords.map((w, i) => (
             <span key={w} className="l29-chip l29-chip--tens" role="listitem">
               <strong>{i < 8 ? (i + 2) * 10 : 100}</strong> {w}
@@ -974,7 +1233,9 @@ export default function Lesson30() {
             transcript={
               <ol>
                 {choosePairs.map((p) => (
-                  <li key={p.id}>{p.options.join(" or ")} → <strong>{p.answer}</strong></li>
+                  <li key={p.id}>
+                    {p.options.join(" or ")} → <strong>{p.answer}</strong>
+                  </li>
                 ))}
               </ol>
             }
@@ -991,13 +1252,21 @@ export default function Lesson30() {
                     let cls = "l29-pair-btn";
                     if (chosen === opt) cls += " is-selected";
                     if (pairChecked && opt === item.answer) cls += " is-ok";
-                    else if (pairChecked && chosen === opt && opt !== item.answer) cls += " is-err";
+                    else if (
+                      pairChecked &&
+                      chosen === opt &&
+                      opt !== item.answer
+                    )
+                      cls += " is-err";
                     return (
                       <button
                         key={opt}
                         type="button"
                         className={cls}
-                        onClick={() => { setPairChecked(false); setPairAns((prev) => ({ ...prev, [item.id]: opt })); }}
+                        onClick={() => {
+                          setPairChecked(false);
+                          setPairAns((prev) => ({ ...prev, [item.id]: opt }));
+                        }}
                         aria-pressed={chosen === opt}
                       >
                         {opt}
@@ -1010,16 +1279,26 @@ export default function Lesson30() {
           })}
         </div>
         <div className="l25-cr-actions" style={{ marginTop: "0.85rem" }}>
-          <button className="l22-check-btn" onClick={() => setPairChecked(true)}>Check answers</button>
+          <button
+            className="l22-check-btn"
+            onClick={() => setPairChecked(true)}
+          >
+            Check answers
+          </button>
           <button
             className="l29-reset-btn"
             type="button"
-            onClick={() => { setPairAns({}); setPairChecked(false); }}
+            onClick={() => {
+              setPairAns({});
+              setPairChecked(false);
+            }}
           >
             Reset
           </button>
           {pairChecked && (
-            <span className="l22-score">{pairScore} / {choosePairs.length}</span>
+            <span className="l22-score">
+              {pairScore} / {choosePairs.length}
+            </span>
           )}
         </div>
       </section>
@@ -1029,32 +1308,51 @@ export default function Lesson30() {
           <p className="page-kicker">Part 2 · Vocabulary · 3</p>
           <h2>What comes next?</h2>
           <p className="lesson22-section-desc">
-            Прочитай послідовність чисел і встав наступне число. Потім
-            послухай <strong>R12</strong> і перевір себе.
+            Прочитай послідовність чисел і встав наступне число. Потім послухай{" "}
+            <strong>R12</strong> і перевір себе.
           </p>
         </div>
-        <p className="l29-sequence">twenty-one · twenty-two · twenty-three · …</p>
+        <p className="l29-sequence">
+          twenty-one · twenty-two · twenty-three · …
+        </p>
         <div className="l29-write-list">
           <div className="l29-write-row">
             <input
               type="text"
               value={nextNumAns}
-              onChange={(e) => { setNextNumChecked(false); setNextNumAns(e.target.value); }}
+              onChange={(e) => {
+                setNextNumChecked(false);
+                setNextNumAns(e.target.value);
+              }}
               placeholder="twenty-four / 24"
-              className={inputStateClass(nextNumChecked, nextNumAns.trim() !== "", nextNumOk)}
+              className={inputStateClass(
+                nextNumChecked,
+                nextNumAns.trim() !== "",
+                nextNumOk,
+              )}
               aria-label="What comes next?"
             />
             {nextNumChecked && !nextNumOk && (
-              <p className="l29-write-answer">Правильна відповідь: <strong>24 / twenty-four</strong></p>
+              <p className="l29-write-answer">
+                Правильна відповідь: <strong>24 / twenty-four</strong>
+              </p>
             )}
           </div>
         </div>
         <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
-          <button className="l22-check-btn" onClick={() => setNextNumChecked(true)}>Check</button>
+          <button
+            className="l22-check-btn"
+            onClick={() => setNextNumChecked(true)}
+          >
+            Check
+          </button>
           <button
             className="l29-reset-btn"
             type="button"
-            onClick={() => { setNextNumAns(""); setNextNumChecked(false); }}
+            onClick={() => {
+              setNextNumAns("");
+              setNextNumChecked(false);
+            }}
           >
             Reset
           </button>
@@ -1064,7 +1362,12 @@ export default function Lesson30() {
             r={12}
             exercise="Vocabulary · 3"
             title="twenty-one, twenty-two, twenty-three… — listen and check"
-            transcript={<p>twenty-one · twenty-two · twenty-three · twenty-four · twenty-five …</p>}
+            transcript={
+              <p>
+                twenty-one · twenty-two · twenty-three · twenty-four ·
+                twenty-five …
+              </p>
+            }
           />
         </div>
       </section>
@@ -1086,24 +1389,38 @@ export default function Lesson30() {
             transcript={
               <div>
                 <p>
-                  <strong>A:</strong> Look at this. These people are great.<br />
-                  <strong>B:</strong> Oh yeah.<br />
-                  <strong>A:</strong> Yes. Look at this photo. This is Anna Chubb. She's from Canada. She's a teacher.<br />
-                  <strong>B:</strong> How old is she?<br />
-                  <strong>A:</strong> She's 99.<br />
+                  <strong>A:</strong> Look at this. These people are great.
+                  <br />
+                  <strong>B:</strong> Oh yeah.
+                  <br />
+                  <strong>A:</strong> Yes. Look at this photo. This is Anna
+                  Chubb. She's from Canada. She's a teacher.
+                  <br />
+                  <strong>B:</strong> How old is she?
+                  <br />
+                  <strong>A:</strong> She's 99.
+                  <br />
                   <strong>B:</strong> Really? Wow.
                 </p>
                 <p>
-                  <strong>A:</strong> And this is Bill Gooch. He's from the UK.<br />
-                  <strong>B:</strong> How old is he?<br />
-                  <strong>A:</strong> He's 85 years old.<br />
-                  <strong>B:</strong> What's his job?<br />
-                  <strong>A:</strong> He's a taxi driver.<br />
+                  <strong>A:</strong> And this is Bill Gooch. He's from the UK.
+                  <br />
+                  <strong>B:</strong> How old is he?
+                  <br />
+                  <strong>A:</strong> He's 85 years old.
+                  <br />
+                  <strong>B:</strong> What's his job?
+                  <br />
+                  <strong>A:</strong> He's a taxi driver.
+                  <br />
                   <strong>B:</strong> Amazing.
                 </p>
                 <p>
-                  <strong>A:</strong> Yeah. And what's his name? His name is Satoru Goto. He's 51 and he's a football player.<br />
-                  <strong>B:</strong> Wow. Where's he from?<br />
+                  <strong>A:</strong> Yeah. And what's his name? His name is
+                  Satoru Goto. He's 51 and he's a football player.
+                  <br />
+                  <strong>B:</strong> Wow. Where's he from?
+                  <br />
                   <strong>A:</strong> He's from Japan.
                 </p>
               </div>
@@ -1115,41 +1432,62 @@ export default function Lesson30() {
           {numProfiles.map((p) => (
             <article key={p.id} className="l29-profile">
               <h3>{p.name}</h3>
-              {(Object.keys(p.fields) as (keyof NumProfile["fields"])[]).map((field) => {
-                const key = `${p.id}-${field}`;
-                const value = profileAns[key] ?? "";
-                const ok = p.fields[field].answers.includes(normalizeLoose(value));
-                return (
-                  <label key={key} className="l29-profile-field">
-                    {p.fields[field].label}
-                    <input
-                      type="text"
-                      value={value}
-                      onChange={(e) => {
-                        setProfileChecked(false);
-                        setProfileAns((prev) => ({ ...prev, [key]: e.target.value }));
-                      }}
-                      className={inputStateClass(profileChecked, value.trim() !== "", ok)}
-                      aria-label={`${p.name} — ${p.fields[field].label}`}
-                    />
-                  </label>
-                );
-              })}
+              {(Object.keys(p.fields) as (keyof NumProfile["fields"])[]).map(
+                (field) => {
+                  const key = `${p.id}-${field}`;
+                  const value = profileAns[key] ?? "";
+                  const ok = p.fields[field].answers.includes(
+                    normalizeLoose(value),
+                  );
+                  return (
+                    <label key={key} className="l29-profile-field">
+                      {p.fields[field].label}
+                      <input
+                        type="text"
+                        value={value}
+                        onChange={(e) => {
+                          setProfileChecked(false);
+                          setProfileAns((prev) => ({
+                            ...prev,
+                            [key]: e.target.value,
+                          }));
+                        }}
+                        className={inputStateClass(
+                          profileChecked,
+                          value.trim() !== "",
+                          ok,
+                        )}
+                        aria-label={`${p.name} — ${p.fields[field].label}`}
+                      />
+                    </label>
+                  );
+                },
+              )}
             </article>
           ))}
         </div>
 
         <div className="l25-cr-actions" style={{ marginTop: "0.85rem" }}>
-          <button className="l22-check-btn" onClick={() => setProfileChecked(true)}>Check answers</button>
+          <button
+            className="l22-check-btn"
+            onClick={() => setProfileChecked(true)}
+          >
+            Check answers
+          </button>
           <button
             className="l29-reset-btn"
             type="button"
-            onClick={() => { setProfileAns({}); setProfileChecked(false); }}
+            onClick={() => {
+              setProfileAns({});
+              setProfileChecked(false);
+            }}
           >
             Reset
           </button>
           {profileChecked && (
-            <span className="l22-score">{profileScore} / {profileFieldKeys.length}</span>
+            <span className="l22-score">
+              {profileScore} / {profileFieldKeys.length}
+            </span>
           )}
         </div>
       </section>
@@ -1170,7 +1508,10 @@ export default function Lesson30() {
             Question words (<em>where, what, who, how</em>…) come{" "}
             <select
               value={gramAns.q1}
-              onChange={(e) => { setGramChecked(false); setGramAns((p) => ({ ...p, q1: e.target.value })); }}
+              onChange={(e) => {
+                setGramChecked(false);
+                setGramAns((p) => ({ ...p, q1: e.target.value }));
+              }}
               className={drillSelClass(gramChecked, gramAns.q1, "before")}
               aria-label="Question words come before/after be"
             >
@@ -1184,7 +1525,10 @@ export default function Lesson30() {
             <em>Be</em> comes{" "}
             <select
               value={gramAns.q2}
-              onChange={(e) => { setGramChecked(false); setGramAns((p) => ({ ...p, q2: e.target.value })); }}
+              onChange={(e) => {
+                setGramChecked(false);
+                setGramAns((p) => ({ ...p, q2: e.target.value }));
+              }}
               className={drillSelClass(gramChecked, gramAns.q2, "before")}
               aria-label="Be comes before/after the subject"
             >
@@ -1197,30 +1541,93 @@ export default function Lesson30() {
 
           <table className="l29-grammar-table">
             <tbody>
-              <tr><td><strong>Where</strong></td><td>is</td><td>he</td><td>from?</td></tr>
-              <tr><td><strong>What</strong></td><td>is</td><td>her</td><td>name?</td></tr>
-              <tr><td><strong>Who</strong></td><td>is</td><td>that</td><td>man?</td></tr>
-              <tr><td><strong>How old</strong></td><td>are</td><td>they</td><td>?</td></tr>
+              <tr>
+                <td>
+                  <strong>Where</strong>
+                </td>
+                <td>is</td>
+                <td>he</td>
+                <td>from?</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>What</strong>
+                </td>
+                <td>is</td>
+                <td>her</td>
+                <td>name?</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Who</strong>
+                </td>
+                <td>is</td>
+                <td>that</td>
+                <td>man?</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>How old</strong>
+                </td>
+                <td>are</td>
+                <td>they</td>
+                <td>?</td>
+              </tr>
             </tbody>
           </table>
         </div>
 
         <div className="l25-cr-actions">
-          <button className="l22-check-btn" onClick={() => setGramChecked(true)}>Check</button>
+          <button
+            className="l22-check-btn"
+            onClick={() => setGramChecked(true)}
+          >
+            Check
+          </button>
           {gramChecked && (
             <span className="l22-score">
-              {(gramAns.q1 === "before" ? 1 : 0) + (gramAns.q2 === "before" ? 1 : 0)} / 2
+              {(gramAns.q1 === "before" ? 1 : 0) +
+                (gramAns.q2 === "before" ? 1 : 0)}{" "}
+              / 2
             </span>
           )}
         </div>
 
-        <table className="l29-grammar-examples" aria-label="Question words with be — examples">
+        <table
+          className="l29-grammar-examples"
+          aria-label="Question words with be — examples"
+        >
           <tbody>
-            <tr><td><strong>Who are</strong> you?</td><td>I'm your new teacher.</td></tr>
-            <tr><td><strong>How old is</strong> he?</td><td>He's 99 years old!</td></tr>
-            <tr><td><strong>What is</strong> her name?</td><td>Her name is Anna Chubb.</td></tr>
-            <tr><td><strong>Where are</strong> they from?</td><td>They're from Canada.</td></tr>
-            <tr><td><strong>When is</strong> your class?</td><td>At 9.30 a.m.</td></tr>
+            <tr>
+              <td>
+                <strong>Who are</strong> you?
+              </td>
+              <td>I'm your new teacher.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>How old is</strong> he?
+              </td>
+              <td>He's 99 years old!</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>What is</strong> her name?
+              </td>
+              <td>Her name is Anna Chubb.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Where are</strong> they from?
+              </td>
+              <td>They're from Canada.</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>When is</strong> your class?
+              </td>
+              <td>At 9.30 a.m.</td>
+            </tr>
           </tbody>
         </table>
 
@@ -1234,7 +1641,9 @@ export default function Lesson30() {
               loading="lazy"
               decoding="async"
             />
-            <figcaption>What / Who / When / Where / Why — коротко про значення</figcaption>
+            <figcaption>
+              What / Who / When / Where / Why — коротко про значення
+            </figcaption>
           </figure>
           <figure className="l29-wh-poster">
             <img
@@ -1259,7 +1668,9 @@ export default function Lesson30() {
                 role="row"
                 style={{ ["--qw-color" as string]: row.color }}
               >
-                <div className="l29-qw-ref-word" role="cell">{row.word}</div>
+                <div className="l29-qw-ref-word" role="cell">
+                  {row.word}
+                </div>
                 <div className="l29-qw-ref-info" role="cell">
                   <p className="l29-qw-ref-desc">{row.desc}</p>
                   <p className="l29-qw-ref-ex">
@@ -1294,7 +1705,9 @@ export default function Lesson30() {
             if (idx === -1) return <li key={s}>{s}</li>;
             return (
               <li key={s}>
-                {s.slice(0, idx)}<span className="be">'s</span>{s.slice(idx + 2)}
+                {s.slice(0, idx)}
+                <span className="be">'s</span>
+                {s.slice(idx + 2)}
               </li>
             );
           })}
@@ -1305,7 +1718,11 @@ export default function Lesson30() {
             exercise="Pronunciation · 6"
             title="'s in questions — listen and repeat"
             transcript={
-              <ol>{pronSentences.map((s) => <li key={s}>{s}</li>)}</ol>
+              <ol>
+                {pronSentences.map((s) => (
+                  <li key={s}>{s}</li>
+                ))}
+              </ol>
             }
           />
         </div>
@@ -1327,39 +1744,62 @@ export default function Lesson30() {
         <div className="l29-write-list">
           {writeItems.map((item) => {
             const value = writeAns[item.id] ?? "";
-            const ok = item.answers.map(normalizeQuestion).includes(normalizeQuestion(value));
+            const ok = item.answers
+              .map(normalizeQuestion)
+              .includes(normalizeQuestion(value));
             return (
               <div key={item.id} className="l29-write-row">
-                <p><strong>{item.id}.</strong> {item.prompt}</p>
+                <p>
+                  <strong>{item.id}.</strong> {item.prompt}
+                </p>
                 <input
                   type="text"
                   value={value}
                   onChange={(e) => {
                     setWriteChecked(false);
-                    setWriteAns((prev) => ({ ...prev, [item.id]: e.target.value }));
+                    setWriteAns((prev) => ({
+                      ...prev,
+                      [item.id]: e.target.value,
+                    }));
                   }}
                   placeholder="Write the question…"
-                  className={inputStateClass(writeChecked, value.trim() !== "", ok)}
+                  className={inputStateClass(
+                    writeChecked,
+                    value.trim() !== "",
+                    ok,
+                  )}
                   aria-label={`Question ${item.id}`}
                 />
                 {writeChecked && !ok && (
-                  <p className="l29-write-answer">Наприклад: <strong>{item.answers[0]}</strong></p>
+                  <p className="l29-write-answer">
+                    Наприклад: <strong>{item.answers[0]}</strong>
+                  </p>
                 )}
               </div>
             );
           })}
         </div>
         <div className="l25-cr-actions" style={{ marginTop: "0.85rem" }}>
-          <button className="l22-check-btn" onClick={() => setWriteChecked(true)}>Check answers</button>
+          <button
+            className="l22-check-btn"
+            onClick={() => setWriteChecked(true)}
+          >
+            Check answers
+          </button>
           <button
             className="l29-reset-btn"
             type="button"
-            onClick={() => { setWriteAns({}); setWriteChecked(false); }}
+            onClick={() => {
+              setWriteAns({});
+              setWriteChecked(false);
+            }}
           >
             Reset
           </button>
           {writeChecked && (
-            <span className="l22-score">{writeScore} / {writeItems.length}</span>
+            <span className="l22-score">
+              {writeScore} / {writeItems.length}
+            </span>
           )}
         </div>
       </section>
@@ -1369,8 +1809,8 @@ export default function Lesson30() {
           <p className="page-kicker">Part 2 · Grammar · 8</p>
           <h2>Ask about people you know</h2>
           <p className="lesson22-section-desc">
-            Впиши імена трьох людей з сім'ї (або вигаданих людей). Потім
-            постав про кожного 2–3 питання з <em>be</em>, як у прикладі.
+            Впиши імена трьох людей з сім'ї (або вигаданих людей). Потім постав
+            про кожного 2–3 питання з <em>be</em>, як у прикладі.
           </p>
         </div>
         <div className="l29-family-inputs">
@@ -1392,10 +1832,18 @@ export default function Lesson30() {
           ))}
         </div>
         <div className="l29-mini-dlg" aria-label="Example">
-          <p><strong>A:</strong> <em>Who's Felipe?</em></p>
-          <p><strong>B:</strong> He's a classmate. He's from Brazil.</p>
-          <p><strong>A:</strong> <em>How old is he?</em></p>
-          <p><strong>B:</strong> He's twenty-three.</p>
+          <p>
+            <strong>A:</strong> <em>Who's Felipe?</em>
+          </p>
+          <p>
+            <strong>B:</strong> He's a classmate. He's from Brazil.
+          </p>
+          <p>
+            <strong>A:</strong> <em>How old is he?</em>
+          </p>
+          <p>
+            <strong>B:</strong> He's twenty-three.
+          </p>
         </div>
       </section>
 
@@ -1689,10 +2137,19 @@ export default function Lesson30() {
           ))}
         </div>
 
-        <div className="l25-conf-card" style={{ maxWidth: 640, marginBottom: "1rem" }}>
+        <div
+          className="l25-conf-card"
+          style={{ maxWidth: 640, marginBottom: "1rem" }}
+        >
           <div className="l25-conf-header">Remember</div>
           <div className="l25-conf-fields">
-            <p style={{ margin: 0, fontSize: "var(--text-sm)", lineHeight: 1.55 }}>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "var(--text-sm)",
+                lineHeight: 1.55,
+              }}
+            >
               <strong>on</strong> + day: on Monday, on Friday, on Sundays
               <br />
               <strong>at</strong> the weekend
@@ -1840,7 +2297,10 @@ export default function Lesson30() {
         <h3 className="l22-listen-subtitle">4 · Speak</h3>
         <div className="lesson22-prompt-grid">
           {daysWeekSpeak.map((q) => (
-            <div key={q} className="lesson22-prompt-card lesson22-prompt-card--task">
+            <div
+              key={q}
+              className="lesson22-prompt-card lesson22-prompt-card--task"
+            >
               {q}
             </div>
           ))}
@@ -2062,7 +2522,11 @@ export default function Lesson30() {
             {profileModel.map((para) => (
               <p
                 key={para.slice(0, 28)}
-                style={{ margin: 0, fontSize: "var(--text-sm)", lineHeight: 1.55 }}
+                style={{
+                  margin: 0,
+                  fontSize: "var(--text-sm)",
+                  lineHeight: 1.55,
+                }}
               >
                 {para}
               </p>
@@ -2099,7 +2563,9 @@ export default function Lesson30() {
           </p>
         </div>
 
-        <h3 className="l22-listen-subtitle">Family photos (Cristina's family)</h3>
+        <h3 className="l22-listen-subtitle">
+          Family photos (Cristina's family)
+        </h3>
         <div className="l27-photo-bank">
           {familyCards.map((c) => (
             <figure key={c.id} className="l27-photo-card">
@@ -2151,7 +2617,9 @@ export default function Lesson30() {
           ))}
         </div>
 
-        <h3 className="l22-listen-subtitle">Quick check · possessives &amp; be</h3>
+        <h3 className="l22-listen-subtitle">
+          Quick check · possessives &amp; be
+        </h3>
         <div className="l26-drill-list">
           {familyJobMatch.map((q) => (
             <div key={q.id} className="l26-drill-row">
@@ -2296,7 +2764,10 @@ export default function Lesson30() {
 
         <div className="l30-ws">
           <header className="l30-ws-header">
-            <div className="l30-ws-deco l30-ws-deco--cloud" aria-hidden="true" />
+            <div
+              className="l30-ws-deco l30-ws-deco--cloud"
+              aria-hidden="true"
+            />
             <div className="l30-ws-deco l30-ws-deco--sun" aria-hidden="true" />
             <h3 className="l30-ws-title">A Horse</h3>
             <p className="l30-ws-badge">Reading Comprehension</p>
@@ -2449,9 +2920,7 @@ export default function Lesson30() {
                         spellCheck={false}
                       />
                       {horseChecked && !ok && (
-                        <span className="l30-ws-hint">
-                          e.g. {q.answers[0]}
-                        </span>
+                        <span className="l30-ws-hint">e.g. {q.answers[0]}</span>
                       )}
                     </li>
                   );
@@ -2486,7 +2955,12 @@ export default function Lesson30() {
 
           <footer className="l30-ws-footer">
             <span className="l30-ws-shoe" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
                 <path d="M7 3c-2.2 0-4 2.2-4 5v4c0 1.7.7 3.2 1.8 4.2L3 21h3.2l1.3-3.5c.5.2 1 .3 1.5.3h2c.5 0 1-.1 1.5-.3L13.8 21H17l-1.8-4.8C16.3 15.2 17 13.7 17 12V8c0-2.8-1.8-5-4-5-1.2 0-2.3.6-3 1.5C9.3 3.6 8.2 3 7 3zm0 2.5c.8 0 1.5.9 1.5 2v4.2c0 .8-.3 1.4-.8 1.8L6.5 18H5.2l1.1-2.9c-.8-.8-1.3-1.9-1.3-3.1V8c0-1.5.9-2.5 2-2.5zm6 0c1.1 0 2 1 2 2.5v3.8c0 1.2-.5 2.3-1.3 3.1l1.1 2.9h-1.3l-1.2-3.5c-.5-.4-.8-1-.8-1.8V7.5c0-1.1.7-2 1.5-2z" />
               </svg>
             </span>
@@ -2495,7 +2969,12 @@ export default function Lesson30() {
             </p>
           </footer>
           <div className="l30-ws-flowers" aria-hidden="true">
-            <span /><span /><span /><span /><span /><span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
           </div>
         </div>
       </section>
@@ -2586,8 +3065,8 @@ export default function Lesson30() {
           <h2>My personal profile</h2>
           <p className="lesson22-section-desc">
             Напиши 8–12 речень про себе, охопивши різні теми: name, age, from /
-            nationality, job, family, appearance, routine, free time, can / can't.
-            Без підказки або з мінімальною опорою.
+            nationality, job, family, appearance, routine, free time, can /
+            can't. Без підказки або з мінімальною опорою.
           </p>
         </div>
         <label className="lesson22-section-desc" htmlFor="l30-writing-box">
@@ -2602,8 +3081,8 @@ export default function Lesson30() {
           placeholder="My name is… I'm … years old. I'm from… I live in… I'm a… / I work as… In my family… I have… hair. In my free time…"
         />
         <p className="l25-cr-hint" style={{ marginTop: "0.5rem" }}>
-          Self-check: скільки речень? Чи є{" "}
-          <em>am / is / are</em>? Чи є <em>my / his / her</em>?
+          Self-check: скільки речень? Чи є <em>am / is / are</em>? Чи є{" "}
+          <em>my / his / her</em>?
         </p>
       </section>
 
@@ -2699,9 +3178,7 @@ export default function Lesson30() {
                     className={`l25-cr-is-btn${
                       reflect[i] === n ? " l25-cr-is-btn--ok" : ""
                     }`}
-                    onClick={() =>
-                      setReflect((prev) => ({ ...prev, [i]: n }))
-                    }
+                    onClick={() => setReflect((prev) => ({ ...prev, [i]: n }))}
                   >
                     {n}
                   </button>

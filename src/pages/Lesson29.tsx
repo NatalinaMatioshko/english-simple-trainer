@@ -616,7 +616,10 @@ const profiles: Profile[] = [
     fields: {
       age: { label: "Age", answers: ["99"] },
       from: { label: "From", answers: ["canada"] },
-      job: { label: "Job", answers: ["teacher", "she's a teacher", "shes a teacher"] },
+      job: {
+        label: "Job",
+        answers: ["teacher", "she's a teacher", "shes a teacher"],
+      },
     },
   },
   {
@@ -627,7 +630,10 @@ const profiles: Profile[] = [
     fields: {
       age: { label: "Age", answers: ["85"] },
       from: { label: "From", answers: ["the uk", "uk"] },
-      job: { label: "Job", answers: ["taxi driver", "he's a taxi driver", "hes a taxi driver"] },
+      job: {
+        label: "Job",
+        answers: ["taxi driver", "he's a taxi driver", "hes a taxi driver"],
+      },
     },
   },
   {
@@ -640,7 +646,11 @@ const profiles: Profile[] = [
       from: { label: "From", answers: ["japan"] },
       job: {
         label: "Job",
-        answers: ["football player", "he's a football player", "hes a football player"],
+        answers: [
+          "football player",
+          "he's a football player",
+          "hes a football player",
+        ],
       },
     },
   },
@@ -776,9 +786,31 @@ function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
     case "info":
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
-          <rect x="8" y="10" width="22" height="28" rx="3" fill="currentColor" opacity="0.2" />
-          <rect x="12" y="16" width="14" height="2.5" rx="1" fill="currentColor" />
-          <rect x="12" y="22" width="10" height="2.5" rx="1" fill="currentColor" />
+          <rect
+            x="8"
+            y="10"
+            width="22"
+            height="28"
+            rx="3"
+            fill="currentColor"
+            opacity="0.2"
+          />
+          <rect
+            x="12"
+            y="16"
+            width="14"
+            height="2.5"
+            rx="1"
+            fill="currentColor"
+          />
+          <rect
+            x="12"
+            y="22"
+            width="10"
+            height="2.5"
+            rx="1"
+            fill="currentColor"
+          />
           <circle cx="34" cy="30" r="9" fill="currentColor" opacity="0.85" />
           <circle cx="34" cy="26" r="2" fill="#fff" />
           <rect x="32.5" y="29" width="3" height="8" rx="1.5" fill="#fff" />
@@ -834,7 +866,13 @@ function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
             strokeWidth="2.5"
             strokeLinecap="round"
           />
-          <text x="38" y="14" fontSize="14" fontWeight="700" fill="currentColor">
+          <text
+            x="38"
+            y="14"
+            fontSize="14"
+            fontWeight="700"
+            fill="currentColor"
+          >
             ?
           </text>
         </svg>
@@ -850,7 +888,13 @@ function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
             strokeWidth="3.5"
             strokeLinecap="round"
           />
-          <text x="34" y="14" fontSize="12" fontWeight="700" fill="currentColor">
+          <text
+            x="34"
+            y="14"
+            fontSize="12"
+            fontWeight="700"
+            fill="currentColor"
+          >
             ?
           </text>
           <text x="6" y="18" fontSize="11" fontWeight="700" fill="currentColor">
@@ -886,9 +930,24 @@ function QwIcon({ kind }: { kind: (typeof questionWordRows)[number]["icon"] }) {
     case "own":
       return (
         <svg viewBox="0 0 48 48" aria-hidden="true">
-          <rect x="8" y="20" width="14" height="18" rx="2" fill="currentColor" opacity="0.75" />
+          <rect
+            x="8"
+            y="20"
+            width="14"
+            height="18"
+            rx="2"
+            fill="currentColor"
+            opacity="0.75"
+          />
           <path d="M8 20l7-8 7 8" fill="currentColor" opacity="0.9" />
-          <circle cx="34" cy="28" r="8" fill="none" stroke="currentColor" strokeWidth="3" />
+          <circle
+            cx="34"
+            cy="28"
+            r="8"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+          />
           <path
             d="M34 36v6"
             stroke="currentColor"
@@ -990,15 +1049,9 @@ const trackR7: AudioTrackData = {
   title: "this / these — listen and tick",
   transcript: (
     <ol>
-      <li>
-        These are my keys. / This is my key.
-      </li>
-      <li>
-        This is my book. / These are my books.
-      </li>
-      <li>
-        What's in this box? / What's in these boxes?
-      </li>
+      <li>These are my keys. / This is my key.</li>
+      <li>This is my book. / These are my books.</li>
+      <li>What's in this box? / What's in these boxes?</li>
     </ol>
   ),
 };
@@ -1059,9 +1112,7 @@ const trackR12: AudioTrackData = {
   exercise: "Vocabulary · 3",
   title: "twenty-one, twenty-two, twenty-three… — listen and check",
   transcript: (
-    <p>
-      twenty-one · twenty-two · twenty-three · twenty-four · twenty-five …
-    </p>
+    <p>twenty-one · twenty-two · twenty-three · twenty-four · twenty-five …</p>
   ),
 };
 
@@ -1286,11 +1337,7 @@ function normalizeLoose(s: string): string {
 }
 
 function normalizeQuestion(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[?.!]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
+  return s.toLowerCase().replace(/[?.!]/g, "").replace(/\s+/g, " ").trim();
 }
 
 export default function Lesson29() {
@@ -1368,8 +1415,7 @@ export default function Lesson29() {
   const buyWrong = Object.keys(buyObj).filter(
     (id) => buyObj[id] && !(buyAnswers as readonly string[]).includes(id),
   ).length;
-  const buyOk =
-    buyChecked && buyScore === buyAnswers.length && buyWrong === 0;
+  const buyOk = buyChecked && buyScore === buyAnswers.length && buyWrong === 0;
 
   const phraseScore = [...heardInR20].filter((p) => phraseTick[p]).length;
   const phraseExtra = Object.keys(phraseTick).filter(
@@ -1383,8 +1429,9 @@ export default function Lesson29() {
   const officeDlgScore = officeDialogueGaps.filter(
     (g) => officeDlgAns[g.id] === g.answer,
   ).length;
-  const demoScore = demoGaps.filter((g) => demoAns[g.gapId] === g.answer)
-    .length;
+  const demoScore = demoGaps.filter(
+    (g) => demoAns[g.gapId] === g.answer,
+  ).length;
   const keyPhraseScore = keyPhrasePanels.filter(
     (p) => keyPhraseAns[p.id] === p.answer,
   ).length;
@@ -1400,14 +1447,14 @@ export default function Lesson29() {
             <p className="page-kicker">Lesson 29</p>
             <h1>Everyday Objects · Numbers</h1>
             <p className="lesson22-topic-pill">
-              this / that / these / those · everyday objects a–l · numbers
-              1–100 · question words with be
+              this / that / these / those · everyday objects a–l · numbers 1–100
+              · question words with be
             </p>
             <p className="lesson22-subtitle">
               Part 1 — speaking (tell your story). Part 1b — everyday objects
-              a–l, this/that/these/those, Max &amp; Carla listening R5–R8.
-              Part 2 — numbers 1–100, question words with <em>be</em>,
-              profiles R9–R14, shop dialogue.
+              a–l, this/that/these/those, Max &amp; Carla listening R5–R8. Part
+              2 — numbers 1–100, question words with <em>be</em>, profiles
+              R9–R14, shop dialogue.
             </p>
             <div className="chips" style={{ marginTop: "0.75rem" }}>
               <span className="chip">Speaking</span>
@@ -1437,10 +1484,8 @@ export default function Lesson29() {
           <p className="lesson22-section-desc">
             Обери тему нижче. Питання — лише підказки / опори. Не відповідай
             коротко «як на інтерв’ю».{" "}
-            <strong>
-              Розповідай про себе широко: 4–8 зв’язних речень
-            </strong>
-            , ніби ти знайомишся з новою людиною. Додавай деталі, причини,
+            <strong>Розповідай про себе широко: 4–8 зв’язних речень</strong>,
+            ніби ти знайомишся з новою людиною. Додавай деталі, причини,
             приклади з життя.
           </p>
         </div>
@@ -1533,8 +1578,7 @@ export default function Lesson29() {
               ›
             </span>
             <span>
-              <strong>Grammar:</strong>{" "}
-              <em>this, that, these and those</em>
+              <strong>Grammar:</strong> <em>this, that, these and those</em>
             </span>
           </li>
           <li>
@@ -1711,9 +1755,8 @@ export default function Lesson29() {
           <p className="page-kicker">Part 1b · Vocabulary · 3</p>
           <h2>What's number…? · close-ups</h2>
           <p className="lesson22-section-desc">
-            Подивись на макро-фото. Питай і відповідай:{" "}
-            <strong>A:</strong> <em>What's number 1?</em>{" "}
-            <strong>B:</strong> <em>It's a pen.</em>
+            Подивись на макро-фото. Питай і відповідай: <strong>A:</strong>{" "}
+            <em>What's number 1?</em> <strong>B:</strong> <em>It's a pen.</em>
           </p>
         </div>
 
@@ -1757,9 +1800,8 @@ export default function Lesson29() {
 
         <h3 className="l22-listen-subtitle">5a · Choose the picture</h3>
         <p className="lesson22-section-desc">
-          Listen and choose the correct picture —{" "}
-          <strong>A</strong> or <strong>B</strong> (ті самі, що у Vocabulary ·
-          2).
+          Listen and choose the correct picture — <strong>A</strong> or{" "}
+          <strong>B</strong> (ті самі, що у Vocabulary · 2).
         </p>
 
         <div className="l28-ab-grid" role="group" aria-label="Picture A or B">
@@ -1854,7 +1896,10 @@ export default function Lesson29() {
           <div className="l25-conv-title">Max &amp; Carla</div>
           <div className="l25-dialogue">
             {officeDialogue.map((line, i) => (
-              <div key={line.kind === "gap" ? `g${line.id}` : `t${i}`} className="l25-line">
+              <div
+                key={line.kind === "gap" ? `g${line.id}` : `t${i}`}
+                className="l25-line"
+              >
                 <span
                   className={`l25-spk ${
                     line.speaker === "Max" ? "l25-spk--a" : "l25-spk--b"
@@ -2032,7 +2077,11 @@ export default function Lesson29() {
                     let cls = "l28-hear-opt";
                     if (chosen === letter) cls += " is-selected";
                     if (show && letter === item.answer) cls += " is-ok";
-                    else if (show && chosen === letter && letter !== item.answer)
+                    else if (
+                      show &&
+                      chosen === letter &&
+                      letter !== item.answer
+                    )
                       cls += " is-err";
                     return (
                       <button
@@ -2120,11 +2169,7 @@ export default function Lesson29() {
               <div className="l28-demo-dialogue">
                 {card.lines.map((line, i) => (
                   <p
-                    key={
-                      line.kind === "gap"
-                        ? line.gapId
-                        : `${card.num}-t${i}`
-                    }
+                    key={line.kind === "gap" ? line.gapId : `${card.num}-t${i}`}
                     className="l28-demo-line"
                   >
                     <span className="l28-demo-spk">{line.speaker}:</span>{" "}
@@ -2271,8 +2316,8 @@ export default function Lesson29() {
           <p className="page-kicker">Part 2 · Vocabulary · 1a</p>
           <h2>Numbers 1–10</h2>
           <p className="lesson22-section-desc">
-            З’єднай цифру на картці зі словом. Обери правильне слово зі
-            списку під кожною карткою.
+            З’єднай цифру на картці зі словом. Обери правильне слово зі списку
+            під кожною карткою.
           </p>
         </div>
 
@@ -2380,7 +2425,11 @@ export default function Lesson29() {
           </p>
         </div>
 
-        <div className="l29-chip-row" role="list" aria-label="Tens and one hundred">
+        <div
+          className="l29-chip-row"
+          role="list"
+          aria-label="Tens and one hundred"
+        >
           {tensWords.map((w, i) => (
             <span key={w} className="l29-chip l29-chip--tens" role="listitem">
               <strong>{i < 8 ? (i + 2) * 10 : 100}</strong> {w}
@@ -2418,7 +2467,11 @@ export default function Lesson29() {
                     let cls = "l29-pair-btn";
                     if (chosen === opt) cls += " is-selected";
                     if (pairChecked && opt === item.answer) cls += " is-ok";
-                    else if (pairChecked && chosen === opt && opt !== item.answer)
+                    else if (
+                      pairChecked &&
+                      chosen === opt &&
+                      opt !== item.answer
+                    )
                       cls += " is-err";
                     return (
                       <button
@@ -2442,7 +2495,10 @@ export default function Lesson29() {
         </div>
 
         <div className="l25-cr-actions" style={{ marginTop: "0.85rem" }}>
-          <button className="l22-check-btn" onClick={() => setPairChecked(true)}>
+          <button
+            className="l22-check-btn"
+            onClick={() => setPairChecked(true)}
+          >
             Check answers
           </button>
           <button
@@ -2468,8 +2524,8 @@ export default function Lesson29() {
           <p className="page-kicker">Part 2 · Vocabulary · 3</p>
           <h2>What comes next?</h2>
           <p className="lesson22-section-desc">
-            Прочитай послідовність чисел і встав наступне число. Потім
-            послухай <strong>R12</strong> і перевір себе.
+            Прочитай послідовність чисел і встав наступне число. Потім послухай{" "}
+            <strong>R12</strong> і перевір себе.
           </p>
         </div>
 
@@ -2705,7 +2761,10 @@ export default function Lesson29() {
           )}
         </div>
 
-        <table className="l29-grammar-examples" aria-label="Question words with be — examples">
+        <table
+          className="l29-grammar-examples"
+          aria-label="Question words with be — examples"
+        >
           <tbody>
             <tr>
               <td>
@@ -2750,7 +2809,9 @@ export default function Lesson29() {
               loading="lazy"
               decoding="async"
             />
-            <figcaption>What / Who / When / Where / Why — коротко про значення</figcaption>
+            <figcaption>
+              What / Who / When / Where / Why — коротко про значення
+            </figcaption>
           </figure>
           <figure className="l29-wh-poster">
             <img
@@ -2910,8 +2971,8 @@ export default function Lesson29() {
           <p className="page-kicker">Part 2 · Grammar · 8</p>
           <h2>Ask about people you know</h2>
           <p className="lesson22-section-desc">
-            Впиши імена трьох людей з сім’ї (або вигаданих людей). Потім
-            постав про кожного 2–3 питання з <em>be</em>, як у прикладі.
+            Впиши імена трьох людей з сім’ї (або вигаданих людей). Потім постав
+            про кожного 2–3 питання з <em>be</em>, як у прикладі.
           </p>
         </div>
 
