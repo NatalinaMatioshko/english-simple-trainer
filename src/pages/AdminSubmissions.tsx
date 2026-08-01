@@ -81,7 +81,7 @@ function signInErrorMessage(err: unknown): string {
     return "Google Sign-In is disabled. Enable it in Firebase Console → Authentication → Sign-in method.";
   }
   if (code === "auth/unauthorized-domain") {
-    return "This domain is not authorized. Add natalinamatioshko.github.io in Authentication → Authorized domains.";
+    return `This domain is not authorized for Firebase Auth. Open Firebase Console → Authentication → Settings → Authorized domains and add your Vercel domain (e.g. your-project.vercel.app).`;
   }
   if (
     code === "auth/popup-closed-by-user" ||
@@ -103,9 +103,9 @@ function signInErrorMessage(err: unknown): string {
     haystack.includes("referrer") ||
     haystack.includes("api_key_http_referrer_blocked")
   ) {
-    return "API key HTTP referrer blocked. Add localhost, github.io, and firebaseapp.com referrers.";
+    return "API key HTTP referrer blocked. In Google Cloud Console → Credentials → your Browser key, add your Vercel domain (*.vercel.app/*) and firebaseapp.com/*.";
   }
-  return "Sign-in failed or was cancelled.";
+  return `Sign-in failed (${code || "unknown"}). ${message ? message.slice(0, 120) : "Check browser console for details."}`;
 }
 
 export default function AdminSubmissions() {
