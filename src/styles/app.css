@@ -542,11 +542,13 @@ h1 {
   border-radius: var(--radius-md);
   padding: var(--space-4);
   text-align: left;
+  color: var(--color-text);
 }
 
 .verb-card .base {
   display: block;
   font-weight: 800;
+  color: var(--color-text);
 }
 
 .verb-card .heform {
