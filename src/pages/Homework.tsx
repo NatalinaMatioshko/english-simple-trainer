@@ -4,16 +4,24 @@ import "../styles/pages.css";
 const homeworkByLesson = [
   {
     id: "30",
-    title: "A1 Level Test",
+    title: "Check & Reflect practice",
     href: "/hw-30",
     tasks: [
       {
         type: "text",
-        text: "Full-screen A1 placement: one question at a time (all topics in sequence)",
+        text: "Flashcards: phrases with go (go to work / school / bed / shopping…)",
       },
       {
         type: "text",
-        text: "Result bands: Pre-A1 · Emerging A1 · A1 · Strong A1",
+        text: "Topic stations: All topics · Lessons 1–29 (speak + mini quiz)",
+      },
+      {
+        type: "text",
+        text: "Quick correction: Common A1 mistakes (Lesson 30 · exercise 7)",
+      },
+      {
+        type: "text",
+        text: "Optional: A1 Level Test → /a1-level-test",
       },
     ],
   },

@@ -839,6 +839,9 @@ export default function Lesson30() {
             style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
           >
             <Link className="lesson22-back-link" to="/hw-30">
+              Homework 30 →
+            </Link>
+            <Link className="lesson22-back-link" to="/a1-level-test">
               A1 Level Test →
             </Link>
             <Link className="lesson22-back-link" to="/lessons">
@@ -3235,6 +3238,12 @@ export default function Lesson30() {
           <Link
             className="lesson22-prompt-card lesson22-prompt-card--task"
             to="/hw-30"
+          >
+            Homework 30 →
+          </Link>
+          <Link
+            className="lesson22-prompt-card lesson22-prompt-card--task"
+            to="/a1-level-test"
           >
             A1 Level Test →
           </Link>

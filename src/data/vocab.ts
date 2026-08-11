@@ -697,6 +697,7 @@ export const vocabCategories: VocabCategory[] = [
     badge: "Вирази часу",
     groups: [
       {
+        label: "Parts of the day",
         items: [
           {
             en: "in the morning",
@@ -711,6 +712,18 @@ export const vocabCategories: VocabCategory[] = [
             example: "I work in the afternoon.",
           },
           {
+            en: "in the evening",
+            ua: "ввечері",
+            ipa: "ɪn ði ˈiːvnɪŋ",
+            example: "I watch TV in the evening.",
+          },
+          {
+            en: "at night",
+            ua: "вночі",
+            ipa: "ət naɪt",
+            example: "I sleep at night.",
+          },
+          {
             en: "at midday",
             ua: "опівдні",
             ipa: "ət ˌmɪdˈdeɪ",
@@ -722,11 +735,116 @@ export const vocabCategories: VocabCategory[] = [
             ipa: "ət ˈmɪdnaɪt",
             example: "He sleeps at midnight.",
           },
+        ],
+      },
+      {
+        label: "Days of the week",
+        items: [
+          {
+            en: "Monday",
+            ua: "понеділок",
+            ipa: "ˈmʌndeɪ",
+            example: "I work on Monday.",
+          },
+          {
+            en: "Tuesday",
+            ua: "вівторок",
+            ipa: "ˈtjuːzdeɪ",
+            example: "We meet on Tuesday.",
+          },
+          {
+            en: "Wednesday",
+            ua: "середа",
+            ipa: "ˈwenzdeɪ",
+            example: "She studies on Wednesday.",
+          },
+          {
+            en: "Thursday",
+            ua: "четвер",
+            ipa: "ˈθɜːzdeɪ",
+            example: "I finish work on Thursday.",
+          },
+          {
+            en: "Friday",
+            ua: "п'ятниця",
+            ipa: "ˈfraɪdeɪ",
+            example: "We go out on Friday.",
+          },
+          {
+            en: "Saturday",
+            ua: "субота",
+            ipa: "ˈsætədeɪ",
+            example: "I go shopping on Saturday.",
+          },
+          {
+            en: "Sunday",
+            ua: "неділя",
+            ipa: "ˈsʌndeɪ",
+            example: "I rest on Sunday.",
+          },
           {
             en: "on Monday",
             ua: "у понеділок",
             ipa: "ɒn ˈmʌndeɪ",
             example: "I start work on Monday.",
+          },
+          {
+            en: "at the weekend",
+            ua: "на вихідних",
+            ipa: "ət ðə ˌwiːkˈend",
+            example: "We go shopping at the weekend.",
+          },
+        ],
+      },
+      {
+        label: "How often",
+        items: [
+          {
+            en: "always",
+            ua: "завжди",
+            ipa: "ˈɔːlweɪz",
+            example: "I always wake up early.",
+          },
+          {
+            en: "usually",
+            ua: "зазвичай",
+            ipa: "ˈjuːʒuəli",
+            example: "I usually have breakfast at home.",
+          },
+          {
+            en: "often",
+            ua: "часто",
+            ipa: "ˈɒf(ə)n",
+            example: "He often goes by bus.",
+          },
+          {
+            en: "sometimes",
+            ua: "іноді",
+            ipa: "ˈsʌmtaɪmz",
+            example: "I sometimes cook.",
+          },
+          {
+            en: "never",
+            ua: "ніколи",
+            ipa: "ˈnevə",
+            example: "She never goes to bed late.",
+          },
+        ],
+      },
+      {
+        label: "Other",
+        items: [
+          {
+            en: "today",
+            ua: "сьогодні",
+            ipa: "təˈdeɪ",
+            example: "Today is Monday.",
+          },
+          {
+            en: "tomorrow",
+            ua: "завтра",
+            ipa: "təˈmɒrəʊ",
+            example: "I work tomorrow.",
           },
           {
             en: "in June",
@@ -755,10 +873,71 @@ export const vocabCategories: VocabCategory[] = [
     id: "go-phrases",
     title: "Go phrases",
     badge: "Рух",
-    description: "Активності з go",
+    description:
+      "Фрази з go. Зазвичай go to + місце (go to work). Але go home — без to. Також без to: go shopping, go out, go by bus, go on foot, go for a walk.",
+    grammar: [
+      "go to + place → go to work / school / the park",
+      "go home (no to)",
+      "go + -ing → go shopping / swimming / running",
+      "go by bus / go on foot / go for a walk",
+    ],
     groups: [
       {
+        label: "go to + place",
         items: [
+          {
+            en: "go to work",
+            ua: "йти на роботу",
+            ipa: "ɡəʊ tə wɜːk",
+            example: "I go to work at 9.",
+          },
+          {
+            en: "go to school",
+            ua: "йти до школи",
+            ipa: "ɡəʊ tə skuːl",
+            example: "I go to school every day.",
+          },
+          {
+            en: "go to bed",
+            ua: "лягати спати",
+            ipa: "ɡəʊ tə bed",
+            example: "I go to bed at 11.",
+          },
+          {
+            en: "go to the park",
+            ua: "йти в парк",
+            ipa: "ɡəʊ tə ðə pɑːk",
+            example: "Do they go to the park?",
+          },
+          {
+            en: "go to the gym",
+            ua: "йти в спортзал",
+            ipa: "ɡəʊ tə ðə dʒɪm",
+            example: "I go to the gym on Friday.",
+          },
+          {
+            en: "go to the cinema",
+            ua: "йти в кіно",
+            ipa: "ɡəʊ tə ðə ˈsɪnəmə",
+            example: "We go to the cinema on Saturday.",
+          },
+        ],
+      },
+      {
+        label: "Without to",
+        items: [
+          {
+            en: "go home",
+            ua: "йти додому",
+            ipa: "ɡəʊ həʊm",
+            example: "I go home at 6. (not go to home)",
+          },
+          {
+            en: "go out",
+            ua: "виходити / гуляти містом",
+            ipa: "ɡəʊ aʊt",
+            example: "We go out on Saturday evening.",
+          },
           {
             en: "go shopping",
             ua: "ходити за покупками",
@@ -778,10 +957,40 @@ export const vocabCategories: VocabCategory[] = [
             example: "We go swimming in summer.",
           },
           {
-            en: "go to work",
-            ua: "йти на роботу",
-            ipa: "ɡəʊ tə wɜːk",
-            example: "I go to work at 9.",
+            en: "go by bus",
+            ua: "їхати автобусом",
+            ipa: "ɡəʊ baɪ bʌs",
+            example: "I go to work by bus.",
+          },
+          {
+            en: "go by car",
+            ua: "їхати машиною",
+            ipa: "ɡəʊ baɪ kɑː",
+            example: "She goes by car.",
+          },
+          {
+            en: "go by train",
+            ua: "їхати поїздом",
+            ipa: "ɡəʊ baɪ treɪn",
+            example: "They go by train.",
+          },
+          {
+            en: "go on foot",
+            ua: "йти пішки",
+            ipa: "ɡəʊ ɒn fʊt",
+            example: "I go to school on foot.",
+          },
+          {
+            en: "go for a walk",
+            ua: "піти погуляти",
+            ipa: "ɡəʊ fər ə wɔːk",
+            example: "I go for a walk after dinner.",
+          },
+          {
+            en: "go abroad",
+            ua: "їхати за кордон",
+            ipa: "ɡəʊ əˈbrɔːd",
+            example: "We go abroad in summer.",
           },
         ],
       },
@@ -795,6 +1004,30 @@ export const vocabCategories: VocabCategory[] = [
     groups: [
       {
         items: [
+          {
+            en: "wake up",
+            ua: "прокидатися",
+            ipa: "weɪk ʌp",
+            example: "I wake up at 7.",
+          },
+          {
+            en: "get up",
+            ua: "вставати",
+            ipa: "ɡet ʌp",
+            example: "I get up at 7.30.",
+          },
+          {
+            en: "have lunch",
+            ua: "обідати",
+            ipa: "hæv lʌntʃ",
+            example: "I have lunch at 1.",
+          },
+          {
+            en: "have dinner",
+            ua: "вечеряти",
+            ipa: "hæv ˈdɪnə",
+            example: "We have dinner at 7.",
+          },
           {
             en: "few",
             ua: "мало (злічувані)",

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../styles/pages.css";
 import RoadmapSection from "../components/RoadmapSection";
@@ -39,6 +40,20 @@ const shortcuts = [
 ];
 
 export default function Home() {
+  const roadmapRef = useRef<HTMLDetailsElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 901px)");
+    const sync = () => {
+      if (mq.matches && roadmapRef.current) {
+        roadmapRef.current.open = true;
+      }
+    };
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
   return (
     <div className="page-shell">
       <header className="page-hero panel hero-home">
@@ -75,10 +90,12 @@ export default function Home() {
           </article>
         ))}
       </section>
-      <details className="home-roadmap-details">
+      <details ref={roadmapRef} className="home-roadmap-details">
         <summary className="home-roadmap-summary">
           <span>Roadmap</span>
-          <span className="home-roadmap-chevron" aria-hidden="true">▾</span>
+          <span className="home-roadmap-chevron" aria-hidden="true">
+            ▾
+          </span>
         </summary>
         <RoadmapSection />
       </details>

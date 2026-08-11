@@ -485,6 +485,13 @@
   transform: rotate(180deg);
 }
 
+/* Desktop: always show roadmap, no collapse control */
+@media (min-width: 901px) {
+  .home-roadmap-summary {
+    display: none;
+  }
+}
+
 .lessons-material-card figcaption strong {
   color: var(--color-text);
   font-size: 1rem;

@@ -199,7 +199,7 @@ const lessons: LessonEntry[] = [
     level: "A1",
     topic: "Numbers review · days of the week · A1 full review",
     description:
-      "Review: numbers + question words (L29) · days of the week · повна перевірка A1: speaking · reading · R4 · writing. HW: A1 Level Test.",
+      "Review: numbers + question words (L29) · days of the week · повна перевірка A1: speaking · reading · R4 · writing. HW: go flashcards · topic stations · quick correction. Separate A1 Level Test.",
     lessonPath: "/lesson-30",
     homeworkPath: "/hw-30",
   },
