@@ -1,6 +1,7 @@
 import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import CoveredTopicsRoadmap from "../components/CoveredTopicsRoadmap";
+import LessonNumberKicker from "../components/LessonNumberKicker";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -814,7 +815,7 @@ export default function Lesson30() {
       <section className="lesson22-hero panel">
         <div className="lesson22-hero-top">
           <div>
-            <p className="page-kicker">Lesson 30</p>
+            <LessonNumberKicker number={30} />
             <h1>Check &amp; Reflect</h1>
             <p className="lesson22-topic-pill">
               Numbers review · days of the week · повна перевірка A1 (L1–29)

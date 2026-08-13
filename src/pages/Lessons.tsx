@@ -18,7 +18,7 @@ type LessonEntry =
       topic: string;
       description: string;
       lessonPath: string;
-      homeworkPath: string;
+      homeworkPath?: string;
       practiceOnly?: false;
     };
 
@@ -203,6 +203,15 @@ const lessons: LessonEntry[] = [
     lessonPath: "/lesson-30",
     homeworkPath: "/hw-30",
   },
+  {
+    id: "31",
+    title: "Town & home",
+    level: "A1",
+    topic: "places · there is/are · rooms · Is there…? · adjectives",
+    description:
+      "Unit 3 A–C: My town (places + There is/are) · Is there wifi? (rooms + Is/Are there) · It's expensive! (opposite adjectives + North Norfolk reading). Speaking, drills, T/F, word order.",
+    lessonPath: "/lesson-31",
+  },
 ];
 
 export default function Lessons() {
@@ -239,8 +248,13 @@ export default function Lessons() {
             key={lesson.id}
           >
             <div className="lesson-card-top">
-              <span className="lesson-badge">
-                {lesson.practiceOnly ? "Practice" : `Lesson ${lesson.id}`}
+              <span
+                className="lesson-badge"
+                aria-label={
+                  lesson.practiceOnly ? "Practice" : `Lesson ${lesson.id}`
+                }
+              >
+                {lesson.practiceOnly ? "Practice" : lesson.id}
               </span>
               <span className="lesson-badge secondary">{lesson.level}</span>
             </div>
@@ -253,7 +267,7 @@ export default function Lessons() {
               <Link className="action-btn primary" to={lesson.lessonPath}>
                 {lesson.practiceOnly ? "Start practice" : "Open lesson"}
               </Link>
-              {!lesson.practiceOnly && (
+              {!lesson.practiceOnly && lesson.homeworkPath && (
                 <Link className="action-btn secondary" to={lesson.homeworkPath}>
                   Open homework
                 </Link>

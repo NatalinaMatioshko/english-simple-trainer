@@ -456,36 +456,19 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 31,
-    title: "Transport",
-    grammar: "go by, take, drive, ride, walk to",
-    vocabulary: "bus, train, station, taxi, car, stop, ticket",
-    speaking: "Talk about how you go to work or move around town.",
-    listening: "Transport listening.",
-    review: "in / to, routine, time, movement.",
-    category: "transport",
-    status: "next",
-  },
-  {
-    id: 32,
-    title: "Directions and places",
-    grammar: "there is / there are, place prepositions, directions",
-    vocabulary: "left, right, next to, opposite, near, bank, café",
-    speaking: "Ask for and give directions.",
-    listening: "Find a place in town from spoken instructions.",
-    review: "Place prepositions and location language.",
+    title: "Town & home",
+    grammar:
+      "There is/are · isn't/aren't · no/any; Is there a/an…? / Are there any…?; How many; adjective position (be + adj · adj + noun)",
+    vocabulary:
+      "places in town; rooms & things in a home; opposite adjectives (busy/quiet, big/small, old/new, cheap/expensive, good/bad)",
+    speaking:
+      "Describe your town; find differences; ask about a flat; describe towns with adjectives",
+    listening:
+      "there's/isn't/are/aren't; intonation for Is there…?; adjective stress",
+    review: "a/an; be; Unit 3 A–C complete in one lesson",
     category: "general",
     status: "next",
-  },
-  {
-    id: 33,
-    title: "Health and final speaking project",
-    grammar: "have got, should basics, mixed A1 review",
-    vocabulary: "headache, fever, cough, cold, tired, doctor",
-    speaking: "Final self-presentation plus a simple doctor role play.",
-    listening: "Health dialogue and mixed listening recap.",
-    review: "All previous units.",
-    category: "health",
-    status: "next",
+    route: "/lesson-31",
   },
 ];
 

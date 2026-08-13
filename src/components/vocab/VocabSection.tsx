@@ -6,6 +6,12 @@ import {
 } from "../../data/vocab";
 import { shuffle } from "../../utils/array";
 import {
+  loadCustomVocab,
+  makeCustomVocabId,
+  saveCustomVocab,
+  type CustomVocabWord,
+} from "../../utils/customVocab";
+import {
   letterSpeakText,
   speakEnglish,
   vocabSpeakText,
@@ -15,8 +21,26 @@ import {
 type View = "table" | "cards";
 
 const ALL_WORDS_ID = "__all__";
+const MY_WORDS_ID = "my-words";
 
-function buildAllWordsCategory(): VocabCategory {
+function buildMyWordsCategory(words: CustomVocabWord[]): VocabCategory {
+  const items: VocabItem[] = words.map(({ en, ua, example }) => ({
+    en,
+    ua,
+    ...(example ? { example } : {}),
+  }));
+
+  return {
+    id: MY_WORDS_ID,
+    title: "Мої слова",
+    badge: words.length > 0 ? String(words.length) : "+",
+    description:
+      "Ваші власні слова. Зберігаються в цьому браузері (localStorage).",
+    groups: [{ label: "Мої слова", items }],
+  };
+}
+
+function buildAllWordsCategory(customWords: CustomVocabWord[]): VocabCategory {
   const seen = new Set<string>();
   const groups = vocabCategories
     .filter((c) => c.id !== "alphabet")
@@ -33,6 +57,22 @@ function buildAllWordsCategory(): VocabCategory {
     })
     .filter((g) => g.items.length > 0);
 
+  if (customWords.length > 0) {
+    const customItems: VocabItem[] = [];
+    for (const w of customWords) {
+      if (seen.has(w.en)) continue;
+      seen.add(w.en);
+      customItems.push({
+        en: w.en,
+        ua: w.ua,
+        ...(w.example ? { example: w.example } : {}),
+      });
+    }
+    if (customItems.length > 0) {
+      groups.push({ label: "Мої слова", items: customItems });
+    }
+  }
+
   const total = groups.reduce((n, g) => n + g.items.length, 0);
 
   return {
@@ -46,21 +86,67 @@ function buildAllWordsCategory(): VocabCategory {
 }
 
 export function VocabSection() {
-  const allWordsCategory = useMemo(() => buildAllWordsCategory(), []);
+  const [customWords, setCustomWords] = useState<CustomVocabWord[]>(() =>
+    loadCustomVocab(),
+  );
+  const myWordsCategory = useMemo(
+    () => buildMyWordsCategory(customWords),
+    [customWords],
+  );
+  const allWordsCategory = useMemo(
+    () => buildAllWordsCategory(customWords),
+    [customWords],
+  );
   const [activeId, setActiveId] = useState(vocabCategories[0].id);
   const [view, setView] = useState<View>("table");
   const [practiceMode, setPracticeMode] = useState(false);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
 
+  useEffect(() => {
+    saveCustomVocab(customWords);
+  }, [customWords]);
+
   const category =
     activeId === ALL_WORDS_ID
       ? allWordsCategory
-      : vocabCategories.find((c) => c.id === activeId)!;
+      : activeId === MY_WORDS_ID
+        ? myWordsCategory
+        : vocabCategories.find((c) => c.id === activeId)!;
 
   const handleTabChange = (id: string) => {
     setActiveId(id);
     setRevealed(new Set());
     setPracticeMode(false);
+  };
+
+  const addCustomWord = (word: Omit<CustomVocabWord, "id">): boolean => {
+    const en = word.en.trim();
+    const ua = word.ua.trim();
+    const example = word.example?.trim();
+    if (!en || !ua) return false;
+    if (customWords.some((w) => w.en.toLowerCase() === en.toLowerCase())) {
+      return false;
+    }
+
+    setCustomWords((prev) => {
+      if (prev.some((w) => w.en.toLowerCase() === en.toLowerCase())) {
+        return prev;
+      }
+      return [
+        ...prev,
+        {
+          id: makeCustomVocabId(),
+          en,
+          ua,
+          ...(example ? { example } : {}),
+        },
+      ];
+    });
+    return true;
+  };
+
+  const deleteCustomWord = (en: string) => {
+    setCustomWords((prev) => prev.filter((w) => w.en !== en));
   };
 
   const toggleReveal = (key: string) => {
@@ -127,6 +213,15 @@ export function VocabSection() {
             <span className="vocab-tab-title">{allWordsCategory.title}</span>
             <span className="vocab-tab-badge">{allWordsCategory.badge}</span>
           </button>
+          <button
+            className={`vocab-tab vocab-tab--mine ${activeId === MY_WORDS_ID ? "active" : ""}`}
+            onClick={() => handleTabChange(MY_WORDS_ID)}
+            role="tab"
+            aria-selected={activeId === MY_WORDS_ID}
+          >
+            <span className="vocab-tab-title">{myWordsCategory.title}</span>
+            <span className="vocab-tab-badge">{myWordsCategory.badge}</span>
+          </button>
           {vocabCategories.map((cat) => (
             <button
               key={cat.id}
@@ -155,6 +250,15 @@ export function VocabSection() {
             onHideAll={hideAll}
             onSwitchToCards={() => setView("cards")}
             setPracticeMode={setPracticeMode}
+            onAddCustomWord={
+              activeId === MY_WORDS_ID ? addCustomWord : undefined
+            }
+            onDeleteCustomWord={
+              activeId === MY_WORDS_ID ? deleteCustomWord : undefined
+            }
+            customWordCount={
+              activeId === MY_WORDS_ID ? customWords.length : undefined
+            }
           />
         )
       ) : (
@@ -231,7 +335,86 @@ type CategoryViewProps = {
   onHideAll: () => void;
   onSwitchToCards: () => void;
   setPracticeMode: (v: boolean) => void;
+  onAddCustomWord?: (word: Omit<CustomVocabWord, "id">) => boolean;
+  onDeleteCustomWord?: (en: string) => void;
+  customWordCount?: number;
 };
+
+function CustomWordForm({
+  onAdd,
+}: {
+  onAdd: (word: Omit<CustomVocabWord, "id">) => boolean;
+}) {
+  const [en, setEn] = useState("");
+  const [ua, setUa] = useState("");
+  const [example, setExample] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const enTrim = en.trim();
+    const uaTrim = ua.trim();
+    if (!enTrim || !uaTrim) {
+      setError("Заповніть англійське і українське слово.");
+      return;
+    }
+    const ok = onAdd({
+      en: enTrim,
+      ua: uaTrim,
+      example: example.trim() || undefined,
+    });
+    if (!ok) {
+      setError("Таке англійське слово вже є у вашому списку.");
+      return;
+    }
+    setEn("");
+    setUa("");
+    setExample("");
+    setError("");
+  };
+
+  return (
+    <form className="vocab-custom-form panel" onSubmit={handleSubmit}>
+      <p className="vocab-custom-form-title">Додати своє слово</p>
+      <div className="vocab-custom-form-fields">
+        <label className="vocab-custom-field">
+          <span>English</span>
+          <input
+            type="text"
+            value={en}
+            onChange={(e) => setEn(e.target.value)}
+            placeholder="e.g. bakery"
+            autoComplete="off"
+          />
+        </label>
+        <label className="vocab-custom-field">
+          <span>Українська</span>
+          <input
+            type="text"
+            value={ua}
+            onChange={(e) => setUa(e.target.value)}
+            placeholder="напр. пекарня"
+            autoComplete="off"
+          />
+        </label>
+        <label className="vocab-custom-field vocab-custom-field--wide">
+          <span>Example (необовʼязково)</span>
+          <input
+            type="text"
+            value={example}
+            onChange={(e) => setExample(e.target.value)}
+            placeholder="There's a bakery near my house."
+            autoComplete="off"
+          />
+        </label>
+      </div>
+      {error && <p className="feedback error">{error}</p>}
+      <button type="submit" className="btn vocab-custom-submit">
+        Додати слово
+      </button>
+    </form>
+  );
+}
 
 function CategoryView({
   category,
@@ -242,8 +425,13 @@ function CategoryView({
   onHideAll,
   onSwitchToCards,
   setPracticeMode,
+  onAddCustomWord,
+  onDeleteCustomWord,
+  customWordCount,
 }: CategoryViewProps) {
   const [playing, setPlaying] = useState<string | null>(null);
+  const isMyWords = category.id === MY_WORDS_ID;
+  const canDelete = Boolean(onDeleteCustomWord);
 
   useEffect(() => {
     warmUpSpeechVoices();
@@ -288,21 +476,31 @@ function CategoryView({
         </div>
       )}
 
-      <div className="vocab-controls-row">
-        <button
-          className={`vocab-practice-toggle ${practiceMode ? "active" : ""}`}
-          onClick={() => setPracticeMode(!practiceMode)}
-          aria-pressed={practiceMode}
-        >
-          {practiceMode ? "📖 Показати всі" : "🧠 Режим практики"}
-        </button>
+      {onAddCustomWord && <CustomWordForm onAdd={onAddCustomWord} />}
 
-        <button className="vocab-cards-cta" onClick={onSwitchToCards}>
-          🃏 Вчити флешкартками
-        </button>
-      </div>
+      {isMyWords && customWordCount === 0 && (
+        <p className="vocab-custom-empty muted">
+          Поки що порожньо — додайте перше слово формою вище.
+        </p>
+      )}
 
-      {practiceMode && (
+      {totalItems > 0 && (
+        <div className="vocab-controls-row">
+          <button
+            className={`vocab-practice-toggle ${practiceMode ? "active" : ""}`}
+            onClick={() => setPracticeMode(!practiceMode)}
+            aria-pressed={practiceMode}
+          >
+            {practiceMode ? "📖 Показати всі" : "🧠 Режим практики"}
+          </button>
+
+          <button className="vocab-cards-cta" onClick={onSwitchToCards}>
+            🃏 Вчити флешкартками
+          </button>
+        </div>
+      )}
+
+      {practiceMode && totalItems > 0 && (
         <div className="vocab-practice-bar">
           <span className="muted">
             Відкрито: {revealedCount} / {totalItems}
@@ -318,101 +516,121 @@ function CategoryView({
         </div>
       )}
 
-      <div className="vocab-groups">
-        {category.groups.map((group, gi) => (
-          <div key={gi} className="vocab-group">
-            {group.label && !practiceMode && (
-              <div className="vocab-group-label">
-                <span className="vocab-group-pill">{group.label}</span>
+      {totalItems > 0 && (
+        <div className="vocab-groups">
+          {category.groups.map((group, gi) => (
+            <div key={gi} className="vocab-group">
+              {group.label && !practiceMode && (
+                <div className="vocab-group-label">
+                  <span className="vocab-group-pill">{group.label}</span>
+                </div>
+              )}
+
+              <div
+                className={`vocab-table-header ${!hasThirdCol ? "vocab-table-header--2col" : ""} ${canDelete ? "vocab-table-header--with-delete" : ""}`}
+              >
+                <span>{col1}</span>
+                <span>{col2}</span>
+                {hasThirdCol && <span>{col3}</span>}
+                {canDelete && <span className="vocab-col-actions"> </span>}
               </div>
-            )}
 
-            <div
-              className={`vocab-table-header ${!hasThirdCol ? "vocab-table-header--2col" : ""}`}
-            >
-              <span>{col1}</span>
-              <span>{col2}</span>
-              {hasThirdCol && <span>{col3}</span>}
-            </div>
+              <div className="vocab-table">
+                {group.items.map((item) => {
+                  const isRevealed = revealed.has(item.en);
+                  const show = !practiceMode || isRevealed;
 
-            <div className="vocab-table">
-              {group.items.map((item) => {
-                const isRevealed = revealed.has(item.en);
-                const show = !practiceMode || isRevealed;
-
-                return (
-                  <div
-                    key={item.en}
-                    className={`vocab-item ${!hasThirdCol ? "vocab-item--2col" : ""} ${practiceMode && !isRevealed ? "vocab-item-hidden" : ""}`}
-                    onClick={practiceMode ? () => onToggle(item.en) : undefined}
-                    role={practiceMode ? "button" : undefined}
-                    tabIndex={practiceMode ? 0 : undefined}
-                    onKeyDown={
-                      practiceMode
-                        ? (e) => {
-                            if (e.key === "Enter" || e.key === " ")
-                              onToggle(item.en);
-                          }
-                        : undefined
-                    }
-                    aria-expanded={practiceMode ? isRevealed : undefined}
-                  >
-                    {/* Col 1: always shown (col1 = Ukrainian by default) */}
-                    <span className="vocab-ua">
-                      {item.ua}
-                      {category.id === "numbers" && item.ipa && (
-                        <span className="vocab-ipa">[ {item.ipa} ]</span>
-                      )}
-                    </span>
-
-                    {/* Col 2: hidden in practice mode */}
-                    <span
-                      className={`vocab-en ${!show ? "vocab-en-hidden" : ""}`}
+                  return (
+                    <div
+                      key={item.en}
+                      className={`vocab-item ${!hasThirdCol ? "vocab-item--2col" : ""} ${canDelete ? "vocab-item--with-delete" : ""} ${practiceMode && !isRevealed ? "vocab-item-hidden" : ""}`}
+                      onClick={
+                        practiceMode ? () => onToggle(item.en) : undefined
+                      }
+                      role={practiceMode ? "button" : undefined}
+                      tabIndex={practiceMode ? 0 : undefined}
+                      onKeyDown={
+                        practiceMode
+                          ? (e) => {
+                              if (e.key === "Enter" || e.key === " ")
+                                onToggle(item.en);
+                            }
+                          : undefined
+                      }
+                      aria-expanded={practiceMode ? isRevealed : undefined}
                     >
-                      {show ? (
-                        <span className="vocab-en-row">
-                          <span className="vocab-en-text">
-                            <span className="vocab-en-word">{item.en}</span>
-                            {category.id !== "numbers" &&
-                              category.id !== "alphabet" &&
-                              item.ipa && (
-                                <span className="vocab-ipa">
-                                  [ {item.ipa} ]
-                                </span>
-                              )}
-                          </span>
-                          <button
-                            type="button"
-                            className={`vocab-speak-btn${
-                              playing === item.en ? " is-playing" : ""
-                            }`}
-                            onClick={(e) => playItem(e, item)}
-                            title={`Почути: ${vocabSpeakText(item, category.id)}`}
-                            aria-label={`Почути вимову: ${vocabSpeakText(item, category.id)}`}
-                          >
-                            ♪
-                          </button>
-                        </span>
-                      ) : (
-                        <span className="vocab-reveal-hint">натисни →</span>
-                      )}
-                    </span>
-
-                    {/* Col 3: example (only shown when hasThirdCol) */}
-                    {hasThirdCol && (
-                      <span
-                        className={`vocab-example ${!show ? "vocab-example-hidden" : ""}`}
-                      >
-                        {show ? (item.example ?? "—") : "—"}
+                      {/* Col 1: always shown (col1 = Ukrainian by default) */}
+                      <span className="vocab-ua">
+                        {item.ua}
+                        {category.id === "numbers" && item.ipa && (
+                          <span className="vocab-ipa">[ {item.ipa} ]</span>
+                        )}
                       </span>
-                    )}
-                  </div>
-                );
-              })}
+
+                      {/* Col 2: hidden in practice mode */}
+                      <span
+                        className={`vocab-en ${!show ? "vocab-en-hidden" : ""}`}
+                      >
+                        {show ? (
+                          <span className="vocab-en-row">
+                            <span className="vocab-en-text">
+                              <span className="vocab-en-word">{item.en}</span>
+                              {category.id !== "numbers" &&
+                                category.id !== "alphabet" &&
+                                item.ipa && (
+                                  <span className="vocab-ipa">
+                                    [ {item.ipa} ]
+                                  </span>
+                                )}
+                            </span>
+                            <button
+                              type="button"
+                              className={`vocab-speak-btn${
+                                playing === item.en ? " is-playing" : ""
+                              }`}
+                              onClick={(e) => playItem(e, item)}
+                              title={`Почути: ${vocabSpeakText(item, category.id)}`}
+                              aria-label={`Почути вимову: ${vocabSpeakText(item, category.id)}`}
+                            >
+                              ♪
+                            </button>
+                          </span>
+                        ) : (
+                          <span className="vocab-reveal-hint">натисни →</span>
+                        )}
+                      </span>
+
+                      {/* Col 3: example (only shown when hasThirdCol) */}
+                      {hasThirdCol && (
+                        <span
+                          className={`vocab-example ${!show ? "vocab-example-hidden" : ""}`}
+                        >
+                          {show ? (item.example ?? "—") : "—"}
+                        </span>
+                      )}
+
+                      {canDelete && onDeleteCustomWord && (
+                        <button
+                          type="button"
+                          className="vocab-delete-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onDeleteCustomWord(item.en);
+                          }}
+                          title="Видалити слово"
+                          aria-label={`Видалити слово ${item.en}`}
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {category.grammar && (
         <div className="vocab-grammar-box">
@@ -447,6 +665,18 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
   useEffect(() => {
     cardRef.current?.focus();
   }, [queue.length, flipped]);
+
+  if (total === 0) {
+    return (
+      <div className="fc-done panel">
+        <h3 className="fc-done-title">Немає слів для карток</h3>
+        <p className="muted">
+          Додайте слова в категорії «Мої слова» (режим таблиці) або оберіть
+          іншу категорію.
+        </p>
+      </div>
+    );
+  }
 
   const current = queue[0] ?? null;
   const done = queue.length === 0;
