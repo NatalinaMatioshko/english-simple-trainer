@@ -7,6 +7,7 @@ import "../styles/lesson26.css";
 import "../styles/lesson30.css";
 import {
   correctionItems,
+  reflectItems,
   topicStations,
 } from "../data/lesson30Review";
 import { hw30GoFlashcards, type Hw30GoCard } from "../data/hw30Review";
@@ -32,6 +33,7 @@ export default function HW30() {
   const [corrAns, setCorrAns] = useState<Record<number, string>>({});
   const [corrChecked, setCorrChecked] = useState(false);
   const [draft, setDraft] = useState("");
+  const [reflect, setReflect] = useState<Record<number, number>>({});
 
   const activeTopic = useMemo(
     () => topicStations.find((t) => t.id === topicId)!,
@@ -50,6 +52,29 @@ export default function HW30() {
   const correctionDone =
     corrChecked && corrScore === correctionItems.length;
 
+  const reflectRated = reflectItems.filter((_, i) => reflect[i] != null).length;
+  const reflectDone = reflectRated === reflectItems.length;
+  const reflectAvg = reflectDone
+    ? Math.round(
+        (reflectItems.reduce((sum, _, i) => sum + (reflect[i] ?? 0), 0) /
+          reflectItems.length) *
+          10,
+      ) / 10
+    : undefined;
+
+  const reflectWriting = [
+    "How confident are you? (1 = not very · 5 = very)",
+    "",
+    ...reflectItems.map((text, i) => {
+      const n = reflect[i];
+      return `${i + 1}. ${text} — ${n != null ? n : "—"}`;
+    }),
+    "",
+    reflectDone
+      ? `Average: ${reflectAvg} / 5 · rated ${reflectRated}/${reflectItems.length}`
+      : `Rated ${reflectRated}/${reflectItems.length} (not finished)`,
+  ].join("\n");
+
   return (
     <div className="lesson22-page">
       <section className="lesson22-hero panel">
@@ -59,7 +84,7 @@ export default function HW30() {
             <h1>Check &amp; Reflect practice</h1>
             <p className="lesson22-subtitle">
               Flashcards with <strong>go</strong> · Topic stations (L1–29) ·
-              Quick correction (A1 mistakes).
+              Quick correction · Reflect (confidence 1–5).
             </p>
           </div>
           <div
@@ -80,6 +105,7 @@ export default function HW30() {
           <span>go phrases</span>
           <span>{topicStations.length} topic stations</span>
           <span>quick correction</span>
+          <span>reflect 1–5</span>
         </div>
       </section>
 
@@ -355,6 +381,64 @@ What was hard: …`}
           quizDone={stationsDone || correctionDone}
           quizScore={corrChecked ? corrScore : undefined}
           showListeningCheck={false}
+        />
+      </section>
+
+      {/* 4 · Reflect — separate submit to teacher */}
+      <section className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">4 · Reflect</p>
+          <h2>How confident are you?</h2>
+          <p className="lesson22-section-desc">
+            1 = not very confident · 5 = very confident. Це покаже, що вже можна
+            «закривати», а що повторити в наступному циклі. Окремо надішли
+            вчителю.
+          </p>
+        </div>
+
+        <ul className="l30-reflect-list">
+          {reflectItems.map((text, i) => (
+            <li key={text} className="l30-reflect-row">
+              <span>{text}</span>
+              <span className="l25-cr-btns" role="group" aria-label={text}>
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    className={`l25-cr-is-btn${
+                      reflect[i] === n ? " l25-cr-is-btn--ok" : ""
+                    }`}
+                    onClick={() =>
+                      setReflect((prev) => ({ ...prev, [i]: n }))
+                    }
+                  >
+                    {n}
+                  </button>
+                ))}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="lesson22-section-desc" style={{ marginTop: "0.85rem" }}>
+          Rated: <strong>{reflectRated}</strong> / {reflectItems.length}
+          {reflectDone && typeof reflectAvg === "number"
+            ? ` · average ${reflectAvg} / 5`
+            : ""}
+        </p>
+
+        <HomeworkSubmit
+          lessonId="30-reflect"
+          writing={reflectWriting}
+          quizDone={reflectDone}
+          quizScore={
+            reflectDone && typeof reflectAvg === "number"
+              ? Math.round(reflectAvg)
+              : undefined
+          }
+          showListeningCheck={false}
+          title="Надіслати Reflect вчителю"
+          description="Оціни всі пункти (1–5), вкажи ім’я і натисни «Надіслати». Це окрема форма — не змішується з основним ДЗ 30."
         />
       </section>
 

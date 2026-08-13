@@ -21,6 +21,10 @@ const homeworkByLesson = [
       },
       {
         type: "text",
+        text: "Reflect: How confident are you? (1–5) — окрема форма вчителю",
+      },
+      {
+        type: "text",
         text: "Optional: A1 Level Test → /a1-level-test",
       },
     ],
