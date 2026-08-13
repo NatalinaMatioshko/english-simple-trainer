@@ -9,20 +9,21 @@ import { Link } from "react-router-dom";
 import LessonNumberKicker from "../components/LessonNumberKicker";
 import {
   adjSentences,
-  altDrillA,
   articleGapsB,
-  differencePrompts,
   dialogueGapsB,
   exitQs,
-  fixMistakeGroups,
-  fixMistakeLines,
   flatCompareRows,
   flatsB,
+  flatsBCorrectId,
+  flatBoxRooms,
+  flatBoxThings,
+  flatMatchB,
+  flatTickSentencesB,
+  flatWordsB,
   gapDrillA,
-  grammarGapsB,
+  grammarBoxB,
   homeVocab,
-  iconMatchB,
-  lesson31ExtraAudio,
+  intonationB,
   lesson31Images,
   mapPlacesA,
   matchSpeakersA,
@@ -36,7 +37,6 @@ import {
   oppositePairs,
   photoMatchC,
   photoQsB,
-  pluralListsA,
   questionStartersC,
   speakA,
   speakB,
@@ -178,20 +178,6 @@ function LessonFigure({
   );
 }
 
-function normalizeFix(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/['']/g, "'")
-    .replace(/[?.!,]+$/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function isFixOk(value: string, answers: readonly string[]): boolean {
-  const n = normalizeFix(value);
-  return answers.some((a) => normalizeFix(a) === n);
-}
-
 function drillSelClass(
   checked: boolean,
   value: string,
@@ -330,6 +316,238 @@ function VocabFlipGrid({
   );
 }
 
+function shuffleParts(parts: readonly string[]): string[] {
+  const arr = [...parts];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function joinWordOrder(parts: readonly string[]): string {
+  return parts.join(" ").replace(/\s+\?/g, "?").trim();
+}
+
+type WordOrderRow = {
+  pool: string[];
+  built: string[];
+};
+
+function initWordOrderRows(
+  items: readonly { parts: readonly string[] }[],
+): WordOrderRow[] {
+  return items.map((item) => ({
+    pool: shuffleParts(item.parts),
+    built: [],
+  }));
+}
+
+type DragPayload =
+  | { row: number; from: "pool"; index: number }
+  | { row: number; from: "built"; index: number };
+
+function WordOrderBoard({
+  items,
+  rows,
+  setRows,
+  checked,
+  setChecked,
+}: {
+  items: readonly {
+    scramble: string;
+    parts: readonly string[];
+    answer: string;
+  }[];
+  rows: WordOrderRow[];
+  setRows: Dispatch<SetStateAction<WordOrderRow[]>>;
+  checked: boolean;
+  setChecked: (v: boolean) => void;
+}) {
+  const [drag, setDrag] = useState<DragPayload | null>(null);
+
+  const updateRow = (rowIdx: number, next: WordOrderRow) => {
+    setChecked(false);
+    setRows((prev) => prev.map((r, i) => (i === rowIdx ? next : r)));
+  };
+
+  const moveToBuilt = (rowIdx: number, poolIndex: number, at?: number) => {
+    const row = rows[rowIdx];
+    if (!row) return;
+    const token = row.pool[poolIndex];
+    if (token == null) return;
+    const pool = row.pool.filter((_, i) => i !== poolIndex);
+    const built = [...row.built];
+    const insertAt =
+      at == null || at < 0 || at > built.length ? built.length : at;
+    built.splice(insertAt, 0, token);
+    updateRow(rowIdx, { pool, built });
+  };
+
+  const moveToPool = (rowIdx: number, builtIndex: number) => {
+    const row = rows[rowIdx];
+    if (!row) return;
+    const token = row.built[builtIndex];
+    if (token == null) return;
+    const built = row.built.filter((_, i) => i !== builtIndex);
+    updateRow(rowIdx, { pool: [...row.pool, token], built });
+  };
+
+  const reorderBuilt = (rowIdx: number, from: number, to: number) => {
+    const row = rows[rowIdx];
+    if (!row || from === to) return;
+    const built = [...row.built];
+    const [token] = built.splice(from, 1);
+    if (token == null) return;
+    const insertAt = to > from ? to - 1 : to;
+    built.splice(Math.max(0, insertAt), 0, token);
+    updateRow(rowIdx, { ...row, built });
+  };
+
+  const onDropBuilt = (rowIdx: number, at: number) => {
+    if (!drag || drag.row !== rowIdx) return;
+    if (drag.from === "pool") moveToBuilt(rowIdx, drag.index, at);
+    else reorderBuilt(rowIdx, drag.index, at);
+    setDrag(null);
+  };
+
+  const score = items.filter((item, i) => {
+    const built = rows[i]?.built ?? [];
+    return joinWordOrder(built) === item.answer && (rows[i]?.pool.length ?? 0) === 0;
+  }).length;
+
+  return (
+    <>
+      <p className="l31-wo-hint">
+        Tap a word to place it · tap again to return · or drag to reorder.
+      </p>
+      <div className="l31-wo-list">
+        {items.map((item, rowIdx) => {
+          const row = rows[rowIdx] ?? { pool: [], built: [] };
+          const joined = joinWordOrder(row.built);
+          const complete = row.pool.length === 0 && row.built.length > 0;
+          const ok = checked && complete && joined === item.answer;
+          const err = checked && complete && joined !== item.answer;
+          const miss = checked && !complete;
+          return (
+            <div
+              key={item.answer}
+              className={[
+                "l31-wo-card",
+                ok ? "is-ok" : "",
+                err ? "is-err" : "",
+                miss ? "is-miss" : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              <p className="l31-wo-scramble">
+                <strong>{rowIdx + 1}.</strong> {item.scramble}
+              </p>
+              <div
+                className="l31-wo-built"
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  onDropBuilt(rowIdx, row.built.length);
+                }}
+                aria-label={`Answer line ${rowIdx + 1}`}
+              >
+                {row.built.length === 0 && (
+                  <span className="l31-wo-placeholder">Drop words here →</span>
+                )}
+                {row.built.map((tok, bi) => (
+                  <button
+                    key={`b-${rowIdx}-${bi}-${tok}`}
+                    type="button"
+                    className="l31-wo-chip l31-wo-chip--built"
+                    draggable
+                    onDragStart={() =>
+                      setDrag({ row: rowIdx, from: "built", index: bi })
+                    }
+                    onDragEnd={() => setDrag(null)}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onDropBuilt(rowIdx, bi);
+                    }}
+                    onClick={() => moveToPool(rowIdx, bi)}
+                  >
+                    {tok}
+                  </button>
+                ))}
+              </div>
+              <div className="l31-wo-pool" aria-label={`Word bank ${rowIdx + 1}`}>
+                {row.pool.map((tok, pi) => (
+                  <button
+                    key={`p-${rowIdx}-${pi}-${tok}`}
+                    type="button"
+                    className="l31-wo-chip"
+                    draggable
+                    onDragStart={() =>
+                      setDrag({ row: rowIdx, from: "pool", index: pi })
+                    }
+                    onDragEnd={() => setDrag(null)}
+                    onClick={() => moveToBuilt(rowIdx, pi)}
+                  >
+                    {tok}
+                  </button>
+                ))}
+              </div>
+              {checked && ok && (
+                <p className="l31-wo-feedback is-ok">✓ {item.answer}</p>
+              )}
+              {checked && (err || miss) && (
+                <p className="l31-wo-feedback is-err">Answer: {item.answer}</p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+        <button
+          type="button"
+          className="l22-check-btn"
+          onClick={() => setChecked(true)}
+        >
+          Check
+        </button>
+        {checked && (
+          <span className="l22-score">
+            {score} / {items.length}
+          </span>
+        )}
+        <button
+          type="button"
+          className="l25-cr-mini-btn"
+          onClick={() => {
+            setRows(
+              items.map((item) => ({
+                pool: [],
+                built: [...item.parts],
+              })),
+            );
+            setChecked(true);
+          }}
+        >
+          Show answers
+        </button>
+        <button
+          type="button"
+          className="l25-cr-mini-btn"
+          onClick={() => {
+            setRows(initWordOrderRows(items));
+            setChecked(false);
+          }}
+        >
+          Reset
+        </button>
+      </div>
+    </>
+  );
+}
+
 function PartBanner({
   id,
   part,
@@ -356,25 +574,12 @@ export default function Lesson31() {
   const [vocabB, setVocabB] = useState<number[]>([]);
   const [vocabC, setVocabC] = useState<number[]>([]);
 
-  const [fixAns, setFixAns] = useState<Record<string, string>>(() =>
-    Object.fromEntries(fixMistakeLines.map((l) => [l.id, l.wrong])),
-  );
-  const [fixChecked, setFixChecked] = useState(false);
-  const [fixShowKey, setFixShowKey] = useState(false);
-  const [fixHints, setFixHints] = useState<Record<string, boolean>>({});
-
   const [grammarBoxAns, setGrammarBoxAns] = useState(() =>
     Array(grammarBoxA.length).fill(""),
   );
   const [grammarBoxChecked, setGrammarBoxChecked] = useState(false);
   const [gapAns, setGapAns] = useState(() => Array(gapDrillA.length).fill(""));
   const [gapChecked, setGapChecked] = useState(false);
-  const [altAns, setAltAns] = useState(() => Array(altDrillA.length).fill(""));
-  const [altChecked, setAltChecked] = useState(false);
-  const [pluralAns, setPluralAns] = useState(() =>
-    Array(pluralListsA.length).fill(""),
-  );
-  const [pluralChecked, setPluralChecked] = useState(false);
   const [uvoAns, setUvoAns] = useState(() => Array(uvoGaps.length).fill(""));
   const [uvoChecked, setUvoChecked] = useState(false);
   const [mapAns, setMapAns] = useState<Record<string, string>>({});
@@ -411,23 +616,37 @@ export default function Lesson31() {
     Array(photoQsB.length).fill(""),
   );
   const [photoChecked, setPhotoChecked] = useState(false);
-  const [iconAns, setIconAns] = useState<Record<string, string>>({});
-  const [iconChecked, setIconChecked] = useState(false);
+  const [flatAns, setFlatAns] = useState<Record<string, string>>({});
+  const [flatChecked, setFlatChecked] = useState(false);
+  const [flatPick, setFlatPick] = useState<
+    | { side: "word"; word: string }
+    | { side: "letter"; letter: string }
+    | null
+  >(null);
+  const [flatShowAll, setFlatShowAll] = useState(false);
+  const flatLetterOrder = flatMatchB.map((p) => p.letter);
   const [chosenFlat, setChosenFlat] = useState("");
+  const [flatChoiceChecked, setFlatChoiceChecked] = useState(false);
+  const [flatTick, setFlatTick] = useState<Record<number, boolean>>({});
+  const [flatTickChecked, setFlatTickChecked] = useState(false);
   const [articleAns, setArticleAns] = useState(() =>
     Array(articleGapsB.length).fill(""),
   );
   const [articleChecked, setArticleChecked] = useState(false);
   const [gramBAns, setGramBAns] = useState(() =>
-    Array(grammarGapsB.length).fill(""),
+    Array(grammarBoxB.length).fill(""),
   );
   const [gramBChecked, setGramBChecked] = useState(false);
+  const [intonAns, setIntonAns] = useState(() =>
+    Array(intonationB.length).fill(""),
+  );
+  const [intonChecked, setIntonChecked] = useState(false);
   const [dialogueAns, setDialogueAns] = useState(() =>
     Array(dialogueGapsB.length).fill(""),
   );
   const [dialogueChecked, setDialogueChecked] = useState(false);
-  const [orderBAns, setOrderBAns] = useState(() =>
-    Array(wordOrderB.length).fill(""),
+  const [orderBRows, setOrderBRows] = useState(() =>
+    initWordOrderRows(wordOrderB),
   );
   const [orderBChecked, setOrderBChecked] = useState(false);
 
@@ -593,10 +812,6 @@ export default function Lesson31() {
     });
   };
 
-  const fixScored = fixMistakeLines.filter((l) => !l.okAsIs);
-  const fixScore = fixScored.filter((l) =>
-    isFixOk(fixAns[l.id] ?? "", l.answers),
-  ).length;
   const mapScore = mapPlacesA.filter((p) => mapAns[p.letter] === p.place)
     .length;
   const matchAScore = matchSpeakersA.filter((p) => matchA[p.id] === p.photo)
@@ -609,7 +824,72 @@ export default function Lesson31() {
     if (sel.length !== j.stressed.length) return false;
     return sel.every((v, k) => v === j.stressed[k]);
   }).length;
-  const iconScore = iconMatchB.filter((p) => iconAns[p.icon] === p.thing)
+  const wordToFlatLetter = Object.fromEntries(
+    Object.entries(flatAns).map(([letter, word]) => [word, letter]),
+  ) as Record<string, string>;
+
+  const pairFlat = (word: string, letter: string) => {
+    setFlatChecked(false);
+    setFlatShowAll(false);
+    setFlatAns((prev) => {
+      const next = { ...prev };
+      for (const [l, w] of Object.entries(next)) {
+        if (w === word || l === letter) delete next[l];
+      }
+      next[letter] = word;
+      return next;
+    });
+    setFlatPick(null);
+  };
+
+  const onFlatWord = (word: string) => {
+    const linked = wordToFlatLetter[word];
+    if (linked) {
+      setFlatAns((prev) => {
+        const next = { ...prev };
+        delete next[linked];
+        return next;
+      });
+      setFlatChecked(false);
+      setFlatShowAll(false);
+      setFlatPick(null);
+      return;
+    }
+    if (flatPick?.side === "letter") {
+      pairFlat(word, flatPick.letter);
+      return;
+    }
+    setFlatPick(
+      flatPick?.side === "word" && flatPick.word === word
+        ? null
+        : { side: "word", word },
+    );
+  };
+
+  const onFlatLetter = (letter: string) => {
+    if (flatAns[letter]) {
+      setFlatAns((prev) => {
+        const next = { ...prev };
+        delete next[letter];
+        return next;
+      });
+      setFlatChecked(false);
+      setFlatShowAll(false);
+      setFlatPick(null);
+      return;
+    }
+    if (flatPick?.side === "word") {
+      pairFlat(flatPick.word, letter);
+      return;
+    }
+    setFlatPick(
+      flatPick?.side === "letter" && flatPick.letter === letter
+        ? null
+        : { side: "letter", letter },
+    );
+  };
+
+  const flatScore = flatMatchB.filter((p) => flatAns[p.letter] === p.word)
     .length;
   const matchCScore = photoMatchC.filter((p) => matchC[p.photo] === p.place)
     .length;
@@ -626,8 +906,8 @@ export default function Lesson31() {
               places · there is/are · rooms · Is there…? · adjectives
             </p>
             <p className="lesson22-subtitle">
-              Unit 3 A–C in one lesson. Describe a town, ask about a flat, and
-              use adjectives for places. Grammar —{" "}
+              Unit 3 A–C · one student. Describe your town, talk about a flat,
+              use adjectives. Grammar —{" "}
               <strong>There is / There are</strong>,{" "}
               <strong>Is there / Are there</strong>, adjective position.
             </p>
@@ -675,168 +955,19 @@ export default function Lesson31() {
 
       <section className="lesson22-block panel">
         <div className="lesson22-flow">
-          <a href="#l31-fix">Fix mistakes</a>
           <a href="#l31-part-a">A My town</a>
-          <a href="#l31a-vocab">Vocabulary</a>
-          <a href="#l31a-listen">Listening</a>
+          <a href="#l31a-vocab">Vocab</a>
+          <a href="#l31a-listen">Listen</a>
           <a href="#l31a-grammar">Grammar</a>
           <a href="#l31a-practice">Practice</a>
-          <a href="#l31a-uvo">Uvo</a>
           <a href="#l31a-speak">Speak</a>
           <a href="#l31-part-b">B Wifi</a>
-          <a href="#l31b-vocab">B1 Rooms</a>
-          <a href="#l31b-grammar">B2 Grammar</a>
-          <a href="#l31b-dialogue">B3 Dialogue</a>
+          <a href="#l31b-flats">Listen 5</a>
+          <a href="#l31b-grammar">Grammar 6–7</a>
+          <a href="#l31b-dialogue">Practice 8–11</a>
           <a href="#l31-part-c">C Expensive</a>
-          <a href="#l31c-opposites">C1 Opposites</a>
-          <a href="#l31c-reading">C2 Reading</a>
-          <a href="#l31c-grammar">C3 Adj position</a>
-          <a href="#l31-review">Review</a>
-        </div>
-      </section>
-
-      {/* ═══════════════ Warm-up · Fix mistakes ═══════════════ */}
-      <section id="l31-fix" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">Warm-up · Fix the mistakes</p>
-          <h2>Friend &amp; family</h2>
-          <p className="lesson22-section-desc">
-            Виправ помилки в текстах. Редагуй рядок → <strong>Check</strong>.
-            Кнопка <strong>Hint</strong> біля рядка показує підказку й
-            правильну відповідь. Або відкрий усі через{" "}
-            <strong>Show answers</strong>.
-          </p>
-        </div>
-
-        {fixMistakeGroups.map((g) => (
-          <div key={g.id} className="l31-fix-group">
-            <h3 className="l31-fix-group-title">
-              {g.title}{" "}
-              <span style={{ fontWeight: 500, color: "var(--color-text-muted)" }}>
-                · {g.titleUa}
-              </span>
-            </h3>
-            {fixMistakeLines
-              .filter((l) => l.group === g.id)
-              .map((line) => {
-                const value = fixAns[line.id] ?? "";
-                const scored = !line.okAsIs;
-                const ok = isFixOk(value, line.answers);
-                const showState = fixChecked && scored;
-                const showHint = fixShowKey || !!fixHints[line.id];
-                return (
-                  <div key={line.id} className="l31-fix-line">
-                    <label className="l31-fix-wrong" htmlFor={`fix-${line.id}`}>
-                      <span className="l31-fix-wrong-text">{line.wrong}</span>
-                      {line.okAsIs && (
-                        <span style={{ marginLeft: "0.4rem" }}>(OK)</span>
-                      )}
-                    </label>
-                    <div className="l31-fix-row">
-                      <input
-                        id={`fix-${line.id}`}
-                        type="text"
-                        className={`l31-fix-input${
-                          showState ? (ok ? " is-ok" : " is-err") : ""
-                        }`}
-                        value={value}
-                        onChange={(e) => {
-                          setFixChecked(false);
-                          setFixAns((prev) => ({
-                            ...prev,
-                            [line.id]: e.target.value,
-                          }));
-                        }}
-                        spellCheck={false}
-                        aria-label={`Correct: ${line.wrong}`}
-                      />
-                      {scored && (
-                        <button
-                          type="button"
-                          className={`l31-fix-hint-btn${showHint ? " is-on" : ""}`}
-                          onClick={() =>
-                            setFixHints((prev) => ({
-                              ...prev,
-                              [line.id]: !prev[line.id],
-                            }))
-                          }
-                          aria-pressed={showHint}
-                          aria-label={
-                            showHint
-                              ? `Hide hint for: ${line.wrong}`
-                              : `Show hint for: ${line.wrong}`
-                          }
-                        >
-                          {showHint ? "Hide" : "Hint"}
-                        </button>
-                      )}
-                    </div>
-                    {showHint && scored && (
-                      <div className="l31-fix-reveal">
-                        {line.tipUa && (
-                          <span className="l31-fix-tip">{line.tipUa}</span>
-                        )}
-                        <span className="l31-fix-answer">
-                          ✓ {line.answers[0]}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-          </div>
-        ))}
-
-        <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
-          <button
-            type="button"
-            className="l22-check-btn"
-            onClick={() => setFixChecked(true)}
-          >
-            Check
-          </button>
-          {fixChecked && (
-            <span className="l22-score">
-              {fixScore} / {fixScored.length}
-            </span>
-          )}
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => {
-              const next = !fixShowKey;
-              setFixShowKey(next);
-              if (next) {
-                setFixHints(
-                  Object.fromEntries(
-                    fixMistakeLines
-                      .filter((l) => !l.okAsIs)
-                      .map((l) => [l.id, true]),
-                  ),
-                );
-              } else {
-                setFixHints({});
-              }
-            }}
-          >
-            {fixShowKey ? "Hide answers" : "Show answers"}
-          </button>
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => {
-              setFixAns(
-                Object.fromEntries(
-                  fixMistakeLines.map((l) => [l.id, l.wrong]),
-                ),
-              );
-              setFixChecked(false);
-              setFixShowKey(false);
-              setFixHints({});
-            }}
-          >
-            Reset
-          </button>
+          <a href="#l31c-reading">Reading</a>
+          <a href="#l31-review">Exit</a>
         </div>
       </section>
 
@@ -1591,10 +1722,9 @@ export default function Lesson31() {
 
       <section id="l31a-practice" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">A5 · Controlled practice</p>
-          <h2>There&apos;s or There are? · alternatives · plurals</h2>
+          <p className="page-kicker">A5 · Practice</p>
+          <h2>There&apos;s / There are · Uvo</h2>
         </div>
-        <h3 className="l22-listen-subtitle">Gap fill</h3>
         <SelectDrill
           items={gapDrillA}
           answers={gapAns}
@@ -1603,36 +1733,10 @@ export default function Lesson31() {
           setChecked={setGapChecked}
           labelKey={(d) => d.prompt ?? ""}
         />
-        <h3 className="l22-listen-subtitle">
-          Choose alternatives · is / are · a / any · no
-        </h3>
-        <SelectDrill
-          items={altDrillA}
-          answers={altAns}
-          setAnswers={setAltAns}
-          checked={altChecked}
-          setChecked={setAltChecked}
-          labelKey={(d) => d.prompt ?? ""}
-        />
-        <h3 className="l22-listen-subtitle">Complete the lists</h3>
-        <SelectDrill
-          items={pluralListsA}
-          answers={pluralAns}
-          setAnswers={setPluralAns}
-          checked={pluralChecked}
-          setChecked={setPluralChecked}
-          labelKey={(d) => d.prompt ?? ""}
-        />
-      </section>
-
-      <section id="l31a-uvo" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">A6 · Complete the text</p>
-          <h2>Uvo is a good town</h2>
-          <p className="lesson22-section-desc">
-            Gap-fill with <strong>are / a / There&apos;s / there / no</strong>.
-          </p>
-        </div>
+        <h3 className="l22-listen-subtitle">Uvo is a good town</h3>
+        <p className="lesson22-section-desc">
+          Gap-fill with <strong>are / a / There&apos;s / there / no</strong>.
+        </p>
         <SelectDrill
           items={uvoGaps}
           answers={uvoAns}
@@ -1646,40 +1750,14 @@ export default function Lesson31() {
       <section id="l31a-speak" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">A6 · Speaking · writing</p>
-          <h2>Talk about your town · find differences · 6 sentences</h2>
+          <h2>Talk about your town</h2>
           <p className="lesson22-section-desc">
-            Скажи 4–6 речень (+ і −). У парах знайди{" "}
-            <strong>дев&apos;ять відмінностей</strong>. Потім напиши 6 речень.
+            Скажи вчителю 4–6 речень (+ і −) про своє місто. Потім напиши 6
+            речень.
           </p>
         </div>
         <div className="lesson22-prompt-grid">
           {speakA.map((p) => (
-            <div key={p} className="lesson22-prompt-card">
-              {p}
-            </div>
-          ))}
-        </div>
-        <h3 className="l22-listen-subtitle">Find nine differences</h3>
-        <p className="lesson22-section-desc">
-          Use the town map + street as Student A / B pictures. Find nine
-          differences.
-        </p>
-        <div className="l31-map-pair">
-          <LessonFigure
-            src={IMG31(lesson31Images.townMapAg)}
-            alt="Town map for differences — Student A"
-            caption="Picture A · map"
-            variant="map"
-          />
-          <LessonFigure
-            src={IMG31(lesson31Images.townStreetCl)}
-            alt="Town street for differences — Student B"
-            caption="Picture B · street"
-            variant="map"
-          />
-        </div>
-        <div className="lesson22-prompt-grid">
-          {differencePrompts.map((p) => (
             <div key={p} className="lesson22-prompt-card">
               {p}
             </div>
@@ -1755,10 +1833,29 @@ export default function Lesson31() {
           <p className="page-kicker">B2 · Vocabulary</p>
           <h2>Rooms and things in a home</h2>
           <p className="lesson22-section-desc">
-            City flat, Brighton · £80 per night. Listen (R4), flip cards, then
-            match icons E–K on the flat panel.
+            City flat, Brighton · £80 per night. Flip cards, look at the photos,
+            listen (R4), then match A–K with the words in the box.
           </p>
         </div>
+
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">1</strong> CITY FLAT, BRIGHTON · £80 per
+          night · rooms A–D · icons E–K — flip the cards.
+        </p>
+        <VocabFlipGrid
+          items={homeVocab}
+          flipped={vocabB}
+          toggle={(i) => toggle(setVocabB, i)}
+        />
+
+        <LessonFigure
+          src={IMG31(lesson31Images.brightonRoomsAd)}
+          alt="City Flat Brighton — room photos A–D"
+          caption="CITY FLAT, BRIGHTON **** · £80 per night · rooms A–D"
+          variant="photo"
+          wide
+        />
+
         <AudioBlock
           r={4}
           exercise="3B · Vocab"
@@ -1775,116 +1872,166 @@ export default function Lesson31() {
             </div>
           }
         />
+
         <LessonFigure
-          src={IMG31(lesson31Images.brightonFlat)}
-          alt="City Flat Brighton — photos A–D and amenity icons E–K"
-          caption="CITY FLAT, BRIGHTON · £80 per night · rooms A–D · icons E–K"
+          src={IMG31(lesson31Images.brightonIconsEk)}
+          alt="In this flat — amenity icons E–K"
+          caption="In this flat: icons E–K"
           variant="photo"
+          wide
         />
-        <VocabFlipGrid
-          items={homeVocab}
-          flipped={vocabB}
-          toggle={(i) => toggle(setVocabB, i)}
-        />
-        <h3 className="l22-listen-subtitle">Icons E–K</h3>
-        <div className="l26-drill-list">
-          {iconMatchB.map((p) => (
-            <div key={p.icon} className="l26-drill-row">
-              <strong className="l26-drill-prompt">
-                Icon {p.icon}
-                <span
-                  style={{
-                    display: "block",
-                    fontWeight: 500,
-                    color: "var(--color-text-muted)",
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  {p.hint}
-                </span>
-              </strong>
-              <span className="l26-drill-arrow" aria-hidden="true">
-                →
-              </span>
-              <select
-                value={iconAns[p.icon] ?? ""}
-                onChange={(e) => {
-                  setIconChecked(false);
-                  setIconAns((prev) => ({ ...prev, [p.icon]: e.target.value }));
-                }}
-                className={drillSelClass(
-                  iconChecked,
-                  iconAns[p.icon] ?? "",
-                  p.thing,
-                )}
-                aria-label={`Icon ${p.icon}`}
-              >
-                <option value="">___</option>
-                {homeVocab
-                  .filter((v) =>
-                    [
-                      "toilet",
-                      "shower",
-                      "beds",
-                      "oven",
-                      "lift",
-                      "TV",
-                      "wifi",
-                    ].includes(v.en),
-                  )
-                  .map((v) => (
-                    <option key={v.en} value={v.en}>
-                      {v.en}
-                    </option>
-                  ))}
-              </select>
-            </div>
-          ))}
+
+        <p className="l31-ex-line" style={{ marginTop: "1.25rem" }}>
+          <strong className="l31-ex-num">2a</strong> Match A–K with the words in
+          the box.
+        </p>
+        <div className="l31-vocab-box" aria-label="Words in the box">
+          <p className="l31-vocab-box-row">
+            <span className="l31-vocab-box-label">Rooms:</span>
+            <span className="l31-vocab-box-words">
+              {flatBoxRooms.join(", ")}
+            </span>
+          </p>
+          <p className="l31-vocab-box-row">
+            <span className="l31-vocab-box-label">Things:</span>
+            <span className="l31-vocab-box-words">
+              {flatBoxThings.join(", ")}
+            </span>
+          </p>
         </div>
+
+        <div className="l31-pair-match">
+          <div className="l31-pair-col" aria-label="Words in the box">
+            {flatWordsB.map((word) => {
+              const linked = wordToFlatLetter[word];
+              const key = flatMatchB.find((p) => p.word === word);
+              const selected =
+                flatPick?.side === "word" && flatPick.word === word;
+              const matched = Boolean(linked);
+              const correct = matched && key?.letter === linked;
+              const wrong = flatChecked && matched && !correct;
+              const ok = flatChecked && matched && correct;
+              const cls = [
+                "l31-pair-card",
+                selected ? "is-selected" : "",
+                matched ? "is-matched" : "",
+                ok ? "is-ok" : "",
+                wrong ? "is-err" : "",
+              ]
+                .filter(Boolean)
+                .join(" ");
+              return (
+                <button
+                  key={word}
+                  type="button"
+                  className={cls}
+                  onClick={() => onFlatWord(word)}
+                  aria-pressed={selected || matched}
+                >
+                  <span className="l31-pair-text">{word}</span>
+                  {matched && (
+                    <span className="l31-pair-badge">{linked}</span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          <div className="l31-pair-col" aria-label="Letters A–K">
+            {flatLetterOrder.map((letter) => {
+              const word = flatAns[letter];
+              const key = flatMatchB.find((p) => p.letter === letter);
+              const selected =
+                flatPick?.side === "letter" && flatPick.letter === letter;
+              const matched = Boolean(word);
+              const correct = matched && key?.word === word;
+              const wrong = flatChecked && matched && !correct;
+              const ok = flatChecked && matched && correct;
+              const cls = [
+                "l31-pair-card",
+                selected ? "is-selected" : "",
+                matched ? "is-matched" : "",
+                ok ? "is-ok" : "",
+                wrong ? "is-err" : "",
+              ]
+                .filter(Boolean)
+                .join(" ");
+              return (
+                <button
+                  key={letter}
+                  type="button"
+                  className={cls}
+                  onClick={() => onFlatLetter(letter)}
+                  aria-pressed={selected || matched}
+                >
+                  <span className="l31-pair-key">{letter}.</span>
+                  {matched && (
+                    <span className="l31-pair-text">{word}</span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        {flatShowAll && (
+          <div className="l31-fix-reveal" style={{ marginTop: "0.85rem" }}>
+            <span className="l31-fix-answer">
+              {flatMatchB.map((p) => `${p.letter} → ${p.word}`).join(" · ")}
+            </span>
+          </div>
+        )}
         <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
           <button
             type="button"
             className="l22-check-btn"
-            onClick={() => setIconChecked(true)}
+            onClick={() => setFlatChecked(true)}
           >
             Check
           </button>
-          {iconChecked && (
+          {flatChecked && (
             <span className="l22-score">
-              {iconScore} / {iconMatchB.length}
+              {flatScore} / {flatMatchB.length}
             </span>
           )}
           <button
             type="button"
             className="l25-cr-mini-btn"
             onClick={() => {
-              setIconAns({});
-              setIconChecked(false);
+              const next = !flatShowAll;
+              setFlatShowAll(next);
+              if (next) {
+                setFlatAns(
+                  Object.fromEntries(
+                    flatMatchB.map((p) => [p.letter, p.word]),
+                  ),
+                );
+                setFlatPick(null);
+                setFlatChecked(true);
+              }
+            }}
+          >
+            {flatShowAll ? "Hide answers" : "Show answers"}
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setFlatAns({});
+              setFlatChecked(false);
+              setFlatPick(null);
+              setFlatShowAll(false);
             }}
           >
             Reset
           </button>
         </div>
-      </section>
 
-      <section id="l31b-photos" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">B3 · Flat photos A–D</p>
-          <h2>Look and answer</h2>
-          <p className="lesson22-section-desc">
-            Photos on the Brighton panel: A living room · B kitchen · C bedroom
-            · D bathroom. Optional listen: What is there…? (R9).
-          </p>
-        </div>
-        <LessonFigure
-          src={IMG31(lesson31Images.brightonFlat)}
-          alt="Brighton flat room photos A–D"
-          caption="Look at photos A–D on the flat panel"
-          variant="photo"
-        />
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">2b</strong> Look at photos A–D again.
+          Answer the questions.
+        </p>
         <AudioBlock
           r={9}
-          exercise="3B · Speaking prep"
+          exercise="3B · 2b"
           title="What is there…? / How many rooms…?"
         />
         <SelectDrill
@@ -1896,54 +2043,180 @@ export default function Lesson31() {
           labelKey={(d) => d.q ?? ""}
         />
         <p className="lesson22-section-desc" style={{ marginTop: "1rem" }}>
-          Close your book — make sentences:{" "}
-          <em>There are two beds in the bedroom.</em>
+          Make sentences: <em>There are two beds in the bedroom.</em>
         </p>
       </section>
 
       <section id="l31b-flats" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">B4 · Compare flats · a / an</p>
-          <h2>Which flat?</h2>
-          <p className="lesson22-section-desc">
-            Listen to the flat descriptions (R7), then choose. Optional follow-up
-            R8.
-          </p>
-        </div>
+        <h2 className="l31-skill-title">Listening</h2>
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">5a</strong> Listen to a conversation
+          between two friends, Jakub and William. Choose the correct flat.
+        </p>
         <AudioBlock
-          r={7}
-          exercise="3B · Listening"
-          title="Match flat descriptions a–d"
+          r={5}
+          exercise="3B · Listening 5"
+          title="Jakub & William — choose the flat"
         />
-        <AudioBlock
-          r={8}
-          exercise="3B · Listening"
-          title="Flat 2 — rooms follow-up"
-        />
-        <div className="lesson22-prompt-grid">
-          {flatsB.map((f) => (
-            <button
-              key={f.id}
-              type="button"
-              className={`lesson22-prompt-card ${chosenFlat === f.id ? "lesson22-prompt-card--task" : ""}`}
-              onClick={() => setChosenFlat(f.id)}
-              aria-pressed={chosenFlat === f.id}
-            >
-              <strong>{f.label}</strong>
-              <ul style={{ margin: "0.5rem 0 0", paddingLeft: "1.1rem" }}>
-                {f.points.map((p) => (
-                  <li key={p}>{p}</li>
-                ))}
-              </ul>
-            </button>
-          ))}
+        <div className="l31-vocab-box" style={{ marginTop: "0.85rem" }}>
+          <div className="lesson22-prompt-grid">
+            {flatsB.map((f) => {
+              const selected = chosenFlat === f.id;
+              const ok =
+                flatChoiceChecked && selected && f.id === flatsBCorrectId;
+              const wrong =
+                flatChoiceChecked && selected && f.id !== flatsBCorrectId;
+              const revealOk =
+                flatChoiceChecked && f.id === flatsBCorrectId && !selected;
+              const cls = [
+                "lesson22-prompt-card",
+                selected ? "lesson22-prompt-card--task" : "",
+                ok || revealOk ? "is-ok" : "",
+                wrong ? "is-err" : "",
+              ]
+                .filter(Boolean)
+                .join(" ");
+              return (
+                <button
+                  key={f.id}
+                  type="button"
+                  className={cls}
+                  onClick={() => {
+                    setFlatChoiceChecked(false);
+                    setChosenFlat(f.id);
+                  }}
+                  aria-pressed={selected}
+                >
+                  <strong>{f.label}</strong>
+                  <ul style={{ margin: "0.5rem 0 0", paddingLeft: "1.1rem" }}>
+                    {f.points.map((p) => (
+                      <li key={p}>{p}</li>
+                    ))}
+                  </ul>
+                </button>
+              );
+            })}
+          </div>
         </div>
-        {chosenFlat && (
-          <p className="lesson22-section-desc" style={{ marginTop: "0.75rem" }}>
-            You chose <strong>Flat {chosenFlat}</strong>. Later: say why.
-          </p>
-        )}
-        <h3 className="l22-listen-subtitle">a / an</h3>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setFlatChoiceChecked(true)}
+          >
+            Check
+          </button>
+          {flatChoiceChecked && (
+            <span className="l22-score">
+              {chosenFlat === flatsBCorrectId ? "1" : "0"} / 1
+              {chosenFlat === flatsBCorrectId
+                ? " · Flat 3"
+                : chosenFlat
+                  ? " · try again"
+                  : " · choose a flat"}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setChosenFlat("");
+              setFlatChoiceChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">5b</strong> Listen again. Tick the
+          sentences you hear.
+        </p>
+        <ul className="l29-phrases-ticklist">
+          {flatTickSentencesB.map((s) => {
+            const on = Boolean(flatTick[s.id]);
+            let cls = "l29-phrases-tick";
+            if (flatTickChecked) {
+              if (s.heard && on) cls += " is-ok";
+              else if (!s.heard && on) cls += " is-err";
+              else if (s.heard && !on) cls += " is-miss";
+            }
+            return (
+              <li key={s.id} className={cls}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={on}
+                    onChange={() => {
+                      setFlatTickChecked(false);
+                      setFlatTick((prev) => ({
+                        ...prev,
+                        [s.id]: !prev[s.id],
+                      }));
+                    }}
+                  />
+                  <span>
+                    {s.id}. {s.text}
+                  </span>
+                </label>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setFlatTickChecked(true)}
+          >
+            Check
+          </button>
+          {flatTickChecked && (
+            <span className="l22-score">
+              {
+                flatTickSentencesB.filter(
+                  (s) => Boolean(flatTick[s.id]) === s.heard,
+                ).length
+              }{" "}
+              / {flatTickSentencesB.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setFlatTick(
+                Object.fromEntries(
+                  flatTickSentencesB
+                    .filter((s) => s.heard)
+                    .map((s) => [s.id, true]),
+                ),
+              );
+              setFlatTickChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setFlatTick({});
+              setFlatTickChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">5c</strong> Look at Exercises 5a and 5b
+          again. Complete the sentences with <em>a</em> and <em>an</em>.
+        </p>
+        <p className="lesson22-section-desc">
+          There is ______ bathroom, ______ shower and ______ TV. There isn&apos;t
+          ______ oven.
+        </p>
         <SelectDrill
           items={articleGapsB}
           answers={articleAns}
@@ -1955,119 +2228,385 @@ export default function Lesson31() {
       </section>
 
       <section id="l31b-grammar" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">B5 · Grammar</p>
-          <h2>Is there a/an …? / Are there any …?</h2>
-          <p className="lesson22-section-desc">
-            Singular → <strong>Is there</strong>. Plural →{" "}
-            <strong>Are there any</strong>. Uncountable:{" "}
-            <em>Is there wifi?</em>
-          </p>
-        </div>
-        <div className="l25-grammar-box">
-          <div className="l25-grammar-label">Questions &amp; short answers</div>
-          <div className="l25-grammar-rows">
-            <div className="l25-gr-row l25-gr-row--pos">
-              <span className="l25-gr-sign">?</span>
-              <div className="l25-gr-cells">
-                <span>
-                  <strong>Is</strong> there a shower?
-                </span>
-                <span>
-                  <strong>Are</strong> there any flats?
-                </span>
-              </div>
+        <h2 className="l31-skill-title">Grammar</h2>
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">6</strong> Read and complete the
+          grammar box. Use Exercises 5b and 5c to help you.
+        </p>
+
+        <div className="l31-there-box">
+          <div className="l31-there-head">
+            Is there a/an …? / Are there any …?
+          </div>
+          <div className="l31-there-cols">
+            <div className="l31-there-col-h">Singular</div>
+            <div className="l31-there-col-h">Plural</div>
+          </div>
+
+          <div className="l31-there-row">
+            <div className="l31-there-sign">?</div>
+            <div className="l31-there-cell">
+              <p>
+                <strong className="l31-ab-n">1</strong>{" "}
+                <select
+                  value={gramBAns[0]}
+                  onChange={(e) => {
+                    setGramBChecked(false);
+                    const next = [...gramBAns];
+                    next[0] = e.target.value;
+                    setGramBAns(next);
+                  }}
+                  className={drillSelClass(
+                    gramBChecked,
+                    gramBAns[0],
+                    grammarBoxB[0].answer,
+                  )}
+                  aria-label="Gap 1"
+                >
+                  <option value="">______</option>
+                  {grammarBoxB[0].options.map((o) => (
+                    <option key={o} value={o}>
+                      {o}
+                    </option>
+                  ))}
+                </select>{" "}
+                there a shower?
+              </p>
             </div>
-            <div className="l25-gr-row l25-gr-row--pos">
-              <span className="l25-gr-sign">+</span>
-              <div className="l25-gr-cells">
-                <span>
-                  Yes, there <strong>is</strong>.
-                </span>
-                <span>
-                  Yes, there <strong>are</strong>.
-                </span>
-              </div>
-            </div>
-            <div className="l25-gr-row l25-gr-row--neg">
-              <span className="l25-gr-sign">−</span>
-              <div className="l25-gr-cells">
-                <span>
-                  No, there <strong>isn&apos;t</strong>.
-                </span>
-                <span>
-                  No, there <strong>aren&apos;t</strong>.
-                </span>
-              </div>
+            <div className="l31-there-cell">
+              <p>
+                <strong className="l31-ab-n">2</strong>{" "}
+                <select
+                  value={gramBAns[1]}
+                  onChange={(e) => {
+                    setGramBChecked(false);
+                    const next = [...gramBAns];
+                    next[1] = e.target.value;
+                    setGramBAns(next);
+                  }}
+                  className={drillSelClass(
+                    gramBChecked,
+                    gramBAns[1],
+                    grammarBoxB[1].answer,
+                  )}
+                  aria-label="Gap 2"
+                >
+                  <option value="">______</option>
+                  {grammarBoxB[1].options.map((o) => (
+                    <option key={o} value={o}>
+                      {o}
+                    </option>
+                  ))}
+                </select>{" "}
+                there any flats?
+              </p>
             </div>
           </div>
-          <div className="l25-short-forms">
-            <span className="l25-sf-label">How many:</span>
-            <span>
-              How many bedrooms <strong>are</strong> there?
-            </span>
-            <span>
-              There <strong>is</strong> one. / There <strong>are</strong> two.
-            </span>
+
+          <div className="l31-there-row">
+            <div className="l31-there-sign l31-there-sign--pos">+</div>
+            <div className="l31-there-cell">
+              <p>
+                Yes, there <strong className="l31-ab-n">3</strong>{" "}
+                <select
+                  value={gramBAns[2]}
+                  onChange={(e) => {
+                    setGramBChecked(false);
+                    const next = [...gramBAns];
+                    next[2] = e.target.value;
+                    setGramBAns(next);
+                  }}
+                  className={drillSelClass(
+                    gramBChecked,
+                    gramBAns[2],
+                    grammarBoxB[2].answer,
+                  )}
+                  aria-label="Gap 3"
+                >
+                  <option value="">______</option>
+                  {grammarBoxB[2].options.map((o) => (
+                    <option key={o} value={o}>
+                      {o}
+                    </option>
+                  ))}
+                </select>
+                .
+              </p>
+            </div>
+            <div className="l31-there-cell">
+              <p>Yes, there are.</p>
+            </div>
+          </div>
+
+          <div className="l31-there-row">
+            <div className="l31-there-sign l31-there-sign--neg">−</div>
+            <div className="l31-there-cell">
+              <p>
+                No, there <strong className="l31-ab-n">4</strong>{" "}
+                <select
+                  value={gramBAns[3]}
+                  onChange={(e) => {
+                    setGramBChecked(false);
+                    const next = [...gramBAns];
+                    next[3] = e.target.value;
+                    setGramBAns(next);
+                  }}
+                  className={drillSelClass(
+                    gramBChecked,
+                    gramBAns[3],
+                    grammarBoxB[3].answer,
+                  )}
+                  aria-label="Gap 4"
+                >
+                  <option value="">______</option>
+                  {grammarBoxB[3].options.map((o) => (
+                    <option key={o} value={o}>
+                      {o}
+                    </option>
+                  ))}
+                </select>
+                .{" "}
+                <span className="l31-there-note">(= No, there is not.)</span>
+              </p>
+            </div>
+            <div className="l31-there-cell">
+              <p>
+                No, there <strong className="l31-ab-n">5</strong>{" "}
+                <select
+                  value={gramBAns[4]}
+                  onChange={(e) => {
+                    setGramBChecked(false);
+                    const next = [...gramBAns];
+                    next[4] = e.target.value;
+                    setGramBAns(next);
+                  }}
+                  className={drillSelClass(
+                    gramBChecked,
+                    gramBAns[4],
+                    grammarBoxB[4].answer,
+                  )}
+                  aria-label="Gap 5"
+                >
+                  <option value="">______</option>
+                  {grammarBoxB[4].options.map((o) => (
+                    <option key={o} value={o}>
+                      {o}
+                    </option>
+                  ))}
+                </select>
+                .{" "}
+                <span className="l31-there-note">(= No, there are not.)</span>
+              </p>
+            </div>
+          </div>
+
+          <p className="l31-there-but">BUT <em>Is there wifi?</em></p>
+
+          <div className="l31-there-how">
+            <strong>with How many</strong>
+            <p>
+              How many bedrooms <strong className="l31-ab-n">6</strong>{" "}
+              <select
+                value={gramBAns[5]}
+                onChange={(e) => {
+                  setGramBChecked(false);
+                  const next = [...gramBAns];
+                  next[5] = e.target.value;
+                  setGramBAns(next);
+                }}
+                className={drillSelClass(
+                  gramBChecked,
+                  gramBAns[5],
+                  grammarBoxB[5].answer,
+                )}
+                aria-label="Gap 6"
+              >
+                <option value="">______</option>
+                {grammarBoxB[5].options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>{" "}
+              there?
+            </p>
+            <p>
+              There <strong className="l31-ab-n">7</strong>{" "}
+              <select
+                value={gramBAns[6]}
+                onChange={(e) => {
+                  setGramBChecked(false);
+                  const next = [...gramBAns];
+                  next[6] = e.target.value;
+                  setGramBAns(next);
+                }}
+                className={drillSelClass(
+                  gramBChecked,
+                  gramBAns[6],
+                  grammarBoxB[6].answer,
+                )}
+                aria-label="Gap 7"
+              >
+                <option value="">______</option>
+                {grammarBoxB[6].options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>{" "}
+              one. / There <strong className="l31-ab-n">8</strong>{" "}
+              <select
+                value={gramBAns[7]}
+                onChange={(e) => {
+                  setGramBChecked(false);
+                  const next = [...gramBAns];
+                  next[7] = e.target.value;
+                  setGramBAns(next);
+                }}
+                className={drillSelClass(
+                  gramBChecked,
+                  gramBAns[7],
+                  grammarBoxB[7].answer,
+                )}
+                aria-label="Gap 8"
+              >
+                <option value="">______</option>
+                {grammarBoxB[7].options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>{" "}
+              two.
+            </p>
           </div>
         </div>
-        <SelectDrill
-          items={grammarGapsB}
-          answers={gramBAns}
-          setAnswers={setGramBAns}
-          checked={gramBChecked}
-          setChecked={setGramBChecked}
-          labelKey={(d) => d.prompt ?? ""}
-        />
-        <h3 className="l22-listen-subtitle">Intonation · notice</h3>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setGramBChecked(true)}
+          >
+            Check
+          </button>
+          {gramBChecked && (
+            <span className="l22-score">
+              {
+                grammarBoxB.filter((g, i) => gramBAns[i] === g.answer).length
+              }{" "}
+              / {grammarBoxB.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setGramBAns(grammarBoxB.map((g) => g.answer));
+              setGramBChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setGramBAns(Array(grammarBoxB.length).fill(""));
+              setGramBChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.5rem" }}>
+          <strong className="l31-ex-num">7a</strong> Listen. Does the voice go
+          up (↑) or down (↓) at the end?
+        </p>
         <AudioBlock
           r={6}
-          exercise="3B · Pronunciation"
+          exercise="3B · 7a"
           title="Is there / Are there — intonation"
-          transcript={
-            <ol>
-              <li>Is there a bathroom?</li>
-              <li>Yes, there is.</li>
-              <li>Are there two beds?</li>
-              <li>Yes, there are.</li>
-              <li>How many rooms are there?</li>
-              <li>There are four rooms.</li>
-            </ol>
-          }
         />
-        <div className="l25-wordbox">
-          <span className="l25-wordbox-item">Is there a bathroom? ↑</span>
-          <span className="l25-wordbox-item">Yes, there is. ↓</span>
-          <span className="l25-wordbox-item">Are there two beds? ↑</span>
-          <span className="l25-wordbox-item">How many rooms are there? ↓</span>
+        <div className="l26-drill-list">
+          {intonationB.map((item, i) => (
+            <div key={item.n} className="l26-drill-row">
+              <strong className="l26-drill-prompt">
+                {item.n}. {item.text}
+              </strong>
+              <span className="l26-drill-arrow" aria-hidden="true">
+                →
+              </span>
+              <select
+                value={intonAns[i]}
+                onChange={(e) => {
+                  setIntonChecked(false);
+                  const next = [...intonAns];
+                  next[i] = e.target.value;
+                  setIntonAns(next);
+                }}
+                className={drillSelClass(
+                  intonChecked,
+                  intonAns[i],
+                  item.answer,
+                )}
+                aria-label={`Intonation ${item.n}`}
+              >
+                <option value="">↑ / ↓</option>
+                <option value="↑">↑</option>
+                <option value="↓">↓</option>
+              </select>
+            </div>
+          ))}
         </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setIntonChecked(true)}
+          >
+            Check
+          </button>
+          {intonChecked && (
+            <span className="l22-score">
+              {
+                intonationB.filter((item, i) => intonAns[i] === item.answer)
+                  .length
+              }{" "}
+              / {intonationB.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setIntonAns(intonationB.map((item) => item.answer));
+              setIntonChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setIntonAns(Array(intonationB.length).fill(""));
+              setIntonChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+        <p className="l31-ex-line" style={{ marginTop: "1rem" }}>
+          <strong className="l31-ex-num">7b</strong> Listen again and repeat.
+        </p>
       </section>
 
       <section id="l31b-dialogue" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">B6 · Dialogue · word order · speaking</p>
-          <h2>William &amp; Jakub · £60 / night</h2>
-        </div>
-        <AudioBlock
-          r={5}
-          exercise="3B · Dialogue"
-          title="William & Jakub — holiday flat"
-          transcript={
-            <div>
-              <p>
-                <strong>Jakub:</strong> What&apos;s that?
-              </p>
-              <p>
-                <strong>William:</strong> It&apos;s the holiday flat website…
-                Look — about £75 per night.
-              </p>
-              <p>
-                <strong>Jakub:</strong> How many bedrooms are there? Is there a
-                bathroom / shower / wifi? Are there any TVs? Is there a lift?
-              </p>
-            </div>
-          }
-        />
+        <h2 className="l31-skill-title">Practice &amp; speaking</h2>
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">8</strong> Complete the conversation.
+        </p>
         <blockquote className="l23-rule-quote" style={{ marginBottom: "1rem" }}>
           <p>
             <strong>William:</strong> Look. This flat is £60 per night!
@@ -2140,19 +2679,25 @@ export default function Lesson31() {
           </button>
         </div>
 
-        <h3 className="l22-listen-subtitle">Make questions</h3>
-        <SelectDrill
+        <p className="l31-ex-line" style={{ marginTop: "1.5rem" }}>
+          <strong className="l31-ex-num">9a</strong> Put the words in the
+          correct order to make questions.
+        </p>
+        <WordOrderBoard
           items={wordOrderB}
-          answers={orderBAns}
-          setAnswers={setOrderBAns}
+          rows={orderBRows}
+          setRows={setOrderBRows}
           checked={orderBChecked}
           setChecked={setOrderBChecked}
-          labelKey={(d) => d.scramble ?? ""}
         />
+        <p className="l31-ex-line" style={{ marginTop: "1rem" }}>
+          <strong className="l31-ex-num">9b</strong> Answer the questions about
+          your home (to your teacher).
+        </p>
 
-        <h3 className="l22-listen-subtitle">Two holiday flats · compare</h3>
-        <p className="lesson22-section-desc">
-          Ask and answer using the table ideas. Then choose a flat.
+        <p className="l31-ex-line" style={{ marginTop: "1.5rem" }}>
+          <strong className="l31-ex-num">10</strong> PREPARE · Look at Flat 1–3
+          (Listening 5a). Write questions about the flats.
         </p>
         <div className="l25-wordbox">
           {flatCompareRows.map((r) => (
@@ -2161,13 +2706,12 @@ export default function Lesson31() {
             </span>
           ))}
         </div>
-        <h3 className="l22-listen-subtitle">Speaking · describe a city</h3>
-        <LessonFigure
-          src={IMG31(lesson31Images.tokyoFuji)}
-          alt="Tokyo skyline with Mount Fuji"
-          caption="3B speaking · describe a city (e.g. Tokyo)"
-          variant="photo"
-        />
+
+        <p className="l31-ex-line" style={{ marginTop: "1.5rem" }}>
+          <strong className="l31-ex-num">11</strong> SPEAK · Answer your
+          questions about Flat 3 (or your flat). Then choose a flat for your
+          holiday and say why.
+        </p>
         <div className="lesson22-prompt-grid" style={{ marginTop: "1rem" }}>
           {speakB.map((p) => (
             <div key={p} className="lesson22-prompt-card">
@@ -2525,11 +3069,11 @@ export default function Lesson31() {
           setChecked={setOrderCChecked}
           labelKey={(d) => d.scramble ?? ""}
         />
-        <h3 className="l22-listen-subtitle">Ask about places · describe towns</h3>
+        <h3 className="l22-listen-subtitle">Speak · your town</h3>
         <LessonFigure
           src={IMG31(lesson31Images.tokyoFuji)}
           alt="Tokyo skyline with Mount Fuji"
-          caption="Speaking cue · describe a city (e.g. Tokyo)"
+          caption="Speaking cue · describe a city"
           variant="photo"
         />
         <div className="l25-wordbox" style={{ marginBottom: "1rem" }}>
@@ -2548,42 +3092,23 @@ export default function Lesson31() {
         </div>
         <blockquote className="l23-rule-quote" style={{ marginTop: "1.25rem" }}>
           <p>
-            <strong>Model.</strong> A: <em>Is there a big hotel?</em> B:{" "}
+            <strong>Model.</strong> Teacher: <em>Is there a big hotel?</em> You:{" "}
             <em>Yes, the City Hotel is big. / No, there are no big hotels.</em>{" "}
-            A: <em>Is the cinema good?</em> B:{" "}
+            Teacher: <em>Is the cinema good?</em> You:{" "}
             <em>Yes, it is. / No, it isn&apos;t.</em>
           </p>
         </blockquote>
       </section>
 
-      {/* ═══════════════ REVIEW ═══════════════ */}
+      {/* ═══════════════ EXIT ═══════════════ */}
       <section id="l31-review" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">Review · Unit 3 A–C</p>
-          <h2>Quick recap + exit</h2>
+          <p className="page-kicker">Exit check</p>
+          <h2>Can you…?</h2>
           <p className="lesson22-section-desc">
             places · there is/are · rooms · Is there…? · adjectives
           </p>
         </div>
-        <div className="lesson22-hero-chips" style={{ marginBottom: "1rem" }}>
-          <span>There&apos;s a …</span>
-          <span>Is there wifi?</span>
-          <span>busy ↔ quiet</span>
-          <span>a quiet town</span>
-          <span>It isn&apos;t expensive</span>
-        </div>
-        <h3 className="l22-listen-subtitle">Extra Unit 3 tracks</h3>
-        <p className="lesson22-section-desc">
-          Optional: furniture / Flat 1 / asking the way (R10–R11, R14–R16).
-        </p>
-        {lesson31ExtraAudio.map((t) => (
-          <AudioBlock
-            key={t.r}
-            r={t.r}
-            exercise={t.exercise}
-            title={t.title}
-          />
-        ))}
         <div className="lesson22-prompt-grid">
           {exitQs.map((q) => (
             <div
@@ -2594,18 +3119,14 @@ export default function Lesson31() {
             </div>
           ))}
         </div>
-      </section>
-
-      <section className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">After class</p>
-          <h2>Practice links</h2>
-          <p className="lesson22-section-desc">
-            Повтори places, rooms і adjectives у Vocab / Trainer. Unit 3 A–C
-            complete in Lesson 31.
-          </p>
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.5rem",
+            marginTop: "1rem",
+          }}
+        >
           <Link className="lesson22-back-link" to="/vocab">
             Vocab →
           </Link>

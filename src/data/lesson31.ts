@@ -7,11 +7,11 @@
  * R2  — Jack / Diana / Yuki town descriptions → photo match A–C (A5)
  * R3  — There's / There are pronunciation (A3 Notice the sound)
  * R4  — rooms + home things vocab (B2)
- * R5  — William & Jakub holiday-flat dialogue (B6)
- * R6  — Is there / Are there intonation (B5)
- * R7  — match flat descriptions a–d (B4)
- * R8  — Flat 2 listening follow-up (B4 optional)
- * R9  — What is there…? practice (B3 / speak)
+ * R5  — Jakub & William · choose the flat (Listening 5a–c, after R4)
+ * R6  — Is there / Are there intonation (grammar)
+ * R7  — match flat descriptions a–d (Review extras)
+ * R8  — Flat 2 listening follow-up (Review extras)
+ * R9  — What is there…? practice (photos / speak)
  * R10 — furniture / flat detail questions (Review extras)
  * R11 — Flat 1 description (Review extras)
  * R12 — adjective sentences It's busy/quiet… (C2)
@@ -23,6 +23,16 @@
 
 /** Extra Unit 3 tracks shown in Review (core Listen buttons use R1–R9, R12–R13). */
 export const lesson31ExtraAudio = [
+  {
+    r: 7,
+    exercise: "3B · Extra",
+    title: "Match flat descriptions a–d",
+  },
+  {
+    r: 8,
+    exercise: "3B · Extra",
+    title: "Flat 2 — rooms follow-up",
+  },
   {
     r: 10,
     exercise: "3B · Extra",
@@ -56,6 +66,8 @@ export const lesson31Images = {
   townStreetCl: "town-street-cl.png",
   photosAbc: "photos-abc.png",
   brightonFlat: "brighton-flat.png",
+  brightonRoomsAd: "brighton-rooms-ad.png",
+  brightonIconsEk: "brighton-icons-ek.png",
   tokyoFuji: "tokyo-fuji.png",
   adjBusy: "adj-busy.png",
   adjQuiet: "adj-quiet.png",
@@ -780,15 +792,40 @@ export const photoQsB = [
   },
 ] as const;
 
-export const iconMatchB = [
-  { icon: "E", thing: "toilet", hint: "WC" },
-  { icon: "F", thing: "shower", hint: "water spray" },
-  { icon: "G", thing: "beds", hint: "sleep" },
-  { icon: "H", thing: "oven", hint: "cook" },
-  { icon: "I", thing: "lift", hint: "elevator" },
-  { icon: "J", thing: "TV", hint: "screen" },
-  { icon: "K", thing: "wifi", hint: "internet" },
+/** 2a Match A–K with words in the box (rooms + things). */
+export const flatMatchB = [
+  { letter: "A", word: "living room" },
+  { letter: "B", word: "kitchen" },
+  { letter: "C", word: "bedroom" },
+  { letter: "D", word: "bathroom" },
+  { letter: "E", word: "toilet" },
+  { letter: "F", word: "shower" },
+  { letter: "G", word: "beds" },
+  { letter: "H", word: "oven" },
+  { letter: "I", word: "lift" },
+  { letter: "J", word: "TV" },
+  { letter: "K", word: "wifi" },
 ] as const;
+
+export const flatBoxRooms = [
+  "bathroom",
+  "bedroom",
+  "kitchen",
+  "living room",
+] as const;
+
+export const flatBoxThings = [
+  "beds",
+  "lift",
+  "oven",
+  "shower",
+  "toilet",
+  "TV",
+  "wifi",
+] as const;
+
+/** Word column order for pair-match (Rooms → Things). */
+export const flatWordsB = [...flatBoxRooms, ...flatBoxThings] as const;
 
 export const flatsB = [
   {
@@ -825,6 +862,22 @@ export const flatsB = [
   },
 ] as const;
 
+/** Correct flat in Listening 5a (R5 · Jakub & William). */
+export const flatsBCorrectId = "3";
+
+/** 5b · Tick the sentences you hear (R5). */
+export const flatTickSentencesB = [
+  { id: 1, text: "Are there any flats in Berlin for us?", heard: true },
+  { id: 2, text: "How many beds are there?", heard: true },
+  { id: 3, text: "There are two beds.", heard: true },
+  { id: 4, text: "No, there aren't.", heard: false },
+  { id: 5, text: "Is there a bathroom?", heard: true },
+  { id: 6, text: "Yes, there is.", heard: true },
+  { id: 7, text: "No, there isn't.", heard: true },
+  { id: 8, text: "There isn't an oven.", heard: true },
+] as const;
+
+/** 5c · Complete with a / an */
 export const articleGapsB = [
   { blank: "There is ___ bathroom", options: ["a", "an", "any"], answer: "a" },
   { blank: "___ shower", options: ["a", "an", "any"], answer: "a" },
@@ -836,47 +889,70 @@ export const articleGapsB = [
   },
 ] as const;
 
+/** Grammar box 6 — gaps 1–8 (Is / Are / is / isn't / aren't / are / is / are). */
+export const grammarBoxB = [
+  { n: 1, options: ["Is", "Are", "Do"] as const, answer: "Is" },
+  { n: 2, options: ["Is", "Are", "Do"] as const, answer: "Are" },
+  { n: 3, options: ["is", "are", "isn't"] as const, answer: "is" },
+  { n: 4, options: ["isn't", "aren't", "is"] as const, answer: "isn't" },
+  { n: 5, options: ["isn't", "aren't", "are"] as const, answer: "aren't" },
+  { n: 6, options: ["is", "are", "do"] as const, answer: "are" },
+  { n: 7, options: ["is", "are", "aren't"] as const, answer: "is" },
+  { n: 8, options: ["is", "are", "isn't"] as const, answer: "are" },
+] as const;
+
+/** @deprecated use grammarBoxB — kept shape for SelectDrill fallbacks */
 export const grammarGapsB = [
   {
-    prompt: "(?) ___ there a shower?",
+    prompt: "1 ______ there a shower?",
     options: ["Is", "Are", "Do"],
     answer: "Is",
   },
   {
-    prompt: "(?) ___ there any flats?",
+    prompt: "2 ______ there any flats?",
     options: ["Is", "Are", "Do"],
     answer: "Are",
   },
   {
-    prompt: "(+) Yes, there ___.",
+    prompt: "3 Yes, there ______ .",
     options: ["is", "are", "isn't"],
     answer: "is",
   },
   {
-    prompt: "(−) No, there ___. (= is not)",
+    prompt: "4 No, there ______ . (= is not)",
     options: ["isn't", "aren't", "is"],
     answer: "isn't",
   },
   {
-    prompt: "(−) No, there ___. (= are not)",
+    prompt: "5 No, there ______ . (= are not)",
     options: ["isn't", "aren't", "are"],
     answer: "aren't",
   },
   {
-    prompt: "How many bedrooms ___ there?",
+    prompt: "6 How many bedrooms ______ there?",
     options: ["is", "are", "do"],
     answer: "are",
   },
   {
-    prompt: "There ___ one.",
+    prompt: "7 There ______ one.",
     options: ["is", "are", "aren't"],
     answer: "is",
   },
   {
-    prompt: "There ___ two.",
+    prompt: "8 There ______ two.",
     options: ["is", "are", "isn't"],
     answer: "are",
   },
+] as const;
+
+/** 7a · intonation ↑ / ↓ (R6) */
+export const intonationB = [
+  { n: 1, text: "Is there a bathroom?", answer: "↑" },
+  { n: 2, text: "Yes, there is.", answer: "↓" },
+  { n: 3, text: "Are there two beds?", answer: "↑" },
+  { n: 4, text: "Yes, there are.", answer: "↓" },
+  { n: 5, text: "How many rooms are there?", answer: "↓" },
+  { n: 6, text: "There are four rooms.", answer: "↓" },
 ] as const;
 
 export const dialogueGapsB = [
@@ -949,46 +1025,31 @@ export const dialogueGapsB = [
   },
 ] as const;
 
+/** 9a · drag / tap words into order */
 export const wordOrderB = [
   {
     scramble: "your house or flat / is / Where?",
-    options: [
-      "Where is your house or flat?",
-      "Where your house or flat is?",
-      "Is where your house or flat?",
-    ],
+    parts: ["your house or flat", "is", "Where", "?"] as const,
     answer: "Where is your house or flat?",
   },
   {
     scramble: "are / many / How / there / rooms?",
-    options: [
-      "How many rooms are there?",
-      "How rooms many are there?",
-      "Are how many rooms there?",
-    ],
+    parts: ["are", "many", "How", "there", "rooms", "?"] as const,
     answer: "How many rooms are there?",
   },
   {
     scramble: "a / Is / shower / there?",
-    options: [
-      "Is there a shower?",
-      "Is a shower there?",
-      "There is a shower?",
-    ],
+    parts: ["a", "Is", "shower", "there", "?"] as const,
     answer: "Is there a shower?",
   },
   {
     scramble: "there / are / TVs / many / How?",
-    options: [
-      "How many TVs are there?",
-      "How TVs many are there?",
-      "Are there how many TVs?",
-    ],
+    parts: ["there", "are", "TVs", "many", "How", "?"] as const,
     answer: "How many TVs are there?",
   },
   {
     scramble: "wifi / there / Is?",
-    options: ["Is there wifi?", "Is wifi there?", "There is wifi?"],
+    parts: ["wifi", "there", "Is", "?"] as const,
     answer: "Is there wifi?",
   },
 ] as const;
@@ -1009,12 +1070,12 @@ export const flatCompareRows = [
 ] as const;
 
 export const speakB = [
-  "How many rooms are there?",
+  "How many rooms are there in Flat 3?",
   "Is there a shower?",
   "Is there wifi?",
   "Are there any TVs?",
   "Is there a lift / an oven?",
-  "Choose a flat for your holiday.",
+  "Which flat do you want for a holiday? Why?",
 ] as const;
 
 /* ── Part C · It's expensive! ─────────────────────────────────── */
@@ -1252,11 +1313,11 @@ export const wordOrderC = [
 ] as const;
 
 export const speakC = [
-  "Is there a big hotel?",
+  "Is there a big hotel in your town?",
   "Is the cinema good?",
   "Are there any cheap shops?",
   "Is your town busy or quiet?",
-  "Describe three towns/cities to the class.",
+  "Describe your town in 4–6 sentences.",
 ] as const;
 
 export const questionStartersC = [
