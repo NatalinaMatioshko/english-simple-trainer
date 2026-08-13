@@ -1,0 +1,142 @@
+/* Lesson 32 — WH-questions */
+
+.l32-rule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.l32-rule-card {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md, 0.9rem);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface-2, #fff));
+}
+
+.l32-rule-card h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+  color: var(--color-primary);
+}
+
+.l32-rule-card p {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.l32-rule-card code {
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
+.l32-core-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+
+.l32-core-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 0.75rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-md, 0.9rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2, #fff);
+}
+
+.l32-core-q {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.l32-core-tag {
+  align-self: start;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.4rem;
+  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.l32-core-a {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.l32-fix-line {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.l32-fix-wrong {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.l32-fix-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-md, 0.65rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface, #fff);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.l32-fix-input.is-ok {
+  border-color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 12%, transparent);
+}
+
+.l32-fix-input.is-err {
+  border-color: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 10%, transparent);
+}
+
+.l32-fix-tip {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.l32-fix-answer {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.l32-interview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+
+.l32-interview-card {
+  padding: 0.85rem 0.75rem;
+  text-align: center;
+  font-weight: 800;
+  border-radius: var(--radius-md, 0.9rem);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+  background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface-2, #fff));
+  color: var(--color-text);
+}
+
+@media (max-width: 720px) {
+  .l32-rule-grid {
+    grid-template-columns: 1fr;
+  }
+}

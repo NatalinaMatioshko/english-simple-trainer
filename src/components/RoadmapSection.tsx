@@ -470,6 +470,22 @@ const roadmapLessons: Lesson[] = [
     status: "next",
     route: "/lesson-31",
   },
+  {
+    id: 32,
+    title: "WH-questions · was / were",
+    grammar:
+      "WH-questions with to be (Who is he?) and Present Simple do/does (What does she do? Where / When / Why / How often…); was/were — past of to be (I/he/she/it → was; you/we/they → were); Yes/No + WH with was/were",
+    vocabulary:
+      "Who, What, Where, When, Why, How often; jobs, places, time, reason, frequency; yesterday, last week, at home, at work, at the gym; was / were",
+    speaking:
+      "Ask and answer WH-questions in pairs; talk about yesterday / last week with was/were (Where were you? Was he at the gym?)",
+    listening: "Model WH Q&A; stress on do/does vs is/are; was vs were",
+    review:
+      "Present Simple questions; to be questions — not a new tense; introduce past of to be (was/were)",
+    category: "general",
+    status: "next",
+    route: "/lesson-32",
+  },
 ];
 
 function getCategoryIcon(category: Lesson["category"]) {

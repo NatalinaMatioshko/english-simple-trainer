@@ -212,6 +212,16 @@ const lessons: LessonEntry[] = [
       "Unit 3 A–C: My town (places + There is/are) · Is there wifi? (rooms + Is/Are there) · It's expensive! (opposite adjectives + North Norfolk reading). Speaking, drills, T/F, word order.",
     lessonPath: "/lesson-31",
   },
+  {
+    id: "32",
+    title: "WH-questions · was / were",
+    level: "A1",
+    topic:
+      "Who · What · Where · When · Why · How often · do / does / to be · was / were",
+    description:
+      "Part 1: WH-questions + do/does/to be (не новий час) — Who is he? What does she do? Where / When / Why / How often… Part 2: was/were (past of to be) — I was tired yesterday; Was he at the gym?; Where were you yesterday? Practice + speaking.",
+    lessonPath: "/lesson-32",
+  },
 ];
 
 export default function Lessons() {
