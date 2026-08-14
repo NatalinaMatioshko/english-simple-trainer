@@ -630,7 +630,7 @@ export default function Lesson31() {
   const [listen4Hints, setListen4Hints] = useState<Record<number, boolean>>({});
   const [listen4ShowAll, setListen4ShowAll] = useState(false);
   const [placeStressSel, setPlaceStressSel] = useState<number[][]>(() =>
-    placeStressItems.map(() => []),
+    placeStressItems.map(() => [] as number[]),
   );
   const [placeStressChecked, setPlaceStressChecked] = useState(false);
   const [showWriteSample, setShowWriteSample] = useState(false);

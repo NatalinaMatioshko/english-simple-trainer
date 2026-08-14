@@ -1,8 +1,10 @@
 import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import "../styles/lesson22.css";
 import "../styles/lesson19.css";
 import "../styles/lesson25.css";
+import "../styles/lesson26.css";
 
 /* ─── Types ──────────────────────────────────────────────── */
 
@@ -439,6 +441,12 @@ export default function HW25() {
   const [crEx8, setCrEx8] = useState<(string | null)[]>(Array(7).fill(null));
   const [crEx9, setCrEx9] = useState<string[]>(["", "", ""]);
   const [crEx9Checked, setCrEx9Checked] = useState(false);
+  const [draft, setDraft] = useState("");
+
+  const practiceDone = showEx7a && showEx6 && showTf;
+  const practiceScore = ex7aScore + ex6Score + tfScore;
+  const practiceTotal =
+    ex7aItems.length + ex6Items.length + trueFalseItems.length;
 
   return (
     <div className="lesson22-page" ref={pageRef}>
@@ -1109,6 +1117,42 @@ export default function HW25() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* ── Submit ─────────────────────────────────────────────── */}
+      <section className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Submit</p>
+          <h2>Send your homework</h2>
+          <p className="lesson22-section-desc">
+            Напиши коротко, що було складно / що повториш. Потім надішли
+            вчителю.
+          </p>
+        </div>
+        <label className="lesson22-section-desc" htmlFor="hw25-writing">
+          Reflection (optional notes):
+        </label>
+        <textarea
+          id="hw25-writing"
+          className="hw27-textarea"
+          rows={6}
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          placeholder={`Practice: ${showEx7a || showEx6 || showTf ? `${practiceScore}/${practiceTotal}` : "not checked yet"}
+What was hard: …`}
+        />
+        <HomeworkSubmit
+          lessonId="25"
+          writing={[
+            draft.trim() || "(no extra notes)",
+            `Form of be: ${showEx7a ? `${ex7aScore}/${ex7aItems.length}` : "not finished"}`,
+            `Fill-in 're/are/aren't: ${showEx6 ? `${ex6Score}/${ex6Items.length}` : "not finished"}`,
+            `True/False: ${showTf ? `${tfScore}/${trueFalseItems.length}` : "not finished"}`,
+          ].join("\n")}
+          quizDone={practiceDone}
+          quizScore={practiceDone ? practiceScore : undefined}
+          showListeningCheck={false}
+        />
       </section>
 
       {/* ── Back link ─────────────────────────────────────────── */}

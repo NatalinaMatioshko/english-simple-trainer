@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -207,6 +208,7 @@ export default function HW26() {
   const [fixChecked, setFixChecked] = useState(false);
   const [r8Ans, setR8Ans] = useState<Record<number, string>>({});
   const [r8Checked, setR8Checked] = useState(false);
+  const [draft, setDraft] = useState("");
 
   const transformScore = grammarDrill.filter(
     (d, i) => transformAns[i] === d.answer,
@@ -219,6 +221,10 @@ export default function HW26() {
     (d, i) => fixAns[i] === d.answer,
   ).length;
   const r8Score = r8Gaps.filter((g) => r8Ans[g.id] === g.answer).length;
+  const drillsDone =
+    transformChecked && subChecked && qaChecked && fixChecked && r8Checked;
+  const drillsScore =
+    transformScore + subScore + qaScore + fixScore + r8Score;
 
   function r8SelClass(id: number, answer: string) {
     return drillSelClass(r8Checked, r8Ans[id] ?? "", answer);
@@ -768,6 +774,47 @@ export default function HW26() {
           Після кожної вправи перевір відповіді — натисни <strong>Check</strong>
           .
         </p>
+      </section>
+
+      {/* Submit */}
+      <section className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Submit</p>
+          <h2>Send your homework</h2>
+          <p className="lesson22-section-desc">
+            Напиши коротко, що було складно / що повториш. Потім надішли
+            вчителю.
+          </p>
+        </div>
+        <label className="lesson22-section-desc" htmlFor="hw26-writing">
+          Reflection (optional notes):
+        </label>
+        <textarea
+          id="hw26-writing"
+          className="hw27-textarea"
+          rows={6}
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          placeholder={`Drills: ${
+            transformChecked || subChecked || qaChecked || fixChecked || r8Checked
+              ? String(drillsScore)
+              : "not checked yet"
+          }
+What was hard: …`}
+        />
+        <HomeworkSubmit
+          lessonId="26"
+          writing={[
+            draft.trim() || "(no extra notes)",
+            `Transform: ${transformChecked ? `${transformScore}/${grammarDrill.length}` : "not finished"}`,
+            `Substitution: ${subChecked ? `${subScore}/${substitutionDrill.length}` : "not finished"}`,
+            `Q&A: ${qaChecked ? `${qaScore}/${qaDrill.length}` : "not finished"}`,
+            `Correction: ${fixChecked ? `${fixScore}/${correctionDrill.length}` : "not finished"}`,
+            `R8 listen & complete: ${r8Checked ? `${r8Score}/${r8Gaps.length}` : "not finished"}`,
+          ].join("\n")}
+          quizDone={drillsDone}
+          quizScore={drillsDone ? drillsScore : undefined}
+        />
       </section>
     </div>
   );

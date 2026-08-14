@@ -509,7 +509,15 @@ export const placesListA = [
 ] as const;
 
 /** 1b · tap syllables to underline stress (R1) */
-export const placeStressItems = [
+export type PlaceStressItem = {
+  n: number;
+  en: string;
+  parts: readonly string[];
+  stressed: number[];
+  breakAfter: number[];
+};
+
+export const placeStressItems: PlaceStressItem[] = [
   {
     n: 1,
     en: "train station",
@@ -522,79 +530,79 @@ export const placeStressItems = [
     en: "hotel",
     parts: ["ho", "tel"],
     stressed: [1],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
   {
     n: 3,
     en: "café",
     parts: ["ca", "fé"],
     stressed: [1],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
   {
     n: 4,
     en: "bank",
     parts: ["bank"],
     stressed: [0],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
   {
     n: 5,
     en: "restaurant",
     parts: ["res", "tau", "rant"],
     stressed: [0],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
   {
     n: 6,
     en: "supermarket",
     parts: ["su", "per", "mar", "ket"],
     stressed: [0],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
   {
     n: 7,
     en: "cinema",
     parts: ["ci", "ne", "ma"],
     stressed: [0],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
   {
     n: 8,
     en: "park",
     parts: ["park"],
     stressed: [0],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
   {
     n: 9,
     en: "market",
     parts: ["mar", "ket"],
     stressed: [0],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
   {
     n: 10,
     en: "bookshop",
     parts: ["book", "shop"],
     stressed: [0],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
   {
     n: 11,
     en: "house",
     parts: ["house"],
     stressed: [0],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
   {
     n: 12,
     en: "flat",
     parts: ["flat"],
     stressed: [0],
-    breakAfter: [] as number[],
+    breakAfter: [],
   },
-] as const;
+];
 
 export const mapPlacesA = [
   { letter: "A", place: "a café", tipUa: "BEAN — кафе" },

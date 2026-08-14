@@ -197,6 +197,11 @@ export default function Hw31DragMatch({ onResultChange }: Props) {
       next[page] = shuffle(round.pairs.map((p) => p.id));
       return next;
     });
+    setSlotOrder((prev) => {
+      const next = [...prev];
+      next[page] = shuffle(round.pairs.map((_, i) => i));
+      return next;
+    });
     setSelectedId(null);
   };
 
