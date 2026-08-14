@@ -3,6 +3,25 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "31",
+    title: "Town & home",
+    href: "/hw-31",
+    tasks: [
+      {
+        type: "text",
+        text: "Crossword: places · home · adjectives from Lesson 31",
+      },
+      {
+        type: "text",
+        text: "Drag match: English → Ukrainian (3 rounds) + sound on drop",
+      },
+      {
+        type: "text",
+        text: "Send crossword + match results to teacher",
+      },
+    ],
+  },
+  {
     id: "30",
     title: "Check & Reflect practice",
     href: "/hw-30",

@@ -12,6 +12,8 @@ import {
   articleGapsB,
   dialogueGapsB,
   exitQs,
+  fixMistakeGroups,
+  fixMistakeLines,
   flatCompareRows,
   flatsB,
   flatsBCorrectId,
@@ -176,6 +178,20 @@ function LessonFigure({
       )}
     </>
   );
+}
+
+function normalizeFix(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/['']/g, "'")
+    .replace(/[?.!,]+$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isFixOk(value: string, answers: readonly string[]): boolean {
+  const n = normalizeFix(value);
+  return answers.some((a) => normalizeFix(a) === n);
 }
 
 function drillSelClass(
@@ -574,6 +590,13 @@ export default function Lesson31() {
   const [vocabB, setVocabB] = useState<number[]>([]);
   const [vocabC, setVocabC] = useState<number[]>([]);
 
+  const [fixAns, setFixAns] = useState<Record<string, string>>(() =>
+    Object.fromEntries(fixMistakeLines.map((l) => [l.id, l.wrong])),
+  );
+  const [fixChecked, setFixChecked] = useState(false);
+  const [fixShowKey, setFixShowKey] = useState(false);
+  const [fixHints, setFixHints] = useState<Record<string, boolean>>({});
+
   const [grammarBoxAns, setGrammarBoxAns] = useState(() =>
     Array(grammarBoxA.length).fill(""),
   );
@@ -812,6 +835,10 @@ export default function Lesson31() {
     });
   };
 
+  const fixScored = fixMistakeLines.filter((l) => !l.okAsIs);
+  const fixScore = fixScored.filter((l) =>
+    isFixOk(fixAns[l.id] ?? "", l.answers),
+  ).length;
   const mapScore = mapPlacesA.filter((p) => mapAns[p.letter] === p.place)
     .length;
   const matchAScore = matchSpeakersA.filter((p) => matchA[p.id] === p.photo)
@@ -955,6 +982,7 @@ export default function Lesson31() {
 
       <section className="lesson22-block panel">
         <div className="lesson22-flow">
+          <a href="#l31-fix">Fix mistakes</a>
           <a href="#l31-part-a">A My town</a>
           <a href="#l31a-vocab">Vocab</a>
           <a href="#l31a-listen">Listen</a>
@@ -968,6 +996,151 @@ export default function Lesson31() {
           <a href="#l31-part-c">C Expensive</a>
           <a href="#l31c-reading">Reading</a>
           <a href="#l31-review">Exit</a>
+        </div>
+      </section>
+
+      {/* ═══════════════ Warm-up · Fix mistakes (ДЗ учня) ═══════════════ */}
+      <section id="l31-fix" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Warm-up · Fix the mistakes</p>
+          <h2>Friend &amp; family</h2>
+          <p className="lesson22-section-desc">
+            Виправ помилки в текстах. Редагуй рядок → <strong>Check</strong>.
+            Кнопка <strong>Hint</strong> біля рядка показує підказку й
+            правильну відповідь. Або відкрий усі через{" "}
+            <strong>Show answers</strong>.
+          </p>
+        </div>
+
+        {fixMistakeGroups.map((g) => (
+          <div key={g.id} className="l31-fix-group">
+            <h3 className="l31-fix-group-title">
+              {g.title}{" "}
+              <span style={{ fontWeight: 500, color: "var(--color-text-muted)" }}>
+                · {g.titleUa}
+              </span>
+            </h3>
+            {fixMistakeLines
+              .filter((l) => l.group === g.id)
+              .map((line) => {
+                const value = fixAns[line.id] ?? "";
+                const scored = !line.okAsIs;
+                const ok = isFixOk(value, line.answers);
+                const showState = fixChecked && scored;
+                const showHint = fixShowKey || !!fixHints[line.id];
+                return (
+                  <div key={line.id} className="l31-fix-line">
+                    <label className="l31-fix-wrong" htmlFor={`fix-${line.id}`}>
+                      <span className="l31-fix-wrong-text">{line.wrong}</span>
+                      {line.okAsIs && (
+                        <span style={{ marginLeft: "0.4rem" }}>(OK)</span>
+                      )}
+                    </label>
+                    <div className="l31-fix-row">
+                      <input
+                        id={`fix-${line.id}`}
+                        type="text"
+                        className={`l31-fix-input${
+                          showState ? (ok ? " is-ok" : " is-err") : ""
+                        }`}
+                        value={value}
+                        onChange={(e) => {
+                          setFixChecked(false);
+                          setFixAns((prev) => ({
+                            ...prev,
+                            [line.id]: e.target.value,
+                          }));
+                        }}
+                        spellCheck={false}
+                        aria-label={`Correct: ${line.wrong}`}
+                      />
+                      {scored && (
+                        <button
+                          type="button"
+                          className={`l31-fix-hint-btn${showHint ? " is-on" : ""}`}
+                          onClick={() =>
+                            setFixHints((prev) => ({
+                              ...prev,
+                              [line.id]: !prev[line.id],
+                            }))
+                          }
+                          aria-pressed={showHint}
+                          aria-label={
+                            showHint
+                              ? `Hide hint for: ${line.wrong}`
+                              : `Show hint for: ${line.wrong}`
+                          }
+                        >
+                          {showHint ? "Hide" : "Hint"}
+                        </button>
+                      )}
+                    </div>
+                    {showHint && scored && (
+                      <div className="l31-fix-reveal">
+                        {line.tipUa && (
+                          <span className="l31-fix-tip">{line.tipUa}</span>
+                        )}
+                        <span className="l31-fix-answer">
+                          ✓ {line.answers[0]}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+          </div>
+        ))}
+
+        <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setFixChecked(true)}
+          >
+            Check
+          </button>
+          {fixChecked && (
+            <span className="l22-score">
+              {fixScore} / {fixScored.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              const next = !fixShowKey;
+              setFixShowKey(next);
+              if (next) {
+                setFixHints(
+                  Object.fromEntries(
+                    fixMistakeLines
+                      .filter((l) => !l.okAsIs)
+                      .map((l) => [l.id, true]),
+                  ),
+                );
+              } else {
+                setFixHints({});
+              }
+            }}
+          >
+            {fixShowKey ? "Hide answers" : "Show answers"}
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setFixAns(
+                Object.fromEntries(
+                  fixMistakeLines.map((l) => [l.id, l.wrong]),
+                ),
+              );
+              setFixChecked(false);
+              setFixShowKey(false);
+              setFixHints({});
+            }}
+          >
+            Reset
+          </button>
         </div>
       </section>
 
@@ -3127,6 +3300,9 @@ export default function Lesson31() {
             marginTop: "1rem",
           }}
         >
+          <Link className="lesson22-back-link" to="/hw-31">
+            HW31 crossword →
+          </Link>
           <Link className="lesson22-back-link" to="/vocab">
             Vocab →
           </Link>

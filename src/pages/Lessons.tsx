@@ -209,8 +209,9 @@ const lessons: LessonEntry[] = [
     level: "A1",
     topic: "places · there is/are · rooms · Is there…? · adjectives",
     description:
-      "Unit 3 A–C: My town (places + There is/are) · Is there wifi? (rooms + Is/Are there) · It's expensive! (opposite adjectives + North Norfolk reading). Speaking, drills, T/F, word order.",
+      "Unit 3 A–C: My town (places + There is/are) · Is there wifi? (rooms + Is/Are there) · It's expensive! (opposite adjectives + North Norfolk reading). Speaking, drills, T/F, word order. HW: crossword.",
     lessonPath: "/lesson-31",
+    homeworkPath: "/hw-31",
   },
   {
     id: "32",
