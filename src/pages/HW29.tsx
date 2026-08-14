@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/app.css";
 import "../styles/lesson22.css";
@@ -22,7 +22,9 @@ import {
 import { useScoredQuiz } from "../hooks/useScoredQuiz";
 import { ScoredQuizCard } from "../components/practice/ScoredQuizCard";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
-import Hw29CheckReflect from "../components/Hw29CheckReflect";
+import Hw29CheckReflect, {
+  type Hw29CheckReflectResult,
+} from "../components/Hw29CheckReflect";
 import { shuffle } from "../utils/array";
 
 const IMG = (file: string) =>
@@ -157,6 +159,9 @@ const writingPrompts = [
 
 export default function HW29() {
   const [draft, setDraft] = useState("");
+  const [restDraft, setRestDraft] = useState("");
+  const [checkResult, setCheckResult] =
+    useState<Hw29CheckReflectResult | null>(null);
   const [numAns, setNumAns] = useState<Record<number, string>>({});
   const [numChecked, setNumChecked] = useState(false);
   const [shopGaps, setShopGaps] = useState<Record<number, string>>({});
@@ -172,6 +177,10 @@ export default function HW29() {
   const testMeta = hw29TestMeta.find((t) => t.id === testId)!;
   const test = useScoredQuiz(testTasks, `hw29-test-${testId}`);
 
+  const onCheckResult = useCallback((r: Hw29CheckReflectResult) => {
+    setCheckResult(r);
+  }, []);
+
   const numScore = numberPictures.filter(
     (p) => numAns[p.pos] === numberWords[p.value - 1],
   ).length;
@@ -179,6 +188,18 @@ export default function HW29() {
   const shopGapScore = shopDialogueGaps.filter(
     (g) => shopGaps[g.id] === g.answer,
   ).length;
+
+  const restWriting = [
+    restDraft.trim() || "(no extra notes)",
+    "",
+    "— Practice scores —",
+    `Quiz L28: ${test28.finished ? `${test28.score}/${test28.total}` : "not finished"}`,
+    `Numbers 1–10: ${numChecked ? `${numScore}/${numberPictures.length}` : "not checked"}`,
+    `Shop dialogue: ${shopGapsChecked ? `${shopGapScore}/${shopDialogueGaps.length}` : "not checked"}`,
+    `Quiz L29: ${test.finished ? `${test.score}/${test.total}` : "not finished"}`,
+    "",
+    checkResult?.summary ?? "— Check & Reflect: not started —",
+  ].join("\n");
 
   return (
     <div className="lesson22-page">
@@ -564,10 +585,57 @@ export default function HW29() {
           quizDone={test.finished}
           quizScore={test.finished ? test.score : undefined}
           showListeningCheck={false}
+          title="Надіслати Writing"
+          description="Текст береться з поля вище (People you know). Решту вправ надішли окремою кнопкою внизу сторінки."
         />
       </section>
 
-      <Hw29CheckReflect />
+      <Hw29CheckReflect onResultChange={onCheckResult} />
+
+      <section className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Submit · rest of homework</p>
+          <h2>Send practice &amp; Check &amp; Reflect</h2>
+          <p className="lesson22-section-desc">
+            Надішли результати quiz / match / shop і Check &amp; Reflect.
+            Writing уже йде окремою формою вище.
+          </p>
+        </div>
+        <label className="lesson22-section-desc" htmlFor="hw29-rest-notes">
+          Notes (optional):
+        </label>
+        <textarea
+          id="hw29-rest-notes"
+          className="hw27-textarea"
+          rows={5}
+          value={restDraft}
+          onChange={(e) => setRestDraft(e.target.value)}
+          placeholder={`Quiz L28: ${test28.finished ? `${test28.score}/${test28.total}` : "…"}
+Numbers: ${numChecked ? `${numScore}/${numberPictures.length}` : "…"}
+What was hard: …`}
+        />
+        <HomeworkSubmit
+          lessonId="29-rest"
+          writing={restWriting}
+          quizDone={
+            test28.finished ||
+            test.finished ||
+            numChecked ||
+            shopGapsChecked ||
+            !!checkResult?.reflectDone
+          }
+          quizScore={
+            test.finished
+              ? test.score
+              : test28.finished
+                ? test28.score
+                : undefined
+          }
+          showListeningCheck={false}
+          title="Надіслати решту ДЗ"
+          description="До вчителя підуть бали вправ і Reflect. Додай ім’я і натисни «Надіслати»."
+        />
+      </section>
 
       <section className="lesson22-block panel">
         <div className="lesson22-section-head">

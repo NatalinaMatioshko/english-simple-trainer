@@ -8,13 +8,10 @@
 
 .hw31-board {
   display: grid;
-  gap: 2px;
+  gap: 1px;
   width: max-content;
   margin: 0 auto;
-  padding: 0.35rem;
-  border-radius: var(--radius-md, 0.75rem);
-  background: color-mix(in srgb, var(--color-primary) 12%, var(--color-border));
-  border: 1px solid var(--color-border);
+  padding: 0.5rem;
 }
 
 .hw31-cell {
@@ -25,14 +22,20 @@
 }
 
 .hw31-cell--block {
-  background: color-mix(in srgb, var(--color-text) 18%, var(--color-surface-2, #fff));
-  border-radius: 0.2rem;
+  background: transparent;
 }
 
 .hw31-cell--letter {
   background: var(--color-surface, #fff);
-  border-radius: 0.25rem;
-  border: 1px solid color-mix(in srgb, var(--color-primary) 25%, var(--color-border));
+  border: 1px solid color-mix(in srgb, var(--color-text) 65%, var(--color-border));
+}
+
+.hw31-cell--letter.is-active-word {
+  background: color-mix(in srgb, var(--color-primary) 9%, var(--color-surface, #fff));
+}
+
+.hw31-cell--letter.is-active-cell {
+  background: color-mix(in srgb, var(--color-accent) 24%, var(--color-surface, #fff));
 }
 
 .hw31-cell--letter.is-ok {
@@ -79,6 +82,19 @@
   outline-offset: -2px;
 }
 
+.hw31-clues-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin: 1rem 0 0.35rem;
+}
+
+.hw31-clues-hint {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
 .hw31-clues {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -111,6 +127,50 @@
   color: var(--color-text);
   line-height: 1.4;
   font-size: 0.92rem;
+}
+
+.hw31-clue-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.hw31-ua-btn {
+  flex: 0 0 auto;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.35rem;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+  background: var(--color-surface, #fff);
+  color: var(--color-primary);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
+.hw31-ua-btn.is-on {
+  background: color-mix(in srgb, var(--color-primary) 16%, var(--color-surface, #fff));
+}
+
+.hw31-clue-button {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.hw31-clue-button:hover,
+.hw31-clue-button:focus-visible {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
 }
 
 .hw31-clue.is-ok {

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   countChoiceSlots,
   cr1Family,
@@ -18,6 +18,34 @@ import {
   type CrChoiceLine,
 } from "../data/hw29CheckReflect";
 
+function scoreChoiceLines(
+  items: CrChoiceLine[],
+  flatIndices: number[][],
+  values: (string | null)[],
+): { ok: number; total: number } {
+  let ok = 0;
+  let total = 0;
+  items.forEach((parts, si) => {
+    let choiceIdx = 0;
+    for (const part of parts) {
+      if (typeof part === "string") continue;
+      const fi = flatIndices[si]![choiceIdx++]!;
+      total += 1;
+      if (values[fi] === part.answer) ok += 1;
+    }
+  });
+  return { ok, total };
+}
+
+export type Hw29CheckReflectResult = {
+  summary: string;
+  reflectDone: boolean;
+  reflectAvg?: number;
+};
+
+type Props = {
+  onResultChange?: (result: Hw29CheckReflectResult) => void;
+};
 function ChoiceExercise({
   items,
   flatIndices,
@@ -89,7 +117,7 @@ function inputClass(checked: boolean, value: string, answer: string): string {
   return base;
 }
 
-export default function Hw29CheckReflect() {
+export default function Hw29CheckReflect({ onResultChange }: Props) {
   const cr3Slots = useMemo(() => countChoiceSlots(cr3PossessiveAdj), []);
   const cr6Slots = useMemo(() => countChoiceSlots(cr6Demonstratives), []);
 
@@ -134,12 +162,16 @@ export default function Hw29CheckReflect() {
   ).length;
   const ex2Total = cr2Possessive.filter((item) => !item.example).length;
 
+  const ex3Score = scoreChoiceLines(cr3PossessiveAdj, cr3FlatIndices, ex3);
+
   const ex5Score = cr5Scramble.filter(
     (item, i) =>
       !item.example &&
       normalizeCrAnswer(ex5[i] ?? "") === normalizeCrAnswer(item.answer),
   ).length;
   const ex5Total = cr5Scramble.filter((item) => !item.example).length;
+
+  const ex6Score = scoreChoiceLines(cr6Demonstratives, cr6FlatIndices, ex6);
 
   const ex7aScore = cr7aNumbers.filter(
     (item, i) =>
@@ -154,6 +186,70 @@ export default function Hw29CheckReflect() {
       normalizeCrAnswer(ex7b[i] ?? "") === normalizeCrAnswer(item.answer),
   ).length;
   const ex7bTotal = cr7bAges.filter((item) => !item.example).length;
+
+  const reflectRated = crReflectItems.filter((_, i) => reflect[i] != null).length;
+  const reflectDone = reflectRated === crReflectItems.length;
+  const reflectAvg = reflectDone
+    ? Math.round(
+        (crReflectItems.reduce((s, _, i) => s + (reflect[i] ?? 0), 0) /
+          crReflectItems.length) *
+          10,
+      ) / 10
+    : undefined;
+
+  useEffect(() => {
+    if (!onResultChange) return;
+    const lines = [
+      "HW29 · Check & Reflect",
+      `1 Family: ${ex1Checked ? `${ex1Score}/${ex1Total}` : "not checked"}`,
+      `2 Possessive 's: ${ex2Checked ? `${ex2Score}/${ex2Total}` : "not checked"}`,
+      `3 Possessive adj: ${ex3Score.ok}/${ex3Score.total} correct`,
+      `4 Mistakes: opened ${ex4Open.size}/${cr4Mistakes.length}`,
+      `5 Scramble: ${ex5Checked ? `${ex5Score}/${ex5Total}` : "not checked"}`,
+      `6 Demonstratives: ${ex6Score.ok}/${ex6Score.total} correct`,
+      `7a Numbers: ${ex7aChecked ? `${ex7aScore}/${ex7aTotal}` : "not checked"}`,
+      `7b Ages: ${ex7bChecked ? `${ex7bScore}/${ex7bTotal}` : "not checked"}`,
+      `8a Answers opened: ${ex8Open.size}/${cr8aQuestions.length}`,
+      `Reflect: ${reflectRated}/${crReflectItems.length}${
+        typeof reflectAvg === "number" ? ` · avg ${reflectAvg}/5` : ""
+      }`,
+      ...crReflectItems.map(
+        (text, i) => `  · ${text}: ${reflect[i] ?? "—"}`,
+      ),
+    ];
+    onResultChange({
+      summary: lines.join("\n"),
+      reflectDone,
+      reflectAvg,
+    });
+  }, [
+    onResultChange,
+    ex1Checked,
+    ex1Score,
+    ex1Total,
+    ex2Checked,
+    ex2Score,
+    ex2Total,
+    ex3Score.ok,
+    ex3Score.total,
+    ex4Open,
+    ex5Checked,
+    ex5Score,
+    ex5Total,
+    ex6Score.ok,
+    ex6Score.total,
+    ex7aChecked,
+    ex7aScore,
+    ex7aTotal,
+    ex7bChecked,
+    ex7bScore,
+    ex7bTotal,
+    ex8Open,
+    reflect,
+    reflectRated,
+    reflectDone,
+    reflectAvg,
+  ]);
 
   return (
     <section className="lesson22-block panel">
