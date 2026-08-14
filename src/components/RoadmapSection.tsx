@@ -456,32 +456,28 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 31,
-    title: "Town & home",
-    grammar:
-      "There is/are · isn't/aren't · no/any; Is there a/an…? / Are there any…?; How many; adjective position (be + adj · adj + noun)",
-    vocabulary:
-      "places in town; rooms & things in a home; opposite adjectives (busy/quiet, big/small, old/new, cheap/expensive, good/bad)",
-    speaking:
-      "Describe your town; find differences; ask about a flat; describe towns with adjectives",
-    listening:
-      "there's/isn't/are/aren't; intonation for Is there…?; adjective stress",
-    review: "a/an; be; Unit 3 A–C complete in one lesson",
+    title: "My town",
+    grammar: "There is/are · isn't/aren't · no/any",
+    vocabulary: "places in town",
+    speaking: "Describe your town; find differences",
+    listening: "there's/isn't/are/aren't; place stress",
+    review: "a/an; be; Unit 3A",
     category: "general",
     status: "next",
     route: "/lesson-31",
   },
   {
     id: 32,
-    title: "WH-questions · was / were",
+    title: "WH-questions · was / were · Unit 3 B–C",
     grammar:
-      "WH-questions with to be (Who is he?) and Present Simple do/does (What does she do? Where / When / Why / How often…); was/were — past of to be (I/he/she/it → was; you/we/they → were); Yes/No + WH with was/were",
+      "WH-questions with to be and do/does; was/were — past of to be; Is there a/an…? / Are there any…?; How many; adjective position (be + adj · adj + noun)",
     vocabulary:
-      "Who, What, Where, When, Why, How often; jobs, places, time, reason, frequency; yesterday, last week, at home, at work, at the gym; was / were",
+      "Who, What, Where, When, Why, How often; yesterday, last week, at home / at work / at the gym; rooms & things in a home; opposite adjectives (busy/quiet, big/small, old/new, cheap/expensive, good/bad)",
     speaking:
-      "Ask and answer WH-questions in pairs; talk about yesterday / last week with was/were (Where were you? Was he at the gym?)",
-    listening: "Model WH Q&A; stress on do/does vs is/are; was vs were",
-    review:
-      "Present Simple questions; to be questions — not a new tense; introduce past of to be (was/were)",
+      "Ask and answer WH-questions; talk about yesterday with was/were; ask about a flat; describe towns with adjectives",
+    listening:
+      "stress on do/does vs is/are; was vs were; intonation for Is there…?; adjective stress",
+    review: "Present Simple questions; There is/are (L31); Unit 3 B–C",
     category: "general",
     status: "next",
     route: "/lesson-32",

@@ -1338,13 +1338,10 @@ export const questionStartersC = [
 ] as const;
 
 export const exitQs = [
-  "Name 5 places in a town.",
-  "There's / There are / isn't / aren't",
   "Ask: Is there a/an …? / Are there any …?",
   "Name 4 rooms + 4 things in a home.",
   "Say 5 opposite adjective pairs.",
   "be + adj / adj + noun — one example each.",
-  "Describe your town in 4–6 sentences.",
 ] as const;
 
 /* ── Warm-up · Fix the mistakes (Friend & Family) ─────────────── */

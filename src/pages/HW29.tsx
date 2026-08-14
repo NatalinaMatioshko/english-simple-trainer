@@ -189,16 +189,9 @@ export default function HW29() {
     (g) => shopGaps[g.id] === g.answer,
   ).length;
 
-  const restWriting = [
-    restDraft.trim() || "(no extra notes)",
-    "",
-    "— Practice scores —",
-    `Quiz L28: ${test28.finished ? `${test28.score}/${test28.total}` : "not finished"}`,
-    `Numbers 1–10: ${numChecked ? `${numScore}/${numberPictures.length}` : "not checked"}`,
-    `Shop dialogue: ${shopGapsChecked ? `${shopGapScore}/${shopDialogueGaps.length}` : "not checked"}`,
-    `Quiz L29: ${test.finished ? `${test.score}/${test.total}` : "not finished"}`,
-    "",
-    checkResult?.summary ?? "— Check & Reflect: not started —",
+  const reviewWriting = [
+    checkResult?.summary ?? "— Check & Reflect (Unit review): not started —",
+    ...(restDraft.trim() ? ["", "— Notes —", restDraft.trim()] : []),
   ].join("\n");
 
   return (
@@ -594,46 +587,37 @@ export default function HW29() {
 
       <section className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">Submit · rest of homework</p>
-          <h2>Send practice &amp; Check &amp; Reflect</h2>
+          <p className="page-kicker">Submit · Check &amp; Reflect</p>
+          <h2>Send Unit review to teacher</h2>
           <p className="lesson22-section-desc">
-            Надішли результати quiz / match / shop і Check &amp; Reflect.
-            Writing уже йде окремою формою вище.
+            Надішли відповіді з <strong>Check &amp; Reflect (Unit review)</strong>{" "}
+            вище — усі вправи й самооцінку Reflect. Writing іде окремою формою.
           </p>
         </div>
-        <label className="lesson22-section-desc" htmlFor="hw29-rest-notes">
+        <label className="lesson22-section-desc" htmlFor="hw29-review-notes">
           Notes (optional):
         </label>
         <textarea
-          id="hw29-rest-notes"
+          id="hw29-review-notes"
           className="hw27-textarea"
-          rows={5}
+          rows={4}
           value={restDraft}
           onChange={(e) => setRestDraft(e.target.value)}
-          placeholder={`Quiz L28: ${test28.finished ? `${test28.score}/${test28.total}` : "…"}
-Numbers: ${numChecked ? `${numScore}/${numberPictures.length}` : "…"}
-What was hard: …`}
+          placeholder="What was hard in the Unit review? …"
         />
         <HomeworkSubmit
-          lessonId="29-rest"
-          writing={restWriting}
-          quizDone={
-            test28.finished ||
-            test.finished ||
-            numChecked ||
-            shopGapsChecked ||
-            !!checkResult?.reflectDone
-          }
+          lessonId="29-review"
+          writing={reviewWriting}
+          quizDone={!!checkResult?.reflectDone}
           quizScore={
-            test.finished
-              ? test.score
-              : test28.finished
-                ? test28.score
-                : undefined
+            checkResult?.reflectDone &&
+            typeof checkResult.reflectAvg === "number"
+              ? Math.round(checkResult.reflectAvg)
+              : undefined
           }
           showListeningCheck={false}
-          title="Надіслати решту ДЗ"
-          description="До вчителя підуть бали вправ і Reflect. Додай ім’я і натисни «Надіслати»."
+          title="Надіслати Check &amp; Reflect"
+          description="До вчителя підуть відповіді Unit review і Reflect. Додай ім’я і натисни «Надіслати»."
         />
       </section>
 

@@ -205,22 +205,22 @@ const lessons: LessonEntry[] = [
   },
   {
     id: "31",
-    title: "Town & home",
+    title: "My town",
     level: "A1",
-    topic: "places · there is/are · rooms · Is there…? · adjectives",
+    topic: "places · there is/are · There's / There are",
     description:
-      "Unit 3 A–C: My town (places + There is/are) · Is there wifi? (rooms + Is/Are there) · It's expensive! (opposite adjectives + North Norfolk reading). Speaking, drills, T/F, word order. HW: crossword.",
+      "Unit 3A: My town — places + There is/are, isn't/aren't, no/any. Listening, map match, grammar drills, speaking. HW: crossword.",
     lessonPath: "/lesson-31",
     homeworkPath: "/hw-31",
   },
   {
     id: "32",
-    title: "WH-questions · was / were",
+    title: "WH-questions · was / were · Unit 3 B–C",
     level: "A1",
     topic:
-      "Who · What · Where · When · Why · How often · do / does / to be · was / were",
+      "Who · What · Where · When · Why · How often · was / were · rooms · Is there…? · adjectives",
     description:
-      "Part 1: WH-questions + do/does/to be (не новий час) — Who is he? What does she do? Where / When / Why / How often… Part 2: was/were (past of to be) — I was tired yesterday; Was he at the gym?; Where were you yesterday? Practice + speaking.",
+      "Part 1: WH-questions + do/does/to be (не новий час). Part 2: was/were (past of to be). Далі Unit 3 B–C: Is there wifi? (rooms + Is/Are there, How many) · It's expensive! (opposite adjectives + North Norfolk reading).",
     lessonPath: "/lesson-32",
   },
 ];
