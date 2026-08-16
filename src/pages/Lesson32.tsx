@@ -1459,7 +1459,7 @@ export default function Lesson32() {
           <p className="page-kicker">Part 1 · Speaking</p>
           <h2>Ask and answer</h2>
           <p className="lesson22-section-desc">
-            У парі став WH-питання і відповідай. Використовуй{" "}
+            Став викладачу WH-питання та відповідай на його питання. Використовуй{" "}
             <strong>is/are</strong> або <strong>do/does</strong>.
           </p>
         </div>
@@ -1692,20 +1692,18 @@ export default function Lesson32() {
           <p className="page-kicker">B2 · Vocabulary</p>
           <h2>Rooms and things in a home</h2>
           <p className="lesson22-section-desc">
-            City flat, Brighton · £80 per night. Flip cards, look at the photos,
-            listen (R4), then match A–K with the words in the box.
+            City flat, Brighton · £80 per night. Фото A–D → зістав A–K зі
+            словами → послухай і повтори (3.4) → питання про квартиру.
           </p>
         </div>
 
         <p className="l31-ex-line">
-          <strong className="l31-ex-num">1</strong> CITY FLAT, BRIGHTON · £80 per
-          night · rooms A–D · icons E–K — flip the cards.
+          <strong className="l31-ex-num">1</strong> Look at photos A–D. What
+          objects can you see?
         </p>
-        <VocabFlipGrid
-          items={homeVocab}
-          flipped={vocabB}
-          toggle={(i) => toggle(setVocabB, i)}
-        />
+        <p className="lesson22-section-desc">
+          <em>There is a table.</em>
+        </p>
 
         <LessonFigure
           src={IMG31(lesson31Images.brightonRoomsAd)}
@@ -1713,23 +1711,6 @@ export default function Lesson32() {
           caption="CITY FLAT, BRIGHTON **** · £80 per night · rooms A–D"
           variant="photo"
           wide
-        />
-
-        <AudioBlock
-          r={4}
-          exercise="3B · Vocab"
-          title="Rooms & things — listen & repeat"
-          transcript={
-            <div>
-              <p>
-                <strong>Rooms:</strong> bathroom, bedroom, kitchen, living room
-              </p>
-              <p>
-                <strong>Things:</strong> beds, lift, oven, shower, toilet, TV,
-                wifi
-              </p>
-            </div>
-          }
         />
 
         <LessonFigure
@@ -1885,14 +1866,34 @@ export default function Lesson32() {
         </div>
 
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">2b</strong> Look at photos A–D again.
-          Answer the questions.
+          <strong className="l31-ex-num">2b</strong> Listen and repeat.
         </p>
-        <AudioBlock
-          r={9}
-          exercise="3B · 2b"
-          title="What is there…? / How many rooms…?"
+        <VocabFlipGrid
+          items={homeVocab}
+          flipped={vocabB}
+          toggle={(i) => toggle(setVocabB, i)}
         />
+        <AudioBlock
+          r={4}
+          exercise="3B · 2b"
+          title="Rooms & things — listen & repeat"
+          transcript={
+            <div>
+              <p>
+                <strong>Rooms:</strong> bathroom, bedroom, kitchen, living room
+              </p>
+              <p>
+                <strong>Things:</strong> beds, lift, oven, shower, toilet, TV,
+                wifi
+              </p>
+            </div>
+          }
+        />
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">3</strong> Read the questions aloud
+          and answer them about the flat in Exercise 1.
+        </p>
         <L31SelectDrill
           items={photoQsB}
           answers={photoAns}
@@ -1901,8 +1902,13 @@ export default function Lesson32() {
           setChecked={setPhotoChecked}
           labelKey={(d) => d.q ?? ""}
         />
-        <p className="lesson22-section-desc" style={{ marginTop: "1rem" }}>
-          Make sentences: <em>There are two beds in the bedroom.</em>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">4</strong> From memory, make sentences
+          about the flat.
+        </p>
+        <p className="lesson22-section-desc">
+          <em>There are two beds in the bedroom.</em>
         </p>
       </section>
 
@@ -2567,14 +2573,30 @@ export default function Lesson32() {
         </div>
 
         <p className="l31-ex-line" style={{ marginTop: "1.5rem" }}>
-          <strong className="l31-ex-num">11</strong> SPEAK · Answer your
-          questions about Flat 3 (or your flat). Then choose a flat for your
-          holiday and say why.
+          <strong className="l31-ex-num">11</strong> SPEAK · Викладач ставить
+          питання українською. Відповідай повними реченнями англійською:
+          спочатку про Flat 3, потім про своє житло та свій вибір.
         </p>
         <div className="lesson22-prompt-grid" style={{ marginTop: "1rem" }}>
           {speakB.map((p) => (
-            <div key={p} className="lesson22-prompt-card">
-              {p}
+            <div
+              key={p.ua}
+              className="lesson22-prompt-card lesson22-prompt-card--task"
+            >
+              <span
+                style={{
+                  display: "block",
+                  marginBottom: "0.35rem",
+                  color: "var(--color-primary)",
+                  fontSize: "0.75rem",
+                  fontWeight: 800,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                {p.topic} · відповідай англійською
+              </span>
+              {p.ua}
             </div>
           ))}
         </div>

@@ -374,7 +374,7 @@ export const fixWhLines = [
 ] as const;
 
 export const speakPrompts = [
-  "Ask your partner: Who is your favourite singer / actor?",
+  "Ask your teacher: Who is your favourite singer / actor?",
   "Ask: What does he/she do? (job or free time)",
   "Ask: Where do you live? Where does your friend live?",
   "Ask: When does your lesson / work start?",
@@ -573,7 +573,7 @@ export const wasWereMatch = [
 
 export const wasWereSpeakPrompts = [
   "Say where you were yesterday (at home / at work / at the gym / …).",
-  "Ask your partner: Where were you yesterday? / last week?",
+  "Ask your teacher: Where were you yesterday? / last week?",
   "Ask: Were you at home yesterday? Was he/she at work?",
   "Ask: Was it cold / hot / rainy yesterday?",
   "Talk about last week: I was… / We were… / They were…",
@@ -584,7 +584,7 @@ export const exitChecks = [
   "I can ask Who / What / Where / When / Why / How often…",
   "I use is/are with be (Who is he? What is your job?).",
   "I use do/does + verb (What does she do? Where do you live?).",
-  "I can answer my partner's WH-questions.",
+  "I can answer WH-questions in a dialogue.",
   "I know: I/he/she/it → was; you/we/they → were.",
   "I can make affirmative, Yes/No and WH questions with was/were.",
   "I can talk about yesterday / last week with was and were.",

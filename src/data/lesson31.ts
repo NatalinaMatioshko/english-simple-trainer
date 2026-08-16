@@ -1078,12 +1078,19 @@ export const flatCompareRows = [
 ] as const;
 
 export const speakB = [
-  "How many rooms are there in Flat 3?",
-  "Is there a shower?",
-  "Is there wifi?",
-  "Are there any TVs?",
-  "Is there a lift / an oven?",
-  "Which flat do you want for a holiday? Why?",
+  { ua: "Скільки кімнат у квартирі 3?", topic: "Квартира 3" },
+  { ua: "Скільки спалень у квартирі 3?", topic: "Квартира 3" },
+  { ua: "Чи є у квартирі 3 душ?", topic: "Квартира 3" },
+  { ua: "Чи є у квартирі 3 телевізор?", topic: "Квартира 3" },
+  { ua: "Чи є у квартирі 3 Wi-Fi?", topic: "Квартира 3" },
+  { ua: "Скільки кімнат у твоєму житлі?", topic: "Твоє житло" },
+  { ua: "Чи є у твоєму житлі кухня?", topic: "Твоє житло" },
+  { ua: "Чи є у твоєму житлі телевізор і Wi-Fi?", topic: "Твоє житло" },
+  { ua: "Чи є у твоєму будинку ліфт?", topic: "Твоє житло" },
+  {
+    ua: "Яку з трьох квартир ти обереш для відпочинку? Чому?",
+    topic: "Твій вибір",
+  },
 ] as const;
 
 /* ── Part C · It's expensive! ─────────────────────────────────── */
