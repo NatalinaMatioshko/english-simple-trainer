@@ -1,5 +1,156 @@
 /** Lesson 32 · Part 1: WH-questions (do / does / to be) · Part 2: was / were */
 
+/* ── Правила · порядок слів у питаннях ─────────────────────────── */
+
+export type QChartRow = {
+  qw: string;
+  aux: string;
+  subject: string;
+  tail: string;
+};
+
+/** QWASI: (Question Word) + Auxiliary + Subject + Infinitive */
+export const qwasiExamples = ["What do you do?", "Where do they live?"] as const;
+
+export const yesNoExamples = [
+  "Do you speak English?",
+  "Does she live here?",
+] as const;
+
+export const beChartRows: readonly QChartRow[] = [
+  { qw: "", aux: "Is", subject: "Sharon", tail: "from the US?" },
+  { qw: "How old", aux: "are", subject: "you?", tail: "" },
+  { qw: "What", aux: "is", subject: "this?", tail: "" },
+  { qw: "Where", aux: "are", subject: "you", tail: "from?" },
+];
+
+export const doChartRows: readonly QChartRow[] = [
+  { qw: "", aux: "Do", subject: "you", tail: "like pizza?" },
+  { qw: "Where", aux: "do", subject: "you", tail: "work?" },
+  { qw: "What time", aux: "does", subject: "he", tail: "get up?" },
+  { qw: "How often", aux: "do", subject: "they", tail: "go out?" },
+  { qw: "What", aux: "do", subject: "you", tail: "do?" },
+];
+
+/** Конструктор питання: Wh + helping verb + subject + main verb + ? */
+export const qBuilderWh = [
+  "Who",
+  "When",
+  "What",
+  "Where",
+  "Why",
+  "How",
+] as const;
+
+export const qBuilderRows = [
+  { aux: "Do", auxTail: "", subjects: ["I", "you"] },
+  { aux: "Do", auxTail: "es", subjects: ["he", "she", "it"] },
+  { aux: "Do", auxTail: "", subjects: ["you", "we", "they"] },
+] as const;
+
+export const qBuilderVerbs = [
+  "go",
+  "work",
+  "sleep",
+  "write",
+  "study",
+  "live",
+  "have",
+  "eat",
+] as const;
+
+export const qBuilderExamples = [
+  "Do you study English?",
+  "What do you eat for breakfast?",
+  "Does she live in London?",
+  "Where does he work?",
+  "Do we have pets?",
+] as const;
+
+/** ✓ правильно / ✗ помилка — інфінітив після підмета */
+export const doDoesPairs = [
+  { ok: "What does she do?", err: "What does she does?" },
+  { ok: "Where does he work?", err: "Where does he works?" },
+] as const;
+
+export const questionWordCards = [
+  {
+    word: "Who",
+    ua: "хто",
+    cat: "людина",
+    q: "Who is that man?",
+    a: "That's Peter.",
+  },
+  {
+    word: "Where",
+    ua: "де / куди",
+    cat: "місце",
+    q: "Where do you live?",
+    a: "In London.",
+  },
+  {
+    word: "When",
+    ua: "коли",
+    cat: "час",
+    q: "When does the film start?",
+    a: "In the afternoon.",
+  },
+  {
+    word: "What time",
+    ua: "о котрій годині",
+    cat: "година",
+    q: "What time does he get up?",
+    a: "At seven.",
+  },
+  {
+    word: "Why",
+    ua: "чому",
+    cat: "причина",
+    q: "Why do you study English?",
+    a: "Because I need it for work.",
+  },
+  {
+    word: "What",
+    ua: "що / який",
+    cat: "річ · дія",
+    q: "What do you need?",
+    a: "I need your car.",
+  },
+  {
+    word: "How",
+    ua: "як · яким чином",
+    cat: "спосіб",
+    q: "How do you go to work?",
+    a: "By car.",
+  },
+  {
+    word: "How often",
+    ua: "як часто",
+    cat: "частота",
+    q: "How often do you play sports?",
+    a: "Every day.",
+  },
+  {
+    word: "How old",
+    ua: "скільки років",
+    cat: "вік",
+    q: "How old is your sister?",
+    a: "She's 27.",
+  },
+] as const;
+
+export const whatNounExamples = [
+  { q: "What colour is your jacket?", hl: "What colour" },
+  { q: "What size do you want?", hl: "What size" },
+  { q: "What car does he have?", hl: "What car" },
+] as const;
+
+export const howAdjExamples = [
+  { q: "How fast is your car?", hl: "How fast" },
+  { q: "How big is her house?", hl: "How big" },
+  { q: "How often do you play sports?", hl: "How often" },
+] as const;
+
 export const whWords = [
   { en: "Who", ua: "хто", tip: "people", example: "Who is he?" },
   { en: "What", ua: "що / який", tip: "things / jobs", example: "What does she do?" },

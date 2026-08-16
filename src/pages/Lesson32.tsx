@@ -9,11 +9,21 @@ import { Link } from "react-router-dom";
 import LessonNumberKicker from "../components/LessonNumberKicker";
 import {
   beOrDoDrill,
+  beChartRows,
   coreQuestions,
+  doChartRows,
+  doDoesPairs,
   exitChecks,
   fixWhLines,
+  howAdjExamples,
   interviewGrid,
   matchAnswerQ,
+  qBuilderExamples,
+  qBuilderRows,
+  qBuilderVerbs,
+  qBuilderWh,
+  questionWordCards,
+  qwasiExamples,
   scrambleQs,
   speakPrompts,
   wasWereDrill,
@@ -21,7 +31,9 @@ import {
   wasWereMatch,
   wasWereScramble,
   wasWereSpeakPrompts,
+  whatNounExamples,
   whWords,
+  yesNoExamples,
 } from "../data/lesson32";
 import {
   adjSentences,
@@ -905,6 +917,7 @@ export default function Lesson32() {
 
       <section className="lesson22-block panel">
         <div className="lesson22-flow">
+          <a href="#l32-rules">Правила</a>
           <a href="#l32-core">1 WH core</a>
           <a href="#l32-rule">2 WH rule</a>
           <a href="#l32-practice">3 WH practice</a>
@@ -920,6 +933,340 @@ export default function Lesson32() {
           <a href="#l32-part-c">C Expensive</a>
           <a href="#l32c-reading">Reading</a>
           <a href="#l32-exit">Exit</a>
+        </div>
+      </section>
+
+      {/* ── Правила · порядок слів у питаннях ───────────────── */}
+      <section id="l32-rules" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Start here · Правила</p>
+          <h2>Порядок слів у питаннях Present Simple</h2>
+          <p className="lesson22-section-desc">
+            Формула <strong>QWASI</strong> і дві схеми: питання з{" "}
+            <strong>be</strong> та з <strong>do / does</strong>.
+          </p>
+        </div>
+
+        <div className="l32r-stack">
+          <div>
+            <p className="l32r-lead">
+              Порядок слів в англійському питанні в Present Simple —{" "}
+              <strong>QWASI</strong>:{" "}
+              <strong>(питальне слово)</strong> +{" "}
+              <strong>допоміжне дієслово</strong> + <strong>підмет</strong> +{" "}
+              <strong>інфінітив</strong>.
+            </p>
+            <div className="l32r-formula" aria-label="Формула QWASI">
+              <span className="l32r-chip l32r-qw">
+                <b>Q</b>
+                <small>питальне слово</small>
+              </span>
+              <span className="l32r-chip l32r-aux">
+                <b>A</b>
+                <small>допоміжне</small>
+              </span>
+              <span className="l32r-chip l32r-subj">
+                <b>S</b>
+                <small>підмет</small>
+              </span>
+              <span className="l32r-chip l32r-tail">
+                <b>I</b>
+                <small>інфінітив</small>
+              </span>
+            </div>
+            <div className="l32r-ex">
+              {qwasiExamples.map((q) => (
+                <p key={q}>{q}</p>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="l32r-lead">
+              У <strong>так / ні</strong> питаннях (загальних){" "}
+              <strong>немає</strong> питального слова — починаємо з do / does.
+            </p>
+            <div className="l32r-ex">
+              {yesNoExamples.map((q) => (
+                <p key={q}>{q}</p>
+              ))}
+            </div>
+          </div>
+
+          <div className="l32r-chart-box">
+            <p className="l32r-chart-title">
+              Present Simple questions ·{" "}
+              <span>питання з be</span>
+            </p>
+            <div className="l32r-chart" role="table" aria-label="Питання з be">
+              <div className="l32r-chart-head" role="row">
+                <span className="l32r-col l32r-qw">Питальне слово</span>
+                <span className="l32r-col l32r-aux">Допоміжне be</span>
+                <span className="l32r-col l32r-subj">Підмет</span>
+                <span className="l32r-col l32r-tail">Прикм. · іменник тощо</span>
+              </div>
+              {beChartRows.map((row) => (
+                <div
+                  key={`${row.aux}-${row.subject}-${row.tail}`}
+                  className="l32r-row"
+                  role="row"
+                >
+                  <span
+                    className={`l32r-cell l32r-qw${row.qw ? "" : " is-empty"}`}
+                    data-label="Питальне"
+                  >
+                    {row.qw || "—"}
+                  </span>
+                  <span className="l32r-cell l32r-aux" data-label="Be">
+                    {row.aux}
+                  </span>
+                  <span className="l32r-cell l32r-subj" data-label="Підмет">
+                    {row.subject}
+                  </span>
+                  <span
+                    className={`l32r-cell l32r-tail${row.tail ? "" : " is-empty"}`}
+                    data-label="Далі"
+                  >
+                    {row.tail || "—"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="l32r-chart-box">
+            <p className="l32r-chart-title">
+              Present Simple questions ·{" "}
+              <span>питання з do</span>
+            </p>
+            <div className="l32r-chart" role="table" aria-label="Питання з do">
+              <div className="l32r-chart-head" role="row">
+                <span className="l32r-col l32r-qw">Питальне слово</span>
+                <span className="l32r-col l32r-aux">Допоміжне дієслово</span>
+                <span className="l32r-col l32r-subj">Підмет</span>
+                <span className="l32r-col l32r-tail">Інфінітив</span>
+              </div>
+              {doChartRows.map((row) => (
+                <div
+                  key={`${row.aux}-${row.subject}-${row.tail}`}
+                  className="l32r-row"
+                  role="row"
+                >
+                  <span
+                    className={`l32r-cell l32r-qw${row.qw ? "" : " is-empty"}`}
+                    data-label="Питальне"
+                  >
+                    {row.qw || "—"}
+                  </span>
+                  <span className="l32r-cell l32r-aux" data-label="Do/does">
+                    {row.aux}
+                  </span>
+                  <span className="l32r-cell l32r-subj" data-label="Підмет">
+                    {row.subject}
+                  </span>
+                  <span className="l32r-cell l32r-tail" data-label="Інфінітив">
+                    {row.tail}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="l32q-box">
+            <p className="l32r-chart-title">
+              Збери питання · <span>крок за кроком</span>
+            </p>
+            <div className="l32q-table">
+              <span className="l32q-head l32r-qw">
+                Wh-питання
+                <small>wh- question</small>
+              </span>
+              <span className="l32q-head l32r-aux">
+                Допоміжне
+                <small>helping verb</small>
+              </span>
+              <span className="l32q-head l32r-subj">
+                Підмет
+                <small>subject</small>
+              </span>
+              <span className="l32q-head l32r-tail">
+                Основне дієслово
+                <small>main verb</small>
+              </span>
+              <span className="l32q-head l32r-c4">?</span>
+
+              <div
+                className="l32q-cell l32q-cell--wh l32r-qw"
+                data-label="Wh-питання"
+              >
+                {qBuilderWh.map((w) => (
+                  <span key={w}>{w}</span>
+                ))}
+              </div>
+
+              {qBuilderRows.map((row, i) => (
+                <div
+                  key={`aux-${row.aux}${row.auxTail}-${i}`}
+                  className={`l32q-cell l32q-cell--aux l32q-r${i + 1} l32r-aux`}
+                  data-label="Допоміжне"
+                >
+                  <span>
+                    {row.aux}
+                    {row.auxTail && (
+                      <span className="l32q-hl">{row.auxTail}</span>
+                    )}
+                  </span>
+                </div>
+              ))}
+
+              {qBuilderRows.map((row, i) => (
+                <div
+                  key={`subj-${row.subjects.join("-")}`}
+                  className={`l32q-cell l32q-cell--subj l32q-r${i + 1} l32r-subj`}
+                  data-label="Підмет"
+                >
+                  {row.subjects.map((s) => (
+                    <span key={s}>{s}</span>
+                  ))}
+                </div>
+              ))}
+
+              <div
+                className="l32q-cell l32q-cell--main l32r-tail"
+                data-label="Основне дієслово"
+              >
+                {qBuilderVerbs.map((v) => (
+                  <span key={v}>{v}</span>
+                ))}
+              </div>
+
+              <div
+                className="l32q-cell l32q-cell--q l32r-c4"
+                data-label="Знак питання"
+                aria-hidden="true"
+              >
+                ?
+              </div>
+            </div>
+
+            <div className="l32q-examples">
+              <span className="l32q-examples-label">Приклади</span>
+              <ul>
+                {qBuilderExamples.map((e) => (
+                  <li key={e}>{e}</li>
+                ))}
+              </ul>
+            </div>
+
+            <p className="l32r-note" style={{ marginTop: "0.85rem" }}>
+              Читай зліва направо: береш слово з кожної колонки — і питання
+              готове. <strong>Do</strong> для <strong>I / you / we / they</strong>,{" "}
+              <strong>Does</strong> для <strong>he / she / it</strong>. Основне
+              дієслово завжди в початковій формі.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="l32r-sub">
+              Питання з <em>am / is / are</em>
+            </h3>
+            <p className="l32r-note">
+              Коли основне дієслово — <strong>be</strong>, ми ставимо{" "}
+              <strong>am / is / are</strong> як допоміжне{" "}
+              <strong>перед</strong> підметом. Порядок тоді{" "}
+              <strong>QWAS</strong>: (питальне слово) + am/is/are + підмет.
+              Інфінітива немає.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="l32r-sub">
+              Питання з <em>do / does</em>
+            </h3>
+            <p className="l32r-lead">
+              Якщо дієслово <strong>не</strong> be — беремо{" "}
+              <strong>do / does</strong>.{" "}
+              <strong>does</strong> з <strong>he / she / it</strong>,{" "}
+              <strong>do</strong> з <strong>I / you / we / they</strong>. Після
+              підмета — основне дієслово в{" "}
+              <strong>початковій формі</strong> (без{" "}
+              <strong>-s / -es</strong>).
+            </p>
+            <div className="l32r-vs">
+              {doDoesPairs.map((pair) => (
+                <div key={pair.ok} style={{ display: "contents" }}>
+                  <div className="l32r-vs-item is-ok">
+                    <span className="l32r-vs-mark" aria-hidden="true">
+                      ✓
+                    </span>
+                    <span>{pair.ok}</span>
+                  </div>
+                  <div className="l32r-vs-item is-err">
+                    <span className="l32r-vs-mark" aria-hidden="true">
+                      ✗
+                    </span>
+                    <span>{pair.err}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="l32r-sub">Питальні слова · граматична таблиця</h3>
+            <div className="l32r-qw-grid">
+              {questionWordCards.map((card, i) => (
+                <article
+                  key={card.word}
+                  className={`l32r-qw-card l32r-c${(i % 4) + 1}`}
+                >
+                  <div className="l32r-qw-top">
+                    <span className="l32r-qw-word">{card.word}</span>
+                    <span className="l32r-qw-tag">{card.cat}</span>
+                  </div>
+                  <span className="l32r-qw-ua">{card.ua}</span>
+                  <p className="l32r-qw-qa">
+                    <b>A:</b> {card.q}
+                    <br />
+                    <b>B:</b> {card.a}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="l32r-pair-grid">
+            <div className="l32r-pair-card l32r-c1">
+              <h3>What + іменник</h3>
+              <p>
+                Часто ставимо <strong>what + іменник</strong>: what time, what
+                colour, what size…
+              </p>
+              <ul className="l32r-pair-list">
+                {whatNounExamples.map((item) => (
+                  <li key={item.q}>
+                    <b>{item.hl}</b>
+                    {item.q.slice(item.hl.length)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="l32r-pair-card l32r-c2">
+              <h3>How + прикметник / прислівник</h3>
+              <p>
+                Також <strong>how + adj / adv</strong>: how often, how old, how
+                tall…
+              </p>
+              <ul className="l32r-pair-list">
+                {howAdjExamples.map((item) => (
+                  <li key={item.q}>
+                    <b>{item.hl}</b>
+                    {item.q.slice(item.hl.length)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
