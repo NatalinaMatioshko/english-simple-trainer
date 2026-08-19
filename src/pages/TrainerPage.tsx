@@ -68,12 +68,6 @@ export default function TrainerPage() {
         <section className="content">
           {mode === "study" && (
             <div className="study-layout">
-              <VerbList
-                verbs={filteredVerbs}
-                revealedVerbs={revealedVerbs}
-                onToggleVerb={toggleVerbReveal}
-              />
-
               <div className="study-grid">
                 <ConjugationCard
                   currentTask={conjugation.currentTask}
@@ -93,6 +87,12 @@ export default function TrainerPage() {
                   nextTask={question.nextTask}
                 />
               </div>
+
+              <VerbList
+                verbs={filteredVerbs}
+                revealedVerbs={revealedVerbs}
+                onToggleVerb={toggleVerbReveal}
+              />
             </div>
           )}
 
