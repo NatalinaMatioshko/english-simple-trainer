@@ -21,24 +21,11 @@ import {
   grammarBoxB,
   homeVocab,
   intonationB,
-  adjSentences,
-  adjStressC,
   lesson31Images,
-  northNorfolk,
-  northNorfolkAdjTap,
-  oppositeGaps,
-  oppositePairs,
-  photoMatchC,
   photoQsB,
-  prepareTownsC,
-  questionGapsC,
   speakB,
-  speakC,
-  tfItems,
   warmUpB,
-  warmUpC,
   wordOrderB,
-  wordOrderC,
 } from "../data/lesson31";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
@@ -628,29 +615,6 @@ export default function Lesson33() {
   );
   const [orderBChecked, setOrderBChecked] = useState(false);
 
-  const [vocabC, setVocabC] = useState<number[]>([]);
-  const [oppAns, setOppAns] = useState(() =>
-    Array(oppositeGaps.length).fill(""),
-  );
-  const [oppChecked, setOppChecked] = useState(false);
-  const [matchC, setMatchC] = useState<Record<string, string>>({});
-  const [matchCChecked, setMatchCChecked] = useState(false);
-  const [tfAns, setTfAns] = useState<Record<number, "T" | "F" | "">>({});
-  const [tfChecked, setTfChecked] = useState(false);
-  const [orderCRows, setOrderCRows] = useState(() =>
-    initWordOrderRows(wordOrderC),
-  );
-  const [orderCChecked, setOrderCChecked] = useState(false);
-  const [stressCSel, setStressCSel] = useState<number[][]>(() =>
-    adjStressC.map(() => []),
-  );
-  const [stressCChecked, setStressCChecked] = useState(false);
-  const [adjTapSel, setAdjTapSel] = useState<Record<string, boolean>>({});
-  const [adjTapChecked, setAdjTapChecked] = useState(false);
-  const [qGapAns, setQGapAns] = useState<Record<string, string>>({});
-  const [townNotes, setTownNotes] = useState(["", "", ""]);
-  const [showReading, setShowReading] = useState(true);
-
   const toggle = (setter: Dispatch<SetStateAction<number[]>>, idx: number) =>
     setter((prev) =>
       prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx],
@@ -723,58 +687,20 @@ export default function Lesson33() {
 
   const flatScore = flatMatchB.filter((p) => flatAns[p.letter] === p.word)
     .length;
-  const matchCScore = photoMatchC.filter((p) => matchC[p.photo] === p.place)
-    .length;
-  const tfScore = tfItems.filter((item, i) => tfAns[i] === item.answer).length;
-  const stressCScore = adjStressC.filter((item, i) => {
-    const sel = stressCSel[i] ?? [];
-    if (sel.length !== item.stressed.length) return false;
-    return item.stressed.every((idx, k) => sel[k] === idx);
-  }).length;
-
-  const adjTapKeys = northNorfolkAdjTap.flatMap((block) =>
-    block.tokens.map((tok, ti) => ({
-      key: `${block.place}-${ti}`,
-      adj: tok.adj,
-    })),
-  );
-  const adjTapScore = adjTapKeys.filter((t) => {
-    const on = Boolean(adjTapSel[t.key]);
-    return t.adj ? on : !on;
-  }).length;
-  const adjTapTotal = adjTapKeys.length;
-
-  const toggleStressC = (rowIdx: number, wordIdx: number) => {
-    setStressCChecked(false);
-    setStressCSel((prev) => {
-      const next = prev.map((row) => [...row]);
-      const row = next[rowIdx] ?? [];
-      next[rowIdx] = row.includes(wordIdx)
-        ? row.filter((i) => i !== wordIdx)
-        : [...row, wordIdx].sort((a, b) => a - b);
-      return next;
-    });
-  };
-
-  const toggleAdjTap = (key: string) => {
-    setAdjTapChecked(false);
-    setAdjTapSel((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
   return (
     <div className="lesson22-page">
       <section className="lesson22-hero panel">
         <div className="lesson22-hero-top">
           <div>
             <LessonNumberKicker number={33} />
-            <h1>Is there wifi? · It&apos;s expensive!</h1>
+            <h1>Is there wifi?</h1>
             <p className="lesson22-topic-pill">
-              rooms · Is there…? · Are there any…? · adjectives
+              rooms · Is there…? · Are there any…? · How many…?
             </p>
             <p className="lesson22-subtitle">
-              Unit 3 B–C. Talk about a flat with{" "}
-              <strong>Is there / Are there</strong>, then describe places with
-              opposite adjectives.
+              Unit 3B. Talk about a flat with{" "}
+              <strong>Is there / Are there</strong> and{" "}
+              <strong>How many</strong>.
             </p>
           </div>
           <div
@@ -791,6 +717,12 @@ export default function Lesson33() {
             </Link>
             <Link
               className="lesson22-back-link lesson22-back-link--ghost"
+              to="/lesson-34"
+            >
+              Lesson 34 →
+            </Link>
+            <Link
+              className="lesson22-back-link lesson22-back-link--ghost"
               to="/vocab"
             >
               Vocab →
@@ -800,8 +732,8 @@ export default function Lesson33() {
         <div className="lesson22-hero-chips">
           <span>Is there wifi?</span>
           <span>Are there any hotels?</span>
-          <span>a quiet town</span>
-          <span>It&apos;s expensive</span>
+          <span>How many rooms?</span>
+          <span>There is / There are</span>
         </div>
       </section>
 
@@ -812,10 +744,6 @@ export default function Lesson33() {
           <a href="#l33b-flats">Listen 5</a>
           <a href="#l33b-grammar">Grammar 6–7</a>
           <a href="#l33b-dialogue">Practice 8–11</a>
-          <a href="#l33-part-c">C Expensive</a>
-          <a href="#l33c-opposites">Vocab 1–4</a>
-          <a href="#l33c-reading">Reading 5–6</a>
-          <a href="#l33c-grammar">Grammar 7–12</a>
           <a href="#l33-exit">Exit</a>
         </div>
       </section>
@@ -1763,781 +1691,13 @@ export default function Lesson33() {
         </div>
       </section>
 
-      {/* ═══════════════ PART C ═══════════════ */}
-      <PartBanner
-        id="l33-part-c"
-        part="Part C · 3C"
-        title="It's expensive!"
-        desc="Opposite adjectives · position of adjectives · North Norfolk reading"
-      />
-
-      <section id="l33c-warmup" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">C1 · Warm-up</p>
-          <h2>Your town — adjectives</h2>
-        </div>
-        <div className="lesson22-prompt-grid">
-          {warmUpC.map((q) => (
-            <div key={q} className="lesson22-prompt-card">
-              {q}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="l33c-opposites" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">C2 · Vocabulary</p>
-          <h2>Describing places · opposites</h2>
-          <p className="lesson22-section-desc">
-            Opposite adjective pairs · listen &amp; repeat · complete · speak.
-          </p>
-        </div>
-
-        <p className="l31-ex-line">
-          <strong className="l31-ex-num">1</strong> Look at the pictures. Study
-          the opposite adjectives.
-        </p>
-        <div>
-          {oppositePairs.map((p) => (
-            <div key={p.a} className="l31-adj-row">
-              <div className="l31-adj-row-label">
-                {p.a} ↔ {p.b}{" "}
-                <span style={{ fontWeight: 500 }}>
-                  ({p.uaA} ↔ {p.uaB})
-                </span>
-              </div>
-              <div className="l31-adj-card">
-                <strong>{p.a}</strong>
-                <img
-                  src={IMG31(p.imgA)}
-                  alt={`${p.a} place`}
-                  loading="lazy"
-                />
-              </div>
-              <div className="l31-adj-card">
-                <strong>{p.b}</strong>
-                <img
-                  src={IMG31(p.imgB)}
-                  alt={`${p.b} place`}
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-        <VocabFlipGrid
-          items={adjSentences}
-          flipped={vocabC}
-          toggle={(i) => toggle(setVocabC, i)}
-        />
-
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">2</strong> Listen and repeat the
-          sentences in Exercise 1.
-        </p>
-        <AudioBlock
-          r={12}
-          exercise="3C · 2"
-          title="It's busy / quiet / big… — listen & repeat"
-          transcript={
-            <ol>
-              {adjSentences.map((s) => (
-                <li key={s.en}>{s.en}</li>
-              ))}
-            </ol>
-          }
-        />
-
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">3</strong> Complete the sentences.
-        </p>
-        <L31SelectDrill
-          items={oppositeGaps}
-          answers={oppAns}
-          setAnswers={setOppAns}
-          checked={oppChecked}
-          setChecked={setOppChecked}
-          labelKey={(d) => d.prompt ?? ""}
-        />
-
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">4</strong> Make sentences about places
-          you know. Say them to your teacher.
-        </p>
-        <p className="lesson22-section-desc">
-          <em>There&apos;s a big train station in my city.</em>
-          <br />
-          <em>The café in my town is expensive.</em>
-        </p>
-        <div className="l25-wordbox">
-          {oppositePairs.map((p) => (
-            <span key={p.a} className="l25-wordbox-item">
-              {p.a} / {p.b}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      <section id="l33c-reading" className="lesson22-block panel">
-        <h2 className="l31-skill-title">Reading</h2>
-        <p className="l31-ex-line">
-          <strong className="l31-ex-num">5</strong> Read the text and match
-          places 1–3 with photos A–C.
-        </p>
-        <LessonFigure
-          src={IMG31(lesson31Images.northNorfolk)}
-          alt="Welcome to North Norfolk — map and town descriptions"
-          caption="WELCOME TO North Norfolk!"
-          variant="photo"
-          wide
-        />
-        <LessonFigure
-          src={IMG31(lesson31Images.norfolkPhotosAbc)}
-          alt="North Norfolk photos A–C and Cromer on the map"
-          caption="Photos A–C · match with places 1–3"
-          variant="photo"
-          wide
-        />
-        <button
-          type="button"
-          className="l25-cr-mini-btn"
-          onClick={() => setShowReading((v) => !v)}
-          style={{ marginBottom: "0.75rem" }}
-        >
-          {showReading ? "Hide text" : "Show text"}
-        </button>
-        {showReading && (
-          <div className="lesson22-prompt-grid" style={{ marginBottom: "1rem" }}>
-            {northNorfolk.map((t, i) => (
-              <div key={t.place} className="lesson22-prompt-card">
-                <strong>
-                  {i + 1}. {t.place}
-                </strong>
-                <p style={{ margin: "0.5rem 0 0" }}>{t.text}</p>
-              </div>
-            ))}
-          </div>
-        )}
-        <div className="l26-drill-list">
-          {photoMatchC.map((p) => (
-            <div key={p.photo} className="l26-drill-row">
-              <strong className="l26-drill-prompt">
-                Photo {p.photo}
-                <span
-                  style={{
-                    display: "block",
-                    fontWeight: 500,
-                    color: "var(--color-text-muted)",
-                    fontSize: "0.9rem",
-                  }}
-                >
-                  {p.hint}
-                </span>
-              </strong>
-              <span className="l26-drill-arrow" aria-hidden="true">
-                →
-              </span>
-              <select
-                value={matchC[p.photo] ?? ""}
-                onChange={(e) => {
-                  setMatchCChecked(false);
-                  setMatchC((prev) => ({ ...prev, [p.photo]: e.target.value }));
-                }}
-                className={drillSelClass(
-                  matchCChecked,
-                  matchC[p.photo] ?? "",
-                  p.place,
-                )}
-                aria-label={`Photo ${p.photo}`}
-              >
-                <option value="">___</option>
-                {northNorfolk.map((t) => (
-                  <option key={t.place} value={t.place}>
-                    {t.place}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ))}
-        </div>
-        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
-          <button
-            type="button"
-            className="l22-check-btn"
-            onClick={() => setMatchCChecked(true)}
-          >
-            Check
-          </button>
-          {matchCChecked && (
-            <span className="l22-score">
-              {matchCScore} / {photoMatchC.length}
-            </span>
-          )}
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => {
-              setMatchC({});
-              setMatchCChecked(false);
-            }}
-          >
-            Reset
-          </button>
-        </div>
-
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">6</strong> Read the text again. Are the
-          sentences true (T) or false (F)?
-        </p>
-        <div className="l26-drill-list">
-          {tfItems.map((item, i) => {
-            const selected = tfAns[i] ?? "";
-            const show = tfChecked && selected;
-            const ok = selected === item.answer;
-            return (
-              <div
-                key={item.statement}
-                className="l26-drill-row"
-                style={{ flexWrap: "wrap" }}
-              >
-                <strong
-                  className="l26-drill-prompt"
-                  style={{ flex: "1 1 220px" }}
-                >
-                  {i + 1}. {item.statement}
-                </strong>
-                <div style={{ display: "flex", gap: "0.4rem" }}>
-                  {(["T", "F"] as const).map((opt) => (
-                    <button
-                      key={opt}
-                      type="button"
-                      className={`l22-choice-btn ${selected === opt ? "selected" : ""} ${
-                        show && selected === opt
-                          ? ok
-                            ? "correct"
-                            : "wrong"
-                          : ""
-                      }`}
-                      onClick={() => {
-                        setTfChecked(false);
-                        setTfAns((prev) => ({ ...prev, [i]: opt }));
-                      }}
-                    >
-                      {opt === "T" ? "True" : "False"}
-                    </button>
-                  ))}
-                </div>
-                {show && !ok && (
-                  <span
-                    style={{
-                      flex: "1 1 100%",
-                      color: "var(--color-text-muted)",
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    Correct: {item.answer}. {item.tip}
-                  </span>
-                )}
-              </div>
-            );
-          })}
-        </div>
-        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
-          <button
-            type="button"
-            className="l22-check-btn"
-            onClick={() => setTfChecked(true)}
-          >
-            Check
-          </button>
-          {tfChecked && (
-            <span className="l22-score">
-              {tfScore} / {tfItems.length}
-            </span>
-          )}
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => {
-              setTfAns({});
-              setTfChecked(false);
-            }}
-          >
-            Reset
-          </button>
-        </div>
-      </section>
-
-      <section id="l33c-grammar" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">C3 · Grammar · speaking</p>
-          <h2>Position of adjectives</h2>
-        </div>
-        <p className="l31-ex-line">
-          <strong className="l31-ex-num">7</strong> Read the grammar box. Then
-          underline the adjectives in the text in Exercise 5.
-        </p>
-        <div className="l25-grammar-box">
-          <div className="l25-grammar-label">Position of adjectives</div>
-          <div className="l25-grammar-rows">
-            <div className="l25-gr-row l25-gr-row--pos">
-              <span className="l25-gr-sign">be</span>
-              <div className="l25-gr-cells">
-                <span>
-                  It&apos;s <strong>big</strong>.
-                </span>
-                <span>
-                  It isn&apos;t <strong>expensive</strong>.
-                </span>
-                <span>
-                  This town is <strong>busy</strong>.
-                </span>
-              </div>
-            </div>
-            <div className="l25-gr-row l25-gr-row--pos">
-              <span className="l25-gr-sign">+N</span>
-              <div className="l25-gr-cells">
-                <span>
-                  This is a <strong>quiet</strong> town.
-                </span>
-                <span>
-                  There&apos;s an <strong>old</strong> cinema.
-                </span>
-                <span>
-                  There are <strong>cheap</strong> shops and restaurants.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
-          <p>
-            <strong>Пояснення.</strong> Прикметник описує місце / річ.
-          </p>
-          <p style={{ marginTop: "0.65rem" }}>
-            <strong>1. Після be</strong> (<em>is / are / isn&apos;t / aren&apos;t</em>
-            ):{" "}
-            <em>
-              It&apos;s <u>big</u>. This town is <u>busy</u>.
-            </em>
-            <br />
-            <span style={{ color: "var(--color-text-muted)" }}>
-              Формула: subject + be + adjective.
-            </span>
-          </p>
-          <p style={{ marginTop: "0.65rem" }}>
-            <strong>2. Перед іменником</strong>:{" "}
-            <em>
-              a <u>quiet</u> town · an <u>old</u> cinema · cheap shops
-            </em>
-            .
-            <br />
-            <span style={{ color: "var(--color-text-muted)" }}>
-              Формула: a/an/the + adjective + noun. <em>a</em> →{" "}
-              <em>an</em> перед голосним звуком (<em>an old…</em>).
-            </span>
-          </p>
-          <p style={{ marginTop: "0.65rem" }}>
-            <strong>Не так:</strong>{" "}
-            <em style={{ textDecoration: "line-through" }}>a town quiet</em> /{" "}
-            <em style={{ textDecoration: "line-through" }}>
-              It&apos;s a expensive
-            </em>
-            .
-          </p>
-        </blockquote>
-        <p className="lesson22-section-desc" style={{ marginTop: "1rem" }}>
-          Tap each adjective in the North Norfolk texts.
-        </p>
-        <div className="lesson22-prompt-grid">
-          {northNorfolkAdjTap.map((block) => (
-            <div key={block.place} className="lesson22-prompt-card">
-              <strong>
-                {block.n}. {block.place}
-              </strong>
-              <p
-                style={{
-                  margin: "0.65rem 0 0",
-                  lineHeight: 1.85,
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: "0.2rem 0.25rem",
-                }}
-              >
-                {block.tokens.map((tok, ti) => {
-                  const key = `${block.place}-${ti}`;
-                  const on = Boolean(adjTapSel[key]);
-                  let cls = "l26-stress-syl";
-                  if (on) cls += " l26-stress-syl--on";
-                  if (adjTapChecked) {
-                    if (tok.adj && on) cls += " l26-stress-syl--ok";
-                    else if (on && !tok.adj) cls += " l26-stress-syl--err";
-                    else if (tok.adj && !on) cls += " l26-stress-syl--miss";
-                  }
-                  return (
-                    <button
-                      key={key}
-                      type="button"
-                      className={cls}
-                      onClick={() => toggleAdjTap(key)}
-                      aria-pressed={on}
-                    >
-                      {tok.t}
-                    </button>
-                  );
-                })}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
-          <button
-            type="button"
-            className="l22-check-btn"
-            onClick={() => setAdjTapChecked(true)}
-          >
-            Check
-          </button>
-          {adjTapChecked && (
-            <span className="l22-score">
-              {adjTapScore} / {adjTapTotal}
-            </span>
-          )}
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => {
-              const next: Record<string, boolean> = {};
-              for (const block of northNorfolkAdjTap) {
-                block.tokens.forEach((tok, ti) => {
-                  if (tok.adj) next[`${block.place}-${ti}`] = true;
-                });
-              }
-              setAdjTapSel(next);
-              setAdjTapChecked(true);
-            }}
-          >
-            Show answers
-          </button>
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => {
-              setAdjTapSel({});
-              setAdjTapChecked(false);
-            }}
-          >
-            Reset
-          </button>
-        </div>
-
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">8a</strong> Listen and underline the
-          stressed words.
-        </p>
-        <AudioBlock
-          r={13}
-          exercise="3C · 8a"
-          title="Adjective + noun — sentence stress"
-          transcript={
-            <ol>
-              {adjStressC.map((s) => (
-                <li key={s.n}>{s.words.join(" ")}</li>
-              ))}
-            </ol>
-          }
-        />
-        <p className="lesson22-section-desc" style={{ marginTop: "0.75rem" }}>
-          Tap the stressed word(s) in each sentence.
-        </p>
-        <div className="l26-stress-list">
-          {adjStressC.map((item, ji) => {
-            const sel = stressCSel[ji] ?? [];
-            const ok =
-              sel.length === item.stressed.length &&
-              item.stressed.every((v, k) => sel[k] === v);
-            return (
-              <div key={item.n} className="l26-stress-row">
-                <span className="l26-stress-letter">{item.n}</span>
-                <div className="l26-stress-parts">
-                  {item.words.map((word, wi) => {
-                    const on = sel.includes(wi);
-                    const should = item.stressed.includes(wi);
-                    let cls = "l26-stress-syl";
-                    if (on) cls += " l26-stress-syl--on";
-                    if (stressCChecked) {
-                      if (should && on) cls += " l26-stress-syl--ok";
-                      else if (on && !should) cls += " l26-stress-syl--err";
-                      else if (should && !on) cls += " l26-stress-syl--miss";
-                    }
-                    return (
-                      <span key={`${item.n}-${wi}`} className="l26-stress-chunk">
-                        <button
-                          type="button"
-                          className={cls}
-                          onClick={() => toggleStressC(ji, wi)}
-                          aria-pressed={on}
-                        >
-                          {word}
-                        </button>
-                        {wi < item.words.length - 1 ? (
-                          <span className="l26-stress-gap"> </span>
-                        ) : null}
-                      </span>
-                    );
-                  })}
-                </div>
-                {stressCChecked && (
-                  <span
-                    className={
-                      ok
-                        ? "l26-stress-mark l26-stress-mark--ok"
-                        : "l26-stress-mark"
-                    }
-                    aria-hidden="true"
-                  >
-                    {ok ? "✓" : "✗"}
-                  </span>
-                )}
-              </div>
-            );
-          })}
-        </div>
-        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
-          <button
-            type="button"
-            className="l22-check-btn"
-            onClick={() => setStressCChecked(true)}
-          >
-            Check
-          </button>
-          {stressCChecked && (
-            <span className="l22-score">
-              {stressCScore} / {adjStressC.length}
-            </span>
-          )}
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => {
-              setStressCSel(adjStressC.map((s) => [...s.stressed]));
-              setStressCChecked(true);
-            }}
-          >
-            Show answers
-          </button>
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => {
-              setStressCSel(adjStressC.map(() => []));
-              setStressCChecked(false);
-            }}
-          >
-            Reset
-          </button>
-        </div>
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">8b</strong> Listen again and repeat.
-        </p>
-        <AudioBlock
-          r={13}
-          exercise="3C · 8b"
-          title="Listen again and repeat"
-        />
-
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">9</strong> Put the words in the correct
-          order to make sentences.
-        </p>
-        <WordOrderBoard
-          items={wordOrderC}
-          rows={orderCRows}
-          setRows={setOrderCRows}
-          checked={orderCChecked}
-          setChecked={setOrderCChecked}
-        />
-
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">10a</strong> Complete the questions about
-          places in your town. Use adjectives.
-        </p>
-        <div className="l26-drill-list">
-          {questionGapsC.map((q, i) => {
-            const two = "twoBlanks" in q && q.twoBlanks;
-            const mid = "mid" in q ? q.mid : undefined;
-            return (
-              <div
-                key={q.id}
-                className="l26-drill-row"
-                style={{ flexWrap: "wrap", alignItems: "center", gap: "0.35rem" }}
-              >
-                <strong className="l26-drill-prompt" style={{ flex: "0 0 auto" }}>
-                  {i + 1}.
-                </strong>
-                <span>{q.before}</span>
-                <input
-                  type="text"
-                  value={qGapAns[`${q.id}-a`] ?? ""}
-                  onChange={(e) =>
-                    setQGapAns((prev) => ({
-                      ...prev,
-                      [`${q.id}-a`]: e.target.value,
-                    }))
-                  }
-                  className="l22-gap-input"
-                  placeholder="______"
-                  aria-label={`Question ${i + 1} blank 1`}
-                  style={{ minWidth: "8rem", flex: "1 1 8rem" }}
-                />
-                {two && mid != null && (
-                  <>
-                    <span>{mid}</span>
-                    <input
-                      type="text"
-                      value={qGapAns[`${q.id}-b`] ?? ""}
-                      onChange={(e) =>
-                        setQGapAns((prev) => ({
-                          ...prev,
-                          [`${q.id}-b`]: e.target.value,
-                        }))
-                      }
-                      className="l22-gap-input"
-                      placeholder="______"
-                      aria-label={`Question ${i + 1} blank 2`}
-                      style={{ minWidth: "6rem", flex: "1 1 6rem" }}
-                    />
-                  </>
-                )}
-                <span>{q.after}</span>
-                <span
-                  style={{
-                    flex: "1 1 100%",
-                    color: "var(--color-text-muted)",
-                    fontSize: "0.85rem",
-                  }}
-                >
-                  e.g. {q.example}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => {
-              const next: Record<string, string> = {};
-              for (const q of questionGapsC) {
-                if ("twoBlanks" in q && q.twoBlanks) {
-                  const [a, b] = q.example.split("·").map((s) => s.trim());
-                  next[`${q.id}-a`] = a ?? q.example;
-                  next[`${q.id}-b`] = b ?? "";
-                } else {
-                  next[`${q.id}-a`] = q.example;
-                }
-              }
-              setQGapAns(next);
-            }}
-          >
-            Show examples
-          </button>
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => setQGapAns({})}
-          >
-            Reset
-          </button>
-        </div>
-
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">10b</strong> Ask your teacher the
-          questions and answer theirs.
-        </p>
-        <blockquote className="l23-rule-quote">
-          <p>
-            <strong>Model.</strong> Teacher: <em>Is there a big hotel?</em> You:{" "}
-            <em>Yes, the City Hotel is big. / No, there are no big hotels.</em>
-            <br />
-            Teacher: <em>Is the cinema good?</em> You:{" "}
-            <em>Yes, it is. / No, it isn&apos;t.</em>
-          </p>
-        </blockquote>
-        <div className="lesson22-prompt-grid" style={{ marginTop: "0.85rem" }}>
-          {speakC.map((p) => (
-            <div key={p} className="lesson22-prompt-card">
-              {p}
-            </div>
-          ))}
-        </div>
-
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">11</strong> Prepare. Choose three towns
-          or cities and make notes. Use Exercise 5 to help you.
-        </p>
-        <div className="l25-wordbox" style={{ marginBottom: "0.85rem" }}>
-          {prepareTownsC.map((t) => (
-            <span key={t} className="l25-wordbox-item">
-              {t}
-            </span>
-          ))}
-        </div>
-        <div className="lesson22-prompt-grid">
-          {[0, 1, 2].map((i) => (
-            <label key={i} className="lesson22-prompt-card">
-              <strong>Town / city {i + 1}</strong>
-              <textarea
-                value={townNotes[i] ?? ""}
-                onChange={(e) => {
-                  const v = e.target.value;
-                  setTownNotes((prev) => {
-                    const next = [...prev];
-                    next[i] = v;
-                    return next;
-                  });
-                }}
-                rows={4}
-                placeholder="shops · restaurants · parks · hotels…"
-                style={{
-                  width: "100%",
-                  marginTop: "0.5rem",
-                  resize: "vertical",
-                  font: "inherit",
-                }}
-              />
-            </label>
-          ))}
-        </div>
-
-        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">12</strong> Speak. Describe your three
-          towns or cities to your teacher.
-        </p>
-        <LessonFigure
-          src={IMG31(lesson31Images.tokyoFuji)}
-          alt="Tokyo skyline with Mount Fuji"
-          caption="Speaking cue · describe towns / cities"
-          variant="photo"
-        />
-        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
-          <p>
-            <strong>Ideas.</strong>{" "}
-            <em>This town is quiet. There is a small train station…</em> /{" "}
-            <em>It&apos;s busy. There are cheap shops and a good market…</em>
-          </p>
-        </blockquote>
-      </section>
-
       {/* ── Exit ─────────────────────────────────────────────── */}
       <section id="l33-exit" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">Exit check</p>
           <h2>Can you…?</h2>
           <p className="lesson22-section-desc">
-            rooms · Is there…? · adjectives
+            rooms · Is there…? · How many…?
           </p>
         </div>
         <ul className="l22-goals-list">
@@ -2545,9 +1705,6 @@ export default function Lesson33() {
           <li>Name 4 rooms + 4 things in a home.</li>
           <li>Talk about a flat with There is / There are.</li>
           <li>Choose a flat for a holiday and say why.</li>
-          <li>Say 5 opposite adjective pairs.</li>
-          <li>be + adj / adj + noun — one example each.</li>
-          <li>Describe a town with adjectives.</li>
         </ul>
         <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
           <Link className="l22-check-btn" to="/vocab">
@@ -2561,6 +1718,9 @@ export default function Lesson33() {
           </Link>
           <Link className="l25-cr-mini-btn" to="/lesson-32">
             ← Lesson 32
+          </Link>
+          <Link className="l25-cr-mini-btn" to="/lesson-34">
+            Lesson 34 →
           </Link>
           <Link className="l25-cr-mini-btn" to="/lessons">
             All lessons →

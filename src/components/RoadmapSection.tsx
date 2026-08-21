@@ -483,19 +483,31 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 33,
-    title: "Is there wifi? · It's expensive!",
+    title: "Is there wifi?",
     grammar:
-      "Is there a/an…? / Are there any…?; How many; adjective position (be + adj · adj + noun)",
-    vocabulary:
-      "rooms & things in a home; opposite adjectives (busy/quiet, big/small, old/new, cheap/expensive, good/bad)",
+      "Is there a/an…? / Are there any…?; How many; There is / There are",
+    vocabulary: "rooms & things in a home (bathroom, wifi, lift…)",
     speaking:
-      "Ask about a flat; answer Ukrainian prompts in English; describe towns with adjectives",
-    listening:
-      "intonation for Is there…?; Jakub & William flat conversation; adjective stress",
-    review: "There is/are (L31); Unit 3 B–C",
+      "Ask about a flat; answer Ukrainian prompts in English; choose a holiday flat",
+    listening: "intonation for Is there…?; Jakub & William flat conversation",
+    review: "There is/are (L31); Unit 3B",
     category: "general",
     status: "next",
     route: "/lesson-33",
+  },
+  {
+    id: 34,
+    title: "It's expensive!",
+    grammar: "adjective position (be + adj · adj + noun); sentence stress",
+    vocabulary:
+      "opposite adjectives (busy/quiet, big/small, old/new, cheap/expensive, good/bad)",
+    speaking:
+      "Complete town questions with adjectives; describe three towns to the teacher",
+    listening: "adjective sentences (R12); adjective + noun stress (R13)",
+    review: "places & There is/are (L31); Unit 3C",
+    category: "general",
+    status: "next",
+    route: "/lesson-34",
   },
 ];
 

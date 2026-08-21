@@ -33,7 +33,8 @@ Lessons are written for **one student + one teacher**. Classroom phrases such as
 | 30 | Check & Reflect + optional A1 Level Test |
 | 31 | Unit 3A · My town (there is/are) · HW crossword |
 | 32 | WH-questions · was/were |
-| 33 | Unit 3 B–C · Is there wifi? · It's expensive! |
+| 33 | Unit 3B · Is there wifi? |
+| 34 | Unit 3C · It's expensive! |
 
 ---
 
@@ -201,7 +202,8 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/lessons` | Lessons list |
 | `/lesson-31` | My town (Unit 3A) |
 | `/lesson-32` | WH-questions · was/were |
-| `/lesson-33` | Is there wifi? · It's expensive! (Unit 3 B–C) |
+| `/lesson-33` | Is there wifi? (Unit 3B) |
+| `/lesson-34` | It's expensive! (Unit 3C) |
 | `/hw-31` | Homework · Lesson 31 |
 | `/a1-level-test` | A1 Level Test |
 | `/extra-resources` | Extra infographics |

@@ -220,17 +220,26 @@ const lessons: LessonEntry[] = [
     topic:
       "Who · What · Where · When · Why · How often · do / does / to be · was / were",
     description:
-      "Part 1: WH-questions + do/does/to be (не новий час). Part 2: was/were (past of to be). Practice + speaking. Unit 3 B–C → Lesson 33.",
+      "Part 1: WH-questions + do/does/to be (не новий час). Part 2: was/were (past of to be). Practice + speaking. Unit 3B → Lesson 33 · Unit 3C → Lesson 34.",
     lessonPath: "/lesson-32",
   },
   {
     id: "33",
-    title: "Is there wifi? · It's expensive!",
+    title: "Is there wifi?",
     level: "A1",
-    topic: "rooms · Is there…? · Are there any…? · adjectives",
+    topic: "rooms · Is there…? · Are there any…? · How many…?",
     description:
-      "Unit 3 B–C: Is there wifi? (rooms + Is/Are there, How many) · It's expensive! (opposite adjectives + North Norfolk reading). Speaking for one student.",
+      "Unit 3B: Is there wifi? — rooms & things in a home, Is/Are there, How many, flat listening (Jakub & William), grammar & speaking for one student.",
     lessonPath: "/lesson-33",
+  },
+  {
+    id: "34",
+    title: "It's expensive!",
+    level: "A1",
+    topic: "opposite adjectives · position of adjectives · North Norfolk",
+    description:
+      "Unit 3C: It's expensive! — opposite adjectives, North Norfolk reading, adjective position, stress, word order, speak about your town (one student).",
+    lessonPath: "/lesson-34",
   },
 ];
 
