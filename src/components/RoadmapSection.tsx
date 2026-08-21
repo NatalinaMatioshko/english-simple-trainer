@@ -62,7 +62,7 @@ const completedPath: StageSummary[] = [
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 27–32",
+    range: "Lessons 27–33",
     title: "Real-life situations",
     summary:
       "After jobs: shopping, food, transport, directions, health, and a practical speaking push toward A2 readiness.",
@@ -468,19 +468,34 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 32,
-    title: "WH-questions · was / were · Unit 3 B–C",
+    title: "WH-questions · was / were",
     grammar:
-      "WH-questions with to be and do/does; was/were — past of to be; Is there a/an…? / Are there any…?; How many; adjective position (be + adj · adj + noun)",
+      "WH-questions with to be and do/does; was/were — past of to be; Yes/No + WH with was/were",
     vocabulary:
-      "Who, What, Where, When, Why, How often; yesterday, last week, at home / at work / at the gym; rooms & things in a home; opposite adjectives (busy/quiet, big/small, old/new, cheap/expensive, good/bad)",
+      "Who, What, Where, When, Why, How often; yesterday, last week, at home / at work / at the gym",
     speaking:
-      "Ask and answer WH-questions; talk about yesterday with was/were; ask about a flat; describe towns with adjectives",
-    listening:
-      "stress on do/does vs is/are; was vs were; intonation for Is there…?; adjective stress",
-    review: "Present Simple questions; There is/are (L31); Unit 3 B–C",
+      "Ask and answer WH-questions; talk about yesterday / last week with was/were",
+    listening: "stress on do/does vs is/are; was vs were",
+    review: "Present Simple questions; to be questions; past of to be",
     category: "general",
     status: "next",
     route: "/lesson-32",
+  },
+  {
+    id: 33,
+    title: "Is there wifi? · It's expensive!",
+    grammar:
+      "Is there a/an…? / Are there any…?; How many; adjective position (be + adj · adj + noun)",
+    vocabulary:
+      "rooms & things in a home; opposite adjectives (busy/quiet, big/small, old/new, cheap/expensive, good/bad)",
+    speaking:
+      "Ask about a flat; answer Ukrainian prompts in English; describe towns with adjectives",
+    listening:
+      "intonation for Is there…?; Jakub & William flat conversation; adjective stress",
+    review: "There is/are (L31); Unit 3 B–C",
+    category: "general",
+    status: "next",
+    route: "/lesson-33",
   },
 ];
 
@@ -616,7 +631,7 @@ export default function RoadmapSection() {
     <section className="roadmap-layout">
       <aside className="roadmap-sidebar panel">
         <p className="page-kicker">Learning path</p>
-        <h2>Roadmap for Lessons 1–32</h2>
+        <h2>Roadmap for Lessons 1–33</h2>
         <p className="roadmap-lead">
           The course moves from self-introduction and <strong>to be</strong> to
           daily routines, countries, jobs, shopping, transport, health, and
@@ -682,7 +697,7 @@ export default function RoadmapSection() {
           <section className="roadmap-block">
             <div className="roadmap-block-head">
               <p className="roadmap-mini-label">Full timeline</p>
-              <h3>Lessons 1–32</h3>
+              <h3>Lessons 1–33</h3>
               <p>
                 This is the complete course line from the first lesson to the
                 latest discussed stage.

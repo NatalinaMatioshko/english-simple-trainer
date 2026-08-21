@@ -215,13 +215,22 @@ const lessons: LessonEntry[] = [
   },
   {
     id: "32",
-    title: "WH-questions · was / were · Unit 3 B–C",
+    title: "WH-questions · was / were",
     level: "A1",
     topic:
-      "Who · What · Where · When · Why · How often · was / were · rooms · Is there…? · adjectives",
+      "Who · What · Where · When · Why · How often · do / does / to be · was / were",
     description:
-      "Part 1: WH-questions + do/does/to be (не новий час). Part 2: was/were (past of to be). Далі Unit 3 B–C: Is there wifi? (rooms + Is/Are there, How many) · It's expensive! (opposite adjectives + North Norfolk reading).",
+      "Part 1: WH-questions + do/does/to be (не новий час). Part 2: was/were (past of to be). Practice + speaking. Unit 3 B–C → Lesson 33.",
     lessonPath: "/lesson-32",
+  },
+  {
+    id: "33",
+    title: "Is there wifi? · It's expensive!",
+    level: "A1",
+    topic: "rooms · Is there…? · Are there any…? · adjectives",
+    description:
+      "Unit 3 B–C: Is there wifi? (rooms + Is/Are there, How many) · It's expensive! (opposite adjectives + North Norfolk reading). Speaking for one student.",
+    lessonPath: "/lesson-33",
   },
 ];
 

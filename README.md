@@ -8,8 +8,8 @@ Built with **React 19 + Vite 8 + TypeScript**, deployed to **GitHub Pages**.
 
 ## Features
 
-- **Roadmap** — curriculum overview (lessons 1–32), current / completed / next status
-- **Lessons 15–32** — full interactive pages (speaking, vocab, listening, grammar, reading)
+- **Roadmap** — curriculum overview (lessons 1–33), current / completed / next status
+- **Lessons 15–33** — full interactive pages (speaking, vocab, listening, grammar, reading)
 - **Homework** — `/hw-25`…`/hw-31` with flashcards, quizzes, crossword (HW31); older `/homework/:id` still used for early lessons
 - **Vocab** — dictionary with IPA + Web Speech pronunciation
 - **Trainer** — conjugation + question builder, then 50 core verbs; practice decks and scored quizzes
@@ -32,7 +32,8 @@ Lessons are written for **one student + one teacher**. Classroom phrases such as
 | 28–29 | Speaking he/she/it · everyday objects · numbers |
 | 30 | Check & Reflect + optional A1 Level Test |
 | 31 | Unit 3A · My town (there is/are) · HW crossword |
-| 32 | WH-questions · was/were · Unit 3 B–C (wifi, adjectives) |
+| 32 | WH-questions · was/were |
+| 33 | Unit 3 B–C · Is there wifi? · It's expensive! |
 
 ---
 
@@ -168,7 +169,7 @@ src/
   context/        # Theme (light / dark)
   data/           # Vocab, verbs, lesson31/32, HW review decks, practice tasks
   hooks/          # Quiz / practice hooks (useScoredQuiz, …)
-  pages/          # Home, Lessons, Lesson15–32, HW25–31, Vocab, Trainer, Admin…
+  pages/          # Home, Lessons, Lesson15–33, HW25–31, Vocab, Trainer, Admin…
   services/       # Firestore helpers (e.g. writingSubmissions)
   styles/         # Global + per-lesson CSS
   types/          # Shared TypeScript types
@@ -199,7 +200,8 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/` | Home + roadmap |
 | `/lessons` | Lessons list |
 | `/lesson-31` | My town (Unit 3A) |
-| `/lesson-32` | WH-questions · was/were · Unit 3 B–C |
+| `/lesson-32` | WH-questions · was/were |
+| `/lesson-33` | Is there wifi? · It's expensive! (Unit 3 B–C) |
 | `/hw-31` | Homework · Lesson 31 |
 | `/a1-level-test` | A1 Level Test |
 | `/extra-resources` | Extra infographics |

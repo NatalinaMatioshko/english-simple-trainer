@@ -65,6 +65,7 @@ export const lesson31Images = {
   townMapAg: "town-map-ag.png",
   townStreetCl: "town-street-cl.png",
   photosAbc: "photos-abc.png",
+  northNorfolk: "north-norfolk.png",
   brightonFlat: "brighton-flat.png",
   brightonRoomsAd: "brighton-rooms-ad.png",
   brightonIconsEk: "brighton-icons-ek.png",
@@ -1204,17 +1205,17 @@ export const northNorfolk = [
 export const photoMatchC = [
   {
     photo: "A",
-    hint: "rural train station platform",
+    hint: "small train station · quiet town",
     place: "West Runton",
   },
   {
     photo: "B",
-    hint: "big Victorian-style hotel",
+    hint: "big hotel in the centre · old cinema",
     place: "Cromer",
   },
   {
     photo: "C",
-    hint: "busy town square / clock tower",
+    hint: "busy market · cheap bookshops · park",
     place: "Sheringham",
   },
 ] as const;
