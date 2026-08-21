@@ -22,13 +22,16 @@ import {
   homeVocab,
   intonationB,
   adjSentences,
+  adjStressC,
   lesson31Images,
   northNorfolk,
+  northNorfolkAdjTap,
   oppositeGaps,
   oppositePairs,
   photoMatchC,
   photoQsB,
-  questionStartersC,
+  prepareTownsC,
+  questionGapsC,
   speakB,
   speakC,
   tfItems,
@@ -60,6 +63,8 @@ function AudioBlock({
   transcript?: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const src = SOUND_U3(r);
   return (
     <div className="l25-audio-item" style={{ marginTop: "0.85rem" }}>
       <div className="l25-audio-meta">
@@ -70,11 +75,29 @@ function AudioBlock({
         </div>
       </div>
       <audio
+        key={src}
         controls
         className="l25-audio-ctrl"
-        src={SOUND_U3(r)}
-        preload="none"
-      />
+        src={src}
+        preload="metadata"
+        onError={() =>
+          setErr(`Audio failed to load (R${r}). Check the file is available.`)
+        }
+        onCanPlay={() => setErr(null)}
+      >
+        <source src={src} type="audio/mpeg" />
+      </audio>
+      {err && (
+        <p
+          style={{
+            margin: "0.35rem 0 0",
+            color: "var(--color-danger, #b91c1c)",
+            fontSize: "0.9rem",
+          }}
+        >
+          {err}
+        </p>
+      )}
       {transcript && (
         <>
           <button
@@ -315,7 +338,11 @@ function shuffleParts(parts: readonly string[]): string[] {
 }
 
 function joinWordOrder(parts: readonly string[]): string {
-  return parts.join(" ").replace(/\s+\?/g, "?").trim();
+  return parts
+    .join(" ")
+    .replace(/\s+\?/g, "?")
+    .replace(/\s+\./g, ".")
+    .trim();
 }
 
 type WordOrderRow = {
@@ -610,10 +637,18 @@ export default function Lesson33() {
   const [matchCChecked, setMatchCChecked] = useState(false);
   const [tfAns, setTfAns] = useState<Record<number, "T" | "F" | "">>({});
   const [tfChecked, setTfChecked] = useState(false);
-  const [orderCAns, setOrderCAns] = useState(() =>
-    Array(wordOrderC.length).fill(""),
+  const [orderCRows, setOrderCRows] = useState(() =>
+    initWordOrderRows(wordOrderC),
   );
   const [orderCChecked, setOrderCChecked] = useState(false);
+  const [stressCSel, setStressCSel] = useState<number[][]>(() =>
+    adjStressC.map(() => []),
+  );
+  const [stressCChecked, setStressCChecked] = useState(false);
+  const [adjTapSel, setAdjTapSel] = useState<Record<string, boolean>>({});
+  const [adjTapChecked, setAdjTapChecked] = useState(false);
+  const [qGapAns, setQGapAns] = useState<Record<string, string>>({});
+  const [townNotes, setTownNotes] = useState(["", "", ""]);
   const [showReading, setShowReading] = useState(true);
 
   const toggle = (setter: Dispatch<SetStateAction<number[]>>, idx: number) =>
@@ -691,6 +726,40 @@ export default function Lesson33() {
   const matchCScore = photoMatchC.filter((p) => matchC[p.photo] === p.place)
     .length;
   const tfScore = tfItems.filter((item, i) => tfAns[i] === item.answer).length;
+  const stressCScore = adjStressC.filter((item, i) => {
+    const sel = stressCSel[i] ?? [];
+    if (sel.length !== item.stressed.length) return false;
+    return item.stressed.every((idx, k) => sel[k] === idx);
+  }).length;
+
+  const adjTapKeys = northNorfolkAdjTap.flatMap((block) =>
+    block.tokens.map((tok, ti) => ({
+      key: `${block.place}-${ti}`,
+      adj: tok.adj,
+    })),
+  );
+  const adjTapScore = adjTapKeys.filter((t) => {
+    const on = Boolean(adjTapSel[t.key]);
+    return t.adj ? on : !on;
+  }).length;
+  const adjTapTotal = adjTapKeys.length;
+
+  const toggleStressC = (rowIdx: number, wordIdx: number) => {
+    setStressCChecked(false);
+    setStressCSel((prev) => {
+      const next = prev.map((row) => [...row]);
+      const row = next[rowIdx] ?? [];
+      next[rowIdx] = row.includes(wordIdx)
+        ? row.filter((i) => i !== wordIdx)
+        : [...row, wordIdx].sort((a, b) => a - b);
+      return next;
+    });
+  };
+
+  const toggleAdjTap = (key: string) => {
+    setAdjTapChecked(false);
+    setAdjTapSel((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   return (
     <div className="lesson22-page">
@@ -746,7 +815,7 @@ export default function Lesson33() {
           <a href="#l33-part-c">C Expensive</a>
           <a href="#l33c-opposites">Vocab 1–4</a>
           <a href="#l33c-reading">Reading 5–6</a>
-          <a href="#l33c-grammar">Grammar 7–10</a>
+          <a href="#l33c-grammar">Grammar 7–12</a>
           <a href="#l33-exit">Exit</a>
         </div>
       </section>
@@ -1823,6 +1892,13 @@ export default function Lesson33() {
           variant="photo"
           wide
         />
+        <LessonFigure
+          src={IMG31(lesson31Images.norfolkPhotosAbc)}
+          alt="North Norfolk photos A–C and Cromer on the map"
+          caption="Photos A–C · match with places 1–3"
+          variant="photo"
+          wide
+        />
         <button
           type="button"
           className="l25-cr-mini-btn"
@@ -1843,9 +1919,6 @@ export default function Lesson33() {
             ))}
           </div>
         )}
-        <p className="lesson22-section-desc" style={{ marginBottom: "0.75rem" }}>
-          Photos A–C (use the clues):
-        </p>
         <div className="l26-drill-list">
           {photoMatchC.map((p) => (
             <div key={p.photo} className="l26-drill-row">
@@ -1914,7 +1987,8 @@ export default function Lesson33() {
         </div>
 
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">6</strong> Read again. True or False?
+          <strong className="l31-ex-num">6</strong> Read the text again. Are the
+          sentences true (T) or false (F)?
         </p>
         <div className="l26-drill-list">
           {tfItems.map((item, i) => {
@@ -2001,7 +2075,8 @@ export default function Lesson33() {
           <h2>Position of adjectives</h2>
         </div>
         <p className="l31-ex-line">
-          <strong className="l31-ex-num">7</strong> Look at the grammar box.
+          <strong className="l31-ex-num">7</strong> Read the grammar box. Then
+          underline the adjectives in the text in Exercise 5.
         </p>
         <div className="l25-grammar-box">
           <div className="l25-grammar-label">Position of adjectives</div>
@@ -2030,89 +2105,428 @@ export default function Lesson33() {
                   There&apos;s an <strong>old</strong> cinema.
                 </span>
                 <span>
-                  There are <strong>cheap</strong> shops.
+                  There are <strong>cheap</strong> shops and restaurants.
                 </span>
               </div>
             </div>
           </div>
         </div>
+        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
+          <p>
+            <strong>Пояснення.</strong> Прикметник описує місце / річ.
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <strong>1. Після be</strong> (<em>is / are / isn&apos;t / aren&apos;t</em>
+            ):{" "}
+            <em>
+              It&apos;s <u>big</u>. This town is <u>busy</u>.
+            </em>
+            <br />
+            <span style={{ color: "var(--color-text-muted)" }}>
+              Формула: subject + be + adjective.
+            </span>
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <strong>2. Перед іменником</strong>:{" "}
+            <em>
+              a <u>quiet</u> town · an <u>old</u> cinema · cheap shops
+            </em>
+            .
+            <br />
+            <span style={{ color: "var(--color-text-muted)" }}>
+              Формула: a/an/the + adjective + noun. <em>a</em> →{" "}
+              <em>an</em> перед голосним звуком (<em>an old…</em>).
+            </span>
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <strong>Не так:</strong>{" "}
+            <em style={{ textDecoration: "line-through" }}>a town quiet</em> /{" "}
+            <em style={{ textDecoration: "line-through" }}>
+              It&apos;s a expensive
+            </em>
+            .
+          </p>
+        </blockquote>
+        <p className="lesson22-section-desc" style={{ marginTop: "1rem" }}>
+          Tap each adjective in the North Norfolk texts.
+        </p>
+        <div className="lesson22-prompt-grid">
+          {northNorfolkAdjTap.map((block) => (
+            <div key={block.place} className="lesson22-prompt-card">
+              <strong>
+                {block.n}. {block.place}
+              </strong>
+              <p
+                style={{
+                  margin: "0.65rem 0 0",
+                  lineHeight: 1.85,
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "0.2rem 0.25rem",
+                }}
+              >
+                {block.tokens.map((tok, ti) => {
+                  const key = `${block.place}-${ti}`;
+                  const on = Boolean(adjTapSel[key]);
+                  let cls = "l26-stress-syl";
+                  if (on) cls += " l26-stress-syl--on";
+                  if (adjTapChecked) {
+                    if (tok.adj && on) cls += " l26-stress-syl--ok";
+                    else if (on && !tok.adj) cls += " l26-stress-syl--err";
+                    else if (tok.adj && !on) cls += " l26-stress-syl--miss";
+                  }
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      className={cls}
+                      onClick={() => toggleAdjTap(key)}
+                      aria-pressed={on}
+                    >
+                      {tok.t}
+                    </button>
+                  );
+                })}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setAdjTapChecked(true)}
+          >
+            Check
+          </button>
+          {adjTapChecked && (
+            <span className="l22-score">
+              {adjTapScore} / {adjTapTotal}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              const next: Record<string, boolean> = {};
+              for (const block of northNorfolkAdjTap) {
+                block.tokens.forEach((tok, ti) => {
+                  if (tok.adj) next[`${block.place}-${ti}`] = true;
+                });
+              }
+              setAdjTapSel(next);
+              setAdjTapChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setAdjTapSel({});
+              setAdjTapChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">8</strong> Listen and notice the stress.
-          Repeat.
+          <strong className="l31-ex-num">8a</strong> Listen and underline the
+          stressed words.
         </p>
         <AudioBlock
           r={13}
-          exercise="3C · 8"
+          exercise="3C · 8a"
           title="Adjective + noun — sentence stress"
           transcript={
             <ol>
-              <li>This is a quiet town.</li>
-              <li>There are six small shops.</li>
-              <li>There are no hotels.</li>
-              <li>This town is busy.</li>
-              <li>There&apos;s a small cinema.</li>
+              {adjStressC.map((s) => (
+                <li key={s.n}>{s.words.join(" ")}</li>
+              ))}
             </ol>
           }
         />
-        <div className="l25-wordbox">
-          <span className="l25-wordbox-item">
-            This is a <strong>quiet</strong> town.
-          </span>
-          <span className="l25-wordbox-item">
-            There are <strong>six small</strong> shops.
-          </span>
-          <span className="l25-wordbox-item">
-            There are <strong>no</strong> hotels.
-          </span>
-          <span className="l25-wordbox-item">
-            This town is <strong>busy</strong>.
-          </span>
-          <span className="l25-wordbox-item">
-            There&apos;s a <strong>small</strong> cinema.
-          </span>
+        <p className="lesson22-section-desc" style={{ marginTop: "0.75rem" }}>
+          Tap the stressed word(s) in each sentence.
+        </p>
+        <div className="l26-stress-list">
+          {adjStressC.map((item, ji) => {
+            const sel = stressCSel[ji] ?? [];
+            const ok =
+              sel.length === item.stressed.length &&
+              item.stressed.every((v, k) => sel[k] === v);
+            return (
+              <div key={item.n} className="l26-stress-row">
+                <span className="l26-stress-letter">{item.n}</span>
+                <div className="l26-stress-parts">
+                  {item.words.map((word, wi) => {
+                    const on = sel.includes(wi);
+                    const should = item.stressed.includes(wi);
+                    let cls = "l26-stress-syl";
+                    if (on) cls += " l26-stress-syl--on";
+                    if (stressCChecked) {
+                      if (should && on) cls += " l26-stress-syl--ok";
+                      else if (on && !should) cls += " l26-stress-syl--err";
+                      else if (should && !on) cls += " l26-stress-syl--miss";
+                    }
+                    return (
+                      <span key={`${item.n}-${wi}`} className="l26-stress-chunk">
+                        <button
+                          type="button"
+                          className={cls}
+                          onClick={() => toggleStressC(ji, wi)}
+                          aria-pressed={on}
+                        >
+                          {word}
+                        </button>
+                        {wi < item.words.length - 1 ? (
+                          <span className="l26-stress-gap"> </span>
+                        ) : null}
+                      </span>
+                    );
+                  })}
+                </div>
+                {stressCChecked && (
+                  <span
+                    className={
+                      ok
+                        ? "l26-stress-mark l26-stress-mark--ok"
+                        : "l26-stress-mark"
+                    }
+                    aria-hidden="true"
+                  >
+                    {ok ? "✓" : "✗"}
+                  </span>
+                )}
+              </div>
+            );
+          })}
         </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setStressCChecked(true)}
+          >
+            Check
+          </button>
+          {stressCChecked && (
+            <span className="l22-score">
+              {stressCScore} / {adjStressC.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setStressCSel(adjStressC.map((s) => [...s.stressed]));
+              setStressCChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setStressCSel(adjStressC.map(() => []));
+              setStressCChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">8b</strong> Listen again and repeat.
+        </p>
+        <AudioBlock
+          r={13}
+          exercise="3C · 8b"
+          title="Listen again and repeat"
+        />
+
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
           <strong className="l31-ex-num">9</strong> Put the words in the correct
-          order.
+          order to make sentences.
         </p>
-        <L31SelectDrill
+        <WordOrderBoard
           items={wordOrderC}
-          answers={orderCAns}
-          setAnswers={setOrderCAns}
+          rows={orderCRows}
+          setRows={setOrderCRows}
           checked={orderCChecked}
           setChecked={setOrderCChecked}
-          labelKey={(d) => d.scramble ?? ""}
         />
+
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">10</strong> Ask your teacher and answer
-          about your town.
+          <strong className="l31-ex-num">10a</strong> Complete the questions about
+          places in your town. Use adjectives.
         </p>
-        <LessonFigure
-          src={IMG31(lesson31Images.tokyoFuji)}
-          alt="Tokyo skyline with Mount Fuji"
-          caption="Speaking cue · describe a city"
-          variant="photo"
-        />
-        <div className="l25-wordbox" style={{ marginBottom: "1rem" }}>
-          {questionStartersC.map((q) => (
-            <span key={q} className="l25-wordbox-item">
-              {q}
-            </span>
-          ))}
+        <div className="l26-drill-list">
+          {questionGapsC.map((q, i) => {
+            const two = "twoBlanks" in q && q.twoBlanks;
+            const mid = "mid" in q ? q.mid : undefined;
+            return (
+              <div
+                key={q.id}
+                className="l26-drill-row"
+                style={{ flexWrap: "wrap", alignItems: "center", gap: "0.35rem" }}
+              >
+                <strong className="l26-drill-prompt" style={{ flex: "0 0 auto" }}>
+                  {i + 1}.
+                </strong>
+                <span>{q.before}</span>
+                <input
+                  type="text"
+                  value={qGapAns[`${q.id}-a`] ?? ""}
+                  onChange={(e) =>
+                    setQGapAns((prev) => ({
+                      ...prev,
+                      [`${q.id}-a`]: e.target.value,
+                    }))
+                  }
+                  className="l22-gap-input"
+                  placeholder="______"
+                  aria-label={`Question ${i + 1} blank 1`}
+                  style={{ minWidth: "8rem", flex: "1 1 8rem" }}
+                />
+                {two && mid != null && (
+                  <>
+                    <span>{mid}</span>
+                    <input
+                      type="text"
+                      value={qGapAns[`${q.id}-b`] ?? ""}
+                      onChange={(e) =>
+                        setQGapAns((prev) => ({
+                          ...prev,
+                          [`${q.id}-b`]: e.target.value,
+                        }))
+                      }
+                      className="l22-gap-input"
+                      placeholder="______"
+                      aria-label={`Question ${i + 1} blank 2`}
+                      style={{ minWidth: "6rem", flex: "1 1 6rem" }}
+                    />
+                  </>
+                )}
+                <span>{q.after}</span>
+                <span
+                  style={{
+                    flex: "1 1 100%",
+                    color: "var(--color-text-muted)",
+                    fontSize: "0.85rem",
+                  }}
+                >
+                  e.g. {q.example}
+                </span>
+              </div>
+            );
+          })}
         </div>
-        <div className="lesson22-prompt-grid">
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              const next: Record<string, string> = {};
+              for (const q of questionGapsC) {
+                if ("twoBlanks" in q && q.twoBlanks) {
+                  const [a, b] = q.example.split("·").map((s) => s.trim());
+                  next[`${q.id}-a`] = a ?? q.example;
+                  next[`${q.id}-b`] = b ?? "";
+                } else {
+                  next[`${q.id}-a`] = q.example;
+                }
+              }
+              setQGapAns(next);
+            }}
+          >
+            Show examples
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => setQGapAns({})}
+          >
+            Reset
+          </button>
+        </div>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">10b</strong> Ask your teacher the
+          questions and answer theirs.
+        </p>
+        <blockquote className="l23-rule-quote">
+          <p>
+            <strong>Model.</strong> Teacher: <em>Is there a big hotel?</em> You:{" "}
+            <em>Yes, the City Hotel is big. / No, there are no big hotels.</em>
+            <br />
+            Teacher: <em>Is the cinema good?</em> You:{" "}
+            <em>Yes, it is. / No, it isn&apos;t.</em>
+          </p>
+        </blockquote>
+        <div className="lesson22-prompt-grid" style={{ marginTop: "0.85rem" }}>
           {speakC.map((p) => (
             <div key={p} className="lesson22-prompt-card">
               {p}
             </div>
           ))}
         </div>
-        <blockquote className="l23-rule-quote" style={{ marginTop: "1.25rem" }}>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">11</strong> Prepare. Choose three towns
+          or cities and make notes. Use Exercise 5 to help you.
+        </p>
+        <div className="l25-wordbox" style={{ marginBottom: "0.85rem" }}>
+          {prepareTownsC.map((t) => (
+            <span key={t} className="l25-wordbox-item">
+              {t}
+            </span>
+          ))}
+        </div>
+        <div className="lesson22-prompt-grid">
+          {[0, 1, 2].map((i) => (
+            <label key={i} className="lesson22-prompt-card">
+              <strong>Town / city {i + 1}</strong>
+              <textarea
+                value={townNotes[i] ?? ""}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setTownNotes((prev) => {
+                    const next = [...prev];
+                    next[i] = v;
+                    return next;
+                  });
+                }}
+                rows={4}
+                placeholder="shops · restaurants · parks · hotels…"
+                style={{
+                  width: "100%",
+                  marginTop: "0.5rem",
+                  resize: "vertical",
+                  font: "inherit",
+                }}
+              />
+            </label>
+          ))}
+        </div>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">12</strong> Speak. Describe your three
+          towns or cities to your teacher.
+        </p>
+        <LessonFigure
+          src={IMG31(lesson31Images.tokyoFuji)}
+          alt="Tokyo skyline with Mount Fuji"
+          caption="Speaking cue · describe towns / cities"
+          variant="photo"
+        />
+        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
           <p>
-            <strong>Model.</strong> Teacher: <em>Is there a big hotel?</em> You:{" "}
-            <em>Yes, the City Hotel is big. / No, there are no big hotels.</em>{" "}
-            Teacher: <em>Is the cinema good?</em> You:{" "}
-            <em>Yes, it is. / No, it isn&apos;t.</em>
+            <strong>Ideas.</strong>{" "}
+            <em>This town is quiet. There is a small train station…</em> /{" "}
+            <em>It&apos;s busy. There are cheap shops and a good market…</em>
           </p>
         </blockquote>
       </section>

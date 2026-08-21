@@ -66,6 +66,7 @@ export const lesson31Images = {
   townStreetCl: "town-street-cl.png",
   photosAbc: "photos-abc.png",
   northNorfolk: "north-norfolk.png",
+  norfolkPhotosAbc: "norfolk-photos-abc.png",
   brightonFlat: "brighton-flat.png",
   brightonRoomsAd: "brighton-rooms-ad.png",
   brightonIconsEk: "brighton-icons-ek.png",
@@ -1205,17 +1206,17 @@ export const northNorfolk = [
 export const photoMatchC = [
   {
     photo: "A",
-    hint: "small train station · quiet town",
+    hint: "small train station · “Way out”",
     place: "West Runton",
   },
   {
     photo: "B",
-    hint: "big hotel in the centre · old cinema",
+    hint: "big hotel with a tower",
     place: "Cromer",
   },
   {
     photo: "C",
-    hint: "busy market · cheap bookshops · park",
+    hint: "busy street · clock tower · Sheringham",
     place: "Sheringham",
   },
 ] as const;
@@ -1256,76 +1257,259 @@ export const tfItems = [
 export const wordOrderC = [
   {
     scramble: "expensive / This / restaurant / is",
-    options: [
-      "This restaurant is expensive.",
-      "This is restaurant expensive.",
-      "Expensive is this restaurant.",
-    ],
+    parts: ["This", "restaurant", "is", "expensive."] as const,
     answer: "This restaurant is expensive.",
   },
   {
     scramble: "small / park / is / There / a",
-    options: [
-      "There is a small park.",
-      "There a small park is.",
-      "Is there a small park.",
-    ],
+    parts: ["There", "is", "a", "small", "park."] as const,
     answer: "There is a small park.",
   },
   {
     scramble: "are / hotels / cheap / not / These",
-    options: [
-      "These hotels are not cheap.",
-      "These are hotels not cheap.",
-      "Not these hotels are cheap.",
-    ],
+    parts: ["These", "hotels", "are", "not", "cheap."] as const,
     answer: "These hotels are not cheap.",
   },
   {
     scramble: "busy / This / station / a / is",
-    options: [
-      "This is a busy station.",
-      "This station is a busy.",
-      "A busy this is station.",
-    ],
+    parts: ["This", "is", "a", "busy", "station."] as const,
     answer: "This is a busy station.",
   },
   {
     scramble: "big / not / is / supermarket / It / a",
-    options: [
-      "It is not a big supermarket.",
-      "It not is a big supermarket.",
-      "A big supermarket it is not.",
-    ],
+    parts: ["It", "is", "not", "a", "big", "supermarket."] as const,
     answer: "It is not a big supermarket.",
   },
   {
     scramble: "bank / new / Is / this / a ?",
-    options: [
-      "Is this a new bank?",
-      "Is a new this bank?",
-      "This is a new bank?",
-    ],
+    parts: ["Is", "this", "a", "new", "bank", "?"] as const,
     answer: "Is this a new bank?",
   },
   {
     scramble: "Is / your / a / station / big / town / in / there ?",
-    options: [
-      "Is there a big station in your town?",
-      "Is a big station there in your town?",
-      "There is a big station in your town?",
-    ],
+    parts: ["Is", "there", "a", "big", "station", "in", "your", "town", "?"] as const,
     answer: "Is there a big station in your town?",
   },
   {
     scramble: "restaurants / good / town / your / there / any / in / Are ?",
-    options: [
-      "Are there any good restaurants in your town?",
-      "Are any good restaurants there in your town?",
-      "There are any good restaurants in your town?",
-    ],
+    parts: [
+      "Are",
+      "there",
+      "any",
+      "good",
+      "restaurants",
+      "in",
+      "your",
+      "town",
+      "?",
+    ] as const,
     answer: "Are there any good restaurants in your town?",
   },
+] as const;
+
+/** 8 · tap stressed words (R13) */
+export type AdjStressItem = {
+  n: number;
+  words: readonly string[];
+  /** indices of stressed words in `words` */
+  stressed: readonly number[];
+};
+
+export const adjStressC: readonly AdjStressItem[] = [
+  {
+    n: 1,
+    words: ["This", "is", "a", "quiet", "town."],
+    stressed: [3],
+  },
+  {
+    n: 2,
+    words: ["There", "are", "six", "small", "shops."],
+    stressed: [3],
+  },
+  {
+    n: 3,
+    words: ["There", "are", "no", "hotels."],
+    stressed: [2],
+  },
+  {
+    n: 4,
+    words: ["This", "town", "is", "busy."],
+    stressed: [3],
+  },
+  {
+    n: 5,
+    words: ["There's", "a", "small", "cinema."],
+    stressed: [2],
+  },
+] as const;
+
+/** 7 · tap / underline adjectives in the North Norfolk texts */
+export type NorfolkAdjToken = { t: string; adj: boolean };
+
+export const northNorfolkAdjTap: readonly {
+  n: number;
+  place: string;
+  tokens: readonly NorfolkAdjToken[];
+}[] = [
+  {
+    n: 1,
+    place: "West Runton",
+    tokens: [
+      { t: "This", adj: false },
+      { t: "is", adj: false },
+      { t: "a", adj: false },
+      { t: "quiet", adj: true },
+      { t: "town.", adj: false },
+      { t: "There", adj: false },
+      { t: "is", adj: false },
+      { t: "a", adj: false },
+      { t: "café,", adj: false },
+      { t: "a", adj: false },
+      { t: "good", adj: true },
+      { t: "restaurant", adj: false },
+      { t: "and", adj: false },
+      { t: "six", adj: false },
+      { t: "small", adj: true },
+      { t: "shops.", adj: false },
+      { t: "There", adj: false },
+      { t: "are", adj: false },
+      { t: "no", adj: false },
+      { t: "hotels.", adj: false },
+      { t: "There", adj: false },
+      { t: "is", adj: false },
+      { t: "a", adj: false },
+      { t: "small", adj: true },
+      { t: "train", adj: false },
+      { t: "station.", adj: false },
+    ],
+  },
+  {
+    n: 2,
+    place: "Sheringham",
+    tokens: [
+      { t: "This", adj: false },
+      { t: "town", adj: false },
+      { t: "is", adj: false },
+      { t: "busy.", adj: true },
+      { t: "It's", adj: false },
+      { t: "big!", adj: true },
+      { t: "There", adj: false },
+      { t: "is", adj: false },
+      { t: "a", adj: false },
+      { t: "good", adj: true },
+      { t: "market", adj: false },
+      { t: "on", adj: false },
+      { t: "Saturdays,", adj: false },
+      { t: "and", adj: false },
+      { t: "there", adj: false },
+      { t: "are", adj: false },
+      { t: "coffee", adj: false },
+      { t: "shops,", adj: false },
+      { t: "cheap", adj: true },
+      { t: "bookshops", adj: false },
+      { t: "and", adj: false },
+      { t: "more", adj: false },
+      { t: "small", adj: true },
+      { t: "shops.", adj: false },
+      { t: "There", adj: false },
+      { t: "are", adj: false },
+      { t: "hotels,", adj: false },
+      { t: "restaurants", adj: false },
+      { t: "and", adj: false },
+      { t: "cafés.", adj: false },
+      { t: "There", adj: false },
+      { t: "is", adj: false },
+      { t: "also", adj: false },
+      { t: "a", adj: false },
+      { t: "park.", adj: false },
+    ],
+  },
+  {
+    n: 3,
+    place: "Cromer",
+    tokens: [
+      { t: "This", adj: false },
+      { t: "town", adj: false },
+      { t: "is", adj: false },
+      { t: "good", adj: true },
+      { t: "for", adj: false },
+      { t: "holidays.", adj: false },
+      { t: "It", adj: false },
+      { t: "isn't", adj: false },
+      { t: "expensive.", adj: true },
+      { t: "There", adj: false },
+      { t: "are", adj: false },
+      { t: "cheap", adj: true },
+      { t: "shops", adj: false },
+      { t: "and", adj: false },
+      { t: "restaurants", adj: false },
+      { t: "here.", adj: false },
+      { t: "There", adj: false },
+      { t: "is", adj: false },
+      { t: "an", adj: false },
+      { t: "old", adj: true },
+      { t: "cinema", adj: false },
+      { t: "and", adj: false },
+      { t: "there", adj: false },
+      { t: "is", adj: false },
+      { t: "a", adj: false },
+      { t: "big", adj: true },
+      { t: "hotel", adj: false },
+      { t: "in", adj: false },
+      { t: "the", adj: false },
+      { t: "centre.", adj: false },
+    ],
+  },
+] as const;
+
+export const questionGapsC = [
+  {
+    id: "q1",
+    before: "Is there a",
+    after: "?",
+    example: "big hotel",
+  },
+  {
+    id: "q2",
+    before: "Is the",
+    after: "?",
+    example: "cinema good",
+  },
+  {
+    id: "q3",
+    before: "Is there a",
+    after: "?",
+    example: "cheap supermarket",
+  },
+  {
+    id: "q4",
+    before: "Are there any",
+    after: "in your town?",
+    example: "good restaurants",
+  },
+  {
+    id: "q5",
+    before: "Is your town's",
+    after: "?",
+    example: "park big",
+  },
+  {
+    id: "q6",
+    before: "Is the",
+    mid: "in your town",
+    after: "?",
+    example: "station · new",
+    twoBlanks: true as const,
+  },
+] as const;
+
+export const prepareTownsC = [
+  "shops",
+  "restaurants",
+  "parks",
+  "hotels",
+  "cinemas",
+  "markets",
 ] as const;
 
 export const speakC = [
@@ -1333,7 +1517,6 @@ export const speakC = [
   "Is the cinema good?",
   "Are there any cheap shops?",
   "Is your town busy or quiet?",
-  "Describe your town in 4–6 sentences.",
 ] as const;
 
 export const questionStartersC = [
