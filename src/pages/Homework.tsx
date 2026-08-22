@@ -3,6 +3,25 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "32",
+    title: "WH-questions · was / were",
+    href: "/hw-32",
+    tasks: [
+      {
+        type: "text",
+        text: "Task 1: WH-questions — be/do/does + match answer to question",
+      },
+      {
+        type: "text",
+        text: "Task 2: was/were — choose + put words in order",
+      },
+      {
+        type: "text",
+        text: "Send results to teacher",
+      },
+    ],
+  },
+  {
     id: "31",
     title: "Town & home",
     href: "/hw-31",

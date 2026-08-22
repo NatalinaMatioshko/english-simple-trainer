@@ -30,6 +30,7 @@ import Lesson30 from "../pages/Lesson30";
 import HW30 from "../pages/HW30";
 import Lesson31 from "../pages/Lesson31";
 import HW31 from "../pages/HW31";
+import HW32 from "../pages/HW32";
 import Lesson32 from "../pages/Lesson32";
 import Lesson33 from "../pages/Lesson33";
 import Lesson34 from "../pages/Lesson34";
@@ -76,6 +77,7 @@ function AppRoutes() {
         <Route path="/lesson-31" element={<Lesson31 />} />
         <Route path="/hw-31" element={<HW31 />} />
         <Route path="/lesson-32" element={<Lesson32 />} />
+        <Route path="/hw-32" element={<HW32 />} />
         <Route path="/lesson-33" element={<Lesson33 />} />
         <Route path="/lesson-34" element={<Lesson34 />} />
         <Route path="/a1-level-test" element={<A1LevelTest />} />

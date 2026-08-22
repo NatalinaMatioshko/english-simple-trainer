@@ -992,6 +992,9 @@ export default function Lesson32() {
           <Link className="l25-cr-mini-btn" to="/trainer">
             Trainer
           </Link>
+          <Link className="l25-cr-mini-btn" to="/hw-32">
+            HW32 recap
+          </Link>
           <Link className="l25-cr-mini-btn" to="/hw-31">
             HW31 crossword
           </Link>

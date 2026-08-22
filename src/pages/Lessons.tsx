@@ -220,8 +220,9 @@ const lessons: LessonEntry[] = [
     topic:
       "Who · What · Where · When · Why · How often · do / does / to be · was / were",
     description:
-      "Part 1: WH-questions + do/does/to be (не новий час). Part 2: was/were (past of to be). Practice + speaking. Unit 3B → Lesson 33 · Unit 3C → Lesson 34.",
+      "Part 1: WH-questions + do/does/to be (не новий час). Part 2: was/were (past of to be). Practice + speaking. HW: recap drills. Unit 3B → Lesson 33 · Unit 3C → Lesson 34.",
     lessonPath: "/lesson-32",
+    homeworkPath: "/hw-32",
   },
   {
     id: "33",
