@@ -232,6 +232,7 @@ const lessons: LessonEntry[] = [
     description:
       "Unit 3B: Is there wifi? — rooms & things in a home, Is/Are there, How many, flat listening (Jakub & William), grammar & speaking for one student.",
     lessonPath: "/lesson-33",
+    homeworkPath: "/hw-33",
   },
   {
     id: "34",

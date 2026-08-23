@@ -1716,6 +1716,9 @@ export default function Lesson33() {
           <Link className="l25-cr-mini-btn" to="/hw-31">
             HW31 crossword
           </Link>
+          <Link className="l25-cr-mini-btn" to="/hw-33">
+            HW33
+          </Link>
           <Link className="l25-cr-mini-btn" to="/lesson-32">
             ← Lesson 32
           </Link>

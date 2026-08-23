@@ -272,42 +272,37 @@ function L31SelectDrill({
   );
 }
 
-function VocabFlipGrid({
-  items,
+function AdjFlipLabel({
+  en,
+  ua,
   flipped,
-  toggle,
+  onToggle,
 }: {
-  items: readonly { en: string; ua: string }[];
-  flipped: number[];
-  toggle: (idx: number) => void;
+  en: string;
+  ua: string;
+  flipped: boolean;
+  onToggle: () => void;
 }) {
   return (
-    <div className="l22-vocab-grid">
-      {items.map((item, idx) => {
-        const isFlipped = flipped.includes(idx);
-        return (
-          <button
-            key={item.en}
-            type="button"
-            className={`l22-vocab-card ${isFlipped ? "l22-vocab-card--flipped" : ""}`}
-            onClick={() => toggle(idx)}
-            aria-pressed={isFlipped}
-          >
-            <div className="l22-vocab-inner">
-              <div className="l22-vocab-face l22-vocab-front">
-                <span className="l22-vocab-label">Українською</span>
-                <strong>{item.ua}</strong>
-                <span className="l22-vocab-hint">tap to flip</span>
-              </div>
-              <div className="l22-vocab-face l22-vocab-back">
-                <span className="l22-vocab-label">English</span>
-                <strong>{item.en}</strong>
-              </div>
-            </div>
-          </button>
-        );
-      })}
-    </div>
+    <button
+      type="button"
+      className={`l22-vocab-card l31-adj-flip ${flipped ? "l22-vocab-card--flipped" : ""}`}
+      onClick={onToggle}
+      aria-pressed={flipped}
+      aria-label={`${ua} · ${en}`}
+    >
+      <div className="l22-vocab-inner">
+        <div className="l22-vocab-face l22-vocab-front">
+          <span className="l22-vocab-label">Українською</span>
+          <strong>{ua}</strong>
+          <span className="l22-vocab-hint">tap → English</span>
+        </div>
+        <div className="l22-vocab-face l22-vocab-back">
+          <span className="l22-vocab-label">English</span>
+          <strong>{en}</strong>
+        </div>
+      </div>
+    </button>
   );
 }
 
@@ -572,7 +567,7 @@ function PartBanner({
 
 
 export default function Lesson34() {
-  const [vocabC, setVocabC] = useState<number[]>([]);
+  const [adjPicFlip, setAdjPicFlip] = useState<Record<string, boolean>>({});
   const [oppAns, setOppAns] = useState(() =>
     Array(oppositeGaps.length).fill(""),
   );
@@ -595,10 +590,8 @@ export default function Lesson34() {
   const [townNotes, setTownNotes] = useState(["", "", ""]);
   const [showReading, setShowReading] = useState(true);
 
-  const toggle = (setter: Dispatch<SetStateAction<number[]>>, idx: number) =>
-    setter((prev) =>
-      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx],
-    );
+  const toggleAdjPic = (key: string) =>
+    setAdjPicFlip((prev) => ({ ...prev, [key]: !prev[key] }));
 
   const matchCScore = photoMatchC.filter((p) => matchC[p.photo] === p.place)
     .length;
@@ -726,39 +719,41 @@ export default function Lesson34() {
           <strong className="l31-ex-num">1</strong> Look at the pictures. Study
           the opposite adjectives.
         </p>
+        <p className="lesson22-section-desc">
+          Натисни слово під картинкою — спочатку українською, потім англійською.
+        </p>
         <div>
-          {oppositePairs.map((p) => (
+          {oppositePairs.map((p, pi) => (
             <div key={p.a} className="l31-adj-row">
-              <div className="l31-adj-row-label">
-                {p.a} ↔ {p.b}{" "}
-                <span style={{ fontWeight: 500 }}>
-                  ({p.uaA} ↔ {p.uaB})
-                </span>
-              </div>
               <div className="l31-adj-card">
-                <strong>{p.a}</strong>
                 <img
                   src={IMG31(p.imgA)}
                   alt={`${p.a} place`}
                   loading="lazy"
                 />
+                <AdjFlipLabel
+                  en={p.a}
+                  ua={p.uaA}
+                  flipped={Boolean(adjPicFlip[`${pi}-a`])}
+                  onToggle={() => toggleAdjPic(`${pi}-a`)}
+                />
               </div>
               <div className="l31-adj-card">
-                <strong>{p.b}</strong>
                 <img
                   src={IMG31(p.imgB)}
                   alt={`${p.b} place`}
                   loading="lazy"
                 />
+                <AdjFlipLabel
+                  en={p.b}
+                  ua={p.uaB}
+                  flipped={Boolean(adjPicFlip[`${pi}-b`])}
+                  onToggle={() => toggleAdjPic(`${pi}-b`)}
+                />
               </div>
             </div>
           ))}
         </div>
-        <VocabFlipGrid
-          items={adjSentences}
-          flipped={vocabC}
-          toggle={(i) => toggle(setVocabC, i)}
-        />
 
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
           <strong className="l31-ex-num">2</strong> Listen and repeat the

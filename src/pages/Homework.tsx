@@ -3,6 +3,25 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "33",
+    title: "Is there wifi?",
+    href: "/hw-33",
+    tasks: [
+      {
+        type: "text",
+        text: "Task 1: Is there / Are there — There is / There are",
+      },
+      {
+        type: "text",
+        text: "Task 2: Brighton flat — answer questions + a / an",
+      },
+      {
+        type: "text",
+        text: "Send results to teacher",
+      },
+    ],
+  },
+  {
     id: "32",
     title: "WH-questions · was / were",
     href: "/hw-32",

@@ -782,6 +782,30 @@
   image-rendering: auto;
 }
 
+.l31-adj-flip {
+  width: 100%;
+  min-height: 5.5rem;
+  margin-top: 0.35rem;
+}
+
+.l31-adj-flip .l22-vocab-inner {
+  min-height: 5.5rem;
+}
+
+.l31-adj-flip .l22-vocab-face {
+  padding: 0.65rem 0.5rem;
+  border-radius: 12px;
+}
+
+.l31-adj-flip .l22-vocab-front strong,
+.l31-adj-flip .l22-vocab-back strong {
+  font-size: 1rem;
+}
+
+.l31-adj-flip .l22-vocab-hint {
+  font-size: 0.65rem;
+}
+
 .l31-adj-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
