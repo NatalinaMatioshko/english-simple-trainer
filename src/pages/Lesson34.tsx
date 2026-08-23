@@ -17,8 +17,9 @@ import {
   oppositePairs,
   photoMatchC,
   prepareTownsC,
+  presentContinuousDoing,
+  presentContinuousWordBank,
   questionGapsC,
-  speakC,
   tfItems,
   warmUpC,
   wordOrderC,
@@ -31,6 +32,20 @@ import "../styles/lesson31.css";
 const IMG31 = (file: string) =>
   `${import.meta.env.BASE_URL}images/lesson31/${file}`;
 
+const IMG34 = (file: string) =>
+  `${import.meta.env.BASE_URL}images/lesson34/${file}`;
+
+function normIngAnswer(raw: string): string {
+  return raw.trim().toLowerCase().replace(/[.!?]+$/, "");
+}
+
+function ingAnswerOk(raw: string, answer: string): boolean {
+  const n = normIngAnswer(raw);
+  if (!n) return false;
+  const base = answer.replace(/ing$/, "");
+  return n === answer || n === base;
+}
+
 function LessonFigure({
   src,
   alt,
@@ -42,7 +57,7 @@ function LessonFigure({
   alt: string;
   caption?: string;
   wide?: boolean;
-  variant?: "default" | "map" | "photo";
+  variant?: "default" | "map" | "photo" | "worksheet";
 }) {
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -63,6 +78,7 @@ function LessonFigure({
     wide ? "l31-figure--wide" : "",
     variant === "map" ? "l31-figure--map" : "",
     variant === "photo" ? "l31-figure--photo" : "",
+    variant === "worksheet" ? "l31-figure--worksheet" : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -498,8 +514,6 @@ function PartBanner({
   );
 }
 
-
-
 export default function Lesson34() {
   const [adjPicFlip, setAdjPicFlip] = useState<Record<string, boolean>>({});
   const [oppAns, setOppAns] = useState(() =>
@@ -523,6 +537,8 @@ export default function Lesson34() {
   const [qGapAns, setQGapAns] = useState<Record<string, string>>({});
   const [townNotes, setTownNotes] = useState(["", "", ""]);
   const [showReading, setShowReading] = useState(true);
+  const [pcDoingAns, setPcDoingAns] = useState<Record<number, string>>({});
+  const [pcDoingChecked, setPcDoingChecked] = useState(false);
 
   const toggleAdjPic = (key: string) =>
     setAdjPicFlip((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -547,6 +563,10 @@ export default function Lesson34() {
     return t.adj ? on : !on;
   }).length;
   const adjTapTotal = adjTapKeys.length;
+
+  const pcDoingScore = presentContinuousDoing.filter((item) =>
+    ingAnswerOk(pcDoingAns[item.n] ?? "", item.answer),
+  ).length;
 
   const toggleStressC = (rowIdx: number, wordIdx: number) => {
     setStressCChecked(false);
@@ -614,6 +634,7 @@ export default function Lesson34() {
           <a href="#l34c-opposites">Vocab 1–4</a>
           <a href="#l34c-reading">Reading 5–6</a>
           <a href="#l34c-grammar">Grammar 7–12</a>
+          <a href="#l34-present-continuous">Present continuous</a>
           <a href="#l34-exit">Exit</a>
         </div>
       </section>
@@ -644,9 +665,6 @@ export default function Lesson34() {
         <div className="lesson22-section-head">
           <p className="page-kicker">C2 · Vocabulary</p>
           <h2>Describing places · opposites</h2>
-          <p className="lesson22-section-desc">
-            Opposite adjective pairs · listen &amp; repeat · complete · speak.
-          </p>
         </div>
 
         <p className="l31-ex-line">
@@ -932,8 +950,8 @@ export default function Lesson34() {
           <h2>Position of adjectives</h2>
         </div>
         <p className="l31-ex-line">
-          <strong className="l31-ex-num">7</strong> Read the grammar box. Then
-          underline the adjectives in the text in Exercise 5.
+          <strong className="l31-ex-num">7</strong> Read the grammar box. Tap
+          each adjective in the North Norfolk text (Exercise 5).
         </p>
         <div className="l25-grammar-box">
           <div className="l25-grammar-label">Position of adjectives</div>
@@ -1004,10 +1022,7 @@ export default function Lesson34() {
             .
           </p>
         </blockquote>
-        <p className="lesson22-section-desc" style={{ marginTop: "1rem" }}>
-          Tap each adjective in the North Norfolk texts.
-        </p>
-        <div className="lesson22-prompt-grid">
+        <div className="lesson22-prompt-grid" style={{ marginTop: "1rem" }}>
           {northNorfolkAdjTap.map((block) => (
             <div key={block.place} className="lesson22-prompt-card">
               <strong>
@@ -1106,7 +1121,7 @@ export default function Lesson34() {
           }
         />
         <p className="lesson22-section-desc" style={{ marginTop: "0.75rem" }}>
-          Tap the stressed word(s) in each sentence.
+          Натисни наголосні слова — як підкреслення в підручнику.
         </p>
         <div className="l26-stress-list">
           {adjStressC.map((item, ji) => {
@@ -1196,10 +1211,8 @@ export default function Lesson34() {
           </button>
         </div>
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
-          <strong className="l31-ex-num">8b</strong> Listen again and repeat.
-        </p>
-        <p className="lesson22-section-desc">
-          Use the player in <strong>8a</strong> again and repeat each sentence.
+          <strong className="l31-ex-num">8b</strong> Listen again and repeat —
+          use the player in <strong>8a</strong>.
         </p>
 
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
@@ -1310,7 +1323,7 @@ export default function Lesson34() {
 
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
           <strong className="l31-ex-num">10b</strong> Ask your teacher the
-          questions and answer theirs.
+          questions from <strong>10a</strong> and answer theirs.
         </p>
         <blockquote className="l23-rule-quote">
           <p>
@@ -1321,13 +1334,6 @@ export default function Lesson34() {
             <em>Yes, it is. / No, it isn&apos;t.</em>
           </p>
         </blockquote>
-        <div className="lesson22-prompt-grid" style={{ marginTop: "0.85rem" }}>
-          {speakC.map((p) => (
-            <div key={p} className="lesson22-prompt-card">
-              {p}
-            </div>
-          ))}
-        </div>
 
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
           <strong className="l31-ex-num">11</strong> Prepare. Choose three towns
@@ -1386,6 +1392,264 @@ export default function Lesson34() {
         </blockquote>
       </section>
 
+      {/* ── Present continuous ───────────────────────────────── */}
+      <section id="l34-present-continuous" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Grammar · preview</p>
+          <h2>Present continuous</h2>
+          <p className="lesson22-section-desc">
+            <strong>am / is / are + verb-ing</strong> — дія зараз, у момент
+            мовлення.
+          </p>
+        </div>
+
+        <div className="l25-grammar-box">
+          <div className="l25-grammar-label">Present continuous</div>
+          <div className="l25-grammar-rows">
+            <div className="l25-gr-row l25-gr-row--pos">
+              <span className="l25-gr-sign">+</span>
+              <div className="l25-gr-cells">
+                <span>
+                  I&apos;m <strong>working</strong>.
+                </span>
+                <span>
+                  She&apos;s <strong>studying</strong> English.
+                </span>
+                <span>
+                  They&apos;re <strong>watching</strong> TV.
+                </span>
+              </div>
+            </div>
+            <div className="l25-gr-row l25-gr-row--neg">
+              <span className="l25-gr-sign">−</span>
+              <div className="l25-gr-cells">
+                <span>
+                  I&apos;m <strong>not working</strong>.
+                </span>
+                <span>
+                  He <strong>isn&apos;t sleeping</strong>.
+                </span>
+                <span>
+                  We <strong>aren&apos;t listening</strong>.
+                </span>
+              </div>
+            </div>
+            <div className="l25-gr-row l25-gr-row--q">
+              <span className="l25-gr-sign">?</span>
+              <div className="l25-gr-cells">
+                <span>
+                  <strong>Are you listening</strong>?
+                </span>
+                <span className="l25-gr-answer">
+                  Yes, <strong>I am</strong>. / No, <strong>I&apos;m not</strong>.
+                </span>
+              </div>
+            </div>
+            <div className="l25-gr-row l25-gr-row--where">
+              <span className="l25-gr-sign">what</span>
+              <div className="l25-gr-cells">
+                <span>
+                  <strong>What are you doing</strong>?
+                </span>
+                <span className="l25-gr-answer">
+                  I&apos;m <strong>cooking</strong> dinner.
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="l25-short-forms">
+            <span className="l25-sf-label">Short forms:</span>
+            <span>
+              <strong>I&apos;m</strong> = I am
+            </span>
+            <span>
+              <strong>She&apos;s</strong> = She is
+            </span>
+            <span>
+              <strong>They&apos;re</strong> = They are
+            </span>
+            <span>
+              <strong>isn&apos;t</strong> = is not
+            </span>
+            <span>
+              <strong>aren&apos;t</strong> = are not
+            </span>
+          </div>
+        </div>
+
+        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
+          <p>
+            <strong>Пояснення.</strong> Present Continuous описує те, що
+            відбувається <em>зараз</em> — у момент, коли ми говоримо.
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <strong>Формула:</strong>{" "}
+            <em>am / is / are + verb-ing</em>
+            <br />
+            <span style={{ color: "var(--color-text-muted)" }}>
+              I → <em>am</em> · he / she / it → <em>is</em> · you / we / they →{" "}
+              <em>are</em>
+            </span>
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <strong>Коли використовуємо:</strong> дія в процесі зараз.
+            <br />
+            <em>
+              I&apos;m <u>studying</u> now. She&apos;s <u>working</u> at the
+              moment.
+            </em>
+            <br />
+            <span style={{ color: "var(--color-text-muted)" }}>
+              Часті слова: <em>now</em>, <em>at the moment</em>, <em>today</em>.
+            </span>
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <strong>−ing:</strong>{" "}
+            <em>work → working</em> · <em>live → living</em> ·{" "}
+            <em>run → running</em> · <em>study → studying</em>
+            <br />
+            <span style={{ color: "var(--color-text-muted)" }}>
+              Прибираємо <em>-e</em> (<em>live → living</em>). Podvojujemo
+              приголосну після короткого голосного (<em>run → running</em>).
+            </span>
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <strong>Present simple vs continuous:</strong>{" "}
+            <em>I work</em> (зазвичай, регулярно) ·{" "}
+            <em>I&apos;m working</em> (зараз, у цей момент).
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <strong>Не так:</strong>{" "}
+            <em style={{ textDecoration: "line-through" }}>I working</em> /{" "}
+            <em style={{ textDecoration: "line-through" }}>He is work</em> /{" "}
+            <em style={{ textDecoration: "line-through" }}>
+              She is read now
+            </em>
+            .
+          </p>
+        </blockquote>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">Practise</strong> What are they doing?
+        </p>
+        <p className="lesson22-section-desc">
+          Complete the sentences using the verbs from the word bank in present
+          continuous. Натисни на картинку, щоб відкрити її в повному розмірі.
+        </p>
+        <LessonFigure
+          src={IMG34("what-are-they-doing.png")}
+          alt="What are they doing? — house scene with numbered actions"
+          caption="What are they doing? · tap to zoom"
+          wide
+          variant="worksheet"
+        />
+        <div className="l25-wordbox" style={{ marginTop: "1rem" }}>
+          {presentContinuousWordBank.map((w) => (
+            <span key={w} className="l25-wordbox-item">
+              {w}
+            </span>
+          ))}
+        </div>
+        <div className="l31-pc-doing-grid">
+          {presentContinuousDoing.map((item) => {
+            const val = pcDoingAns[item.n] ?? "";
+            const ok =
+              pcDoingChecked && ingAnswerOk(val, item.answer);
+            const err = pcDoingChecked && val.trim() && !ok;
+            const inputCls = [
+              "l22-gap-input",
+              ok ? "is-ok" : "",
+              err ? "is-err" : "",
+            ]
+              .filter(Boolean)
+              .join(" ");
+            return (
+              <p key={item.n} className="l31-pc-doing-row">
+                <strong>{item.n}.</strong>
+                <span>{item.before}</span>
+                <input
+                  type="text"
+                  value={val}
+                  onChange={(e) => {
+                    setPcDoingChecked(false);
+                    setPcDoingAns((prev) => ({
+                      ...prev,
+                      [item.n]: e.target.value,
+                    }));
+                  }}
+                  className={inputCls}
+                  placeholder="…ing"
+                  aria-label={`Sentence ${item.n}`}
+                />
+                <span>{item.after}</span>
+              </p>
+            );
+          })}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setPcDoingChecked(true)}
+          >
+            Check
+          </button>
+          {pcDoingChecked && (
+            <span className="l22-score">
+              {pcDoingScore} / {presentContinuousDoing.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setPcDoingAns(
+                Object.fromEntries(
+                  presentContinuousDoing.map((item) => [
+                    item.n,
+                    item.answer,
+                  ]),
+                ),
+              );
+              setPcDoingChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setPcDoingAns({});
+              setPcDoingChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">Speak</strong> Describe the pictures.
+        </p>
+        <p className="lesson22-section-desc">
+          What is everyone doing? Say sentences in present continuous — to your
+          teacher. Натисни на картинку, щоб відкрити її в повному розмірі.
+        </p>
+        <div className="l31-pc-picture-row">
+          <LessonFigure
+            src={IMG34("describe-the-picture.png")}
+            alt="Describe the picture — busy town street with named people"
+            caption="Describe the picture · tap to zoom"
+            variant="worksheet"
+          />
+          <LessonFigure
+            src={IMG34("summer-in-the-park.png")}
+            alt="Summer in the park — children doing activities"
+            caption="Summer in the Park · tap to zoom"
+            variant="worksheet"
+          />
+        </div>
+      </section>
 
       {/* ── Exit ─────────────────────────────────────────────── */}
       <section id="l34-exit" className="lesson22-block panel">

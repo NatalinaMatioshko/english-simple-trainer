@@ -508,6 +508,71 @@
   max-width: min(100%, 1000px);
 }
 
+.l31-figure--worksheet img {
+  max-width: min(100%, 920px);
+  width: 100%;
+  height: auto;
+}
+
+.l31-pc-doing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 0.65rem 1rem;
+  margin-top: 1rem;
+}
+
+.l31-pc-doing-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.l31-pc-doing-row strong {
+  min-width: 1.5rem;
+}
+
+.l31-pc-doing-row .l22-gap-input {
+  min-width: 6.5rem;
+  flex: 1 1 6.5rem;
+  max-width: 10rem;
+}
+
+.l31-pc-doing-row .l22-gap-input.is-ok {
+  border-color: var(--color-success, #16a34a);
+  background: color-mix(in srgb, #22c55e 10%, var(--color-surface, #fff));
+}
+
+.l31-pc-doing-row .l22-gap-input.is-err {
+  border-color: var(--color-error, #dc2626);
+  background: color-mix(in srgb, #ef4444 8%, var(--color-surface, #fff));
+}
+
+.l31-pc-picture-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: start;
+}
+
+.l31-pc-picture-row .l31-figure {
+  margin: 0;
+}
+
+.l31-pc-picture-row .l31-figure--worksheet img {
+  max-width: 100%;
+}
+
+@media (max-width: 820px) {
+  .l31-pc-picture-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Book-style vocab box (Rooms / Things) for flat match A–K */
 .l31-vocab-box {
   margin: 0.85rem 0 0;

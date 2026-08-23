@@ -1216,7 +1216,7 @@ export const photoMatchC = [
   },
   {
     photo: "C",
-    hint: "busy street · clock tower · Sheringham",
+    hint: "busy street · clock tower",
     place: "Sheringham",
   },
 ] as const;
@@ -1533,6 +1533,54 @@ export const exitQs = [
   "Name 4 rooms + 4 things in a home.",
   "Say 5 opposite adjective pairs.",
   "be + adj / adj + noun — one example each.",
+] as const;
+
+/** Present continuous · What are they doing? (Lesson 34) */
+export const presentContinuousWordBank = [
+  "sing",
+  "drink",
+  "take",
+  "dig",
+  "talk",
+  "mock",
+  "play",
+  "ask",
+  "shout",
+  "sleep",
+  "cradle",
+  "ride",
+  "swim",
+  "feed",
+  "drive",
+  "fly",
+  "cry",
+  "run",
+] as const;
+
+export const presentContinuousDoing = [
+  { n: 1, before: "They are", after: ".", answer: "flying" },
+  { n: 2, before: "It is", after: ".", answer: "sleeping" },
+  { n: 3, before: "He is", after: " a truck.", answer: "driving" },
+  { n: 4, before: "He is", after: ".", answer: "sleeping" },
+  { n: 5, before: "They are", after: ".", answer: "flying" },
+  { n: 6, before: "She is", after: ".", answer: "shouting" },
+  { n: 7, before: "She is", after: " on the phone.", answer: "talking" },
+  { n: 8, before: "She is", after: " for silence.", answer: "asking" },
+  { n: 9, before: "She is", after: " the birds.", answer: "feeding" },
+  { n: 10, before: "It is", after: ".", answer: "singing" },
+  { n: 11, before: "He is", after: " a girl.", answer: "mocking" },
+  { n: 12, before: "She is", after: ".", answer: "crying" },
+  { n: 13, before: "He is", after: " the drums.", answer: "playing" },
+  { n: 14, before: "He is", after: " the trumpet.", answer: "playing" },
+  { n: 15, before: "He is", after: ".", answer: "swimming" },
+  { n: 16, before: "They are", after: " water.", answer: "drinking" },
+  { n: 17, before: "He is", after: ".", answer: "running" },
+  { n: 18, before: "He is", after: " football.", answer: "playing" },
+  { n: 19, before: "She is", after: " a baby.", answer: "cradling" },
+  { n: 20, before: "He is", after: " a photo.", answer: "taking" },
+  { n: 21, before: "She is", after: " with a teddy.", answer: "playing" },
+  { n: 22, before: "He is", after: " a rocking horse.", answer: "riding" },
+  { n: 23, before: "He is", after: " a hole.", answer: "digging" },
 ] as const;
 
 /* ── Warm-up · Fix the mistakes (Friend & Family) ─────────────── */
