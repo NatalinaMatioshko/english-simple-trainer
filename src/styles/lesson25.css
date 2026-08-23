@@ -811,6 +811,27 @@ details[open] .l25-details-toggle::after {
   font-weight: 600;
 }
 
+/* Drill action row: Check · score · Show answers · Reset */
+.l25-cr-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+  margin-top: 0.75rem;
+}
+
+.l25-cr-actions .l22-score {
+  margin-top: 0;
+  font-size: 0.9rem;
+}
+
+.l25-cr-actions .l25-cr-mini-btn {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  border-radius: var(--radius-sm);
+}
+
 /* Mini reveal button */
 .l25-cr-mini-btn {
   border: 1px solid #cbd5e1;

@@ -27,8 +27,8 @@ export default function ScrollToTopButton() {
       title="Наверх"
     >
       <svg
-        width="22"
-        height="22"
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -37,8 +37,8 @@ export default function ScrollToTopButton() {
         strokeLinejoin="round"
         aria-hidden="true"
       >
-        <path d="M12 19V5" />
-        <path d="M5 12l7-7 7 7" />
+        <path d="M12 17V7" />
+        <path d="m7 12 5-5 5 5" />
       </svg>
     </button>
   );
