@@ -63,7 +63,6 @@ export default function HW32() {
 
   const allDone = task1Done && task2Done;
   const totalScore = task1Score + task2Score;
-  const totalItems = task1Total + task2Total;
 
   return (
     <div className="lesson22-page">
