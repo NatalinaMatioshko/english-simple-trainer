@@ -236,11 +236,12 @@ const lessons: LessonEntry[] = [
   },
   {
     id: "34",
-    title: "It's expensive!",
+    title: "It's expensive! · Present continuous",
     level: "A1",
-    topic: "opposite adjectives · position of adjectives · North Norfolk",
+    topic:
+      "Unit 3C · opposite adjectives · North Norfolk · Present continuous",
     description:
-      "Unit 3C: It's expensive! — opposite adjectives, North Norfolk reading, adjective position, stress, word order, speak about your town (one student).",
+      "Unit 3C: opposite adjectives, reading, adjective position, stress & speaking. Plus Present continuous rules, What are they doing?, and picture description (one student).",
     lessonPath: "/lesson-34",
   },
 ];

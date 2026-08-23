@@ -62,10 +62,16 @@ const completedPath: StageSummary[] = [
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 27–33",
-    title: "Real-life situations",
+    range: "Lessons 30–34",
+    title: "Unit 3 · My town",
     summary:
-      "After jobs: shopping, food, transport, directions, health, and a practical speaking push toward A2 readiness.",
+      "A1 review, places in town, flats (Is there wifi?), opposite adjectives, and a Present continuous preview with picture exercises.",
+  },
+  {
+    range: "Lessons 35–40",
+    title: "Unit 4–5 · Family & daily life",
+    summary:
+      "Family photos, daily routines, adverbs of frequency, can / can't, Present continuous, and simple vs continuous contrast.",
   },
 ];
 
@@ -497,17 +503,84 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 34,
-    title: "It's expensive!",
-    grammar: "adjective position (be + adj · adj + noun); sentence stress",
+    title: "It's expensive! · Present continuous",
+    grammar:
+      "adjective position (be + adj · adj + noun); Present continuous (am/is/are + -ing)",
     vocabulary:
-      "opposite adjectives (busy/quiet, big/small, old/new, cheap/expensive, good/bad)",
+      "opposite adjectives; action verbs (park, town scenes); word bank for -ing forms",
     speaking:
-      "Complete town questions with adjectives; describe three towns to the teacher",
-    listening: "adjective sentences (R12); adjective + noun stress (R13)",
-    review: "places & There is/are (L31); Unit 3C",
+      "Describe towns; What are they doing? gaps; describe picture scenes to the teacher",
+    listening: "R12 adjective sentences; R13 adjective + noun stress",
+    review: "There is/are (L31–33); Unit 3C + PC preview",
     category: "general",
     status: "next",
     route: "/lesson-34",
+  },
+  {
+    id: 35,
+    title: "Family photos",
+    grammar: "possessive 's; Whose…?",
+    vocabulary: "family (mother, father, brother, sister, husband, wife, son, daughter)",
+    speaking: "Talk about your family; ask Whose…? questions",
+    listening: "family words; photo descriptions",
+    review: "Unit 4A · possessives",
+    category: "people",
+    status: "next",
+  },
+  {
+    id: 36,
+    title: "From morning to night",
+    grammar: "prepositions of time (at, in, on) and place (at, in, to)",
+    vocabulary: "daily routine; times of day",
+    speaking: "Describe your typical day to the teacher",
+    listening: "routine phrases; linking",
+    review: "Unit 4B · prepositions",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 37,
+    title: "Blue Zones",
+    grammar: "position of adverbs; expressions of frequency",
+    vocabulary: "months; always / usually / sometimes / never",
+    speaking: "How often do you…? — ask and answer with the teacher",
+    listening: "adverbs and frequency phrases",
+    review: "Unit 4C · adverbs",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 38,
+    title: "Vote for me!",
+    grammar: "can / can't",
+    vocabulary: "verb phrases (buy a newspaper, send an email…)",
+    speaking: "What can you do? — short presentation to the teacher",
+    listening: "can / can't sentence stress",
+    review: "Unit 5A · ability",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 39,
+    title: "A quiet life?",
+    grammar: "Present continuous — be + verb + -ing (full unit)",
+    vocabulary: "noise verbs; action phrases",
+    speaking: "Describe what people are doing now",
+    listening: "/ŋ/; present continuous in context",
+    review: "PC preview (L34); Unit 5B",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 40,
+    title: "A city for all seasons",
+    grammar: "Present simple or Present continuous?",
+    vocabulary: "weather and seasons; places in London",
+    speaking: "Compare habits vs actions happening now",
+    listening: "simple vs continuous contrast",
+    review: "Present Simple (L28); Present continuous",
+    category: "general",
+    status: "next",
   },
 ];
 
@@ -643,7 +716,7 @@ export default function RoadmapSection() {
     <section className="roadmap-layout">
       <aside className="roadmap-sidebar panel">
         <p className="page-kicker">Learning path</p>
-        <h2>Roadmap for Lessons 1–33</h2>
+        <h2>Roadmap for Lessons 1–40</h2>
         <p className="roadmap-lead">
           The course moves from self-introduction and <strong>to be</strong> to
           daily routines, countries, jobs, shopping, transport, health, and
@@ -709,10 +782,10 @@ export default function RoadmapSection() {
           <section className="roadmap-block">
             <div className="roadmap-block-head">
               <p className="roadmap-mini-label">Full timeline</p>
-              <h3>Lessons 1–33</h3>
+              <h3>Lessons 1–40</h3>
               <p>
-                This is the complete course line from the first lesson to the
-                latest discussed stage.
+                This is the complete course line from the first lesson through
+                Unit 3 (live) and planned Units 4–5.
               </p>
             </div>
 

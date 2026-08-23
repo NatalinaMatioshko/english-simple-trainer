@@ -591,13 +591,13 @@ export default function Lesson34() {
         <div className="lesson22-hero-top">
           <div>
             <LessonNumberKicker number={34} />
-            <h1>It&apos;s expensive!</h1>
+            <h1>It&apos;s expensive! · Present continuous</h1>
             <p className="lesson22-topic-pill">
-              opposite adjectives · position of adjectives · North Norfolk
+              Unit 3C · opposite adjectives · Present continuous
             </p>
             <p className="lesson22-subtitle">
-              Unit 3C. Describe places with opposite adjectives and{" "}
-              <strong>be + adj</strong> / <strong>adj + noun</strong>.
+              Describe places with opposite adjectives, then practise{" "}
+              <strong>am / is / are + -ing</strong> with picture exercises.
             </p>
           </div>
           <div
@@ -625,6 +625,7 @@ export default function Lesson34() {
           <span>It&apos;s expensive</span>
           <span>North Norfolk</span>
           <span>adj + noun</span>
+          <span>Present continuous</span>
         </div>
       </section>
 
@@ -644,7 +645,7 @@ export default function Lesson34() {
         id="l34-part-c"
         part="Part C · 3C"
         title="It's expensive!"
-        desc="Opposite adjectives · position of adjectives · North Norfolk reading"
+        desc="Opposite adjectives · North Norfolk · adjective position"
       />
 
       <section id="l34c-warmup" className="lesson22-block panel">
@@ -1657,12 +1658,13 @@ export default function Lesson34() {
           <p className="page-kicker">Exit check</p>
           <h2>Can you…?</h2>
           <p className="lesson22-section-desc">
-            opposite adjectives · position · describe a town
+            opposite adjectives · Present continuous · describe a town
           </p>
         </div>
         <ul className="l22-goals-list">
           <li>Say 5 opposite adjective pairs.</li>
           <li>be + adj / adj + noun — one example each.</li>
+          <li>Make 3 Present continuous sentences about a picture.</li>
           <li>Describe a town with adjectives.</li>
           <li>Ask and answer about places in your town.</li>
         </ul>
