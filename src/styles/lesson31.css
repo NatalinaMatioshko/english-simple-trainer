@@ -551,24 +551,66 @@
   background: color-mix(in srgb, #ef4444 8%, var(--color-surface, #fff));
 }
 
-.l31-pc-picture-row {
+.l31-figure-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.85rem;
   align-items: start;
 }
 
-.l31-pc-picture-row .l31-figure {
+.l31-figure-row .l31-figure {
   margin: 0;
 }
 
-.l31-pc-picture-row .l31-figure--worksheet img {
+.l31-figure-row .l31-figure img {
   max-width: 100%;
 }
 
 @media (max-width: 820px) {
-  .l31-pc-picture-row {
+  .l31-figure-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.l31-tense-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.75rem;
+}
+
+.l31-tense-card {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md, 0.9rem);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface-2, #fff));
+}
+
+.l31-tense-card--pc {
+  border-color: color-mix(in srgb, #3b82f6 35%, var(--color-border));
+  background: color-mix(in srgb, #3b82f6 8%, var(--color-surface-2, #fff));
+}
+
+.l31-tense-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--color-primary);
+}
+
+.l31-tense-card--pc h4 {
+  color: #1d4ed8;
+}
+
+.l31-tense-card p {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 820px) {
+  .l31-tense-compare {
     grid-template-columns: 1fr;
   }
 }

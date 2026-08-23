@@ -761,20 +761,23 @@ export default function Lesson34() {
           <strong className="l31-ex-num">5</strong> Read the text and match
           places 1–3 with photos A–C.
         </p>
-        <LessonFigure
-          src={IMG31(lesson31Images.northNorfolk)}
-          alt="Welcome to North Norfolk — map and town descriptions"
-          caption="WELCOME TO North Norfolk!"
-          variant="photo"
-          wide
-        />
-        <LessonFigure
-          src={IMG31(lesson31Images.norfolkPhotosAbc)}
-          alt="North Norfolk photos A–C and Cromer on the map"
-          caption="Photos A–C · match with places 1–3"
-          variant="photo"
-          wide
-        />
+        <p className="lesson22-section-desc">
+          Натисни на картинку, щоб відкрити її в повному розмірі.
+        </p>
+        <div className="l31-figure-row">
+          <LessonFigure
+            src={IMG31(lesson31Images.northNorfolk)}
+            alt="Welcome to North Norfolk — map and town descriptions"
+            caption="WELCOME TO North Norfolk! · tap to zoom"
+            variant="photo"
+          />
+          <LessonFigure
+            src={IMG31(lesson31Images.norfolkPhotosAbc)}
+            alt="North Norfolk photos A–C and Cromer on the map"
+            caption="Photos A–C · match with places 1–3 · tap to zoom"
+            variant="photo"
+          />
+        </div>
         <button
           type="button"
           className="l25-cr-mini-btn"
@@ -1515,11 +1518,6 @@ export default function Lesson34() {
             </span>
           </p>
           <p style={{ marginTop: "0.65rem" }}>
-            <strong>Present simple vs continuous:</strong>{" "}
-            <em>I work</em> (зазвичай, регулярно) ·{" "}
-            <em>I&apos;m working</em> (зараз, у цей момент).
-          </p>
-          <p style={{ marginTop: "0.65rem" }}>
             <strong>Не так:</strong>{" "}
             <em style={{ textDecoration: "line-through" }}>I working</em> /{" "}
             <em style={{ textDecoration: "line-through" }}>He is work</em> /{" "}
@@ -1527,6 +1525,91 @@ export default function Lesson34() {
               She is read now
             </em>
             .
+          </p>
+        </blockquote>
+
+        <h3 className="l22-listen-subtitle" style={{ marginTop: "1.25rem" }}>
+          Present Simple vs Present Continuous
+        </h3>
+        <div className="l31-tense-compare">
+          <div className="l31-tense-card">
+            <h4>Present Simple</h4>
+            <p>
+              <strong>Формула:</strong> <em>verb</em> / <em>verb + s</em> (he,
+              she, it)
+            </p>
+            <p style={{ marginTop: "0.5rem" }}>
+              <strong>Коли:</strong> звичка, регулярна дія, факт, розклад.
+            </p>
+            <p style={{ marginTop: "0.5rem" }}>
+              <em>I work</em> every day.
+              <br />
+              <em>She works</em> in an office.
+              <br />
+              <em>He plays</em> football on Saturdays.
+            </p>
+            <p
+              style={{
+                marginTop: "0.5rem",
+                color: "var(--color-text-muted)",
+                fontSize: "0.9rem",
+              }}
+            >
+              Маркери: <em>every day</em>, <em>usually</em>, <em>often</em>,{" "}
+              <em>on Mondays</em>
+            </p>
+          </div>
+          <div className="l31-tense-card l31-tense-card--pc">
+            <h4>Present Continuous</h4>
+            <p>
+              <strong>Формула:</strong> <em>am / is / are + verb-ing</em>
+            </p>
+            <p style={{ marginTop: "0.5rem" }}>
+              <strong>Коли:</strong> дія <em>зараз</em>, у процесі, у момент
+              мовлення.
+            </p>
+            <p style={{ marginTop: "0.5rem" }}>
+              <em>I&apos;m working</em> now.
+              <br />
+              <em>She&apos;s studying</em> at the moment.
+              <br />
+              <em>They&apos;re watching</em> TV.
+            </p>
+            <p
+              style={{
+                marginTop: "0.5rem",
+                color: "var(--color-text-muted)",
+                fontSize: "0.9rem",
+              }}
+            >
+              Маркери: <em>now</em>, <em>at the moment</em>, <em>today</em>
+            </p>
+          </div>
+        </div>
+        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
+          <p>
+            <strong>Як відрізнити?</strong> Запитай: це <em>зазвичай</em> чи{" "}
+            <em>саме зараз</em>?
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <em>I drink coffee every morning.</em> — звичка (Present Simple)
+            <br />
+            <em>I&apos;m drinking coffee now.</em> — зараз, у цей момент
+            (Present Continuous)
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <em>She works in Kyiv.</em> — постійна робота / факт (PS)
+            <br />
+            <em>She&apos;s working at home today.</em> — сьогодні, тимчасово
+            (PC)
+          </p>
+          <p style={{ marginTop: "0.65rem" }}>
+            <strong>Пам&apos;ятай:</strong> state verbs (like, know, want,
+            need…) зазвичай <em>не</em> вживають у Continuous:{" "}
+            <em style={{ textDecoration: "line-through" }}>
+              I&apos;m liking
+            </em>{" "}
+            → <em>I like</em> coffee.
           </p>
         </blockquote>
 
@@ -1636,7 +1719,7 @@ export default function Lesson34() {
           What is everyone doing? Say sentences in present continuous — to your
           teacher. Натисни на картинку, щоб відкрити її в повному розмірі.
         </p>
-        <div className="l31-pc-picture-row">
+        <div className="l31-figure-row">
           <LessonFigure
             src={IMG34("describe-the-picture.png")}
             alt="Describe the picture — busy town street with named people"
