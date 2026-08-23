@@ -2,11 +2,11 @@ import {
   useEffect,
   useState,
   type Dispatch,
-  type ReactNode,
   type SetStateAction,
 } from "react";
 import { Link } from "react-router-dom";
 import LessonNumberKicker from "../components/LessonNumberKicker";
+import Unit3AudioBlock from "../components/Unit3AudioBlock";
 import {
   adjSentences,
   adjStressC,
@@ -30,72 +30,6 @@ import "../styles/lesson31.css";
 
 const IMG31 = (file: string) =>
   `${import.meta.env.BASE_URL}images/lesson31/${file}`;
-
-const SOUND_U3 = (r: number) =>
-  `${import.meta.env.BASE_URL}sounds/Unit_3/RM_A1_SB_U3_R${r}.mp3`;
-
-function AudioBlock({
-  r,
-  exercise,
-  title,
-  transcript,
-}: {
-  r: number;
-  exercise: string;
-  title: string;
-  transcript?: ReactNode;
-}) {
-  const [open, setOpen] = useState(false);
-  const [err, setErr] = useState<string | null>(null);
-  const src = SOUND_U3(r);
-  return (
-    <div className="l25-audio-item" style={{ marginTop: "0.85rem" }}>
-      <div className="l25-audio-meta">
-        <span className="l25-audio-num">R{r}</span>
-        <div className="l25-audio-info">
-          <span className="l25-audio-ex">{exercise}</span>
-          <span className="l25-audio-title">{title}</span>
-        </div>
-      </div>
-      <audio
-        key={src}
-        controls
-        className="l25-audio-ctrl"
-        src={src}
-        preload="metadata"
-        onError={() =>
-          setErr(`Audio failed to load (R${r}). Check the file is available.`)
-        }
-        onCanPlay={() => setErr(null)}
-      >
-        <source src={src} type="audio/mpeg" />
-      </audio>
-      {err && (
-        <p
-          style={{
-            margin: "0.35rem 0 0",
-            color: "var(--color-danger, #b91c1c)",
-            fontSize: "0.9rem",
-          }}
-        >
-          {err}
-        </p>
-      )}
-      {transcript && (
-        <>
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? "Hide transcript" : "Transcript"}
-          </button>
-          {open && <div className="l25-details-body">{transcript}</div>}
-        </>
-      )}
-    </div>
-  );
-}
 
 function LessonFigure({
   src,
@@ -759,7 +693,7 @@ export default function Lesson34() {
           <strong className="l31-ex-num">2</strong> Listen and repeat the
           sentences in Exercise 1.
         </p>
-        <AudioBlock
+        <Unit3AudioBlock
           r={12}
           exercise="3C · 2"
           title="It's busy / quiet / big… — listen & repeat"
@@ -1159,7 +1093,7 @@ export default function Lesson34() {
           <strong className="l31-ex-num">8a</strong> Listen and underline the
           stressed words.
         </p>
-        <AudioBlock
+        <Unit3AudioBlock
           r={13}
           exercise="3C · 8a"
           title="Adjective + noun — sentence stress"
@@ -1264,11 +1198,9 @@ export default function Lesson34() {
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
           <strong className="l31-ex-num">8b</strong> Listen again and repeat.
         </p>
-        <AudioBlock
-          r={13}
-          exercise="3C · 8b"
-          title="Listen again and repeat"
-        />
+        <p className="lesson22-section-desc">
+          Use the player in <strong>8a</strong> again and repeat each sentence.
+        </p>
 
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
           <strong className="l31-ex-num">9</strong> Put the words in the correct
