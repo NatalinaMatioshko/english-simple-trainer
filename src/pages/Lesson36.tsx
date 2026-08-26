@@ -70,6 +70,12 @@ export default function Lesson36() {
             </Link>
             <Link
               className="lesson22-back-link lesson22-back-link--ghost"
+              to="/lesson-37"
+            >
+              Lesson 37 →
+            </Link>
+            <Link
+              className="lesson22-back-link lesson22-back-link--ghost"
               to="/vocab"
             >
               Vocab →
@@ -426,6 +432,9 @@ export default function Lesson36() {
           </Link>
           <Link className="l25-cr-mini-btn" to="/trainer">
             Trainer
+          </Link>
+          <Link className="l25-cr-mini-btn" to="/lesson-37">
+            Lesson 37 →
           </Link>
           <Link className="l25-cr-mini-btn" to="/lesson-35">
             ← Lesson 35

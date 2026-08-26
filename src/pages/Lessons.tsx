@@ -264,6 +264,15 @@ const lessons: LessonEntry[] = [
       "ELLLO A1-04: відео Present Simple, listening quiz, complete the sentences, do/don't і speaking про свою рутину з викладачем.",
     lessonPath: "/lesson-36",
   },
+  {
+    id: "37",
+    title: "Review · Test-English practice",
+    level: "A1",
+    topic: "days · adjectives · this/that · Present continuous · simple vs continuous",
+    description:
+      "П'ять сторінок Test-English: days/months/seasons, adjectives, this/that/these/those, Present continuous і Present simple vs Present continuous. Після кожної — коротке speaking з викладачем.",
+    lessonPath: "/lesson-37",
+  },
 ];
 
 export default function Lessons() {

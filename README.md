@@ -37,6 +37,7 @@ Lessons are written for **one student + one teacher**. Classroom phrases such as
 | 34 | Unit 3C · It's expensive! + Present continuous |
 | 35 | Unit 3D · English in action: directions |
 | 36 | Present Simple · daily verbs (ELLLO video) |
+| 37 | Review · days, adjectives, this/that, Present continuous |
 
 ---
 
@@ -208,6 +209,7 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/lesson-34` | It's expensive! (Unit 3C) |
 | `/lesson-35` | Directions (Unit 3D) |
 | `/lesson-36` | Present Simple daily verbs |
+| `/lesson-37` | Test-English review (days, adjectives, this/that, PC, simple vs continuous) |
 | `/hw-31` | Homework · Lesson 31 |
 | `/hw-34` | Homework · Lesson 34 |
 | `/hw-35` | Homework · Lesson 35 (Unit 3 check) |
