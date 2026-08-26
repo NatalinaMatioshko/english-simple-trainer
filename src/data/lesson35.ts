@@ -3,6 +3,7 @@
 export const lesson35Images = {
   townMap: "town-map.png",
   welcomeToMyTown: "welcome-to-my-town.png",
+  pixelTownMap: "pixel-town-map.png",
   goStraightOn: "go-straight-on.png",
   turnLeft: "turn-left.png",
   turnRight: "turn-right.png",

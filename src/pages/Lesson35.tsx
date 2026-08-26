@@ -30,6 +30,8 @@ const PROMOVA_URL =
 const IMG35 = (file: string) =>
   `${import.meta.env.BASE_URL}images/lesson35/${file}`;
 
+const NEXT_LESSON_VIDEO_ID = "YZKCS60loaQ";
+
 const norm = (s: string) => s.trim().toLowerCase().replace(/[.!?]+$/, "");
 
 export default function Lesson35() {
@@ -172,6 +174,7 @@ export default function Lesson35() {
           <a href="#l35-speak">5 Speaking</a>
           <a href="#l35-town">My Town</a>
           <a href="#l35-exit">Exit</a>
+          <a href="#l35-next">Next lesson</a>
         </div>
       </section>
 
@@ -703,17 +706,25 @@ export default function Lesson35() {
           <p className="page-kicker">Wrap-up · Speaking</p>
           <h2>Welcome to My Town!</h2>
           <p className="lesson22-section-desc">
-            Подивись на плакат і опиши місто викладачу:{" "}
+            Подивись на дві картинки і опиши місто викладачу:{" "}
             <strong>There is / There are</strong> — і скажи, куди там можна
             піти.
           </p>
         </div>
-        <Lesson31Figure
-          src={IMG35(lesson35Images.welcomeToMyTown)}
-          alt="Welcome to My Town poster: 4 parks, 6 cafés, 1 hospital, not many schools, no stadium, a lot of shops, 1 river, 2 bridges, no airport"
-          caption="Welcome to My Town! · tap to zoom"
-          variant="worksheet"
-        />
+        <div className="l31-figure-row">
+          <Lesson31Figure
+            src={IMG35(lesson35Images.welcomeToMyTown)}
+            alt="Welcome to My Town poster: 4 parks, 6 cafés, 1 hospital, not many schools, no stadium, a lot of shops, 1 river, 2 bridges, no airport"
+            caption="Welcome to My Town! · tap to zoom"
+            variant="worksheet"
+          />
+          <Lesson31Figure
+            src={IMG35(lesson35Images.pixelTownMap)}
+            alt="Pixel town map with airport, gym, hospital, coffee shop, cinema, park, mall, parking, bus station, hotel, bank, house and public restrooms"
+            caption="Town map · tap to zoom"
+            variant="worksheet"
+          />
+        </div>
         <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
           <strong className="l31-ex-num">6</strong> Describe the town. Make nine
           sentences.
@@ -774,6 +785,27 @@ export default function Lesson35() {
           <Link className="l25-cr-mini-btn" to="/lessons">
             All lessons →
           </Link>
+        </div>
+      </section>
+
+      <section id="l35-next" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Preview · next lesson</p>
+          <h2>Watch this video</h2>
+          <p className="lesson22-section-desc">
+            Це відео для <strong>наступного уроку</strong>. Подивись його вдома
+            й запам&apos;ятай нові місця в місті. На наступному уроці опишемо
+            цю мапу й дамо напрямки.
+          </p>
+        </div>
+        <div className="l22-video-wrap">
+          <iframe
+            src={`https://www.youtube.com/embed/${NEXT_LESSON_VIDEO_ID}`}
+            title="Places in town — preview for the next lesson"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
         </div>
       </section>
     </div>
