@@ -129,6 +129,12 @@ export default function Lesson35() {
             </Link>
             <Link
               className="lesson22-back-link lesson22-back-link--ghost"
+              to="/lesson-36"
+            >
+              Lesson 36 →
+            </Link>
+            <Link
+              className="lesson22-back-link lesson22-back-link--ghost"
               to="/vocab"
             >
               Vocab →
@@ -779,6 +785,9 @@ export default function Lesson35() {
           <Link className="l25-cr-mini-btn" to="/hw-35">
             HW35
           </Link>
+          <Link className="l25-cr-mini-btn" to="/lesson-36">
+            Lesson 36 →
+          </Link>
           <Link className="l25-cr-mini-btn" to="/lesson-34">
             ← Lesson 34
           </Link>
@@ -793,9 +802,9 @@ export default function Lesson35() {
           <p className="page-kicker">Preview · next lesson</p>
           <h2>Watch this video</h2>
           <p className="lesson22-section-desc">
-            Це відео для <strong>наступного уроку</strong>. Подивись його вдома
-            й запам&apos;ятай нові місця в місті. На наступному уроці опишемо
-            цю мапу й дамо напрямки.
+            Це відео для <strong>наступного уроку</strong> (Lesson 36).
+            Подивись його вдома: Present Simple — morning, work, lunch,
+            weekend. На уроці зробимо listening quiz і speaking.
           </p>
         </div>
         <div className="l22-video-wrap">

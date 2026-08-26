@@ -255,6 +255,15 @@ const lessons: LessonEntry[] = [
     lessonPath: "/lesson-35",
     homeworkPath: "/hw-35",
   },
+  {
+    id: "36",
+    title: "Present Simple · daily verbs",
+    level: "A1",
+    topic: "I wake up · do / don't · morning, work, lunch, weekend",
+    description:
+      "ELLLO A1-04: відео Present Simple, listening quiz, complete the sentences, do/don't і speaking про свою рутину з викладачем.",
+    lessonPath: "/lesson-36",
+  },
 ];
 
 export default function Lessons() {
