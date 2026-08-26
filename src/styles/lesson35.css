@@ -1,0 +1,301 @@
+/* ── Lesson 35 · directions ───────────────────────────────────── */
+
+/* 1 · place chips */
+.l35-chip-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.l35-chip {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface-2, #f7f8fc);
+  color: inherit;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.l35-chip:hover {
+  border-color: var(--color-primary);
+}
+
+.l35-chip.is-on {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.l35-chip.is-ok {
+  border-color: #16a34a;
+  background: #16a34a;
+  color: #fff;
+}
+
+.l35-chip.is-err {
+  border-color: #dc2626;
+  background: #dc2626;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+.l35-chip.is-miss {
+  border-color: #16a34a;
+  background: transparent;
+  color: #16a34a;
+  border-style: dashed;
+}
+
+/* 2b · direction picture cards */
+.l35-dir-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+  margin-top: 0.85rem;
+  align-items: start;
+}
+
+.l35-dir-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-md, 0.75rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface, #fff);
+}
+
+.l35-dir-card .l31-figure {
+  margin: 0;
+}
+
+.l35-dir-card .l31-figure img {
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: #fff;
+}
+
+.l35-dir-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 0.4rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.85rem;
+  flex: 0 0 auto;
+}
+
+.l35-dir-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.l35-dir-ua {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+/* 3 · useful phrases box */
+.l35-phrase-box {
+  margin-top: 0.85rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-md, 0.75rem);
+  border: 1px solid rgba(219, 39, 119, 0.28);
+  background: rgba(244, 114, 182, 0.08);
+}
+
+.l35-phrase-group + .l35-phrase-group {
+  margin-top: 0.9rem;
+}
+
+.l35-phrase-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #be185d;
+}
+
+.l35-phrase-list {
+  list-style: none;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.l35-phrase-list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  line-height: 1.5;
+}
+
+.l35-phrase-ua {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* ── Homework 35 · Check and reflect ──────────────────────────── */
+
+.hw35-hint {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.hw35-fix-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-md, 0.75rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2, #f7f8fc);
+}
+
+.hw35-fix-wrong {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.hw35-rewrite-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.hw35-rewrite-line .l22-gap-input {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.hw35-fix-row .l22-gap-input {
+  width: 100%;
+}
+
+.hw35-tip {
+  font-size: 0.82rem;
+  color: #b91c1c;
+}
+
+.hw35-q-list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.hw35-q-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  line-height: 2;
+}
+
+.hw35-q-input {
+  min-width: 5rem;
+  max-width: 8rem;
+}
+
+.hw35-reflect-list {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+.hw35-reflect-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-md, 0.75rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2, #f7f8fc);
+}
+
+/* wrap-up · My Town facts */
+.l35-town-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+}
+
+.l35-town-card {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--radius-md, 0.75rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2, #f7f8fc);
+}
+
+.l35-town-place {
+  font-weight: 700;
+}
+
+.l35-town-note {
+  font-weight: 800;
+  color: #dc2626;
+}
+
+/* 4a · conversations */
+.l35-conv {
+  margin-top: 0.85rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-md, 0.75rem);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2, #f7f8fc);
+}
+
+.l35-conv-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 0.5rem;
+}
+
+.l35-conv-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.5rem;
+  line-height: 1.9;
+}
+
+.l35-conv-who {
+  flex: 0 0 1.6rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.l35-conv-who--empty {
+  color: transparent;
+}
+
+.l35-conv-line select {
+  max-width: 100%;
+}

@@ -35,7 +35,7 @@ Lessons are written for **one student + one teacher**. Classroom phrases such as
 | 32 | WH-questions · was/were |
 | 33 | Unit 3B · Is there wifi? |
 | 34 | Unit 3C · It's expensive! + Present continuous |
-| 35 | Unit 4A · Family photos (Promova practice) |
+| 35 | Unit 3D · English in action: directions |
 
 ---
 
@@ -205,9 +205,10 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/lesson-32` | WH-questions · was/were |
 | `/lesson-33` | Is there wifi? (Unit 3B) |
 | `/lesson-34` | It's expensive! (Unit 3C) |
-| `/lesson-35` | Family photos (Unit 4A) |
+| `/lesson-35` | Directions (Unit 3D) |
 | `/hw-31` | Homework · Lesson 31 |
 | `/hw-34` | Homework · Lesson 34 |
+| `/hw-35` | Homework · Lesson 35 (Unit 3 check) |
 | `/a1-level-test` | A1 Level Test |
 | `/extra-resources` | Extra infographics |
 | `/vocab` | Vocabulary |

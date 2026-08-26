@@ -3,6 +3,25 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "35",
+    title: "Check and reflect",
+    href: "/hw-35",
+    tasks: [
+      {
+        type: "text",
+        text: "Task 1: places in town + there is / there are + correct the mistakes",
+      },
+      {
+        type: "text",
+        text: "Task 2: adjectives, rewrite sentences, word order + Reflect 1–5",
+      },
+      {
+        type: "text",
+        text: "Send results to teacher",
+      },
+    ],
+  },
+  {
     id: "34",
     title: "It's expensive!",
     href: "/hw-34",

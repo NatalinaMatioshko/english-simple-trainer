@@ -247,12 +247,13 @@ const lessons: LessonEntry[] = [
   },
   {
     id: "35",
-    title: "Family photos",
+    title: "English in action · Directions",
     level: "A1",
-    topic: "family · possessive 's · Whose…?",
+    topic: "Unit 3D · ask for and give directions",
     description:
-      "Unit 4A: Family photos — родина, присвійний 's і питання Whose…? Практика у Promova.",
+      "Unit 3D: мапа міста, Excuse me — where's the…?, Is there a… near here?, go straight on / turn left / go past, три діалоги з аудіо та speaking від станції. Плюс практика у Promova.",
     lessonPath: "/lesson-35",
+    homeworkPath: "/hw-35",
   },
 ];
 
