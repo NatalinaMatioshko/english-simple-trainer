@@ -3,6 +3,25 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "34",
+    title: "It's expensive!",
+    href: "/hw-34",
+    tasks: [
+      {
+        type: "text",
+        text: "Task 1: word order + questions about your town + prepare 3 towns",
+      },
+      {
+        type: "text",
+        text: "Task 2: check — WH-questions + Present continuous",
+      },
+      {
+        type: "text",
+        text: "Send results to teacher",
+      },
+    ],
+  },
+  {
     id: "33",
     title: "Is there wifi?",
     href: "/hw-33",

@@ -243,6 +243,16 @@ const lessons: LessonEntry[] = [
     description:
       "Unit 3C: opposite adjectives, reading, adjective position, stress & speaking. Plus Present continuous rules, What are they doing?, and picture description (one student).",
     lessonPath: "/lesson-34",
+    homeworkPath: "/hw-34",
+  },
+  {
+    id: "35",
+    title: "Family photos",
+    level: "A1",
+    topic: "family · possessive 's · Whose…?",
+    description:
+      "Unit 4A: Family photos — родина, присвійний 's і питання Whose…? Практика у Promova.",
+    lessonPath: "/lesson-35",
   },
 ];
 

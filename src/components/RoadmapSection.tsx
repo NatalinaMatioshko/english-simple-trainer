@@ -526,6 +526,7 @@ const roadmapLessons: Lesson[] = [
     review: "Unit 4A · possessives",
     category: "people",
     status: "next",
+    route: "/lesson-35",
   },
   {
     id: 36,
