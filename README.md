@@ -37,7 +37,7 @@ Lessons are written for **one student + one teacher**. Classroom phrases such as
 | 34 | Unit 3C · It's expensive! + Present continuous |
 | 35 | Unit 3D · English in action: directions |
 | 36 | Present Simple · daily verbs (ELLLO video) |
-| 37 | Present continuous speaking: *I work every day* / *I am working now* (Test-English extra at the end) |
+| 37 | Present continuous speaking: *I work every day* / *I am working now* |
 
 ---
 
@@ -209,11 +209,12 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/lesson-34` | It's expensive! (Unit 3C) |
 | `/lesson-35` | Directions (Unit 3D) |
 | `/lesson-36` | Present Simple daily verbs |
-| `/lesson-37` | Present continuous · now vs every day (Test-English extra) |
+| `/lesson-37` | Present continuous · now vs every day |
 | `/hw-31` | Homework · Lesson 31 |
 | `/hw-34` | Homework · Lesson 34 |
 | `/hw-35` | Homework · Lesson 35 (Unit 3 check) |
 | `/hw-36` | Homework · Lesson 36 (Present Simple daily verbs) |
+| `/hw-37` | Homework · Lesson 37 (Test-English practice) |
 | `/a1-level-test` | A1 Level Test |
 | `/extra-resources` | Extra infographics |
 | `/vocab` | Vocabulary |

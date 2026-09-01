@@ -3,6 +3,25 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "37",
+    title: "Present continuous · Test-English",
+    href: "/hw-37",
+    tasks: [
+      {
+        type: "text",
+        text: "Days, months and seasons + adjectives (Test-English)",
+      },
+      {
+        type: "text",
+        text: "this/that/these/those + Present continuous + simple vs continuous",
+      },
+      {
+        type: "text",
+        text: "Write short sentences after each page and send to teacher",
+      },
+    ],
+  },
+  {
     id: "36",
     title: "Present Simple · daily verbs",
     href: "/hw-36",

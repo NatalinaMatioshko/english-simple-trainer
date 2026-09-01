@@ -546,7 +546,7 @@ const roadmapLessons: Lesson[] = [
     grammar: "I work every day. / I am working now.",
     vocabulary: "work, eat, drink, read, talk, sit",
     speaking: "Lots of speaking with the teacher: habits vs now",
-    listening: "Test-English extra pages after speaking",
+    listening: "Picture speaking (kitchen + Present continuous cards)",
     review: "Present Simple (L36); PC preview (L34)",
     category: "general",
     status: "next",

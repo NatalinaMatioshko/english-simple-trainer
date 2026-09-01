@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import LessonNumberKicker from "../components/LessonNumberKicker";
+import Lesson31Figure from "../components/lesson31/Lesson31Figure";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
-import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 
 const VERBS = [
@@ -44,53 +44,8 @@ const NOW_MARKERS = [
   { marker: "today", model: "I am reading today." },
 ] as const;
 
-const LINKS = [
-  {
-    id: "days",
-    kicker: "Extra 1 · Vocabulary",
-    title: "Days, months and seasons",
-    desc: "Відкрий сторінку, прочитай слова (дні, місяці, пори року) і зроби всі vocabulary exercises. Потім скажи викладачу: який сьогодні день, який місяць і яка пора року.",
-    href: "https://test-english.com/vocabulary/a1/days-months-seasons-a1-english-vocabulary/",
-    label: "Days, months and seasons — A1 Vocabulary ↗",
-    speak: "Today is … . It's … (month). It's … (season).",
-  },
-  {
-    id: "adj",
-    kicker: "Extra 2 · Grammar",
-    title: "Adjectives",
-    desc: "Прочитай правило про прикметники (a big house, The house is big) і виконай усі grammar exercises на сторінці. Потім опиши 3 речі в кімнаті прикметниками.",
-    href: "https://test-english.com/grammar-points/a1/adjectives/",
-    label: "Adjectives — A1 Grammar ↗",
-    speak: "This is a … room. The chair is … . My bag is … .",
-  },
-  {
-    id: "this",
-    kicker: "Extra 3 · Grammar",
-    title: "this / that / these / those",
-    desc: "Прочитай правило (this/these — близько, that/those — далеко) і виконай усі 3 grammar exercises. Потім покажи викладачу предмети: this book, that window, these pens, those chairs.",
-    href: "https://test-english.com/grammar-points/a1/this-that-these-those/",
-    label: "this / that / these / those — A1 Grammar ↗",
-    speak: "This is … . That is … . These are … . Those are … .",
-  },
-  {
-    id: "pc",
-    kicker: "Extra 4 · Grammar",
-    title: "Present continuous",
-    desc: "Після говоріння — коротка практика на сайті. Прочитай am / is / are + -ing і виконай exercises. Не розтягуй це на весь урок.",
-    href: "https://test-english.com/grammar-points/a1/present-continuous/",
-    label: "Present continuous — A1 Grammar ↗",
-    speak: "I'm sitting. You're talking. He's/She's … . It's raining / the sun is shining.",
-  },
-  {
-    id: "pspc",
-    kicker: "Extra 5 · Grammar",
-    title: "Present simple or Present continuous?",
-    desc: "Перевір контраст every day / now на Test-English. Потім ще раз скажи викладачу 2 речення про рутину і 2 про зараз.",
-    href: "https://test-english.com/grammar-points/a1/present-simple-present-continuous/",
-    label: "Present simple or Present continuous? — A1 Grammar ↗",
-    speak: "I usually drink coffee in the morning. Right now I'm talking to my teacher.",
-  },
-] as const;
+const IMG37 = (file: string) =>
+  `${import.meta.env.BASE_URL}images/lesson37/${file}`;
 
 export default function Lesson37() {
   return (
@@ -102,10 +57,6 @@ export default function Lesson37() {
             <h1>Present continuous · now vs every day</h1>
             <p className="lesson22-topic-pill">
               I work every day · I am working now
-            </p>
-            <p className="lesson22-subtitle">
-              Не ще один перевантажений grammar-блок. Мало слів, багато
-              говоріння з викладачем, чіткий контраст.
             </p>
           </div>
           <div
@@ -119,6 +70,12 @@ export default function Lesson37() {
               to="/lesson-36"
             >
               ← Lesson 36
+            </Link>
+            <Link
+              className="lesson22-back-link lesson22-back-link--ghost"
+              to="/hw-37"
+            >
+              HW37 →
             </Link>
             <Link
               className="lesson22-back-link lesson22-back-link--ghost"
@@ -144,7 +101,7 @@ export default function Lesson37() {
           <a href="#l37-same">4 Same verb</a>
           <a href="#l37-ask">5 Ask</a>
           <a href="#l37-look">6 Now</a>
-          <a href="#l37-extra">Extra</a>
+          <a href="#l37-pics">7 Pictures</a>
           <a href="#l37-exit">Exit</a>
         </div>
       </section>
@@ -353,45 +310,40 @@ export default function Lesson37() {
         </blockquote>
       </section>
 
-      <section id="l37-extra" className="lesson22-block panel">
+      <section id="l37-pics" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">Extra · Test-English</p>
-          <h2>Practice after speaking</h2>
+          <p className="page-kicker">7 · Pictures</p>
+          <h2>Look and speak</h2>
           <p className="lesson22-section-desc">
-            Якщо лишився час або як домашня практика: відкрий посилання, зроби
-            вправи, потім коротко скажи викладачу.
+            Дві картки в ряд — натисни, щоб збільшити. Ліва: відповідай
+            викладачу на питання. Права: скажи 10 речень про зараз (am / is /
+            are + -ing).
           </p>
         </div>
+        <div className="l31-figure-row">
+          <Lesson31Figure
+            src={IMG37("speaking-card.png")}
+            alt="Speaking card: a family cooking in the kitchen. Questions: Where are the people? What are they doing? What food can you see?"
+            caption="Speaking card · tap to zoom"
+            variant="worksheet"
+          />
+          <Lesson31Figure
+            src={IMG37("present-continuous.jpg")}
+            alt="Present continuous worksheet: ten pictures — play football, sing, read, jump, make a cake, play guitar, cook, ride a bike, fly, make a snowman"
+            caption="Present continuous · tap to zoom"
+            variant="worksheet"
+          />
+        </div>
+        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
+          <p>
+            <strong>Speak with your teacher.</strong> Full sentences. Left:{" "}
+            <em>They are in the kitchen. They are cooking.</em> Right:{" "}
+            <em>They are playing football. She is reading a book.</em>
+            <br />
+            Then contrast: <em>I cook every day. They are cooking now.</em>
+          </p>
+        </blockquote>
       </section>
-
-      {LINKS.map((item) => (
-        <section
-          key={item.id}
-          id={`l37-${item.id}`}
-          className="lesson22-block panel"
-        >
-          <div className="lesson22-section-head">
-            <p className="page-kicker">{item.kicker}</p>
-            <h2>{item.title}</h2>
-            <p className="lesson22-section-desc">{item.desc}</p>
-          </div>
-          <article className="l26-hw-link-card">
-            <a
-              className="l22-external-link"
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {item.label}
-            </a>
-          </article>
-          <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
-            <p>
-              <strong>Speak with your teacher.</strong> <em>{item.speak}</em>
-            </p>
-          </blockquote>
-        </section>
-      ))}
 
       <section id="l37-exit" className="lesson22-block panel">
         <div className="lesson22-section-head">
@@ -409,7 +361,10 @@ export default function Lesson37() {
           </li>
         </ul>
         <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
-          <Link className="l22-check-btn" to="/vocab">
+          <Link className="l22-check-btn" to="/hw-37">
+            HW37
+          </Link>
+          <Link className="l25-cr-mini-btn" to="/vocab">
             Vocab
           </Link>
           <Link className="l25-cr-mini-btn" to="/trainer">

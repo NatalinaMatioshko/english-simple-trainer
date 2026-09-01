@@ -1,0 +1,48 @@
+export const hw37Links = [
+  {
+    id: "days",
+    kicker: "1 · Vocabulary",
+    title: "Days, months and seasons",
+    desc: "Відкрий сторінку, прочитай слова (дні, місяці, пори року) і зроби всі vocabulary exercises. Потім напиши: який сьогодні день, який місяць і яка пора року.",
+    href: "https://test-english.com/vocabulary/a1/days-months-seasons-a1-english-vocabulary/",
+    label: "Days, months and seasons — A1 Vocabulary ↗",
+    prompt: "Today is … . It's … (month). It's … (season).",
+  },
+  {
+    id: "adj",
+    kicker: "2 · Grammar",
+    title: "Adjectives",
+    desc: "Прочитай правило про прикметники (a big house, The house is big) і виконай усі grammar exercises. Потім опиши 3 речі в кімнаті.",
+    href: "https://test-english.com/grammar-points/a1/adjectives/",
+    label: "Adjectives — A1 Grammar ↗",
+    prompt: "This is a … room. The chair is … . My bag is … .",
+  },
+  {
+    id: "this",
+    kicker: "3 · Grammar",
+    title: "this / that / these / those",
+    desc: "Прочитай правило (this/these — близько, that/those — далеко) і виконай усі 3 grammar exercises. Потім напиши: this book, that window, these pens, those chairs.",
+    href: "https://test-english.com/grammar-points/a1/this-that-these-those/",
+    label: "this / that / these / those — A1 Grammar ↗",
+    prompt: "This is … . That is … . These are … . Those are … .",
+  },
+  {
+    id: "pc",
+    kicker: "4 · Grammar",
+    title: "Present continuous",
+    desc: "Прочитай правило am / is / are + -ing і виконай усі grammar exercises. Потім напиши 4 речення про зараз.",
+    href: "https://test-english.com/grammar-points/a1/present-continuous/",
+    label: "Present continuous — A1 Grammar ↗",
+    prompt: "I'm sitting. You're talking. He's/She's … . It's raining / the sun is shining.",
+  },
+  {
+    id: "pspc",
+    kicker: "5 · Grammar",
+    title: "Present simple or Present continuous?",
+    desc: "Прочитай, чим відрізняються Present Simple (рутина) і Present continuous (зараз). Виконай усі grammar exercises. Потім напиши 2 речення про рутину і 2 про зараз.",
+    href: "https://test-english.com/grammar-points/a1/present-simple-present-continuous/",
+    label: "Present simple or Present continuous? — A1 Grammar ↗",
+    prompt:
+      "I usually drink coffee in the morning. Right now I'm talking to my teacher.",
+  },
+] as const;

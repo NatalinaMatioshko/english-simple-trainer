@@ -271,8 +271,9 @@ const lessons: LessonEntry[] = [
     level: "A1",
     topic: "I work every day · I am working now",
     description:
-      "Мало слів, багато говоріння з викладачем: work/eat/drink/read/talk/sit. Контраст every day vs now. Test-English — extra в кінці.",
+      "Контраст every day vs now: work/eat/drink/read/talk/sit, маркери часу, speaking з викладачем і дві picture cards.",
     lessonPath: "/lesson-37",
+    homeworkPath: "/hw-37",
   },
 ];
 
