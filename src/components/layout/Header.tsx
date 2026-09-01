@@ -1,4 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import "../../styles/studentAuth.css";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
@@ -16,6 +18,7 @@ function isNavActive(pathname: string, to: string) {
 
 export function Header() {
   const { pathname } = useLocation();
+  const { user, loading, displayName, isTeacher, logOut } = useAuth();
 
   return (
     <>
@@ -58,6 +61,22 @@ export function Header() {
           </nav>
 
           <div className="topbar-actions">
+            {!loading &&
+              (user ? (
+                <div className="auth-chip">
+                  <span>
+                    {displayName}
+                    {isTeacher ? " · вчитель" : ""}
+                  </span>
+                  <button type="button" onClick={() => void logOut()}>
+                    Вийти
+                  </button>
+                </div>
+              ) : (
+                <Link className="auth-chip" to="/login">
+                  Увійти
+                </Link>
+              ))}
             <ThemeToggle />
           </div>
         </header>

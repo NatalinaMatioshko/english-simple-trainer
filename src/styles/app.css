@@ -799,6 +799,35 @@ h1 {
   font-size: var(--text-sm);
 }
 
+.vocab-auth-status,
+.vocab-migrated-note,
+.vocab-cloud-error {
+  margin: 0.55rem 0 0;
+  font-size: var(--text-sm);
+  max-width: 62ch;
+  line-height: 1.45;
+}
+
+.vocab-cloud-error {
+  color: var(--color-error, #dc2626);
+}
+
+.vocab-logout-btn {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--color-primary);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.vocab-auth-status a {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
 .vocab-practice-toggle {
   padding: 0.65rem 1.1rem;
   border-radius: var(--radius-full);

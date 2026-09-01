@@ -16,9 +16,8 @@ export default function VocabPage() {
             <p className="muted vocab-page-kicker">Vocabulary trainer</p>
             <h2 className="vocab-page-title">Словник</h2>
             <p className="vocab-page-subtitle muted">
-              Окрема сторінка для таблиці, флешкарток і режиму практики —
-              зручніше тренувати слова без відволікань від вправ. У кожного
-              слова є IPA-транскрипція.
+              Таблиця, флешкартки і свої слова. Після входу учня нові слова
+              зберігаються на платформі — вчитель їх теж бачить.
             </p>
           </div>
           <div className="vocab-page-nav">

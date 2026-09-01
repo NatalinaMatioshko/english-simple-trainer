@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { AuthProvider } from "../context/AuthContext";
 import { ThemeProvider } from "../context/ThemeContext";
 import { SiteLayout } from "../components/layout/SiteLayout";
 import TrainerPage from "../pages/TrainerPage";
@@ -45,6 +46,7 @@ import HW37 from "../pages/HW37";
 import A1LevelTest from "../pages/A1LevelTest";
 import ExtraResources from "../pages/ExtraResources";
 import VocabPage from "../pages/VocabPage";
+import LoginPage from "../pages/LoginPage";
 import SelfStudyReview from "../pages/SelfStudyReview";
 import NotFound from "../pages/NotFound";
 
@@ -58,6 +60,7 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/trainer" element={<TrainerPage />} />
         <Route path="/vocab" element={<VocabPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/lessons" element={<Lessons />} />
         <Route path="/extra-resources" element={<ExtraResources />} />
         <Route path="/lesson-15" element={<Lesson15 />} />
@@ -111,7 +114,9 @@ function AppRoutes() {
 export default function App() {
   return (
     <ThemeProvider>
-      <AppRoutes />
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
     </ThemeProvider>
   );
 }

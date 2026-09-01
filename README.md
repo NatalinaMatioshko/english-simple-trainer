@@ -108,7 +108,7 @@ Fill values from **Firebase Console → Project settings → Your apps** (web ap
 
 | Variable | Purpose |
 |----------|---------|
-| `VITE_TEACHER_EMAIL` | Teacher email for `/admin/submissions` (client UX check only) |
+| `VITE_TEACHER_EMAIL` | Teacher email for `/admin/submissions` and student vocab (client UX check only) |
 | `VITE_FIREBASE_API_KEY` | Firebase web API key |
 | `VITE_FIREBASE_AUTH_DOMAIN` | Auth domain |
 | `VITE_FIREBASE_PROJECT_ID` | Project ID |
@@ -126,11 +126,15 @@ Missing Firebase `VITE_*` vars throw a clear error at startup.
 
 ## Firebase Console setup (before deploy)
 
-**1. Enable Google Sign-In**
+**1. Enable Google Sign-In and Email/Password**
 
-`Firebase Console → Authentication → Sign-in method → Google → Enable`
+`Firebase Console → Authentication → Sign-in method`
 
-Without this: `auth/operation-not-allowed`.
+- **Google → Enable** (teacher login; student may also use it)
+- **Email/Password → Enable** (student registration + login)
+
+Without Google: `auth/operation-not-allowed` on teacher sign-in.  
+Without Email/Password: the student cannot register with email.
 
 **2. Authorize GitHub Pages domain**
 
@@ -157,10 +161,14 @@ https://english-simple-trainer.web.app/*
 
 Missing `*.firebaseapp.com` / `*.web.app` often shows: **The requested action is invalid.**
 
-**4. Firestore Rules — teacher review**
+**4. Firestore Rules — teacher review + student vocab**
 
 Keep your real teacher email in Console `isTeacher()`.  
-To enable **Mark as reviewed** in `/admin/submissions`, allow teacher updates that only touch `reviewed` + `reviewedAt` (see repo `firestore.rules` → `teacherReviewOnly()`). Publish after editing.
+To enable **Mark as reviewed** in `/admin/submissions`, allow teacher updates that only touch `reviewed` + `reviewedAt` (see repo `firestore.rules` → `teacherReviewOnly()`).
+
+To let the student save dictionary words, publish the `studentVocab` rules from the same file: the student can create/read/delete their own words; the teacher can read (and delete) all of them.
+
+Publish after editing.
 
 ---
 
@@ -170,7 +178,7 @@ To enable **Mark as reviewed** in `/admin/submissions`, allow teacher updates th
 src/
   app/            # React Router (App.tsx)
   components/     # Layout, practice cards, roadmap, vocab UI, …
-  context/        # Theme (light / dark)
+  context/        # Theme + Auth (email/password + Google)
   data/           # Vocab, verbs, lesson31/32, HW review decks, practice tasks
   hooks/          # Quiz / practice hooks (useScoredQuiz, …)
   pages/          # Home, Lessons, Lesson15–33, HW25–31, Vocab, Trainer, Admin…
@@ -192,6 +200,7 @@ public/
 |------------|----------|
 | `homeworkAnswers` | Homework submissions (teacher admin page) |
 | `writingSubmissions` | About me / self-study writing saves |
+| `studentVocab` | Student-added dictionary words (visible to the teacher on `/vocab`) |
 
 Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `apiKey` is still public in the client bundle after build — that is expected. Security is enforced via **Firestore Security Rules** and API key HTTP referrer restrictions, not by hiding the key in `.env`.
 
@@ -217,7 +226,8 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/hw-37` | Homework · Lesson 37 (Test-English practice) |
 | `/a1-level-test` | A1 Level Test |
 | `/extra-resources` | Extra infographics |
-| `/vocab` | Vocabulary |
+| `/vocab` | Vocabulary (student words persist after login) |
+| `/login` | Student register / login (email + password or Google) |
 | `/trainer` | Practice trainer |
 | `/homework` | Homework index |
 | `/self-study` | Self-study review |

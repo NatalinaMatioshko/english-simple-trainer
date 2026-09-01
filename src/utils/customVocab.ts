@@ -7,6 +7,7 @@ export type CustomVocabWord = {
   en: string;
   ua: string;
   example?: string;
+  ownerName?: string;
 };
 
 function isCustomVocabWord(value: unknown): value is CustomVocabWord {

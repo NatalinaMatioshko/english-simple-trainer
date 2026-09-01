@@ -51,5 +51,33 @@ service cloud.firestore {
       allow update: if teacherReviewOnly();
       allow delete: if false;
     }
+
+    match /studentVocab/{id} {
+      allow create: if request.auth != null
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.en is string
+        && request.resource.data.en.size() >= 1
+        && request.resource.data.en.size() <= 80
+        && request.resource.data.ua is string
+        && request.resource.data.ua.size() >= 1
+        && request.resource.data.ua.size() <= 80
+        && request.resource.data.example is string
+        && request.resource.data.example.size() <= 200
+        && request.resource.data.ownerName is string
+        && request.resource.data.ownerName.size() >= 1
+        && request.resource.data.ownerName.size() <= 80
+        && request.resource.data.keys().hasAll([
+          'en', 'ua', 'example', 'ownerUid', 'ownerName', 'createdAt'
+        ]);
+
+      allow read, list: if request.auth != null && (
+        isTeacher() || resource.data.ownerUid == request.auth.uid
+      );
+
+      allow update: if false;
+      allow delete: if request.auth != null && (
+        isTeacher() || resource.data.ownerUid == request.auth.uid
+      );
+    }
   }
 }

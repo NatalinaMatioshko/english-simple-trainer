@@ -4,6 +4,8 @@ export type VocabItem = {
   /** IPA transcription (without brackets), e.g. "ˈsɪti" */
   ipa?: string;
   example?: string;
+  /** Firestore / local id for student-added words */
+  customId?: string;
 };
 
 export type VocabGroup = {

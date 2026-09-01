@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   vocabCategories,
   type VocabCategory,
@@ -7,10 +8,17 @@ import {
 import { shuffle } from "../../utils/array";
 import {
   loadCustomVocab,
-  makeCustomVocabId,
   saveCustomVocab,
   type CustomVocabWord,
 } from "../../utils/customVocab";
+import { useAuth } from "../../context/AuthContext";
+import {
+  addLocalVocabWord,
+  addStudentVocabWord,
+  deleteStudentVocabWord,
+  migrateLocalVocabToCloud,
+  subscribeStudentVocab,
+} from "../../services/studentVocab";
 import {
   letterSpeakText,
   speakEnglish,
@@ -23,20 +31,48 @@ type View = "table" | "cards";
 const ALL_WORDS_ID = "__all__";
 const MY_WORDS_ID = "my-words";
 
-function buildMyWordsCategory(words: CustomVocabWord[]): VocabCategory {
-  const items: VocabItem[] = words.map(({ en, ua, example }) => ({
-    en,
-    ua,
-    ...(example ? { example } : {}),
-  }));
+function buildMyWordsCategory(
+  words: CustomVocabWord[],
+  signedIn: boolean,
+  isTeacher: boolean,
+): VocabCategory {
+  const groups = isTeacher
+    ? Array.from(
+        words.reduce((map, w) => {
+          const key = w.ownerName?.trim() || "Учень";
+          const list = map.get(key) ?? [];
+          list.push({
+            en: w.en,
+            ua: w.ua,
+            customId: w.id,
+            ...(w.example ? { example: w.example } : {}),
+          });
+          map.set(key, list);
+          return map;
+        }, new Map<string, VocabItem[]>()),
+      ).map(([label, items]) => ({ label, items }))
+    : [
+        {
+          label: "Мої слова",
+          items: words.map(({ id, en, ua, example }) => ({
+            en,
+            ua,
+            customId: id,
+            ...(example ? { example } : {}),
+          })),
+        },
+      ];
 
   return {
     id: MY_WORDS_ID,
-    title: "Мої слова",
+    title: isTeacher ? "Слова учня" : "Мої слова",
     badge: words.length > 0 ? String(words.length) : "+",
-    description:
-      "Ваші власні слова. Зберігаються в цьому браузері (localStorage).",
-    groups: [{ label: "Мої слова", items }],
+    description: signedIn
+      ? isTeacher
+        ? "Слова, які учень зберіг на платформі. Ти бачиш їх після свого Google-входу."
+        : "Твої слова зберігаються на платформі. Вчитель їх теж бачить."
+      : "Увійди, щоб зберігати слова на платформі. Без входу список лишається лише в цьому браузері.",
+    groups,
   };
 }
 
@@ -65,6 +101,7 @@ function buildAllWordsCategory(customWords: CustomVocabWord[]): VocabCategory {
       customItems.push({
         en: w.en,
         ua: w.ua,
+        customId: w.id,
         ...(w.example ? { example: w.example } : {}),
       });
     }
@@ -86,12 +123,16 @@ function buildAllWordsCategory(customWords: CustomVocabWord[]): VocabCategory {
 }
 
 export function VocabSection() {
+  const { user, loading, isTeacher, displayName, logOut } = useAuth();
+  const migratedRef = useRef(false);
   const [customWords, setCustomWords] = useState<CustomVocabWord[]>(() =>
     loadCustomVocab(),
   );
+  const [cloudError, setCloudError] = useState("");
+  const [migratedNote, setMigratedNote] = useState("");
   const myWordsCategory = useMemo(
-    () => buildMyWordsCategory(customWords),
-    [customWords],
+    () => buildMyWordsCategory(customWords, Boolean(user), isTeacher),
+    [customWords, user, isTeacher],
   );
   const allWordsCategory = useMemo(
     () => buildAllWordsCategory(customWords),
@@ -103,8 +144,42 @@ export function VocabSection() {
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
 
   useEffect(() => {
+    if (user) return;
     saveCustomVocab(customWords);
-  }, [customWords]);
+  }, [customWords, user]);
+
+  useEffect(() => {
+    if (loading || !user) {
+      if (!user && !loading) {
+        setCustomWords(loadCustomVocab());
+      }
+      return;
+    }
+    setCloudError("");
+    migratedRef.current = false;
+    const unsub = subscribeStudentVocab(
+      user,
+      isTeacher,
+      (words) => {
+        setCustomWords(words);
+        if (!isTeacher && !migratedRef.current) {
+          migratedRef.current = true;
+          void migrateLocalVocabToCloud(user, displayName, words).then(
+            (n) => {
+              if (n > 0) {
+                setMigratedNote(
+                  `Перенесено ${n} слів з цього браузера на платформу.`,
+                );
+                saveCustomVocab([]);
+              }
+            },
+          );
+        }
+      },
+      setCloudError,
+    );
+    return unsub;
+  }, [user, loading, isTeacher, displayName]);
 
   const category =
     activeId === ALL_WORDS_ID
@@ -128,25 +203,43 @@ export function VocabSection() {
       return false;
     }
 
-    setCustomWords((prev) => {
-      if (prev.some((w) => w.en.toLowerCase() === en.toLowerCase())) {
-        return prev;
-      }
-      return [
-        ...prev,
-        {
-          id: makeCustomVocabId(),
-          en,
-          ua,
-          ...(example ? { example } : {}),
-        },
-      ];
+    if (user) {
+      void addStudentVocabWord(user, displayName, {
+        en,
+        ua,
+        ...(example ? { example } : {}),
+      }).catch((err) => {
+        console.error(err);
+        setCloudError("Не вдалося зберегти слово на платформі.");
+      });
+      return true;
+    }
+
+    const next = addLocalVocabWord(customWords, {
+      en,
+      ua,
+      ...(example ? { example } : {}),
     });
+    if (!next) return false;
+    setCustomWords(next);
     return true;
   };
 
-  const deleteCustomWord = (en: string) => {
-    setCustomWords((prev) => prev.filter((w) => w.en !== en));
+  const deleteCustomWord = (idOrEn: string) => {
+    const match = customWords.find(
+      (w) => w.id === idOrEn || w.en === idOrEn,
+    );
+    if (user) {
+      const id = match?.id ?? idOrEn;
+      void deleteStudentVocabWord(id).catch((err) => {
+        console.error(err);
+        setCloudError("Не вдалося видалити слово на платформі.");
+      });
+      return;
+    }
+    setCustomWords((prev) =>
+      prev.filter((w) => w.id !== idOrEn && w.en !== idOrEn),
+    );
   };
 
   const toggleReveal = (key: string) => {
@@ -181,6 +274,32 @@ export function VocabSection() {
                 ? "Флешкартки: переверни картку і познач — знаєш чи ні. Можна одну категорію або всі слова."
                 : "Вирази та фрази. У режимі практики ховайте переклад і перевіряйте себе."}
             </p>
+            {!loading && user && (
+              <p className="vocab-auth-status">
+                Акаунт: <strong>{displayName}</strong>
+                {isTeacher ? " · вчитель" : ""}.{" "}
+                {isTeacher
+                  ? "Слова учня з платформи видно нижче у вкладці «Слова учня»."
+                  : "Нові слова зберігаються на платформі, вчитель їх теж бачить."}{" "}
+                <button
+                  type="button"
+                  className="vocab-logout-btn"
+                  onClick={() => void logOut()}
+                >
+                  Вийти
+                </button>
+              </p>
+            )}
+            {!loading && !user && (
+              <p className="vocab-auth-status">
+                Без входу нові слова лишаються лише в цьому браузері.{" "}
+                <Link to="/login">Увійти або зареєструватись</Link>
+              </p>
+            )}
+            {migratedNote && (
+              <p className="vocab-migrated-note">{migratedNote}</p>
+            )}
+            {cloudError && <p className="vocab-cloud-error">{cloudError}</p>}
           </div>
 
           <div className="vocab-view-switcher">
@@ -251,7 +370,7 @@ export function VocabSection() {
             onSwitchToCards={() => setView("cards")}
             setPracticeMode={setPracticeMode}
             onAddCustomWord={
-              activeId === MY_WORDS_ID ? addCustomWord : undefined
+              activeId === MY_WORDS_ID && !isTeacher ? addCustomWord : undefined
             }
             onDeleteCustomWord={
               activeId === MY_WORDS_ID ? deleteCustomWord : undefined
@@ -385,6 +504,7 @@ function CustomWordForm({
             onChange={(e) => setEn(e.target.value)}
             placeholder="e.g. bakery"
             autoComplete="off"
+            maxLength={80}
           />
         </label>
         <label className="vocab-custom-field">
@@ -395,6 +515,7 @@ function CustomWordForm({
             onChange={(e) => setUa(e.target.value)}
             placeholder="напр. пекарня"
             autoComplete="off"
+            maxLength={80}
           />
         </label>
         <label className="vocab-custom-field vocab-custom-field--wide">
@@ -405,6 +526,7 @@ function CustomWordForm({
             onChange={(e) => setExample(e.target.value)}
             placeholder="There's a bakery near my house."
             autoComplete="off"
+            maxLength={200}
           />
         </label>
       </div>
@@ -480,7 +602,9 @@ function CategoryView({
 
       {isMyWords && customWordCount === 0 && (
         <p className="vocab-custom-empty muted">
-          Поки що порожньо — додайте перше слово формою вище.
+          {onAddCustomWord
+            ? "Поки що порожньо — додайте перше слово формою вище."
+            : "Поки що немає слів учня на платформі."}
         </p>
       )}
 
@@ -615,7 +739,7 @@ function CategoryView({
                           className="vocab-delete-btn"
                           onClick={(e) => {
                             e.stopPropagation();
-                            onDeleteCustomWord(item.en);
+                            onDeleteCustomWord(item.customId ?? item.en);
                           }}
                           title="Видалити слово"
                           aria-label={`Видалити слово ${item.en}`}
