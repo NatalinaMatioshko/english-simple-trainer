@@ -65,7 +65,7 @@ const roleplayCards = [
 /* ─── Audio tracks ──────────────────────────────────────────── */
 
 const SOUND = (r: number) =>
-  `${import.meta.env.BASE_URL}sounds/RM_A1_SB_U1_R${r}.mp3`;
+  `${import.meta.env.BASE_URL}sounds/Unit_1/RM_A1_SB_U1_R${r}.mp3`;
 
 type AudioTrackData = {
   r: number;

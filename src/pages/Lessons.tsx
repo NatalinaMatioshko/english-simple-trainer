@@ -267,11 +267,11 @@ const lessons: LessonEntry[] = [
   },
   {
     id: "37",
-    title: "Review · Test-English practice",
+    title: "Present continuous · now vs every day",
     level: "A1",
-    topic: "days · adjectives · this/that · Present continuous · simple vs continuous",
+    topic: "I work every day · I am working now",
     description:
-      "П'ять сторінок Test-English: days/months/seasons, adjectives, this/that/these/those, Present continuous і Present simple vs Present continuous. Після кожної — коротке speaking з викладачем.",
+      "Мало слів, багато говоріння з викладачем: work/eat/drink/read/talk/sit. Контраст every day vs now. Test-English — extra в кінці.",
     lessonPath: "/lesson-37",
   },
 ];
