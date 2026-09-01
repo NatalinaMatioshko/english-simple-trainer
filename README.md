@@ -38,6 +38,7 @@ Lessons are written for **one student + one teacher**. Classroom phrases such as
 | 35 | Unit 3D · English in action: directions |
 | 36 | Present Simple · daily verbs (ELLLO video) |
 | 37 | Review · days, adjectives, this/that, Present continuous |
+| 38 | **TODO** · Present continuous speaking: tiny vocab; *I work every day* / *I am working now* (not another packed grammar block) |
 
 ---
 

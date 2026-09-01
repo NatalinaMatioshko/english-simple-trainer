@@ -105,6 +105,7 @@ export default function Lesson37() {
           <a href="#l37-pc">4 Present continuous</a>
           <a href="#l37-pspc">5 Simple vs continuous</a>
           <a href="#l37-exit">Exit</a>
+          <a href="#l37-next">Next TODO</a>
         </div>
       </section>
 
@@ -163,6 +164,24 @@ export default function Lesson37() {
             All lessons →
           </Link>
         </div>
+      </section>
+
+      <section id="l37-next" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Next · TODO</p>
+          <h2>Present continuous · now vs every day</h2>
+          <p className="lesson22-section-desc">
+            Наступний урок — окремий, не ще один перевантажений grammar-блок.
+            Мало слів, багато говоріння з викладачем, чіткий контраст:
+          </p>
+        </div>
+        <blockquote className="l23-rule-quote">
+          <p>
+            <em>I work every day.</em>
+            <br />
+            <em>I am working now.</em>
+          </p>
+        </blockquote>
       </section>
     </div>
   );

@@ -68,10 +68,10 @@ const nextLessonsSummary: StageSummary[] = [
       "A1 review, places in town, flats (Is there wifi?), opposite adjectives, and a Present continuous preview with picture exercises.",
   },
   {
-    range: "Lessons 35–40",
+    range: "Lessons 35–41",
     title: "Unit 4–5 · Family & daily life",
     summary:
-      "Family photos, daily routines, adverbs of frequency, can / can't, Present continuous, and simple vs continuous contrast.",
+      "Directions, Present Simple daily verbs, Test-English review, then a speaking-first Present continuous lesson (now vs every day) before can / can't and Unit 5.",
   },
 ];
 
@@ -554,6 +554,17 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 38,
+    title: "Present continuous · now vs every day",
+    grammar: "I work every day. / I am working now.",
+    vocabulary: "tiny set of daily verbs only",
+    speaking: "Lots of speaking with the teacher: habits vs now",
+    listening: "short model contrasts (not a packed grammar dump)",
+    review: "Present Simple (L36); PC preview (L34, L37)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 39,
     title: "Vote for me!",
     grammar: "can / can't",
     vocabulary: "verb phrases (buy a newspaper, send an email…)",
@@ -564,24 +575,24 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 39,
+    id: 40,
     title: "A quiet life?",
     grammar: "Present continuous — be + verb + -ing (full unit)",
     vocabulary: "noise verbs; action phrases",
     speaking: "Describe what people are doing now",
     listening: "/ŋ/; present continuous in context",
-    review: "PC preview (L34); Unit 5B",
+    review: "PC speaking (L38); Unit 5B",
     category: "general",
     status: "next",
   },
   {
-    id: 40,
+    id: 41,
     title: "A city for all seasons",
     grammar: "Present simple or Present continuous?",
     vocabulary: "weather and seasons; places in London",
     speaking: "Compare habits vs actions happening now",
     listening: "simple vs continuous contrast",
-    review: "Present Simple (L28); Present continuous",
+    review: "Present Simple (L28); Present continuous (L38)",
     category: "general",
     status: "next",
   },
@@ -719,7 +730,7 @@ export default function RoadmapSection() {
     <section className="roadmap-layout">
       <aside className="roadmap-sidebar panel">
         <p className="page-kicker">Learning path</p>
-        <h2>Roadmap for Lessons 1–40</h2>
+        <h2>Roadmap for Lessons 1–41</h2>
         <p className="roadmap-lead">
           The course moves from self-introduction and <strong>to be</strong> to
           daily routines, countries, jobs, shopping, transport, health, and
@@ -785,7 +796,7 @@ export default function RoadmapSection() {
           <section className="roadmap-block">
             <div className="roadmap-block-head">
               <p className="roadmap-mini-label">Full timeline</p>
-              <h3>Lessons 1–40</h3>
+              <h3>Lessons 1–41</h3>
               <p>
                 This is the complete course line from the first lesson through
                 Unit 3 (live) and planned Units 4–5.
