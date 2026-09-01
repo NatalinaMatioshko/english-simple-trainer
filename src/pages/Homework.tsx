@@ -3,6 +3,29 @@ import "../styles/pages.css";
 
 const homeworkByLesson = [
   {
+    id: "36",
+    title: "Present Simple · daily verbs",
+    href: "/hw-36",
+    tasks: [
+      {
+        type: "text",
+        text: "Watch ELLLO A1-04, then listening quiz + complete the sentences",
+      },
+      {
+        type: "text",
+        text: "do / don't / does + word-order questions from the video",
+      },
+      {
+        type: "text",
+        text: "Write answers about your routine; check at / to (to do) / time",
+      },
+      {
+        type: "text",
+        text: "Send results to teacher",
+      },
+    ],
+  },
+  {
     id: "35",
     title: "Check and reflect",
     href: "/hw-35",

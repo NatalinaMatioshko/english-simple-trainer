@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import LessonNumberKicker from "../components/LessonNumberKicker";
+import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import WordOrderBoard, {
   initWordOrderRows,
 } from "../components/lesson31/WordOrderBoard";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
+import { hw36At, hw36Time, hw36To } from "../data/hw36";
 import {
   doDont,
   listenQuiz,
@@ -18,7 +19,115 @@ import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 
-export default function Lesson36() {
+type SelectItem = {
+  id: string;
+  prompt: string;
+  options: readonly string[];
+  answer: string;
+};
+
+function SelectCheck({
+  items,
+  ans,
+  setAns,
+  checked,
+  setChecked,
+  aria,
+}: {
+  items: readonly SelectItem[];
+  ans: string[];
+  setAns: (next: string[]) => void;
+  checked: boolean;
+  setChecked: (v: boolean) => void;
+  aria: string;
+}) {
+  const score = items.filter((q, i) => ans[i] === q.answer).length;
+  return (
+    <>
+      <div className="l26-drill-list">
+        {items.map((q, i) => (
+          <div key={q.id} className="l26-drill-row">
+            <strong className="l26-drill-prompt">
+              {i + 1}. {q.prompt}
+            </strong>
+            <span className="l26-drill-arrow" aria-hidden="true">
+              →
+            </span>
+            <select
+              value={ans[i]}
+              onChange={(e) => {
+                setChecked(false);
+                const next = [...ans];
+                next[i] = e.target.value;
+                setAns(next);
+              }}
+              className={drillSelClass(checked, ans[i], q.answer)}
+              aria-label={`${aria} ${i + 1}`}
+            >
+              <option value="">___</option>
+              {q.options.map((o) => (
+                <option key={o} value={o}>
+                  {o}
+                </option>
+              ))}
+            </select>
+          </div>
+        ))}
+      </div>
+      <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+        <button
+          type="button"
+          className="l22-check-btn"
+          onClick={() => setChecked(true)}
+        >
+          Check
+        </button>
+        {checked && (
+          <span className="l22-score">
+            {score} / {items.length}
+          </span>
+        )}
+        <button
+          type="button"
+          className="l25-cr-mini-btn"
+          onClick={() => {
+            setAns(items.map((q) => q.answer));
+            setChecked(true);
+          }}
+        >
+          Show answers
+        </button>
+        <button
+          type="button"
+          className="l25-cr-mini-btn"
+          onClick={() => {
+            setAns(Array(items.length).fill(""));
+            setChecked(false);
+          }}
+        >
+          Reset
+        </button>
+      </div>
+    </>
+  );
+}
+
+function wordOrderScore(
+  items: typeof wordOrder36,
+  rows: ReturnType<typeof initWordOrderRows>,
+) {
+  return items.filter((item, i) => {
+    const built = rows[i]?.built ?? [];
+    const joined = built
+      .join(" ")
+      .replace(/\s+\?/g, "?")
+      .replace(/\s+\./g, ".")
+      .trim();
+    return joined === item.answer && (rows[i]?.pool.length ?? 0) === 0;
+  }).length;
+}
+
+export default function HW36() {
   const [listenAns, setListenAns] = useState(() =>
     Array(listenQuiz.length).fill(""),
   );
@@ -35,56 +144,89 @@ export default function Lesson36() {
   );
   const [orderChecked, setOrderChecked] = useState(false);
 
+  const [speakAns, setSpeakAns] = useState(() =>
+    Array(speakPrompts.length).fill(""),
+  );
+
+  const [atAns, setAtAns] = useState(() => Array(hw36At.length).fill(""));
+  const [atChecked, setAtChecked] = useState(false);
+
+  const [toAns, setToAns] = useState(() => Array(hw36To.length).fill(""));
+  const [toChecked, setToChecked] = useState(false);
+
+  const [timeAns, setTimeAns] = useState(() => Array(hw36Time.length).fill(""));
+  const [timeChecked, setTimeChecked] = useState(false);
+
+  const [draft, setDraft] = useState("");
+
   const listenScore = listenQuiz.filter(
     (q, i) => listenAns[i] === q.answer,
   ).length;
   const gapScore = videoGaps.filter((g, i) => gapAns[i] === g.answer).length;
   const doScore = doDont.filter((q, i) => doAns[i] === q.answer).length;
+  const orderScore = wordOrderScore(wordOrder36, orderRows);
+  const speakDone = speakAns.every((a) => a.trim().length > 0);
+  const atScore = hw36At.filter((q, i) => atAns[i] === q.answer).length;
+  const toScore = hw36To.filter((q, i) => toAns[i] === q.answer).length;
+  const timeScore = hw36Time.filter((q, i) => timeAns[i] === q.answer).length;
+
+  const checks = useMemo(
+    () => ({
+      listen: listenChecked,
+      gaps: gapChecked,
+      doDont: doChecked,
+      wordOrder: orderChecked,
+      speaking: speakDone,
+      at: atChecked,
+      to: toChecked,
+      time: timeChecked,
+    }),
+    [
+      listenChecked,
+      gapChecked,
+      doChecked,
+      orderChecked,
+      speakDone,
+      atChecked,
+      toChecked,
+      timeChecked,
+    ],
+  );
+
+  const allDone = Object.values(checks).every(Boolean);
+  const totalScore =
+    listenScore + gapScore + doScore + orderScore + atScore + toScore + timeScore;
+  const totalItems =
+    listenQuiz.length +
+    videoGaps.length +
+    doDont.length +
+    wordOrder36.length +
+    hw36At.length +
+    hw36To.length +
+    hw36Time.length;
 
   return (
     <div className="lesson22-page">
       <section className="lesson22-hero panel">
         <div className="lesson22-hero-top">
           <div>
-            <LessonNumberKicker number={36} />
+            <p className="page-kicker">Homework · Lesson 36</p>
             <h1>Present Simple · daily verbs</h1>
-            <p className="lesson22-topic-pill">
-              I wake up · I teach · I eat in the park
-            </p>
             <p className="lesson22-subtitle">
-              ELLLO A1-04. Послухай чотири діалоги з{" "}
-              <strong>Present Simple</strong> і відповідай про свою рутину.
+              Ті самі завдання з уроку: відео ELLLO A1-04, listening, complete,
+              do / don&apos;t, word order і відповіді про свою рутину. Плюс
+              перевірка <strong>at</strong>, <strong>to</strong> (to do) і{" "}
+              <strong>час</strong>.
             </p>
           </div>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
           >
+            <Link className="lesson22-back-link" to="/lesson-36">
+              ← Lesson 36
+            </Link>
             <Link className="lesson22-back-link" to="/lessons">
               ← Back to lessons
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-35"
-            >
-              ← Lesson 35
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-37"
-            >
-              Lesson 37 →
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/hw-36"
-            >
-              HW36 →
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/vocab"
-            >
-              Vocab →
             </Link>
           </div>
         </div>
@@ -94,22 +236,25 @@ export default function Lesson36() {
           <span>fix bikes</span>
           <span>play soccer</span>
           <span>do / don&apos;t</span>
+          <span>at / to</span>
+          <span>in the morning</span>
         </div>
       </section>
 
       <section className="lesson22-block panel">
         <div className="lesson22-flow">
-          <a href="#l36-video">Video</a>
-          <a href="#l36-listen">1 Listening</a>
-          <a href="#l36-gaps">2 Complete</a>
-          <a href="#l36-do">3 do / don&apos;t</a>
-          <a href="#l36-order">4 Word order</a>
-          <a href="#l36-speak">5 Speaking</a>
-          <a href="#l36-exit">Exit</a>
+          <a href="#hw36-video">Video</a>
+          <a href="#hw36-listen">1 Listening</a>
+          <a href="#hw36-gaps">2 Complete</a>
+          <a href="#hw36-do">3 do / don&apos;t</a>
+          <a href="#hw36-order">4 Word order</a>
+          <a href="#hw36-speak">5 Speaking</a>
+          <a href="#hw36-check">Check · at / to / time</a>
+          <a href="#hw36-submit">Submit</a>
         </div>
       </section>
 
-      <section id="l36-video" className="lesson22-block panel">
+      <section id="hw36-video" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">Video · ELLLO A1-04</p>
           <h2>Verbs in the Present Simple</h2>
@@ -148,7 +293,7 @@ export default function Lesson36() {
         </div>
       </section>
 
-      <section id="l36-listen" className="lesson22-block panel">
+      <section id="hw36-listen" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">1 · Listening quiz</p>
           <h2>Answer from the video</h2>
@@ -222,7 +367,7 @@ export default function Lesson36() {
         </div>
       </section>
 
-      <section id="l36-gaps" className="lesson22-block panel">
+      <section id="hw36-gaps" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">2 · Complete</p>
           <h2>Complete the sentences</h2>
@@ -298,7 +443,7 @@ export default function Lesson36() {
         </div>
       </section>
 
-      <section id="l36-do" className="lesson22-block panel">
+      <section id="hw36-do" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">3 · Grammar</p>
           <h2>do / don&apos;t / does</h2>
@@ -374,7 +519,7 @@ export default function Lesson36() {
         </div>
       </section>
 
-      <section id="l36-order" className="lesson22-block panel">
+      <section id="hw36-order" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">4 · Word order</p>
           <h2>Make questions</h2>
@@ -391,67 +536,142 @@ export default function Lesson36() {
         />
       </section>
 
-      <section id="l36-speak" className="lesson22-block panel">
+      <section id="hw36-speak" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">5 · Speaking</p>
-          <h2>Ask and answer with your teacher</h2>
+          <h2>Write about your routine</h2>
           <p className="lesson22-section-desc">
-            Прочитай питання вголос і відповідай про <strong>себе</strong>.
-            Потім запитай викладача.
+            Прочитай питання вголос і напиши відповіді про{" "}
+            <strong>себе</strong>. На уроці розкажи їх викладачу.
           </p>
         </div>
         <div className="lesson22-prompt-grid">
-          {speakPrompts.map((q) => (
-            <div
+          {speakPrompts.map((q, i) => (
+            <label
               key={q}
               className="lesson22-prompt-card lesson22-prompt-card--task"
             >
               {q}
-            </div>
+              <textarea
+                className="hw27-textarea"
+                rows={3}
+                value={speakAns[i]}
+                onChange={(e) => {
+                  const next = [...speakAns];
+                  next[i] = e.target.value;
+                  setSpeakAns(next);
+                }}
+                placeholder="I …"
+                aria-label={q}
+                style={{ marginTop: "0.65rem", width: "100%" }}
+              />
+            </label>
           ))}
         </div>
         <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
           <p>
-            <strong>Model.</strong> Teacher: <em>What do you do in the morning?</em>{" "}
-            You: <em>I wake up, I take a shower and I eat breakfast.</em>
+            <strong>Model.</strong>{" "}
+            <em>What do you do in the morning?</em> —{" "}
+            <em>I wake up, I take a shower and I eat breakfast.</em>
             <br />
-            Teacher: <em>When do you get up?</em> You:{" "}
-            <em>I get up at seven.</em>
+            <em>When do you get up?</em> — <em>I get up at seven.</em>
           </p>
         </blockquote>
       </section>
 
-      <section id="l36-exit" className="lesson22-block panel">
+      <section id="hw36-check" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">Exit check</p>
-          <h2>Can you…?</h2>
+          <p className="page-kicker">Check · at / to / time</p>
+          <h2>at · to · час</h2>
+          <p className="lesson22-section-desc">
+            Три короткі перевірки: <strong>at</strong> (година, home, weekend),{" "}
+            <strong>to</strong> (go to…, like to do) і <strong>час</strong> (in
+            the morning / on Monday / at 7 o&apos;clock).
+          </p>
         </div>
-        <ul className="l22-goals-list">
-          <li>Say 4 things you do in the morning.</li>
-          <li>Ask: What do you do during the day / on the weekend?</li>
-          <li>Use don&apos;t in one sentence about you.</li>
-          <li>Answer a listening question from the video.</li>
-        </ul>
-        <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
-          <Link className="l22-check-btn" to="/hw-36">
-            HW36
-          </Link>
-          <Link className="l25-cr-mini-btn" to="/vocab">
-            Vocab
-          </Link>
-          <Link className="l25-cr-mini-btn" to="/trainer">
-            Trainer
-          </Link>
-          <Link className="l25-cr-mini-btn" to="/lesson-37">
-            Lesson 37 →
-          </Link>
-          <Link className="l25-cr-mini-btn" to="/lesson-35">
-            ← Lesson 35
-          </Link>
-          <Link className="l25-cr-mini-btn" to="/lessons">
-            All lessons →
-          </Link>
+
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">A</strong> Choose <strong>at</strong>.
+        </p>
+        <SelectCheck
+          items={hw36At}
+          ans={atAns}
+          setAns={setAtAns}
+          checked={atChecked}
+          setChecked={setAtChecked}
+          aria="at"
+        />
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">B</strong> Choose <strong>to</strong>{" "}
+          (go to… / to do).
+        </p>
+        <SelectCheck
+          items={hw36To}
+          ans={toAns}
+          setAns={setToAns}
+          checked={toChecked}
+          setChecked={setToChecked}
+          aria="to"
+        />
+
+        <p className="l31-ex-line" style={{ marginTop: "1.35rem" }}>
+          <strong className="l31-ex-num">C</strong> Time — in / on / at.
+        </p>
+        <SelectCheck
+          items={hw36Time}
+          ans={timeAns}
+          setAns={setTimeAns}
+          checked={timeChecked}
+          setChecked={setTimeChecked}
+          aria="time"
+        />
+      </section>
+
+      <section id="hw36-submit" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Submit</p>
+          <h2>Send your homework</h2>
+          <p className="lesson22-section-desc">
+            Перевір вправи (Check), напиши відповіді про себе, зроби at / to /
+            час і надішли вчителю.
+          </p>
         </div>
+        <label className="lesson22-section-desc" htmlFor="hw36-writing">
+          Notes (optional):
+        </label>
+        <textarea
+          id="hw36-writing"
+          className="hw27-textarea"
+          rows={5}
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          placeholder="Що було складно? Які слова хочеш повторити?"
+        />
+        <HomeworkSubmit
+          lessonId="36"
+          writing={[
+            draft.trim() || "(no extra notes)",
+            `1 · Listening: ${checks.listen ? `${listenScore}/${listenQuiz.length}` : "not finished"}`,
+            `2 · Complete: ${checks.gaps ? `${gapScore}/${videoGaps.length}` : "not finished"}`,
+            `3 · do / don't: ${checks.doDont ? `${doScore}/${doDont.length}` : "not finished"}`,
+            `4 · Word order: ${checks.wordOrder ? `${orderScore}/${wordOrder36.length}` : "not finished"}`,
+            "5 · Routine answers:",
+            ...speakPrompts.map(
+              (q, i) => `  ${q} — ${speakAns[i].trim() || "—"}`,
+            ),
+            `Check · at: ${checks.at ? `${atScore}/${hw36At.length}` : "not finished"}`,
+            `Check · to: ${checks.to ? `${toScore}/${hw36To.length}` : "not finished"}`,
+            `Check · time: ${checks.time ? `${timeScore}/${hw36Time.length}` : "not finished"}`,
+            allDone
+              ? `Total: ${totalScore}/${totalItems}`
+              : "Total: incomplete",
+          ].join("\n")}
+          quizDone={allDone}
+          quizScore={allDone ? totalScore : undefined}
+          showListeningCheck={false}
+          description="Після перевірки всіх вправ натисни «Надіслати». Додай ім'я."
+        />
       </section>
     </div>
   );

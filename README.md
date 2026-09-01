@@ -214,6 +214,7 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/hw-31` | Homework · Lesson 31 |
 | `/hw-34` | Homework · Lesson 34 |
 | `/hw-35` | Homework · Lesson 35 (Unit 3 check) |
+| `/hw-36` | Homework · Lesson 36 (Present Simple daily verbs) |
 | `/a1-level-test` | A1 Level Test |
 | `/extra-resources` | Extra infographics |
 | `/vocab` | Vocabulary |

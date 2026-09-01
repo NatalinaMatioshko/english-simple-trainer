@@ -263,6 +263,7 @@ const lessons: LessonEntry[] = [
     description:
       "ELLLO A1-04: відео Present Simple, listening quiz, complete the sentences, do/don't і speaking про свою рутину з викладачем.",
     lessonPath: "/lesson-36",
+    homeworkPath: "/hw-36",
   },
   {
     id: "37",
