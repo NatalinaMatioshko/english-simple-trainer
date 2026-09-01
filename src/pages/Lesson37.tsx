@@ -28,6 +28,22 @@ const LOOK = [
   "I'm not eating. I'm talking.",
 ] as const;
 
+const SIMPLE_MARKERS = [
+  { marker: "every day", model: "I work every day." },
+  { marker: "usually", model: "I usually eat." },
+  { marker: "often", model: "I often read." },
+  { marker: "always", model: "I always sit." },
+  { marker: "sometimes", model: "I sometimes talk." },
+  { marker: "never", model: "I never drink coffee." },
+] as const;
+
+const NOW_MARKERS = [
+  { marker: "now", model: "I am working now." },
+  { marker: "right now", model: "I am talking right now." },
+  { marker: "at the moment", model: "I am sitting at the moment." },
+  { marker: "today", model: "I am reading today." },
+] as const;
+
 const LINKS = [
   {
     id: "days",
@@ -115,8 +131,8 @@ export default function Lesson37() {
         <div className="lesson22-hero-chips">
           <span>work / working</span>
           <span>eat / eating</span>
-          <span>every day</span>
-          <span>now</span>
+          <span>every day · usually</span>
+          <span>now · right now</span>
         </div>
       </section>
 
@@ -124,9 +140,10 @@ export default function Lesson37() {
         <div className="lesson22-flow">
           <a href="#l37-contrast">1 Contrast</a>
           <a href="#l37-words">2 Words</a>
-          <a href="#l37-same">3 Same verb</a>
-          <a href="#l37-ask">4 Ask</a>
-          <a href="#l37-look">5 Now</a>
+          <a href="#l37-markers">3 Markers</a>
+          <a href="#l37-same">4 Same verb</a>
+          <a href="#l37-ask">5 Ask</a>
+          <a href="#l37-look">6 Now</a>
           <a href="#l37-extra">Extra</a>
           <a href="#l37-exit">Exit</a>
         </div>
@@ -160,8 +177,9 @@ export default function Lesson37() {
         </div>
         <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
           <p>
-            <strong>Remember.</strong> every day → Present Simple. now → am / is
-            / are + <em>-ing</em>.
+            <strong>Remember.</strong> every day / usually / often → Present
+            Simple. now / right now / at the moment → am / is / are +{" "}
+            <em>-ing</em>.
           </p>
         </blockquote>
       </section>
@@ -183,9 +201,77 @@ export default function Lesson37() {
         </div>
       </section>
 
-      <section id="l37-same" className="lesson22-block panel">
+      <section id="l37-markers" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">3 · Speak</p>
+          <h2>Time markers</h2>
+          <p className="lesson22-section-desc">
+            Take turns with your teacher. Викладач каже маркер — ти кажеш
+            речення з одним із шести дієслів.
+          </p>
+        </div>
+        <div className="l31-figure-row">
+          <div className="l25-conf-card" style={{ flex: 1 }}>
+            <div className="l25-conf-header">every day</div>
+            <div className="l25-conf-fields">
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: "var(--text-sm)",
+                  lineHeight: 1.55,
+                }}
+              >
+                <strong>every day</strong> · <strong>usually</strong> ·{" "}
+                <strong>often</strong> · <strong>always</strong> ·{" "}
+                <strong>sometimes</strong> · <strong>never</strong>
+              </p>
+            </div>
+          </div>
+          <div className="l25-conf-card" style={{ flex: 1 }}>
+            <div className="l25-conf-header">now</div>
+            <div className="l25-conf-fields">
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: "var(--text-sm)",
+                  lineHeight: 1.55,
+                }}
+              >
+                <strong>now</strong> · <strong>right now</strong> ·{" "}
+                <strong>at the moment</strong> · <strong>today</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+        <p className="lesson22-section-desc" style={{ marginTop: "1rem" }}>
+          usually / often / always / sometimes / never — перед дієсловом. every
+          day — в кінці.
+        </p>
+        <div className="lesson22-prompt-grid">
+          {[...SIMPLE_MARKERS, ...NOW_MARKERS].map((item) => (
+            <div
+              key={item.marker}
+              className="lesson22-prompt-card lesson22-prompt-card--task"
+            >
+              <strong>{item.marker}</strong>
+              <br />
+              {item.model}
+            </div>
+          ))}
+        </div>
+        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
+          <p>
+            <strong>Model.</strong> Teacher: <em>usually</em> You:{" "}
+            <em>I usually read.</em>
+            <br />
+            Teacher: <em>right now</em> You: <em>I am sitting right now.</em>
+          </p>
+        </blockquote>
+      </section>
+
+      <section id="l37-same" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">4 · Speak</p>
           <h2>The same verb twice</h2>
           <p className="lesson22-section-desc">
             Take turns with your teacher. Для кожного дієслова скажи{" "}
@@ -214,7 +300,7 @@ export default function Lesson37() {
 
       <section id="l37-ask" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">4 · Speak</p>
+          <p className="page-kicker">5 · Speak</p>
           <h2>Ask and answer with your teacher</h2>
           <p className="lesson22-section-desc">
             Прочитай питання вголос і відповідай правдою. Потім запитай
@@ -245,7 +331,7 @@ export default function Lesson37() {
 
       <section id="l37-look" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">5 · Speak</p>
+          <p className="page-kicker">6 · Speak</p>
           <h2>Look around · now</h2>
           <p className="lesson22-section-desc">
             Подивись на себе і на викладача. Скажи, що відбувається{" "}
@@ -318,7 +404,9 @@ export default function Lesson37() {
           </li>
           <li>Do the same with 3 more verbs (eat, drink, read, talk, sit).</li>
           <li>Ask your teacher: What are you doing now?</li>
-          <li>Answer: What do you do every day?</li>
+          <li>
+            Use a marker: usually / often / right now / at the moment.
+          </li>
         </ul>
         <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
           <Link className="l22-check-btn" to="/vocab">
