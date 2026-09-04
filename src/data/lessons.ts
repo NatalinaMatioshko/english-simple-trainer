@@ -1,3 +1,5 @@
+import { homeworkCovers } from "./homeworkList";
+
 export type LessonEntry =
   | {
       id: string;
@@ -273,3 +275,22 @@ export const lessons: LessonEntry[] = [
     homeworkPath: "/hw-37",
   },
 ];
+
+export const lessonCovers: Record<string, string> = {
+  ...homeworkCovers,
+  practice: "/images/present-simple-harry-potter.png",
+  "about-me": "/images/lesson28/all-about-me.jpg",
+  "23": "/images/articles-a-an-the.jpg",
+  "24": "/images/describing-people-adjectives.png",
+  "28": "/images/lesson28/things-scene.png",
+  "29": "/images/lesson28/home-office-vocab.png",
+  "34": "/images/lesson34/what-are-they-doing.png",
+  "35": "/images/lesson35/pixel-town-map.png",
+  extra: "/images/everyday-actions.png",
+};
+
+export function lessonCubeLabel(lesson: LessonEntry): string {
+  if (lesson.practiceOnly) return `Practice. ${lesson.title}`;
+  if (!/^\d+$/.test(lesson.id)) return lesson.title;
+  return `${lesson.id}. ${lesson.title}`;
+}

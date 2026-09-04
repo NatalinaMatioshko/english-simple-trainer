@@ -17,29 +17,25 @@ export default function Homework() {
         </p>
       </header>
 
-      <section className="homework-cubes" aria-label="Homework cards">
+      <section className="catalog-cubes" aria-label="Homework cards">
         {homeworkByLesson.map((lesson) => {
           const cover = homeworkCovers[lesson.id];
-          const taskCount = lesson.tasks.length;
           return (
             <Link
               key={lesson.id}
               to={homeworkHref(lesson)}
-              className="homework-cube"
+              className="catalog-cube"
             >
-              <span className="homework-cube-media" aria-hidden="true">
+              <span className="catalog-cube-media" aria-hidden="true">
                 {cover ? (
                   <img src={cover} alt="" />
                 ) : (
-                  <span className="homework-cube-fallback">{lesson.id}</span>
+                  <span className="catalog-cube-fallback">{lesson.id}</span>
                 )}
               </span>
-              <span className="homework-cube-body">
-                <span className="homework-cube-title">
+              <span className="catalog-cube-body">
+                <span className="catalog-cube-title">
                   {lesson.id}. {lesson.title}
-                </span>
-                <span className="homework-cube-meta">
-                  {taskCount} {taskCount === 1 ? "task" : "tasks"}
                 </span>
               </span>
             </Link>

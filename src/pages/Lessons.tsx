@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
-import { lessons, type LessonEntry } from "../data/lessons";
+import {
+  lessonCovers,
+  lessonCubeLabel,
+  lessons,
+  type LessonEntry,
+} from "../data/lessons";
 import "../styles/pages.css";
 
 export default function Lessons() {
@@ -20,70 +25,57 @@ export default function Lessons() {
         ? [practiceLesson, ...regularLessons]
         : regularLessons;
 
+  const currentLessonId = [...lessons]
+    .filter((lesson) => !lesson.practiceOnly && /^\d+$/.test(lesson.id))
+    .at(-1)?.id;
+
   return (
     <div className="page-shell">
       <header className="page-hero panel">
         <p className="page-kicker">Course map</p>
         <h1>Lessons</h1>
         <p className="page-subtitle">
-          Choose a lesson card to open the teaching page or jump to homework.
+          Обери картку, щоб відкрити урок.
         </p>
       </header>
 
-      <section className="cards-grid">
-        {displayLessons.map((lesson) => (
-          <article
-            className={`lesson-card panel${lesson.practiceOnly ? " lesson-card--practice" : ""}`}
-            key={lesson.id}
-          >
-            <div className="lesson-card-top">
-              <span
-                className="lesson-badge"
-                aria-label={
-                  lesson.practiceOnly ? "Practice" : `Lesson ${lesson.id}`
-                }
-              >
-                {lesson.practiceOnly ? "Practice" : lesson.id}
+      <section className="catalog-cubes" aria-label="Lesson cards">
+        {displayLessons.map((lesson) => {
+          const cover = lessonCovers[lesson.id];
+          const isCurrent = lesson.id === currentLessonId;
+          return (
+            <Link
+              key={lesson.id}
+              to={lesson.lessonPath}
+              className={`catalog-cube${lesson.practiceOnly ? " is-practice" : ""}${isCurrent ? " is-current" : " is-past"}`}
+              aria-current={isCurrent ? "true" : undefined}
+            >
+              <span className="catalog-cube-media" aria-hidden="true">
+                {cover ? (
+                  <img src={cover} alt="" />
+                ) : (
+                  <span className="catalog-cube-fallback">
+                    {lesson.practiceOnly ? "P" : lesson.id}
+                  </span>
+                )}
               </span>
-              <span className="lesson-badge secondary">{lesson.level}</span>
-            </div>
-
-            <h2>{lesson.title}</h2>
-            <p className="lesson-topic">{lesson.topic}</p>
-            <p className="lesson-desc">{lesson.description}</p>
-
-            <div className="card-actions">
-              <Link className="action-btn primary" to={lesson.lessonPath}>
-                {lesson.practiceOnly ? "Start practice" : "Open lesson"}
-              </Link>
-              {!lesson.practiceOnly && lesson.homeworkPath && (
-                <Link className="action-btn secondary" to={lesson.homeworkPath}>
-                  Open homework
-                </Link>
-              )}
-            </div>
-          </article>
-        ))}
-
-        <article className="lesson-card panel lesson-card--resources">
-          <div className="lesson-card-top">
-            <span className="lesson-badge">Extra</span>
-            <span className="lesson-badge secondary">Materials</span>
-          </div>
-
-          <h2>Extra resources</h2>
-          <p className="lesson-topic">Visual materials</p>
-          <p className="lesson-desc">
-            16 інфографік і worksheets: phrasal verbs, idioms, WH questions,
-            everyday actions, Harry Potter та ін.
-          </p>
-
-          <div className="card-actions">
-            <Link className="action-btn primary" to="/extra-resources">
-              Open visual materials
+              <span className="catalog-cube-body">
+                <span className="catalog-cube-title">
+                  {lessonCubeLabel(lesson)}
+                </span>
+              </span>
             </Link>
-          </div>
-        </article>
+          );
+        })}
+
+        <Link to="/extra-resources" className="catalog-cube is-extra is-past">
+          <span className="catalog-cube-media" aria-hidden="true">
+            <img src={lessonCovers.extra} alt="" />
+          </span>
+          <span className="catalog-cube-body">
+            <span className="catalog-cube-title">Extra. Visual materials</span>
+          </span>
+        </Link>
       </section>
     </div>
   );
