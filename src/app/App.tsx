@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "../context/AuthContext";
 import { ThemeProvider } from "../context/ThemeContext";
 import { SiteLayout } from "../components/layout/SiteLayout";
@@ -51,13 +51,16 @@ import SelfStudyReview from "../pages/SelfStudyReview";
 import NotFound from "../pages/NotFound";
 
 import Home from "../pages/Home";
+import RoadmapPage from "../pages/RoadmapPage";
 import { AboutMePage } from "../components/AboutMePage/AboutMePage";
 
 function AppRoutes() {
   return (
     <Routes>
       <Route element={<SiteLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<RoadmapPage />} />
+        <Route path="/roadmap" element={<Navigate to="/" replace />} />
+        <Route path="/cabinet" element={<Home />} />
         <Route path="/trainer" element={<TrainerPage />} />
         <Route path="/vocab" element={<VocabPage />} />
         <Route path="/login" element={<LoginPage />} />

@@ -1,7 +1,7 @@
 .page-shell {
   display: grid;
   gap: 1.5rem;
-  max-width: 1100px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 1.5rem;
 }
@@ -173,8 +173,112 @@
   gap: 1rem;
 }
 
+.homework-cubes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.homework-cube {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.homework-cube:hover,
+.homework-cube:focus-visible {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  box-shadow: var(--shadow-md);
+  outline: none;
+}
+
+.homework-cube-media {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(1, 105, 111, 0.12), transparent 55%),
+    #efe8d8;
+  overflow: hidden;
+}
+
+.homework-cube-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+[data-theme="dark"] .homework-cube-media {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(79, 152, 163, 0.2), transparent 55%),
+    #2a2723;
+}
+
+.homework-cube-fallback {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.homework-cube-body {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.85rem 0.95rem 1rem;
+  background: var(--color-surface-2);
+  min-height: 4.6rem;
+}
+
+.homework-cube-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+.homework-cube-meta {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
 .homework-card {
   padding: 1.25rem;
+}
+
+@media (max-width: 1100px) {
+  .homework-cubes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .homework-cubes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .homework-cube-body {
+    padding: 0.7rem 0.75rem 0.85rem;
+    min-height: 4.1rem;
+  }
+
+  .homework-cube-title {
+    font-size: 0.84rem;
+  }
 }
 
 .homework-steps {

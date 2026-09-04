@@ -3,7 +3,7 @@
 /* Covered topics · roadmap (line-by-line) */
 .l30-covered {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   padding: 1.15rem 1.25rem 1.25rem;
 }
 
@@ -189,6 +189,10 @@
   flex-direction: column;
 }
 
+.l30-road-stage:has(.l30-road-line-stage.is-open) {
+  overflow: visible;
+}
+
 .l30-road-stage::before {
   content: "";
   position: absolute;
@@ -346,6 +350,11 @@
   overflow: hidden;
 }
 
+.l30-road-line-stage.is-open {
+  height: auto;
+  overflow: visible;
+}
+
 .l30-road-line {
   border-radius: 14px;
   border: 1.5px solid color-mix(in srgb, var(--l30-cat-accent, #2dd4bf) 45%, transparent);
@@ -363,25 +372,33 @@
 }
 
 .l30-road-line--hover {
-  max-height: none;
-  height: 100%;
+  max-height: min(52vh, 28rem);
+  height: auto;
+}
+
+.l30-road-line-hint {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #94a3b8;
 }
 
 .l30-road-hover-list {
   list-style: none;
-  margin: 0.45rem 0 0;
+  margin: 0.2rem 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0.28rem;
 }
 
-.l30-road-hover-list button {
+.l30-road-hover-list a {
   display: flex;
   align-items: flex-start;
   gap: 0.45rem;
   width: 100%;
   text-align: left;
+  text-decoration: none;
   font: inherit;
   font-size: 0.82rem;
   font-weight: 600;
@@ -390,13 +407,31 @@
   background: rgba(15, 23, 42, 0.35);
   border: 1px solid transparent;
   border-radius: 8px;
-  padding: 0.35rem 0.45rem;
+  padding: 0.4rem 0.5rem;
   cursor: pointer;
   transition:
     color 0.2s ease,
     background 0.2s ease,
     border-color 0.2s ease,
     transform 0.2s ease;
+}
+
+.l30-road-hover-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.l30-road-hover-lesson {
+  flex-shrink: 0;
+  align-self: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--l30-cat-accent, #2dd4bf);
+  background: color-mix(in srgb, var(--l30-cat-accent, #2dd4bf) 16%, transparent);
+  border-radius: 999px;
+  padding: 0.18rem 0.5rem;
 }
 
 .l30-road-hover-dot {
@@ -409,16 +444,19 @@
   transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.l30-road-hover-list button:hover,
-.l30-road-hover-list button.is-on {
+.l30-road-hover-list a:hover,
+.l30-road-hover-list a.is-on,
+.l30-road-hover-list a:focus-visible {
   color: #f8fafc;
   background: color-mix(in srgb, var(--l30-cat-accent) 16%, rgba(15, 23, 42, 0.55));
   border-color: color-mix(in srgb, var(--l30-cat-accent) 40%, transparent);
   transform: translateX(3px);
+  outline: none;
 }
 
-.l30-road-hover-list button:hover .l30-road-hover-dot,
-.l30-road-hover-list button.is-on .l30-road-hover-dot {
+.l30-road-hover-list a:hover .l30-road-hover-dot,
+.l30-road-hover-list a.is-on .l30-road-hover-dot,
+.l30-road-hover-list a:focus-visible .l30-road-hover-dot {
   background: var(--l30-cat-accent, #2dd4bf);
   box-shadow: 0 0 10px color-mix(in srgb, var(--l30-cat-accent) 60%, transparent);
   transform: scale(1.25);
@@ -524,6 +562,10 @@
   .l30-road-line-stage {
     height: 150px;
     min-height: 150px;
+  }
+
+  .l30-road-line-stage.is-open {
+    height: auto;
   }
 }
 

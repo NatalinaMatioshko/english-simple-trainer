@@ -1,125 +1,169 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { vocabCategories } from "../data/vocab";
+import { subscribeStudentVocab } from "../services/studentVocab";
+import { homeworkByLesson, homeworkHref } from "../data/homeworkList";
+import { lessons } from "../data/lessons";
 import "../styles/pages.css";
-import RoadmapSection from "../components/RoadmapSection";
-import CoveredTopicsRoadmap from "../components/CoveredTopicsRoadmap";
-import {
-  RotatingWord,
-  type RotatingWordItem,
-} from "../components/RotatingWord";
-import { FaceButton } from "../components/FaceButton";
-import "../styles/roadmap.css";
+import "../styles/dashboard.css";
 
-const heroRotateWords: RotatingWordItem[] = [
-  { text: "Trainer", tone: "primary" },
-  { text: "Speaking", tone: "accent" },
-  { text: "Listening", tone: "success" },
-  { text: "Reading", tone: "error" },
-  { text: "Progress", tone: "night" },
-];
-
-const shortcuts = [
-  {
-    title: "Trainer",
-    description: "Open the main Present Simple training page.",
-    path: "/trainer",
-    button: "Open trainer",
-  },
-  {
-    title: "Lessons",
-    description: "See current lessons in one clean overview.",
-    path: "/lessons",
-    button: "Open lessons",
-  },
-  {
-    title: "Homework",
-    description: "Check homework tasks for the current lessons.",
-    path: "/homework",
-    button: "Open homework",
-  },
-];
+function courseVocabCount(): number {
+  return vocabCategories.reduce(
+    (total, category) =>
+      total + category.groups.reduce((sum, group) => sum + group.items.length, 0),
+    0,
+  );
+}
 
 export default function Home() {
-  const roadmapRef = useRef<HTMLDetailsElement>(null);
+  const { user, loading, displayName, isTeacher } = useAuth();
+  const [ownWordCount, setOwnWordCount] = useState<number | null>(null);
+  const latestLesson = useMemo(
+    () => [...lessons].reverse().find((lesson) => !lesson.practiceOnly),
+    [],
+  );
+  const latestHomework = homeworkByLesson[0];
+  const lessonCount = lessons.filter((lesson) => !lesson.practiceOnly).length;
+  const dictionarySize = useMemo(() => courseVocabCount(), []);
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 901px)");
-    const sync = () => {
-      if (mq.matches && roadmapRef.current) {
-        roadmapRef.current.open = true;
-      }
-    };
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
+    if (!user || loading) return;
+    return subscribeStudentVocab(user, isTeacher, (words) => {
+      setOwnWordCount(words.length);
+    });
+  }, [user, loading, isTeacher]);
 
   return (
-    <div className="page-shell">
-      <header className="page-hero panel hero-home">
-        <div className="hero-home__copy">
-          <p className="page-kicker">English practice space</p>
+    <div className="page-shell dash">
+      <section className="dash-welcome">
+        <p className="dash-kicker">Навчальна платформа</p>
+        <h1>
+          {user ? `Привіт, ${displayName}` : "Кабінет учня"}
+        </h1>
+        <p>
+          {user
+            ? "Продовжуй урок, повтори слова або відкрий домашнє — все в одному місці."
+            : "Увійди, щоб зберігати свої слова на платформі. Уроки й тренажер доступні і без входу."}
+        </p>
+      </section>
 
-          <h1 className="home-hero-title">
-            English Simple{" "}
-            <RotatingWord
-              words={heroRotateWords}
-              className="home-hero-rotate"
-            />
-          </h1>
-          <p className="page-subtitle">
-            A simple learning hub for routines, questions, adverbs of frequency,
-            and speaking practice.
-          </p>
-        </div>
-        <FaceButton />
-      </header>
+      <section className="dash-continue panel" aria-labelledby="dash-continue-title">
+        <p className="dash-card-kicker">Продовжити навчання</p>
+        {latestLesson ? (
+          <>
+            <h2 id="dash-continue-title">{latestLesson.title}</h2>
+            <p className="dash-card-meta">
+              Урок {latestLesson.id} · {latestLesson.topic}
+            </p>
+            <p className="dash-card-copy">{latestLesson.description}</p>
+            <div className="dash-card-actions">
+              <Link className="action-btn primary" to={latestLesson.lessonPath}>
+                Відкрити урок
+              </Link>
+              {latestLesson.homeworkPath ? (
+                <Link className="action-btn secondary" to={latestLesson.homeworkPath}>
+                  Домашнє
+                </Link>
+              ) : null}
+            </div>
+          </>
+        ) : (
+          <p className="dash-empty">Уроків поки немає.</p>
+        )}
+      </section>
 
-      <blockquote className="home-quote panel">
-        <p>«Циклічне повторення в різних контекстах»</p>
-      </blockquote>
+      <section className="dash-grid">
+        <article className="dash-card panel">
+          <p className="dash-card-kicker">Домашнє</p>
+          <h2>Остання домашня в курсі</h2>
+          {latestHomework ? (
+            <>
+              <p className="dash-card-meta">
+                Lesson {latestHomework.id} · {latestHomework.title}
+              </p>
+              <p className="dash-card-copy">
+                Це актуальне домашнє з програми, не персональний статус здачі.
+              </p>
+              <Link className="action-btn primary" to={homeworkHref(latestHomework)}>
+                Відкрити HW {latestHomework.id}
+              </Link>
+            </>
+          ) : (
+            <p className="dash-empty">Домашніх завдань поки немає.</p>
+          )}
+        </article>
 
-      <section className="cards-grid home-grid">
-        {shortcuts.map((item) => (
-          <article className="lesson-card panel home-card" key={item.title}>
-            <h2>{item.title}</h2>
-            <p className="lesson-desc">{item.description}</p>
-            <Link className="action-btn primary" to={item.path}>
-              {item.button}
+        <article className="dash-card panel">
+          <p className="dash-card-kicker">Словник</p>
+          <h2>Слова для повторення</h2>
+          {user ? (
+            ownWordCount === null ? (
+              <p className="dash-card-copy">Завантаження слів…</p>
+            ) : ownWordCount > 0 ? (
+              <p className="dash-card-copy">
+                На платформі збережено {ownWordCount}{" "}
+                {ownWordCount === 1 ? "слово" : "слів"}.
+              </p>
+            ) : (
+              <p className="dash-empty">
+                Ще немає збережених слів. Додай перше у вкладці «Мої слова».
+              </p>
+            )
+          ) : (
+            <p className="dash-empty">
+              Увійди, щоб бачити свої слова на платформі. Без входу доступний словник
+              курсу ({dictionarySize} одиниць).
+            </p>
+          )}
+          <div className="dash-card-actions">
+            <Link className="action-btn primary" to="/vocab">
+              Повторити слова
             </Link>
-          </article>
-        ))}
-      </section>
-      <details ref={roadmapRef} className="home-roadmap-details">
-        <summary className="home-roadmap-summary">
-          <span>Roadmap</span>
-          <span className="home-roadmap-chevron" aria-hidden="true">
-            ▾
-          </span>
-        </summary>
-        <RoadmapSection />
-      </details>
-      <section className="home-covered-roadmap">
-        <CoveredTopicsRoadmap id="home-a1-covered" />
+            {!user ? (
+              <Link className="action-btn secondary" to="/login">
+                Увійти
+              </Link>
+            ) : null}
+          </div>
+        </article>
+
+        <article className="dash-card panel">
+          <p className="dash-card-kicker">Прогрес</p>
+          <h2>Уроки в курсі</h2>
+          <p className="dash-card-copy">
+            Зараз у програмі {lessonCount} уроків. Відміток «пройдено» ще немає —
+            тому тут немає вигаданого відсотка.
+          </p>
+          <Link className="action-btn secondary" to="/lessons">
+            Усі уроки
+          </Link>
+        </article>
       </section>
 
-      <div style={{ textAlign: "center", padding: "0.5rem 0 1.5rem" }}>
-        <Link
-          to="/admin/submissions"
-          style={{
-            fontSize: "0.7rem",
-            color: "var(--muted)",
-            opacity: 0.45,
-            textDecoration: "none",
-            padding: "0.25rem 0.6rem",
-            borderRadius: "0.4rem",
-            border: "1px solid currentColor",
-            letterSpacing: "0.04em",
-          }}
-        >
-          teacher
+      <section className="dash-actions" aria-label="Швидкі дії">
+        <Link className="dash-action" to="/lessons">
+          Уроки
         </Link>
-      </div>
+        <Link className="dash-action" to="/trainer">
+          Тренажер
+        </Link>
+        <Link className="dash-action" to="/vocab">
+          Словник
+        </Link>
+        <Link className="dash-action" to="/homework">
+          Домашнє
+        </Link>
+        <Link className="dash-action" to="/">
+          Roadmap
+        </Link>
+      </section>
+
+      {isTeacher ? (
+        <p className="dash-teacher">
+          <Link to="/admin/submissions">Роботи учнів</Link>
+        </p>
+      ) : null}
     </div>
   );
 }
