@@ -190,6 +190,16 @@
   width: 100%;
 }
 
+.hw35-fix-row .l22-gap-input.is-ok {
+  border-color: var(--color-success, #16a34a);
+  background: color-mix(in srgb, #22c55e 10%, var(--color-surface, #fff));
+}
+
+.hw35-fix-row .l22-gap-input.is-err {
+  border-color: var(--color-error, #dc2626);
+  background: color-mix(in srgb, #ef4444 8%, var(--color-surface, #fff));
+}
+
 .hw35-tip {
   font-size: 0.82rem;
   color: #b91c1c;

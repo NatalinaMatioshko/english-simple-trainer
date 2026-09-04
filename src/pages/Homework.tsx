@@ -9,15 +9,15 @@ const homeworkByLesson = [
     tasks: [
       {
         type: "text",
-        text: "Days, months and seasons + adjectives (Test-English)",
+        text: "Translate UA → EN: Present Simple, Present Continuous + happy/funny/kind…",
       },
       {
         type: "text",
-        text: "this/that/these/those + Present continuous + simple vs continuous",
+        text: "One Test-English block: days, adjectives, this/that, continuous, simple vs continuous",
       },
       {
         type: "text",
-        text: "Write short sentences after each page and send to teacher",
+        text: "Write short sentences after the links and send to teacher",
       },
     ],
   },
