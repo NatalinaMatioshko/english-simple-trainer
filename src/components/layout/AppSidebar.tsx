@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { ThemeToggle } from "./ThemeToggle";
 import { appNavItems, isAppNavActive } from "../../utils/appNav";
 import { AppNavIcon } from "./AppNavIcon";
 
@@ -9,18 +8,7 @@ export function AppSidebar({ pathname }: { pathname: string }) {
 
   return (
     <aside className="app-sidebar" aria-label="Навігація платформи">
-      <Link to="/" className="app-sidebar-brand">
-        <span className="app-sidebar-logo" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-            <path d="M6 18V7.5a2.5 2.5 0 0 1 4.6-1.4L12 8l1.4-1.9A2.5 2.5 0 0 1 18 7.5V18" />
-            <path d="M5 18h14" />
-          </svg>
-        </span>
-        <span>
-          <span className="app-sidebar-kicker">English A1–A2</span>
-          <span className="app-sidebar-title">Simple Trainer</span>
-        </span>
-      </Link>
+      <p className="app-sidebar-heading">Меню</p>
 
       <nav className="app-sidebar-nav">
         {appNavItems.map((item) => {
@@ -84,7 +72,6 @@ export function AppSidebar({ pathname }: { pathname: string }) {
         ) : (
           <p className="app-sidebar-user">Завантаження…</p>
         )}
-        <ThemeToggle />
       </div>
     </aside>
   );

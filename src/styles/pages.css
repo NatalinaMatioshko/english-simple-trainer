@@ -629,7 +629,11 @@
   border-top: 1px solid var(--color-border);
 }
 
-/* ── Home · Roadmap collapsible ────────────────────────────── */
+.page-shell--roadmap {
+  max-width: none;
+}
+
+/* ── Home · Roadmap: folded on mobile, always open on desktop ─ */
 .home-roadmap-details {
   margin: 0;
 }
@@ -639,7 +643,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.9rem 1.25rem;
-  border-radius: var(--radius-card);
+  border-radius: var(--radius-md);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   font-size: 1rem;
@@ -648,25 +652,49 @@
   cursor: pointer;
   list-style: none;
   user-select: none;
-  margin: 0 var(--page-pad);
 }
 
-.home-roadmap-summary::-webkit-details-marker { display: none; }
+.home-roadmap-summary::-webkit-details-marker {
+  display: none;
+}
 
 .home-roadmap-chevron {
   font-size: 1.1rem;
+  line-height: 1;
   transition: transform 0.2s ease;
-  color: var(--muted);
+  color: var(--color-text-muted);
 }
 
 .home-roadmap-details[open] .home-roadmap-chevron {
   transform: rotate(180deg);
 }
 
-/* Desktop: always show roadmap, no collapse control */
+.home-roadmap-fold {
+  display: flex;
+  width: 100%;
+  margin-top: 0.85rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
 @media (min-width: 901px) {
-  .home-roadmap-summary {
+  .home-roadmap-summary,
+  .home-roadmap-fold {
     display: none;
+  }
+
+  /* Keep the two-column map visible even if details is not yet open */
+  .home-roadmap-details:not([open]) .roadmap-layout {
+    display: grid;
   }
 }
 

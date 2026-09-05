@@ -36,9 +36,9 @@ export function SiteLayout() {
 
   return (
     <div className="site-layout">
+      <AppTopbar />
       <AppSidebar pathname={pathname} />
       <div className="app-main">
-        <AppTopbar />
         <MobileNav />
         <div id="main-content" className="app-content" tabIndex={-1}>
           {lessonMode ? (

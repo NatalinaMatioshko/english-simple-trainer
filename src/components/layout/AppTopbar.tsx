@@ -1,12 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { ThemeToggle } from "./ThemeToggle";
-import { getPageContext } from "../../utils/appNav";
+import { appNavItems, getPageContext, isAppNavActive } from "../../utils/appNav";
 
 export function AppTopbar() {
   const { pathname } = useLocation();
   const { title, crumbs } = getPageContext(pathname);
-  const { user, loading, displayName, isTeacher, logOut } = useAuth();
+  const { user, loading } = useAuth();
+  const topLinks = appNavItems.filter((item) => item.id !== "home");
 
   return (
     <>
@@ -14,6 +15,34 @@ export function AppTopbar() {
         Перейти до вмісту
       </a>
       <header className="app-topbar">
+        <Link to="/" className="app-topbar-brand">
+          <span className="app-topbar-logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M6 18V7.5a2.5 2.5 0 0 1 4.6-1.4L12 8l1.4-1.9A2.5 2.5 0 0 1 18 7.5V18" />
+              <path d="M5 18h14" />
+            </svg>
+          </span>
+          <span className="app-topbar-wordmark">
+            simple trainer<span>.</span>
+          </span>
+        </Link>
+
+        <nav className="app-topbar-nav" aria-label="Основне меню">
+          {topLinks.map((item) => {
+            const active = isAppNavActive(pathname, item.to);
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`app-topbar-link${active ? " is-active" : ""}`}
+                aria-current={active ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
         <div className="app-topbar-copy">
           <nav className="app-breadcrumb" aria-label="Навігаційний шлях">
             {crumbs.map((crumb, index) => {
@@ -38,25 +67,17 @@ export function AppTopbar() {
         </div>
 
         <div className="app-topbar-actions">
+          <ThemeToggle />
           {!loading &&
             (user ? (
-              <div className="app-topbar-account">
-                <span>
-                  {displayName}
-                  {isTeacher ? " · вчитель" : ""}
-                </span>
-                <button type="button" onClick={() => void logOut()}>
-                  Вийти
-                </button>
-              </div>
+              <Link className="app-topbar-cta" to="/cabinet">
+                Кабінет
+              </Link>
             ) : (
-              <Link className="app-topbar-login" to="/login">
+              <Link className="app-topbar-cta" to="/login">
                 Увійти
               </Link>
             ))}
-          <div className="app-topbar-theme">
-            <ThemeToggle />
-          </div>
         </div>
       </header>
     </>

@@ -14,11 +14,11 @@ export type AppNavItem = {
 
 export const appNavItems: AppNavItem[] = [
   { id: "roadmap", to: "/", label: "Roadmap" },
-  { id: "home", to: "/cabinet", label: "Кабінет" },
-  { id: "lessons", to: "/lessons", label: "Уроки" },
-  { id: "trainer", to: "/trainer", label: "Тренажер" },
-  { id: "vocab", to: "/vocab", label: "Словник" },
-  { id: "homework", to: "/homework", label: "Домашнє" },
+  { id: "home", to: "/cabinet", label: "Cabinet" },
+  { id: "lessons", to: "/lessons", label: "Lessons" },
+  { id: "trainer", to: "/trainer", label: "Trainer" },
+  { id: "vocab", to: "/vocab", label: "Vocab" },
+  { id: "homework", to: "/homework", label: "Homework" },
 ];
 
 export const mobileNavItems: AppNavItem[] = appNavItems.filter(
