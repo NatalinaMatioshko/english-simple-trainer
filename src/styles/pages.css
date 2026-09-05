@@ -1,7 +1,7 @@
 .page-shell {
   display: grid;
   gap: 1.5rem;
-  max-width: 1100px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 1.5rem;
 }
@@ -173,8 +173,186 @@
   gap: 1rem;
 }
 
+.catalog-cubes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.catalog-cube {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.catalog-cube:hover,
+.catalog-cube:focus-visible {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  box-shadow: var(--shadow-md);
+  outline: none;
+}
+
+.catalog-cube.is-practice {
+  border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+}
+
+.catalog-cube.is-extra {
+  border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+}
+
+.catalog-cube.is-current {
+  box-shadow: var(--shadow-md);
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+}
+
+.catalog-cube-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(1, 105, 111, 0.12), transparent 55%),
+    #efe8d8;
+  overflow: hidden;
+}
+
+.catalog-cube-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.22s ease;
+}
+
+.catalog-cube.is-past .catalog-cube-media img {
+  filter: grayscale(0.2) brightness(0.78);
+}
+
+.catalog-cube.is-past .catalog-cube-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(72, 58, 42, 0.42);
+  backdrop-filter: blur(2.5px);
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.catalog-cube.is-past:hover .catalog-cube-media img,
+.catalog-cube.is-past:focus-visible .catalog-cube-media img {
+  filter: none;
+}
+
+.catalog-cube.is-past:hover .catalog-cube-media::after,
+.catalog-cube.is-past:focus-visible .catalog-cube-media::after {
+  opacity: 0;
+}
+
+[data-theme="dark"] .catalog-cube-media {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(79, 152, 163, 0.2), transparent 55%),
+    #2a2723;
+}
+
+.catalog-cube-fallback {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.catalog-cube-body {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  padding: 0.85rem 1rem 0.95rem;
+  background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface));
+  border-top: 1px solid color-mix(in srgb, var(--color-primary) 22%, transparent);
+  transition: background 0.22s ease;
+}
+
+.catalog-cube.is-current .catalog-cube-body {
+  background: color-mix(in srgb, var(--color-primary) 26%, var(--color-surface));
+}
+
+.catalog-cube.is-practice .catalog-cube-body {
+  background: color-mix(in srgb, var(--color-primary) 20%, var(--color-surface));
+}
+
+.catalog-cube.is-extra .catalog-cube-body {
+  background: color-mix(in srgb, var(--color-accent) 22%, var(--color-surface));
+  border-top-color: color-mix(in srgb, var(--color-accent) 34%, transparent);
+}
+
+.catalog-cube:hover .catalog-cube-body,
+.catalog-cube:focus-visible .catalog-cube-body {
+  background: color-mix(in srgb, var(--color-primary) 28%, var(--color-surface));
+}
+
+.catalog-cube.is-extra:hover .catalog-cube-body,
+.catalog-cube.is-extra:focus-visible .catalog-cube-body {
+  background: color-mix(in srgb, var(--color-accent) 28%, var(--color-surface));
+}
+
+.catalog-cube-title {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  font-optical-sizing: auto;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
 .homework-card {
   padding: 1.25rem;
+}
+
+@media (max-width: 1100px) {
+  .catalog-cubes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .catalog-cubes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .catalog-cube-body {
+    padding: 0.75rem 0.8rem 0.9rem;
+  }
+
+  .catalog-cube-title {
+    font-size: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-cube.is-past .catalog-cube-media::after {
+    backdrop-filter: none;
+  }
+
+  .catalog-cube.is-past .catalog-cube-media img,
+  .catalog-cube.is-past .catalog-cube-media::after {
+    transition: none;
+  }
 }
 
 .homework-steps {
@@ -451,7 +629,11 @@
   border-top: 1px solid var(--color-border);
 }
 
-/* ── Home · Roadmap collapsible ────────────────────────────── */
+.page-shell--roadmap {
+  max-width: none;
+}
+
+/* ── Home · Roadmap: folded on mobile, always open on desktop ─ */
 .home-roadmap-details {
   margin: 0;
 }
@@ -461,7 +643,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.9rem 1.25rem;
-  border-radius: var(--radius-card);
+  border-radius: var(--radius-md);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   font-size: 1rem;
@@ -470,25 +652,49 @@
   cursor: pointer;
   list-style: none;
   user-select: none;
-  margin: 0 var(--page-pad);
 }
 
-.home-roadmap-summary::-webkit-details-marker { display: none; }
+.home-roadmap-summary::-webkit-details-marker {
+  display: none;
+}
 
 .home-roadmap-chevron {
   font-size: 1.1rem;
+  line-height: 1;
   transition: transform 0.2s ease;
-  color: var(--muted);
+  color: var(--color-text-muted);
 }
 
 .home-roadmap-details[open] .home-roadmap-chevron {
   transform: rotate(180deg);
 }
 
-/* Desktop: always show roadmap, no collapse control */
+.home-roadmap-fold {
+  display: flex;
+  width: 100%;
+  margin-top: 0.85rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
 @media (min-width: 901px) {
-  .home-roadmap-summary {
+  .home-roadmap-summary,
+  .home-roadmap-fold {
     display: none;
+  }
+
+  /* Keep the two-column map visible even if details is not yet open */
+  .home-roadmap-details:not([open]) .roadmap-layout {
+    display: grid;
   }
 }
 

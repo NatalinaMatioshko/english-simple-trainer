@@ -1,0 +1,296 @@
+import { homeworkCovers } from "./homeworkList";
+
+export type LessonEntry =
+  | {
+      id: string;
+      title: string;
+      level: string;
+      topic: string;
+      description: string;
+      lessonPath: string;
+      practiceOnly: true;
+    }
+  | {
+      id: string;
+      title: string;
+      level: string;
+      topic: string;
+      description: string;
+      lessonPath: string;
+      homeworkPath?: string;
+      practiceOnly?: false;
+    };
+
+export const lessons: LessonEntry[] = [
+  {
+    id: "practice",
+    title: "To be + Present Simple + Routine",
+    level: "A1-A2",
+    topic: "Самостійна практика",
+    description:
+      "9 блоків для повторення: am/is/are, рутина, at/in/on, 3-тя особа, mixed quiz, sentence builder, fix mistakes і writing.",
+    lessonPath: "/self-study",
+    practiceOnly: true,
+  },
+  {
+    id: "15",
+    title: "Present Simple + Adverbs of frequency",
+    level: "A1",
+    topic: "Говоріння + частота",
+    description:
+      "Як сказати не лише what you do, а й how often — always, usually, sometimes, never.",
+    lessonPath: "/lesson-15",
+    homeworkPath: "/homework/15",
+  },
+  {
+    id: "16",
+    title: "Present Simple Practice",
+    level: "A1-A2",
+    topic: "Speaking drills",
+    description:
+      "Do / does, short answers, швидкі відповіді та speaking про щоденну рутину.",
+    lessonPath: "/lesson-16",
+    homeworkPath: "/homework/16",
+  },
+  {
+    id: "17",
+    title: "Present Simple + Speaking Video",
+    level: "A1-A2",
+    topic: "Video lesson",
+    description:
+      "Відео, повторення патернів Present Simple і швидке говоріння про свій день.",
+    lessonPath: "/lesson-17",
+    homeworkPath: "/homework/17",
+  },
+  {
+    id: "18",
+    title: "in / on / at / to",
+    level: "A1-A2",
+    topic: "Prepositions",
+    description:
+      "Прийменники часу, місця й руху: картинки, швидкі вправи та speaking.",
+    lessonPath: "/lesson-18",
+    homeworkPath: "/homework/18",
+  },
+  {
+    id: "19",
+    title: "Do expressions",
+    level: "A1-A2",
+    topic: "Vocabulary + speaking",
+    description:
+      "Фрази з do, порівняння do vs make, картки та picture tasks для говоріння.",
+    lessonPath: "/lesson-19",
+    homeworkPath: "/homework/19",
+  },
+  {
+    id: "about-me",
+    title: "About Me",
+    level: "A1",
+    topic: "To be + have got",
+    description:
+      "Інтерактивна сторінка: профілі людей, to be, I've got, порядок слів і writing про себе.",
+    lessonPath: "/about-me",
+    homeworkPath: "/homework",
+  },
+  {
+    id: "20",
+    title: "He / She / It + Present Simple",
+    level: "A1-A2",
+    topic: "Third person",
+    description:
+      "Flashcards, -s/-es/-ies, вправи I → he/she та speaking про іншу людину.",
+    lessonPath: "/lesson-20",
+    homeworkPath: "/homework/20",
+  },
+  {
+    id: "21",
+    title: "Can + Third Person Review",
+    level: "A1-A2",
+    topic: "Can / can't + review",
+    description:
+      "Can для вмінь і прохань, 3-тя особа, Test-English listening і task-based speaking.",
+    lessonPath: "/lesson-21",
+    homeworkPath: "/homework/21",
+  },
+  {
+    id: "22",
+    title: "Present Simple Review + About Me",
+    level: "A1-A2",
+    topic: "Self-description + routine",
+    description:
+      "Повтор Present Simple і can, опис себе, картинка парку, listening, лексика рутини та пошук помилок.",
+    lessonPath: "/lesson-22",
+    homeworkPath: "/homework/22",
+  },
+  {
+    id: "23",
+    title: "To be + Articles + Speaking",
+    level: "A1-A2",
+    topic: "a / an / the",
+    description:
+      "Активна практика am/is/are, правила артиклів, вправи на вибір і speaking з a/an/the.",
+    lessonPath: "/lesson-23",
+    homeworkPath: "/homework",
+  },
+  {
+    id: "24",
+    title: "Describing People",
+    level: "A1-A2",
+    topic: "Appearance + personality",
+    description:
+      "Відео, прикметники зовнішності й характеру, is / has got і speaking — опис людини.",
+    lessonPath: "/lesson-24",
+    homeworkPath: "/homework",
+  },
+  {
+    id: "25",
+    title: "Hello! Countries & Nationalities",
+    level: "A1",
+    topic: "be: I / you / we / they",
+    description:
+      "Знайомство і розповідь про себе: 12 країн, am/is/are, short answers, діалоги, читання та рольова гра.",
+    lessonPath: "/lesson-25",
+    homeworkPath: "/hw-25",
+  },
+  {
+    id: "26",
+    title: "Jobs",
+    level: "A1",
+    topic: "be: he/she/it · jobs",
+    description:
+      "Ask and answer about jobs: warm-up, 8 jobs + stress, be he/she/it drills, profile speaking, Green Cross Hospital, homework.",
+    lessonPath: "/lesson-26",
+    homeworkPath: "/hw-26",
+  },
+  {
+    id: "27",
+    title: "About you & your family",
+    level: "A1",
+    topic: "profile · family · jobs · place of work · possessives",
+    description:
+      "Tell me about yourself and your family: profile, family tree, Unit 2 R1–R4 listening, job+place, reading chunks, speaking.",
+    lessonPath: "/lesson-27",
+    homeworkPath: "/hw-27",
+  },
+  {
+    id: "28",
+    title: "Speaking · he/she/it",
+    level: "A1",
+    topic: "Present Simple he / she / it · ask back · tell your story",
+    description:
+      "Speaking: ask back + tell your story. Video bridge ELLLO A1-06: listening quiz + grammar drill he/she/it. HW: video quiz + writing.",
+    lessonPath: "/lesson-28",
+    homeworkPath: "/hw-28",
+  },
+  {
+    id: "29",
+    title: "Everyday Objects · Numbers",
+    level: "A1",
+    topic: "this/that/these/those · everyday objects · numbers 1–100",
+    description:
+      "Part 1b: objects a–l, Max & Carla, demonstratives R5–R8. Part 2: numbers 1–100, question words with be, profiles R9–R14, shop dialogue. HW: flashcards + quiz.",
+    lessonPath: "/lesson-29",
+    homeworkPath: "/hw-29",
+  },
+  {
+    id: "30",
+    title: "Check & Reflect",
+    level: "A1",
+    topic: "Numbers review · days of the week · A1 full review",
+    description:
+      "Review: numbers + question words (L29) · days of the week · повна перевірка A1: speaking · reading · R4 · writing. HW: go flashcards · topic stations · quick correction. Separate A1 Level Test.",
+    lessonPath: "/lesson-30",
+    homeworkPath: "/hw-30",
+  },
+  {
+    id: "31",
+    title: "My town",
+    level: "A1",
+    topic: "places · there is/are · There's / There are",
+    description:
+      "Unit 3A: My town — places + There is/are, isn't/aren't, no/any. Listening, map match, grammar drills, speaking. HW: crossword.",
+    lessonPath: "/lesson-31",
+    homeworkPath: "/hw-31",
+  },
+  {
+    id: "32",
+    title: "WH-questions · was / were",
+    level: "A1",
+    topic:
+      "Who · What · Where · When · Why · How often · do / does / to be · was / were",
+    description:
+      "Part 1: WH-questions + do/does/to be (не новий час). Part 2: was/were (past of to be). Practice + speaking. HW: recap drills. Unit 3B → Lesson 33 · Unit 3C → Lesson 34.",
+    lessonPath: "/lesson-32",
+    homeworkPath: "/hw-32",
+  },
+  {
+    id: "33",
+    title: "Is there wifi?",
+    level: "A1",
+    topic: "rooms · Is there…? · Are there any…? · How many…?",
+    description:
+      "Unit 3B: Is there wifi? — rooms & things in a home, Is/Are there, How many, flat listening (Jakub & William), grammar & speaking for one student.",
+    lessonPath: "/lesson-33",
+    homeworkPath: "/hw-33",
+  },
+  {
+    id: "34",
+    title: "It's expensive! · Present continuous",
+    level: "A1",
+    topic:
+      "Unit 3C · opposite adjectives · North Norfolk · Present continuous",
+    description:
+      "Unit 3C: opposite adjectives, reading, adjective position, stress & speaking. Plus Present continuous rules, What are they doing?, and picture description (one student).",
+    lessonPath: "/lesson-34",
+    homeworkPath: "/hw-34",
+  },
+  {
+    id: "35",
+    title: "English in action · Directions",
+    level: "A1",
+    topic: "Unit 3D · ask for and give directions",
+    description:
+      "Unit 3D: мапа міста, Excuse me — where's the…?, Is there a… near here?, go straight on / turn left / go past, три діалоги з аудіо та speaking від станції. Плюс практика у Promova.",
+    lessonPath: "/lesson-35",
+    homeworkPath: "/hw-35",
+  },
+  {
+    id: "36",
+    title: "Present Simple · daily verbs",
+    level: "A1",
+    topic: "I wake up · do / don't · morning, work, lunch, weekend",
+    description:
+      "ELLLO A1-04: відео Present Simple, listening quiz, complete the sentences, do/don't і speaking про свою рутину з викладачем.",
+    lessonPath: "/lesson-36",
+    homeworkPath: "/hw-36",
+  },
+  {
+    id: "37",
+    title: "Present continuous · now vs every day",
+    level: "A1",
+    topic: "I work every day · I am working now",
+    description:
+      "Контраст every day vs now: work/eat/drink/read/talk/sit, маркери часу, speaking з викладачем і дві picture cards.",
+    lessonPath: "/lesson-37",
+    homeworkPath: "/hw-37",
+  },
+];
+
+export const lessonCovers: Record<string, string> = {
+  ...homeworkCovers,
+  practice: "/images/present-simple-harry-potter.png",
+  "about-me": "/images/lesson28/all-about-me.jpg",
+  "23": "/images/articles-a-an-the.jpg",
+  "24": "/images/describing-people-adjectives.png",
+  "28": "/images/lesson28/things-scene.png",
+  "29": "/images/lesson28/home-office-vocab.png",
+  "34": "/images/lesson34/what-are-they-doing.png",
+  "35": "/images/lesson35/pixel-town-map.png",
+  extra: "/images/everyday-actions.png",
+};
+
+export function lessonCubeLabel(lesson: LessonEntry): string {
+  if (lesson.practiceOnly) return `Practice. ${lesson.title}`;
+  if (!/^\d+$/.test(lesson.id)) return lesson.title;
+  return `${lesson.id}. ${lesson.title}`;
+}

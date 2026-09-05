@@ -1388,6 +1388,12 @@ export const speakingTour: SpeakingTourCard[] = [
 ];
 
 /** Curriculum map — everything covered in Lessons 1–29 (intro animation) */
+export type CoveredTopicItem = {
+  text: string;
+  to: string;
+  lesson: string;
+};
+
 export type CoveredCategory = {
   id: string;
   titleUa: string;
@@ -1395,7 +1401,7 @@ export type CoveredCategory = {
   accent: string;
   /** Short label on roadmap node */
   node: string;
-  items: string[];
+  items: CoveredTopicItem[];
 };
 
 export const coveredTopics: CoveredCategory[] = [
@@ -1406,16 +1412,52 @@ export const coveredTopics: CoveredCategory[] = [
     accent: "#2dd4bf",
     node: "1",
     items: [
-      "to be: am / is / are у ствердженнях, питаннях і запереченнях",
-      "Present Simple у базових структурах",
-      "can / can’t для вміння і невміння",
-      "a / an / the",
-      "possessive adjectives: my, your, his, her, our, their, its",
-      "possessive ’s: father’s name, friend’s name",
-      "demonstratives: this, that, these, those",
-      "різниця між it’s / its, they’re / their, you’re / your",
-      "базові правила do / make у сталих сполученнях",
-      "злічувані / незлічувані іменники у простих прикладах",
+      {
+        text: "to be: am / is / are у ствердженнях, питаннях і запереченнях",
+        to: "/lesson-25",
+        lesson: "L25",
+      },
+      {
+        text: "Present Simple у базових структурах",
+        to: "/lesson-16",
+        lesson: "L16",
+      },
+      {
+        text: "can / can’t для вміння і невміння",
+        to: "/lesson-21",
+        lesson: "L21",
+      },
+      { text: "a / an / the", to: "/lesson-23", lesson: "L23" },
+      {
+        text: "possessive adjectives: my, your, his, her, our, their, its",
+        to: "/lesson-27",
+        lesson: "L27",
+      },
+      {
+        text: "possessive ’s: father’s name, friend’s name",
+        to: "/lesson-27#l27-family",
+        lesson: "L27",
+      },
+      {
+        text: "demonstratives: this, that, these, those",
+        to: "/lesson-29",
+        lesson: "L29",
+      },
+      {
+        text: "різниця між it’s / its, they’re / their, you’re / your",
+        to: "/lesson-27",
+        lesson: "L27",
+      },
+      {
+        text: "базові правила do / make у сталих сполученнях",
+        to: "/lesson-19",
+        lesson: "L19",
+      },
+      {
+        text: "злічувані / незлічувані іменники у простих прикладах",
+        to: "/lesson-29",
+        lesson: "L29",
+      },
     ],
   },
   {
@@ -1425,14 +1467,46 @@ export const coveredTopics: CoveredCategory[] = [
     accent: "#60a5fa",
     node: "2",
     items: [
-      "personal information: name, age, origin, job, student, place of work",
-      "family: mother, father, parents, brother, sister, son, daughter, husband, wife, children, uncle",
-      "jobs: doctor, nurse, pilot, farmer, taxi driver, office worker, police officer, artist, writer, receptionist, tour guide, engineer, dentist, football player, student, manager, soldier",
-      "nationalities and countries: British, American, Canadian, Polish, Spanish, Japanese, Mexican, Brazilian, Argentinian, Turkish…",
-      "appearance: tall, short, thin, fat, plump, curly, straight, blond/fair, dark, beard, glasses",
-      "feelings and character: happy, nervous, excited, friendly, quiet, shy, angry, bored, clever, kind, tidy",
-      "hobbies and interests: reading, dancing, swimming, singing, cooking, gaming",
-      "food: pizza, coffee, fried potatoes, fast food",
+      {
+        text: "personal information: name, age, origin, job, student, place of work",
+        to: "/lesson-25",
+        lesson: "L25",
+      },
+      {
+        text: "family: mother, father, parents, brother, sister, son, daughter, husband, wife, children, uncle",
+        to: "/lesson-27#l27-family",
+        lesson: "L27",
+      },
+      {
+        text: "jobs: doctor, nurse, pilot, farmer, taxi driver, office worker, police officer…",
+        to: "/lesson-26",
+        lesson: "L26",
+      },
+      {
+        text: "nationalities and countries: British, American, Canadian, Polish, Spanish…",
+        to: "/lesson-25",
+        lesson: "L25",
+      },
+      {
+        text: "appearance: tall, short, thin, fat, plump, curly, straight, blond/fair, dark, beard, glasses",
+        to: "/lesson-24",
+        lesson: "L24",
+      },
+      {
+        text: "feelings and character: happy, nervous, excited, friendly, quiet, shy, angry, bored, clever, kind, tidy",
+        to: "/lesson-24",
+        lesson: "L24",
+      },
+      {
+        text: "hobbies and interests: reading, dancing, swimming, singing, cooking, gaming",
+        to: "/lesson-22",
+        lesson: "L22",
+      },
+      {
+        text: "food: pizza, coffee, fried potatoes, fast food",
+        to: "/lesson-22",
+        lesson: "L22",
+      },
     ],
   },
   {
@@ -1442,13 +1516,37 @@ export const coveredTopics: CoveredCategory[] = [
     accent: "#fb923c",
     node: "3",
     items: [
-      "представляти себе",
-      "розповідати про сім’ю",
-      "описувати людину за фото або карткою",
-      "говорити про роботу і місце роботи",
-      "говорити про хобі та вподобання",
-      "коротко розповідати про себе як personal profile",
-      "ставити прості питання про іншу людину",
+      { text: "представляти себе", to: "/lesson-25", lesson: "L25" },
+      {
+        text: "розповідати про сім’ю",
+        to: "/lesson-27#l27-speaking",
+        lesson: "L27",
+      },
+      {
+        text: "описувати людину за фото або карткою",
+        to: "/lesson-24",
+        lesson: "L24",
+      },
+      {
+        text: "говорити про роботу і місце роботи",
+        to: "/lesson-26",
+        lesson: "L26",
+      },
+      {
+        text: "говорити про хобі та вподобання",
+        to: "/lesson-22",
+        lesson: "L22",
+      },
+      {
+        text: "коротко розповідати про себе як personal profile",
+        to: "/about-me",
+        lesson: "About me",
+      },
+      {
+        text: "ставити прості питання про іншу людину",
+        to: "/lesson-28",
+        lesson: "L28",
+      },
     ],
   },
   {
@@ -1458,10 +1556,26 @@ export const coveredTopics: CoveredCategory[] = [
     accent: "#c084fc",
     node: "4",
     items: [
-      "короткі діалоги про стан, опис людей, сім’ю, професії",
-      "аудіо про країни та національності",
-      "аудіювання з вибором правильної відповіді",
-      "розуміння основної думки, а не кожного слова",
+      {
+        text: "короткі діалоги про стан, опис людей, сім’ю, професії",
+        to: "/lesson-27#l27-listening",
+        lesson: "L27",
+      },
+      {
+        text: "аудіо про країни та національності",
+        to: "/lesson-25",
+        lesson: "L25",
+      },
+      {
+        text: "аудіювання з вибором правильної відповіді",
+        to: "/lesson-27#l27-listening",
+        lesson: "L27",
+      },
+      {
+        text: "розуміння основної думки, а не кожного слова",
+        to: "/lesson-27#l27-listening",
+        lesson: "L27",
+      },
     ],
   },
   {
@@ -1471,11 +1585,31 @@ export const coveredTopics: CoveredCategory[] = [
     accent: "#f472b6",
     node: "5",
     items: [
-      "читання фразами / chunks",
-      "короткі тексти про сім’ю",
-      "тексти про професії та відомих людей",
-      "короткі профілі людей",
-      "виділення головної інформації з тексту",
+      {
+        text: "читання фразами / chunks",
+        to: "/lesson-27#l27-reading",
+        lesson: "L27",
+      },
+      {
+        text: "короткі тексти про сім’ю",
+        to: "/lesson-27#l27-my-family",
+        lesson: "L27",
+      },
+      {
+        text: "тексти про професії та відомих людей",
+        to: "/lesson-26",
+        lesson: "L26",
+      },
+      {
+        text: "короткі профілі людей",
+        to: "/about-me",
+        lesson: "About me",
+      },
+      {
+        text: "виділення головної інформації з тексту",
+        to: "/lesson-27#l27-reading",
+        lesson: "L27",
+      },
     ],
   },
   {
@@ -1485,11 +1619,23 @@ export const coveredTopics: CoveredCategory[] = [
     accent: "#facc15",
     node: "6",
     items: [
-      "personal profile",
-      "короткий опис себе",
-      "простий текст про сім’ю",
-      "заповнення пропусків у тексті",
-      "базові домашні завдання на платформі",
+      { text: "personal profile", to: "/about-me", lesson: "About me" },
+      { text: "короткий опис себе", to: "/about-me", lesson: "About me" },
+      {
+        text: "простий текст про сім’ю",
+        to: "/hw-27",
+        lesson: "HW27",
+      },
+      {
+        text: "заповнення пропусків у тексті",
+        to: "/lesson-27#l27-my-family",
+        lesson: "L27",
+      },
+      {
+        text: "базові домашні завдання на платформі",
+        to: "/homework",
+        lesson: "HW",
+      },
     ],
   },
   {
@@ -1499,11 +1645,27 @@ export const coveredTopics: CoveredCategory[] = [
     accent: "#22d3ee",
     node: "7",
     items: [
-      "word stress у назвах країн",
-      "вимова професій",
-      "різниця між British та American pronunciation у простих прикладах",
-      "чітке читання кінцевих звуків",
-      "відпрацювання наголосу в can / can’t",
+      {
+        text: "word stress у назвах країн",
+        to: "/lesson-25",
+        lesson: "L25",
+      },
+      { text: "вимова професій", to: "/lesson-26", lesson: "L26" },
+      {
+        text: "різниця між British та American pronunciation у простих прикладах",
+        to: "/lesson-25",
+        lesson: "L25",
+      },
+      {
+        text: "чітке читання кінцевих звуків",
+        to: "/lesson-26",
+        lesson: "L26",
+      },
+      {
+        text: "відпрацювання наголосу в can / can’t",
+        to: "/lesson-21",
+        lesson: "L21",
+      },
     ],
   },
   {
@@ -1513,16 +1675,16 @@ export const coveredTopics: CoveredCategory[] = [
     accent: "#4ade80",
     node: "8",
     items: [
-      "знайомство",
-      "опис себе",
-      "сім’я",
-      "робота",
-      "національність",
-      "місце проживання",
-      "зовнішність",
-      "хобі",
-      "улюблена їжа",
-      "короткі історії про людей",
+      { text: "знайомство", to: "/lesson-25", lesson: "L25" },
+      { text: "опис себе", to: "/about-me", lesson: "About me" },
+      { text: "сім’я", to: "/lesson-27#l27-family", lesson: "L27" },
+      { text: "робота", to: "/lesson-26", lesson: "L26" },
+      { text: "національність", to: "/lesson-25", lesson: "L25" },
+      { text: "місце проживання", to: "/lesson-25", lesson: "L25" },
+      { text: "зовнішність", to: "/lesson-24", lesson: "L24" },
+      { text: "хобі", to: "/lesson-22", lesson: "L22" },
+      { text: "улюблена їжа", to: "/lesson-22", lesson: "L22" },
+      { text: "короткі історії про людей", to: "/lesson-26", lesson: "L26" },
     ],
   },
 ];
@@ -1537,7 +1699,7 @@ export type CoveredStep = {
 
 export const coveredSteps: CoveredStep[] = coveredTopics.flatMap(
   (cat, catIndex) =>
-    cat.items.map((text, itemIndex) => ({
+    cat.items.map((item, itemIndex) => ({
       globalIndex:
         coveredTopics
           .slice(0, catIndex)
@@ -1545,7 +1707,7 @@ export const coveredSteps: CoveredStep[] = coveredTopics.flatMap(
       catIndex,
       itemIndex,
       cat,
-      text,
+      text: item.text,
     })),
 );
 

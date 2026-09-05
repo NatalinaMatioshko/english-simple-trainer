@@ -5,6 +5,7 @@ import {
   useState,
   type CSSProperties,
 } from "react";
+import { Link } from "react-router-dom";
 import {
   coveredNodePoints,
   coveredSteps,
@@ -43,6 +44,7 @@ export default function CoveredTopicsRoadmap({
   const coveredTimer = useRef<number | null>(null);
   const coveredFadeTimer = useRef<number | null>(null);
   const hoverLock = useRef<number | null>(null);
+  const pinCat = useRef<number | null>(null);
 
   const clearCoveredTimers = () => {
     if (coveredTimer.current != null) {
@@ -70,6 +72,7 @@ export default function CoveredTopicsRoadmap({
     setCoveredIndex(-1);
     setCoveredLinePhase("in");
     setCoveredPlaying(true);
+    pinCat.current = null;
     setHoverCat(null);
     setHoverItem(null);
 
@@ -95,36 +98,45 @@ export default function CoveredTopicsRoadmap({
     return clearCoveredTimers;
   }, [coveredRun]);
 
-  const skipCovered = () => {
+  const stopCoveredPlayback = () => {
     clearCoveredTimers();
     setCoveredIndex(COVERED_TOTAL - 1);
     setCoveredLinePhase("done");
     setCoveredPlaying(false);
+  };
+
+  const skipCovered = () => {
+    stopCoveredPlayback();
+    pinCat.current = null;
     setHoverCat(null);
     setHoverItem(null);
   };
 
   const replayCovered = () => {
+    pinCat.current = null;
     clearCoveredTimers();
     setCoveredRun((r) => r + 1);
   };
 
-  const driveToCat = (catIndex: number) => {
-    if (hoverLock.current === catIndex) return;
+  const driveToCat = (catIndex: number, pin = false) => {
+    if (coveredPlaying) stopCoveredPlayback();
+    if (pin) pinCat.current = catIndex;
+    if (hoverLock.current === catIndex && !pin) return;
     hoverLock.current = catIndex;
     setHoverCat(catIndex);
     setHoverItem(null);
   };
 
   const driveToItem = (catIndex: number, itemIndex: number) => {
+    if (coveredPlaying) stopCoveredPlayback();
     hoverLock.current = catIndex;
     setHoverCat(catIndex);
     setHoverItem(itemIndex);
   };
 
   const leaveDrive = () => {
-    hoverLock.current = null;
-    setHoverCat(null);
+    hoverLock.current = pinCat.current;
+    setHoverCat(pinCat.current);
     setHoverItem(null);
   };
 
@@ -168,7 +180,8 @@ export default function CoveredTopicsRoadmap({
           <h2>Що ми вже пройшли</h2>
           <p className="l30-covered-desc">
             Шлях фундаменту A1 — рядок за рядком. Наведи на точку або пункт
-            збоку: маркер під’їде до неї.
+            збоку: маркер під’їде, знизу з’явиться список тем. Натисни тему —
+            відкриється урок, де ми це проходили.
           </p>
         </div>
         <div className="l30-covered-controls">
@@ -217,7 +230,12 @@ export default function CoveredTopicsRoadmap({
         </div>
       </div>
 
-      <div className="l30-road" onMouseLeave={leaveDrive}>
+      <div
+        className="l30-road"
+        onPointerLeave={(event) => {
+          if (event.pointerType === "mouse") leaveDrive();
+        }}
+      >
         <aside className="l30-road-side l30-road-side--left">
           <p className="l30-road-side-label">Foundation</p>
           <ul>
@@ -229,6 +247,7 @@ export default function CoveredTopicsRoadmap({
                   style={{ "--l30-cat-accent": c.accent } as CSSProperties}
                   onMouseEnter={() => driveToCat(i)}
                   onFocus={() => driveToCat(i)}
+                  onClick={() => driveToCat(i, true)}
                 >
                   <span>{c.node}</span>
                   {c.titleEn}
@@ -409,12 +428,15 @@ export default function CoveredTopicsRoadmap({
                   aria-label={`${cat.titleUa}: ${cat.titleEn}`}
                   onMouseEnter={() => driveToCat(i)}
                   onFocus={() => driveToCat(i)}
+                  onClick={() => driveToCat(i, true)}
                 />
               );
             })}
           </div>
 
-          <div className="l30-road-line-stage">
+          <div
+            className={`l30-road-line-stage${hoverCat != null ? " is-open" : ""}`}
+          >
             {hoverCat != null && focusCat ? (
               <div
                 key={`hover-${hoverCat}`}
@@ -433,27 +455,29 @@ export default function CoveredTopicsRoadmap({
                     {focusCat.items.length} тем
                   </span>
                 </div>
-                {hoverItem != null && (
-                  <p className="l30-road-line-text">
-                    {focusCat.items[hoverItem]}
-                  </p>
-                )}
+                <p className="l30-road-line-hint">
+                  Натисни тему, щоб відкрити урок.
+                </p>
                 <ul className="l30-road-hover-list">
                   {focusCat.items.map((item, itemIndex) => (
                     <li key={`${focusCat.id}-${itemIndex}`}>
-                      <button
-                        type="button"
+                      <Link
+                        to={item.to}
                         className={
                           hoverItem === itemIndex ? "is-on" : undefined
                         }
                         onMouseEnter={() => driveToItem(hoverCat, itemIndex)}
+                        onFocus={() => driveToItem(hoverCat, itemIndex)}
                       >
                         <span
                           className="l30-road-hover-dot"
                           aria-hidden="true"
                         />
-                        {item}
-                      </button>
+                        <span className="l30-road-hover-copy">{item.text}</span>
+                        <span className="l30-road-hover-lesson">
+                          {item.lesson}
+                        </span>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -462,7 +486,8 @@ export default function CoveredTopicsRoadmap({
               <div className="l30-road-line l30-road-line--done" role="status">
                 <span className="l30-road-line-kicker">Path complete</span>
                 <p>
-                  Фундамент A1 зібрано. Наведи на точку — під’їдемо знову ↓
+                  Фундамент A1 зібрано. Наведи на точку — побачиш теми. Натисни
+                  тему, щоб відкрити урок.
                 </p>
               </div>
             ) : coveredStep ? (
@@ -506,6 +531,7 @@ export default function CoveredTopicsRoadmap({
                     style={{ "--l30-cat-accent": c.accent } as CSSProperties}
                     onMouseEnter={() => driveToCat(idx)}
                     onFocus={() => driveToCat(idx)}
+                    onClick={() => driveToCat(idx, true)}
                   >
                     <span>{c.node}</span>
                     {c.titleEn}

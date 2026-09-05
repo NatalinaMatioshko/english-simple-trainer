@@ -1,0 +1,499 @@
+.site-layout {
+  display: grid;
+  grid-template-columns: 17.25rem minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 2560px;
+  margin-inline: auto;
+  background: color-mix(in srgb, var(--color-bg) 88%, #d8d4cc);
+}
+
+@media (min-width: 2561px) {
+  .site-layout {
+    border-inline: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.app-topbar {
+  grid-column: 1 / -1;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  min-height: 4.35rem;
+  padding: 0.7rem 1.35rem;
+  background: var(--color-surface-2);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 1px 0 color-mix(in srgb, #fff 60%, transparent);
+}
+
+.app-topbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.app-topbar-logo {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.65rem;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.app-topbar-logo svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.app-topbar-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.app-topbar-wordmark span {
+  color: var(--color-primary);
+}
+
+.app-topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem 1.1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.app-topbar-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.app-topbar-link:hover,
+.app-topbar-link.is-active {
+  color: var(--color-primary-hover);
+}
+
+.app-topbar-copy {
+  display: none;
+}
+
+.app-topbar-title {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.app-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.app-breadcrumb a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.app-breadcrumb a:hover {
+  color: var(--color-primary);
+}
+
+.app-breadcrumb-sep {
+  margin: 0 0.4rem;
+  opacity: 0.6;
+}
+
+.app-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.app-topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.55rem;
+  padding: 0.4rem 1.15rem;
+  border-radius: 999px;
+  background: #2b2924;
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.app-topbar-cta:hover {
+  background: #1d1c18;
+}
+
+[data-theme="dark"] .app-topbar-cta {
+  background: #ece7df;
+  color: #171614;
+}
+
+[data-theme="dark"] .app-topbar-cta:hover {
+  background: #fff;
+}
+
+.app-sidebar {
+  grid-column: 1;
+  grid-row: 2;
+  position: sticky;
+  top: 5.15rem;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  width: auto;
+  margin: 1rem 0 1.25rem 1.1rem;
+  height: calc(100vh - 6.4rem);
+  padding: 1.15rem 1rem 1rem;
+  background: var(--color-surface-2);
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  border-radius: 1.15rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.app-sidebar-heading {
+  margin: 0 0.35rem 0.9rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.app-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-height: 0;
+  overflow: auto;
+}
+
+.app-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.7rem;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.app-sidebar-link:hover {
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+.app-sidebar-link.is-active {
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary-hover);
+}
+
+.app-sidebar-icon {
+  display: grid;
+  place-items: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex-shrink: 0;
+}
+
+.app-sidebar-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.app-sidebar-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.app-sidebar-user {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.app-sidebar-user span {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.app-sidebar-auth-btn {
+  justify-self: start;
+  min-height: 2.5rem;
+  padding: 0.35rem 0.15rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-primary);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.app-sidebar-auth-btn--link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.app-main {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+  min-width: 0;
+  padding: 1.25rem 1.5rem 2rem;
+}
+
+.app-content:focus {
+  outline: none;
+}
+
+.app-content .page-shell,
+.app-content .app {
+  max-width: 1280px;
+  margin: 0;
+  padding: 0 0 1rem;
+}
+
+.app-content .page-shell--roadmap {
+  max-width: none;
+}
+
+.lesson-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.lesson-workspace-main {
+  min-width: 0;
+}
+
+.lesson-workspace-main .lesson22-page,
+.lesson-workspace-main .lesson-page,
+.lesson-workspace-main .page-shell,
+.lesson-workspace-main .app {
+  width: 100%;
+  max-width: 48rem;
+  margin: 0;
+  padding-top: 0;
+}
+
+.lesson-workspace-main section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+.lesson-outline {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.9rem;
+  padding: 0.9rem 1rem 1rem;
+}
+
+.lesson-outline-title,
+.lesson-outline-kicker {
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.lesson-outline-progress {
+  height: 0.35rem;
+  margin-bottom: 0.75rem;
+  border-radius: 999px;
+  background: var(--color-surface-2);
+  overflow: hidden;
+}
+
+.lesson-outline-progress span {
+  display: block;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+.lesson-outline-nav {
+  display: grid;
+  gap: 0.15rem;
+  max-height: min(52vh, 28rem);
+  overflow: auto;
+}
+
+.lesson-outline-nav a {
+  display: block;
+  padding: 0.4rem 0.45rem;
+  border-radius: 0.5rem;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.lesson-outline-nav a:hover,
+.lesson-outline-nav a.is-active {
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+
+.lesson-outline-empty {
+  margin: 0 0 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+.lesson-outline-links {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.lesson-outline-links a {
+  color: var(--color-primary);
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.lesson-outline--rail {
+  display: none;
+  position: sticky;
+  top: 1rem;
+}
+
+.lesson-outline--drawer summary {
+  cursor: pointer;
+  font-weight: 800;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.lesson-outline--drawer[open] summary {
+  margin-bottom: 0.75rem;
+}
+
+.app-sidebar-link:focus-visible,
+.app-sidebar-auth-btn:focus-visible,
+.app-topbar a:focus-visible,
+.app-topbar button:focus-visible,
+.lesson-outline a:focus-visible,
+.lesson-outline summary:focus-visible,
+.dash-card a:focus-visible,
+.dash-action:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (min-width: 1280px) {
+  .lesson-workspace {
+    grid-template-columns: minmax(0, 1fr) 16rem;
+    gap: 1.25rem;
+  }
+
+  .lesson-outline--rail {
+    display: block;
+  }
+
+  .lesson-outline--drawer {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .app-topbar-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-layout {
+    display: block;
+  }
+
+  .app-sidebar {
+    display: none;
+  }
+
+  .app-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 25;
+    gap: 0.7rem;
+    min-height: 3.5rem;
+    padding: 0.55rem 0.85rem;
+  }
+
+  .app-topbar-wordmark {
+    display: none;
+  }
+
+  .app-topbar-copy {
+    display: block;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .app-topbar-title {
+    font-size: 1rem;
+  }
+
+  .app-topbar-cta {
+    min-height: 2.3rem;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  .app-content {
+    padding: 0.85rem 0.85rem 6.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .app-breadcrumb {
+    display: none;
+  }
+}
