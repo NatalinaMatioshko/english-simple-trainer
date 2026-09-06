@@ -18,10 +18,17 @@ export const IMG38 = (file: string) =>
   `${import.meta.env.BASE_URL}images/lesson38/${file}`;
 
 export const lucaText = [
-  "This is Luca. He's from Italy and he lives in Rome. He's a student.",
-  "He's got blonde hair and blue eyes. He's in his 20s.",
-  "This is his friend Mehmet. Mehmet is from Turkey. He's a taxi driver.",
-  "He's got a daughter. He's got brown hair, brown eyes and a beard. He's in his 30s.",
+  "OK, so my name is Luca and this is my good friend, Mehmet.",
+  "I'm from Italy. He's from Turkey. We live in Rome.",
+  "I'm a taxi driver and Mehmet's a student here. He's got a daughter. I haven't got any children.",
+  "I've got blonde hair and blue eyes. He's got brown hair, brown eyes and a beard.",
+  "I'm in my 20s and Mehmet is in his 30s.",
+  "We're very different, but we're good friends!",
+] as const;
+
+export const whoIsWho = [
+  { id: "luca", prompt: "Which photo is Luca?", answer: "A" },
+  { id: "mehmet", prompt: "Which photo is Mehmet?", answer: "B" },
 ] as const;
 
 export const labelBank = [
@@ -44,34 +51,47 @@ export const photoLabels = [
   { n: 7, photo: "B", hint: "Mehmet's age", answer: "in his 30s" },
 ] as const;
 
-export const peoplePhotos = [
+export const profilePhotos = [
   {
     id: "A",
-    file: "luca.jpg",
-    emoji: "👨‍🦱",
-    caption: "Photo A · Luca",
-    note: "blonde hair · blue eyes · 20s",
+    file: "luca.png",
+    emoji: "🚗",
+    caption: "Photo A",
+    note: "1 hair · 2 eyes · 3 Age",
   },
   {
     id: "B",
-    file: "mehmet.jpg",
+    file: "mehmet.png",
     emoji: "👨‍👧",
-    caption: "Photo B · Mehmet",
-    note: "brown hair · beard · 30s",
+    caption: "Photo B",
+    note: "4 hair · 5 eyes · 6 beard · 7 Age",
+  },
+] as const;
+
+export const matchPhotos = [
+  {
+    id: "A",
+    file: "woman-20s.png",
+    emoji: "👩",
+    caption: "Photo A",
+  },
+  {
+    id: "B",
+    file: "surfer.png",
+    emoji: "🏄‍♂️",
+    caption: "Photo B",
   },
   {
     id: "C",
-    file: "woman-50s.jpg",
-    emoji: "👩",
+    file: "grey-beard.png",
+    emoji: "👴",
     caption: "Photo C",
-    note: "blonde hair · blue eyes · 50s",
   },
   {
     id: "D",
-    file: "surfer.jpg",
-    emoji: "🏄‍♂️",
+    file: "woman-50s.png",
+    emoji: "👩",
     caption: "Photo D",
-    note: "red hair · 40s",
   },
 ] as const;
 
@@ -79,35 +99,38 @@ export const descMatch = [
   {
     id: "1",
     text: "She's got blonde hair and blue eyes. She's in her 50s.",
-    answer: "C",
+    answer: "D",
   },
   {
     id: "2",
     text: "He's got red hair. He's in his 40s.",
-    answer: "D",
+    answer: "B",
   },
   {
     id: "3",
-    text: "He's got blonde hair and blue eyes. He's in his 20s.",
+    text: "She's got brown hair and green eyes. She's in her 20s.",
     answer: "A",
   },
   {
     id: "4",
-    text: "He's got brown hair, brown eyes and a beard. He's in his 30s.",
-    answer: "B",
+    text: "He's got grey hair and a beard.",
+    answer: "C",
   },
 ] as const;
 
-export const wordMapItems = [
-  { word: "blue", bin: "colours" },
-  { word: "brown", bin: "colours" },
-  { word: "green", bin: "colours" },
+/** Book 3c word map — these start already in the circles */
+export const wordMapFixed = {
+  colours: ["blue", "brown", "green"],
+  body: ["hair", "eyes", "a beard"],
+} as const;
+
+/** Book: "Add more words to the word map." */
+export const wordMapExtra = [
   { word: "red", bin: "colours" },
   { word: "blonde", bin: "colours" },
   { word: "grey", bin: "colours" },
-  { word: "hair", bin: "body" },
-  { word: "eyes", bin: "body" },
-  { word: "a beard", bin: "body" },
+  { word: "short", bin: "body" },
+  { word: "long", bin: "body" },
 ] as const;
 
 export const grammarPlusMinus = [

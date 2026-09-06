@@ -5,6 +5,7 @@ import { drillSelClass } from "../components/lesson31/drillSelClass";
 import WordOrderBoard, {
   initWordOrderRows,
 } from "../components/lesson31/WordOrderBoard";
+import { WordMap } from "../components/lesson38/WordMap";
 import {
   descMatch,
   grammarPlusMinus,
@@ -13,9 +14,10 @@ import {
   labelBank,
   lucaText,
   makeQuestions,
+  matchPhotos,
   packSuggest,
-  peoplePhotos,
   photoLabels,
+  profilePhotos,
   questionGrammar,
   roseLines,
   samHasGot,
@@ -27,7 +29,8 @@ import {
   travelObjects,
   tripLabels,
   tripScenes,
-  wordMapItems,
+  whoIsWho,
+  wordMapExtra,
 } from "../data/lesson38";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
@@ -181,6 +184,8 @@ function CheckBar({
 }
 
 export default function Lesson38() {
+  const [whoAns, setWhoAns] = useState<Record<string, string>>({});
+  const [whoChecked, setWhoChecked] = useState(false);
   const [labelAns, setLabelAns] = useState(() =>
     Array(photoLabels.length).fill(""),
   );
@@ -192,6 +197,7 @@ export default function Lesson38() {
     {},
   );
   const [mapChecked, setMapChecked] = useState(false);
+  const [mapPlay, setMapPlay] = useState(0);
   const [plusAns, setPlusAns] = useState(() =>
     Array(grammarPlusMinus.length).fill(""),
   );
@@ -224,12 +230,15 @@ export default function Lesson38() {
   const [qRowsChecked, setQRowsChecked] = useState(false);
   const [roseOrder, setRoseOrder] = useState<string[]>([]);
   const [roseChecked, setRoseChecked] = useState(false);
+  const [describe, setDescribe] = useState(["", "", ""]);
 
+  const whoScore = whoIsWho.filter((item) => whoAns[item.id] === item.answer)
+    .length;
   const labelScore = photoLabels.filter((item, i) => labelAns[i] === item.answer)
     .length;
   const descScore = descMatch.filter((item) => descAns[item.id] === item.answer)
     .length;
-  const mapScore = wordMapItems.filter((item) => mapBins[item.word] === item.bin)
+  const mapScore = wordMapExtra.filter((item) => mapBins[item.word] === item.bin)
     .length;
   const plusScore = grammarPlusMinus.filter(
     (item, i) => plusAns[i] === item.answer,
@@ -355,16 +364,12 @@ export default function Lesson38() {
           <p className="page-kicker">1 · 4A Reading</p>
           <h2>You&apos;ve got a friend</h2>
           <p className="lesson22-section-desc">
-            Read about Luca and Mehmet. Then look at the photos.
+            Read the profile and look at the photos. Which person is Luca?
+            Which person is Mehmet?
           </p>
         </div>
-        <p className="l38-note">
-          Textbook photos can go in <code>public/images/lesson38/</code> (
-          <code>luca.jpg</code>, <code>mehmet.jpg</code>, …). Until then the
-          cards show a label so every task still works.
-        </p>
         <div className="l25-conf-card">
-          <div className="l25-conf-header">Luca &amp; Mehmet</div>
+          <div className="l25-conf-header">Luca&apos;s profile</div>
           <div className="l25-conf-fields">
             {lucaText.map((line) => (
               <p key={line} style={{ margin: "0 0 0.55rem" }}>
@@ -373,8 +378,8 @@ export default function Lesson38() {
             ))}
           </div>
         </div>
-        <div className="l38-photo-grid" style={{ marginTop: "1rem" }}>
-          {peoplePhotos.slice(0, 2).map((p) => (
+        <div className="l38-photo-grid l38-photo-grid--wide" style={{ marginTop: "1rem" }}>
+          {profilePhotos.map((p) => (
             <PhotoCard
               key={p.id}
               file={p.file}
@@ -384,6 +389,38 @@ export default function Lesson38() {
             />
           ))}
         </div>
+        <div className="l26-drill-list" style={{ marginTop: "1rem" }}>
+          {whoIsWho.map((item) => (
+            <div key={item.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">{item.prompt}</strong>
+              <select
+                value={whoAns[item.id] ?? ""}
+                onChange={(e) => {
+                  setWhoChecked(false);
+                  setWhoAns((prev) => ({ ...prev, [item.id]: e.target.value }));
+                }}
+                className={drillSelClass(
+                  whoChecked,
+                  whoAns[item.id] ?? "",
+                  item.answer,
+                )}
+              >
+                <option value="">Photo</option>
+                {profilePhotos.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.id}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <CheckBar
+          checked={whoChecked}
+          score={whoScore}
+          total={whoIsWho.length}
+          onCheck={() => setWhoChecked(true)}
+        />
       </section>
 
       <section id="l38-labels" className="lesson22-block panel">
@@ -391,8 +428,16 @@ export default function Lesson38() {
           <p className="page-kicker">2 · Vocabulary</p>
           <h2>Match the labels</h2>
           <p className="lesson22-section-desc">
-            Choose a phrase for numbers 1–7 on the photos.
+            Look at the numbers on the photos. Match 1–7 with the words in the
+            box.
           </p>
+        </div>
+        <div className="l38-chip-bank" aria-label="Word box">
+          {labelBank.map((word) => (
+            <span key={word} className="l38-chip">
+              {word}
+            </span>
+          ))}
         </div>
         {photoLabels.map((item, i) => (
           <div key={item.n} className="l38-label-row">
@@ -431,14 +476,15 @@ export default function Lesson38() {
 
       <section id="l38-match" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">3 · Photos A–D</p>
-          <h2>Who is it?</h2>
+          <p className="page-kicker">3a · Photos A–D</p>
+          <h2>Match descriptions 1–4</h2>
           <p className="lesson22-section-desc">
-            Match each description to a photo. Then listen and repeat.
+            Match descriptions 1–4 with photos A–D. Then listen and repeat the
+            words in bold.
           </p>
         </div>
         <div className="l38-photo-grid">
-          {peoplePhotos.map((p) => (
+          {matchPhotos.map((p) => (
             <PhotoCard
               key={p.id}
               file={p.file}
@@ -468,7 +514,7 @@ export default function Lesson38() {
                 aria-label={`Description ${item.id}`}
               >
                 <option value="">Photo</option>
-                {peoplePhotos.map((p) => (
+                {matchPhotos.map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.id}
                   </option>
@@ -485,21 +531,29 @@ export default function Lesson38() {
         />
         <AudioBlock
           r={1}
-          exercise="4A · R1"
-          title="Listen and repeat: hair, eyes, beard, in his 20s / 30s"
+          exercise="3b · 4.1"
+          title="Listen and repeat the words in bold: blonde hair, blue eyes, in her 50s…"
         />
       </section>
 
       <section id="l38-map" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">4 · Word map</p>
-          <h2>Colours or the body?</h2>
+          <p className="page-kicker">3c · Word map</p>
+          <h2>Add more words</h2>
           <p className="lesson22-section-desc">
-            Tap a word, then tap a box.
+            Watch the map appear. Then tap a new word and tap{" "}
+            <strong>colours</strong> or <strong>the body</strong>. Discuss extra
+            words with your teacher.
           </p>
         </div>
+        <WordMap
+          pick={mapPick}
+          bins={mapBins}
+          playKey={mapPlay}
+          onPickHub={putMap}
+        />
         <div className="l38-chip-bank">
-          {wordMapItems.map((item) => (
+          {wordMapExtra.map((item) => (
             <button
               key={item.word}
               type="button"
@@ -512,40 +566,19 @@ export default function Lesson38() {
             </button>
           ))}
         </div>
-        <div className="l38-bins">
+        <div className="l25-cr-actions">
           <button
             type="button"
-            className={`l38-bin${mapChecked ? " is-ok" : ""}`}
-            onClick={() => putMap("colours")}
+            className="l25-cr-mini-btn"
+            onClick={() => setMapPlay((n) => n + 1)}
           >
-            <h3>Colours</h3>
-            {wordMapItems
-              .filter((item) => mapBins[item.word] === "colours")
-              .map((item) => (
-                <span key={item.word} className="l38-chip is-on">
-                  {item.word}
-                </span>
-              ))}
-          </button>
-          <button
-            type="button"
-            className={`l38-bin${mapChecked ? " is-ok" : ""}`}
-            onClick={() => putMap("body")}
-          >
-            <h3>The body</h3>
-            {wordMapItems
-              .filter((item) => mapBins[item.word] === "body")
-              .map((item) => (
-                <span key={item.word} className="l38-chip is-on">
-                  {item.word}
-                </span>
-              ))}
+            Play animation
           </button>
         </div>
         <CheckBar
           checked={mapChecked}
           score={mapScore}
-          total={wordMapItems.length}
+          total={wordMapExtra.length}
           onCheck={() => setMapChecked(true)}
         />
       </section>
@@ -673,23 +706,51 @@ export default function Lesson38() {
 
       <section id="l38-speak1" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">7 · Speaking</p>
-          <h2>Describe yourself and a friend</h2>
+          <p className="page-kicker">4a · Speaking</p>
+          <h2>Describe your teacher</h2>
           <p className="lesson22-section-desc">
-            Ask your teacher and answer the questions. Then describe a friend.
+            Complete the sentences about your teacher. Then read them aloud.
+            Can your teacher guess who you described — the teacher, or a
+            friend?
           </p>
         </div>
+        <div className="l26-drill-list">
+          {[
+            "He/She's got ______ hair.",
+            "He/She's got ______ eyes.",
+            "He/She is in his/her 20s / 30s / 40s / ______.",
+          ].map((prompt, i) => (
+            <div key={prompt} className="l26-drill-row">
+              <strong className="l26-drill-prompt">{prompt}</strong>
+              <input
+                className="l22-gap-input"
+                value={describe[i]}
+                onChange={(e) => {
+                  const next = [...describe];
+                  next[i] = e.target.value;
+                  setDescribe(next);
+                }}
+                aria-label={`Describe ${i + 1}`}
+                placeholder={i === 2 ? "50s / 60s …" : ""}
+              />
+            </div>
+          ))}
+        </div>
+        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
+          <p>
+            <strong>4b.</strong> Read your sentences to your teacher. Then
+            describe a friend:{" "}
+            <em>
+              OK, my name is Piotr. I&apos;ve got brown hair. My friend&apos;s
+              name is Basia…
+            </em>
+          </p>
+        </blockquote>
         <ul className="l22-goals-list">
           {speakFriendPrompts.map((q) => (
             <li key={q}>{q}</li>
           ))}
         </ul>
-        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
-          <p>
-            Example: <em>OK, my name is Piotr. I&apos;ve got brown hair and
-            brown eyes. I&apos;m in my 20s. My friend&apos;s name is Basia…</em>
-          </p>
-        </blockquote>
       </section>
 
       <section id="l38-objects" className="lesson22-block panel">

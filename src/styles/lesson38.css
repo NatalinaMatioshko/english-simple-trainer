@@ -57,8 +57,23 @@
 .l38-photo-card img {
   display: block;
   width: 100%;
-  height: 10.5rem;
-  object-fit: cover;
+  height: 16rem;
+  object-fit: contain;
+  background: #111;
+}
+
+.l38-photo-grid--wide {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .l38-photo-grid--wide {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .l38-photo-card img {
+    height: 22rem;
+  }
 }
 
 .l38-label-row {
@@ -114,22 +129,175 @@
   gap: 0.85rem;
 }
 
-.l38-bin {
-  min-height: 8rem;
-  padding: 0.75rem;
-  border-radius: 1rem;
-  border: 2px dashed var(--color-border);
-  background: var(--color-surface);
+.l38-mind {
+  position: relative;
+  width: 100%;
+  height: min(28rem, 72vw);
+  margin: 0.25rem 0 0.75rem;
 }
 
-.l38-bin h3 {
-  margin: 0 0 0.55rem;
-  font-size: 0.95rem;
+.l38-mind-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
-.l38-bin.is-ok {
-  border-color: color-mix(in srgb, #16803c 55%, var(--color-border));
-  background: color-mix(in srgb, #16803c 8%, var(--color-surface));
+.l38-mind-line {
+  stroke: currentColor;
+  stroke-width: 0.55;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: l38-line-in 0.35s ease forwards;
+}
+
+.l38-node {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  padding: 0.2rem 0.35rem;
+  border: 0;
+  border-radius: 50%;
+  font: inherit;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  color: #fff;
+  transform: translate(-50%, -50%) scale(0.15);
+  opacity: 0;
+  animation: l38-pop 0.55s cubic-bezier(0.18, 1.35, 0.32, 1) forwards;
+  box-shadow: 0 8px 18px rgba(40, 52, 64, 0.16);
+}
+
+.l38-node--hub {
+  width: 7.4rem;
+  height: 7.4rem;
+  font-size: 1.05rem;
+}
+
+.l38-node--sat {
+  width: 5.15rem;
+  height: 5.15rem;
+  font-size: 0.92rem;
+}
+
+.l38-tone-colours {
+  background: linear-gradient(135deg, #ff5d73, #ffc857, #2ec4b6, #3d8bfd);
+  color: #fff;
+}
+
+.l38-tone-the-body {
+  background: #ff7a59;
+  color: #fff;
+}
+
+.l38-tone-blue {
+  background: #3d8bfd;
+  color: #fff;
+}
+
+.l38-tone-brown {
+  background: #a15c38;
+  color: #fff;
+}
+
+.l38-tone-green {
+  background: #2f9e62;
+  color: #fff;
+}
+
+.l38-tone-red {
+  background: #e23d3d;
+  color: #fff;
+}
+
+.l38-tone-blonde {
+  background: #f0c14b;
+  color: #3a2d0b;
+}
+
+.l38-tone-grey {
+  background: #8b95a3;
+  color: #fff;
+}
+
+.l38-tone-hair {
+  background: #c47a3a;
+  color: #fff;
+}
+
+.l38-tone-eyes {
+  background: #1aa3a8;
+  color: #fff;
+}
+
+.l38-tone-a-beard {
+  background: #7a4b32;
+  color: #fff;
+}
+
+.l38-tone-short {
+  background: #d946ef;
+  color: #fff;
+}
+
+.l38-tone-long {
+  background: #7c5cff;
+  color: #fff;
+}
+
+.l38-tone-mix {
+  background: #01696f;
+  color: #fff;
+}
+
+.l38-mind-line.l38-tone-blue { stroke: #3d8bfd; }
+.l38-mind-line.l38-tone-brown { stroke: #a15c38; }
+.l38-mind-line.l38-tone-green { stroke: #2f9e62; }
+.l38-mind-line.l38-tone-red { stroke: #e23d3d; }
+.l38-mind-line.l38-tone-blonde { stroke: #f0c14b; }
+.l38-mind-line.l38-tone-grey { stroke: #8b95a3; }
+.l38-mind-line.l38-tone-hair { stroke: #c47a3a; }
+.l38-mind-line.l38-tone-eyes { stroke: #1aa3a8; }
+.l38-mind-line.l38-tone-a-beard { stroke: #7a4b32; }
+.l38-mind-line.l38-tone-short { stroke: #d946ef; }
+.l38-mind-line.l38-tone-long { stroke: #7c5cff; }
+.l38-mind-line.l38-tone-mix { stroke: #01696f; }
+
+.l38-node--hub.is-target {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+@keyframes l38-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.12);
+  }
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes l38-line-in {
+  to {
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l38-node,
+  .l38-mind-line {
+    animation: none;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .l38-obj-grid {
@@ -256,6 +424,22 @@
   .l38-bins,
   .l38-obj-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .l38-mind {
+    height: 22rem;
+  }
+
+  .l38-node--hub {
+    width: 5.4rem;
+    height: 5.4rem;
+    font-size: 0.82rem;
+  }
+
+  .l38-node--sat {
+    width: 3.85rem;
+    height: 3.85rem;
+    font-size: 0.72rem;
   }
 }
 
