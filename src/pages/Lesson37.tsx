@@ -79,6 +79,12 @@ export default function Lesson37() {
             </Link>
             <Link
               className="lesson22-back-link lesson22-back-link--ghost"
+              to="/lesson-38"
+            >
+              Lesson 38 →
+            </Link>
+            <Link
+              className="lesson22-back-link lesson22-back-link--ghost"
               to="/vocab"
             >
               Vocab →
@@ -363,6 +369,9 @@ export default function Lesson37() {
         <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
           <Link className="l22-check-btn" to="/hw-37">
             HW37
+          </Link>
+          <Link className="l25-cr-mini-btn" to="/lesson-38">
+            Lesson 38 →
           </Link>
           <Link className="l25-cr-mini-btn" to="/vocab">
             Vocab

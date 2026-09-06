@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "38": "/images/describing-people-adjectives.png",
   "37": "/images/lesson37/present-continuous.jpg",
   "36": "/images/in-the-morning.jpg",
   "35": "/images/lesson35/welcome-to-my-town.png",
@@ -31,6 +32,25 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "38",
+    title: "have / has got",
+    href: "/hw-38",
+    tasks: [
+      {
+        type: "text",
+        text: "Choose have / has / haven't / hasn't",
+      },
+      {
+        type: "text",
+        text: "Build Have you got…? / Has she got…? questions",
+      },
+      {
+        type: "text",
+        text: "Write about you and a friend (hair, eyes, age, job) and send to teacher",
+      },
+    ],
+  },
   {
     id: "37",
     title: "Present continuous · Test-English",
