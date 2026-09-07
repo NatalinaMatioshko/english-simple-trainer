@@ -47,6 +47,14 @@
   color: var(--color-text);
 }
 
+.roadmap-current-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
 .roadmap-progress-shell {
   width: 100%;
   height: 10px;

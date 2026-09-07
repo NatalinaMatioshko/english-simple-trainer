@@ -58,20 +58,26 @@ const completedPath: StageSummary[] = [
     summary:
       "Combined can / can't, Present Simple review, articles a / an, describing people, then Roadmap A1 Unit 1A — countries, nationalities, and be with I / you / we / they.",
   },
+  {
+    range: "Lessons 26–30",
+    title: "Jobs, family, objects, and A1 check",
+    summary:
+      "Jobs with he / she / it, family and possessives, Present Simple speaking, everyday objects and numbers, then a full A1 check and reflect.",
+  },
+  {
+    range: "Lessons 31–37",
+    title: "Town, questions, and now vs every day",
+    summary:
+      "There is / are and places in town, WH-questions and was / were, flats, adjectives with a Present continuous preview, directions, Present Simple daily verbs, then speaking: I work every day / I am working now.",
+  },
 ];
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 30–34",
-    title: "Unit 3 · My town",
+    range: "Lessons 39–40",
+    title: "Ability, then more continuous",
     summary:
-      "A1 review, places in town, flats (Is there wifi?), opposite adjectives, and a Present continuous preview with picture exercises.",
-  },
-  {
-    range: "Lessons 35–40",
-    title: "Unit 4–5 · Family & daily life",
-    summary:
-      "Directions, Present Simple daily verbs, then a speaking-first Present continuous lesson (now vs every day) plus Test-English extra, before can / can't and Unit 5.",
+      "Vote for me! (can / can't), then A quiet life? (full Present continuous).",
   },
 ];
 
@@ -426,7 +432,7 @@ const roadmapLessons: Lesson[] = [
       "Video ELLLO A1-06: listening quiz (6 questions) + grammar drill · does / doesn't",
     review: "Personal info, family, jobs, routines, hobbies (L25–27)",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lesson-28",
   },
   {
@@ -442,7 +448,7 @@ const roadmapLessons: Lesson[] = [
       "R5–R8: objects match, Max & Carla office, this/these contrast, picture dialogues; R9–R14: numbers, profiles (Anna / Bill / Satoru), 's pronunciation",
     review: "he/she/it (L28); family & jobs (L27); be questions",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lesson-29",
   },
   {
@@ -457,19 +463,19 @@ const roadmapLessons: Lesson[] = [
     listening: "R4 Unit 2 — Yasemin & Tara family photo (comprehension)",
     review: "Numbers + question words (L29); ALL Lessons 1–29 topics: identity → shop English",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lesson-30",
   },
   {
     id: 31,
     title: "My town",
-    grammar: "There is/are · isn't/aren't · no/any",
-    vocabulary: "places in town",
-    speaking: "Describe your town; find differences",
-    listening: "there's/isn't/are/aren't; place stress",
-    review: "a/an; be; Unit 3A",
+    grammar: "There is / are · isn't / aren't · no / any",
+    vocabulary: "places in town: café, park, station, supermarket, school…",
+    speaking: "Describe your town to the teacher; find differences on the map",
+    listening: "there's / isn't / are / aren't; place-name stress",
+    review: "a / an; be; Unit 3A",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lesson-31",
   },
   {
@@ -484,7 +490,7 @@ const roadmapLessons: Lesson[] = [
     listening: "stress on do/does vs is/are; was vs were",
     review: "Present Simple questions; to be questions; past of to be",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lesson-32",
   },
   {
@@ -498,7 +504,7 @@ const roadmapLessons: Lesson[] = [
     listening: "intonation for Is there…?; Jakub & William flat conversation",
     review: "There is/are (L31); Unit 3B",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lesson-33",
   },
   {
@@ -513,7 +519,7 @@ const roadmapLessons: Lesson[] = [
     listening: "R12 adjective sentences; R13 adjective + noun stress",
     review: "There is/are (L31–33); Unit 3C + PC preview",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lesson-34",
   },
   {
@@ -525,7 +531,7 @@ const roadmapLessons: Lesson[] = [
     listening: "R14 route; R15 useful phrases; R16 three conversations",
     review: "Unit 3D · there is/are (L31–33)",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lesson-35",
   },
   {
@@ -537,7 +543,7 @@ const roadmapLessons: Lesson[] = [
     listening: "ELLLO A1-04 four conversations (YouTube quiz)",
     review: "Present Simple (L28); Unit 3D directions (L35)",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lesson-36",
   },
   {
@@ -545,15 +551,30 @@ const roadmapLessons: Lesson[] = [
     title: "Present continuous · now vs every day",
     grammar: "I work every day. / I am working now.",
     vocabulary: "work, eat, drink, read, talk, sit",
-    speaking: "Lots of speaking with the teacher: habits vs now",
-    listening: "Picture speaking (kitchen + Present continuous cards)",
-    review: "Present Simple (L36); PC preview (L34)",
+    speaking:
+      "Ask your teacher and answer: What do you do every day? What are you doing now?",
+    listening: "Picture speaking: kitchen scene + Present continuous cards",
+    review: "Present Simple daily verbs (L36); PC preview (L34). Extra practice on HW37.",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lesson-37",
   },
   {
     id: 38,
+    title: "You've got a friend · Have you got it?",
+    grammar: "have / has got (+ − ?); short answers",
+    vocabulary:
+      "hair, eyes, beard, in his/her 20s; bag, passport, tickets, sunglasses, camera",
+    speaking:
+      "Describe yourself and a friend; ask your teacher: Have you got…?",
+    listening: "Unit 4 R1–R5: vocab, contractions, Sam & Zara, Have/Has stress",
+    review: "Describing people (L24); objects (L29); now vs every day (L37)",
+    category: "people",
+    status: "current",
+    route: "/lesson-38",
+  },
+  {
+    id: 39,
     title: "Vote for me!",
     grammar: "can / can't",
     vocabulary: "verb phrases (buy a newspaper, send an email…)",
@@ -564,24 +585,13 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 39,
+    id: 40,
     title: "A quiet life?",
     grammar: "Present continuous — be + verb + -ing (full unit)",
     vocabulary: "noise verbs; action phrases",
     speaking: "Describe what people are doing now",
     listening: "/ŋ/; present continuous in context",
     review: "PC speaking (L37); Unit 5B",
-    category: "general",
-    status: "next",
-  },
-  {
-    id: 40,
-    title: "A city for all seasons",
-    grammar: "Present simple or Present continuous?",
-    vocabulary: "weather and seasons; places in London",
-    speaking: "Compare habits vs actions happening now",
-    listening: "simple vs continuous contrast",
-    review: "Present Simple (L28); Present continuous (L37)",
     category: "general",
     status: "next",
   },
@@ -613,6 +623,25 @@ function getStatusLabel(status: Lesson["status"]) {
     default:
       return "Next";
   }
+}
+
+function centerCardInScroller(container: HTMLElement, card: HTMLElement) {
+  if (container.scrollHeight - container.clientHeight > 8) {
+    const containerRect = container.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const delta =
+      cardRect.top -
+      containerRect.top -
+      container.clientHeight / 2 +
+      cardRect.height / 2;
+    const previousBehavior = container.style.scrollBehavior;
+    container.style.scrollBehavior = "auto";
+    container.scrollTop = Math.max(0, container.scrollTop + delta);
+    container.style.scrollBehavior = previousBehavior;
+    return;
+  }
+
+  card.scrollIntoView({ block: "center", inline: "nearest", behavior: "auto" });
 }
 
 export default function RoadmapSection() {
@@ -660,21 +689,38 @@ export default function RoadmapSection() {
     const currentIndex = roadmapLessons.findIndex(
       (lesson) => lesson.status === "current",
     );
-    const currentCard = cardRefs.current[currentIndex];
-    if (!currentCard) return;
-
-    const topOffset = 96;
+    let timer = 0;
 
     const placeCurrentCardInView = () => {
-      const top = currentCard.offsetTop - topOffset;
-      container.scrollTo({
-        top: Math.max(0, top),
-        behavior: "auto",
-      });
+      const currentCard = cardRefs.current[currentIndex];
+      if (!currentCard || container.clientHeight < 40) return;
+      centerCardInScroller(container, currentCard);
     };
 
-    const timer = window.setTimeout(placeCurrentCardInView, 0);
-    return () => window.clearTimeout(timer);
+    const attempt = (left: number) => {
+      placeCurrentCardInView();
+      if (left <= 0) return;
+      timer = window.setTimeout(() => attempt(left - 1), 60);
+    };
+
+    const start = () => {
+      window.clearTimeout(timer);
+      attempt(6);
+    };
+
+    start();
+
+    const details = container.closest("details");
+    const onToggle = () => {
+      if (details && !details.open) return;
+      start();
+    };
+    details?.addEventListener("toggle", onToggle);
+
+    return () => {
+      window.clearTimeout(timer);
+      details?.removeEventListener("toggle", onToggle);
+    };
   }, []);
 
   useEffect(() => {
@@ -729,6 +775,7 @@ export default function RoadmapSection() {
         <div className="roadmap-current">
           <span className="roadmap-current-label">Current lesson</span>
           <strong>Lesson {currentLesson.id}</strong>
+          <p className="roadmap-current-title">{currentLesson.title}</p>
         </div>
 
         <div className="roadmap-progress-shell" aria-hidden="true">
@@ -742,8 +789,9 @@ export default function RoadmapSection() {
           <h3>Course logic</h3>
           <p>
             First the student learns who they are, then what they do every day,
-            then where and when things happen, and after that how to speak about
-            other people and everyday real-life situations.
+            then where and when things happen. Now the course contrasts habits
+            with actions happening now, before ability and fuller continuous
+            speaking.
           </p>
         </div>
       </aside>

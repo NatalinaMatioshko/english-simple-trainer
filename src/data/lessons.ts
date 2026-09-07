@@ -274,6 +274,16 @@ export const lessons: LessonEntry[] = [
     lessonPath: "/lesson-37",
     homeworkPath: "/hw-37",
   },
+  {
+    id: "38",
+    title: "You've got a friend · Have you got it?",
+    level: "A1",
+    topic: "have / has got · describe people · pack for a trip",
+    description:
+      "Unit 4A–4B: describe people with have/has got, match photos, pack a bag, listen to Sam, then ask Have you got…?",
+    lessonPath: "/lesson-38",
+    homeworkPath: "/hw-38",
+  },
 ];
 
 export const lessonCovers: Record<string, string> = {
@@ -286,6 +296,7 @@ export const lessonCovers: Record<string, string> = {
   "29": "/images/lesson28/home-office-vocab.png",
   "34": "/images/lesson34/what-are-they-doing.png",
   "35": "/images/lesson35/pixel-town-map.png",
+  "38": "/images/describing-people-adjectives.png",
   extra: "/images/everyday-actions.png",
 };
 

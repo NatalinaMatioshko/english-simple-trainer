@@ -6,11 +6,26 @@ Built with **React 19 + Vite 8 + TypeScript**, deployed to **GitHub Pages**.
 
 ---
 
+## Interface
+
+The site is now a **learning-platform shell**, not a loose stack of pages:
+
+- **Home (`/`)** is the **Roadmap**: hero, Learning Path (current lesson **37**), full 1–40 timeline, then “what we have already covered”
+- **Desktop** — sticky top bar (`simple trainer.`) + floating left **Menu** (Roadmap, Cabinet, Lessons, Trainer, Vocab, Homework)
+- **Mobile** — bottom nav; the long lesson timeline **folds** behind a Roadmap toggle so you can reach the covered-topics map without scrolling 40 cards
+- **Lessons / Homework** catalogs use **cover cubes** (latest numbered lesson is current; earlier ones are dimmed)
+- Lesson pages keep a **contents rail** on wide screens and a “Зміст уроку” drawer on smaller ones
+- **Cabinet** lives at `/cabinet` (student dashboard). `/roadmap` redirects to `/`
+
+No shop / paywall chrome — teal-on-paper teaching UI only.
+
+---
+
 ## Features
 
-- **Roadmap** — curriculum overview (lessons 1–33), current / completed / next status
-- **Lessons 15–33** — full interactive pages (speaking, vocab, listening, grammar, reading)
-- **Homework** — `/hw-25`…`/hw-31` with flashcards, quizzes, crossword (HW31); older `/homework/:id` still used for early lessons
+- **Roadmap** — curriculum overview (lessons 1–40), current / completed / next status; current class is **Lesson 38**
+- **Lessons 15–38** — full interactive pages (speaking, vocab, listening, grammar, reading)
+- **Homework** — `/hw-25`…`/hw-38`; older `/homework/:id` still used for early lessons
 - **Vocab** — dictionary with IPA + Web Speech pronunciation
 - **Trainer** — conjugation + question builder, then 50 core verbs; practice decks and scored quizzes
 - **A1 Level Test** — separate check at `/a1-level-test`
@@ -38,6 +53,7 @@ Lessons are written for **one student + one teacher**. Classroom phrases such as
 | 35 | Unit 3D · English in action: directions |
 | 36 | Present Simple · daily verbs (ELLLO video) |
 | 37 | Present continuous speaking: *I work every day* / *I am working now* |
+| 38 | Unit 4A–4B · *You've got a friend* / *Have you got it?* · have/has got |
 
 ---
 
@@ -177,15 +193,15 @@ Publish after editing.
 ```
 src/
   app/            # React Router (App.tsx)
-  components/     # Layout, practice cards, roadmap, vocab UI, …
+  components/     # Layout shell (sidebar, topbar), practice cards, roadmap, vocab UI, …
   context/        # Theme + Auth (email/password + Google)
-  data/           # Vocab, verbs, lesson31/32, HW review decks, practice tasks
+  data/           # Vocab, verbs, lesson data, HW review decks, practice tasks
   hooks/          # Quiz / practice hooks (useScoredQuiz, …)
-  pages/          # Home, Lessons, Lesson15–33, HW25–31, Vocab, Trainer, Admin…
+  pages/          # Roadmap home, Cabinet, Lessons, Lesson15–38, HW25–38, Vocab, Trainer, Admin…
   services/       # Firestore helpers (e.g. writingSubmissions)
-  styles/         # Global + per-lesson CSS
+  styles/         # Global + app shell + per-lesson CSS
   types/          # Shared TypeScript types
-  utils/          # shuffle, text helpers, speech (TTS)
+  utils/          # App nav, shuffle, text helpers, speech (TTS)
   firebase.ts     # Firebase init (config from VITE_* env)
 public/
   images/         # Lesson posters, vocab photos, extras
@@ -210,8 +226,9 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 
 | Path | Page |
 |------|------|
-| `/` | Home + roadmap |
-| `/lessons` | Lessons list |
+| `/` | Roadmap (home) |
+| `/cabinet` | Student cabinet |
+| `/lessons` | Lessons catalog |
 | `/lesson-31` | My town (Unit 3A) |
 | `/lesson-32` | WH-questions · was/were |
 | `/lesson-33` | Is there wifi? (Unit 3B) |
@@ -219,11 +236,13 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/lesson-35` | Directions (Unit 3D) |
 | `/lesson-36` | Present Simple daily verbs |
 | `/lesson-37` | Present continuous · now vs every day |
+| `/lesson-38` | You've got a friend · Have you got it? (Unit 4A–4B) |
 | `/hw-31` | Homework · Lesson 31 |
 | `/hw-34` | Homework · Lesson 34 |
 | `/hw-35` | Homework · Lesson 35 (Unit 3 check) |
 | `/hw-36` | Homework · Lesson 36 (Present Simple daily verbs) |
 | `/hw-37` | Homework · Lesson 37 (translate + Test-English) |
+| `/hw-38` | Homework · Lesson 38 (have / has got) |
 | `/a1-level-test` | A1 Level Test |
 | `/extra-resources` | Extra infographics |
 | `/vocab` | Vocabulary (student words persist after login) |
