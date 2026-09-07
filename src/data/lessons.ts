@@ -276,13 +276,23 @@ export const lessons: LessonEntry[] = [
   },
   {
     id: "38",
-    title: "You've got a friend · Have you got it?",
+    title: "You've got a friend",
     level: "A1",
-    topic: "have / has got · describe people · pack for a trip",
+    topic: "have / has got · describe people",
     description:
-      "Unit 4A–4B: describe people with have/has got, match photos, pack a bag, listen to Sam, then ask Have you got…?",
+      "Unit 4A: describe people with have/has got, match photos, and talk about a friend.",
     lessonPath: "/lesson-38",
     homeworkPath: "/hw-38",
+  },
+  {
+    id: "39",
+    title: "Have you got it?",
+    level: "A1",
+    topic: "pack for a trip · Have / Has … got?",
+    description:
+      "Unit 4B: travel objects, pack a bag, listen to Sam, then ask Have you got…?",
+    lessonPath: "/lesson-39",
+    homeworkPath: "/hw-39",
   },
 ];
 
@@ -297,6 +307,7 @@ export const lessonCovers: Record<string, string> = {
   "34": "/images/lesson34/what-are-they-doing.png",
   "35": "/images/lesson35/pixel-town-map.png",
   "38": "/images/describing-people-adjectives.png",
+  "39": "/images/lesson38/office.jpg",
   extra: "/images/everyday-actions.png",
 };
 

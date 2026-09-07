@@ -3,11 +3,28 @@ import { useAuth } from "../../context/AuthContext";
 import { appNavItems, isAppNavActive } from "../../utils/appNav";
 import { AppNavIcon } from "./AppNavIcon";
 
-export function AppSidebar({ pathname }: { pathname: string }) {
+export function AppSidebar({
+  pathname,
+  open,
+  onCollapse,
+  inertWhenClosed = false,
+}: {
+  pathname: string;
+  open: boolean;
+  onCollapse: () => void;
+  inertWhenClosed?: boolean;
+}) {
   const { user, loading, displayName, isTeacher, logOut } = useAuth();
+  const hidden = inertWhenClosed && !open;
 
   return (
-    <aside className="app-sidebar" aria-label="Навігація платформи">
+    <aside
+      id="app-sidebar"
+      className={`app-sidebar${open ? " is-open" : ""}`}
+      aria-label="Навігація платформи"
+      aria-hidden={hidden || undefined}
+      inert={hidden || undefined}
+    >
       <p className="app-sidebar-heading">Меню</p>
 
       <nav className="app-sidebar-nav">
@@ -72,6 +89,14 @@ export function AppSidebar({ pathname }: { pathname: string }) {
         ) : (
           <p className="app-sidebar-user">Завантаження…</p>
         )}
+        <button
+          type="button"
+          className="app-sidebar-collapse"
+          onClick={onCollapse}
+        >
+          <span aria-hidden="true">«</span>
+          Згорнути меню
+        </button>
       </div>
     </aside>
   );
