@@ -216,7 +216,7 @@ export default function Lesson38() {
   const [roseOrder, setRoseOrder] = useState<string[]>([]);
   const [roseChecked, setRoseChecked] = useState(false);
   const [friendNotes, setFriendNotes] = useState(["", "", ""]);
-  const [hwFixAns, setHwFixAns] = useState(() =>
+  const [hwFixAns, setHwFixAns] = useState<Record<string, string>>(() =>
     Object.fromEntries(homeworkFixLines.map((l) => [l.id, l.wrong])),
   );
   const [hwFixChecked, setHwFixChecked] = useState(false);
