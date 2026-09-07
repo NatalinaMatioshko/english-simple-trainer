@@ -74,7 +74,7 @@ const completedPath: StageSummary[] = [
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 39–40",
+    range: "Lessons 40–41",
     title: "Ability, then more continuous",
     summary:
       "Vote for me! (can / can't), then A quiet life? (full Present continuous).",
@@ -561,20 +561,30 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 38,
-    title: "You've got a friend · Have you got it?",
-    grammar: "have / has got (+ − ?); short answers",
-    vocabulary:
-      "hair, eyes, beard, in his/her 20s; bag, passport, tickets, sunglasses, camera",
-    speaking:
-      "Describe yourself and a friend; ask your teacher: Have you got…?",
-    listening: "Unit 4 R1–R5: vocab, contractions, Sam & Zara, Have/Has stress",
-    review: "Describing people (L24); objects (L29); now vs every day (L37)",
+    title: "You've got a friend",
+    grammar: "have / has got (+ −); I've / He's contractions",
+    vocabulary: "hair, eyes, beard, in his/her 20s",
+    speaking: "Describe yourself and a friend with your teacher",
+    listening: "Unit 4 R1–R2: describing people, contractions",
+    review: "Describing people (L24); now vs every day (L37)",
     category: "people",
-    status: "current",
+    status: "completed",
     route: "/lesson-38",
   },
   {
     id: 39,
+    title: "Have you got it?",
+    grammar: "Have / Has … got?; short answers",
+    vocabulary: "bag, passport, tickets, sunglasses, camera",
+    speaking: "Ask your teacher: Have you got…? Pack a bag together.",
+    listening: "Unit 4 R3–R5: travel vocab, Sam & Zara, Have/Has stress",
+    review: "have / has got (L38); objects (L29)",
+    category: "people",
+    status: "current",
+    route: "/lesson-39",
+  },
+  {
+    id: 40,
     title: "Vote for me!",
     grammar: "can / can't",
     vocabulary: "verb phrases (buy a newspaper, send an email…)",
@@ -585,7 +595,7 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 40,
+    id: 41,
     title: "A quiet life?",
     grammar: "Present continuous — be + verb + -ing (full unit)",
     vocabulary: "noise verbs; action phrases",

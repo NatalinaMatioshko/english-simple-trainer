@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "39": "/images/lesson38/office.jpg",
   "38": "/images/describing-people-adjectives.png",
   "37": "/images/lesson37/present-continuous.jpg",
   "36": "/images/in-the-morning.jpg",
@@ -33,21 +34,40 @@ export function homeworkHref(
 
 export const homeworkByLesson = [
   {
-    id: "38",
-    title: "have / has got",
-    href: "/hw-38",
+    id: "39",
+    title: "Have you got it?",
+    href: "/hw-39",
     tasks: [
-      {
-        type: "text",
-        text: "Choose have / has / haven't / hasn't",
-      },
       {
         type: "text",
         text: "Build Have you got…? / Has she got…? questions",
       },
       {
         type: "text",
-        text: "Write about you and a friend (hair, eyes, age, job) and send to teacher",
+        text: "Write what you have got in your bag for a trip and send to teacher",
+      },
+    ],
+  },
+  {
+    id: "38",
+    title: "have / has got",
+    href: "/hw-38",
+    tasks: [
+      {
+        type: "text",
+        text: "Translate sentences: I've got / He's got / hair, eyes, age",
+      },
+      {
+        type: "text",
+        text: "Make questions: Have you got…? Has he got…? What's her name?",
+      },
+      {
+        type: "text",
+        text: "Possessives: my / his / her / mom's / brother's / a client's hair",
+      },
+      {
+        type: "text",
+        text: "Write about you and a friend and send to teacher",
       },
     ],
   },

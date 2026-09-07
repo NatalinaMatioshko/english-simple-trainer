@@ -3,7 +3,13 @@ import { useAuth } from "../../context/AuthContext";
 import { ThemeToggle } from "./ThemeToggle";
 import { appNavItems, getPageContext, isAppNavActive } from "../../utils/appNav";
 
-export function AppTopbar() {
+export function AppTopbar({
+  menuOpen,
+  onMenuToggle,
+}: {
+  menuOpen: boolean;
+  onMenuToggle: () => void;
+}) {
   const { pathname } = useLocation();
   const { title, crumbs } = getPageContext(pathname);
   const { user, loading } = useAuth();
@@ -15,6 +21,27 @@ export function AppTopbar() {
         Перейти до вмісту
       </a>
       <header className="app-topbar">
+        <button
+          type="button"
+          className="app-topbar-menu-btn"
+          aria-expanded={menuOpen}
+          aria-controls="app-sidebar"
+          onClick={onMenuToggle}
+        >
+          <span className="app-topbar-menu-icon" aria-hidden="true">
+            {menuOpen ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+            )}
+          </span>
+          Меню
+        </button>
+
         <Link to="/" className="app-topbar-brand">
           <span className="app-topbar-logo" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
