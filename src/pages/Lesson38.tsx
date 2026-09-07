@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import LessonNumberKicker from "../components/LessonNumberKicker";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
@@ -6,10 +6,14 @@ import WordOrderBoard, {
   initWordOrderRows,
 } from "../components/lesson31/WordOrderBoard";
 import { WordMap } from "../components/lesson38/WordMap";
+import Unit4AudioBlock from "../components/Unit4AudioBlock";
 import {
+  contractionListen,
   descMatch,
   grammarPlusMinus,
   hasHaveChoose,
+  homeworkFixGroups,
+  homeworkFixLines,
   IMG38,
   labelBank,
   lucaText,
@@ -23,9 +27,8 @@ import {
   samHasGot,
   samWhere,
   sofiaSentences,
-  SOUND_U4,
   speakBagPrompts,
-  speakFriendPrompts,
+  speakPrepare,
   travelObjects,
   tripLabels,
   tripScenes,
@@ -37,69 +40,6 @@ import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson38.css";
-
-function AudioBlock({
-  r,
-  exercise,
-  title,
-  transcript,
-}: {
-  r: number;
-  exercise: string;
-  title: string;
-  transcript?: ReactNode;
-}) {
-  const [open, setOpen] = useState(false);
-  const [err, setErr] = useState<string | null>(null);
-  const src = SOUND_U4(r);
-  return (
-    <div className="l25-audio-item" style={{ marginTop: "0.85rem" }}>
-      <div className="l25-audio-meta">
-        <span className="l25-audio-num">R{r}</span>
-        <div className="l25-audio-info">
-          <span className="l25-audio-ex">{exercise}</span>
-          <span className="l25-audio-title">{title}</span>
-        </div>
-      </div>
-      <audio
-        key={src}
-        controls
-        className="l25-audio-ctrl"
-        src={src}
-        preload="metadata"
-        onError={() =>
-          setErr(`Audio failed to load (R${r}). Check the file is available.`)
-        }
-        onCanPlay={() => setErr(null)}
-      >
-        <source src={src} type="audio/mpeg" />
-      </audio>
-      {err && (
-        <p
-          style={{
-            margin: "0.35rem 0 0",
-            color: "var(--color-danger, #b91c1c)",
-            fontSize: "0.9rem",
-          }}
-        >
-          {err}
-        </p>
-      )}
-      {transcript && (
-        <>
-          <button
-            type="button"
-            className="l25-cr-mini-btn"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? "Hide transcript" : "Transcript"}
-          </button>
-          {open && <div className="l25-details-body">{transcript}</div>}
-        </>
-      )}
-    </div>
-  );
-}
 
 function ImgOrFace({
   file,
@@ -128,15 +68,17 @@ function PhotoCard({
   emoji,
   caption,
   note,
+  wide,
 }: {
   file: string;
   emoji: string;
   caption: string;
   note?: string;
+  wide?: boolean;
 }) {
   const [broken, setBroken] = useState(false);
   return (
-    <figure className="l38-photo-card">
+    <figure className={`l38-photo-card${wide ? " l38-photo-card--wide" : ""}`}>
       {broken ? (
         <div className="l38-photo-face">
           <span aria-hidden="true">{emoji}</span>
@@ -156,6 +98,20 @@ function PhotoCard({
       </figcaption>
     </figure>
   );
+}
+
+function altClass(
+  checked: boolean,
+  value: string,
+  opt: string,
+  answer: string,
+) {
+  const on = value === opt;
+  if (!checked) return `l38-alt${on ? " is-on" : ""}`;
+  if (on && opt === answer) return "l38-alt is-ok";
+  if (on) return "l38-alt is-err";
+  if (opt === answer) return "l38-alt is-key";
+  return "l38-alt";
 }
 
 function CheckBar({
@@ -182,6 +138,35 @@ function CheckBar({
     </div>
   );
 }
+
+function normalizeFix(
+  s: string,
+  keepCase = false,
+  keepPunct = false,
+): string {
+  let base = s
+    .replace(/[\u2018\u2019\u02bc']/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!keepPunct) base = base.replace(/[?.!,]+$/g, "");
+  if (!keepCase) base = base.toLowerCase();
+  return base;
+}
+
+function isHwFixOk(
+  value: string,
+  answers: readonly string[],
+  keepCase = false,
+  keepPunct = false,
+): boolean {
+  const n = normalizeFix(value, keepCase, keepPunct);
+  return (
+    n !== "" &&
+    answers.some((a) => normalizeFix(a, keepCase, keepPunct) === n)
+  );
+}
+
+const VIDEO_ID = "UANUTB1GsVU";
 
 export default function Lesson38() {
   const [whoAns, setWhoAns] = useState<Record<string, string>>({});
@@ -230,7 +215,13 @@ export default function Lesson38() {
   const [qRowsChecked, setQRowsChecked] = useState(false);
   const [roseOrder, setRoseOrder] = useState<string[]>([]);
   const [roseChecked, setRoseChecked] = useState(false);
-  const [describe, setDescribe] = useState(["", "", ""]);
+  const [friendNotes, setFriendNotes] = useState(["", "", ""]);
+  const [hwFixAns, setHwFixAns] = useState(() =>
+    Object.fromEntries(homeworkFixLines.map((l) => [l.id, l.wrong])),
+  );
+  const [hwFixChecked, setHwFixChecked] = useState(false);
+  const [hwFixHints, setHwFixHints] = useState<Record<string, boolean>>({});
+  const [hwFixShowKey, setHwFixShowKey] = useState(false);
 
   const whoScore = whoIsWho.filter((item) => whoAns[item.id] === item.answer)
     .length;
@@ -265,6 +256,14 @@ export default function Lesson38() {
     (line) => roseOrder[line.order - 1] === line.id,
   ).length;
   const roseById = Object.fromEntries(roseLines.map((line) => [line.id, line]));
+  const hwFixScore = homeworkFixLines.filter((line) =>
+    isHwFixOk(
+      hwFixAns[line.id] ?? "",
+      line.answers,
+      "keepCase" in line && line.keepCase === true,
+      "keepPunct" in line && line.keepPunct === true,
+    ),
+  ).length;
 
   const putMap = (bin: "colours" | "body") => {
     if (!mapPick) return;
@@ -342,20 +341,157 @@ export default function Lesson38() {
 
       <section className="lesson22-block panel">
         <div className="lesson22-flow">
+          <a href="#l38-hwfix">Fix HW</a>
           <a href="#l38-read">1 Friends</a>
           <a href="#l38-labels">2 Labels</a>
           <a href="#l38-match">3 Photos</a>
           <a href="#l38-map">4 Word map</a>
           <a href="#l38-grammar">5 Grammar</a>
-          <a href="#l38-sofia">6 Sofia</a>
-          <a href="#l38-speak1">7 Speak</a>
-          <a href="#l38-objects">8 Pack</a>
+          <a href="#l38-listen">6 Listen</a>
+          <a href="#l38-choose">7 Choose</a>
+          <a href="#l38-sofia">8 Sofia</a>
+          <a href="#l38-speak1">9 Speak</a>
+          <a href="#l38-video">4B Video</a>
+          <a href="#l38-objects">4B Pack</a>
           <a href="#l38-trips">9 Trips</a>
           <a href="#l38-sam">10 Sam</a>
           <a href="#l38-ask">11 Questions</a>
           <a href="#l38-rose">12 Dialogue</a>
           <a href="#l38-speak2">13 Bag</a>
           <a href="#l38-exit">Exit</a>
+        </div>
+      </section>
+
+      <section id="l38-hwfix" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Warm-up · Homework</p>
+          <h2>Fix the mistakes</h2>
+          <p className="lesson22-section-desc">
+            Усі речення з ДЗ, які треба поправити. Відредагуй рядок →{" "}
+            <strong>Check</strong>. <strong>Hint</strong> показує підказку.
+            Потім прочитай правильні речення вголос із учителем. 34, 38 і 42
+            уже правильні — їх немає тут.
+          </p>
+        </div>
+        {homeworkFixGroups.map((g) => (
+          <div key={g.id} className="l31-fix-group">
+            <h3 className="l31-fix-group-title">
+              {g.title}{" "}
+              <span style={{ fontWeight: 500, color: "var(--color-text-muted)" }}>
+                · {g.desc}
+              </span>
+            </h3>
+            {homeworkFixLines
+              .filter((line) => line.group === g.id)
+              .map((line) => {
+                const value = hwFixAns[line.id] ?? "";
+                const keepCase = "keepCase" in line && line.keepCase === true;
+                const keepPunct = "keepPunct" in line && line.keepPunct === true;
+                const ok = isHwFixOk(value, line.answers, keepCase, keepPunct);
+                const showState = hwFixChecked;
+                const showHint = hwFixShowKey || !!hwFixHints[line.id];
+                return (
+                  <div key={line.id} className="l31-fix-line">
+                    <p className="l38-hwfix-uk">
+                      {line.id}. {line.uk}
+                    </p>
+                    <label
+                      className="l31-fix-wrong"
+                      htmlFor={`l38-hwfix-${line.id}`}
+                    >
+                      <span className="l31-fix-wrong-text">{line.wrong}</span>
+                    </label>
+                    <div className="l31-fix-row">
+                      <input
+                        id={`l38-hwfix-${line.id}`}
+                        type="text"
+                        className={`l31-fix-input${
+                          showState ? (ok ? " is-ok" : " is-err") : ""
+                        }`}
+                        value={value}
+                        onChange={(e) => {
+                          setHwFixChecked(false);
+                          setHwFixAns((prev) => ({
+                            ...prev,
+                            [line.id]: e.target.value,
+                          }));
+                        }}
+                        spellCheck={false}
+                        aria-label={`Correct: ${line.wrong}`}
+                      />
+                      <button
+                        type="button"
+                        className={`l31-fix-hint-btn${showHint ? " is-on" : ""}`}
+                        onClick={() =>
+                          setHwFixHints((prev) => ({
+                            ...prev,
+                            [line.id]: !prev[line.id],
+                          }))
+                        }
+                        aria-pressed={showHint}
+                      >
+                        {showHint ? "Hide" : "Hint"}
+                      </button>
+                    </div>
+                    {showHint && (
+                      <div className="l31-fix-reveal">
+                        <span className="l31-fix-tip">{line.tipUa}</span>
+                        <span className="l31-fix-answer">
+                          ✓ {line.answers[0]}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+          </div>
+        ))}
+        <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setHwFixChecked(true)}
+          >
+            Check
+          </button>
+          {hwFixChecked && (
+            <span className="l22-score">
+              {hwFixScore} / {homeworkFixLines.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              const next = !hwFixShowKey;
+              setHwFixShowKey(next);
+              setHwFixHints(
+                next
+                  ? Object.fromEntries(
+                      homeworkFixLines.map((l) => [l.id, true]),
+                    )
+                  : {},
+              );
+            }}
+          >
+            {hwFixShowKey ? "Hide answers" : "Show answers"}
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setHwFixChecked(false);
+              setHwFixShowKey(false);
+              setHwFixHints({});
+              setHwFixAns(
+                Object.fromEntries(
+                  homeworkFixLines.map((l) => [l.id, l.wrong]),
+                ),
+              );
+            }}
+          >
+            Reset
+          </button>
         </div>
       </section>
 
@@ -490,7 +626,6 @@ export default function Lesson38() {
               file={p.file}
               emoji={p.emoji}
               caption={p.caption}
-              note={p.note}
             />
           ))}
         </div>
@@ -529,7 +664,7 @@ export default function Lesson38() {
           total={descMatch.length}
           onCheck={() => setDescChecked(true)}
         />
-        <AudioBlock
+        <Unit4AudioBlock
           r={1}
           exercise="3b · 4.1"
           title="Listen and repeat the words in bold: blonde hair, blue eyes, in her 50s…"
@@ -585,92 +720,182 @@ export default function Lesson38() {
 
       <section id="l38-grammar" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">5 · Grammar</p>
+          <p className="page-kicker">Grammar</p>
           <h2>have / has got</h2>
-          <p className="lesson22-section-desc">
-            Complete the table, then choose the correct form.
-          </p>
         </div>
-        <blockquote className="l23-rule-quote">
-          <p>
-            I / you / we / they <strong>have got</strong> ·{" "}
-            <strong>haven&apos;t got</strong>. He / she / it{" "}
-            <strong>has got</strong> · <strong>hasn&apos;t got</strong>.
-          </p>
-        </blockquote>
-        {grammarPlusMinus.map((item, i) => (
-          <div key={item.id} className="l38-label-row">
-            <span className="l38-label-n">{i + 1}</span>
-            <div>
-              <p style={{ margin: "0 0 0.35rem" }}>{item.prompt}</p>
-              <select
-                value={plusAns[i]}
-                onChange={(e) => {
-                  setPlusChecked(false);
-                  const next = [...plusAns];
-                  next[i] = e.target.value;
-                  setPlusAns(next);
-                }}
-                className={drillSelClass(plusChecked, plusAns[i], item.answer)}
-              >
-                <option value="">___</option>
-                {item.options.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">5</strong> Read and complete the
+          grammar box.
+        </p>
+        <div className="l25-grammar-box">
+          <div className="l25-grammar-label">have / has got</div>
+          <div className="l25-grammar-rows">
+            <div className="l25-gr-row l25-gr-row--pos">
+              <span className="l25-gr-sign">+</span>
+              <div className="l38-have-lines">
+                <p>
+                  <span className="l38-have-subj">I / You / We / They</span>
+                  <select
+                    aria-label="1 have or has"
+                    value={plusAns[0]}
+                    onChange={(e) => {
+                      setPlusChecked(false);
+                      const next = [...plusAns];
+                      next[0] = e.target.value;
+                      setPlusAns(next);
+                    }}
+                    className={drillSelClass(
+                      plusChecked,
+                      plusAns[0],
+                      grammarPlusMinus[0].answer,
+                    )}
+                  >
+                    <option value="">1 ______</option>
+                    {grammarPlusMinus[0].options.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                  <span>got brown hair.</span>
+                </p>
+                <p>
+                  <span className="l38-have-subj">He / She / It</span>
+                  <select
+                    aria-label="2 have or has"
+                    value={plusAns[1]}
+                    onChange={(e) => {
+                      setPlusChecked(false);
+                      const next = [...plusAns];
+                      next[1] = e.target.value;
+                      setPlusAns(next);
+                    }}
+                    className={drillSelClass(
+                      plusChecked,
+                      plusAns[1],
+                      grammarPlusMinus[1].answer,
+                    )}
+                  >
+                    <option value="">2 ______</option>
+                    {grammarPlusMinus[1].options.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                  <span>got green eyes.</span>
+                </p>
+              </div>
+            </div>
+            <div className="l25-gr-row l25-gr-row--neg">
+              <span className="l25-gr-sign">−</span>
+              <div className="l38-have-lines">
+                <p>
+                  <span className="l38-have-subj">I / You / We / They</span>
+                  <span>
+                    <strong>haven&apos;t</strong> got blue eyes.
+                  </span>
+                </p>
+                <p>
+                  <span className="l38-have-subj">He / She / It</span>
+                  <select
+                    aria-label="3 hasn't or haven't"
+                    value={plusAns[2]}
+                    onChange={(e) => {
+                      setPlusChecked(false);
+                      const next = [...plusAns];
+                      next[2] = e.target.value;
+                      setPlusAns(next);
+                    }}
+                    className={drillSelClass(
+                      plusChecked,
+                      plusAns[2],
+                      grammarPlusMinus[2].answer,
+                    )}
+                  >
+                    <option value="">3 ______</option>
+                    {grammarPlusMinus[2].options.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                  <span>got red hair.</span>
+                </p>
+              </div>
             </div>
           </div>
-        ))}
+        </div>
         <CheckBar
           checked={plusChecked}
           score={plusScore}
           total={grammarPlusMinus.length}
           onCheck={() => setPlusChecked(true)}
         />
-        <AudioBlock
+
+        <p id="l38-listen" className="l31-ex-line" style={{ marginTop: "1.25rem" }}>
+          <strong className="l31-ex-num">6a</strong> Listen to the sentences.
+          Notice the pronunciation of the words in blue.
+        </p>
+        <ol className="l38-contract-list">
+          {contractionListen.map((item) => (
+            <li key={item.contraction}>
+              <span className="l38-blue">{item.contraction}</span> {item.rest}
+            </li>
+          ))}
+        </ol>
+        <Unit4AudioBlock
           r={2}
-          exercise="4A · R2"
+          exercise="4A · 4.2"
           title="I've / You've / We've / They've / He's / She's"
           transcript={
-            <p>
-              I&apos;ve got brown hair. You&apos;ve got blue eyes. We&apos;ve
-              got a daughter. They&apos;ve got a son. He&apos;s got a beard.
-              She&apos;s got blonde hair.
-            </p>
+            <ol>
+              {contractionListen.map((item) => (
+                <li key={item.contraction}>
+                  {item.contraction} {item.rest}
+                </li>
+              ))}
+            </ol>
           }
         />
-        <div className="l26-drill-list" style={{ marginTop: "1rem" }}>
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">6b</strong> Listen again and repeat.
+        </p>
+
+        <p id="l38-choose" className="l31-ex-line" style={{ marginTop: "1.25rem" }}>
+          <strong className="l31-ex-num">7</strong> Choose the correct
+          alternatives.
+        </p>
+        <ol className="l38-alt-list">
           {hasHaveChoose.map((item, i) => (
-            <div key={item.id} className="l26-drill-row">
-              <strong className="l26-drill-prompt">
-                {i + 1}. {item.prompt}
-              </strong>
-              <select
-                value={chooseAns[i]}
-                onChange={(e) => {
-                  setChooseChecked(false);
-                  const next = [...chooseAns];
-                  next[i] = e.target.value;
-                  setChooseAns(next);
-                }}
-                className={drillSelClass(
-                  chooseChecked,
-                  chooseAns[i],
-                  item.answer,
-                )}
-              >
-                <option value="">___</option>
-                {item.options.map((opt) => (
-                  <option key={opt} value={opt}>
+            <li key={item.id}>
+              {item.before}{" "}
+              {item.options.map((opt, oi) => (
+                <span key={opt}>
+                  {oi > 0 ? <span className="l38-alt-slash"> / </span> : null}
+                  <button
+                    type="button"
+                    className={altClass(
+                      chooseChecked,
+                      chooseAns[i],
+                      opt,
+                      item.answer,
+                    )}
+                    onClick={() => {
+                      setChooseChecked(false);
+                      const next = [...chooseAns];
+                      next[i] = opt;
+                      setChooseAns(next);
+                    }}
+                  >
                     {opt}
-                  </option>
-                ))}
-              </select>
-            </div>
+                  </button>
+                </span>
+              ))}{" "}
+              {item.after}
+            </li>
           ))}
-        </div>
+        </ol>
         <CheckBar
           checked={chooseChecked}
           score={chooseScore}
@@ -681,17 +906,19 @@ export default function Lesson38() {
 
       <section id="l38-sofia" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">6 · Sentences</p>
-          <h2>Sofia and Jakub</h2>
-          <p className="lesson22-section-desc">
-            Build sentences about the photo. Tap words to place them.
-          </p>
+          <p className="page-kicker">8 · Sentences</p>
+          <h2>Sofia and Jules</h2>
         </div>
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">8</strong> Look at the picture and
+          make sentences using the prompts.
+        </p>
         <PhotoCard
-          file="sofia-jakub.jpg"
+          file="sofia-jules.png"
           emoji="👨‍👩‍👦"
-          caption="Sofia and Jakub · Paris"
+          caption="Sofia and Jules · Paris"
           note="office worker · son · 30s"
+          wide
         />
         <div style={{ marginTop: "1rem" }}>
           <WordOrderBoard
@@ -706,56 +933,91 @@ export default function Lesson38() {
 
       <section id="l38-speak1" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">4a · Speaking</p>
-          <h2>Describe your teacher</h2>
-          <p className="lesson22-section-desc">
-            Complete the sentences about your teacher. Then read them aloud.
-            Can your teacher guess who you described — the teacher, or a
-            friend?
-          </p>
+          <p className="page-kicker">Speaking</p>
+          <h2>Talk about a friend</h2>
         </div>
+        <p className="l38-speak-banner l38-speak-banner--prep">Prepare</p>
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">9</strong> You&apos;re going to talk
+          about a friend. Think about:
+        </p>
+        <ul className="l22-goals-list">
+          {speakPrepare.map((item) => (
+            <li key={item.id}>{item.label}</li>
+          ))}
+        </ul>
         <div className="l26-drill-list">
-          {[
-            "He/She's got ______ hair.",
-            "He/She's got ______ eyes.",
-            "He/She is in his/her 20s / 30s / 40s / ______.",
-          ].map((prompt, i) => (
-            <div key={prompt} className="l26-drill-row">
-              <strong className="l26-drill-prompt">{prompt}</strong>
+          {speakPrepare.map((item, i) => (
+            <div key={item.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">{item.label}</strong>
               <input
                 className="l22-gap-input"
-                value={describe[i]}
+                value={friendNotes[i]}
                 onChange={(e) => {
-                  const next = [...describe];
+                  const next = [...friendNotes];
                   next[i] = e.target.value;
-                  setDescribe(next);
+                  setFriendNotes(next);
                 }}
-                aria-label={`Describe ${i + 1}`}
-                placeholder={i === 2 ? "50s / 60s …" : ""}
+                aria-label={item.label}
               />
             </div>
           ))}
         </div>
-        <blockquote className="l23-rule-quote" style={{ marginTop: "1rem" }}>
+        <p className="l38-speak-banner">Speak</p>
+        <PhotoCard
+          file="friends-street.png"
+          emoji="👫"
+          caption="A friend"
+          wide
+        />
+        <p id="l38-speak10" className="l31-ex-line" style={{ marginTop: "1rem" }}>
+          <strong className="l31-ex-num">10a</strong> Describe yourself. Then
+          describe your friend from Exercise 9. Talk with your teacher.
+        </p>
+        <blockquote className="l23-rule-quote">
           <p>
-            <strong>4b.</strong> Read your sentences to your teacher. Then
-            describe a friend:{" "}
             <em>
-              OK, my name is Piotr. I&apos;ve got brown hair. My friend&apos;s
-              name is Basia…
+              OK, my name is Piotr. My friend&apos;s name is Basia. We&apos;re
+              from Poland. I&apos;m a teacher. I&apos;ve got …
             </em>
           </p>
         </blockquote>
-        <ul className="l22-goals-list">
-          {speakFriendPrompts.map((q) => (
-            <li key={q}>{q}</li>
-          ))}
-        </ul>
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">10b</strong> Tell your teacher: are
+          you very different from your friend?
+        </p>
+        <blockquote className="l23-rule-quote">
+          <p>
+            <em>
+              Piotr is very different from his friend Basia. Piotr is a
+              teacher, but Basia is …
+            </em>
+          </p>
+        </blockquote>
+      </section>
+
+      <section id="l38-video" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Video · 4B</p>
+          <h2>Listening quiz · adjectives</h2>
+          <p className="lesson22-section-desc">
+            Watch the video with your teacher. Then do the 4B vocabulary.
+          </p>
+        </div>
+        <div className="l22-video-wrap">
+          <iframe
+            src={`https://www.youtube.com/embed/${VIDEO_ID}`}
+            title="Beginner English Listening Quiz — Adjectives"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
       </section>
 
       <section id="l38-objects" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">8 · 4B Vocabulary</p>
+          <p className="page-kicker">1 · 4B Vocabulary</p>
           <h2>Have you got it?</h2>
           <p className="lesson22-section-desc">
             Tap a word, then tap the picture.
@@ -811,7 +1073,7 @@ export default function Lesson38() {
           total={travelObjects.length}
           onCheck={() => setObjChecked(true)}
         />
-        <AudioBlock
+        <Unit4AudioBlock
           r={3}
           exercise="4B · R3"
           title="Listen and repeat: bag, passport, tickets, sunglasses…"
@@ -922,7 +1184,7 @@ export default function Lesson38() {
             Listen. Where is Sam going? Then tick the things he has got.
           </p>
         </div>
-        <AudioBlock
+        <Unit4AudioBlock
           r={4}
           exercise="4B · R4"
           title="Zara and Sam · Have you got your camera?"
@@ -1056,7 +1318,7 @@ export default function Lesson38() {
           total={questionGrammar.length}
           onCheck={() => setQChecked(true)}
         />
-        <AudioBlock
+        <Unit4AudioBlock
           r={5}
           exercise="4B · R5"
           title="Have you got…? Yes, I have. / Has it got…? Yes, it has."

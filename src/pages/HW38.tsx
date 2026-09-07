@@ -8,7 +8,7 @@ import WordOrderBoard, {
 import {
   hasHaveChoose,
   makeQuestions,
-  speakFriendPrompts,
+  speakPrepare,
 } from "../data/lesson38";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
@@ -74,7 +74,7 @@ export default function HW38() {
           {hasHaveChoose.map((item, i) => (
             <div key={item.id} className="l26-drill-row">
               <strong className="l26-drill-prompt">
-                {i + 1}. {item.prompt}
+                {i + 1}. {item.before} _____ {item.after}
               </strong>
               <select
                 value={chooseAns[i]}
@@ -139,8 +139,8 @@ export default function HW38() {
           </p>
         </div>
         <ul className="l22-goals-list">
-          {speakFriendPrompts.map((q) => (
-            <li key={q}>{q}</li>
+          {speakPrepare.map((item) => (
+            <li key={item.id}>{item.label}</li>
           ))}
         </ul>
         <label className="lesson22-section-desc" htmlFor="hw38-me">
