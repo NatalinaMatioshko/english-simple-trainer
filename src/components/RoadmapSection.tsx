@@ -74,7 +74,7 @@ const completedPath: StageSummary[] = [
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 40–41",
+    range: "Lessons 41–42",
     title: "Ability, then more continuous",
     summary:
       "Vote for me! (can / can't), then A quiet life? (full Present continuous).",
@@ -573,11 +573,11 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 39,
-    title: "Have you got it?",
-    grammar: "Have / Has … got?; short answers",
-    vocabulary: "bag, passport, tickets, sunglasses, camera",
-    speaking: "Ask your teacher: Have you got…? Pack a bag together.",
-    listening: "Unit 4 R3–R5: travel vocab, Sam & Zara, Have/Has stress",
+    title: "Have you got it? · Dos and don'ts",
+    grammar: "Have / Has … got?; imperatives: Visit… / Don't go…",
+    vocabulary: "bag, passport, tickets; try, go to, visit, take, drink, see",
+    speaking: "Ask Have you got…? Then give London dos and don'ts to your teacher.",
+    listening: "Unit 4 R3–R5, R9: travel, Sam & Zara, verb phrases",
     review: "have / has got (L38); objects (L29)",
     category: "people",
     status: "current",

@@ -1,11 +1,12 @@
 /**
- * Lesson 39 — Unit 4B Have you got it?
+ * Lesson 39 — Unit 4B Have you got it? (+ Part 2 · Unit 4C Dos and don'ts)
  * Audio: public/sounds/Unit_4/RM_A1_SB_U4_R{n}.mp3
  * R3 — travel objects vocab (SB 4.3)
  * R4 — Sam & Zara · ready for a trip (SB 4.4)
  * R5 — Have / Has in questions vs short answers (SB 4.5)
+ * R9 — common verbs (SB 4.9) — Part 2 in lesson40.ts
  *
- * Photos stay in public/images/lesson38/.
+ * Photos stay in public/images/lesson38/ (+ lesson40/ for Part 2).
  */
 
 export const travelObjects = [
