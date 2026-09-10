@@ -43,11 +43,11 @@ import "../styles/lesson31.css";
 import "../styles/lesson38.css";
 import "../styles/lesson40.css";
 
+type UnderlinePart = (typeof underlineDialogue)[number]["parts"][number];
+type UnderlineTap = Extract<UnderlinePart, { id: string }>;
+
 const underlineTaps = underlineDialogue.flatMap((line) =>
-  line.parts.filter(
-    (part): part is { id: string; text: string; question: boolean } =>
-      "id" in part,
-  ),
+  line.parts.filter((part): part is UnderlineTap => "id" in part),
 );
 
 function setAt(list: string[], index: number, value: string): string[] {
@@ -1041,7 +1041,7 @@ export default function Lesson39() {
               <p key={item.who} className="l40-bubble">
                 <strong>{item.who}:</strong>{" "}
                 {item.parts.map((part, i) =>
-                  part.bold ? (
+                  "bold" in part && part.bold ? (
                     <strong key={i} className="l40-verb">
                       {part.t}
                     </strong>
@@ -1421,7 +1421,9 @@ export default function Lesson39() {
                         <span
                           key={`${opt.id}-${wi}`}
                           className={
-                            opt.stress.includes(wi) ? "l40-stress-u" : undefined
+                            (opt.stress as readonly number[]).includes(wi)
+                              ? "l40-stress-u"
+                              : undefined
                           }
                         >
                           {w}
