@@ -12,7 +12,7 @@ export function AppTopbar({
 }) {
   const { pathname } = useLocation();
   const { title, crumbs } = getPageContext(pathname);
-  const { user, loading } = useAuth();
+  const { user, loading, isTeacher } = useAuth();
   const topLinks = appNavItems.filter((item) => item.id !== "home");
 
   return (
@@ -98,7 +98,7 @@ export function AppTopbar({
           {!loading &&
             (user ? (
               <Link className="app-topbar-cta" to="/cabinet">
-                Кабінет
+                {isTeacher ? "Кабінет вчителя" : "Кабінет"}
               </Link>
             ) : (
               <Link className="app-topbar-cta" to="/login">

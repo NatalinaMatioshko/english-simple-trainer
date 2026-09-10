@@ -205,6 +205,13 @@
   color: #b91c1c;
 }
 
+.hw39-example {
+  margin: 0;
+  font-style: italic;
+  font-weight: 600;
+  color: #1a7a8c;
+}
+
 .hw35-q-list {
   display: grid;
   gap: 0.6rem;

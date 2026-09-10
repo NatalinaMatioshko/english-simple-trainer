@@ -7,6 +7,8 @@ import Lessons from "../pages/Lessons";
 import Homework from "../pages/Homework";
 import HomeworkLesson from "../pages/HomeworkLesson";
 import AdminSubmissions from "../pages/AdminSubmissions";
+import LessonAnalyses from "../pages/LessonAnalyses";
+import LessonAnalysisPage from "../pages/LessonAnalysisPage";
 import Lesson15 from "../pages/Lesson15";
 import Lesson16 from "../pages/Lesson16";
 import Lesson17 from "../pages/Lesson17";
@@ -116,6 +118,8 @@ function AppRoutes() {
         <Route path="/homework" element={<Homework />} />
         <Route path="/homework/:id" element={<HomeworkLesson />} />
         <Route path="/admin/submissions" element={<AdminSubmissions />} />
+        <Route path="/admin/analyses" element={<LessonAnalyses />} />
+        <Route path="/admin/analyses/:id" element={<LessonAnalysisPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

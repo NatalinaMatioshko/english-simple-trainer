@@ -1,0 +1,140 @@
+.la {
+  gap: 1.1rem;
+}
+
+.la-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.la-block h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.la-block h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.la-block p,
+.la-block li {
+  color: var(--color-text);
+  line-height: 1.45;
+}
+
+.la-block ul,
+.la-block ol {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.la-muted {
+  margin: 0 0 0.45rem;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.la-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.la-cards article {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg));
+}
+
+.la-cards p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.la-gaps {
+  display: grid;
+  gap: 1.1rem;
+  padding-left: 1.2rem;
+}
+
+.la-gaps > li {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.la-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.la-table th,
+.la-table td {
+  text-align: left;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.la-table th {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
+}
+
+.la-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.la-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding-left: 0;
+  list-style: none;
+  margin: 0 0 1rem;
+}
+
+.la-inline li {
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.la-flow {
+  margin: 0 0 1rem;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.la-flow li {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.la-flow span {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .la-cards,
+  .la-split {
+    grid-template-columns: 1fr;
+  }
+}

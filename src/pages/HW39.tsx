@@ -1,18 +1,53 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
-import WordOrderBoard, {
-  initWordOrderRows,
-} from "../components/lesson31/WordOrderBoard";
 import { makeQuestions, speakBagPrompts } from "../data/lesson39";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
+import "../styles/lesson26.css";
 import "../styles/lesson31.css";
+import "../styles/lesson35.css";
+
+const exampleQuestion = makeQuestions[0];
+const writeQuestions = makeQuestions.slice(1);
+
+function normText(s: string): string {
+  return s
+    .trim()
+    .toLowerCase()
+    .replace(/[\u2018\u2019\u02bc']/g, "'")
+    .replace(/\s+/g, " ")
+    .replace(/[.!?]+$/, "");
+}
+
+function answersFor(item: (typeof makeQuestions)[number]): string[] {
+  const main = item.answer;
+  const noYour = main.replace("Has your ", "Has ");
+  return noYour === main ? [main] : [main, noYour];
+}
+
+function textOk(value: string, item: (typeof makeQuestions)[number]): boolean {
+  const v = normText(value);
+  return v !== "" && answersFor(item).some((a) => normText(a) === v);
+}
+
+function inputCls(checked: boolean, value: string, ok: boolean): string {
+  if (!checked) return "l22-gap-input";
+  if (ok) return "l22-gap-input is-ok";
+  if (value.trim()) return "l22-gap-input is-err";
+  return "l22-gap-input";
+}
 
 export default function HW39() {
-  const [qRows, setQRows] = useState(() => initWordOrderRows(makeQuestions));
+  const [qAns, setQAns] = useState(() =>
+    Array(writeQuestions.length).fill(""),
+  );
   const [qChecked, setQChecked] = useState(false);
   const [bagText, setBagText] = useState("");
+
+  const qScore = writeQuestions.filter((item, i) =>
+    textOk(qAns[i] ?? "", item),
+  ).length;
 
   const checks = useMemo(
     () => ({
@@ -31,7 +66,7 @@ export default function HW39() {
             <p className="page-kicker">Homework · Lesson 39</p>
             <h1>Have you got it?</h1>
             <p className="lesson22-subtitle">
-              Make questions, then write what you have got in your bag.
+              Write the questions, then write what you have got in your bag.
             </p>
           </div>
           <div
@@ -51,14 +86,87 @@ export default function HW39() {
         <div className="lesson22-section-head">
           <p className="page-kicker">1 · Questions</p>
           <h2>Have you got…?</h2>
+          <p className="lesson22-section-desc">
+            Write the full question. Number 1 is an example.
+          </p>
         </div>
-        <WordOrderBoard
-          items={makeQuestions}
-          rows={qRows}
-          setRows={setQRows}
-          checked={qChecked}
-          setChecked={setQChecked}
-        />
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">7a</strong> Make questions using the
+          prompts.
+        </p>
+        <div className="l26-drill-list">
+          <div className="hw35-fix-row">
+            <p className="hw35-fix-wrong">
+              <strong>1.</strong> {exampleQuestion.scramble}
+            </p>
+            <p className="hw39-example">{exampleQuestion.answer}</p>
+          </div>
+          {writeQuestions.map((item, i) => {
+            const val = qAns[i] ?? "";
+            const ok = qChecked && textOk(val, item);
+            return (
+              <div key={item.scramble} className="hw35-fix-row">
+                <p className="hw35-fix-wrong">
+                  <strong>{i + 2}.</strong> {item.scramble}
+                </p>
+                <input
+                  type="text"
+                  value={val}
+                  onChange={(e) => {
+                    setQChecked(false);
+                    const next = [...qAns];
+                    next[i] = e.target.value;
+                    setQAns(next);
+                  }}
+                  className={inputCls(qChecked, val, ok)}
+                  placeholder="Have / Has … got …?"
+                  aria-label={`Question ${i + 2}`}
+                />
+                {qChecked && !ok && (
+                  <span className="hw35-tip">{item.answer}</span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setQChecked(true)}
+          >
+            Check
+          </button>
+          {qChecked && (
+            <span className="l22-score">
+              {qScore} / {writeQuestions.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setQAns(writeQuestions.map((item) => item.answer));
+              setQChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setQAns(Array(writeQuestions.length).fill(""));
+              setQChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+        <p className="l31-ex-line" style={{ marginTop: "1.1rem" }}>
+          <strong className="l31-ex-num">7b</strong> Ask your teacher the
+          questions and answer them.
+        </p>
       </section>
 
       <section className="lesson22-block panel">
@@ -94,7 +202,7 @@ export default function HW39() {
           lessonId="39"
           writing={bagText}
           quizDone={allDone}
-          quizScore={qChecked ? makeQuestions.length : 0}
+          quizScore={qChecked ? qScore : 0}
           showListeningCheck={false}
         />
       </section>
