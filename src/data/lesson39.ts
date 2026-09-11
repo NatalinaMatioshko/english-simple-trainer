@@ -1,11 +1,12 @@
 /**
- * Lesson 39 — Unit 4B Have you got it?
+ * Lesson 39 — Unit 4B Have you got it? (+ Part 2 · Unit 4C Dos and don'ts)
  * Audio: public/sounds/Unit_4/RM_A1_SB_U4_R{n}.mp3
  * R3 — travel objects vocab (SB 4.3)
  * R4 — Sam & Zara · ready for a trip (SB 4.4)
  * R5 — Have / Has in questions vs short answers (SB 4.5)
+ * R9 — common verbs (SB 4.9) — Part 2 in lesson40.ts
  *
- * Photos stay in public/images/lesson38/.
+ * Photos stay in public/images/lesson38/ (+ lesson40/ for Part 2).
  */
 
 export const travelObjects = [
@@ -26,28 +27,28 @@ export const travelObjects = [
 export const tripScenes = [
   {
     id: "A",
-    file: "beach.jpg",
+    file: "beach.png",
     emoji: "🏖️",
     caption: "Photo A",
     answer: "a holiday in a hot country",
   },
   {
     id: "B",
-    file: "snow.jpg",
+    file: "snow.png",
     emoji: "❄️",
     caption: "Photo B",
     answer: "a holiday in a cold country",
   },
   {
     id: "C",
-    file: "office.jpg",
+    file: "office-day.png",
     emoji: "🖥️",
     caption: "Photo C",
     answer: "a day in the office",
   },
   {
     id: "D",
-    file: "walk.jpg",
+    file: "walk.png",
     emoji: "🌲",
     caption: "Photo D",
     answer: "a long walk",
@@ -109,36 +110,108 @@ export const samHasGot = [
   { id: "tickets", label: "tickets", answer: false },
 ] as const;
 
+/** 4 · Underline the questions in the 3a conversation. */
+export const underlineDialogue = [
+  {
+    who: "Zara",
+    parts: [
+      { text: "OK … " },
+      {
+        id: "cam",
+        text: "Have you got your camera?",
+        question: true,
+      },
+    ],
+  },
+  {
+    who: "Sam",
+    parts: [
+      {
+        id: "no",
+        text: "No, I haven't – but I've got my phone. And Fifi has got a good camera.",
+        question: false,
+      },
+    ],
+  },
+  {
+    who: "Zara",
+    parts: [
+      { text: "OK. You're ready. Oh, " },
+      {
+        id: "tix",
+        text: "have you got your tickets?",
+        question: true,
+      },
+    ],
+  },
+  {
+    who: "Sam",
+    parts: [{ id: "dots", text: "Tickets, tickets …", question: false }],
+  },
+  {
+    who: "Zara",
+    parts: [
+      {
+        id: "fifi",
+        text: "Has Fifi got your tickets?",
+        question: true,
+      },
+    ],
+  },
+  {
+    who: "Sam",
+    parts: [
+      { id: "phew", text: "Oh, yes, she has! Phew!", question: false },
+    ],
+  },
+] as const;
+
 export const questionGrammar = [
   {
     id: "q1",
-    prompt: "_____ I / we / you / they got a ticket?",
     options: ["Have", "Has", "Haven't"] as const,
     answer: "Have",
   },
   {
     id: "q2",
-    prompt: "Yes, I / we / you / they _____.",
     options: ["have", "has", "hasn't"] as const,
     answer: "have",
   },
   {
     id: "q3",
-    prompt: "_____ he / she / it got a phone?",
     options: ["Have", "Has", "Haven't"] as const,
     answer: "Has",
   },
   {
     id: "q4",
-    prompt: "Yes, he / she / it _____.",
     options: ["have", "has", "haven't"] as const,
     answer: "has",
   },
   {
     id: "q5",
-    prompt: "No, he / she / it _____.",
     options: ["haven't", "hasn't", "have"] as const,
     answer: "hasn't",
+  },
+] as const;
+
+export const sameOrDifferent = [
+  {
+    n: 1,
+    aBlue: "Have",
+    aRest: " you got your ticket?",
+    bBefore: "Yes, I ",
+    bBlue: "have",
+    bRest: ".",
+    answer: "different",
+  },
+  {
+    n: 2,
+    aBlue: "Has",
+    aRest: " it got a restaurant?",
+    bBefore: "Yes, it ",
+    bBlue: "has",
+    bRest: ".",
+    answer: "different",
   },
 ] as const;
 

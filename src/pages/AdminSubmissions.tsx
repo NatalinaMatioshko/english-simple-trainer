@@ -100,10 +100,12 @@ function signInErrorMessage(err: unknown): string {
     return "Google Sign-In rejected this origin. Add Pages domain + english-simple-trainer.firebaseapp.com/* to API key HTTP referrers.";
   }
   if (
+    haystack.includes("referer") ||
     haystack.includes("referrer") ||
+    haystack.includes("are-blocked") ||
     haystack.includes("api_key_http_referrer_blocked")
   ) {
-    return "API key HTTP referrer blocked. In Google Cloud Console → Credentials → your Browser key, add your Vercel domain (*.vercel.app/*) and firebaseapp.com/*.";
+    return "API key HTTP referrer blocked. In Google Cloud Console → Credentials → Browser key, add this origin (e.g. http://localhost:5174/*) plus firebaseapp.com/*.";
   }
   return `Sign-in failed (${code || "unknown"}). ${message ? message.slice(0, 120) : "Check browser console for details."}`;
 }

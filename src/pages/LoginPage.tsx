@@ -5,26 +5,26 @@ import { useAuth } from "../context/AuthContext";
 import "../styles/pages.css";
 
 export default function LoginPage() {
-  const { user, loading } = useAuth();
+  const { user, loading, isTeacher } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!loading && user) {
-      navigate("/vocab", { replace: true });
+      navigate(isTeacher ? "/cabinet" : "/vocab", { replace: true });
     }
-  }, [loading, user, navigate]);
+  }, [loading, user, isTeacher, navigate]);
 
   return (
     <div className="page-shell">
       <header className="page-hero panel">
-        <p className="page-kicker">Акаунт учня</p>
+        <p className="page-kicker">Акаунт</p>
         <h1>Увійти або зареєструватись</h1>
         <p className="page-subtitle">
-          Після входу слова в словнику зберігаються на платформі. Вчитель їх
-          теж бачить.
+          Учень зберігає свої слова на платформі. Вчитель після Google-входу
+          бачить кабінет: роботи, слова учня і поточний урок.
         </p>
       </header>
-      <StudentAuthCard onSuccess={() => navigate("/vocab")} />
+      <StudentAuthCard />
       <p style={{ marginTop: "1rem" }}>
         <Link className="back-link" to="/vocab">
           ← До словника

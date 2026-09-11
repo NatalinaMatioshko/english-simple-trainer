@@ -135,6 +135,22 @@ export function getPageContext(pathname: string): {
   if (pathname === "/admin/submissions") {
     return { title: "Роботи учнів", crumbs: [{ label: "Роботи учнів" }] };
   }
+  if (pathname === "/admin/analyses") {
+    return {
+      title: "Аналізи уроків",
+      crumbs: [{ label: "Кабінет", to: "/cabinet" }, { label: "Аналізи" }],
+    };
+  }
+  const analysisMatch = pathname.match(/^\/admin\/analyses\/(\d+)/);
+  if (analysisMatch) {
+    return {
+      title: `Аналіз ${analysisMatch[1]}`,
+      crumbs: [
+        { label: "Аналізи", to: "/admin/analyses" },
+        { label: `Урок ${analysisMatch[1]}` },
+      ],
+    };
+  }
   if (pathname === "/a1-level-test") {
     return {
       title: "A1 test",

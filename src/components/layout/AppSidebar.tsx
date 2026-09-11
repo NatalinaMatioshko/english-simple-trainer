@@ -45,25 +45,46 @@ export function AppSidebar({
           );
         })}
         {isTeacher && (
-          <Link
-            to="/admin/submissions"
-            className={`app-sidebar-link${pathname.startsWith("/admin") ? " is-active" : ""}`}
-            aria-current={pathname.startsWith("/admin") ? "page" : undefined}
-          >
-            <span className="app-sidebar-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                aria-hidden="true"
-              >
-                <path d="M4 5h16v14H4z" />
-                <path d="M8 9h8M8 13h5" />
-              </svg>
-            </span>
-            Роботи учнів
-          </Link>
+          <>
+            <Link
+              to="/admin/submissions"
+              className={`app-sidebar-link${pathname.startsWith("/admin/submissions") ? " is-active" : ""}`}
+              aria-current={pathname.startsWith("/admin/submissions") ? "page" : undefined}
+            >
+              <span className="app-sidebar-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  aria-hidden="true"
+                >
+                  <path d="M4 5h16v14H4z" />
+                  <path d="M8 9h8M8 13h5" />
+                </svg>
+              </span>
+              Роботи учнів
+            </Link>
+            <Link
+              to="/admin/analyses"
+              className={`app-sidebar-link${pathname.startsWith("/admin/analyses") ? " is-active" : ""}`}
+              aria-current={pathname.startsWith("/admin/analyses") ? "page" : undefined}
+            >
+              <span className="app-sidebar-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  aria-hidden="true"
+                >
+                  <path d="M8 5h12M8 12h12M8 19h8" />
+                  <path d="M4 5h.01M4 12h.01M4 19h.01" />
+                </svg>
+              </span>
+              Аналізи уроків
+            </Link>
+          </>
         )}
       </nav>
 

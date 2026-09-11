@@ -50,6 +50,16 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export function authErrorMessage(err: unknown): string {
   const code = err instanceof FirebaseError ? err.code : "";
+  const haystack = `${code} ${err instanceof Error ? err.message : ""}`.toLowerCase();
+  if (
+    haystack.includes("referer") ||
+    haystack.includes("referrer") ||
+    haystack.includes("are-blocked")
+  ) {
+    const origin =
+      typeof window !== "undefined" ? `${window.location.origin}/*` : "http://localhost:5174/*";
+    return `Цей адрес заблокований у Google API key (HTTP referrers). У Google Cloud Console → Credentials → Browser key додай ${origin} (або відкрий сайт на http://localhost:5173/).`;
+  }
   switch (code) {
     case "auth/email-already-in-use":
       return "Цей email уже зареєстрований. Увійди або обери інший.";

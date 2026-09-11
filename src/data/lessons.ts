@@ -286,11 +286,11 @@ export const lessons: LessonEntry[] = [
   },
   {
     id: "39",
-    title: "Have you got it?",
+    title: "Have you got it? · Dos and don'ts",
     level: "A1",
-    topic: "pack for a trip · Have / Has … got?",
+    topic: "Have / Has … got? · imperatives · give advice",
     description:
-      "Unit 4B: travel objects, pack a bag, listen to Sam, then ask Have you got…?",
+      "Unit 4B–4C: pack a bag, ask Have you got…?, then give London dos and don'ts with Visit / Don't go.",
     lessonPath: "/lesson-39",
     homeworkPath: "/hw-39",
   },

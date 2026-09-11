@@ -169,7 +169,7 @@
   display: block;
   width: 100%;
   height: 16rem;
-  object-fit: contain;
+  object-fit: cover;
   background: #111;
 }
 
@@ -515,6 +515,338 @@
   border-radius: 999px;
   background: var(--color-surface-2);
   font-weight: 800;
+}
+
+.l39-pad {
+  width: min(26.5rem, 100%);
+  margin: 0.7rem 0 0.3rem;
+  filter: drop-shadow(5px 8px 10px rgba(40, 40, 40, 0.2));
+}
+
+.l39-pad-sheet {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.32rem;
+  padding: 2.55rem 1.5rem 1.7rem 2.35rem;
+  min-height: 15.25rem;
+  background: #f4f0c8;
+  border-radius: 0.12rem;
+  box-shadow: inset 0 1px 0 #fff8d4;
+}
+
+.l39-pad-rings {
+  position: absolute;
+  top: -0.42rem;
+  left: 0.7rem;
+  right: 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.l39-pad-ring {
+  position: relative;
+  width: 0.72rem;
+  height: 1.18rem;
+  border-radius: 999px;
+  border: 1.5px solid #8a939c;
+  background: linear-gradient(
+    90deg,
+    #f7f8fa 0%,
+    #d5dbe1 25%,
+    #a7afb8 48%,
+    #f2f4f6 62%,
+    #b4bbc3 88%,
+    #e6eaee 100%
+  );
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 1px 1px rgba(0, 0, 0, 0.14);
+}
+
+.l39-pad-ring::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0.62rem;
+  width: 0.38rem;
+  height: 0.38rem;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #d6d0a8;
+  box-shadow: inset 0 0.5px 0.5px rgba(0, 0, 0, 0.16);
+  z-index: -1;
+}
+
+.l39-pad-ring::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  width: 0.2rem;
+  height: 0.3rem;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: #7b848c;
+  box-shadow: 0 0 0 1px #e4e8ec;
+}
+
+.l39-pad-item {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  margin: 0;
+  padding: 0.02rem 0.2rem;
+  width: max-content;
+  max-width: 100%;
+  text-align: left;
+  font-family: Caveat, "Segoe Script", "Comic Sans MS", cursive;
+  font-size: 1.95rem;
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  color: #215a70;
+  cursor: pointer;
+  position: relative;
+}
+
+.l39-pad-item:hover {
+  color: #163e4d;
+}
+
+.l39-pad-item:focus-visible {
+  outline: 2px dashed #215a70;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+.l39-pad-item.is-on::before {
+  content: "✓";
+  position: absolute;
+  left: -1.2rem;
+  top: 0.08rem;
+  font-family: Caveat, "Segoe Script", cursive;
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #215a70;
+}
+
+.l39-pad-item.is-ok {
+  color: #16803c;
+}
+
+.l39-pad-item.is-ok::before {
+  color: #16803c;
+}
+
+.l39-pad-item.is-err {
+  color: #b42318;
+}
+
+.l39-pad-item.is-err::before {
+  content: "✗";
+  position: absolute;
+  left: -1.2rem;
+  top: 0.08rem;
+  font-family: Caveat, "Segoe Script", cursive;
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #b42318;
+}
+
+.l39-dial {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0.35rem 0 0.15rem;
+  max-width: 40rem;
+}
+
+.l39-dial-line {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.l39-dial-tap {
+  appearance: none;
+  margin: 0;
+  padding: 0 0.05rem;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 0.15rem;
+  text-align: left;
+}
+
+.l39-dial-tap:hover {
+  background: color-mix(in srgb, #1a7a8c 10%, transparent);
+}
+
+.l39-dial-tap:focus-visible {
+  outline: 2px dashed #1a7a8c;
+  outline-offset: 2px;
+}
+
+.l39-dial-tap.is-on {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+  color: #1a7a8c;
+}
+
+.l39-dial-tap.is-ok {
+  color: #16803c;
+  text-decoration-color: #16803c;
+}
+
+.l39-dial-tap.is-err {
+  color: #b42318;
+  text-decoration: underline;
+  text-decoration-color: #b42318;
+}
+
+.l39-qbox {
+  width: min(42rem, 100%);
+  margin: 0.45rem 0 0.2rem;
+  overflow: hidden;
+  border: 1px solid #8eacb4;
+  border-radius: 0.2rem 0.2rem 0.45rem 0.45rem;
+  background: #d7e4e8;
+  box-shadow: 4px 6px 0 color-mix(in srgb, #5f8b96 18%, transparent);
+}
+
+.l39-qbox-title {
+  margin: 0;
+  padding: 0.7rem 1rem 0.45rem;
+  background: #eef4f5;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.28rem;
+  font-style: italic;
+  font-weight: 700;
+  color: #1f5d6e;
+}
+
+.l39-qbox-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #1e3a42;
+  font-size: 0.98rem;
+}
+
+.l39-qbox-table th {
+  background: #5f8b96;
+  color: #fff;
+  font-weight: 800;
+  text-align: left;
+  padding: 0.45rem 0.85rem;
+}
+
+.l39-qbox-table td {
+  width: 50%;
+  padding: 0.65rem 0.8rem;
+  vertical-align: top;
+  border: 1px solid #b7c9ce;
+  background: #d7e4e8;
+  line-height: 1.55;
+}
+
+.l39-qbox-sign {
+  display: inline-block;
+  min-width: 1.15rem;
+  font-weight: 800;
+}
+
+.l39-gap {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15rem;
+  margin: 0 0.1rem;
+}
+
+.l39-gap-n {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #1f5d6e;
+  line-height: 1;
+  transform: translateY(-0.45em);
+}
+
+.l39-qbox .l25-cr-sel {
+  max-width: 7.2rem;
+}
+
+.l39-qbox-fill {
+  font-weight: 800;
+}
+
+.l39-sd {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.7rem 0 0.15rem;
+}
+
+.l39-sd-item {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.85rem;
+  background: var(--color-surface);
+}
+
+.l39-sd-line {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.l39-sd-opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.l39-sd .l38-chip.is-ok {
+  border-color: #16803c;
+  color: #16803c;
+  background: color-mix(in srgb, #16803c 10%, var(--color-surface));
+}
+
+.l39-sd .l38-chip.is-err {
+  border-color: #b42318;
+  color: #b42318;
+  background: color-mix(in srgb, #b42318 8%, var(--color-surface));
+}
+
+.l39-order-btn {
+  grid-template-columns: 2.2rem 1fr auto;
+}
+
+.l39-rose-pos {
+  min-width: 1.15rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .l39-qbox-table,
+  .l39-qbox-table tbody,
+  .l39-qbox-table tr,
+  .l39-qbox-table th,
+  .l39-qbox-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .l39-qbox-table td[rowspan] {
+    border-bottom: 0;
+  }
 }
 
 .l38-check-list {

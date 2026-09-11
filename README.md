@@ -168,7 +168,9 @@ If the key has Application restrictions → HTTP referrers, include **all** of:
 
 ```
 http://localhost:5173/*
+http://localhost:5174/*
 http://127.0.0.1:5173/*
+http://127.0.0.1:5174/*
 https://natalinamatioshko.github.io/*
 https://natalinamatioshko.github.io/english-simple-trainer/*
 https://english-simple-trainer.firebaseapp.com/*

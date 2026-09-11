@@ -61,11 +61,13 @@ export function CheckBar({
   score,
   total,
   onCheck,
+  onReset,
 }: {
   checked: boolean;
   score: number;
   total: number;
   onCheck: () => void;
+  onReset?: () => void;
 }) {
   return (
     <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
@@ -76,6 +78,11 @@ export function CheckBar({
         <span>
           {score} / {total}
         </span>
+      )}
+      {onReset && (
+        <button type="button" className="l25-cr-mini-btn" onClick={onReset}>
+          Reset
+        </button>
       )}
     </div>
   );

@@ -276,12 +276,42 @@
 
 .catalog-cube-body {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.2rem;
   flex: 1 1 auto;
   padding: 0.85rem 1rem 0.95rem;
   background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface));
   border-top: 1px solid color-mix(in srgb, var(--color-primary) 22%, transparent);
   transition: background 0.22s ease;
+}
+
+.catalog-cube-note {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.catalog-cube.is-empty {
+  cursor: default;
+}
+
+.catalog-cube.is-empty:hover,
+.catalog-cube.is-empty:focus-visible {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+  border-color: var(--color-border);
+}
+
+.catalog-cube.is-empty:hover .catalog-cube-media img,
+.catalog-cube.is-empty:focus-visible .catalog-cube-media img {
+  filter: grayscale(0.2) brightness(0.78);
+}
+
+.catalog-cube.is-empty:hover .catalog-cube-media::after,
+.catalog-cube.is-empty:focus-visible .catalog-cube-media::after {
+  opacity: 1;
 }
 
 .catalog-cube.is-current .catalog-cube-body {
