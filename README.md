@@ -10,8 +10,12 @@ Built with **React 19 + Vite 8 + TypeScript**, deployed to **GitHub Pages**.
 
 The site is now a **learning-platform shell**, not a loose stack of pages:
 
-- **Home (`/`)** is the **Roadmap**: hero, Learning Path (current lesson **37**), full 1–40 timeline, then “what we have already covered”
-- **Desktop** — sticky top bar (`simple trainer.`) + floating left **Menu** (Roadmap, Cabinet, Lessons, Trainer, Vocab, Homework)
+![Updated learning platform — Roadmap home](docs/screenshots/platform-roadmap.png)
+
+*Platform update: the home page is a full **Roadmap** hub — hero, quick links (Trainer / Lessons / Homework), Learning Path with the current lesson, lesson cards with status tags, and progress (“Що ми вже пройшли”).*
+
+- **Home (`/`)** is the **Roadmap**: hero, Learning Path, full 1–40 timeline, then “what we have already covered”
+- **Desktop** — sticky top bar (`simple trainer.` / brand) + nav (Roadmap, Trainer, Lessons, Vocab, Homework) and teacher account controls
 - **Mobile** — bottom nav; the long lesson timeline **folds** behind a Roadmap toggle so you can reach the covered-topics map without scrolling 40 cards
 - **Lessons / Homework** catalogs use **cover cubes** (latest numbered lesson is current; earlier ones are dimmed)
 - Lesson pages keep a **contents rail** on wide screens and a “Зміст уроку” drawer on smaller ones
