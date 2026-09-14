@@ -286,13 +286,23 @@ export const lessons: LessonEntry[] = [
   },
   {
     id: "39",
-    title: "Have you got it? · Dos and don'ts",
+    title: "Have you got it?",
     level: "A1",
-    topic: "Have / Has … got? · imperatives · give advice",
+    topic: "Have / Has … got? · pack a bag",
     description:
-      "Unit 4B–4C: pack a bag, ask Have you got…?, then give London dos and don'ts with Visit / Don't go.",
+      "Unit 4B: pack a bag, ask Have you got…?, and talk about what is in your bag.",
     lessonPath: "/lesson-39",
     homeworkPath: "/hw-39",
+  },
+  {
+    id: "40",
+    title: "Dos and don'ts",
+    level: "A1",
+    topic: "Imperatives · give advice · London / Rome",
+    description:
+      "Warm-up: fix Petro's writing. Unit 4C: Visit… / Don't go…, London messages, Rome trip, city dos and don'ts.",
+    lessonPath: "/lesson-40",
+    homeworkPath: "/hw-40",
   },
 ];
 
@@ -308,6 +318,7 @@ export const lessonCovers: Record<string, string> = {
   "35": "/images/lesson35/pixel-town-map.png",
   "38": "/images/describing-people-adjectives.png",
   "39": "/images/lesson38/office.jpg",
+  "40": "/images/lesson40/cover.jpg",
   extra: "/images/everyday-actions.png",
 };
 

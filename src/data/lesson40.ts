@@ -1,10 +1,11 @@
 /**
- * Lesson 39 · Part 2 — Unit 4C Dos and don'ts
+ * Lesson 40 — Unit 4C Dos and don'ts · Imperatives
  * Audio: public/sounds/Unit_4/RM_A1_SB_U4_R{n}.mp3
  * R9 — verbs from 2b (SB 4.9)
  * R10 — imperative sentence stress (SB 4.10)
  *
  * Photos: public/images/lesson40/
+ * Warm-up HW fix: lesson40HwFix.ts
  */
 
 export const IMG40 = (file: string) =>
@@ -28,6 +29,9 @@ export const lydiaWhy = {
   ] as const,
   answer: "for a work trip",
 };
+
+export const lydiaOpening =
+  "I have a work trip to London next week! Have you got any dos and don'ts for London? Lydia xx";
 
 export const adviceTexts = [
   {
@@ -175,7 +179,7 @@ export const phrasePics = [
     n: 3,
     file: "go-to-new-york.jpg",
     emoji: "🏙️",
-    phrase: "go to New York",
+    phrase: "visit New York",
     example: false,
   },
   {
@@ -203,17 +207,66 @@ export const phrasePics = [
 
 export const phraseBank = phrasePics.map((item) => item.phrase);
 
-/** 4 · Tick good things to do in London (from 2a). */
+/**
+ * 4 · Tick good things to do in London (from 2a messages).
+ * tick = true → Carla, Jemima, Juana, Alexis, Theresa, Toni (dos).
+ * tick = false → Ben, Vitor (don'ts in messages).
+ */
 export const londonDoTicks = [
-  { id: "1", label: "go to Oxford Street", good: false },
-  { id: "2", label: "visit The British Museum", good: true },
-  { id: "3", label: "take taxis", good: false },
-  { id: "4", label: "go to Greenwich", good: true },
-  { id: "5", label: "take photos", good: true },
-  { id: "6", label: "try Indian food", good: true },
-  { id: "7", label: "drink tea", good: true },
-  { id: "8", label: "see a show", good: true },
-  { id: "9", label: "take a coat", good: true },
+  {
+    id: "1",
+    label: "go to Oxford Street",
+    tick: false,
+    hint: "Ben: Don't go to Oxford Street.",
+  },
+  {
+    id: "2",
+    label: "visit The British Museum",
+    tick: true,
+    hint: "Carla: Visit The British Museum.",
+  },
+  {
+    id: "3",
+    label: "take taxis",
+    tick: false,
+    hint: "Vitor: Don't take taxis!",
+  },
+  {
+    id: "4",
+    label: "go to Greenwich",
+    tick: true,
+    hint: "Jemima: Go to Greenwich…",
+  },
+  {
+    id: "5",
+    label: "take photos",
+    tick: true,
+    hint: "Jemima: …take photos.",
+  },
+  {
+    id: "6",
+    label: "try Indian food",
+    tick: true,
+    hint: "Juana: Try Indian food.",
+  },
+  {
+    id: "7",
+    label: "drink English tea",
+    tick: true,
+    hint: "Alexis: Drink English tea, Lydia.",
+  },
+  {
+    id: "8",
+    label: "see a show",
+    tick: true,
+    hint: "Theresa: See a show, Lydia.",
+  },
+  {
+    id: "9",
+    label: "take a coat",
+    tick: true,
+    hint: "Toni: Take a coat!",
+  },
 ] as const;
 
 /** 5 · Imperatives grammar box gaps. */
@@ -235,56 +288,88 @@ export const imperativeGaps = [
   },
 ] as const;
 
-/**
- * 6a · Stress patterns (SB 4.10).
- * First option in each pair is the book answer.
- */
+/** 6a · Stress patterns (SB 4.10) — one sentence, two stress options. */
 export const stressPatterns = [
   {
     n: 1,
+    words: ["Don't", "go", "to", "Notting", "Hill."],
     options: [
-      { id: "a", words: ["Don't", "go", "to", "Notting", "Hill."], stress: [0] },
-      {
-        id: "b",
-        words: ["Don't", "go", "to", "Notting", "Hill."],
-        stress: [3, 4],
-      },
+      { id: "a", stress: [0] },
+      { id: "b", stress: [3, 4] },
     ],
-    answer: "a",
+    answer: "b",
   },
   {
     n: 2,
+    words: ["Try", "Polish", "food."],
     options: [
-      { id: "a", words: ["Try", "Polish", "food."], stress: [0] },
-      { id: "b", words: ["Try", "Polish", "food."], stress: [1, 2] },
+      { id: "a", stress: [0] },
+      { id: "b", stress: [1, 2] },
     ],
     answer: "a",
   },
   {
     n: 3,
+    words: ["Drink", "coffee", "in", "a", "café."],
     options: [
-      {
-        id: "a",
-        words: ["Drink", "coffee", "in", "a", "café."],
-        stress: [0],
-      },
-      {
-        id: "b",
-        words: ["Drink", "coffee", "in", "a", "café."],
-        stress: [1, 4],
-      },
+      { id: "a", stress: [0] },
+      { id: "b", stress: [1, 4] },
     ],
-    answer: "a",
+    answer: "b",
   },
   {
     n: 4,
+    words: ["Don't", "take", "photos."],
     options: [
-      { id: "a", words: ["Don't", "take", "photos."], stress: [0] },
-      { id: "b", words: ["Don't", "take", "photos."], stress: [2] },
+      { id: "a", stress: [0] },
+      { id: "b", stress: [2] },
     ],
-    answer: "a",
+    answer: "b",
   },
 ] as const;
+
+export type StressSegment =
+  | { kind: "mid"; text: string }
+  | { kind: "pick"; optionId: string; text: string };
+
+/** Group words into middle text vs clickable stress chunks (a or b). */
+export function buildStressSegments(
+  words: readonly string[],
+  optA: { id: string; stress: readonly number[] },
+  optB: { id: string; stress: readonly number[] },
+): StressSegment[] {
+  const pick = (wi: number) => {
+    const inA = optA.stress.includes(wi);
+    const inB = optB.stress.includes(wi);
+    if (inA && !inB) return optA.id;
+    if (inB && !inA) return optB.id;
+    return null;
+  };
+
+  const segments: StressSegment[] = [];
+  let i = 0;
+  while (i < words.length) {
+    const who = pick(i);
+    if (!who) {
+      let text = words[i];
+      i += 1;
+      while (i < words.length && !pick(i)) {
+        text += ` ${words[i]}`;
+        i += 1;
+      }
+      segments.push({ kind: "mid", text });
+      continue;
+    }
+    let text = words[i];
+    i += 1;
+    while (i < words.length && pick(i) === who) {
+      text += ` ${words[i]}`;
+      i += 1;
+    }
+    segments.push({ kind: "pick", optionId: who, text });
+  }
+  return segments;
+}
 
 /** 7 · Trip to Rome · tick = do, cross = don't. */
 export const romeTrip = [
@@ -316,12 +401,10 @@ export const romeTrip = [
     doIt: true,
     example: false,
     answers: [
-      "Visit the Colosseum.",
-      "Visit the Colosseum",
       "Visit Rome.",
       "Visit Rome",
-      "Go to Rome.",
-      "Go to Rome",
+      "Visit the Colosseum.",
+      "Visit the Colosseum",
     ],
   },
   {

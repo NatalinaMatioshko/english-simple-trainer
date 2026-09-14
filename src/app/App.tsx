@@ -49,6 +49,8 @@ import Lesson38 from "../pages/Lesson38";
 import HW38 from "../pages/HW38";
 import Lesson39 from "../pages/Lesson39";
 import HW39 from "../pages/HW39";
+import Lesson40 from "../pages/Lesson40";
+import HW40 from "../pages/HW40";
 import A1LevelTest from "../pages/A1LevelTest";
 import ExtraResources from "../pages/ExtraResources";
 import VocabPage from "../pages/VocabPage";
@@ -112,6 +114,8 @@ function AppRoutes() {
         <Route path="/hw-38" element={<HW38 />} />
         <Route path="/lesson-39" element={<Lesson39 />} />
         <Route path="/hw-39" element={<HW39 />} />
+        <Route path="/lesson-40" element={<Lesson40 />} />
+        <Route path="/hw-40" element={<HW40 />} />
         <Route path="/a1-level-test" element={<A1LevelTest />} />
         <Route path="/self-study" element={<SelfStudyReview />} />
         <Route path="/about-me" element={<AboutMePage />} />

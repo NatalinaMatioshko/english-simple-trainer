@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "40": "/images/lesson40/cover.jpg",
   "39": "/images/lesson38/office.jpg",
   "38": "/images/describing-people-adjectives.png",
   "37": "/images/lesson37/present-continuous.jpg",
@@ -33,6 +34,29 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "40",
+    title: "Dos and don'ts",
+    href: "/hw-40",
+    tasks: [
+      {
+        type: "text",
+        text: "Flashcards: verbs · phrases · London advice (Visit… / Don't go…)",
+      },
+      {
+        type: "text",
+        text: "Test: vocabulary · imperatives · London & Rome dos and don'ts",
+      },
+      {
+        type: "text",
+        text: "Anagram: put imperative sentences in the correct word order",
+      },
+      {
+        type: "text",
+        text: "Write 4 dos and 4 don'ts for your city and send to teacher",
+      },
+    ],
+  },
   {
     id: "39",
     title: "Have you got it?",

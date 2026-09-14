@@ -573,18 +573,30 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 39,
-    title: "Have you got it? · Dos and don'ts",
-    grammar: "Have / Has … got?; imperatives: Visit… / Don't go…",
-    vocabulary: "bag, passport, tickets; try, go to, visit, take, drink, see",
-    speaking: "Ask Have you got…? Then give London dos and don'ts to your teacher.",
-    listening: "Unit 4 R3–R5, R9: travel, Sam & Zara, verb phrases",
+    title: "Have you got it?",
+    grammar: "Have / Has … got?; Yes, I have / No, I haven't",
+    vocabulary: "bag, passport, tickets, camera, money",
+    speaking: "Ask Have you got…? Talk about what is in your bag.",
+    listening: "Unit 4 R3–R5: travel, Sam & Zara",
     review: "have / has got (L38); objects (L29)",
     category: "people",
-    status: "current",
+    status: "completed",
     route: "/lesson-39",
   },
   {
     id: 40,
+    title: "Dos and don'ts",
+    grammar: "Imperatives: Visit… / Don't go…",
+    vocabulary: "try, go to, visit, take, drink, see; London & Rome",
+    speaking: "Give dos and don'ts for London / your city to your teacher",
+    listening: "Unit 4 R9–R10: verb phrases, imperative stress",
+    review: "Have you got…? (L39); describing people writing (L38 HW)",
+    category: "people",
+    status: "current",
+    route: "/lesson-40",
+  },
+  {
+    id: 41,
     title: "Vote for me!",
     grammar: "can / can't",
     vocabulary: "verb phrases (buy a newspaper, send an email…)",
@@ -595,7 +607,7 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 41,
+    id: 42,
     title: "A quiet life?",
     grammar: "Present continuous — be + verb + -ing (full unit)",
     vocabulary: "noise verbs; action phrases",
@@ -775,7 +787,7 @@ export default function RoadmapSection() {
     <section className="roadmap-layout">
       <aside className="roadmap-sidebar panel">
         <p className="page-kicker">Learning path</p>
-        <h2>Roadmap for Lessons 1–40</h2>
+        <h2>Roadmap for Lessons 1–42</h2>
         <p className="roadmap-lead">
           The course moves from self-introduction and <strong>to be</strong> to
           daily routines, countries, jobs, shopping, transport, health, and
@@ -843,7 +855,7 @@ export default function RoadmapSection() {
           <section className="roadmap-block">
             <div className="roadmap-block-head">
               <p className="roadmap-mini-label">Full timeline</p>
-              <h3>Lessons 1–40</h3>
+              <h3>Lessons 1–42</h3>
               <p>
                 This is the complete course line from the first lesson through
                 Unit 3 (live) and planned Units 4–5.
