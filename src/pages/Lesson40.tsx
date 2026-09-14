@@ -26,6 +26,10 @@ import {
   homeworkFixGroups,
   homeworkFixLines,
 } from "../data/lesson40HwFix";
+import {
+  homeworkFixGroups as l38HomeworkFixGroups,
+  homeworkFixLines as l38HomeworkFixLines,
+} from "../data/lesson38";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -133,6 +137,12 @@ export default function Lesson40() {
   const [hwFixChecked, setHwFixChecked] = useState(false);
   const [hwFixHints, setHwFixHints] = useState<Record<string, boolean>>({});
   const [hwFixShowKey, setHwFixShowKey] = useState(false);
+  const [l38FixAns, setL38FixAns] = useState<Record<string, string>>(() =>
+    Object.fromEntries(l38HomeworkFixLines.map((l) => [l.id, l.wrong])),
+  );
+  const [l38FixChecked, setL38FixChecked] = useState(false);
+  const [l38FixHints, setL38FixHints] = useState<Record<string, boolean>>({});
+  const [l38FixShowKey, setL38FixShowKey] = useState(false);
   const [hairAns, setHairAns] = useState<Record<string, string>>({});
   const [hairChecked, setHairChecked] = useState(false);
   const [whyAns, setWhyAns] = useState("");
@@ -168,6 +178,16 @@ export default function Lesson40() {
   const hwFixScore = homeworkFixLines.filter((line) =>
     isHwFixOk(hwFixAns[line.id] ?? "", line.answers),
   ).length;
+  const l38FixScore = l38HomeworkFixLines.filter((line) => {
+    const keepCase = "keepCase" in line && line.keepCase === true;
+    const keepPunct = "keepPunct" in line && line.keepPunct === true;
+    return isHwFixOk(
+      l38FixAns[line.id] ?? "",
+      line.answers,
+      keepCase,
+      keepPunct,
+    );
+  }).length;
   const hairScore = cuttingHairMeanings.filter(
     (item) => hairAns[item.id] === item.en,
   ).length;
@@ -234,7 +254,8 @@ export default function Lesson40() {
 
       <section className="lesson22-block panel">
         <div className="lesson22-flow">
-          <a href="#l40-hwfix">Fix HW</a>
+          <a href="#l40-hwfix">Fix Petro</a>
+          <a href="#l40-l38fix">Fix L38</a>
           <a href="#l40-hair">Cutting hair</a>
           <a href="#l40-imp">Imperatives</a>
           <a href="#l40-london">London</a>
@@ -373,6 +394,148 @@ export default function Lesson40() {
               setHwFixAns(
                 Object.fromEntries(
                   homeworkFixLines.map((l) => [l.id, l.wrong]),
+                ),
+              );
+            }}
+          >
+            Reset
+          </button>
+        </div>
+      </section>
+
+      <section id="l40-l38fix" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">Warm-up · Homework</p>
+          <h2>Fix the mistakes</h2>
+          <p className="lesson22-section-desc">
+            Усі речення з ДЗ, які треба поправити. Відредагуй рядок →{" "}
+            <strong>Check</strong>. <strong>Hint</strong> показує підказку.
+            Потім прочитай правильні речення вголос із учителем. 34, 38 і 42
+            уже правильні — їх немає тут.
+          </p>
+        </div>
+        {l38HomeworkFixGroups.map((g) => (
+          <div key={g.id} className="l31-fix-group">
+            <h3 className="l31-fix-group-title">
+              {g.title}{" "}
+              <span
+                style={{ fontWeight: 500, color: "var(--color-text-muted)" }}
+              >
+                · {g.desc}
+              </span>
+            </h3>
+            {l38HomeworkFixLines
+              .filter((line) => line.group === g.id)
+              .map((line) => {
+                const value = l38FixAns[line.id] ?? "";
+                const keepCase =
+                  "keepCase" in line && line.keepCase === true;
+                const keepPunct =
+                  "keepPunct" in line && line.keepPunct === true;
+                const ok = isHwFixOk(
+                  value,
+                  line.answers,
+                  keepCase,
+                  keepPunct,
+                );
+                const showState = l38FixChecked;
+                const showHint = l38FixShowKey || !!l38FixHints[line.id];
+                return (
+                  <div key={line.id} className="l31-fix-line">
+                    <p className="l38-hwfix-uk">
+                      {line.id}. {line.uk}
+                    </p>
+                    <label
+                      className="l31-fix-wrong"
+                      htmlFor={`l40-l38fix-${line.id}`}
+                    >
+                      <span className="l31-fix-wrong-text">{line.wrong}</span>
+                    </label>
+                    <div className="l31-fix-row">
+                      <input
+                        id={`l40-l38fix-${line.id}`}
+                        type="text"
+                        className={`l31-fix-input${
+                          showState ? (ok ? " is-ok" : " is-err") : ""
+                        }`}
+                        value={value}
+                        onChange={(e) => {
+                          setL38FixChecked(false);
+                          setL38FixAns((prev) => ({
+                            ...prev,
+                            [line.id]: e.target.value,
+                          }));
+                        }}
+                        spellCheck={false}
+                        aria-label={`Correct: ${line.wrong}`}
+                      />
+                      <button
+                        type="button"
+                        className={`l31-fix-hint-btn${showHint ? " is-on" : ""}`}
+                        onClick={() =>
+                          setL38FixHints((prev) => ({
+                            ...prev,
+                            [line.id]: !prev[line.id],
+                          }))
+                        }
+                        aria-pressed={showHint}
+                      >
+                        {showHint ? "Hide" : "Hint"}
+                      </button>
+                    </div>
+                    {showHint && (
+                      <div className="l31-fix-reveal">
+                        <span className="l31-fix-tip">{line.tipUa}</span>
+                        <span className="l31-fix-answer">
+                          ✓ {line.answers[0]}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+          </div>
+        ))}
+        <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setL38FixChecked(true)}
+          >
+            Check
+          </button>
+          {l38FixChecked && (
+            <span className="l22-score">
+              {l38FixScore} / {l38HomeworkFixLines.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              const next = !l38FixShowKey;
+              setL38FixShowKey(next);
+              setL38FixHints(
+                next
+                  ? Object.fromEntries(
+                      l38HomeworkFixLines.map((l) => [l.id, true]),
+                    )
+                  : {},
+              );
+            }}
+          >
+            {l38FixShowKey ? "Hide answers" : "Show answers"}
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setL38FixChecked(false);
+              setL38FixShowKey(false);
+              setL38FixHints({});
+              setL38FixAns(
+                Object.fromEntries(
+                  l38HomeworkFixLines.map((l) => [l.id, l.wrong]),
                 ),
               );
             }}
