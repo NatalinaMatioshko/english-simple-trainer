@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import ScrollManager from "../ScrollManager";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { AppSidebar } from "./AppSidebar";
 import { AppTopbar } from "./AppTopbar";
@@ -9,7 +10,7 @@ import { isLessonWorkspacePath } from "../../utils/appNav";
 import "../../styles/appShell.css";
 
 export function SiteLayout() {
-  const { pathname, hash } = useLocation();
+  const { pathname } = useLocation();
   const [lessonMain, setLessonMain] = useState<HTMLDivElement | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [narrowScreen, setNarrowScreen] = useState(false);
@@ -45,29 +46,9 @@ export function SiteLayout() {
     };
   }, [drawerActive]);
 
-  useEffect(() => {
-    if (!hash) return;
-    const id = decodeURIComponent(hash.replace(/^#/, ""));
-    if (!id) return;
-
-    const scrollToHash = () => {
-      const el = document.getElementById(id);
-      if (!el) return false;
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      return true;
-    };
-
-    if (scrollToHash()) return;
-    const firstTry = window.setTimeout(scrollToHash, 80);
-    const secondTry = window.setTimeout(scrollToHash, 320);
-    return () => {
-      window.clearTimeout(firstTry);
-      window.clearTimeout(secondTry);
-    };
-  }, [pathname, hash]);
-
   return (
     <div className={`site-layout${drawerActive ? " is-menu-open" : ""}`}>
+      <ScrollManager />
       <AppTopbar menuOpen={drawerActive} onMenuToggle={() => setMenuOpen((v) => !v)} />
       <button
         type="button"

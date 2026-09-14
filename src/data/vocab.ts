@@ -2531,6 +2531,577 @@ export const vocabCategories: VocabCategory[] = [
   },
 
   {
+    id: "directions",
+    title: "Directions",
+    badge: "L35",
+    description:
+      "Unit 3D: спитати дорогу і дати вказівки — go straight on, turn left/right, go past, next to.",
+    grammar: [
+      "Excuse me. Where's the…, please?",
+      "Is there a… near here?",
+      "Go straight on. / Turn left. / Turn right.",
+      "Go past the bank. / It's next to a restaurant.",
+      "It's on the right. / It's on Park Street.",
+    ],
+    groups: [
+      {
+        label: "Ask the way",
+        items: [
+          {
+            en: "Excuse me.",
+            ua: "Перепрошую.",
+            ipa: "ɪkˈskjuːz miː",
+            example: "Excuse me. Where's the cinema, please?",
+          },
+          {
+            en: "Where's the…, please?",
+            ua: "Де …, будь ласка?",
+            ipa: "weəz ðə pliːz",
+            example: "Where's the train station, please?",
+          },
+          {
+            en: "Is there a… near here?",
+            ua: "Чи є … поблизу?",
+            ipa: "ɪz ðeər ə nɪə hɪə",
+            example: "Is there a supermarket near here?",
+          },
+        ],
+      },
+      {
+        label: "Give directions",
+        items: [
+          {
+            en: "Go straight on.",
+            ua: "Іди прямо.",
+            ipa: "ɡəʊ streɪt ɒn",
+            example: "Go straight on, then turn left.",
+          },
+          {
+            en: "Turn left.",
+            ua: "Поверни ліворуч.",
+            ipa: "tɜːn left",
+            example: "Turn left at the bookshop.",
+          },
+          {
+            en: "Turn right.",
+            ua: "Поверни праворуч.",
+            ipa: "tɜːn raɪt",
+            example: "Turn right after the big house.",
+          },
+          {
+            en: "Go past…",
+            ua: "Пройди повз…",
+            ipa: "ɡəʊ pɑːst",
+            example: "Go past the hotel.",
+          },
+          {
+            en: "Go down…",
+            ua: "Іди вздовж…",
+            ipa: "ɡəʊ daʊn",
+            example: "Go down Station Road.",
+          },
+          {
+            en: "next to",
+            ua: "поряд із",
+            ipa: "neks tə",
+            example: "It's next to a bank.",
+          },
+          {
+            en: "on the right",
+            ua: "праворуч",
+            ipa: "ɒn ðə raɪt",
+            example: "The supermarket is on the right.",
+          },
+          {
+            en: "on the left",
+            ua: "ліворуч",
+            ipa: "ɒn ðə left",
+            example: "The café is on the left.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "present-continuous",
+    title: "Present continuous",
+    badge: "L37",
+    description:
+      "now vs every day: I work every day. / I am working now. Шість дієслів + маркери часу.",
+    grammar: [
+      "Present Simple (звичай): I work every day.",
+      "Present Continuous (зараз): I am working now.",
+      "am / is / are + verb-ing",
+      "usually / often — перед дієсловом; every day — в кінці; now / right now / at the moment — Present Continuous",
+    ],
+    groups: [
+      {
+        label: "Six verbs",
+        items: [
+          {
+            en: "work → working",
+            ua: "працювати → працюю (зараз)",
+            ipa: "wɜːk → ˈwɜːkɪŋ",
+            example: "I work every day. I am working now.",
+          },
+          {
+            en: "eat → eating",
+            ua: "їсти → їм (зараз)",
+            ipa: "iːt → ˈiːtɪŋ",
+            example: "I usually eat at home. I am eating now.",
+          },
+          {
+            en: "drink → drinking",
+            ua: "пити → п'ю (зараз)",
+            ipa: "drɪŋk → ˈdrɪŋkɪŋ",
+            example: "I never drink coffee. I am drinking tea now.",
+          },
+          {
+            en: "read → reading",
+            ua: "читати → читаю (зараз)",
+            ipa: "riːd → ˈriːdɪŋ",
+            example: "I often read. I am reading now.",
+          },
+          {
+            en: "talk → talking",
+            ua: "розмовляти → розмовляю (зараз)",
+            ipa: "tɔːk → ˈtɔːkɪŋ",
+            example: "I sometimes talk. I am talking now.",
+          },
+          {
+            en: "sit → sitting",
+            ua: "сидіти → сиджу (зараз)",
+            ipa: "sɪt → ˈsɪtɪŋ",
+            example: "I always sit here. I am sitting now.",
+          },
+        ],
+      },
+      {
+        label: "Time markers",
+        items: [
+          {
+            en: "every day",
+            ua: "щодня",
+            ipa: "ˈevri deɪ",
+            example: "I work every day.",
+          },
+          {
+            en: "usually",
+            ua: "зазвичай",
+            ipa: "ˈjuːʒuəli",
+            example: "I usually eat.",
+          },
+          {
+            en: "often",
+            ua: "часто",
+            ipa: "ˈɒf(ə)n",
+            example: "I often read.",
+          },
+          {
+            en: "now / right now",
+            ua: "зараз / просто зараз",
+            ipa: "naʊ / raɪt naʊ",
+            example: "I am working now.",
+          },
+          {
+            en: "at the moment",
+            ua: "у цей момент",
+            ipa: "ət ðə ˈməʊmənt",
+            example: "I am sitting at the moment.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "have-got-people",
+    title: "Have got · people",
+    badge: "L38",
+    description:
+      "Unit 4A: опис людини — have/has got, волосся, очі, борода, вік (in his/her 20s).",
+    grammar: [
+      "I / you / we / they have got… → I've got brown hair.",
+      "he / she / it has got… → He's got blue eyes.",
+      "haven't got / hasn't got → I haven't got any children.",
+      "in his/her 20s / 30s → He's in his 30s.",
+    ],
+    groups: [
+      {
+        label: "have / has got",
+        items: [
+          {
+            en: "have got",
+            ua: "мати (I/you/we/they)",
+            ipa: "həv ɡɒt",
+            example: "I have got blonde hair.",
+          },
+          {
+            en: "has got",
+            ua: "мати (he/she/it)",
+            ipa: "həz ɡɒt",
+            example: "She has got brown eyes.",
+          },
+          {
+            en: "I've got…",
+            ua: "У мене є…",
+            ipa: "aɪv ɡɒt",
+            example: "I've got blue eyes.",
+          },
+          {
+            en: "He's / She's got…",
+            ua: "У нього / неї є…",
+            ipa: "hiːz / ʃiːz ɡɒt",
+            example: "He's got a beard.",
+          },
+          {
+            en: "haven't got",
+            ua: "не мати (I/you/we/they)",
+            ipa: "ˈhævnt ɡɒt",
+            example: "I haven't got any children.",
+          },
+          {
+            en: "hasn't got",
+            ua: "не мати (he/she/it)",
+            ipa: "ˈhæznt ɡɒt",
+            example: "She hasn't got a dog.",
+          },
+        ],
+      },
+      {
+        label: "Appearance",
+        items: [
+          {
+            en: "blonde hair",
+            ua: "біляве волосся",
+            ipa: "blɒnd heə",
+            example: "I've got blonde hair.",
+          },
+          {
+            en: "brown hair",
+            ua: "каштанове волосся",
+            ipa: "braʊn heə",
+            example: "He's got brown hair.",
+          },
+          {
+            en: "red hair",
+            ua: "руде волосся",
+            ipa: "red heə",
+            example: "He's got red hair.",
+          },
+          {
+            en: "grey hair",
+            ua: "сиве волосся",
+            ipa: "ɡreɪ heə",
+            example: "He's got grey hair and a beard.",
+          },
+          {
+            en: "short / long hair",
+            ua: "коротке / довге волосся",
+            ipa: "ʃɔːt / lɒŋ heə",
+            example: "She's got long hair.",
+          },
+          {
+            en: "blue eyes",
+            ua: "блакитні очі",
+            ipa: "bluː aɪz",
+            example: "I've got blue eyes.",
+          },
+          {
+            en: "brown eyes",
+            ua: "карі очі",
+            ipa: "braʊn aɪz",
+            example: "He's got brown eyes.",
+          },
+          {
+            en: "green eyes",
+            ua: "зелені очі",
+            ipa: "ɡriːn aɪz",
+            example: "She's got green eyes.",
+          },
+          {
+            en: "a beard",
+            ua: "борода",
+            ipa: "ə bɪəd",
+            example: "He's got a beard.",
+          },
+          {
+            en: "in his / her 20s",
+            ua: "йому / їй за 20",
+            ipa: "ɪn hɪz / hɜː ˈtwentiz",
+            example: "She's in her 20s.",
+          },
+          {
+            en: "in his / her 30s",
+            ua: "йому / їй за 30",
+            ipa: "ɪn hɪz / hɜː ˈθɜːtiz",
+            example: "Mehmet is in his 30s.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "travel-pack",
+    title: "Travel · pack a bag",
+    badge: "L39",
+    description:
+      "Unit 4B: речі в дорогу + Have you got…? / Has she got…?",
+    grammar: [
+      "Have you got your passport? → Yes, I have. / No, I haven't.",
+      "Has she got the tickets? → Yes, she has. / No, she hasn't.",
+    ],
+    groups: [
+      {
+        label: "Travel objects",
+        items: [
+          {
+            en: "tickets",
+            ua: "квитки",
+            ipa: "ˈtɪkɪts",
+            example: "Have you got your tickets?",
+          },
+          {
+            en: "passport",
+            ua: "паспорт",
+            ipa: "ˈpɑːspɔːt",
+            example: "I've got my passport.",
+          },
+          {
+            en: "credit card",
+            ua: "кредитна картка",
+            ipa: "ˈkredɪt kɑːd",
+            example: "Have you got a credit card?",
+          },
+          {
+            en: "coat",
+            ua: "пальто / куртка",
+            ipa: "kəʊt",
+            example: "Take a coat!",
+          },
+          {
+            en: "food",
+            ua: "їжа",
+            ipa: "fuːd",
+            example: "Have you got food in your bag?",
+          },
+          {
+            en: "bottle of water",
+            ua: "пляшка води",
+            ipa: "ˈbɒtl əv ˈwɔːtə",
+            example: "I've got a bottle of water.",
+          },
+          {
+            en: "camera",
+            ua: "камера / фотоапарат",
+            ipa: "ˈkæmərə",
+            example: "Has Fifi got a camera?",
+          },
+          {
+            en: "sunglasses",
+            ua: "сонцезахисні окуляри",
+            ipa: "ˈsʌnɡlɑːsɪz",
+            example: "Have you got sunglasses?",
+          },
+          {
+            en: "phone",
+            ua: "телефон",
+            ipa: "fəʊn",
+            example: "I've got my phone.",
+          },
+          {
+            en: "money",
+            ua: "гроші",
+            ipa: "ˈmʌni",
+            example: "Yes, we've got money.",
+          },
+          {
+            en: "bag",
+            ua: "сумка / рюкзак",
+            ipa: "bæɡ",
+            example: "Have you got food in your bag?",
+          },
+          {
+            en: "keys",
+            ua: "ключі",
+            ipa: "kiːz",
+            example: "Have you got your keys?",
+          },
+        ],
+      },
+      {
+        label: "Questions",
+        items: [
+          {
+            en: "Have you got…?",
+            ua: "У тебе є…?",
+            ipa: "həv ju ɡɒt",
+            example: "Have you got your passport?",
+          },
+          {
+            en: "Has she / he got…?",
+            ua: "У неї / нього є…?",
+            ipa: "həz ʃi / hi ɡɒt",
+            example: "Has Fifi got your tickets?",
+          },
+          {
+            en: "Yes, I have. / No, I haven't.",
+            ua: "Так, є. / Ні, немає.",
+            ipa: "jes aɪ həv / nəʊ aɪ ˈhævnt",
+            example: "Have you got a camera? No, I haven't.",
+          },
+          {
+            en: "Yes, she has. / No, she hasn't.",
+            ua: "Так, є. / Ні, немає. (she)",
+            ipa: "jes ʃi həz / nəʊ ʃi ˈhæznt",
+            example: "Has she got the tickets? Yes, she has.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "dos-donts",
+    title: "Dos and don'ts",
+    badge: "L40",
+    description:
+      "Unit 4C: імператив — Visit… / Don't go…, та дієслова try, go to, visit, take, drink, see.",
+    grammar: [
+      "Imperative (+): Visit The British Museum. / Take a coat!",
+      "Imperative (−): Don't go to Oxford Street. / Don't take taxis.",
+      "try + food · go to / visit + place · take + transport/photos/coat · drink + tea · see + a show",
+    ],
+    groups: [
+      {
+        label: "Key verbs",
+        items: [
+          {
+            en: "try",
+            ua: "спробувати",
+            ipa: "traɪ",
+            example: "Try Indian food.",
+          },
+          {
+            en: "go to",
+            ua: "піти / поїхати до",
+            ipa: "ɡəʊ tə",
+            example: "Go to Greenwich.",
+          },
+          {
+            en: "visit",
+            ua: "відвідати",
+            ipa: "ˈvɪzɪt",
+            example: "Visit The British Museum.",
+          },
+          {
+            en: "take",
+            ua: "брати / їхати (на транспорті)",
+            ipa: "teɪk",
+            example: "Take a train. / Take photos.",
+          },
+          {
+            en: "drink",
+            ua: "пити",
+            ipa: "drɪŋk",
+            example: "Drink English tea.",
+          },
+          {
+            en: "see",
+            ua: "дивитися / бачити",
+            ipa: "siː",
+            example: "See a show.",
+          },
+        ],
+      },
+      {
+        label: "Useful phrases",
+        items: [
+          {
+            en: "try Japanese food",
+            ua: "спробувати японську їжу",
+            ipa: "traɪ ˌdʒæpəˈniːz fuːd",
+            example: "Try Japanese food in London.",
+          },
+          {
+            en: "visit New York",
+            ua: "відвідати Нью-Йорк",
+            ipa: "ˈvɪzɪt njuː ˈjɔːk",
+            example: "Visit New York next year.",
+          },
+          {
+            en: "drink tea",
+            ua: "пити чай",
+            ipa: "drɪŋk tiː",
+            example: "Drink English tea.",
+          },
+          {
+            en: "see a show",
+            ua: "подивитися шоу / виставу",
+            ipa: "siː ə ʃəʊ",
+            example: "See a show in London.",
+          },
+          {
+            en: "take a train",
+            ua: "їхати поїздом",
+            ipa: "teɪk ə treɪn",
+            example: "Don't take taxis — take a train.",
+          },
+          {
+            en: "take photos",
+            ua: "фотографувати",
+            ipa: "teɪk ˈfəʊtəʊz",
+            example: "Go to Greenwich and take photos.",
+          },
+          {
+            en: "take a coat",
+            ua: "взяти пальто",
+            ipa: "teɪk ə kəʊt",
+            example: "Take a coat!",
+          },
+        ],
+      },
+      {
+        label: "Imperatives",
+        items: [
+          {
+            en: "Visit…",
+            ua: "Відвідай…",
+            ipa: "ˈvɪzɪt",
+            example: "Visit The British Museum.",
+          },
+          {
+            en: "Don't go to…",
+            ua: "Не ходи до…",
+            ipa: "dəʊnt ɡəʊ tə",
+            example: "Don't go to Oxford Street.",
+          },
+          {
+            en: "Don't take…",
+            ua: "Не бери / не їдь…",
+            ipa: "dəʊnt teɪk",
+            example: "Don't take taxis!",
+          },
+          {
+            en: "dos and don'ts",
+            ua: "що варто / не варто робити",
+            ipa: "duːz ənd dəʊnts",
+            example: "Have you got any dos and don'ts for London?",
+          },
+          {
+            en: "work trip",
+            ua: "робоча поїздка",
+            ipa: "wɜːk trɪp",
+            example: "I have a work trip to London.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
     id: "was-were",
     title: "Was / Were",
     badge: "Past be",

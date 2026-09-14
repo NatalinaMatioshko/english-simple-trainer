@@ -25,7 +25,6 @@ import {
   cuttingHairOptions,
   homeworkFixGroups,
   homeworkFixLines,
-  petroHwMeta,
 } from "../data/lesson40HwFix";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
@@ -259,22 +258,6 @@ export default function Lesson40() {
             Текст з ДЗ до Lesson 38 (опис себе й друзів). Відредагуй →{" "}
             <strong>Check</strong>. <strong>Hint</strong> показує пояснення і
             правильне речення. Потім прочитай вголос із учителем.
-          </p>
-        </div>
-        <div className="l25-conf-card" style={{ marginBottom: "1rem" }}>
-          <p style={{ margin: 0 }}>
-            <strong>
-              {petroHwMeta.student} — {petroHwMeta.lesson}
-            </strong>
-          </p>
-          <p
-            style={{
-              margin: "0.35rem 0 0",
-              color: "var(--color-text-muted)",
-              fontSize: "0.92rem",
-            }}
-          >
-            {petroHwMeta.status}
           </p>
         </div>
         {homeworkFixGroups.map((g) => (

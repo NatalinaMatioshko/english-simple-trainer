@@ -1,13 +1,8 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { VocabSection } from "../components/vocab/VocabSection";
 import "../styles/app.css";
 
 export default function VocabPage() {
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, []);
-
   return (
     <div className="app vocab-page">
       <section className="vocab-page-hero panel">

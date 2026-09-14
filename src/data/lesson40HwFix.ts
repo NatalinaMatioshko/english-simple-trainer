@@ -3,12 +3,6 @@
  * Interactive fix: wrong → type correct (same pattern as Lesson 38).
  */
 
-export const petroHwMeta = {
-  student: "Petro",
-  lesson: "Lesson 38",
-  status: "Test: Not done · Quiz: Not done · score 18 · 11.09.2026, 21:07:29",
-};
-
 export const homeworkFixGroups = [
   {
     id: "must",

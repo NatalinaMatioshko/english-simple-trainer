@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import "../styles/app.css";
 import type { Mode } from "../types/trainer";
 import { quizTasks } from "../data/tasks";
@@ -39,10 +39,6 @@ export default function TrainerPage() {
   const checkpoint = useScoredQuiz(checkpointTasks, "checkpoint");
   const frequency = useScoredQuiz(quizTasks, "frequency");
   const activeQuiz = quizId === "checkpoint" ? checkpoint : frequency;
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }, []);
 
   return (
     <div className="app">
