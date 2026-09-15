@@ -7,6 +7,9 @@ import WordOrderBoard, {
 import { ScoredQuizCard } from "../components/practice/ScoredQuizCard";
 import {
   cardsForDeck,
+  hw40ArticleChoose,
+  hw40ArticleGaps,
+  hw40ArticleOptions,
   hw40DeckMeta,
   hw40TestMeta,
   hw40WordOrder,
@@ -16,6 +19,7 @@ import {
   type Hw40Flashcard,
   type Hw40TestId,
 } from "../data/hw40";
+import { drillSelClass } from "../components/lesson31/drillSelClass";
 import { useScoredQuiz } from "../hooks/useScoredQuiz";
 import { shuffle } from "../utils/array";
 import "../styles/lesson22.css";
@@ -51,19 +55,42 @@ export default function HW40() {
   const [orderChecked, setOrderChecked] = useState(false);
   const orderScore = wordOrderScore(hw40WordOrder, orderRows);
 
+  const [articleAns, setArticleAns] = useState(() =>
+    Array(hw40ArticleGaps.length).fill(""),
+  );
+  const [articleChecked, setArticleChecked] = useState(false);
+  const articleScore = hw40ArticleGaps.filter(
+    (item, i) => articleAns[i] === item.answer,
+  ).length;
+
+  const [articleChooseAns, setArticleChooseAns] = useState(() =>
+    Array(hw40ArticleChoose.length).fill(""),
+  );
+  const [articleChooseChecked, setArticleChooseChecked] = useState(false);
+  const articleChooseScore = hw40ArticleChoose.filter(
+    (item, i) => articleChooseAns[i] === item.answer,
+  ).length;
+
   const [writing, setWriting] = useState("");
 
   const testPassed = test.finished && test.score >= testMeta.passScore;
   const orderDone =
     orderChecked && orderScore >= Math.ceil(hw40WordOrder.length * 0.75);
+  const articlesDone =
+    articleChecked &&
+    articleChooseChecked &&
+    articleScore >= Math.ceil(hw40ArticleGaps.length * 0.75) &&
+    articleChooseScore >= Math.ceil(hw40ArticleChoose.length * 0.75);
   const writingDone = writing.trim().length > 30;
-  const allDone = testPassed && orderDone && writingDone;
+  const allDone = testPassed && orderDone && articlesDone && writingDone;
 
   const submitText = [
     writing.trim(),
     "",
     `Test: ${test.finished ? `${test.score}/${test.total}` : "not finished"}`,
     `Word order: ${orderChecked ? `${orderScore}/${hw40WordOrder.length}` : "not finished"}`,
+    `Articles gaps: ${articleChecked ? `${articleScore}/${hw40ArticleGaps.length}` : "not finished"}`,
+    `Articles choose: ${articleChooseChecked ? `${articleChooseScore}/${hw40ArticleChoose.length}` : "not finished"}`,
   ].join("\n");
 
   return (
@@ -74,8 +101,8 @@ export default function HW40() {
             <p className="page-kicker">Homework · Lesson 40</p>
             <h1>Dos and don&apos;ts</h1>
             <p className="lesson22-subtitle">
-              Flashcards · test · word order · write dos and don&apos;ts for
-              your city.
+              Flashcards · test · word order · articles · write dos and
+              don&apos;ts for your city.
             </p>
           </div>
           <div
@@ -93,6 +120,7 @@ export default function HW40() {
           <span>Visit / Don&apos;t go</span>
           <span>London · Rome</span>
           <span>try · visit · take · drink · see</span>
+          <span>a / an / the</span>
         </div>
       </section>
 
@@ -209,7 +237,179 @@ export default function HW40() {
 
       <section className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">4 · Writing</p>
+          <p className="page-kicker">4 · Articles</p>
+          <h2>a · an · the · —</h2>
+          <p className="lesson22-section-desc">
+            Перевір артиклі з порад і опису людей.{" "}
+            <strong>—</strong> = без артикля.
+          </p>
+        </div>
+
+        <div
+          className="l25-conf-card"
+          style={{ maxWidth: 640, marginBottom: "1.25rem" }}
+        >
+          <div className="l25-conf-header">Remember</div>
+          <div className="l25-conf-fields">
+            <p style={{ margin: 0, fontSize: "var(--text-sm)", lineHeight: 1.55 }}>
+              <strong>a / an</strong> — один предмет / професія:{" "}
+              <em>a coat</em>, <em>a show</em>, <em>a colorist</em>.
+              <br />
+              <strong>the</strong> — конкретне / відоме:{" "}
+              <em>the British Museum</em>, <em>the UK</em>.
+              <br />
+              <strong>—</strong> — множина загалом, їжа, hair:{" "}
+              <em>taxis</em>, <em>Indian food</em>, <em>short hair</em>.
+            </p>
+          </div>
+        </div>
+
+        <h3 className="l22-listen-subtitle">4a · Choose a / an / the / —</h3>
+        <div className="l26-drill-list">
+          {hw40ArticleGaps.map((item, i) => (
+            <div key={item.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">
+                {i + 1}. {item.before}{" "}
+                <select
+                  value={articleAns[i]}
+                  onChange={(e) => {
+                    setArticleChecked(false);
+                    const next = [...articleAns];
+                    next[i] = e.target.value;
+                    setArticleAns(next);
+                  }}
+                  className={drillSelClass(
+                    articleChecked,
+                    articleAns[i],
+                    item.answer,
+                  )}
+                  aria-label={`Article ${i + 1}`}
+                >
+                  <option value="">___</option>
+                  {hw40ArticleOptions.map((o) => (
+                    <option key={o} value={o}>
+                      {o}
+                    </option>
+                  ))}
+                </select>{" "}
+                {item.after}
+              </strong>
+              {articleChecked && articleAns[i] !== item.answer && (
+                <span className="hw35-tip" style={{ display: "block" }}>
+                  {item.tipUa} → <strong>{item.answer}</strong>
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setArticleChecked(true)}
+          >
+            Check
+          </button>
+          {articleChecked && (
+            <span className="l22-score">
+              {articleScore} / {hw40ArticleGaps.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setArticleAns(hw40ArticleGaps.map((item) => item.answer));
+              setArticleChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setArticleAns(Array(hw40ArticleGaps.length).fill(""));
+              setArticleChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+
+        <h3 className="l22-listen-subtitle" style={{ marginTop: "1.5rem" }}>
+          4b · Choose the correct sentence
+        </h3>
+        <div className="l26-drill-list">
+          {hw40ArticleChoose.map((item, i) => (
+            <div key={item.id} className="l26-drill-row">
+              <strong className="l26-drill-prompt">
+                {i + 1}. {item.prompt}
+              </strong>
+              <select
+                value={articleChooseAns[i]}
+                onChange={(e) => {
+                  setArticleChooseChecked(false);
+                  const next = [...articleChooseAns];
+                  next[i] = e.target.value;
+                  setArticleChooseAns(next);
+                }}
+                className={drillSelClass(
+                  articleChooseChecked,
+                  articleChooseAns[i],
+                  item.answer,
+                )}
+                aria-label={`Choose sentence ${i + 1}`}
+              >
+                <option value="">___</option>
+                {item.options.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+        <div className="l25-cr-actions" style={{ marginTop: "0.75rem" }}>
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setArticleChooseChecked(true)}
+          >
+            Check
+          </button>
+          {articleChooseChecked && (
+            <span className="l22-score">
+              {articleChooseScore} / {hw40ArticleChoose.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setArticleChooseAns(hw40ArticleChoose.map((item) => item.answer));
+              setArticleChooseChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setArticleChooseAns(Array(hw40ArticleChoose.length).fill(""));
+              setArticleChooseChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+      </section>
+
+      <section className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">5 · Writing</p>
           <h2>Dos and don&apos;ts for your city</h2>
           <p className="lesson22-section-desc">
             Напиши <strong>4 dos</strong> і <strong>4 don&apos;ts</strong> для

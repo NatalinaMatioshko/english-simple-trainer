@@ -303,6 +303,156 @@ export const hw40WordOrder = [
   },
 ] as const;
 
+/** Articles check — a / an / the / — (no article). */
+export const hw40ArticleOptions = ["a", "an", "the", "—"] as const;
+
+export const hw40ArticleGaps = [
+  {
+    id: "a1",
+    before: "Take",
+    after: "coat!",
+    answer: "a",
+    tipUa: "одне пальто, будь-яке → a coat",
+  },
+  {
+    id: "a2",
+    before: "See",
+    after: "show in London.",
+    answer: "a",
+    tipUa: "одне шоу (не конкретне) → a show",
+  },
+  {
+    id: "a3",
+    before: "Don't take",
+    after: "camera.",
+    answer: "a",
+    tipUa: "одна камера → a camera",
+  },
+  {
+    id: "a4",
+    before: "Visit",
+    after: "British Museum.",
+    answer: "the",
+    tipUa: "унікальна назва / відомий музей → the British Museum",
+  },
+  {
+    id: "a5",
+    before: "Go to",
+    after: "London Eye.",
+    answer: "the",
+    tipUa: "відома пам’ятка → the London Eye",
+  },
+  {
+    id: "a6",
+    before: "She's",
+    after: "colorist.",
+    answer: "a",
+    tipUa: "професія в однині → a colorist",
+  },
+  {
+    id: "a7",
+    before: "He was",
+    after: "shop assistant.",
+    answer: "a",
+    tipUa: "професія → a shop assistant",
+  },
+  {
+    id: "a8",
+    before: "I live in",
+    after: "small town.",
+    answer: "a",
+    tipUa: "одне маленьке місто → a small town",
+  },
+  {
+    id: "a9",
+    before: "Hanna's got",
+    after: "short blonde hair.",
+    answer: "—",
+    tipUa: "hair як маса — без артикля: short blonde hair",
+  },
+  {
+    id: "a10",
+    before: "Don't take",
+    after: "taxis!",
+    answer: "—",
+    tipUa: "множина загалом → без артикля: taxis",
+  },
+  {
+    id: "a11",
+    before: "Try",
+    after: "Indian food.",
+    answer: "—",
+    tipUa: "їжа / кухня загалом → без артикля: Indian food",
+  },
+  {
+    id: "a12",
+    before: "I'm from",
+    after: "UK.",
+    answer: "the",
+    tipUa: "the UK · the US (з the)",
+  },
+] as const;
+
+/** Choose the correct sentence (articles). */
+export const hw40ArticleChoose = [
+  {
+    id: "c1",
+    prompt: "Правильна порада:",
+    options: ["Take a coat!", "Take the coat!", "Take coat!"] as const,
+    answer: "Take a coat!",
+  },
+  {
+    id: "c2",
+    prompt: "Правильна порада:",
+    options: [
+      "Visit the British Museum.",
+      "Visit a British Museum.",
+      "Visit British Museum.",
+    ] as const,
+    answer: "Visit the British Museum.",
+  },
+  {
+    id: "c3",
+    prompt: "Правильна порада:",
+    options: [
+      "Don't take taxis!",
+      "Don't take a taxis!",
+      "Don't take the taxis!",
+    ] as const,
+    answer: "Don't take taxis!",
+  },
+  {
+    id: "c4",
+    prompt: "Опис людини:",
+    options: [
+      "She's got short blonde hair.",
+      "She's got a short blonde hair.",
+      "She's got the short blonde hair.",
+    ] as const,
+    answer: "She's got short blonde hair.",
+  },
+  {
+    id: "c5",
+    prompt: "Професія:",
+    options: [
+      "She is a colorist.",
+      "She is colorist.",
+      "She is the colorist.",
+    ] as const,
+    answer: "She is a colorist.",
+  },
+  {
+    id: "c6",
+    prompt: "Країна:",
+    options: [
+      "I'm from the UK.",
+      "I'm from a UK.",
+      "I'm from UK.",
+    ] as const,
+    answer: "I'm from the UK.",
+  },
+] as const;
+
 export const hw40WritingPrompts = [
   "Go to …",
   "Visit …",

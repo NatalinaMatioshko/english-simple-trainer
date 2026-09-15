@@ -53,6 +53,10 @@ export const homeworkByLesson = [
       },
       {
         type: "text",
+        text: "Articles check: a / an / the / — in advice and people descriptions",
+      },
+      {
+        type: "text",
         text: "Write 4 dos and 4 don'ts for your city and send to teacher",
       },
     ],
