@@ -1,0 +1,239 @@
+.hw41-map {
+  --hw41-hub: #3b82f6;
+  --hw41-line: #93c5fd;
+  position: relative;
+  min-height: 340px;
+  margin: 1rem 0 1.25rem;
+  padding: 1rem 0.5rem 1.5rem;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 55%, #fff 100%);
+  border: 1px solid #bfdbfe;
+  overflow: hidden;
+}
+
+.hw41-map-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hw41-map-line {
+  stroke: var(--hw41-line);
+  stroke-width: 1.4;
+  stroke-dasharray: 3 2;
+  fill: none;
+}
+
+.hw41-hub {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  min-width: 5.5rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  border: 2px solid #2563eb;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.28);
+  cursor: pointer;
+}
+
+.hw41-hub.is-target {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+.hw41-slot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  min-width: 5.6rem;
+  min-height: 2.1rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  border: 2px dashed #94a3b8;
+  background: #fff;
+  color: #0f172a;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.hw41-slot.is-filled {
+  border-style: solid;
+  border-color: #38bdf8;
+  background: #e0f2fe;
+}
+
+.hw41-slot.is-ok {
+  border-color: #22c55e;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.hw41-slot.is-err {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.hw41-slot.is-target {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.hw41-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.hw41-chip {
+  border: 1.5px solid #cbd5e1;
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hw41-chip.is-on {
+  border-color: #2563eb;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.hw41-chip.is-used {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.hw41-holiday-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.hw41-holiday-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.hw41-holiday-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #f1f5f9;
+}
+
+.hw41-holiday-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hw41-holiday-mark {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hw41-holiday-mark.is-do {
+  background: #16a34a;
+}
+
+.hw41-holiday-mark.is-dont {
+  background: #dc2626;
+}
+
+.hw41-holiday-body {
+  padding: 0.7rem 0.75rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.hw41-holiday-body .l22-gap-input {
+  width: 100%;
+}
+
+.hw41-holiday-n {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #64748b;
+}
+
+.hw41-true-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.hw41-true-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.hw41-true-row span {
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.hw41-reflect-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+
+.hw41-reflect-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.65rem 0.8rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.hw41-reflect-row span {
+  flex: 1 1 14rem;
+}
+
+.hw41-reflect-row .l25-cr-sel {
+  flex: 0 0 auto;
+  width: 4.5rem;
+}
+
+@media (max-width: 640px) {
+  .hw41-map {
+    min-height: 420px;
+  }
+}

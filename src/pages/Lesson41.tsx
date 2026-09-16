@@ -119,6 +119,9 @@ export default function Lesson41() {
             >
               ← Lesson 40
             </Link>
+            <Link className="lesson22-back-link" to="/hw-41">
+              HW41 →
+            </Link>
           </div>
         </div>
         <div className="lesson22-hero-chips">
@@ -624,7 +627,10 @@ export default function Lesson41() {
           </li>
         </ul>
         <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
-          <Link className="l22-check-btn" to="/lesson-40">
+          <Link className="l22-check-btn" to="/hw-41">
+            HW41
+          </Link>
+          <Link className="l25-cr-mini-btn" to="/lesson-40">
             ← Lesson 40
           </Link>
           <Link className="l25-cr-mini-btn" to="/vocab">

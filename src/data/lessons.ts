@@ -312,6 +312,7 @@ export const lessons: LessonEntry[] = [
     description:
       "Unit 4D English in action: read digital clocks, listen to time dialogues, useful phrases, speak and write the time.",
     lessonPath: "/lesson-41",
+    homeworkPath: "/hw-41",
   },
 ];
 

@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "41": "/images/lesson41/cover.jpg",
   "40": "/images/lesson40/cover.jpg",
   "39": "/images/lesson38/office.jpg",
   "38": "/images/describing-people-adjectives.png",
@@ -34,6 +35,29 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "41",
+    title: "Check and reflect · Unit 4",
+    href: "/hw-41",
+    tasks: [
+      {
+        type: "text",
+        text: "Word map: colours · the body · age",
+      },
+      {
+        type: "text",
+        text: "Complete sentences + have got / hasn't got",
+      },
+      {
+        type: "text",
+        text: "True for you · word-order questions · choose alternatives",
+      },
+      {
+        type: "text",
+        text: "UK holiday dos and don'ts from photos + Reflect 1–5",
+      },
+    ],
+  },
   {
     id: "40",
     title: "Dos and don'ts",
