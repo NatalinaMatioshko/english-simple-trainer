@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import LessonNumberKicker from "../components/LessonNumberKicker";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
@@ -6,6 +6,7 @@ import { CheckBar } from "../components/lesson38/L38Ui";
 import Unit4AudioBlock from "../components/Unit4AudioBlock";
 import {
   clockLetterOptions,
+  daysFlashcards,
   dialogueGaps,
   digitalClocks,
   IMG41,
@@ -15,6 +16,7 @@ import {
   usefulPhrases,
   writeTimes,
 } from "../data/lesson41";
+import { shuffle } from "../utils/array";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -23,6 +25,8 @@ import "../styles/lesson38.css";
 import "../styles/lesson41.css";
 
 const VIDEO_ID = "pSRbZkQH04A";
+
+type DayCard = (typeof daysFlashcards)[number];
 
 function setAt(list: string[], index: number, value: string): string[] {
   const next = [...list];
@@ -143,7 +147,8 @@ export default function Lesson41() {
           <a href="#l41-phrases">4 Phrases</a>
           <a href="#l41-speak">5 Speak</a>
           <a href="#l41-write">6 Write</a>
-          <a href="#l41-video">7 Video</a>
+          <a href="#l41-days">7 Days</a>
+          <a href="#l41-video">8 Video</a>
           <a href="#l41-exit">Exit</a>
         </div>
       </section>
@@ -211,7 +216,7 @@ export default function Lesson41() {
           exercise="4D · 4.11"
           title="What time is it? — four short conversations"
         />
-        <div className="l26-drill-list" style={{ marginTop: "1rem" }}>
+        <div className="l26-drill-list l41-select-list l41-select-list--clock" style={{ marginTop: "1rem" }}>
           {listenMatch.map((item, i) => (
             <div key={item.n} className="l26-drill-row">
               <strong className="l26-drill-prompt">
@@ -386,7 +391,7 @@ export default function Lesson41() {
           title="Useful phrases — listen and repeat"
         />
 
-        <div className="l26-drill-list" style={{ marginTop: "1rem" }}>
+        <div className="l26-drill-list l41-select-list" style={{ marginTop: "1rem" }}>
           {phraseMatch.map((item, i) => (
             <div key={item.n} className="l26-drill-row">
               <strong className="l26-drill-prompt">
@@ -540,20 +545,45 @@ export default function Lesson41() {
         </div>
       </section>
 
+      <section id="l41-days" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">7 · Days of the week</p>
+          <h2>Flashcards · check the days</h2>
+          <p className="lesson22-section-desc">
+            Перед відео перевір дні тижня. Переверни картку (Space / Enter),
+            потім <strong>Знаю</strong> / <strong>Ще раз</strong>.
+          </p>
+        </div>
+        <div
+          className="l25-conf-card"
+          style={{ maxWidth: 520, marginBottom: "1rem" }}
+        >
+          <div className="l25-conf-header">Remember</div>
+          <div className="l25-conf-fields">
+            <p style={{ margin: 0, fontSize: "var(--text-sm)", lineHeight: 1.55 }}>
+              <strong>on</strong> + day: <em>on Monday</em>,{" "}
+              <em>on Friday</em>.
+              <br />
+              Weekdays = Monday–Friday · the weekend = Saturday + Sunday.
+            </p>
+          </div>
+        </div>
+        <DaysFlashcards />
+      </section>
+
       <section id="l41-video" className="lesson22-block panel">
         <div className="lesson22-section-head">
-          <p className="page-kicker">7 · Video</p>
-          <h2>Telling the time</h2>
+          <p className="page-kicker">8 · Video</p>
+          <h2>Days of the week</h2>
           <p className="lesson22-section-desc">
-            Подивись відео й повтори фрази:{" "}
-            <em>o&apos;clock · past · to · quarter · half</em>. Потім скажи
-            кілька речень учителю.
+            Подивись відео про дні тижня. Повтори назви вголос, потім скажи
+            вчителю свій тиждень.
           </p>
         </div>
         <div className="l22-video-wrap">
           <iframe
             src={`https://www.youtube.com/embed/${VIDEO_ID}`}
-            title="Telling the time — English video"
+            title="Days of the week — English video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
@@ -563,8 +593,10 @@ export default function Lesson41() {
           After the video
         </p>
         <p className="l31-ex-line">
-          Tell your teacher three times from the video or from your day:{" "}
-          <em>It&apos;s quarter past… / It&apos;s half past… / It&apos;s… o&apos;clock.</em>
+          Tell your teacher:{" "}
+          <em>
+            On Monday I… On Friday I… At the weekend I…
+          </em>
         </p>
       </section>
 
@@ -586,6 +618,10 @@ export default function Lesson41() {
             Ask about a train or lesson: <em>What time is the…?</em> —{" "}
             <em>It&apos;s at…</em>
           </li>
+          <li>
+            Say the days Monday–Sunday and use <em>on Monday</em> /{" "}
+            <em>at the weekend</em>.
+          </li>
         </ul>
         <div className="l25-cr-actions" style={{ marginTop: "1rem" }}>
           <Link className="l22-check-btn" to="/lesson-40">
@@ -599,6 +635,177 @@ export default function Lesson41() {
           </Link>
         </div>
       </section>
+    </div>
+  );
+}
+
+function DaysFlashcards() {
+  const [queue, setQueue] = useState<DayCard[]>(() =>
+    shuffle([...daysFlashcards]),
+  );
+  const [known, setKnown] = useState<Set<string>>(new Set());
+  const [flipped, setFlipped] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    cardRef.current?.focus();
+  }, [queue.length, flipped]);
+
+  const total = daysFlashcards.length;
+  const current = queue[0] ?? null;
+  const done = queue.length === 0;
+  const knownCount = known.size;
+  const progress = total ? Math.round((knownCount / total) * 100) : 0;
+
+  const flip = () => setFlipped((f) => !f);
+
+  const handleKnow = () => {
+    if (!current) return;
+    setKnown((prev) => new Set([...prev, current.id]));
+    setQueue((prev) => prev.slice(1));
+    setFlipped(false);
+  };
+
+  const handleReview = () => {
+    setQueue((prev) => [...prev.slice(1), prev[0]!]);
+    setFlipped(false);
+  };
+
+  const handleRestart = () => {
+    setQueue(shuffle([...daysFlashcards]));
+    setKnown(new Set());
+    setFlipped(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (done) return;
+    if (e.key === " " || e.key === "Enter") {
+      e.preventDefault();
+      if (!flipped) flip();
+    }
+    if (flipped) {
+      if (e.key === "ArrowRight" || e.key === "k" || e.key === "K")
+        handleKnow();
+      if (e.key === "ArrowLeft" || e.key === "r" || e.key === "R")
+        handleReview();
+    }
+  };
+
+  if (done) {
+    return (
+      <div className="fc-done panel" style={{ marginTop: "0.5rem" }}>
+        <div className="fc-done-icon">🎉</div>
+        <h3 className="fc-done-title">Дні тижня пройдено!</h3>
+        <p className="fc-done-score">
+          Знаєш <strong>{knownCount}</strong> з <strong>{total}</strong> карток
+        </p>
+        <div className="fc-done-bar-wrap">
+          <div className="fc-done-bar" style={{ width: `${progress}%` }} />
+        </div>
+        <div className="fc-done-actions">
+          <button className="btn" type="button" onClick={handleRestart}>
+            Почати знову
+          </button>
+          {knownCount < total && (
+            <button
+              className="btn secondary"
+              type="button"
+              onClick={() => {
+                const reviewItems = daysFlashcards.filter(
+                  (c) => !known.has(c.id),
+                );
+                setQueue(shuffle([...reviewItems]));
+                setKnown(new Set());
+                setFlipped(false);
+              }}
+            >
+              Повторити невідомі ({total - knownCount})
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="fc-wrapper">
+      <div className="fc-top" style={{ marginTop: "0.25rem" }}>
+        <div className="fc-progress-wrap">
+          <div className="fc-progress-bar">
+            <div
+              className="fc-progress-fill"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <span className="fc-counter muted">
+            {knownCount} / {total} знаю
+          </span>
+        </div>
+        <button
+          type="button"
+          className="btn secondary fc-shuffle-btn"
+          onClick={() => {
+            setQueue((prev) => shuffle(prev));
+            setFlipped(false);
+          }}
+        >
+          ⇄ Перемішати
+        </button>
+      </div>
+
+      <div
+        className="fc-scene"
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        ref={cardRef}
+        aria-label={`Картка: ${current?.front ?? ""}. Space — перевернути.`}
+      >
+        <div
+          key={current?.id ?? "empty"}
+          className={`fc-card ${flipped ? "fc-flipped" : ""}`}
+          onClick={!flipped ? flip : undefined}
+        >
+          <div className="fc-face fc-front">
+            <span className="fc-front-label muted">UA</span>
+            <p className="fc-front-word">{current?.front}</p>
+            <span className="fc-flip-hint muted">
+              натисни або <kbd>Space</kbd>
+            </span>
+          </div>
+          <div className="fc-face fc-back">
+            <span className="fc-back-label">English</span>
+            <p className="fc-back-word">{current?.back}</p>
+          </div>
+        </div>
+      </div>
+
+      {flipped && (
+        <div className="fc-actions">
+          <button
+            type="button"
+            className="fc-btn-review"
+            onClick={handleReview}
+          >
+            ↺ Ще раз
+          </button>
+          <button type="button" className="fc-btn-know" onClick={handleKnow}>
+            ✓ Знаю
+          </button>
+        </div>
+      )}
+
+      <div className="fc-keyboard-hint muted">
+        {flipped ? (
+          <>
+            <kbd>←</kbd> Ще раз &nbsp;·&nbsp; <kbd>→</kbd> Знаю
+          </>
+        ) : (
+          <>
+            <kbd>Space</kbd> / <kbd>Enter</kbd> — перевернути
+          </>
+        )}
+      </div>
+      <div className="fc-remaining muted">Залишилось: {queue.length}</div>
     </div>
   );
 }

@@ -108,6 +108,24 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Compact drill selects — don't stretch full width */
+.l41-select-list .l26-drill-prompt {
+  flex: 0 0 auto;
+}
+
+.l41-select-list .l26-drill-row .l25-cr-sel {
+  flex: 0 0 auto;
+  width: min(100%, 20rem);
+  min-width: 12rem;
+  max-width: 20rem;
+}
+
+.l41-select-list--clock .l26-drill-row .l25-cr-sel {
+  width: 4.75rem;
+  min-width: 4.75rem;
+  max-width: 4.75rem;
+}
+
 .l41-dialogue {
   border: 1px solid rgba(148, 163, 184, 0.28);
   border-radius: 12px;

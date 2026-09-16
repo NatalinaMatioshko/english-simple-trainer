@@ -18,6 +18,7 @@ function joinWordOrder(parts: readonly string[]): string {
     .join(" ")
     .replace(/\s+\?/g, "?")
     .replace(/\s+\./g, ".")
+    .replace(/\s+!/g, "!")
     .trim();
 }
 

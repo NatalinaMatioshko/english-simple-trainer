@@ -268,3 +268,17 @@ export const writeTimes = [
     answers: ["It's five to five.", "It's five to five", "five to five"],
   },
 ] as const;
+
+/** 7 · Days of the week — flashcards before video */
+export const daysFlashcards = [
+  { id: "d1", front: "понеділок", back: "Monday" },
+  { id: "d2", front: "вівторок", back: "Tuesday" },
+  { id: "d3", front: "середа", back: "Wednesday" },
+  { id: "d4", front: "четвер", back: "Thursday" },
+  { id: "d5", front: "п'ятниця", back: "Friday" },
+  { id: "d6", front: "субота", back: "Saturday" },
+  { id: "d7", front: "неділя", back: "Sunday" },
+  { id: "d8", front: "будні (пн–пт)", back: "weekdays" },
+  { id: "d9", front: "вихідні", back: "the weekend" },
+  { id: "d10", front: "на понеділок / у понеділок", back: "on Monday" },
+] as const;
