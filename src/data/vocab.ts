@@ -3102,6 +3102,92 @@ export const vocabCategories: VocabCategory[] = [
   },
 
   {
+    id: "tell-the-time",
+    title: "What's the time?",
+    badge: "L41",
+    description:
+      "Unit 4D: питати і казати час — o'clock, past, to, quarter, half.",
+    grammar: [
+      "What time is it? — It's three o'clock. / It's quarter past six.",
+      "past = після години · to = до наступної години",
+      "quarter = 15 хв · half = 30 хв",
+      "What time is the train? — It's at quarter to eleven.",
+    ],
+    groups: [
+      {
+        label: "Ask & answer",
+        items: [
+          {
+            en: "What time is it?",
+            ua: "Котра година?",
+            ipa: "wɒt taɪm ɪz ɪt",
+            example: "What time is it? — It's four o'clock.",
+          },
+          {
+            en: "It's … o'clock",
+            ua: "Рівно … годин",
+            ipa: "ɪts … əˈklɒk",
+            example: "It's three o'clock.",
+          },
+          {
+            en: "What time is the…?",
+            ua: "О котрій …?",
+            ipa: "wɒt taɪm ɪz ðə",
+            example: "What time is the train to London?",
+          },
+          {
+            en: "It's at…",
+            ua: "О … (про подію)",
+            ipa: "ɪts ət",
+            example: "It's at seven forty-five.",
+          },
+        ],
+      },
+      {
+        label: "Past & to",
+        items: [
+          {
+            en: "five past four",
+            ua: "чотири нуль п'ять / п'ять хвилин по четвертій",
+            ipa: "faɪv pɑːst fɔː",
+            example: "It's five past four.",
+          },
+          {
+            en: "quarter past four",
+            ua: "чверть на п'яту / 4:15",
+            ipa: "ˈkwɔːtə pɑːst fɔː",
+            example: "It's quarter past four.",
+          },
+          {
+            en: "half past four",
+            ua: "пів на п'яту / 4:30",
+            ipa: "hɑːf pɑːst fɔː",
+            example: "It's half past four.",
+          },
+          {
+            en: "twenty to five",
+            ua: "без двадцяти п'ята / 4:40",
+            ipa: "ˈtwenti tə faɪv",
+            example: "It's twenty to five.",
+          },
+          {
+            en: "quarter to five",
+            ua: "без чверті п'ята / 4:45",
+            ipa: "ˈkwɔːtə tə faɪv",
+            example: "It's quarter to five.",
+          },
+          {
+            en: "five to five",
+            ua: "без п'яти п'ята / 4:55",
+            ipa: "faɪv tə faɪv",
+            example: "It's five to five.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
     id: "was-were",
     title: "Was / Were",
     badge: "Past be",

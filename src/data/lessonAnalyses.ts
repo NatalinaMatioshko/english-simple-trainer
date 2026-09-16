@@ -327,6 +327,146 @@ export const lessonAnalyses: LessonAnalysis[] = [
     takeaway:
       "Урок 39 мав хорошу основу й практичну тему. Учень уже розуміє, що have got — це «мати», може впізнати питання в аудіо і починає відповідати короткими формами. Але зараз йому потрібна не нова граматика, а багато коротких повторів однієї моделі: I’ve got… / I haven’t got… / Have you got…? / Yes, I have / No, I haven’t / Has he got…? / Yes, he has / No, he hasn’t. Якщо ця система стане автоматичною, він значно впевненіше описуватиме себе, сім’ю, зовнішність, речі, сумку, роботу й поїздки.",
   },
+  {
+    id: "40",
+    title: "Dos and don'ts",
+    topic: "articles · possessive ’s · imperatives · London · corrections",
+    lessonPath: "/lesson-40",
+    lead:
+      "Урок 40 був корисним як урок корекції та закріплення, особливо для артиклів, possessive ’s, Present Simple/Continuous і базових imperatives. Учень добре працював із виправленням помилок і почав чіткіше розрізняти a client / the client / my client, але урок вийшов перевантаженим через різку зміну тем: corrections → article practice → imperatives → London reading → pronunciation → travel advice → професійні фрази.",
+    result: [
+      "почав усвідомлювати різницю: I’m cutting hair / a client’s hair / my client’s hair / the client’s hair;",
+      "сам попросив більше вправ на a/an/the, де спочатку з’являється новий предмет, а далі він стає конкретним — правильний наступний крок;",
+      "добре працював із error correction і почав співвідносити правило зі своїм письмом.",
+    ],
+    strengths: [
+      {
+        title: "Error correction",
+        text: "Знаходив або приймав виправлення: I have got (не I hve got); She is a colourist; My friends’ names are Anna and Mykola; I love reading; I am from Sevastopol; assistant; I am a barber; They are working now; She sometimes drinks water; We are sitting now. Уже не лише слухає пояснення, а співвідносить правило з письмом.",
+      },
+      {
+        title: "Логіка множини + possessive",
+        text: "Розібрали My friends’ names are Anna and Mykola: friends — двоє; апостроф після s — імена належать багатьом; names — множина, бо два імені. Гарна інтеграція plural + possessive apostrophe + noun agreement.",
+      },
+      {
+        title: "Have / has",
+        text: "Згадав базову систему: I/you/we/they have; he/she/it has. Важливий місток від have got (урок 39) до базового have/has.",
+      },
+      {
+        title: "Imperatives · London",
+        text: "Практичні моделі: Visit the British Museum. Don’t take taxis. Go to Greenwich. Take photos. Try Indian food. Drink English tea. See a show. Take a coat. Base verb без you; негатив — don’t + base verb. Короткі ready-made chunks для travel English.",
+      },
+      {
+        title: "Пам’ять на загальний зміст",
+        text: "Повернувшись до порад для Лідії в Лондоні, згадав частину: Don’t take taxis. Go to Greenwich. Take photos. Try Indian food. Drink English tea. See a show. Тримав логіку: Lydia → London work trip → friends give travel advice.",
+      },
+    ],
+    gaps: [
+      {
+        title: "Артиклі: правило знає, контекст ще ні",
+        text: "Знає формулу: a/an — нове; the — конкретне; my/his/her — чий. Але важко автоматично в a client’s / my client’s / the client’s hair. Не давати десятки пояснень — одна модель за раз. Злічуваний іменник в однині не стоїть сам: потрібні a/an, the, my, his, this тощо.",
+        bullets: [
+          "I have a client. The client is waiting.",
+          "I am cutting the client’s hair.",
+          "My client has brown hair. I am cutting my client’s hair.",
+          "I see a door. The door is green. / I have a phone. The phone is new.",
+        ],
+      },
+      {
+        title: "I’m living — відтінок тимчасовості",
+        text: "I am living in a small town now — не помилка. Present Continuous із live можливий для тимчасової ситуації: I’m living with my sister this month. Але постійний факт природніше: I live in Sofiivska Borshchahivka. Не казати, що I’m living «не зовсім нормально» — нормально, але означає «around now».",
+      },
+      {
+        title: "Hair знову неточно",
+        text: "Hair — незлічуване, коли про волосся загалом: She has brown hair. I cut hair. A hair / two hairs — окремі волосини: There is a hair on the table. Не пов’язувати відсутність артикля з множиною — учень уже плутається в singular/plural.",
+      },
+      {
+        title: "Work trip → business trip",
+        text: "I have a work trip to London next week. зрозуміло, але природніше: I have a business trip to London next week. або I’m going to London for work next week.",
+      },
+      {
+        title: "Pronunciation забрав забагато часу",
+        text: "Багато повернень до really, taxi/taxis, there/they’re, very, museum, Greenwich, good, show, coat. Вимова конкурувала з головною метою. На одному уроці 2–3 targets, наприклад: Greenwich, museum, taxis. Решту прийняти як достатньо зрозуміле.",
+      },
+    ],
+    corrections: [
+      {
+        title: "a / the / my client’s hair",
+        text: "I’m cutting hair — загальна професійна дія. …a client’s hair — якогось одного клієнта. …my client’s hair — мого клієнта. …the client’s hair — того конкретного, про якого вже говоримо або якого обоє бачимо.",
+      },
+      {
+        title: "✅ / ⚠️ / ❌ замість змішаних сигналів",
+        text: "I’m living… — ✅ correct, але ⚠️ інший відтінок (тимчасовість). I have a favourite job — ⚠️ можливо, але неприродно. I work in a barbershop — ✅; at a barbershop часто природніше. Are clients friendly? — ✅; Are your clients friendly? точніше. Три позначки: Correct / Correct but different meaning or less natural / Incorrect.",
+      },
+      {
+        title: "Imperatives — одна схема",
+        text: "Пояснення розсіялося між вимовою, London vocab і перекладом. Потрібна одна таблиця: Visit the museum. / Don’t visit the museum. Take photos. / Don’t take photos. Imperative = base form без you; негатив = don’t + verb.",
+        pairHead: { left: "Позитивна порада", right: "Негативна" },
+        pairs: [
+          { left: "Visit the museum.", right: "Don’t visit the museum." },
+          { left: "Take photos.", right: "Don’t take photos." },
+          { left: "Try Indian food.", right: "Don’t try it." },
+          { left: "Drink tea.", right: "Don’t drink coffee." },
+          { left: "Go to Greenwich.", right: "Don’t go to Oxford Street." },
+        ],
+      },
+    ],
+    teacherGood: [
+      "Системно повернулась до помилок учня: Time to Fix It — помилки не «караються», а стають точками росту. Змусила побачити іменник, артикль, множину, possessive, Present Continuous, base form.",
+      "Конкретний професійний контекст барбера: I cut hair. I am cutting a client’s hair. I work at a barbershop. I never work at a barbershop on Sundays. How many clients do you see every day? My clients are often funny.",
+      "London text об’єднав city vocab, directions, imperatives, travel, adjectives, reading in chunks і speaking advice про Kyiv / Sofiivska Borshchahivka.",
+      "Підтримувала, коли помилявся: можна пробувати й питати, не чекати «ідеальної» відповіді. Петро часто каже «не знаю» / «не можу» — йому потрібна ця безпечна атмосфера.",
+    ],
+    teacherImprove: [
+      "Не перетворювати пояснення на довге «розмусолювання». Учень сам просив більше практики («Треба більш практики», «Можеш мені зробити пару речень?»). Після a client → the client → my client — одразу 5 коротких речень, потім підстановка client→friend, hair→beard, phone→camera.",
+      "Чіткіше розділяти «правильно» і «природніше» позначками ✅ / ⚠️ / ❌, щоб він не думав, що все не-найкраще = неправильне.",
+      "Imperatives подати як одну просту схему (позитив / don’t), не розсіювати між вимовою й London vocab.",
+      "Не відволікатися на складні нюанси в момент втоми (the opera, capital letters, underground vs subway, uncountable, конкретний vs неконкретний barbershop). Завершити простим outcome: Give me three recommendations for Kyiv.",
+    ],
+    nextGoal:
+      "Article + possessive practice — автоматично відрізняти a / the / my client і a/my/the client’s hair.",
+    nextGrammar: [
+      "a client → the client",
+      "my / his / her",
+      "possessive ’s",
+      "a client’s / my client’s / the client’s hair",
+    ],
+    nextFlow: [
+      {
+        time: "8 хв",
+        title: "Block 1: a → the",
+        text: "I see a client. The client is waiting. The client has brown hair.",
+      },
+      {
+        time: "8 хв",
+        title: "Block 2: my / his / her",
+        text: "My client is waiting. His hair is short. Her hair is long.",
+      },
+      {
+        time: "10 хв",
+        title: "Block 3: possessive ’s",
+        text: "The client’s hair is short. My friend’s phone is new. My teacher’s bag is black. Лексика: client, hair, beard, phone, bag, ticket, friend, teacher.",
+      },
+      {
+        time: "10 хв",
+        title: "Block 4: speaking",
+        text: "I have a client now. The client is sitting in the chair. I am cutting my client’s hair.",
+      },
+      {
+        time: "5 хв",
+        title: "Substitution drill",
+        text: "Підставити: client → friend; hair → beard; client → sister; phone → camera.",
+      },
+    ],
+    homework: [
+      "6–8 слів: client, hair, beard, phone, bag, ticket, friend, teacher.",
+      "Написати 8 речень: a → the → my / his / her.",
+      "3 речення з possessive ’s: The client’s… / My friend’s… / My teacher’s…",
+      "Voice message 30–45 сек: I have a client now… I am cutting my client’s hair.",
+    ],
+    takeaway:
+      "Урок 40 добре виконав роль корекційного: учень повторив багато важливих помилок і почав бачити логіку артиклів та приналежності. Найсильніші частини — професійні фрази барбера, London imperatives і робота з already-made mistakes. Головне змінити далі: після короткого пояснення — більше швидких однотипних прикладів. Він уже не потребує ще десяти пояснень a/the; йому потрібно 15 коротких речень, де він сам вибере форму й одразу почує, чому вона правильна.",
+  },
 ];
 
 export function getLessonAnalysis(id: string): LessonAnalysis | undefined {

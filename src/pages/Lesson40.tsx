@@ -1286,6 +1286,9 @@ export default function Lesson40() {
           <Link className="l22-check-btn" to="/hw-40">
             HW40
           </Link>
+          <Link className="l25-cr-mini-btn" to="/lesson-41">
+            Lesson 41 →
+          </Link>
           <Link className="l25-cr-mini-btn" to="/lesson-39">
             ← Lesson 39
           </Link>

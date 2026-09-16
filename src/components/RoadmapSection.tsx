@@ -74,7 +74,7 @@ const completedPath: StageSummary[] = [
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 41–42",
+    range: "Lessons 42–43",
     title: "Ability, then more continuous",
     summary:
       "Vote for me! (can / can't), then A quiet life? (full Present continuous).",
@@ -592,11 +592,23 @@ const roadmapLessons: Lesson[] = [
     listening: "Unit 4 R9–R10: verb phrases, imperative stress",
     review: "Have you got…? (L39); describing people writing (L38 HW)",
     category: "people",
-    status: "current",
+    status: "completed",
     route: "/lesson-40",
   },
   {
     id: 41,
+    title: "What's the time?",
+    grammar: "Telling the time: o'clock · past · to · quarter · half",
+    vocabulary: "What time is it? / It's at…; digital clocks",
+    speaking: "Ask and answer about clocks with your teacher",
+    listening: "Unit 4 R11–R12: time dialogues · useful phrases",
+    review: "Dos and don'ts (L40); numbers",
+    category: "general",
+    status: "current",
+    route: "/lesson-41",
+  },
+  {
+    id: 42,
     title: "Vote for me!",
     grammar: "can / can't",
     vocabulary: "verb phrases (buy a newspaper, send an email…)",
@@ -607,7 +619,7 @@ const roadmapLessons: Lesson[] = [
     status: "next",
   },
   {
-    id: 42,
+    id: 43,
     title: "A quiet life?",
     grammar: "Present continuous — be + verb + -ing (full unit)",
     vocabulary: "noise verbs; action phrases",
@@ -787,7 +799,7 @@ export default function RoadmapSection() {
     <section className="roadmap-layout">
       <aside className="roadmap-sidebar panel">
         <p className="page-kicker">Learning path</p>
-        <h2>Roadmap for Lessons 1–42</h2>
+        <h2>Roadmap for Lessons 1–43</h2>
         <p className="roadmap-lead">
           The course moves from self-introduction and <strong>to be</strong> to
           daily routines, countries, jobs, shopping, transport, health, and
@@ -855,7 +867,7 @@ export default function RoadmapSection() {
           <section className="roadmap-block">
             <div className="roadmap-block-head">
               <p className="roadmap-mini-label">Full timeline</p>
-              <h3>Lessons 1–42</h3>
+              <h3>Lessons 1–43</h3>
               <p>
                 This is the complete course line from the first lesson through
                 Unit 3 (live) and planned Units 4–5.

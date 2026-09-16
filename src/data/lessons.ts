@@ -304,6 +304,15 @@ export const lessons: LessonEntry[] = [
     lessonPath: "/lesson-40",
     homeworkPath: "/hw-40",
   },
+  {
+    id: "41",
+    title: "What's the time?",
+    level: "A1",
+    topic: "Tell the time · quarter past / to · half past",
+    description:
+      "Unit 4D English in action: read digital clocks, listen to time dialogues, useful phrases, speak and write the time.",
+    lessonPath: "/lesson-41",
+  },
 ];
 
 export const lessonCovers: Record<string, string> = {
@@ -319,6 +328,7 @@ export const lessonCovers: Record<string, string> = {
   "38": "/images/describing-people-adjectives.png",
   "39": "/images/lesson38/office.jpg",
   "40": "/images/lesson40/cover.jpg",
+  "41": "/images/lesson41/cover.jpg",
   extra: "/images/everyday-actions.png",
 };
 
