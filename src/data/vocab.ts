@@ -2968,11 +2968,11 @@ export const vocabCategories: VocabCategory[] = [
     title: "Dos and don'ts",
     badge: "L40",
     description:
-      "Unit 4C: імператив — Visit… / Don't go…, та дієслова try, go to, visit, take, drink, see.",
+      "Unit 4C: імператив — Visit… / Don't go…, та дієслова try, go to, visit, take, drink, see, arrive.",
     grammar: [
       "Imperative (+): Visit The British Museum. / Take a coat!",
       "Imperative (−): Don't go to Oxford Street. / Don't take taxis.",
-      "try + food · go to / visit + place · take + transport/photos/coat · drink + tea · see + a show",
+      "try + food · go to / visit + place · take + transport/photos/coat · drink + tea · see + a show · arrive",
     ],
     groups: [
       {
@@ -3013,6 +3013,12 @@ export const vocabCategories: VocabCategory[] = [
             ua: "дивитися / бачити",
             ipa: "siː",
             example: "See a show.",
+          },
+          {
+            en: "arrive",
+            ua: "прибувати",
+            ipa: "əˈraɪv",
+            example: "What time does the train arrive?",
           },
         ],
       },

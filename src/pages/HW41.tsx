@@ -1,9 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
-import WordOrderBoard, {
-  initWordOrderRows,
-} from "../components/lesson31/WordOrderBoard";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
 import {
   chooseAlt41,
@@ -17,7 +14,10 @@ import {
   wordMapBank,
   wordMapHubMeta,
   wordOrder41,
+  writeGrammar41,
+  writeGrammarTopicLabel,
   type Hw41MapBin,
+  type Hw41WriteTopic,
 } from "../data/hw41";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
@@ -47,46 +47,51 @@ function inputCls(checked: boolean, value: string, ok: boolean): string {
   return "l22-gap-input";
 }
 
-function wordOrderScore(
-  items: typeof wordOrder41,
-  rows: ReturnType<typeof initWordOrderRows>,
-) {
-  return items.filter((item, i) => {
-    const built = rows[i]?.built ?? [];
-    const joined = built
-      .join(" ")
-      .replace(/\s+\?/g, "?")
-      .replace(/\s+\./g, ".")
-      .replace(/\s+!/g, "!")
-      .trim();
-    return joined === item.answer && (rows[i]?.pool.length ?? 0) === 0;
-  }).length;
-}
-
-/** Slot positions (% of map) around each hub */
+/** Slot positions (% of map) — match textbook: arrows out from each hub */
 const SLOT_POS: Record<Hw41MapBin, { x: number; y: number }[]> = {
   colours: [
-    { x: 18, y: 22 },
-    { x: 8, y: 48 },
-    { x: 18, y: 76 },
-    { x: 32, y: 48 },
-  ],
-  body: [
-    { x: 68, y: 22 },
-    { x: 82, y: 48 },
-    { x: 68, y: 76 },
+    { x: 8, y: 10 },
+    { x: 48, y: 10 },
+    { x: 8, y: 52 },
+    { x: 48, y: 52 },
   ],
   age: [
-    { x: 48, y: 18 },
-    { x: 48, y: 82 },
+    { x: 92, y: 8 },
+    { x: 92, y: 48 },
+  ],
+  body: [
+    { x: 22, y: 55 },
+    { x: 22, y: 92 },
+    { x: 78, y: 92 },
   ],
 };
 
+/** Hub centres — colours TL, age TR, the body bottom */
 const HUB_POS: Record<Hw41MapBin, { x: number; y: number }> = {
-  colours: { x: 22, y: 50 },
-  body: { x: 78, y: 50 },
-  age: { x: 50, y: 50 },
+  colours: { x: 28, y: 31 },
+  age: { x: 72, y: 28 },
+  body: { x: 50, y: 73 },
 };
+
+/** Shorten a line so it starts outside the hub and ends before the slot */
+function mapArrow(
+  hub: { x: number; y: number },
+  slot: { x: number; y: number },
+  startPad = 12,
+  endPad = 6,
+) {
+  const dx = slot.x - hub.x;
+  const dy = slot.y - hub.y;
+  const len = Math.hypot(dx, dy) || 1;
+  const ux = dx / len;
+  const uy = dy / len;
+  return {
+    x1: hub.x + ux * startPad,
+    y1: hub.y + uy * startPad,
+    x2: slot.x - ux * endPad,
+    y2: slot.y - uy * endPad,
+  };
+}
 
 type MapPlacement = Partial<
   Record<(typeof wordMapBank)[number], { bin: Hw41MapBin; slot: number }>
@@ -113,8 +118,8 @@ export default function HW41() {
     Array(trueForYou.length).fill(""),
   );
 
-  const [orderRows, setOrderRows] = useState(() =>
-    initWordOrderRows(wordOrder41),
+  const [orderAns, setOrderAns] = useState(() =>
+    Array(wordOrder41.length).fill(""),
   );
   const [orderChecked, setOrderChecked] = useState(false);
 
@@ -127,6 +132,11 @@ export default function HW41() {
     1: "Take your passport.",
   });
   const [holidayChecked, setHolidayChecked] = useState(false);
+
+  const [writeAns, setWriteAns] = useState(() =>
+    Array(writeGrammar41.length).fill(""),
+  );
+  const [writeChecked, setWriteChecked] = useState(false);
 
   const [reflect, setReflect] = useState(() =>
     Array(reflect41.length).fill(""),
@@ -147,11 +157,16 @@ export default function HW41() {
   const haveScore = haveGotGaps.filter(
     (g, i) => !g.example && haveAns[i] === g.answer,
   ).length;
-  const orderScore = wordOrderScore(wordOrder41, orderRows);
+  const orderScore = wordOrder41.filter((item, i) =>
+    textOk(orderAns[i], [item.answer]),
+  ).length;
   const altScore = chooseAlt41.filter((g, i) => altAns[i] === g.answer).length;
   const holidayItems = holidayPics.filter((p) => !p.example);
   const holidayScore = holidayItems.filter((p) =>
     textOk(holidayAns[p.n] ?? "", p.answers),
+  ).length;
+  const writeScore = writeGrammar41.filter((item, i) =>
+    textOk(writeAns[i], item.answers),
   ).length;
   const reflectDone = reflect.every((v) => v !== "");
   const trueDone = trueAns.filter((t) => t.trim().length > 3).length >= 4;
@@ -165,6 +180,8 @@ export default function HW41() {
     alt: altChecked && altScore === chooseAlt41.length,
     holiday:
       holidayChecked && holidayScore === holidayItems.length,
+    write:
+      writeChecked && writeScore >= Math.ceil(writeGrammar41.length * 0.7),
     reflect: reflectDone,
   };
   const allDone = Object.values(checks).every(Boolean);
@@ -203,9 +220,17 @@ export default function HW41() {
     `3 · have got: ${haveChecked ? `${haveScore}/${haveItems.length}` : "not finished"}`,
     "4 · True for you:",
     ...trueForYou.map((p, i) => `  ${p} → ${trueAns[i]?.trim() || "—"}`),
-    `5 · Word order: ${orderChecked ? `${orderScore}/${wordOrder41.length}` : "not finished"}`,
+    `5 · Questions: ${orderChecked ? `${orderScore}/${wordOrder41.length}` : "not finished"}`,
+    ...wordOrder41.map(
+      (item, i) => `  ${item.scramble} → ${orderAns[i]?.trim() || "—"}`,
+    ),
     `6 · Alternatives: ${altChecked ? `${altScore}/${chooseAlt41.length}` : "not finished"}`,
     `7 · Holiday UK: ${holidayChecked ? `${holidayScore}/${holidayItems.length}` : "not finished"}`,
+    `8 · Translate UA→EN: ${writeChecked ? `${writeScore}/${writeGrammar41.length}` : "not finished"}`,
+    ...writeGrammar41.map(
+      (item, i) =>
+        `  [${item.topic}] ${item.ua} → ${writeAns[i]?.trim() || "—"}`,
+    ),
     "Reflect (1–5):",
     ...reflect41.map((s, i) => `  ${s} — ${reflect[i] || "—"}`),
   ].join("\n");
@@ -218,7 +243,8 @@ export default function HW41() {
             <p className="page-kicker">Homework · Lesson 41</p>
             <h1>Check and reflect</h1>
             <p className="lesson22-subtitle">
-              Unit 4 review: people · have got · advice · holiday UK · reflect.
+              Unit 4 review: people · have got · advice · holiday UK · grammar
+              write · reflect.
             </p>
           </div>
           <div
@@ -236,6 +262,7 @@ export default function HW41() {
           <span>word map</span>
           <span>have got</span>
           <span>dos and don&apos;ts</span>
+          <span>PS / PC / articles</span>
           <span>reflect 1–5</span>
         </div>
       </section>
@@ -246,9 +273,10 @@ export default function HW41() {
           <a href="#hw41-2">2 Vocab</a>
           <a href="#hw41-3">3 have got</a>
           <a href="#hw41-4">4 You</a>
-          <a href="#hw41-5">5 Order</a>
+          <a href="#hw41-5">5 Questions</a>
           <a href="#hw41-6">6 Choose</a>
           <a href="#hw41-7">7 Photos</a>
+          <a href="#hw41-8">8 Translate</a>
           <a href="#hw41-reflect">Reflect</a>
           <a href="#hw41-submit">Submit</a>
         </div>
@@ -281,17 +309,31 @@ export default function HW41() {
         </div>
         <div className="hw41-map" aria-label="Word map">
           <svg className="hw41-map-svg" viewBox="0 0 100 100" aria-hidden>
+            <defs>
+              <marker
+                id="hw41-arrow"
+                markerWidth="4"
+                markerHeight="4"
+                refX="3.5"
+                refY="2"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0,0 L4,2 L0,4 Z" fill="#4a5568" />
+              </marker>
+            </defs>
             {(Object.keys(HUB_POS) as Hw41MapBin[]).flatMap((bin) =>
               SLOT_POS[bin].map((slot, i) => {
-                const hub = HUB_POS[bin];
+                const a = mapArrow(HUB_POS[bin], slot);
                 return (
                   <line
                     key={`${bin}-${i}`}
                     className="hw41-map-line"
-                    x1={hub.x}
-                    y1={hub.y}
-                    x2={slot.x}
-                    y2={slot.y}
+                    x1={a.x1}
+                    y1={a.y1}
+                    x2={a.x2}
+                    y2={a.y2}
+                    markerEnd="url(#hw41-arrow)"
                   />
                 );
               }),
@@ -337,7 +379,7 @@ export default function HW41() {
                   onClick={() => placeOnSlot(bin, slot)}
                   aria-label={`${bin} slot ${slot + 1}`}
                 >
-                  {word ?? "…"}
+                  {word ?? ""}
                 </button>
               );
             }),
@@ -584,31 +626,83 @@ export default function HW41() {
         </div>
       </section>
 
-      {/* 5 · Word order */}
+      {/* 5 · Questions */}
       <section id="hw41-5" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">5 · Questions</p>
-          <h2>Put the words in order</h2>
+          <h2>Write the questions</h2>
           <p className="lesson22-section-desc">
-            Склади питання. Потім запитай учителя і відповідай сам.
+            Напиши повне питання. Слова в підказці — не в тому порядку. Потім
+            запитай учителя і відповідай сам.
           </p>
         </div>
         <p className="l31-ex-line">
-          <strong className="l31-ex-num">5a</strong> Put the words in the
-          correct order to make questions.
+          <strong className="l31-ex-num">5a</strong> Write the questions. Use
+          the words to help you.
         </p>
-        <WordOrderBoard
-          items={wordOrder41}
-          rows={orderRows}
-          setRows={setOrderRows}
-          checked={orderChecked}
-          setChecked={setOrderChecked}
-        />
-        {orderChecked && (
-          <p className="l22-score" style={{ marginTop: "0.75rem" }}>
-            {orderScore} / {wordOrder41.length}
-          </p>
-        )}
+        <div className="hw41-true-list">
+          {wordOrder41.map((item, i) => {
+            const val = orderAns[i];
+            const ok = textOk(val, [item.answer]);
+            return (
+              <label key={item.answer} className="hw41-true-row">
+                <span>
+                  {i + 1}. {item.scramble}
+                </span>
+                <input
+                  type="text"
+                  className={inputCls(orderChecked, val, ok)}
+                  value={val}
+                  onChange={(e) => {
+                    setOrderChecked(false);
+                    const next = [...orderAns];
+                    next[i] = e.target.value;
+                    setOrderAns(next);
+                  }}
+                  placeholder="Write the full question…"
+                  aria-label={`Question ${i + 1}`}
+                />
+                {orderChecked && !ok && (
+                  <span className="hw35-tip">{item.answer}</span>
+                )}
+              </label>
+            );
+          })}
+        </div>
+        <div className="l25-cr-actions">
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setOrderChecked(true)}
+          >
+            Check
+          </button>
+          {orderChecked && (
+            <span className="l22-score">
+              {orderScore} / {wordOrder41.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setOrderAns(wordOrder41.map((item) => item.answer));
+              setOrderChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setOrderAns(Array(wordOrder41.length).fill(""));
+              setOrderChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
         <p className="l31-ex-line" style={{ marginTop: "1rem" }}>
           <strong className="l31-ex-num">5b</strong> Ask your teacher the
           questions and answer them.
@@ -793,6 +887,93 @@ export default function HW41() {
         </div>
       </section>
 
+      {/* 8 · Grammar translate */}
+      <section id="hw41-8" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">8 · Grammar</p>
+          <h2>UA → EN</h2>
+          <p className="lesson22-section-desc">
+            Переклади речення англійською.{" "}
+            <strong>Present Simple</strong> ·{" "}
+            <strong>Present Continuous</strong> ·{" "}
+            <strong>articles</strong> (a / an / the / —).
+          </p>
+        </div>
+
+        {(["ps", "pc", "articles"] as Hw41WriteTopic[]).map((topic) => (
+          <div key={topic} style={{ marginBottom: "1.15rem" }}>
+            <h3 className="l22-listen-subtitle">
+              {writeGrammarTopicLabel[topic]}
+            </h3>
+            <div className="l26-drill-list">
+              {writeGrammar41.map((item, i) => {
+                if (item.topic !== topic) return null;
+                const val = writeAns[i] ?? "";
+                const ok = textOk(val, item.answers);
+                return (
+                  <div key={item.id} className="hw35-fix-row">
+                    <p className="hw35-fix-wrong">
+                      <strong>{i + 1}.</strong> {item.ua}
+                    </p>
+                    <input
+                      type="text"
+                      value={val}
+                      onChange={(e) => {
+                        setWriteChecked(false);
+                        const next = [...writeAns];
+                        next[i] = e.target.value;
+                        setWriteAns(next);
+                      }}
+                      className={inputCls(writeChecked, val, ok)}
+                      placeholder="English…"
+                      aria-label={`Translate ${item.id}`}
+                    />
+                    {writeChecked && !ok && (
+                      <span className="hw35-tip">{item.answers[0]}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+
+        <div className="l25-cr-actions">
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setWriteChecked(true)}
+          >
+            Check
+          </button>
+          {writeChecked && (
+            <span className="l22-score">
+              {writeScore} / {writeGrammar41.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setWriteAns(writeGrammar41.map((g) => g.answers[0]));
+              setWriteChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setWriteAns(Array(writeGrammar41.length).fill(""));
+              setWriteChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+      </section>
+
       {/* Reflect */}
       <section id="hw41-reflect" className="lesson22-block panel">
         <div className="lesson22-section-head">
@@ -851,7 +1032,13 @@ export default function HW41() {
           writing={submitText}
           quizDone={allDone}
           quizScore={
-            mapScore + vocabScore + haveScore + orderScore + altScore + holidayScore
+            mapScore +
+            vocabScore +
+            haveScore +
+            orderScore +
+            altScore +
+            holidayScore +
+            writeScore
           }
           showListeningCheck={false}
         />

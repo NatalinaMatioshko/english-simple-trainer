@@ -50,11 +50,15 @@ export const homeworkByLesson = [
       },
       {
         type: "text",
-        text: "True for you · word-order questions · choose alternatives",
+        text: "True for you · write questions · choose alternatives",
       },
       {
         type: "text",
         text: "UK holiday dos and don'ts from photos + Reflect 1–5",
+      },
+      {
+        type: "text",
+        text: "Translate UA→EN: Present Simple · Present Continuous · articles",
       },
     ],
   },

@@ -161,41 +161,34 @@ export const trueForYou = [
   "My town has got …",
 ] as const;
 
-/** 5a · Word order questions */
+/** 5a · Write the questions (words given as a hint) */
 export const wordOrder41 = [
   {
     scramble: "you / got / a / Have / phone?",
-    parts: ["Have", "you", "got", "a", "phone?"] as const,
     answer: "Have you got a phone?",
   },
   {
     scramble: "Has / your / green / teacher / eyes / got?",
-    parts: ["Has", "your", "teacher", "got", "green", "eyes?"] as const,
     answer: "Has your teacher got green eyes?",
   },
   {
     scramble: "Have / blonde / your / hair / parents / got?",
-    parts: ["Have", "your", "parents", "got", "blonde", "hair?"] as const,
     answer: "Have your parents got blonde hair?",
   },
   {
     scramble: "you / food / your / bag / in / Have / got?",
-    parts: ["Have", "you", "got", "food", "in", "your", "bag?"] as const,
     answer: "Have you got food in your bag?",
   },
   {
     scramble: "camera / good / your / phone / Has / a / got?",
-    parts: ["Has", "your", "phone", "got", "a", "good", "camera?"] as const,
     answer: "Has your phone got a good camera?",
   },
   {
     scramble: "bottle / of / Have / a / got / water / you?",
-    parts: ["Have", "you", "got", "a", "bottle", "of", "water?"] as const,
     answer: "Have you got a bottle of water?",
   },
   {
     scramble: "How / credit cards / you / many / got / have?",
-    parts: ["How", "many", "credit", "cards", "have", "you", "got?"] as const,
     answer: "How many credit cards have you got?",
   },
 ] as const;
@@ -346,3 +339,177 @@ export const reflect41 = [
   "I can give advice.",
   "I can tell the time.",
 ] as const;
+
+/**
+ * 8 · Grammar review — UA → EN translate
+ * (Present Simple · Present Continuous · articles)
+ */
+export type Hw41WriteTopic = "ps" | "pc" | "articles";
+
+export const writeGrammar41: {
+  id: number;
+  topic: Hw41WriteTopic;
+  ua: string;
+  answers: readonly string[];
+}[] = [
+  {
+    id: 1,
+    topic: "ps",
+    ua: "Я працюю щодня.",
+    answers: ["I work every day.", "I work every day"],
+  },
+  {
+    id: 2,
+    topic: "ps",
+    ua: "Вона зазвичай їсть сніданок.",
+    answers: [
+      "She usually eats breakfast.",
+      "She usually eats breakfast",
+      "She eats breakfast usually.",
+      "She eats breakfast usually",
+    ],
+  },
+  {
+    id: 3,
+    topic: "ps",
+    ua: "Вони не п'ють каву щоранку.",
+    answers: [
+      "They don't drink coffee every morning.",
+      "They don't drink coffee every morning",
+      "They do not drink coffee every morning.",
+      "They do not drink coffee every morning",
+    ],
+  },
+  {
+    id: 4,
+    topic: "ps",
+    ua: "Він живе в Лондоні?",
+    answers: ["Does he live in London?", "Does he live in London"],
+  },
+  {
+    id: 5,
+    topic: "pc",
+    ua: "Я зараз працюю.",
+    answers: [
+      "I am working now.",
+      "I am working now",
+      "I'm working now.",
+      "I'm working now",
+    ],
+  },
+  {
+    id: 6,
+    topic: "pc",
+    ua: "Вона зараз їсть.",
+    answers: [
+      "She is eating now.",
+      "She is eating now",
+      "She's eating now.",
+      "She's eating now",
+      "She is eating at the moment.",
+      "She is eating at the moment",
+      "She's eating at the moment.",
+      "She's eating at the moment",
+    ],
+  },
+  {
+    id: 7,
+    topic: "pc",
+    ua: "Вони зараз не розмовляють.",
+    answers: [
+      "They aren't talking now.",
+      "They aren't talking now",
+      "They are not talking now.",
+      "They are not talking now",
+      "They're not talking now.",
+      "They're not talking now",
+    ],
+  },
+  {
+    id: 8,
+    topic: "pc",
+    ua: "Ти зараз читаєш?",
+    answers: [
+      "Are you reading now?",
+      "Are you reading now",
+      "Are you reading?",
+      "Are you reading",
+    ],
+  },
+  {
+    id: 9,
+    topic: "articles",
+    ua: "Відвідай Британський музей.",
+    answers: [
+      "Visit the British Museum.",
+      "Visit the British Museum",
+      "Visit The British Museum.",
+      "Visit The British Museum",
+    ],
+  },
+  {
+    id: 10,
+    topic: "articles",
+    ua: "Візьми пальто.",
+    answers: ["Take a coat.", "Take a coat", "Take a coat!"],
+  },
+  {
+    id: 11,
+    topic: "articles",
+    ua: "Не бери таксі.",
+    answers: [
+      "Don't take taxis.",
+      "Don't take taxis",
+      "Don't take taxis!",
+      "Don't take a taxi.",
+      "Don't take a taxi",
+      "Don't take a taxi!",
+      "Do not take taxis.",
+      "Do not take taxis",
+      "Do not take a taxi.",
+      "Do not take a taxi",
+    ],
+  },
+  {
+    id: 12,
+    topic: "articles",
+    ua: "Спробуй індійську їжу.",
+    answers: ["Try Indian food.", "Try Indian food"],
+  },
+  {
+    id: 13,
+    topic: "articles",
+    ua: "У неї світле волосся.",
+    answers: [
+      "She has got blonde hair.",
+      "She has got blonde hair",
+      "She's got blonde hair.",
+      "She's got blonde hair",
+      "She has blonde hair.",
+      "She has blonde hair",
+      "She's got fair hair.",
+      "She's got fair hair",
+      "She has got fair hair.",
+      "She has got fair hair",
+    ],
+  },
+  {
+    id: 14,
+    topic: "articles",
+    ua: "Поїдь до Великобританії.",
+    answers: [
+      "Go to the UK.",
+      "Go to the UK",
+      "Go to the U.K.",
+      "Go to the U.K",
+      "Go to the United Kingdom.",
+      "Go to the United Kingdom",
+    ],
+  },
+];
+
+export const writeGrammarTopicLabel: Record<Hw41WriteTopic, string> = {
+  ps: "Present Simple",
+  pc: "Present Continuous",
+  articles: "Articles (a / an / the / —)",
+};

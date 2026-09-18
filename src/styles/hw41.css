@@ -1,13 +1,14 @@
 .hw41-map {
-  --hw41-hub: #3b82f6;
-  --hw41-line: #93c5fd;
+  --hw41-hub: #9aafc9;
+  --hw41-line: #4a5568;
   position: relative;
-  min-height: 340px;
-  margin: 1rem 0 1.25rem;
-  padding: 1rem 0.5rem 1.5rem;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 55%, #fff 100%);
-  border: 1px solid #bfdbfe;
+  aspect-ratio: 1;
+  width: min(100%, 520px);
+  margin: 1rem auto 1.25rem;
+  padding: 0.35rem;
+  border-radius: 4px;
+  background: #f3e4de;
+  border: 1px solid #e5d0c8;
   overflow: hidden;
 }
 
@@ -21,8 +22,8 @@
 
 .hw41-map-line {
   stroke: var(--hw41-line);
-  stroke-width: 1.4;
-  stroke-dasharray: 3 2;
+  stroke-width: 0.7;
+  stroke-linecap: round;
   fill: none;
 }
 
@@ -30,21 +31,27 @@
   position: absolute;
   transform: translate(-50%, -50%);
   z-index: 2;
-  min-width: 5.5rem;
-  padding: 0.65rem 0.9rem;
-  border-radius: 999px;
-  border: 2px solid #2563eb;
-  background: #3b82f6;
-  color: #fff;
-  font-weight: 800;
-  font-size: 0.95rem;
+  width: 22%;
+  aspect-ratio: 1;
+  height: auto;
+  padding: 0.35rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--hw41-hub);
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: clamp(0.8rem, 3.2vw, 1.05rem);
   text-align: center;
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.28);
-  cursor: pointer;
+  display: grid;
+  place-items: center;
+  line-height: 1.15;
+  box-shadow: none;
+  cursor: default;
+  user-select: none;
 }
 
 .hw41-hub.is-target {
-  outline: 3px solid #fbbf24;
+  outline: 2px solid #c4a484;
   outline-offset: 3px;
 }
 
@@ -52,41 +59,45 @@
   position: absolute;
   transform: translate(-50%, -50%);
   z-index: 2;
-  min-width: 5.6rem;
-  min-height: 2.1rem;
-  padding: 0.35rem 0.55rem;
-  border-radius: 999px;
-  border: 2px dashed #94a3b8;
-  background: #fff;
-  color: #0f172a;
-  font-size: 0.82rem;
+  min-width: 4.6rem;
+  min-height: 1.7rem;
+  padding: 0.15rem 0.35rem;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1.5px solid #6b7280;
+  background: transparent;
+  color: #1a1a1a;
+  font-size: 0.78rem;
   font-weight: 700;
   text-align: center;
   cursor: pointer;
   line-height: 1.2;
 }
 
+.hw41-slot:empty::after {
+  content: "\00a0";
+}
+
 .hw41-slot.is-filled {
-  border-style: solid;
-  border-color: #38bdf8;
-  background: #e0f2fe;
+  border-bottom-color: #374151;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .hw41-slot.is-ok {
-  border-color: #22c55e;
-  background: #f0fdf4;
+  border-bottom-color: #16a34a;
+  background: rgba(240, 253, 244, 0.75);
   color: #166534;
 }
 
 .hw41-slot.is-err {
-  border-color: #ef4444;
-  background: #fef2f2;
+  border-bottom-color: #dc2626;
+  background: rgba(254, 242, 242, 0.8);
   color: #b91c1c;
 }
 
 .hw41-slot.is-target {
-  border-color: #f59e0b;
-  background: #fffbeb;
+  border-bottom-color: #b45309;
+  background: rgba(255, 251, 235, 0.9);
 }
 
 .hw41-bank {
@@ -97,19 +108,20 @@
 }
 
 .hw41-chip {
-  border: 1.5px solid #cbd5e1;
-  background: #fff;
+  border: 1.5px solid #c4b5a8;
+  background: #fffaf7;
   border-radius: 999px;
   padding: 0.3rem 0.75rem;
   font-size: 0.88rem;
   font-weight: 700;
   cursor: pointer;
+  color: #1a1a1a;
 }
 
 .hw41-chip.is-on {
-  border-color: #2563eb;
-  background: #dbeafe;
-  color: #1d4ed8;
+  border-color: #7a8fad;
+  background: #d5e0ee;
+  color: #1a1a1a;
 }
 
 .hw41-chip.is-used {
@@ -199,7 +211,7 @@
   gap: 0.3rem;
 }
 
-.hw41-true-row span {
+.hw41-true-row > span:first-of-type {
   font-weight: 700;
   font-size: 0.92rem;
 }
