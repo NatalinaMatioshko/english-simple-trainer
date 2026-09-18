@@ -513,3 +513,166 @@ export const writeGrammarTopicLabel: Record<Hw41WriteTopic, string> = {
   pc: "Present Continuous",
   articles: "Articles (a / an / the / —)",
 };
+
+/**
+ * 9 · Mixed schedule / days / time — UA → EN (no hints)
+ * Item 12 is intentionally odd in Ukrainian: student should use leave / arrive.
+ */
+export const scheduleTranslate41: {
+  id: number;
+  ua: string;
+  note?: string;
+  answers: readonly string[];
+}[] = [
+  {
+    id: 1,
+    ua: "Я працюю з понеділка по п’ятницю.",
+    answers: [
+      "I work from Monday to Friday.",
+      "I work from Monday to Friday",
+      "I work Monday to Friday.",
+      "I work Monday to Friday",
+    ],
+  },
+  {
+    id: 2,
+    ua: "Я не працюю в неділю.",
+    answers: [
+      "I don't work on Sunday.",
+      "I don't work on Sunday",
+      "I do not work on Sunday.",
+      "I do not work on Sunday",
+      "I don't work on Sundays.",
+      "I don't work on Sundays",
+    ],
+  },
+  {
+    id: 3,
+    ua: "Мої вихідні — понеділок і п’ятниця.",
+    answers: [
+      "My days off are Monday and Friday.",
+      "My days off are Monday and Friday",
+      "My days off are Mondays and Fridays.",
+      "My days off are Mondays and Fridays",
+    ],
+  },
+  {
+    id: 4,
+    ua: "Я починаю роботу о десятій.",
+    answers: [
+      "I start work at ten.",
+      "I start work at ten",
+      "I start work at 10.",
+      "I start work at 10",
+      "I start work at 10 a.m.",
+      "I start work at 10 a.m",
+      "I start work at ten o'clock.",
+      "I start work at ten o'clock",
+      "I start work at 10 o'clock.",
+      "I start work at 10 o'clock",
+    ],
+  },
+  {
+    id: 5,
+    ua: "Я закінчую роботу о восьмій вечора.",
+    answers: [
+      "I finish work at eight in the evening.",
+      "I finish work at eight in the evening",
+      "I finish work at 8 p.m.",
+      "I finish work at 8 p.m",
+      "I finish work at 8 pm.",
+      "I finish work at 8 pm",
+      "I finish work at eight p.m.",
+      "I finish work at eight p.m",
+      "I finish work at 8 o'clock in the evening.",
+      "I finish work at 8 o'clock in the evening",
+    ],
+  },
+  {
+    id: 6,
+    ua: "Я граю у відеоігри на вихідних.",
+    answers: [
+      "I play video games at the weekend.",
+      "I play video games at the weekend",
+      "I play video games on the weekend.",
+      "I play video games on the weekend",
+      "I play computer games at the weekend.",
+      "I play computer games at the weekend",
+      "I play games at the weekend.",
+      "I play games at the weekend",
+    ],
+  },
+  {
+    id: 7,
+    ua: "Вона навчається в суботу вранці.",
+    answers: [
+      "She studies on Saturday morning.",
+      "She studies on Saturday morning",
+      "She studies on Saturday mornings.",
+      "She studies on Saturday mornings",
+    ],
+  },
+  {
+    id: 8,
+    ua: "Він працює вночі.",
+    answers: [
+      "He works at night.",
+      "He works at night",
+      "He works nights.",
+      "He works nights",
+    ],
+  },
+  {
+    id: 9,
+    ua: "Ми зустрічаємося у вівторок увечері.",
+    answers: [
+      "We meet on Tuesday evening.",
+      "We meet on Tuesday evening",
+      "We meet on Tuesday evenings.",
+      "We meet on Tuesday evenings",
+      "We're meeting on Tuesday evening.",
+      "We're meeting on Tuesday evening",
+      "We are meeting on Tuesday evening.",
+      "We are meeting on Tuesday evening",
+    ],
+  },
+  {
+    id: 10,
+    ua: "О котрій починається урок?",
+    answers: [
+      "What time does the lesson start?",
+      "What time does the lesson start",
+      "What time does class start?",
+      "What time does class start",
+      "What time does the class start?",
+      "What time does the class start",
+    ],
+  },
+  {
+    id: 11,
+    ua: "Урок починається о шостій п’ятнадцять.",
+    answers: [
+      "The lesson starts at quarter past six.",
+      "The lesson starts at quarter past six",
+      "The lesson starts at 6:15.",
+      "The lesson starts at 6:15",
+      "The lesson starts at six fifteen.",
+      "The lesson starts at six fifteen",
+      "The lesson starts at 6.15.",
+      "The lesson starts at 6.15",
+      "Class starts at quarter past six.",
+      "Class starts at quarter past six",
+    ],
+  },
+  {
+    id: 12,
+    ua: "О котрій закінчується потяг?",
+    note: "Українською дивно — для потяга краще leave / arrive, не end.",
+    answers: [
+      "What time does the train leave?",
+      "What time does the train leave",
+      "What time does the train arrive?",
+      "What time does the train arrive",
+    ],
+  },
+];

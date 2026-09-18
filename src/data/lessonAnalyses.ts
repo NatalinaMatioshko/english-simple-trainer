@@ -467,6 +467,184 @@ export const lessonAnalyses: LessonAnalysis[] = [
     takeaway:
       "Урок 40 добре виконав роль корекційного: учень повторив багато важливих помилок і почав бачити логіку артиклів та приналежності. Найсильніші частини — професійні фрази барбера, London imperatives і робота з already-made mistakes. Головне змінити далі: після короткого пояснення — більше швидких однотипних прикладів. Він уже не потребує ще десяти пояснень a/the; йому потрібно 15 коротких речень, де він сам вибере форму й одразу почує, чому вона правильна.",
   },
+  {
+    id: "41",
+    title: "What's the time?",
+    topic: "tell the time · days · schedules · listening · Present Simple",
+    lessonPath: "/lesson-41",
+    lead:
+      "Урок 41 був корисним як повторення часу, днів тижня, Present Simple та розуміння коротких listening dialogues. Учень добре впорався з логікою розкладу й поступово став точніше використовувати works / doesn’t work / has, але наприкінці уроку тема змішалася з непройденими структурами на кшталт ask if / verb-ing after about, через що він закономірно заплутався.",
+    result: [
+      "повторив, як називати час: o’clock, past, to, half past, quarter past, quarter to;",
+      "повторив What time is it? і почав розрізняти What time is it? / What time does the train leave? / What time does the lesson start/end?;",
+      "повторив дні тижня; закріпив on Monday, in the morning, at night, at the weekend; краще зрозумів Monday to Friday;",
+      "потренував Present Simple через work schedules; помітив has у She has history class on Wednesday;",
+      "впізнавав основну інформацію у listening. Це хороший урок на закріплення A1-бази.",
+    ],
+    strengths: [
+      {
+        title: "Базова логіка часу",
+        text: "Може впізнати або побудувати: It’s five past ten. It’s quarter past four. It’s half past eleven. It’s quarter to five. It’s five to five. It’s ten to seven. It’s three p.m. Розуміє орієнтири на годиннику: 12 → o’clock; 3 → quarter past; 6 → half past; 9 → quarter to. Це базова A1-система для називання часу.",
+      },
+      {
+        title: "«Котра година?» vs «о котрій?»",
+        text: "Важливий результат: What time is it? → It’s seven forty-five. What time does the train leave? → It leaves at 7:45. What time does the lesson start/end? → It starts/ends at…. Почув різницю: It’s 7:45 (поточний час) vs It’s at 7:45 (коли відбувається щось конкретне).",
+      },
+      {
+        title: "Дні тижня",
+        text: "Повторив Monday–Sunday, weekdays, the weekend. Почав використовувати on Monday / on Tuesday / on Fridays / at the weekend / Monday to Friday. Добре помітив у listening I work Monday to Friday і зрозумів: «з понеділка по п’ятницю».",
+      },
+      {
+        title: "Третя особа в контексті",
+        text: "Сильний момент: She doesn’t work on Wednesday. She sometimes works on Saturday. The woman has history class on Wednesday. Почув і відтворив doesn’t work / works / has — увага до -s зміцнюється.",
+      },
+      {
+        title: "Listening gist",
+        text: "Не завжди пам’ятав усі слова, але витягував головне: хто коли працює / навчається; хто грає в soccer; коли вихідний; чому не вчиться в неділю; що означає Monday to Friday. Добра ознака росту comprehension.",
+      },
+    ],
+    gaps: [
+      {
+        title: "Час треба автоматизувати",
+        text: "Знає елементи past / to / half past / quarter to, але в момент відповіді плутає порядок (11 half, ten seven…). Не додаткові пояснення — короткі швидкі drills від цифр до одного spoken variant.",
+        pairHead: { left: "Цифри", right: "Сказати" },
+        pairs: [
+          { left: "6:15", right: "quarter past six" },
+          { left: "6:30", right: "half past six" },
+          { left: "6:45", right: "quarter to seven" },
+          { left: "6:50", right: "ten to seven" },
+        ],
+      },
+      {
+        title: "On / in / at нестабільні",
+        text: "Плутав at Tuesday, at the morning, on the morning, at weekend, on weekend. Одна стабільна таблиця + BrE at the weekend (AmE: on the weekend).",
+        pairHead: { left: "Коли?", right: "Прийменник · приклад" },
+        pairs: [
+          { left: "День тижня", right: "on · on Monday" },
+          { left: "Частина дня", right: "in · in the morning" },
+          { left: "Ніч", right: "at · at night" },
+          { left: "Точний час", right: "at · at 7:30" },
+          { left: "Weekend (BrE)", right: "at the weekend" },
+          { left: "Weekend (AmE)", right: "on the weekend" },
+        ],
+      },
+      {
+        title: "My week starts vs I work",
+        text: "Намагався сказати щось на кшталт My week start at Tuesday. Розвести три моделі й питання.",
+        pairHead: { left: "Питання", right: "Відповідь" },
+        pairs: [
+          {
+            left: "When does your week start?",
+            right: "My week starts on Tuesday.",
+          },
+          {
+            left: "What days do you work?",
+            right: "I work Tuesday to Thursday.",
+          },
+          {
+            left: "When are your days off?",
+            right: "My days off are Monday and Friday.",
+          },
+          {
+            left: "When don’t you work?",
+            right: "I don’t work on Mondays and Fridays.",
+          },
+        ],
+        bullets: [
+          "My week starts on Tuesday.",
+          "I work from Tuesday to Thursday.",
+          "I work on Tuesday and Thursday.",
+          "My days off are Monday and Friday.",
+        ],
+      },
+      {
+        title: "Reported speech / -ing наприкінці",
+        text: "З’явилось: He asks when she plays soccer. He asks if they can play soccer together at the weekend. He asks about playing soccer together. Це вже reported questions, if, can, gerund after about — для A1 занадто великий стрибок. Петро сказав «Незрозуміло» / «Треба більше домашки» / просив практику play / -ing. Це не провал простого правила — зіткнувся з темою, яку системно ще не проходили.",
+      },
+    ],
+    corrections: [
+      {
+        title: "What time is our train?",
+        text: "Фраза можлива в розмовній англійській, але для учня краще точніші моделі: What time is the train? What time does the train leave? What time does the train arrive? Для A1 найкраще: What time does the train leave? — It leaves at 7:45.",
+      },
+      {
+        title: "the end vs the lesson ends",
+        text: "Добре розвели іменник the end і дієслово the lesson ends. Але твердження «якщо немає артикля — автоматично дієслово» неточне: water / people / books / work залежать від ролі в реченні. Краще: артикль часто показує злічуваний іменник в однині; відсутність артикля ≠ автоматично дієслово — дивись роль слова.",
+      },
+      {
+        title: "at the weekend",
+        text: "Правильно дали BrE at the weekend. Корисно одразу сказати: on the weekend — AmE. Обидва зрозумілі; активним лишаємо at the weekend.",
+      },
+      {
+        title: "on Saturday morning",
+        text: "Правильно: She studies on Saturday morning — on, бо конкретний день + частина дня (on Tuesday afternoon / on Friday evening). Але: in the morning / in the evening / at night. Хороший матеріал для короткої практики наступного разу.",
+      },
+    ],
+    teacherGood: [
+      "Почала з уже знайомої теми: після articles / have got / possessives повернення до часу й days of the week дало відчуття «я вже щось знаю».",
+      "Багато listening: короткі тематичні діалоги (work / study / sports schedule, days off, weekend) — Петро краще ловить мову в живому контексті, ніж у чистій таблиці.",
+      "Конкретна похвала за doesn’t work / works / has — підкріплює, що він реально просувається.",
+      "Адаптувала запити учня (змішана домашка, -ing, складніші речення): не кинулась у нову тему посеред уроку, але зафіксувала інтерес і 15–20 хв наступного разу.",
+    ],
+    teacherImprove: [
+      "Менше фонетичних зупинок у середині meaning task (Tuesday, Saturday, really, taxi/taxis, there/they’re, Greenwich, together). Спочатку зміст → короткий правильний paraphrase → наприкінці 2–3 слова на вимову.",
+      "Не розбирати непройдену граматику без рамки. Достатньо: «Це складніша конструкція. Сьогодні не запам’ятовуємо — лише розуміємо зміст: він питає, чи можуть вони грати разом.»",
+      "На початку озвучувати один main topic: Today we have one main topic: time and schedules. Reported speech у аудіо — тільки gist, не окрема граматика.",
+    ],
+    nextGoal:
+      "Days + time + routine speaking — без нової складної граматики. Коли працює / не працює / вихідні; о котрій починає й закінчує; що робить вранці / вдень / увечері.",
+    nextGrammar: [
+      "I work from… to… / on…",
+      "I don’t work on…",
+      "My days off are…",
+      "I start / finish work at…",
+      "on Thursday evening · at the weekend",
+    ],
+    nextFlow: [
+      {
+        time: "5 хв",
+        title: "Warm-up · clock drills",
+        text: "6:15 / 6:30 / 6:45 / 6:50 → quarter past / half past / quarter to / ten to.",
+      },
+      {
+        time: "10 хв",
+        title: "My schedule",
+        text: "I work from Tuesday to Thursday. I work on Saturday and Sunday. I don’t work on Mondays and Fridays. My days off are Monday and Friday.",
+      },
+      {
+        time: "10 хв",
+        title: "Start / finish",
+        text: "I start work at 10 a.m. I finish work at 8 p.m. I study English on Thursday evening. I play games at the weekend.",
+      },
+      {
+        time: "10 хв",
+        title: "Mini-dialogue",
+        text: "What days do you work? When are your days off? What time do you start work? What do you do at the weekend?",
+      },
+      {
+        time: "5 хв",
+        title: "Exit check",
+        text: "4 речення про свій тиждень без підказок + 2 питання What time…?",
+      },
+    ],
+    homework: [
+      "12 змішаних UA→EN речень без підказок:",
+      "1. Я працюю з понеділка по п’ятницю.",
+      "2. Я не працюю в неділю.",
+      "3. Мої вихідні — понеділок і п’ятниця.",
+      "4. Я починаю роботу о десятій.",
+      "5. Я закінчую роботу о восьмій вечора.",
+      "6. Я граю у відеоігри на вихідних.",
+      "7. Вона навчається в суботу вранці.",
+      "8. Він працює вночі.",
+      "9. Ми зустрічаємося у вівторок увечері.",
+      "10. О котрій починається урок?",
+      "11. Урок починається о шостій п’ятнадцять.",
+      "12. О котрій закінчується потяг? (учень має помітити й виправити на leave / arrive)",
+    ],
+    takeaway:
+      "Урок 41 дав хороший результат у темах time, days, schedules і listening. Петро вже краще використовує works / doesn’t work, has, on Monday, in the morning, at night, at the weekend, Monday to Friday, starts / ends at…. Найбільший ризик — наприкінці зайшли в reported speech і -ing after prepositions раніше, ніж він готовий. Наступний урок краще використати для автоматизації вже зрозумілого: час + розклад + дні тижня + рутина.",
+  },
 ];
 
 export function getLessonAnalysis(id: string): LessonAnalysis | undefined {

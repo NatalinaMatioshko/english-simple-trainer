@@ -60,6 +60,10 @@ export const homeworkByLesson = [
         type: "text",
         text: "Translate UA→EN: Present Simple · Present Continuous · articles",
       },
+      {
+        type: "text",
+        text: "12 mixed UA→EN: days · schedule · time (leave/arrive)",
+      },
     ],
   },
   {

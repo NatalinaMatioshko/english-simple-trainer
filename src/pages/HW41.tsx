@@ -16,6 +16,7 @@ import {
   wordOrder41,
   writeGrammar41,
   writeGrammarTopicLabel,
+  scheduleTranslate41,
   type Hw41MapBin,
   type Hw41WriteTopic,
 } from "../data/hw41";
@@ -138,6 +139,11 @@ export default function HW41() {
   );
   const [writeChecked, setWriteChecked] = useState(false);
 
+  const [schedAns, setSchedAns] = useState(() =>
+    Array(scheduleTranslate41.length).fill(""),
+  );
+  const [schedChecked, setSchedChecked] = useState(false);
+
   const [reflect, setReflect] = useState(() =>
     Array(reflect41.length).fill(""),
   );
@@ -168,6 +174,9 @@ export default function HW41() {
   const writeScore = writeGrammar41.filter((item, i) =>
     textOk(writeAns[i], item.answers),
   ).length;
+  const schedScore = scheduleTranslate41.filter((item, i) =>
+    textOk(schedAns[i], item.answers),
+  ).length;
   const reflectDone = reflect.every((v) => v !== "");
   const trueDone = trueAns.filter((t) => t.trim().length > 3).length >= 4;
 
@@ -182,6 +191,9 @@ export default function HW41() {
       holidayChecked && holidayScore === holidayItems.length,
     write:
       writeChecked && writeScore >= Math.ceil(writeGrammar41.length * 0.7),
+    schedule:
+      schedChecked &&
+      schedScore >= Math.ceil(scheduleTranslate41.length * 0.7),
     reflect: reflectDone,
   };
   const allDone = Object.values(checks).every(Boolean);
@@ -231,6 +243,10 @@ export default function HW41() {
       (item, i) =>
         `  [${item.topic}] ${item.ua} → ${writeAns[i]?.trim() || "—"}`,
     ),
+    `9 · Schedule UA→EN: ${schedChecked ? `${schedScore}/${scheduleTranslate41.length}` : "not finished"}`,
+    ...scheduleTranslate41.map(
+      (item, i) => `  ${item.ua} → ${schedAns[i]?.trim() || "—"}`,
+    ),
     "Reflect (1–5):",
     ...reflect41.map((s, i) => `  ${s} — ${reflect[i] || "—"}`),
   ].join("\n");
@@ -243,8 +259,8 @@ export default function HW41() {
             <p className="page-kicker">Homework · Lesson 41</p>
             <h1>Check and reflect</h1>
             <p className="lesson22-subtitle">
-              Unit 4 review: people · have got · advice · holiday UK · grammar
-              write · reflect.
+              Unit 4 review: people · have got · advice · holiday UK · UA→EN ·
+              schedule · reflect.
             </p>
           </div>
           <div
@@ -263,6 +279,7 @@ export default function HW41() {
           <span>have got</span>
           <span>dos and don&apos;ts</span>
           <span>PS / PC / articles</span>
+          <span>schedule UA→EN</span>
           <span>reflect 1–5</span>
         </div>
       </section>
@@ -277,6 +294,7 @@ export default function HW41() {
           <a href="#hw41-6">6 Choose</a>
           <a href="#hw41-7">7 Photos</a>
           <a href="#hw41-8">8 Translate</a>
+          <a href="#hw41-9">9 Schedule</a>
           <a href="#hw41-reflect">Reflect</a>
           <a href="#hw41-submit">Submit</a>
         </div>
@@ -974,6 +992,85 @@ export default function HW41() {
         </div>
       </section>
 
+      {/* 9 · Schedule translate */}
+      <section id="hw41-9" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">9 · Schedule</p>
+          <h2>UA → EN · days · time · routine</h2>
+          <p className="lesson22-section-desc">
+            12 змішаних речень без підказок: дні, розклад, час. Уважніше до
+            останнього речення — чи природно так казати про потяг?
+          </p>
+        </div>
+        <div className="l26-drill-list">
+          {scheduleTranslate41.map((item, i) => {
+            const val = schedAns[i] ?? "";
+            const ok = textOk(val, item.answers);
+            return (
+              <div key={item.id} className="hw35-fix-row">
+                <p className="hw35-fix-wrong">
+                  <strong>{item.id}.</strong> {item.ua}
+                </p>
+                <input
+                  type="text"
+                  value={val}
+                  onChange={(e) => {
+                    setSchedChecked(false);
+                    const next = [...schedAns];
+                    next[i] = e.target.value;
+                    setSchedAns(next);
+                  }}
+                  className={inputCls(schedChecked, val, ok)}
+                  placeholder="English…"
+                  aria-label={`Schedule translate ${item.id}`}
+                />
+                {schedChecked && !ok && (
+                  <span className="hw35-tip">
+                    {item.note ? `${item.note} → ` : ""}
+                    {item.answers[0]}
+                    {item.answers[2] ? ` / ${item.answers[2]}` : ""}
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+        <div className="l25-cr-actions">
+          <button
+            type="button"
+            className="l22-check-btn"
+            onClick={() => setSchedChecked(true)}
+          >
+            Check
+          </button>
+          {schedChecked && (
+            <span className="l22-score">
+              {schedScore} / {scheduleTranslate41.length}
+            </span>
+          )}
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setSchedAns(scheduleTranslate41.map((g) => g.answers[0]));
+              setSchedChecked(true);
+            }}
+          >
+            Show answers
+          </button>
+          <button
+            type="button"
+            className="l25-cr-mini-btn"
+            onClick={() => {
+              setSchedAns(Array(scheduleTranslate41.length).fill(""));
+              setSchedChecked(false);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+      </section>
+
       {/* Reflect */}
       <section id="hw41-reflect" className="lesson22-block panel">
         <div className="lesson22-section-head">
@@ -1038,7 +1135,8 @@ export default function HW41() {
             orderScore +
             altScore +
             holidayScore +
-            writeScore
+            writeScore +
+            schedScore
           }
           showListeningCheck={false}
         />
