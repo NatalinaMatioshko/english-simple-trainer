@@ -477,7 +477,7 @@ function Hw40Flashcards() {
   }, [deckId, deckCards]);
 
   useEffect(() => {
-    cardRef.current?.focus();
+    cardRef.current?.focus({ preventScroll: true });
   }, [queue.length, flipped]);
 
   const total = deckCards.length;

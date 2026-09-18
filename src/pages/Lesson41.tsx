@@ -654,7 +654,7 @@ function DaysFlashcards() {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    cardRef.current?.focus();
+    cardRef.current?.focus({ preventScroll: true });
   }, [queue.length, flipped]);
 
   const total = daysFlashcards.length;

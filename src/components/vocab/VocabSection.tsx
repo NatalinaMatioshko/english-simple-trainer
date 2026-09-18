@@ -787,7 +787,7 @@ function FlashcardMode({ category }: { category: VocabCategory }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    cardRef.current?.focus();
+    cardRef.current?.focus({ preventScroll: true });
   }, [queue.length, flipped]);
 
   if (total === 0) {
