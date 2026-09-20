@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "42": "/images/lesson42/cover.jpg",
   "41": "/images/lesson41/cover.jpg",
   "40": "/images/lesson40/cover.jpg",
   "39": "/images/lesson38/office.jpg",

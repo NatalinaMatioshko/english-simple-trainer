@@ -3194,6 +3194,157 @@ export const vocabCategories: VocabCategory[] = [
   },
 
   {
+    id: "my-week",
+    title: "My week",
+    badge: "L42",
+    description:
+      "Unit 5A–5B: everyday activities, days of the week, Present Simple I, travel (by bus / leave / arrive).",
+    grammar: [
+      "I work from Monday to Friday. / I don't work at the weekend.",
+      "Do you work on Saturdays? — Yes, I do. / No, I don't.",
+      "What time do you leave home? / How do you travel to work?",
+      "go to work by bus · take the train · leave home · arrive at work",
+    ],
+    groups: [
+      {
+        label: "Everyday activities",
+        items: [
+          {
+            en: "get up",
+            ua: "вставати",
+            ipa: "ɡet ʌp",
+            example: "I get up at seven o'clock.",
+          },
+          {
+            en: "have breakfast",
+            ua: "снідати",
+            ipa: "hæv ˈbrekfəst",
+            example: "I have breakfast at seven thirty.",
+          },
+          {
+            en: "go to work",
+            ua: "іти на роботу",
+            ipa: "ɡəʊ tə wɜːk",
+            example: "I go to work at eight.",
+          },
+          {
+            en: "have lunch",
+            ua: "обідати",
+            ipa: "hæv lʌntʃ",
+            example: "I have lunch at one o'clock.",
+          },
+          {
+            en: "go home",
+            ua: "іти додому",
+            ipa: "ɡəʊ həʊm",
+            example: "I go home at half past five.",
+          },
+          {
+            en: "have dinner",
+            ua: "вечеряти",
+            ipa: "hæv ˈdɪnə",
+            example: "I have dinner at seven.",
+          },
+          {
+            en: "watch TV",
+            ua: "дивитися телевізор",
+            ipa: "wɒtʃ ˌtiːˈviː",
+            example: "I watch TV in the evening.",
+          },
+          {
+            en: "study",
+            ua: "вчитись",
+            ipa: "ˈstʌdi",
+            example: "I study English on Thursday evening.",
+          },
+          {
+            en: "go to bed",
+            ua: "лягати спати",
+            ipa: "ɡəʊ tə bed",
+            example: "I go to bed at eleven.",
+          },
+        ],
+      },
+      {
+        label: "Days & time phrases",
+        items: [
+          {
+            en: "from Monday to Friday",
+            ua: "з понеділка по п'ятницю",
+            ipa: "frəm ˈmʌndeɪ tə ˈfraɪdeɪ",
+            example: "I work from Monday to Friday.",
+          },
+          {
+            en: "on Mondays",
+            ua: "по понеділках",
+            ipa: "ɒn ˈmʌndeɪz",
+            example: "On Mondays, I work in a bookshop.",
+          },
+          {
+            en: "at the weekend",
+            ua: "на вихідних (BrE)",
+            ipa: "ət ðə ˌwiːkˈend",
+            example: "I don't work at the weekend.",
+          },
+          {
+            en: "in the evening",
+            ua: "увечері",
+            ipa: "ɪn ði ˈiːvnɪŋ",
+            example: "In the evening, I watch TV.",
+          },
+        ],
+      },
+      {
+        label: "Travel",
+        items: [
+          {
+            en: "by bus",
+            ua: "автобусом",
+            ipa: "baɪ bʌs",
+            example: "I go to work by bus.",
+          },
+          {
+            en: "take the train",
+            ua: "їхати поїздом",
+            ipa: "teɪk ðə treɪn",
+            example: "I take the train to work.",
+          },
+          {
+            en: "cycle",
+            ua: "їхати велосипедом",
+            ipa: "ˈsaɪkl",
+            example: "I cycle to work.",
+          },
+          {
+            en: "drive",
+            ua: "їхати машиною",
+            ipa: "draɪv",
+            example: "I drive to my parents' house.",
+          },
+          {
+            en: "walk",
+            ua: "іти пішки",
+            ipa: "wɔːk",
+            example: "I walk home.",
+          },
+          {
+            en: "leave home",
+            ua: "виходити з дому",
+            ipa: "liːv həʊm",
+            example: "I leave home at eight.",
+          },
+          {
+            en: "arrive at work",
+            ua: "прибувати на роботу",
+            ipa: "əˈraɪv ət wɜːk",
+            example: "I arrive at work at 8.30.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
     id: "was-were",
     title: "Was / Were",
     badge: "Past be",

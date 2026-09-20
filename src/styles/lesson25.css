@@ -543,13 +543,14 @@
 }
 
 .l25-audio-item {
-  background: var(--card-bg, #fff);
-  border: 1px solid var(--border, #e2e8f0);
+  background: var(--color-surface, var(--card-bg, #fff));
+  border: 1px solid var(--color-border, var(--border, #e2e8f0));
   border-radius: 12px;
   padding: 1rem 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  color: var(--color-text);
 }
 
 .l25-audio-meta {
@@ -572,6 +573,11 @@
   flex-shrink: 0;
 }
 
+[data-theme="dark"] .l25-audio-num {
+  background: rgba(79, 152, 163, 0.25);
+  color: #9ad0d9;
+}
+
 .l25-audio-info {
   display: flex;
   flex-direction: column;
@@ -581,7 +587,7 @@
 .l25-audio-ex {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--color-text-muted, #64748b);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -589,14 +595,14 @@
 .l25-audio-title {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--color-text, #1e293b);
 }
 
 .l25-audio-ctrl {
   width: 100%;
   height: 36px;
   border-radius: 8px;
-  accent-color: #3b82f6;
+  accent-color: var(--color-primary, #3b82f6);
 }
 
 .l25-details {

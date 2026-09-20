@@ -74,10 +74,10 @@ const completedPath: StageSummary[] = [
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 42–43",
-    title: "Ability, then more continuous",
+    range: "Lessons 42–44",
+    title: "My week, then ability & continuous",
     summary:
-      "Vote for me! (can / can't), then A quiet life? (full Present continuous).",
+      "My week (Unit 5 routines + travel), then Vote for me! (can / can't) and A quiet life? (Present continuous).",
   },
 ];
 
@@ -604,28 +604,40 @@ const roadmapLessons: Lesson[] = [
     listening: "Unit 4 R11–R12: time dialogues · useful phrases",
     review: "Dos and don'ts (L40); numbers",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lesson-41",
   },
   {
     id: 42,
+    title: "My week",
+    grammar: "Present Simple I/you/we/they · Do you…?",
+    vocabulary: "everyday activities; days; go by bus · leave · arrive",
+    speaking: "Describe your week and how you travel — with your teacher",
+    listening: "Unit 5 R1–R8: week schedule · Mari · travel",
+    review: "Time (L41); days; Present Simple routines",
+    category: "general",
+    status: "current",
+    route: "/lesson-42",
+  },
+  {
+    id: 43,
     title: "Vote for me!",
     grammar: "can / can't",
     vocabulary: "verb phrases (buy a newspaper, send an email…)",
     speaking: "What can you do? — short presentation to the teacher",
     listening: "can / can't sentence stress",
-    review: "Unit 5A · ability",
+    review: "Unit 6A · ability",
     category: "general",
     status: "next",
   },
   {
-    id: 43,
+    id: 44,
     title: "A quiet life?",
     grammar: "Present continuous — be + verb + -ing (full unit)",
     vocabulary: "noise verbs; action phrases",
     speaking: "Describe what people are doing now",
     listening: "/ŋ/; present continuous in context",
-    review: "PC speaking (L37); Unit 5B",
+    review: "PC speaking (L37); later unit",
     category: "general",
     status: "next",
   },

@@ -119,6 +119,12 @@ export default function Lesson41() {
             >
               ← Lesson 40
             </Link>
+            <Link
+              className="lesson22-back-link lesson22-back-link--ghost"
+              to="/lesson-42"
+            >
+              Lesson 42 →
+            </Link>
             <Link className="lesson22-back-link" to="/hw-41">
               HW41 →
             </Link>
@@ -632,6 +638,9 @@ export default function Lesson41() {
           </Link>
           <Link className="l25-cr-mini-btn" to="/lesson-40">
             ← Lesson 40
+          </Link>
+          <Link className="l25-cr-mini-btn" to="/lesson-42">
+            Lesson 42 →
           </Link>
           <Link className="l25-cr-mini-btn" to="/vocab">
             Vocab
