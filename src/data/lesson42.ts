@@ -332,19 +332,19 @@ export const stressSentences42 = [
   {
     id: 1,
     words: ["On", "Fridays,", "I", "have", "breakfast", "at", "ten."],
-    stressed: [1, 4, 6],
+    stressed: [1, 4, 6] as number[],
     example: true,
   },
   {
     id: 2,
     words: ["I", "go", "to", "work", "at", "eight", "thirty."],
-    stressed: [1, 3, 5, 6],
+    stressed: [1, 3, 5, 6] as number[],
     example: false,
   },
   {
     id: 3,
     words: ["At", "twelve", "o'clock,", "I", "have", "lunch."],
-    stressed: [1, 2, 5],
+    stressed: [1, 2, 5] as number[],
     example: false,
   },
   {
@@ -360,7 +360,7 @@ export const stressSentences42 = [
       "eight",
       "thirty.",
     ],
-    stressed: [1, 2, 4, 5, 7, 8],
+    stressed: [1, 2, 4, 5, 7, 8] as number[],
     example: false,
   },
   {
@@ -377,7 +377,7 @@ export const stressSentences42 = [
       "my",
       "friends.",
     ],
-    stressed: [1, 3, 5, 6, 9],
+    stressed: [1, 3, 5, 6, 9] as number[],
     example: false,
   },
 ] as const;
