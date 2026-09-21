@@ -204,7 +204,7 @@ export default function Lesson42() {
   const onAtScore = grammarOnAt42.filter((g, i) => onAtAns[i] === g.answer)
     .length;
 
-  const [stressSel, setStressSel] = useState(() =>
+  const [stressSel, setStressSel] = useState<number[][]>(() =>
     stressSentences42.map((s) => (s.example ? [...s.stressed] : [])),
   );
   const [stressChecked, setStressChecked] = useState(false);
