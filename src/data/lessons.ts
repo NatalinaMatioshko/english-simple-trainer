@@ -342,6 +342,7 @@ export const lessonCovers: Record<string, string> = {
   "41": "/images/lesson41/cover.jpg",
   "42": "/images/lesson42/cover.jpg",
   extra: "/images/everyday-actions.png",
+  review: "/images/at-work.webp",
 };
 
 export function lessonCubeLabel(lesson: LessonEntry): string {

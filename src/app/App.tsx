@@ -57,6 +57,8 @@ import HW42 from "../pages/HW42";
 import Lesson42 from "../pages/Lesson42";
 import A1LevelTest from "../pages/A1LevelTest";
 import ExtraResources from "../pages/ExtraResources";
+import ReviewHub from "../pages/ReviewHub";
+import ReviewMaterialPage from "../pages/ReviewMaterialPage";
 import VocabPage from "../pages/VocabPage";
 import LoginPage from "../pages/LoginPage";
 import SelfStudyReview from "../pages/SelfStudyReview";
@@ -78,6 +80,8 @@ function AppRoutes() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/lessons" element={<Lessons />} />
         <Route path="/extra-resources" element={<ExtraResources />} />
+        <Route path="/review" element={<ReviewHub />} />
+        <Route path="/review/:id" element={<ReviewMaterialPage />} />
         <Route path="/lesson-15" element={<Lesson15 />} />
         <Route path="/lesson-16" element={<Lesson16 />} />
         <Route path="/lesson-17" element={<Lesson17 />} />

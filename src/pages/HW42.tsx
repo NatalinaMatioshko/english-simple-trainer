@@ -235,6 +235,12 @@ export default function HW42() {
             >
               ← Lesson 42
             </Link>
+            <Link
+              className="lesson22-back-link lesson22-back-link--ghost"
+              to="/review/preposition-geometry"
+            >
+              Review · in/on/at →
+            </Link>
           </div>
         </div>
       </section>

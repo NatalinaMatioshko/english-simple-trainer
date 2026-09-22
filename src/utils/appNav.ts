@@ -4,7 +4,8 @@ export type AppNavId =
   | "lessons"
   | "trainer"
   | "vocab"
-  | "homework";
+  | "homework"
+  | "review";
 
 export type AppNavItem = {
   id: AppNavId;
@@ -19,6 +20,7 @@ export const appNavItems: AppNavItem[] = [
   { id: "trainer", to: "/trainer", label: "Trainer" },
   { id: "vocab", to: "/vocab", label: "Vocab" },
   { id: "homework", to: "/homework", label: "Homework" },
+  { id: "review", to: "/review", label: "Review" },
 ];
 
 export const mobileNavItems: AppNavItem[] = appNavItems.filter(
@@ -40,6 +42,9 @@ export function isAppNavActive(pathname: string, to: string): boolean {
   }
   if (to === "/trainer") return pathname === "/trainer";
   if (to === "/vocab") return pathname === "/vocab";
+  if (to === "/review") {
+    return pathname === "/review" || pathname.startsWith("/review/");
+  }
   return pathname === to || pathname.startsWith(`${to}/`);
 }
 
@@ -129,6 +134,17 @@ export function getPageContext(pathname: string): {
       crumbs: [
         { label: "Уроки", to: "/lessons" },
         { label: "Extra resources" },
+      ],
+    };
+  }
+  if (pathname === "/review" || pathname.startsWith("/review/")) {
+    const reviewMatch = pathname.match(/^\/review\/([^/]+)/);
+    return {
+      title: reviewMatch ? "Правило" : "Повторення",
+      crumbs: [
+        { label: "Уроки", to: "/lessons" },
+        { label: "Review", to: "/review" },
+        ...(reviewMatch ? [{ label: reviewMatch[1] }] : []),
       ],
     };
   }

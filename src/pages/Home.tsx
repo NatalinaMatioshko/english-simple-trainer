@@ -243,6 +243,9 @@ function TeacherCabinet({
         <Link className="dash-action" to="/homework">
           Домашнє
         </Link>
+        <Link className="dash-action" to="/review">
+          Повторення
+        </Link>
         <Link className="dash-action" to="/">
           Roadmap
         </Link>
@@ -398,6 +401,9 @@ export default function Home() {
         </Link>
         <Link className="dash-action" to="/homework">
           Домашнє
+        </Link>
+        <Link className="dash-action" to="/review">
+          Повторення
         </Link>
         <Link className="dash-action" to="/">
           Roadmap

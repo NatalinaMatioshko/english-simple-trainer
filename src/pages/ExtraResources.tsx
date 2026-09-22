@@ -110,6 +110,9 @@ export default function ExtraResources() {
         <Link className="back-link back-home-btn" to="/lessons">
           ← Lessons
         </Link>
+        <Link className="back-link" to="/review">
+          Review &amp; rules →
+        </Link>
       </div>
 
       <header className="page-hero panel">

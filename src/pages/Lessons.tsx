@@ -76,6 +76,15 @@ export default function Lessons() {
             <span className="catalog-cube-title">Extra. Visual materials</span>
           </span>
         </Link>
+
+        <Link to="/review" className="catalog-cube is-extra is-past">
+          <span className="catalog-cube-media" aria-hidden="true">
+            <img src={lessonCovers.review} alt="" />
+          </span>
+          <span className="catalog-cube-body">
+            <span className="catalog-cube-title">Review. Rules &amp; practice</span>
+          </span>
+        </Link>
       </section>
     </div>
   );
