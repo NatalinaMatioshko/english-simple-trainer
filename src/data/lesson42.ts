@@ -309,6 +309,18 @@ export const personalizePrompts = [
   "At the weekend, I don't … / I …",
 ] as const;
 
+/** HW42 · same prompts in Ukrainian (student writes English) */
+export const personalizePromptsUa = [
+  "З понеділка по п'ятницю я встаю о …",
+  "Я їду на роботу / університет / … о … (на / автобусом / …)",
+  "Я … / Я працюю … / Я студент.",
+  "Я обідаю о …",
+  "Я йду / їду додому о …",
+  "Увечері я …",
+  "Я лягаю спати о …",
+  "У вихідні я не … / Я …",
+] as const;
+
 /** Grammar · Present Simple I (textbook box · ex.6) */
 export const psIForms = [
   { form: "+", example: "I / You / We / They go to work." },

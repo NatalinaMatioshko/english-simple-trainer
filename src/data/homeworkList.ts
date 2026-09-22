@@ -37,6 +37,33 @@ export function homeworkHref(
 
 export const homeworkByLesson = [
   {
+    id: "42",
+    title: "My week · travel",
+    href: "/hw-42",
+    tasks: [
+      {
+        type: "text",
+        text: "Mini-test: Parts of the day (picture → word)",
+      },
+      {
+        type: "text",
+        text: "Write 5 sentences about your day + On Mondays gaps",
+      },
+      {
+        type: "text",
+        text: "Write 3 sentences about your week · Mari → true for you",
+      },
+      {
+        type: "text",
+        text: "Grammar on/at · word-order sentences",
+      },
+      {
+        type: "text",
+        text: "Travel: R4 listen & repeat · UA→EN flashcards · gaps 2b",
+      },
+    ],
+  },
+  {
     id: "41",
     title: "Check and reflect · Unit 4",
     href: "/hw-41",

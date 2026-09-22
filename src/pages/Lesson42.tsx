@@ -344,9 +344,9 @@ export default function Lesson42() {
             </Link>
             <Link
               className="lesson22-back-link lesson22-back-link--ghost"
-              to="/hw-41"
+              to="/hw-42"
             >
-              ← HW 41
+              HW 42 →
             </Link>
             <Link
               className="lesson22-back-link lesson22-back-link--ghost"
@@ -2116,8 +2116,8 @@ export default function Lesson42() {
           <Link className="l25-cr-mini-btn" to="/lesson-41">
             ← Lesson 41
           </Link>
-          <Link className="l25-cr-mini-btn" to="/hw-41">
-            HW 41
+          <Link className="l25-cr-mini-btn" to="/hw-42">
+            HW 42
           </Link>
           <Link className="l25-cr-mini-btn" to="/vocab">
             Vocab

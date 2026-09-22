@@ -322,6 +322,7 @@ export const lessons: LessonEntry[] = [
     description:
       "My week + Part 2 A long journey: everyday activities, days, Mari's week, travel match A–G, Do you…?, leave / arrive.",
     lessonPath: "/lesson-42",
+    homeworkPath: "/hw-42",
   },
 ];
 
