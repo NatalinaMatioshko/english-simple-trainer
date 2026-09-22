@@ -8,10 +8,15 @@ import {
   everydaySentences,
   grammarOnAt42,
   IMG42,
+  onInAtChunks42,
   orderWrite42,
   partDayQuiz,
   personalizePromptsUa,
+  placeDirectionChunks42,
+  placeDirectionPick42,
   psIForms,
+  transportPick42,
+  transportStabilizeChunks42,
   travelChunks,
   travelGaps2b,
   u5Scripts,
@@ -120,6 +125,46 @@ export default function HW42() {
     textOk(gap2bAns[i], g.answers),
   ).length;
 
+  const [placeFlip, setPlaceFlip] = useState<number[]>([]);
+  const togglePlaceFlip = (idx: number) => {
+    setPlaceFlip((prev) => {
+      const open = prev.includes(idx);
+      if (!open) speakEnglish(placeDirectionChunks42[idx].example);
+      return open ? prev.filter((i) => i !== idx) : [...prev, idx];
+    });
+  };
+  const [placePick, setPlacePick] = useState(() =>
+    Array(placeDirectionPick42.length).fill(""),
+  );
+  const [placeChecked, setPlaceChecked] = useState(false);
+  const placeScore = placeDirectionPick42.filter(
+    (item, i) => placePick[i] === item.answer,
+  ).length;
+
+  const [oninatPick, setOninatPick] = useState(() =>
+    Array(onInAtChunks42.length).fill(""),
+  );
+  const [oninatChecked, setOninatChecked] = useState(false);
+  const oninatScore = onInAtChunks42.filter(
+    (item, i) => oninatPick[i] === item.answer,
+  ).length;
+
+  const [transportFlip, setTransportFlip] = useState<number[]>([]);
+  const toggleTransportFlip = (idx: number) => {
+    setTransportFlip((prev) => {
+      const open = prev.includes(idx);
+      if (!open) speakEnglish(transportStabilizeChunks42[idx].en);
+      return open ? prev.filter((i) => i !== idx) : [...prev, idx];
+    });
+  };
+  const [transportPick, setTransportPick] = useState(() =>
+    Array(transportPick42.length).fill(""),
+  );
+  const [transportChecked, setTransportChecked] = useState(false);
+  const transportScore = transportPick42.filter(
+    (item, i) => transportPick[i] === item.answer,
+  ).length;
+
   const [draft, setDraft] = useState("");
 
   const dayDone = dayWrite.filter((t) => t.trim().length > 5).length >= 5;
@@ -134,6 +179,9 @@ export default function HW42() {
     grammar: onAtChecked && onAtScore === grammarOnAt42.length,
     order: orderChecked && orderScore >= Math.ceil(orderWrite42.length * 0.75),
     travelGaps: gap2bChecked && gap2bScore === travelGaps2b.length,
+    places: placeChecked && placeScore === placeDirectionPick42.length,
+    oninat: oninatChecked && oninatScore === onInAtChunks42.length,
+    transport: transportChecked && transportScore === transportPick42.length,
   };
   const allDone = Object.values(checks).every(Boolean);
 
@@ -151,6 +199,15 @@ export default function HW42() {
     "",
     "=== Word order ===",
     ...orderAns.map((s, i) => `${i + 1}. ${s}`),
+    "",
+    "=== Places & directions ===",
+    ...placePick.map((s, i) => `${i + 1}. ${s || "(empty)"}`),
+    "",
+    "=== on / in / at ===",
+    ...oninatPick.map((s, i) => `${onInAtChunks42[i].cue} → ${s || "(empty)"}`),
+    "",
+    "=== Transport chunks ===",
+    ...transportPick.map((s, i) => `${i + 1}. ${s || "(empty)"}`),
   ].join("\n");
 
   return (
@@ -161,11 +218,11 @@ export default function HW42() {
             <p className="page-kicker">Homework 42</p>
             <h1>My week · travel</h1>
             <p className="lesson22-topic-pill">
-              Parts of the day · routine · Present Simple · travel
+              Parts of the day · routine · places · transport
             </p>
             <p className="lesson22-subtitle">
-              Повтори урок 42: частини доби, свій день і тиждень, граматика on/at,
-              travel phrases.
+              Повтори урок 42: частини доби, свій день і тиждень, on/in/at,
+              місця й напрямки, transport chunks.
             </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -192,6 +249,9 @@ export default function HW42() {
           <a href="#hw42-grammar">6 Grammar</a>
           <a href="#hw42-order">7 Order</a>
           <a href="#hw42-travel">8–10 Travel</a>
+          <a href="#hw42-places">11 Places</a>
+          <a href="#hw42-oninat">12 on/in/at</a>
+          <a href="#hw42-transport">13 Transport</a>
           <a href="#hw42-submit">Submit</a>
         </div>
       </section>
@@ -784,6 +844,300 @@ export default function HW42() {
         </button>
       </section>
 
+      {/* 11 · Places & directions */}
+      <section id="hw42-places" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">11 · Chunks</p>
+          <h2>Places &amp; directions</h2>
+          <p className="lesson22-section-desc">
+            Спочатку вивчи готові фрази (tap → English + 🔊). Потім обери
+            правильне речення — без правила «at = локація», лише chunks.
+          </p>
+        </div>
+
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">A</strong> Learn the chunks
+        </p>
+        <div className="l22-vocab-grid" style={{ marginTop: "0.65rem" }}>
+          {placeDirectionChunks42.map((c, idx) => {
+            const isFlipped = placeFlip.includes(idx);
+            return (
+              <button
+                key={c.en}
+                type="button"
+                className={`l22-vocab-card${isFlipped ? " l22-vocab-card--flipped" : ""}`}
+                onClick={() => togglePlaceFlip(idx)}
+                aria-pressed={isFlipped}
+                aria-label={`${c.ua} · ${c.en}`}
+              >
+                <div className="l22-vocab-inner">
+                  <div className="l22-vocab-face l22-vocab-front">
+                    <span className="l22-vocab-label">Українською</span>
+                    <strong>{c.ua}</strong>
+                    <span className="l22-vocab-hint">tap → English</span>
+                  </div>
+                  <div className="l22-vocab-face l22-vocab-back">
+                    <span className="l22-vocab-label">English</span>
+                    <strong>{c.en}</strong>
+                    <em>{c.example}</em>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.25rem" }}>
+          <strong className="l31-ex-num">B</strong> Choose the correct sentence
+        </p>
+        <div className="l42-pick-list">
+          {placeDirectionPick42.map((item, i) => (
+            <div key={item.id} className="l42-pick-item">
+              <p className="l42-pick-tip">
+                {item.id}. <span>{item.tip}</span>
+              </p>
+              <div className="l42-pick-options" role="group">
+                {item.options.map((opt) => {
+                  const selected = placePick[i] === opt;
+                  const isOk = placeChecked && opt === item.answer;
+                  const isErr =
+                    placeChecked && selected && opt !== item.answer;
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={[
+                        "l42-pick-btn",
+                        selected ? "is-selected" : "",
+                        isOk ? "is-ok" : "",
+                        isErr ? "is-err" : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                      onClick={() => {
+                        setPlaceChecked(false);
+                        const next = [...placePick];
+                        next[i] = opt;
+                        setPlacePick(next);
+                        speakEnglish(opt);
+                      }}
+                      aria-pressed={selected}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+        <CheckBar
+          checked={placeChecked}
+          score={placeScore}
+          total={placeDirectionPick42.length}
+          onCheck={() => setPlaceChecked(true)}
+          onReset={() => {
+            setPlacePick(Array(placeDirectionPick42.length).fill(""));
+            setPlaceChecked(false);
+          }}
+        />
+        <button
+          type="button"
+          className="l25-cr-mini-btn"
+          style={{ marginTop: "0.4rem" }}
+          onClick={() => {
+            setPlacePick(placeDirectionPick42.map((item) => item.answer));
+            setPlaceChecked(true);
+          }}
+        >
+          Show answers
+        </button>
+      </section>
+
+      {/* 12 · on / in / at rapid */}
+      <section id="hw42-oninat" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">12 · Rapid drill</p>
+          <h2>on · in · at</h2>
+          <p className="lesson22-section-desc">
+            Швидко обери chunk: дні → <em>on</em>, частини дня → <em>in</em>,
+            точний час і night → <em>at</em>. BrE: <em>at the weekend</em>.
+          </p>
+        </div>
+        <div className="l42-pick-list">
+          {onInAtChunks42.map((item, i) => (
+            <div key={item.id} className="l42-pick-item">
+              <p className="l42-pick-tip">
+                {item.id}. Cue: <strong>{item.cue}</strong>
+              </p>
+              <div className="l42-pick-options" role="group">
+                {item.options.map((opt) => {
+                  const selected = oninatPick[i] === opt;
+                  const isOk = oninatChecked && opt === item.answer;
+                  const isErr =
+                    oninatChecked && selected && opt !== item.answer;
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={[
+                        "l42-pick-btn",
+                        selected ? "is-selected" : "",
+                        isOk ? "is-ok" : "",
+                        isErr ? "is-err" : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                      onClick={() => {
+                        setOninatChecked(false);
+                        const next = [...oninatPick];
+                        next[i] = opt;
+                        setOninatPick(next);
+                        speakEnglish(opt);
+                      }}
+                      aria-pressed={selected}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+        <CheckBar
+          checked={oninatChecked}
+          score={oninatScore}
+          total={onInAtChunks42.length}
+          onCheck={() => setOninatChecked(true)}
+          onReset={() => {
+            setOninatPick(Array(onInAtChunks42.length).fill(""));
+            setOninatChecked(false);
+          }}
+        />
+        <button
+          type="button"
+          className="l25-cr-mini-btn"
+          style={{ marginTop: "0.4rem" }}
+          onClick={() => {
+            setOninatPick(onInAtChunks42.map((item) => item.answer));
+            setOninatChecked(true);
+          }}
+        >
+          Show answers
+        </button>
+      </section>
+
+      {/* 13 · Transport stabilize */}
+      <section id="hw42-transport" className="lesson22-block panel">
+        <div className="lesson22-section-head">
+          <p className="page-kicker">13 · Chunks</p>
+          <h2>Transport · 8 fixed phrases</h2>
+          <p className="lesson22-section-desc">
+            Спочатку запам&apos;ятай ці 8 фраз. Потім обери правильний варіант
+            (не вигадуй свої — стабілізуй готові).
+          </p>
+        </div>
+
+        <p className="l31-ex-line">
+          <strong className="l31-ex-num">A</strong> Learn &amp; say
+        </p>
+        <div className="l22-vocab-grid" style={{ marginTop: "0.65rem" }}>
+          {transportStabilizeChunks42.map((c, idx) => {
+            const isFlipped = transportFlip.includes(idx);
+            return (
+              <button
+                key={c.en}
+                type="button"
+                className={`l22-vocab-card${isFlipped ? " l22-vocab-card--flipped" : ""}`}
+                onClick={() => toggleTransportFlip(idx)}
+                aria-pressed={isFlipped}
+                aria-label={`${c.ua} · ${c.en}`}
+              >
+                <div className="l22-vocab-inner">
+                  <div className="l22-vocab-face l22-vocab-front">
+                    <span className="l22-vocab-label">Українською</span>
+                    <strong>{c.ua}</strong>
+                    <span className="l22-vocab-hint">tap → English</span>
+                  </div>
+                  <div className="l22-vocab-face l22-vocab-back">
+                    <span className="l22-vocab-label">English</span>
+                    <strong>{c.en}</strong>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        <p className="l31-ex-line" style={{ marginTop: "1.25rem" }}>
+          <strong className="l31-ex-num">B</strong> Fix the mistake — choose
+          the correct chunk
+        </p>
+        <div className="l42-pick-list">
+          {transportPick42.map((item, i) => (
+            <div key={item.id} className="l42-pick-item">
+              <p className="l42-pick-tip">
+                {item.id}. <span>{item.tip}</span>
+              </p>
+              <div className="l42-pick-options" role="group">
+                {item.options.map((opt) => {
+                  const selected = transportPick[i] === opt;
+                  const isOk = transportChecked && opt === item.answer;
+                  const isErr =
+                    transportChecked && selected && opt !== item.answer;
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={[
+                        "l42-pick-btn",
+                        selected ? "is-selected" : "",
+                        isOk ? "is-ok" : "",
+                        isErr ? "is-err" : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                      onClick={() => {
+                        setTransportChecked(false);
+                        const next = [...transportPick];
+                        next[i] = opt;
+                        setTransportPick(next);
+                        speakEnglish(opt);
+                      }}
+                      aria-pressed={selected}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+        <CheckBar
+          checked={transportChecked}
+          score={transportScore}
+          total={transportPick42.length}
+          onCheck={() => setTransportChecked(true)}
+          onReset={() => {
+            setTransportPick(Array(transportPick42.length).fill(""));
+            setTransportChecked(false);
+          }}
+        />
+        <button
+          type="button"
+          className="l25-cr-mini-btn"
+          style={{ marginTop: "0.4rem" }}
+          onClick={() => {
+            setTransportPick(transportPick42.map((item) => item.answer));
+            setTransportChecked(true);
+          }}
+        >
+          Show answers
+        </button>
+      </section>
+
       <section id="hw42-submit" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">Submit</p>
@@ -812,7 +1166,10 @@ export default function HW42() {
             gapScore +
             onAtScore +
             orderScore +
-            gap2bScore
+            gap2bScore +
+            placeScore +
+            oninatScore +
+            transportScore
           }
           showListeningCheck={false}
         />

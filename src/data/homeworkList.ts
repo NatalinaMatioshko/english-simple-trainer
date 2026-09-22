@@ -61,6 +61,14 @@ export const homeworkByLesson = [
         type: "text",
         text: "Travel: R4 listen & repeat · UA→EN flashcards · gaps 2b",
       },
+      {
+        type: "text",
+        text: "Places & directions chunks · choose correct (at work / go home…)",
+      },
+      {
+        type: "text",
+        text: "Rapid on / in / at · 8 transport chunks + fix mistakes",
+      },
     ],
   },
   {

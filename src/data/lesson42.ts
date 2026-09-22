@@ -879,3 +879,244 @@ export const writeQuestions42 = [
     ],
   },
 ] as const;
+
+/** HW42 · places & directions chunks (student weak spots) */
+export const placeDirectionChunks42 = [
+  {
+    en: "at work",
+    ua: "на роботі",
+    example: "I'm at work now.",
+  },
+  {
+    en: "to work",
+    ua: "на роботу (напрямок)",
+    example: "I go to work at eight.",
+  },
+  {
+    en: "go home",
+    ua: "іти / їхати додому",
+    example: "I go home at six.",
+  },
+  {
+    en: "at school",
+    ua: "у школі",
+    example: "She's at school today.",
+  },
+  {
+    en: "arrive at work",
+    ua: "прибути на роботу",
+    example: "I arrive at work at 9.",
+  },
+  {
+    en: "leave home",
+    ua: "виходити з дому",
+    example: "I leave home at 7.30.",
+  },
+  {
+    en: "at a bookshop",
+    ua: "у книгарні (місце роботи)",
+    example: "I work at a bookshop.",
+  },
+  {
+    en: "in the bookshop",
+    ua: "в книгарні (всередині)",
+    example: "She's in the bookshop.",
+  },
+] as const;
+
+/** HW42 · choose the correct place/direction sentence */
+export const placeDirectionPick42 = [
+  {
+    id: 1,
+    tip: "home — без to",
+    options: ["I go to home at 6.", "I go home at 6."],
+    answer: "I go home at 6.",
+  },
+  {
+    id: 2,
+    tip: "місце (де?) → at",
+    options: ["I'm at work.", "I'm to work."],
+    answer: "I'm at work.",
+  },
+  {
+    id: 3,
+    tip: "напрямок (куди?) → to",
+    options: ["I go at work at 8.", "I go to work at 8."],
+    answer: "I go to work at 8.",
+  },
+  {
+    id: 4,
+    tip: "arrive + at + місце",
+    options: ["I arrive to work at 9.", "I arrive at work at 9."],
+    answer: "I arrive at work at 9.",
+  },
+  {
+    id: 5,
+    tip: "місце навчання / роботи",
+    options: ["She's at school.", "She's to school."],
+    answer: "She's at school.",
+  },
+  {
+    id: 6,
+    tip: "A1 активний варіант: at a bookshop",
+    options: ["I work at a bookshop.", "I work to a bookshop."],
+    answer: "I work at a bookshop.",
+  },
+  {
+    id: 7,
+    tip: "leave home — без from у базовій фразі",
+    options: ["I leave home at 7.30.", "I leave to home at 7.30."],
+    answer: "I leave home at 7.30.",
+  },
+  {
+    id: 8,
+    tip: "walk home — без to",
+    options: ["I walk to home.", "I walk home."],
+    answer: "I walk home.",
+  },
+] as const;
+
+/** HW42 · rapid on / in / at chunks */
+export const onInAtChunks42 = [
+  {
+    id: 1,
+    cue: "Monday",
+    options: ["on Monday", "at Monday", "in Monday"],
+    answer: "on Monday",
+  },
+  {
+    id: 2,
+    cue: "the morning",
+    options: ["on the morning", "in the morning", "at the morning"],
+    answer: "in the morning",
+  },
+  {
+    id: 3,
+    cue: "7 p.m.",
+    options: ["on 7 p.m.", "in 7 p.m.", "at 7 p.m."],
+    answer: "at 7 p.m.",
+  },
+  {
+    id: 4,
+    cue: "the weekend (BrE)",
+    options: ["on the weekend", "at the weekend", "in the weekend"],
+    answer: "at the weekend",
+  },
+  {
+    id: 5,
+    cue: "Friday evening",
+    options: ["on Friday evening", "in Friday evening", "at Friday evening"],
+    answer: "on Friday evening",
+  },
+  {
+    id: 6,
+    cue: "night",
+    options: ["on night", "in night", "at night"],
+    answer: "at night",
+  },
+  {
+    id: 7,
+    cue: "Tuesdays",
+    options: ["on Tuesdays", "at Tuesdays", "in Tuesdays"],
+    answer: "on Tuesdays",
+  },
+  {
+    id: 8,
+    cue: "the evening",
+    options: ["on the evening", "in the evening", "at the evening"],
+    answer: "in the evening",
+  },
+] as const;
+
+/**
+ * HW42 · stabilize 8 transport chunks
+ * (student errors: go to walk, circle, go by car, drive car…)
+ */
+export const transportStabilizeChunks42 = [
+  {
+    en: "I walk to work.",
+    ua: "Я йду на роботу пішки.",
+  },
+  {
+    en: "I walk home.",
+    ua: "Я йду додому пішки.",
+  },
+  {
+    en: "I go to work by bus.",
+    ua: "Я їду на роботу автобусом.",
+  },
+  {
+    en: "I go to work by train.",
+    ua: "Я їду на роботу поїздом.",
+  },
+  {
+    en: "I cycle to work.",
+    ua: "Я їду на роботу велосипедом.",
+  },
+  {
+    en: "I drive to my parents' house.",
+    ua: "Я їду машиною до батьків.",
+  },
+  {
+    en: "I take a taxi.",
+    ua: "Я беру таксі.",
+  },
+  {
+    en: "I take a boat.",
+    ua: "Я їду човном / поромом.",
+  },
+] as const;
+
+export const transportPick42 = [
+  {
+    id: 1,
+    tip: "walk = дієслово «йти пішки»",
+    options: ["I go to walk.", "I walk to work."],
+    answer: "I walk to work.",
+  },
+  {
+    id: 2,
+    tip: "cycle, не circle",
+    options: ["I circle to work.", "I cycle to work."],
+    answer: "I cycle to work.",
+  },
+  {
+    id: 3,
+    tip: "drive to + місце",
+    options: ["I drive car to my parents' house.", "I drive to my parents' house."],
+    answer: "I drive to my parents' house.",
+  },
+  {
+    id: 4,
+    tip: "готовий chunk: drive to…",
+    options: [
+      "I go by car to my parents' house.",
+      "I drive to my parents' house.",
+    ],
+    answer: "I drive to my parents' house.",
+  },
+  {
+    id: 5,
+    tip: "go to work by + транспорт",
+    options: ["I go to work by bus.", "I go by bus to work at."],
+    answer: "I go to work by bus.",
+  },
+  {
+    id: 6,
+    tip: "take + a + транспорт",
+    options: ["I take a taxi.", "I take taxi."],
+    answer: "I take a taxi.",
+  },
+  {
+    id: 7,
+    tip: "walk home — без to",
+    options: ["I walk to home.", "I walk home."],
+    answer: "I walk home.",
+  },
+  {
+    id: 8,
+    tip: "take a boat",
+    options: ["I take a boat.", "I go boat to work."],
+    answer: "I take a boat.",
+  },
+] as const;
