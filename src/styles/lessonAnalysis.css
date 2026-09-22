@@ -41,6 +41,78 @@
   font-weight: 700;
 }
 
+.la-signal {
+  display: grid;
+  gap: 0.35rem;
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.85rem;
+  border: 1px solid color-mix(in srgb, #c47a1a 35%, var(--color-border));
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, #c47a1a 14%, var(--color-surface)),
+      color-mix(in srgb, var(--color-surface) 92%, #c47a1a)
+    );
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.la-signal-label {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6b3d05;
+  background: color-mix(in srgb, #c47a1a 22%, white);
+}
+
+.la-covered {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.la-covered li {
+  padding: 0.35rem 0.7rem;
+  border-radius: 0.65rem;
+  border: 1px dashed color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+.la-result {
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.la-result li {
+  position: relative;
+  padding: 0.65rem 0.85rem 0.65rem 2.1rem;
+  border-radius: 0.7rem;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 90%, var(--color-bg));
+}
+
+.la-result li::before {
+  content: "✓";
+  position: absolute;
+  left: 0.7rem;
+  top: 0.65rem;
+  font-weight: 800;
+  color: color-mix(in srgb, #2f7d4a 80%, var(--color-primary));
+}
+
 .la-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -48,9 +120,12 @@
 }
 
 .la-cards article {
-  padding: 0.85rem 0.95rem;
+  position: relative;
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.95rem 1rem 1rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.75rem;
+  border-radius: 0.85rem;
   background: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg));
 }
 
@@ -59,21 +134,115 @@
   font-size: 0.95rem;
 }
 
+.la-badge {
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 0.15rem;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.la-badge-ok {
+  color: #1f5c35;
+  background: color-mix(in srgb, #2f7d4a 18%, white);
+}
+
+.la-badge-warn {
+  color: #7a3b08;
+  background: color-mix(in srgb, #c47a1a 20%, white);
+}
+
+.la-badge-tip {
+  color: #1d4f7a;
+  background: color-mix(in srgb, #3a7eb8 18%, white);
+}
+
+.la-tone-ok {
+  border-color: color-mix(in srgb, #2f7d4a 40%, var(--color-border)) !important;
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, #2f7d4a 10%, var(--color-surface)),
+      var(--color-surface)
+    ) !important;
+}
+
+.la-tone-warn {
+  border-color: color-mix(in srgb, #c47a1a 45%, var(--color-border)) !important;
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, #c47a1a 12%, var(--color-surface)),
+      var(--color-surface)
+    ) !important;
+}
+
+.la-tone-tip {
+  border-color: color-mix(in srgb, #3a7eb8 42%, var(--color-border)) !important;
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, #3a7eb8 11%, var(--color-surface)),
+      var(--color-surface)
+    ) !important;
+}
+
+.la-quote {
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  border-left: 3px solid color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
+  border-radius: 0 0.55rem 0.55rem 0;
+  background: color-mix(in srgb, var(--color-primary) 7%, var(--color-surface));
+  font-style: italic;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.la-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.15rem 0 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.la-chips li {
+  padding: 0.28rem 0.6rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 70%, var(--color-surface));
+  font-size: 0.84rem;
+  font-weight: 650;
+  font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+}
+
 .la-gaps {
   display: grid;
-  gap: 1.1rem;
-  padding-left: 1.2rem;
+  gap: 1rem;
+  padding-left: 0;
+  list-style: none;
 }
 
 .la-gaps > li {
   display: grid;
   gap: 0.45rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--color-surface) 88%, var(--color-bg));
 }
 
 .la-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
+  margin-top: 0.15rem;
 }
 
 .la-table th,
@@ -92,10 +261,44 @@
   background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
 }
 
+.la-table td:first-child {
+  font-weight: 700;
+  font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+  white-space: nowrap;
+}
+
 .la-split {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.1rem;
+}
+
+.la-check,
+.la-improve {
+  padding-left: 0 !important;
+  list-style: none !important;
+}
+
+.la-check li,
+.la-improve li {
+  position: relative;
+  padding-left: 1.35rem;
+}
+
+.la-check li::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  font-weight: 800;
+  color: #2f7d4a;
+}
+
+.la-improve li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  font-weight: 800;
+  color: #c47a1a;
 }
 
 .la-inline {
@@ -113,18 +316,60 @@
   border: 1px solid var(--color-border);
   font-size: 0.85rem;
   font-weight: 700;
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
 }
 
 .la-flow {
   margin: 0 0 1rem;
-  padding-left: 1.15rem;
+  padding-left: 0;
+  list-style: none;
   display: grid;
-  gap: 0.55rem;
+  gap: 0.65rem;
+  counter-reset: la-flow;
 }
 
 .la-flow li {
   display: grid;
-  gap: 0.15rem;
+  gap: 0.2rem;
+  padding: 0.7rem 0.85rem 0.7rem 2.6rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 90%, var(--color-bg));
+  position: relative;
+  counter-increment: la-flow;
+}
+
+.la-flow li::before {
+  content: counter(la-flow);
+  position: absolute;
+  left: 0.7rem;
+  top: 0.75rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: white;
+  background: color-mix(in srgb, var(--color-primary) 85%, black);
+}
+
+.la-flow strong {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.la-flow-time {
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--color-primary) 75%, black);
+  background: color-mix(in srgb, var(--color-primary) 12%, white);
 }
 
 .la-flow span {
@@ -132,9 +377,39 @@
   font-size: 0.95rem;
 }
 
+.la-next {
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--color-primary) 9%, var(--color-surface)),
+      var(--color-surface)
+    );
+}
+
+.la-takeaway {
+  border-color: color-mix(in srgb, #2f7d4a 35%, var(--color-border));
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, #2f7d4a 10%, var(--color-surface)),
+      var(--color-surface)
+    );
+}
+
+.la-takeaway p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
 @media (max-width: 900px) {
   .la-cards,
   .la-split {
     grid-template-columns: 1fr;
+  }
+
+  .la-table td:first-child {
+    white-space: normal;
   }
 }

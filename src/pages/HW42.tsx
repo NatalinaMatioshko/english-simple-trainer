@@ -814,13 +814,7 @@ export default function HW42() {
             orderScore +
             gap2bScore
           }
-          quizTotal={
-            partDayQuiz.length +
-            weekGaps.length +
-            grammarOnAt42.length +
-            orderWrite42.length +
-            travelGaps2b.length
-          }
+          showListeningCheck={false}
         />
       </section>
     </div>

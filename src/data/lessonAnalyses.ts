@@ -6,6 +6,10 @@ export type AnalysisSection = {
   bullets?: string[];
   pairs?: AnalysisPair[];
   pairHead?: AnalysisPair;
+  /** Visual accent on cards / gap blocks */
+  tone?: "ok" | "warn" | "tip";
+  /** Short student quote or key phrase */
+  quote?: string;
 };
 
 export type LessonAnalysis = {
@@ -14,6 +18,10 @@ export type LessonAnalysis = {
   topic: string;
   lessonPath: string;
   lead: string;
+  /** One-line teacher signal under the lead */
+  signal?: string;
+  /** Topic chips: what the lesson touched */
+  covered?: string[];
   result: string[];
   strengths: AnalysisSection[];
   gaps: AnalysisSection[];
@@ -25,6 +33,8 @@ export type LessonAnalysis = {
   nextFlow: { time: string; title: string; text: string }[];
   homework: string[];
   takeaway: string;
+  resultHeading?: string;
+  takeawayHeading?: string;
 };
 
 export const lessonAnalyses: LessonAnalysis[] = [
@@ -644,6 +654,249 @@ export const lessonAnalyses: LessonAnalysis[] = [
     ],
     takeaway:
       "Урок 41 дав хороший результат у темах time, days, schedules і listening. Петро вже краще використовує works / doesn’t work, has, on Monday, in the morning, at night, at the weekend, Monday to Friday, starts / ends at…. Найбільший ризик — наприкінці зайшли в reported speech і -ing after prepositions раніше, ніж він готовий. Наступний урок краще використати для автоматизації вже зрозумілого: час + розклад + дні тижня + рутина.",
+  },
+  {
+    id: "42",
+    title: "My week · A long journey",
+    topic: "routine · days · on/in/at · transport · listening",
+    lessonPath: "/lesson-42",
+    lead:
+      "Урок 42 був корисним як системне повторення, але вийшов ширшим за план: час, daily routine, days, prepositions of time, reading, transport і homework. Петро добре розуміє Present Simple, але його запит зараз — не ще один великий review, а коротка автоматизація слабких місць і поступовий перехід до Past Simple.",
+    signal:
+      "Наприкінці він прямо сказав, що очікував Past Simple. Повторення потрібне — але компактніше, з чітким кроком у нову тему.",
+    covered: [
+      "telling the time",
+      "o’clock · past · to · half · quarter",
+      "morning · afternoon · evening · night · midnight",
+      "daily routine",
+      "Present Simple · he/she/it + -s",
+      "days of the week",
+      "on Monday · in the morning · at night · at the weekend",
+      "Monday to Friday · days off",
+      "Mari’s week reading",
+      "short answers with are",
+      "word stress",
+      "go to work · walk home · cycle · drive · leave · arrive",
+    ],
+    result: [
+      "повторив час, routine, days, on/in/at, робочий графік і транспортні chunks;",
+      "сам почав помічати works / doesn’t work / has у listening;",
+      "зрозумів Monday to Friday = з понеділка по п’ятницю;",
+      "склав кілька справжніх речень про свій тиждень і шлях на роботу;",
+      "сам назвав слабкі місця: at work / to work / go home / at school — конкретні блоки, не «все складно».",
+    ],
+    strengths: [
+      {
+        title: "Час · базова логіка",
+        tone: "ok",
+        text: "Упізнає й частково називає half past, quarter past / to, five to, ten to, twelve o’clock, midnight. Швидка відповідь ще плутається, але логіку «до / після» вже чує — і сам помічає, коли відповідь нелогічна (наприклад half past eleven ↔ 11:30).",
+        bullets: [
+          "half past seven",
+          "quarter past… / quarter to…",
+          "five to five · ten to seven",
+          "twelve o’clock · midnight",
+        ],
+      },
+      {
+        title: "Listening · Present Simple -s",
+        tone: "ok",
+        quote:
+          "She doesn’t work on Wednesday. · She sometimes works on Saturday. · The woman has history class on Wednesday.",
+        text: "Почув doesn’t work / works / has і зрозумів, що в третій особі форми інші. Правило he/she/it + -s починає переходити зі свідомого знання в listening recognition.",
+      },
+      {
+        title: "Monday to Friday",
+        tone: "ok",
+        text: "Спочатку сприйняв як «лише Monday and Friday». Після пояснення закріпив: Monday to Friday = з понеділка по п’ятницю — ключова конструкція для графіка.",
+        bullets: [
+          "I work Monday to Friday.",
+          "I study from Tuesday to Thursday.",
+          "My week starts on Tuesday and ends on Sunday.",
+        ],
+      },
+      {
+        title: "Самостійні речення",
+        tone: "ok",
+        text: "Уже комбінує знайомі слова, а не лише повторює готову фразу.",
+        bullets: [
+          "I study English on Mondays.",
+          "On Tuesday, I go to university.",
+          "I get up late on Saturdays.",
+          "On Sundays, I watch TV.",
+          "I work in a bookshop. · I go to work. · I walk home.",
+          "I drive to my parents’ house.",
+        ],
+      },
+      {
+        title: "Самооцінка",
+        tone: "tip",
+        quote: "at work · to work · go home · at school · місця й напрямки",
+        text: "Сам сформулював потребу: плутається в місцях і напрямках. Це цінно — не «мені все складно», а конкретні мовні блоки для наступного drill.",
+      },
+    ],
+    gaps: [
+      {
+        title: "Час ще не автоматизований",
+        tone: "warn",
+        text: "Розуміє пояснення, але швидко сказати час важко: half past / quarter past / quarter to, цифри vs слова, at 7:45 vs it’s 7:45. Не великий блок теорії — 3–5 хв швидких drills на кожному уроці.",
+        pairHead: { left: "Цифри", right: "Сказати" },
+        pairs: [
+          { left: "6:15", right: "quarter past six" },
+          { left: "6:30", right: "half past six" },
+          { left: "6:45", right: "quarter to seven" },
+          { left: "6:50", right: "ten to seven" },
+          { left: "7:00", right: "seven o’clock" },
+        ],
+      },
+      {
+        title: "In / on / at нестабільні",
+        tone: "warn",
+        text: "Плутав at Tuesday, on the morning, at weekend, in/at a bookshop, go home / go to home, arrive at / to work. Не одне правило «at = локація» — запам’ятовувати chunks.",
+        pairHead: { left: "Chunk", right: "Значення" },
+        pairs: [
+          { left: "on Monday / on Fridays", right: "у понеділок / по п’ятницях" },
+          { left: "in the morning / evening", right: "вранці / увечері" },
+          { left: "at night · at 7 p.m.", right: "вночі · о 7 вечора" },
+          { left: "at the weekend (BrE)", right: "на вихідних" },
+          { left: "at work · at school", right: "на роботі · у школі" },
+          { left: "in the bookshop", right: "всередині книгарні" },
+          { left: "go to work · go home", right: "на роботу · додому" },
+          { left: "arrive at work", right: "прибути на роботу" },
+        ],
+        bullets: [
+          "З днями → on",
+          "З частинами дня → in",
+          "З точним часом і night → at",
+        ],
+      },
+      {
+        title: "go / walk / drive / cycle",
+        tone: "warn",
+        quote: "I go to walk. · I circle to work. · I go by car to… · I drive car…",
+        text: "Спочатку стабілізувати 7–8 готових transport chunks, не просити багато власних варіантів.",
+        bullets: [
+          "I walk to work. · I walk home.",
+          "I go to work by bus / by train.",
+          "I cycle to work.",
+          "I drive to my parents’ house.",
+          "I take a taxi. · I take a boat.",
+        ],
+      },
+      {
+        title: "Short answers · множина",
+        tone: "tip",
+        quote: "Are the week and the weekend very different for her? → Yes, they are.",
+        text: "Підмет — два елементи (the week + the weekend), тому they. Окремий mini-drill на are / they are / they aren’t.",
+        pairHead: { left: "Питання", right: "Відповідь" },
+        pairs: [
+          {
+            left: "Are Monday and Friday busy?",
+            right: "Yes, they are.",
+          },
+          {
+            left: "Are your days off Monday and Friday?",
+            right: "Yes, they are.",
+          },
+          {
+            left: "Are your parents at home?",
+            right: "No, they aren’t.",
+          },
+          {
+            left: "Is your week busy?",
+            right: "Yes, it is.",
+          },
+        ],
+      },
+    ],
+    corrections: [
+      {
+        title: "What time is our train?",
+        tone: "tip",
+        text: "Зрозуміла фраза, але для A1 кращі точні моделі: What time does the train leave? — It leaves at 7:45. What time does the train arrive? — It arrives at 10:30. What time is the train? можливе розмовно — не робити головною моделлю.",
+      },
+      {
+        title: "the end vs the lesson ends",
+        tone: "tip",
+        text: "the end — іменник; the lesson ends — дієслово. Не казати «немає артикля → автоматично дієслово»: без артикля бувають water / books / Kyiv і дієслова. Краще: артикль часто показує один злічуваний іменник; роль слова видно з усього речення.",
+      },
+      {
+        title: "in a bookshop · at a bookshop",
+        tone: "ok",
+        text: "Обидва правильні. at a bookshop — місце роботи як заклад; in a bookshop — робота всередині. Для A1 активний варіант: I work at a bookshop. in — правильна альтернатива, без щоразу вибирати.",
+      },
+      {
+        title: "My week starts / ends",
+        tone: "ok",
+        bullets: [
+          "My week starts on Tuesday.",
+          "My week ends on Sunday.",
+          "I work from Tuesday to Thursday.",
+          "I work Tuesday to Thursday.",
+          "I don’t work on Mondays and Fridays.",
+        ],
+        text: "Правильна модель графіка — варто тримати як готовий набір.",
+      },
+      {
+        title: "at the weekend (BrE)",
+        tone: "ok",
+        text: "BrE: at the weekend. AmE: on the weekend. Для курсу активний: I play games at the weekend.",
+      },
+    ],
+    teacherGood: [
+      "Повторення прив’язане до реального життя: графік, вихідні, уроки англійської, як дістається роботи.",
+      "Давала час самому думати: підмет, дієслово, works/doesn’t, прийменник, Monday to Friday — не лише копіювати фразу.",
+      "Конкретна похвала за doesn’t work / works / has — мікроперемоги закріплюють прогрес.",
+      "Підлаштувалась під запит: більше письма, самостійні переклади, менш передбачувані завдання без готових підказок.",
+    ],
+    teacherImprove: [
+      "Урок занадто широкий: time + routine + days + reading + stress + short answers + transport + leave/arrive (+ preview Past). Фактично два уроки в одному. Далі: нова тема з короткого warm-up зі старого.",
+      "Не пояснювати нове правило у втомі (ask if / -ing after about / indirect questions). Достатньо: «Складніша конструкція. Сьогодні не вчимо — лише зміст: він питає, чи можуть вони грати.»",
+      "Після пояснення on/in/at — rapid drill (10 швидких відповідей), а не довгий теоретичний діалог: Monday → on Monday; morning → in the morning; 7 p.m. → at 7 p.m.; weekend → at the weekend; Friday evening → on Friday evening.",
+    ],
+    nextGoal:
+      "Talk about yesterday · Past Simple of be + 5–6 regular verbs (без великого списку irregular).",
+    nextGrammar: [
+      "yesterday · last night · last weekend",
+      "I was / I wasn’t · You were…",
+      "I worked · watched · played · walked · cooked · studied · visited",
+      "Today I work. → Yesterday I worked.",
+    ],
+    nextFlow: [
+      {
+        time: "5 хв",
+        title: "Warm-up review",
+        text: "What time is it? What days do you work? What do you do at the weekend? How do you go to work?",
+      },
+      {
+        time: "8 хв",
+        title: "Today ↔ Yesterday",
+        text: "I am tired → I was tired. I work → I worked. I play games → I played games. I watch TV → I watched TV.",
+      },
+      {
+        time: "12 хв",
+        title: "Personal yesterday",
+        text: "Yesterday I worked. I watched TV. I played a game. I cooked dinner. I went to bed late. Поки без складних питань із did — спершу was/were + regular.",
+      },
+      {
+        time: "8 хв",
+        title: "Speak · mini story",
+        text: "Учень розповідає вчорашній день 4–6 реченнями. Учитель лише підказує chunks.",
+      },
+      {
+        time: "5 хв",
+        title: "Exit",
+        text: "Yesterday: what did you do? — коротка відповідь без таблиці.",
+      },
+    ],
+    homework: [
+      "HW42: Parts of the day · day/week writing · gaps · UA→EN routine · on/at · word order · travel R4 + flashcards + 2b.",
+      "Додатково (опційно): 6 речень Yesterday I… з worked / watched / played / walked / cooked / studied.",
+      "Voice 30–40 сек: Yesterday I… (без вимог до did-питань).",
+    ],
+    resultHeading: "Що реально закріпилось",
+    takeawayHeading: "Короткий review → Past Simple",
+    takeaway:
+      "Урок 42 був продуктивним для повторення: час, графік, дні, prepositions, listening. Але мотивація Петра вже просить рух уперед. Найкращий наступний крок: короткий review → Past Simple with yesterday → проста особиста історія. Так збережеш систему й він відчує новий рівень.",
   },
 ];
 
