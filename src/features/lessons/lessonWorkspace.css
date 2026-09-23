@@ -1,0 +1,738 @@
+/* Minimal shared styles for content-driven lesson workspace (lw-*).
+   Figure zoom keeps Lesson31Figure class names (l31-*) — only those rules are included. */
+
+.lw-page {
+  display: grid;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.lw-hero,
+.lw-block {
+  padding: 1.1rem 1.15rem;
+}
+
+.lw-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.lw-hero h1 {
+  margin: 0.15rem 0 0.35rem;
+  font-size: clamp(1.45rem, 2.5vw, 1.85rem);
+  line-height: 1.25;
+}
+
+.lw-subtitle {
+  margin: 0.35rem 0 0.75rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+.lw-topic-pill {
+  display: inline-block;
+  margin: 0.25rem 0 0;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  font-size: 0.88rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+}
+
+.lw-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lw-back-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.35rem 0.7rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: var(--color-surface);
+}
+
+.lw-back-link:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+}
+
+.lw-back-link--ghost {
+  background: transparent;
+  font-weight: 650;
+}
+
+.lw-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+
+.lw-chips span {
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--color-bg) 55%, var(--color-surface));
+}
+
+.lw-section-head {
+  margin-bottom: 0.65rem;
+}
+
+.lw-section-head h2 {
+  margin: 0.1rem 0 0.25rem;
+  font-size: 1.2rem;
+}
+
+.lw-section-desc {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+.lw-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.lw-flow a {
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+}
+
+.lw-flow a:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+}
+
+.lw-prompt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: 0.65rem;
+}
+
+.lw-prompt-card {
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 90%, var(--color-bg));
+  line-height: 1.4;
+}
+
+.lw-prompt-card--task {
+  border-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-border));
+}
+
+.lw-prompt-card strong {
+  font-weight: 800;
+}
+
+.lw-contrast-row,
+.lw-figure-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.35rem;
+}
+
+.lw-conf-card {
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.lw-conf-header {
+  padding: 0.45rem 0.75rem;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+  border-bottom: 1px solid var(--color-border);
+}
+
+.lw-conf-body {
+  margin: 0;
+  padding: 0.85rem 0.9rem;
+  font-size: 1.1rem;
+  line-height: 1.45;
+}
+
+.lw-note {
+  margin: 1rem 0 0;
+  padding: 0.75rem 0.9rem;
+  border-left: 3px solid color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
+  border-radius: 0 0.55rem 0.55rem 0;
+  background: color-mix(in srgb, var(--color-primary) 7%, var(--color-surface));
+}
+
+.lw-note p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.lw-goals-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.4rem;
+  line-height: 1.45;
+}
+
+.lw-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.85rem;
+}
+
+.lw-check-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.9rem;
+  border-radius: 0.6rem;
+  border: 1px solid transparent;
+  background: var(--color-primary);
+  color: white;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lw-check-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.lw-mini-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lw-mini-btn:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+}
+
+.lw-muted {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.lw-mc-prompt {
+  margin: 0 0 0.55rem;
+  font-weight: 700;
+}
+
+.lw-mc-options {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.lw-mc-btn {
+  text-align: left;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.lw-mc-btn.is-selected {
+  border-color: color-mix(in srgb, var(--color-primary) 50%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
+}
+
+.lw-mc-btn.is-ok {
+  border-color: color-mix(in srgb, #2f7d4a 50%, var(--color-border));
+  background: color-mix(in srgb, #2f7d4a 14%, var(--color-surface));
+}
+
+.lw-mc-btn.is-err {
+  border-color: color-mix(in srgb, #b33a3a 50%, var(--color-border));
+  background: color-mix(in srgb, #b33a3a 12%, var(--color-surface));
+}
+
+.lw-gap-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.lw-gap-row {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.lw-gap-input {
+  min-width: 5rem;
+  max-width: 10rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.45rem;
+  border: 1px solid var(--color-border);
+  font: inherit;
+}
+
+.lw-gap-input.is-ok {
+  border-color: #16a34a;
+  background: color-mix(in srgb, #22c55e 10%, var(--color-surface));
+}
+
+.lw-gap-input.is-err {
+  border-color: #dc2626;
+  background: color-mix(in srgb, #ef4444 8%, var(--color-surface));
+}
+
+.lw-tip {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--color-primary) 70%, var(--color-text));
+}
+
+.lw-textarea {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--color-border);
+  font: inherit;
+  resize: vertical;
+  background: var(--color-surface);
+}
+
+.lw-video-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  margin: 0.35rem 0 0.75rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: #000;
+}
+
+.lw-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.lw-drill-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.lw-drill-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.55rem;
+}
+
+.lw-drill-prompt {
+  flex: 1 1 12rem;
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.lw-drill-arrow {
+  color: var(--color-text-muted);
+  font-weight: 700;
+}
+
+.lw-select {
+  max-width: 100%;
+  min-width: 7rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  font: inherit;
+  background: var(--color-surface);
+}
+
+.lw-select.is-ok {
+  border-color: #16a34a;
+  background: color-mix(in srgb, #22c55e 10%, var(--color-surface));
+}
+
+.lw-select.is-err {
+  border-color: #dc2626;
+  background: color-mix(in srgb, #ef4444 8%, var(--color-surface));
+}
+
+.lw-gap-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  line-height: 1.45;
+}
+
+.lw-word-order .l25-cr-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.85rem;
+}
+
+.lw-word-order .l22-check-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.9rem;
+  border-radius: 0.6rem;
+  border: 1px solid transparent;
+  background: var(--color-primary);
+  color: white;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lw-word-order .l25-cr-mini-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lw-word-order .l22-score {
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.l31-wo-hint {
+  margin: 0.35rem 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.l31-wo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.l31-wo-card {
+  padding: 0.85rem 0.95rem;
+  border-radius: 0.9rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.l31-wo-card.is-ok {
+  border-color: color-mix(in srgb, #2f7d4a 45%, var(--color-border));
+  background: color-mix(in srgb, #2f7d4a 10%, var(--color-surface));
+}
+
+.l31-wo-card.is-err,
+.l31-wo-card.is-miss {
+  border-color: color-mix(in srgb, #b33a3a 40%, var(--color-border));
+  background: color-mix(in srgb, #b33a3a 8%, var(--color-surface));
+}
+
+.l31-wo-scramble {
+  margin: 0 0 0.55rem;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.l31-wo-built {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 3rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.65rem;
+  border: 1.5px dashed color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 6%, transparent);
+}
+
+.l31-wo-placeholder {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  font-style: italic;
+}
+
+.l31-wo-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+  min-height: 2.4rem;
+}
+
+.l31-wo-chip {
+  margin: 0;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 700;
+  cursor: grab;
+  touch-action: manipulation;
+}
+
+.l31-wo-chip:active {
+  cursor: grabbing;
+}
+
+.l31-wo-chip:hover {
+  border-color: var(--color-primary);
+}
+
+.l31-wo-chip--built {
+  background: color-mix(in srgb, var(--color-primary) 14%, var(--color-surface));
+  border-style: solid;
+}
+
+.l31-wo-feedback {
+  margin: 0.55rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.l31-wo-feedback.is-ok {
+  color: #2f7d4a;
+}
+
+.l31-wo-feedback.is-err {
+  color: #b33a3a;
+}
+
+/* Lesson31Figure class names (required by shared component) */
+.l31-figure {
+  margin: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.l31-figure-cap {
+  order: 2;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+}
+
+.l31-figure-zoom {
+  order: 1;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+  border-radius: 0.75rem;
+}
+
+.l31-figure-zoom:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.l31-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-inline: auto;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  object-fit: contain;
+}
+
+.l31-figure--worksheet img {
+  max-width: 100%;
+}
+
+.lw-figure-row .l31-figure {
+  margin: 0;
+}
+
+.l31-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(0 0 0 / 72%);
+}
+
+.l31-lightbox-img {
+  max-width: min(96vw, 1100px);
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.l31-lightbox-close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 0;
+  border-radius: 999px;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  background: #fff;
+}
+
+.l31-lightbox-close:hover {
+  background: #f1f5f9;
+}
+
+/* Word box above MC group (match labels) */
+.lw-chip-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 0.85rem;
+}
+
+.lw-chip {
+  display: inline-flex;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  font-size: 0.88rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+}
+
+/* fillBlank choiceMode: buttons */
+.lw-alt-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.65rem;
+  line-height: 1.55;
+}
+
+.lw-alt {
+  display: inline-flex;
+  margin: 0;
+  padding: 0.1rem 0.35rem;
+  border: 1px solid transparent;
+  border-radius: 0.35rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
+  color: inherit;
+}
+
+.lw-alt.is-on {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface));
+}
+
+.lw-alt.is-ok {
+  border-color: #2f9e62;
+  background: color-mix(in srgb, #2f9e62 18%, var(--color-surface));
+}
+
+.lw-alt.is-err {
+  border-color: #b42318;
+  background: color-mix(in srgb, #b42318 14%, var(--color-surface));
+}
+
+.lw-alt.is-key {
+  outline: 2px dashed #2f9e62;
+}
+
+.lw-alt-slash {
+  opacity: 0.55;
+  font-weight: 600;
+}
+
+/* L38 grammar box: horizontal scroll on narrow screens */
+.l38-grammar-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.l38-grammar-scroll .l25-grammar-box {
+  min-width: min(100%, 28rem);
+}
+
+/* Word map: clip overflow so hubs don't cause page horizontal scroll */
+.l38-wordmap-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.l38-wordmap-wrap .l38-mind {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 720px) {
+  .lw-contrast-row,
+  .lw-figure-row {
+    grid-template-columns: 1fr;
+  }
+
+  .l38-grammar-scroll .l25-grammar-box,
+  .l38-grammar-scroll .l38-have-lines p {
+    font-size: 0.92rem;
+  }
+
+  .l38-grammar-scroll .l38-have-lines {
+    display: grid;
+    gap: 0.55rem;
+  }
+}

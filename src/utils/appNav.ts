@@ -31,7 +31,11 @@ export function isAppNavActive(pathname: string, to: string): boolean {
   if (to === "/") return pathname === "/";
   if (to === "/cabinet") return pathname === "/cabinet";
   if (to === "/lessons") {
-    return pathname === "/lessons" || pathname.startsWith("/lesson-");
+    return (
+      pathname === "/lessons" ||
+      pathname.startsWith("/lesson-") ||
+      /^\/lessons\/[^/]+$/.test(pathname)
+    );
   }
   if (to === "/homework") {
     return (
@@ -51,6 +55,7 @@ export function isAppNavActive(pathname: string, to: string): boolean {
 export function isLessonWorkspacePath(pathname: string): boolean {
   return (
     /^\/lesson-\d+/.test(pathname) ||
+    /^\/lessons\/\d+$/.test(pathname) ||
     /^\/hw-\d+/.test(pathname) ||
     /^\/homework\/\d+/.test(pathname)
   );
@@ -81,6 +86,16 @@ export function getPageContext(pathname: string): {
       crumbs: [
         { label: "Уроки", to: "/lessons" },
         { label: `Урок ${lessonMatch[1]}` },
+      ],
+    };
+  }
+  const contentLessonMatch = pathname.match(/^\/lessons\/(\d+)$/);
+  if (contentLessonMatch) {
+    return {
+      title: `Урок ${contentLessonMatch[1]}`,
+      crumbs: [
+        { label: "Уроки", to: "/lessons" },
+        { label: `Урок ${contentLessonMatch[1]}` },
       ],
     };
   }
