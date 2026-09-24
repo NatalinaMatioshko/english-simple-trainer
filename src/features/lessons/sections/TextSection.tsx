@@ -29,9 +29,11 @@ export function TextSection({ section }: { section: TextSectionType }) {
           ))}
         </div>
       ) : section.bullets && section.bullets.length > 0 ? (
-        <ul className="lw-goals-list">
+        <ul className="lw-sentence-stack">
           {section.bullets.map((line) => (
-            <li key={line}>{line}</li>
+            <li key={line} className="lw-sentence-line">
+              {line}
+            </li>
           ))}
         </ul>
       ) : null}

@@ -68,6 +68,26 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson38;
     },
   },
+  {
+    id: "43",
+    number: 43,
+    title: "A long journey",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 43,
+    status: "published",
+    estimatedMinutes: 60,
+    hasHomework: true,
+    topic: "travel · Do you…? · leave / arrive · Past Simple preview",
+    description:
+      "How you travel to work: match photos, leave/arrive, Do you…?, Tim & Donna listening, speaking, and a soft Past Simple (yesterday) preview.",
+    route: "/lessons/43",
+    homeworkPath: "/hw-43",
+    load: async () => {
+      const mod = await import("./lessons/lesson-43/lesson");
+      return mod.lesson43;
+    },
+  },
 ];
 
 export function getRegistryEntry(

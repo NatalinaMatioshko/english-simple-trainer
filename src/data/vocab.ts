@@ -702,6 +702,42 @@ export const vocabCategories: VocabCategory[] = [
         label: "Parts of the day",
         items: [
           {
+            en: "morning",
+            ua: "ранок",
+            ipa: "ˈmɔːnɪŋ",
+            example: "I get up in the morning.",
+          },
+          {
+            en: "noon",
+            ua: "полудень / 12:00",
+            ipa: "nuːn",
+            example: "It's noon.",
+          },
+          {
+            en: "afternoon",
+            ua: "день (після полудня)",
+            ipa: "ˌɑːftəˈnuːn",
+            example: "I work in the afternoon.",
+          },
+          {
+            en: "evening",
+            ua: "вечір",
+            ipa: "ˈiːvnɪŋ",
+            example: "I watch TV in the evening.",
+          },
+          {
+            en: "night",
+            ua: "ніч",
+            ipa: "naɪt",
+            example: "Good night!",
+          },
+          {
+            en: "midnight",
+            ua: "опівніч / 00:00",
+            ipa: "ˈmɪdnaɪt",
+            example: "I go to bed before midnight.",
+          },
+          {
             en: "in the morning",
             ua: "вранці",
             ipa: "ɪn ðə ˈmɔːnɪŋ",
@@ -3196,7 +3232,7 @@ export const vocabCategories: VocabCategory[] = [
   {
     id: "my-week",
     title: "My week",
-    badge: "L42",
+    badge: "L42–43",
     description:
       "Unit 5A–5B: everyday activities, days of the week, Present Simple I, travel (by bus / leave / arrive).",
     grammar: [
@@ -3216,6 +3252,12 @@ export const vocabCategories: VocabCategory[] = [
             example: "I get up at seven o'clock.",
           },
           {
+            en: "get up late",
+            ua: "вставати пізно",
+            ipa: "ɡet ʌp leɪt",
+            example: "On Saturdays, I get up late.",
+          },
+          {
             en: "have breakfast",
             ua: "снідати",
             ipa: "hæv ˈbrekfəst",
@@ -3226,6 +3268,12 @@ export const vocabCategories: VocabCategory[] = [
             ua: "іти на роботу",
             ipa: "ɡəʊ tə wɜːk",
             example: "I go to work at eight.",
+          },
+          {
+            en: "work",
+            ua: "працювати",
+            ipa: "wɜːk",
+            example: "I work from nine to five thirty.",
           },
           {
             en: "have lunch",
@@ -3263,6 +3311,12 @@ export const vocabCategories: VocabCategory[] = [
             ipa: "ɡəʊ tə bed",
             example: "I go to bed at eleven.",
           },
+          {
+            en: "go to university",
+            ua: "іти в університет",
+            ipa: "ɡəʊ tə ˌjuːnɪˈvɜːsəti",
+            example: "On Tuesdays, I go to university.",
+          },
         ],
       },
       {
@@ -3292,11 +3346,76 @@ export const vocabCategories: VocabCategory[] = [
             ipa: "ɪn ði ˈiːvnɪŋ",
             example: "In the evening, I watch TV.",
           },
+          {
+            en: "from … to …",
+            ua: "з … до …",
+            ipa: "frəm … tə …",
+            example: "I work from nine to five thirty.",
+          },
         ],
       },
       {
-        label: "Travel",
+        label: "Transport",
         items: [
+          {
+            en: "bus",
+            ua: "автобус",
+            ipa: "bʌs",
+            example: "I go to work by bus.",
+          },
+          {
+            en: "train",
+            ua: "поїзд",
+            ipa: "treɪn",
+            example: "I go to the office by train.",
+          },
+          {
+            en: "taxi",
+            ua: "таксі",
+            ipa: "ˈtæksi",
+            example: "I travel to work by taxi.",
+          },
+          {
+            en: "boat",
+            ua: "човен / пором",
+            ipa: "bəʊt",
+            example: "I take a boat to work.",
+          },
+          {
+            en: "bike",
+            ua: "велосипед",
+            ipa: "baɪk",
+            example: "I love my bike!",
+          },
+          {
+            en: "car",
+            ua: "машина",
+            ipa: "kɑː",
+            example: "I drive to my parents' house.",
+          },
+          {
+            en: "office",
+            ua: "офіс",
+            ipa: "ˈɒfɪs",
+            example: "I go to the office by train.",
+          },
+        ],
+      },
+      {
+        label: "Travel phrases",
+        items: [
+          {
+            en: "travel",
+            ua: "їхати / подорожувати",
+            ipa: "ˈtrævl",
+            example: "How do you travel to work?",
+          },
+          {
+            en: "journey",
+            ua: "поїздка / дорога",
+            ipa: "ˈdʒɜːni",
+            example: "That's a really long journey to work.",
+          },
           {
             en: "by bus",
             ua: "автобусом",
@@ -3304,10 +3423,46 @@ export const vocabCategories: VocabCategory[] = [
             example: "I go to work by bus.",
           },
           {
+            en: "by train",
+            ua: "поїздом",
+            ipa: "baɪ treɪn",
+            example: "I go to the office by train.",
+          },
+          {
+            en: "by taxi",
+            ua: "на таксі",
+            ipa: "baɪ ˈtæksi",
+            example: "I travel to work by taxi.",
+          },
+          {
+            en: "by bike",
+            ua: "на велосипеді",
+            ipa: "baɪ baɪk",
+            example: "I go to work by bike.",
+          },
+          {
             en: "take the train",
             ua: "їхати поїздом",
             ipa: "teɪk ðə treɪn",
             example: "I take the train to work.",
+          },
+          {
+            en: "take a taxi",
+            ua: "брати таксі",
+            ipa: "teɪk ə ˈtæksi",
+            example: "I take a taxi.",
+          },
+          {
+            en: "take a boat",
+            ua: "їхати човном / поромом",
+            ipa: "teɪk ə bəʊt",
+            example: "I take a boat to work.",
+          },
+          {
+            en: "take the bus",
+            ua: "їхати автобусом",
+            ipa: "teɪk ðə bʌs",
+            example: "I take the bus. I leave home at 7.30.",
           },
           {
             en: "cycle",
@@ -3338,6 +3493,298 @@ export const vocabCategories: VocabCategory[] = [
             ua: "прибувати на роботу",
             ipa: "əˈraɪv ət wɜːk",
             example: "I arrive at work at 8.30.",
+          },
+          {
+            en: "leave",
+            ua: "виходити / залишати",
+            ipa: "liːv",
+            example: "What time do you leave home?",
+          },
+          {
+            en: "arrive",
+            ua: "прибувати",
+            ipa: "əˈraɪv",
+            example: "What time do you arrive at work?",
+          },
+          {
+            en: "How do you travel to work?",
+            ua: "Як ти добираєшся на роботу?",
+            ipa: "haʊ də ju ˈtrævl tə wɜːk",
+            example: "How do you travel to work? — By bus.",
+          },
+          {
+            en: "What time do you leave home?",
+            ua: "О котрій ти виходиш з дому?",
+            ipa: "wɒt taɪm də ju liːv həʊm",
+            example: "What time do you leave home? — At 7.30.",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "past-simple",
+    title: "Past Simple",
+    badge: "L43+",
+    description:
+      "Ознайомлення: час про минуле (yesterday). Правильні дієслова (-ed), неправильні (запам'ятати), часові маркери.",
+    grammar: [
+      "Present: I work every day. → Past: I worked yesterday.",
+      "Правильні: work → worked (додаємо -ed). Форма однакова для всіх осіб.",
+      "Неправильні: go → went (форму треба запам'ятати).",
+      "Markers: yesterday, last night, last week, … ago.",
+    ],
+    frontLabel: "Українською",
+    backLabel: "Present → Past",
+    groups: [
+      {
+        label: "Time markers",
+        items: [
+          {
+            en: "yesterday",
+            ua: "вчора",
+            ipa: "ˈjestədeɪ",
+            example: "I worked yesterday.",
+          },
+          {
+            en: "yesterday morning",
+            ua: "учора вранці",
+            ipa: "ˈjestədeɪ ˈmɔːnɪŋ",
+            example: "I got up late yesterday morning.",
+          },
+          {
+            en: "yesterday afternoon",
+            ua: "учора вдень",
+            ipa: "ˈjestədeɪ ˌɑːftəˈnuːn",
+            example: "I studied yesterday afternoon.",
+          },
+          {
+            en: "yesterday evening",
+            ua: "учора ввечері",
+            ipa: "ˈjestədeɪ ˈiːvnɪŋ",
+            example: "I watched a film yesterday evening.",
+          },
+          {
+            en: "last night",
+            ua: "минулої ночі / учора ввечері",
+            ipa: "lɑːst naɪt",
+            example: "I slept well last night.",
+          },
+          {
+            en: "last weekend",
+            ua: "минулими вихідними",
+            ipa: "lɑːst ˌwiːkˈend",
+            example: "I visited my parents last weekend.",
+          },
+          {
+            en: "last week",
+            ua: "минулого тижня",
+            ipa: "lɑːst wiːk",
+            example: "I started a new job last week.",
+          },
+          {
+            en: "two days ago",
+            ua: "два дні тому",
+            ipa: "tuː deɪz əˈɡəʊ",
+            example: "I met her two days ago.",
+          },
+          {
+            en: "… ago",
+            ua: "… тому",
+            ipa: "əˈɡəʊ",
+            example: "I finished work an hour ago.",
+          },
+        ],
+      },
+      {
+        label: "Regular verbs (-ed)",
+        items: [
+          {
+            en: "worked",
+            ua: "працювати → працював / працювала",
+            example: "work → worked · I worked yesterday.",
+          },
+          {
+            en: "watched",
+            ua: "дивитися → дивився / дивилася",
+            example: "watch → watched · I watched a film.",
+          },
+          {
+            en: "played",
+            ua: "грати → грав / грала",
+            example: "play → played · I played video games.",
+          },
+          {
+            en: "walked",
+            ua: "гуляти / ходити → гуляв / гуляла",
+            example: "walk → walked · I walked in the park.",
+          },
+          {
+            en: "cooked",
+            ua: "готувати → готував / готувала",
+            example: "cook → cooked · I cooked dinner.",
+          },
+          {
+            en: "studied",
+            ua: "вчитися → вчився / вчилася",
+            example: "study → studied · I studied English.",
+          },
+          {
+            en: "visited",
+            ua: "відвідувати → відвідав / відвідала",
+            example: "visit → visited · I visited my friend.",
+          },
+          {
+            en: "talked",
+            ua: "розмовляти → розмовляв / розмовляла",
+            example: "talk → talked · I talked to my mum.",
+          },
+          {
+            en: "cleaned",
+            ua: "прибирати → прибирав / прибирала",
+            example: "clean → cleaned · I cleaned my room.",
+          },
+          {
+            en: "washed",
+            ua: "мити → мив / мила",
+            example: "wash → washed · I washed the dishes.",
+          },
+          {
+            en: "started",
+            ua: "починати → почав / почала",
+            example: "start → started · I started work at nine.",
+          },
+          {
+            en: "finished",
+            ua: "закінчувати → закінчив / закінчила",
+            example: "finish → finished · I finished at five.",
+          },
+          {
+            en: "relaxed",
+            ua: "відпочивати → відпочивав / відпочивала",
+            example: "relax → relaxed · I relaxed at home.",
+          },
+          {
+            en: "arrived",
+            ua: "прибувати → прибув / прибула",
+            example: "arrive → arrived · I arrived at eight.",
+          },
+          {
+            en: "asked",
+            ua: "запитувати → запитав / запитала",
+            example: "ask → asked · I asked a question.",
+          },
+          {
+            en: "called",
+            ua: "телефонувати → зателефонував / зателефонувала",
+            example: "call → called · I called my friend.",
+          },
+        ],
+      },
+      {
+        label: "Irregular verbs",
+        items: [
+          {
+            en: "was / were",
+            ua: "бути → був / була / були",
+            example: "be → was / were · I was tired yesterday.",
+          },
+          {
+            en: "went",
+            ua: "іти / їхати → пішов / поїхав",
+            example: "go → went · I went to work.",
+          },
+          {
+            en: "had",
+            ua: "мати → мав / мала",
+            example: "have → had · I had breakfast.",
+          },
+          {
+            en: "did",
+            ua: "робити → зробив / зробила",
+            example: "do → did · I did my homework.",
+          },
+          {
+            en: "got",
+            ua: "отримати / дістатися → отримав / дістався",
+            example: "get → got · I got home late.",
+          },
+          {
+            en: "ate",
+            ua: "їсти → їв / їла",
+            example: "eat → ate · I ate lunch.",
+          },
+          {
+            en: "drank",
+            ua: "пити → пив / пила",
+            example: "drink → drank · I drank coffee.",
+          },
+          {
+            en: "woke up",
+            ua: "прокидатися → прокинувся / прокинулася",
+            example: "wake up → woke up · I woke up at ten.",
+          },
+          {
+            en: "got up",
+            ua: "вставати → встав / встала",
+            example: "get up → got up · I got up at ten.",
+          },
+          {
+            en: "felt",
+            ua: "почуватися → почувався / почувалася",
+            example: "feel → felt · I felt better.",
+          },
+          {
+            en: "made",
+            ua: "робити / створювати → зробив / зробила",
+            example: "make → made · I made tea.",
+          },
+          {
+            en: "took",
+            ua: "брати → взяв / взяла",
+            example: "take → took · I took a taxi.",
+          },
+          {
+            en: "saw",
+            ua: "бачити → побачив / побачила",
+            example: "see → saw · I saw a film.",
+          },
+          {
+            en: "came",
+            ua: "приходити / приїжджати → прийшов / приїхав",
+            example: "come → came · I came home late.",
+          },
+          {
+            en: "bought",
+            ua: "купувати → купив / купила",
+            example: "buy → bought · I bought coffee.",
+          },
+          {
+            en: "met",
+            ua: "зустрічати → зустрів / зустріла",
+            example: "meet → met · I met my friend.",
+          },
+          {
+            en: "read",
+            ua: "читати → читав / читала",
+            ipa: "red",
+            example: "read → read · I read a book. (past = /red/)",
+          },
+          {
+            en: "left",
+            ua: "залишати / виходити → залишив / вийшов",
+            example: "leave → left · I left home at 8.",
+          },
+          {
+            en: "slept",
+            ua: "спати → спав / спала",
+            example: "sleep → slept · I slept well.",
+          },
+          {
+            en: "sat",
+            ua: "сидіти → сидів / сиділа",
+            example: "sit → sat · I sat at home.",
           },
         ],
       },

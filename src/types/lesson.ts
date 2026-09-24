@@ -77,6 +77,8 @@ export type MultipleChoiceSection = LessonSectionBase & {
 
 export type FillBlankSection = LessonSectionBase & {
   type: "fillBlank";
+  /** Optional word box above the gaps */
+  chips?: string[];
   items: Array<{
     id: string;
     before: string;
@@ -86,6 +88,8 @@ export type FillBlankSection = LessonSectionBase & {
     options?: string[];
     /** `buttons` = tap alternatives in-line (e.g. has / have) */
     choiceMode?: "select" | "buttons";
+    /** Wider text input (sentence writing) */
+    wide?: boolean;
   }>;
 };
 

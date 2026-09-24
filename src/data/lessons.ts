@@ -92,16 +92,6 @@ const legacyLessons: LessonEntry[] = [
     homeworkPath: "/homework/19",
   },
   {
-    id: "about-me",
-    title: "About Me",
-    level: "A1",
-    topic: "To be + have got",
-    description:
-      "Інтерактивна сторінка: профілі людей, to be, I've got, порядок слів і writing про себе.",
-    lessonPath: "/about-me",
-    homeworkPath: "/homework",
-  },
-  {
     id: "20",
     title: "He / She / It + Present Simple",
     level: "A1-A2",
@@ -110,6 +100,16 @@ const legacyLessons: LessonEntry[] = [
       "Flashcards, -s/-es/-ies, вправи I → he/she та speaking про іншу людину.",
     lessonPath: "/lesson-20",
     homeworkPath: "/homework/20",
+  },
+  {
+    id: "about-me",
+    title: "About Me",
+    level: "A1",
+    topic: "To be + have got",
+    description:
+      "Інтерактивна сторінка: профілі людей, to be, I've got, порядок слів і writing про себе.",
+    lessonPath: "/about-me",
+    homeworkPath: "/homework",
   },
   {
     id: "21",
@@ -307,13 +307,20 @@ const legacyLessons: LessonEntry[] = [
     id: "42",
     title: "My week",
     level: "A1",
-    topic: "Present Simple · days · routine · travel",
+    topic: "Present Simple · days · routine",
     description:
-      "My week + Part 2 A long journey: everyday activities, days, Mari's week, travel match A–G, Do you…?, leave / arrive.",
+      "Unit 5A: everyday activities, days, Mari's week, on/at, and speaking about your week. Travel → Lesson 43.",
     lessonPath: "/lesson-42",
     homeworkPath: "/hw-42",
   },
 ];
+
+/** Catalog order: numeric lesson ids; special pages get a slot between lessons. */
+function catalogOrder(id: string): number {
+  if (id === "about-me") return 20.5;
+  const n = Number(id);
+  return Number.isFinite(n) ? n : Number.POSITIVE_INFINITY;
+}
 
 const contentDriven = getContentDrivenCatalogCards();
 const contentIds = contentDrivenLessonIds();
@@ -323,14 +330,11 @@ export const lessons: LessonEntry[] = [
   ...legacyLessons.filter((lesson) => !contentIds.has(lesson.id)),
   ...contentDriven,
 ].sort((a, b) => {
-  const an = Number(a.id);
-  const bn = Number(b.id);
-  if (Number.isFinite(an) && Number.isFinite(bn)) return an - bn;
   const aPractice = "practiceOnly" in a && a.practiceOnly;
   const bPractice = "practiceOnly" in b && b.practiceOnly;
   if (aPractice) return -1;
   if (bPractice) return 1;
-  return String(a.id).localeCompare(String(b.id));
+  return catalogOrder(a.id) - catalogOrder(b.id);
 });
 
 export const lessonCovers: Record<string, string> = {
@@ -350,6 +354,7 @@ export const lessonCovers: Record<string, string> = {
   "40": "/images/lesson40/cover.jpg",
   "41": "/images/lesson41/cover.jpg",
   "42": "/images/lesson42/cover.jpg",
+  "43": "/images/lesson42/travel-e-train.png",
   extra: "/images/everyday-actions.png",
   review: "/images/at-work.webp",
 };
