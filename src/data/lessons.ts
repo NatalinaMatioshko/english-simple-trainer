@@ -1,4 +1,8 @@
 import { homeworkCovers } from "./homeworkList";
+import {
+  contentDrivenLessonIds,
+  getContentDrivenCatalogCards,
+} from "../features/lessons/catalogAdapter";
 
 export type LessonEntry =
   | {
@@ -21,7 +25,12 @@ export type LessonEntry =
       practiceOnly?: false;
     };
 
-export const lessons: LessonEntry[] = [
+/**
+ * Legacy catalog entries (pre–content-driven).
+ * Lessons owned by src/content/lessonRegistry.ts must NOT be listed here —
+ * they are merged via getContentDrivenCatalogCards().
+ */
+const legacyLessons: LessonEntry[] = [
   {
     id: "practice",
     title: "To be + Present Simple + Routine",
@@ -255,26 +264,6 @@ export const lessons: LessonEntry[] = [
     homeworkPath: "/hw-35",
   },
   {
-    id: "36",
-    title: "Present Simple · daily verbs",
-    level: "A1",
-    topic: "I wake up · do / don't · morning, work, lunch, weekend",
-    description:
-      "ELLLO A1-04: відео Present Simple, listening quiz, complete the sentences, do/don't і speaking про свою рутину з викладачем.",
-    lessonPath: "/lesson-36",
-    homeworkPath: "/hw-36",
-  },
-  {
-    id: "37",
-    title: "Present continuous · now vs every day",
-    level: "A1",
-    topic: "I work every day · I am working now",
-    description:
-      "Контраст every day vs now: work/eat/drink/read/talk/sit, маркери часу, speaking з викладачем і дві picture cards.",
-    lessonPath: "/lesson-37",
-    homeworkPath: "/hw-37",
-  },
-  {
     id: "38",
     title: "You've got a friend",
     level: "A1",
@@ -326,6 +315,24 @@ export const lessons: LessonEntry[] = [
   },
 ];
 
+const contentDriven = getContentDrivenCatalogCards();
+const contentIds = contentDrivenLessonIds();
+
+/** Catalog for Lessons page: legacy + published content-driven (registry is SoT for those). */
+export const lessons: LessonEntry[] = [
+  ...legacyLessons.filter((lesson) => !contentIds.has(lesson.id)),
+  ...contentDriven,
+].sort((a, b) => {
+  const an = Number(a.id);
+  const bn = Number(b.id);
+  if (Number.isFinite(an) && Number.isFinite(bn)) return an - bn;
+  const aPractice = "practiceOnly" in a && a.practiceOnly;
+  const bPractice = "practiceOnly" in b && b.practiceOnly;
+  if (aPractice) return -1;
+  if (bPractice) return 1;
+  return String(a.id).localeCompare(String(b.id));
+});
+
 export const lessonCovers: Record<string, string> = {
   ...homeworkCovers,
   practice: "/images/present-simple-harry-potter.png",
@@ -336,6 +343,8 @@ export const lessonCovers: Record<string, string> = {
   "29": "/images/lesson28/home-office-vocab.png",
   "34": "/images/lesson34/what-are-they-doing.png",
   "35": "/images/lesson35/pixel-town-map.png",
+  "36": "/images/in-the-morning.jpg",
+  "37": "/images/lesson37/speaking-card.png",
   "38": "/images/describing-people-adjectives.png",
   "39": "/images/lesson38/office.jpg",
   "40": "/images/lesson40/cover.jpg",

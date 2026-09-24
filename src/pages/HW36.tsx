@@ -222,7 +222,7 @@ export default function HW36() {
           <div
             style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
           >
-            <Link className="lesson22-back-link" to="/lesson-36">
+            <Link className="lesson22-back-link" to="/lessons/36">
               ← Lesson 36
             </Link>
             <Link className="lesson22-back-link" to="/lessons">

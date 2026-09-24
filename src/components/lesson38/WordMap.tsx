@@ -1,4 +1,3 @@
-import { wordMapExtra } from "../../data/lesson38";
 import "../../styles/lesson38.css";
 
 type Bin = "colours" | "body";
@@ -12,21 +11,13 @@ type Node = {
   bin: Bin;
 };
 
+type Extra = { word: string; bin: Bin };
+type Fixed = { colours: readonly string[]; body: readonly string[] };
+
 const HUBS: Record<Bin, { x: number; y: number }> = {
   colours: { x: 26, y: 50 },
   body: { x: 74, y: 50 },
 };
-
-const FIXED: Node[] = [
-  { id: "hub-colours", label: "colours", x: 26, y: 50, hub: true, bin: "colours" },
-  { id: "blue", label: "blue", x: 8, y: 18, bin: "colours" },
-  { id: "brown", label: "brown", x: 6, y: 52, bin: "colours" },
-  { id: "green", label: "green", x: 10, y: 84, bin: "colours" },
-  { id: "hub-body", label: "the body", x: 74, y: 50, hub: true, bin: "body" },
-  { id: "hair", label: "hair", x: 92, y: 18, bin: "body" },
-  { id: "beard", label: "a beard", x: 58, y: 82, bin: "body" },
-  { id: "eyes", label: "eyes", x: 92, y: 82, bin: "body" },
-];
 
 const EXTRA_SLOTS: Record<Bin, { x: number; y: number }[]> = {
   colours: [
@@ -41,18 +32,87 @@ const EXTRA_SLOTS: Record<Bin, { x: number; y: number }[]> = {
   ],
 };
 
+const DEFAULT_FIXED: Fixed = {
+  colours: ["blue", "brown", "green"],
+  body: ["hair", "eyes", "a beard"],
+};
+
+function buildFixedNodes(fixed: Fixed): Node[] {
+  const colourSlots = [
+    { x: 8, y: 18 },
+    { x: 6, y: 52 },
+    { x: 10, y: 84 },
+  ];
+  const bodySlots = [
+    { x: 92, y: 18 },
+    { x: 92, y: 82 },
+    { x: 58, y: 82 },
+  ];
+  const nodes: Node[] = [
+    {
+      id: "hub-colours",
+      label: "colours",
+      x: 26,
+      y: 50,
+      hub: true,
+      bin: "colours",
+    },
+    {
+      id: "hub-body",
+      label: "the body",
+      x: 74,
+      y: 50,
+      hub: true,
+      bin: "body",
+    },
+  ];
+  fixed.colours.forEach((label, i) => {
+    const slot = colourSlots[i] ?? colourSlots[0];
+    nodes.push({
+      id: `fixed-c-${label}`,
+      label,
+      x: slot.x,
+      y: slot.y,
+      bin: "colours",
+    });
+  });
+  fixed.body.forEach((label, i) => {
+    const slot = bodySlots[i] ?? bodySlots[0];
+    nodes.push({
+      id: `fixed-b-${label}`,
+      label,
+      x: slot.x,
+      y: slot.y,
+      bin: "body",
+    });
+  });
+  return nodes;
+}
+
 type Props = {
   pick: string | null;
   bins: Record<string, Bin>;
   playKey: number;
   onPickHub: (bin: Bin) => void;
+  /** Content-driven fixed hub words (from lesson props) */
+  fixed?: Fixed;
+  /** Content-driven extra words to place */
+  extras?: readonly Extra[];
 };
 
-export function WordMap({ pick, bins, playKey, onPickHub }: Props) {
-  const extras: Node[] = wordMapExtra.flatMap((item) => {
+export function WordMap({
+  pick,
+  bins,
+  playKey,
+  onPickHub,
+  fixed = DEFAULT_FIXED,
+  extras = [],
+}: Props) {
+  const fixedNodes = buildFixedNodes(fixed);
+  const extrasNodes: Node[] = extras.flatMap((item) => {
     const bin = bins[item.word];
     if (!bin) return [];
-    const used = wordMapExtra.filter((w) => bins[w.word] === bin);
+    const used = extras.filter((w) => bins[w.word] === bin);
     const slot = EXTRA_SLOTS[bin][used.indexOf(item)] ?? EXTRA_SLOTS[bin][0];
     return [
       {
@@ -65,7 +125,7 @@ export function WordMap({ pick, bins, playKey, onPickHub }: Props) {
     ];
   });
 
-  const nodes = [...FIXED, ...extras];
+  const nodes = [...fixedNodes, ...extrasNodes];
   const sats = nodes.filter((n) => !n.hub);
 
   return (
@@ -138,4 +198,3 @@ function toneOf(label: string): string {
   }
   return "mix";
 }
-
