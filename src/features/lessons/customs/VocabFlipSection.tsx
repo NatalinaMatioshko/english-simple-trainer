@@ -23,13 +23,26 @@ export function VocabFlipSection({ section }: { section: CustomSection }) {
   const frontLabel = props.frontLabel ?? "Українською";
   const backLabel = props.backLabel ?? "English";
   const [flipped, setFlipped] = useState<number[]>([]);
+  const [announce, setAnnounce] = useState("");
 
   const toggle = (idx: number) => {
     const open = flipped.includes(idx);
     if (!open && cards[idx]?.speak) speakEnglish(cards[idx].speak!);
-    setFlipped((prev) =>
-      open ? prev.filter((i) => i !== idx) : [...prev, idx],
-    );
+    const next = open
+      ? flipped.filter((i) => i !== idx)
+      : [...flipped, idx];
+    setFlipped(next);
+    const card = cards[idx];
+    if (!card) return;
+    if (open) {
+      setAnnounce(
+        `Card closed. ${next.length} of ${cards.length} cards revealed.`,
+      );
+    } else {
+      setAnnounce(
+        `Revealed: ${card.back}. ${next.length} of ${cards.length} cards revealed.`,
+      );
+    }
   };
 
   return (
@@ -51,9 +64,13 @@ export function VocabFlipSection({ section }: { section: CustomSection }) {
               className={`l22-vocab-card${isFlipped ? " l22-vocab-card--flipped" : ""}`}
               onClick={() => toggle(idx)}
               aria-pressed={isFlipped}
-              aria-label={`${c.front} · ${c.back}`}
+              aria-label={
+                isFlipped
+                  ? `${backLabel}: ${c.back}. Press to hide.`
+                  : `${frontLabel}: ${c.front}. Press to reveal.`
+              }
             >
-              <div className="l22-vocab-inner">
+              <div className="l22-vocab-inner" aria-hidden="true">
                 <div className="l22-vocab-face l22-vocab-front">
                   <span className="l22-vocab-label">{frontLabel}</span>
                   <strong>{c.front}</strong>
@@ -69,6 +86,9 @@ export function VocabFlipSection({ section }: { section: CustomSection }) {
           );
         })}
       </div>
+      <p className="lw-a11y-feedback lw-visually-hidden" role="status" aria-live="polite">
+        {announce}
+      </p>
     </section>
   );
 }

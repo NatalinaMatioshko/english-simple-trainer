@@ -27,6 +27,7 @@ export function TickListSection({ section }: { section: CustomSection }) {
   const score = items.filter(
     (item) => Boolean(tick[item.id]) === item.correct,
   ).length;
+  const incorrectCount = items.length - score;
 
   return (
     <section id={section.id} className="lw-block panel">
@@ -37,11 +38,13 @@ export function TickListSection({ section }: { section: CustomSection }) {
           <p className="lw-section-desc">{section.description}</p>
         ) : null}
       </div>
-      <div className="l42-heard-list">
+      <div className="l42-heard-list" role="group" aria-label={section.title}>
         {items.map((item) => {
           const on = Boolean(tick[item.id]);
-          const wrong = checked && on !== item.correct;
-          const ok = checked && on === item.correct && item.correct;
+          const match = on === item.correct;
+          const wrong = checked && !match;
+          const ok = checked && match;
+          const statusId = `${section.id}-tick-${item.id}-status`;
           return (
             <label
               key={item.id}
@@ -59,13 +62,25 @@ export function TickListSection({ section }: { section: CustomSection }) {
                     [item.id]: !prev[item.id],
                   }));
                 }}
+                aria-describedby={checked ? statusId : undefined}
               />
               <span>
                 {item.id}. {item.label}
               </span>
-              {checked && wrong ? (
-                <span className="lw-tip">
-                  {item.correct ? tipCorrect : tipWrong}
+              {checked ? (
+                <span
+                  id={statusId}
+                  className={
+                    match ? "lw-item-status is-ok" : "lw-item-status is-err"
+                  }
+                >
+                  {match ? "Correct" : "Incorrect"}
+                  {!match ? (
+                    <>
+                      {" · "}
+                      {item.correct ? tipCorrect : tipWrong}
+                    </>
+                  ) : null}
                 </span>
               ) : null}
             </label>
@@ -81,7 +96,7 @@ export function TickListSection({ section }: { section: CustomSection }) {
           Check
         </button>
         {checked ? (
-          <span className="lw-muted">
+          <span className="lw-muted" aria-hidden="true">
             {score} / {items.length}
           </span>
         ) : null}
@@ -108,6 +123,11 @@ export function TickListSection({ section }: { section: CustomSection }) {
           Reset
         </button>
       </div>
+      <p className="lw-a11y-feedback" role="status" aria-live="polite">
+        {checked
+          ? `${score} correct, ${incorrectCount} incorrect.`
+          : ""}
+      </p>
     </section>
   );
 }

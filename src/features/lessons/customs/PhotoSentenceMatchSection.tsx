@@ -39,36 +39,60 @@ export function PhotoSentenceMatchSection({
         ) : null}
       </div>
       <div className="l42-pic-grid l42-travel-pic-grid">
-        {images.map((pic, i) => (
-          <figure key={pic.id} className="l42-pic-card">
-            <img src={pic.src} alt={pic.alt} loading="lazy" />
-            <figcaption>
-              <strong>{pic.id}</strong>
-              <select
-                value={ans[i] ?? ""}
-                onChange={(e) => {
-                  setChecked(false);
-                  const next = [...ans];
-                  next[i] = e.target.value;
-                  setAns(next);
-                }}
-                className={drillSelClass(
-                  checked,
-                  ans[i] ?? "",
-                  String(pic.answer),
-                )}
-                aria-label={`Photo ${pic.id} → sentence`}
-              >
-                <option value="">—</option>
-                {options.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            </figcaption>
-          </figure>
-        ))}
+        {images.map((pic, i) => {
+          const value = ans[i] ?? "";
+          const isCorrect = value === String(pic.answer);
+          const statusId = `${section.id}-match-${pic.id}-status`;
+          return (
+            <figure key={pic.id} className="l42-pic-card">
+              <img src={pic.src} alt={pic.alt} loading="lazy" />
+              <figcaption>
+                <strong>{pic.id}</strong>
+                <select
+                  value={value}
+                  onChange={(e) => {
+                    setChecked(false);
+                    const next = [...ans];
+                    next[i] = e.target.value;
+                    setAns(next);
+                  }}
+                  className={drillSelClass(
+                    checked,
+                    value,
+                    String(pic.answer),
+                  )}
+                  aria-label={`Photo ${pic.id}: ${pic.alt}. Choose matching sentence`}
+                  aria-describedby={checked ? statusId : undefined}
+                >
+                  <option value="">—</option>
+                  {options.map((o) => (
+                    <option key={o.value} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+                {checked ? (
+                  <span
+                    id={statusId}
+                    className={
+                      !value
+                        ? "lw-item-status"
+                        : isCorrect
+                          ? "lw-item-status is-ok"
+                          : "lw-item-status is-err"
+                    }
+                  >
+                    {!value
+                      ? "Not answered"
+                      : isCorrect
+                        ? "Correct"
+                        : "Incorrect"}
+                  </span>
+                ) : null}
+              </figcaption>
+            </figure>
+          );
+        })}
       </div>
       <div className="lw-actions">
         <button
@@ -79,7 +103,7 @@ export function PhotoSentenceMatchSection({
           Check
         </button>
         {checked ? (
-          <span className="lw-muted">
+          <span className="lw-muted" aria-hidden="true">
             {score} / {images.length}
           </span>
         ) : null}
@@ -104,6 +128,11 @@ export function PhotoSentenceMatchSection({
           Reset
         </button>
       </div>
+      <p className="lw-a11y-feedback" role="status" aria-live="polite">
+        {checked
+          ? `You got ${score} out of ${images.length} correct.`
+          : ""}
+      </p>
     </section>
   );
 }
