@@ -55,6 +55,13 @@ Use the numeric string id consistently: `"37"` → route `/lessons/37`, legacy `
 | `homeworkLink` | `path`, `label` | Link to existing `/hw-NN` |
 | `custom` | `componentKey`, optional `props` | Non-standard UI |
 
+## Migrated lessons
+
+- **36** — interactive: video, MC groups, select gaps, word order, speaking
+- **37** — speaking/static + custom pictures
+- **38** — audio, photo gallery, WordMap, grammar box, homework-fix, matching via MC groups
+- **43** — A long journey (from L42 Part 2): photo-sentence-match, vocab-flip, tick-list, native-audio, Do you…?
+
 ## Custom keys in use
 
 | componentKey | Purpose |
@@ -67,12 +74,11 @@ Use the numeric string id consistently: `"37"` → route `/lessons/37`, legacy `
 | `lesson38-word-map` | Word map mind-map (data via props) |
 | `lesson38-grammar-have-got` | Interactive have/has got grammar box |
 | `lesson38-friend-speak` | Prepare notes + speak models for L38 |
-
-## Migrated lessons
-
-- **36** — interactive: video, MC groups, select gaps, word order, speaking
-- **37** — speaking/static + custom pictures
-- **38** — audio, photo gallery, WordMap, grammar box, homework-fix, matching via MC groups
+| `photo-sentence-match` | Photo grid + select match to sentences |
+| `vocab-flip` | UA↔EN flip cards |
+| `tick-list` | Checkbox “tick what you hear / true” list |
+| `same-or-different` | Pronunciation same/different with blue highlights |
+| `tense-preview` | Visual tense intro: lead + contrast + rule cards |
 
 ## When to use `custom`
 

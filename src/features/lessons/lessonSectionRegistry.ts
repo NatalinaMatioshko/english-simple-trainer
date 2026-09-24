@@ -7,6 +7,12 @@ import { Lesson38GrammarHaveGotSection } from "./customs/Lesson38GrammarHaveGotS
 import { Lesson38WordMapSection } from "./customs/Lesson38WordMapSection";
 import { NativeAudioSection } from "./customs/NativeAudioSection";
 import { PhotoGallerySection } from "./customs/PhotoGallerySection";
+import { PhotoSentenceMatchSection } from "./customs/PhotoSentenceMatchSection";
+import { SameOrDifferentSection } from "./customs/SameOrDifferentSection";
+import { TensePreviewSection } from "./customs/TensePreviewSection";
+import { TickListSection } from "./customs/TickListSection";
+import { VerbTableSection } from "./customs/VerbTableSection";
+import { VocabFlipSection } from "./customs/VocabFlipSection";
 import { YoutubeVideoSection } from "./customs/YoutubeVideoSection";
 import { FillBlankSection } from "./sections/FillBlankSection";
 import { HomeworkLinkSection } from "./sections/HomeworkLinkSection";
@@ -45,6 +51,12 @@ export const customSectionComponents: Record<
   "lesson38-word-map": Lesson38WordMapSection,
   "lesson38-grammar-have-got": Lesson38GrammarHaveGotSection,
   "lesson38-friend-speak": Lesson38FriendSpeakSection,
+  "photo-sentence-match": PhotoSentenceMatchSection,
+  "vocab-flip": VocabFlipSection,
+  "tick-list": TickListSection,
+  "verb-table": VerbTableSection,
+  "same-or-different": SameOrDifferentSection,
+  "tense-preview": TensePreviewSection,
 };
 
 export function getCustomSectionComponent(componentKey: string) {

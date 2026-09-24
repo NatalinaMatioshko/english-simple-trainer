@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
 import { CheckBar } from "../components/lesson38/L38Ui";
-import Unit5AudioBlock from "../components/Unit5AudioBlock";
 import {
   everydaySentences,
   grammarOnAt42,
@@ -15,11 +14,6 @@ import {
   placeDirectionChunks42,
   placeDirectionPick42,
   psIForms,
-  transportPick42,
-  transportStabilizeChunks42,
-  travelChunks,
-  travelGaps2b,
-  u5Scripts,
   weekGaps,
 } from "../data/lesson42";
 import { speakEnglish } from "../utils/speech";
@@ -50,15 +44,6 @@ function inputCls(checked: boolean, value: string, ok: boolean): string {
   return "l22-gap-input";
 }
 
-function U5ListTranscript({ lines }: { lines: readonly string[] }) {
-  return (
-    <ol>
-      {lines.map((line) => (
-        <li key={line}>{line}</li>
-      ))}
-    </ol>
-  );
-}
 
 export default function HW42() {
   const [pdIndex, setPdIndex] = useState(0);
@@ -108,23 +93,6 @@ export default function HW42() {
     textOk(orderAns[i], item.answers),
   ).length;
 
-  const [travelFlip, setTravelFlip] = useState<number[]>([]);
-  const toggleTravelFlip = (idx: number) => {
-    setTravelFlip((prev) => {
-      const open = prev.includes(idx);
-      if (!open) speakEnglish(travelChunks[idx].en);
-      return open ? prev.filter((i) => i !== idx) : [...prev, idx];
-    });
-  };
-
-  const [gap2bAns, setGap2bAns] = useState(() =>
-    Array(travelGaps2b.length).fill(""),
-  );
-  const [gap2bChecked, setGap2bChecked] = useState(false);
-  const gap2bScore = travelGaps2b.filter((g, i) =>
-    textOk(gap2bAns[i], g.answers),
-  ).length;
-
   const [placeFlip, setPlaceFlip] = useState<number[]>([]);
   const togglePlaceFlip = (idx: number) => {
     setPlaceFlip((prev) => {
@@ -149,22 +117,6 @@ export default function HW42() {
     (item, i) => oninatPick[i] === item.answer,
   ).length;
 
-  const [transportFlip, setTransportFlip] = useState<number[]>([]);
-  const toggleTransportFlip = (idx: number) => {
-    setTransportFlip((prev) => {
-      const open = prev.includes(idx);
-      if (!open) speakEnglish(transportStabilizeChunks42[idx].en);
-      return open ? prev.filter((i) => i !== idx) : [...prev, idx];
-    });
-  };
-  const [transportPick, setTransportPick] = useState(() =>
-    Array(transportPick42.length).fill(""),
-  );
-  const [transportChecked, setTransportChecked] = useState(false);
-  const transportScore = transportPick42.filter(
-    (item, i) => transportPick[i] === item.answer,
-  ).length;
-
   const [draft, setDraft] = useState("");
 
   const dayDone = dayWrite.filter((t) => t.trim().length > 5).length >= 5;
@@ -178,10 +130,8 @@ export default function HW42() {
     me: meDone,
     grammar: onAtChecked && onAtScore === grammarOnAt42.length,
     order: orderChecked && orderScore >= Math.ceil(orderWrite42.length * 0.75),
-    travelGaps: gap2bChecked && gap2bScore === travelGaps2b.length,
     places: placeChecked && placeScore === placeDirectionPick42.length,
     oninat: oninatChecked && oninatScore === onInAtChunks42.length,
-    transport: transportChecked && transportScore === transportPick42.length,
   };
   const allDone = Object.values(checks).every(Boolean);
 
@@ -205,9 +155,6 @@ export default function HW42() {
     "",
     "=== on / in / at ===",
     ...oninatPick.map((s, i) => `${onInAtChunks42[i].cue} → ${s || "(empty)"}`),
-    "",
-    "=== Transport chunks ===",
-    ...transportPick.map((s, i) => `${i + 1}. ${s || "(empty)"}`),
   ].join("\n");
 
   return (
@@ -216,13 +163,13 @@ export default function HW42() {
         <div className="lesson22-hero-top">
           <div>
             <p className="page-kicker">Homework 42</p>
-            <h1>My week · travel</h1>
+            <h1>My week</h1>
             <p className="lesson22-topic-pill">
-              Parts of the day · routine · places · transport
+              Parts of the day · routine · places · on/in/at
             </p>
             <p className="lesson22-subtitle">
               Повтори урок 42: частини доби, свій день і тиждень, on/in/at,
-              місця й напрямки, transport chunks.
+              місця й напрямки. Travel → HW43.
             </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -254,11 +201,10 @@ export default function HW42() {
           <a href="#hw42-me">5 True for you</a>
           <a href="#hw42-grammar">6 Grammar</a>
           <a href="#hw42-order">7 Order</a>
-          <a href="#hw42-travel">8–10 Travel</a>
-          <a href="#hw42-places">11 Places</a>
-          <a href="#hw42-oninat">12 on/in/at</a>
-          <a href="#hw42-transport">13 Transport</a>
+          <a href="#hw42-places">8 Places</a>
+          <a href="#hw42-oninat">9 on/in/at</a>
           <a href="#hw42-submit">Submit</a>
+          <a href="/hw-43">HW43 Travel →</a>
         </div>
       </section>
 
@@ -745,111 +691,6 @@ export default function HW42() {
         </button>
       </section>
 
-      {/* Travel · 1b + vocab + 2b */}
-      <section id="hw42-travel" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">8–10 · Travel</p>
-          <h2>A long journey</h2>
-        </div>
-
-        <p className="l31-ex-line">
-          <strong className="l31-ex-num">8</strong> Listen and repeat.
-        </p>
-        <Unit5AudioBlock
-          r={4}
-          exercise="HW42 · 8"
-          title="Travel sentences · listen and repeat"
-          transcript={<U5ListTranscript lines={u5Scripts[4]} />}
-        />
-
-        <p className="l31-ex-line" style={{ marginTop: "1.15rem" }}>
-          <strong className="l31-ex-num">9</strong> Flip UA → English
-        </p>
-        <div className="l22-vocab-grid" style={{ marginTop: "0.65rem" }}>
-          {travelChunks.map((c, idx) => {
-            const isFlipped = travelFlip.includes(idx);
-            return (
-              <button
-                key={c.en}
-                type="button"
-                className={`l22-vocab-card${isFlipped ? " l22-vocab-card--flipped" : ""}`}
-                onClick={() => toggleTravelFlip(idx)}
-                aria-pressed={isFlipped}
-                aria-label={`${c.ua} · ${c.en}`}
-              >
-                <div className="l22-vocab-inner">
-                  <div className="l22-vocab-face l22-vocab-front">
-                    <span className="l22-vocab-label">Українською</span>
-                    <strong>{c.ua}</strong>
-                    <span className="l22-vocab-hint">tap → English</span>
-                  </div>
-                  <div className="l22-vocab-face l22-vocab-back">
-                    <span className="l22-vocab-label">English</span>
-                    <strong>{c.en}</strong>
-                    <em>{c.example}</em>
-                  </div>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        <p className="l31-ex-line" style={{ marginTop: "1.25rem" }}>
-          <strong className="l31-ex-num">10</strong> Complete the sentences.
-        </p>
-        <div className="l42-gap-list">
-          {travelGaps2b.map((g, i) => {
-            const ok = textOk(gap2bAns[i], g.answers);
-            return (
-              <div key={g.id} className="l42-gap-row">
-                <span className="l42-gap-num">{g.id}</span>
-                <p className="l42-gap-line">
-                  {g.before}{" "}
-                  <input
-                    type="text"
-                    value={gap2bAns[i]}
-                    onChange={(e) => {
-                      setGap2bChecked(false);
-                      const next = [...gap2bAns];
-                      next[i] = e.target.value;
-                      setGap2bAns(next);
-                    }}
-                    className={inputCls(gap2bChecked, gap2bAns[i], ok)}
-                    style={{ width: "6.5rem" }}
-                    aria-label={`Travel gap ${g.id}`}
-                  />{" "}
-                  {g.after}
-                </p>
-                {gap2bChecked && !ok ? (
-                  <span className="hw35-tip">{g.answers[0]}</span>
-                ) : null}
-              </div>
-            );
-          })}
-        </div>
-        <CheckBar
-          checked={gap2bChecked}
-          score={gap2bScore}
-          total={travelGaps2b.length}
-          onCheck={() => setGap2bChecked(true)}
-          onReset={() => {
-            setGap2bAns(Array(travelGaps2b.length).fill(""));
-            setGap2bChecked(false);
-          }}
-        />
-        <button
-          type="button"
-          className="l25-cr-mini-btn"
-          style={{ marginTop: "0.4rem" }}
-          onClick={() => {
-            setGap2bAns(travelGaps2b.map((g) => g.answers[0]));
-            setGap2bChecked(true);
-          }}
-        >
-          Show answers
-        </button>
-      </section>
-
       {/* 11 · Places & directions */}
       <section id="hw42-places" className="lesson22-block panel">
         <div className="lesson22-section-head">
@@ -1034,116 +875,6 @@ export default function HW42() {
         </button>
       </section>
 
-      {/* 13 · Transport stabilize */}
-      <section id="hw42-transport" className="lesson22-block panel">
-        <div className="lesson22-section-head">
-          <p className="page-kicker">13 · Chunks</p>
-          <h2>Transport · 8 fixed phrases</h2>
-          <p className="lesson22-section-desc">
-            Спочатку запам&apos;ятай ці 8 фраз. Потім обери правильний варіант
-            (не вигадуй свої — стабілізуй готові).
-          </p>
-        </div>
-
-        <p className="l31-ex-line">
-          <strong className="l31-ex-num">A</strong> Learn &amp; say
-        </p>
-        <div className="l22-vocab-grid" style={{ marginTop: "0.65rem" }}>
-          {transportStabilizeChunks42.map((c, idx) => {
-            const isFlipped = transportFlip.includes(idx);
-            return (
-              <button
-                key={c.en}
-                type="button"
-                className={`l22-vocab-card${isFlipped ? " l22-vocab-card--flipped" : ""}`}
-                onClick={() => toggleTransportFlip(idx)}
-                aria-pressed={isFlipped}
-                aria-label={`${c.ua} · ${c.en}`}
-              >
-                <div className="l22-vocab-inner">
-                  <div className="l22-vocab-face l22-vocab-front">
-                    <span className="l22-vocab-label">Українською</span>
-                    <strong>{c.ua}</strong>
-                    <span className="l22-vocab-hint">tap → English</span>
-                  </div>
-                  <div className="l22-vocab-face l22-vocab-back">
-                    <span className="l22-vocab-label">English</span>
-                    <strong>{c.en}</strong>
-                  </div>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        <p className="l31-ex-line" style={{ marginTop: "1.25rem" }}>
-          <strong className="l31-ex-num">B</strong> Fix the mistake — choose
-          the correct chunk
-        </p>
-        <div className="l42-pick-list">
-          {transportPick42.map((item, i) => (
-            <div key={item.id} className="l42-pick-item">
-              <p className="l42-pick-tip">
-                {item.id}. <span>{item.tip}</span>
-              </p>
-              <div className="l42-pick-options" role="group">
-                {item.options.map((opt) => {
-                  const selected = transportPick[i] === opt;
-                  const isOk = transportChecked && opt === item.answer;
-                  const isErr =
-                    transportChecked && selected && opt !== item.answer;
-                  return (
-                    <button
-                      key={opt}
-                      type="button"
-                      className={[
-                        "l42-pick-btn",
-                        selected ? "is-selected" : "",
-                        isOk ? "is-ok" : "",
-                        isErr ? "is-err" : "",
-                      ]
-                        .filter(Boolean)
-                        .join(" ")}
-                      onClick={() => {
-                        setTransportChecked(false);
-                        const next = [...transportPick];
-                        next[i] = opt;
-                        setTransportPick(next);
-                        speakEnglish(opt);
-                      }}
-                      aria-pressed={selected}
-                    >
-                      {opt}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
-        <CheckBar
-          checked={transportChecked}
-          score={transportScore}
-          total={transportPick42.length}
-          onCheck={() => setTransportChecked(true)}
-          onReset={() => {
-            setTransportPick(Array(transportPick42.length).fill(""));
-            setTransportChecked(false);
-          }}
-        />
-        <button
-          type="button"
-          className="l25-cr-mini-btn"
-          style={{ marginTop: "0.4rem" }}
-          onClick={() => {
-            setTransportPick(transportPick42.map((item) => item.answer));
-            setTransportChecked(true);
-          }}
-        >
-          Show answers
-        </button>
-      </section>
-
       <section id="hw42-submit" className="lesson22-block panel">
         <div className="lesson22-section-head">
           <p className="page-kicker">Submit</p>
@@ -1172,10 +903,8 @@ export default function HW42() {
             gapScore +
             onAtScore +
             orderScore +
-            gap2bScore +
             placeScore +
-            oninatScore +
-            transportScore
+            oninatScore
           }
           showListeningCheck={false}
         />

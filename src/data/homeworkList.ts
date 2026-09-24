@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "43": "/images/lesson42/travel-e-train.png",
   "42": "/images/lesson42/cover.jpg",
   "41": "/images/lesson41/cover.jpg",
   "40": "/images/lesson40/cover.jpg",
@@ -37,8 +38,27 @@ export function homeworkHref(
 
 export const homeworkByLesson = [
   {
+    id: "43",
+    title: "A long journey",
+    href: "/hw-43",
+    tasks: [
+      {
+        type: "text",
+        text: "Travel: R4 listen & repeat · UA→EN flashcards · gaps",
+      },
+      {
+        type: "text",
+        text: "8 transport chunks + fix mistakes",
+      },
+      {
+        type: "text",
+        text: "Past Simple: regular + irregular verb flashcards",
+      },
+    ],
+  },
+  {
     id: "42",
-    title: "My week · travel",
+    title: "My week",
     href: "/hw-42",
     tasks: [
       {
@@ -59,15 +79,11 @@ export const homeworkByLesson = [
       },
       {
         type: "text",
-        text: "Travel: R4 listen & repeat · UA→EN flashcards · gaps 2b",
-      },
-      {
-        type: "text",
         text: "Places & directions chunks · choose correct (at work / go home…)",
       },
       {
         type: "text",
-        text: "Rapid on / in / at · 8 transport chunks + fix mistakes",
+        text: "Rapid on / in / at",
       },
     ],
   },

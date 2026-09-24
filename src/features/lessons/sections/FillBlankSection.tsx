@@ -52,6 +52,15 @@ export function FillBlankSection({ section }: { section: FillBlankType }) {
           <p className="lw-section-desc">{section.description}</p>
         ) : null}
       </div>
+      {section.chips && section.chips.length > 0 ? (
+        <div className="lw-chip-bank" aria-label="Word box">
+          {section.chips.map((word) => (
+            <span key={word} className="lw-chip">
+              {word}
+            </span>
+          ))}
+        </div>
+      ) : null}
       {useButtons ? (
         <ol className="lw-alt-list">
           {section.items.map((item, i) => {
@@ -88,9 +97,11 @@ export function FillBlankSection({ section }: { section: FillBlankType }) {
             const val = answers[i] ?? "";
             const ok = item.correctAnswers.some((a) => norm(a) === norm(val));
             const useSelect = Boolean(item.options?.length);
+            const attempted = val.trim().length > 0;
             let inputCls = "lw-gap-input";
-            if (checked && ok) inputCls += " is-ok";
-            if (checked && val.trim() && !ok) inputCls += " is-err";
+            if (item.wide) inputCls += " lw-gap-input--wide";
+            if (checked && attempted && ok) inputCls += " is-ok";
+            if (checked && attempted && !ok) inputCls += " is-err";
             return (
               <label key={item.id} className="lw-gap-row">
                 <span className="lw-gap-line">
@@ -132,7 +143,7 @@ export function FillBlankSection({ section }: { section: FillBlankType }) {
                   )}{" "}
                   {item.after}
                 </span>
-                {checked && !ok ? (
+                {checked && attempted && !ok ? (
                   <span className="lw-tip">{item.correctAnswers[0]}</span>
                 ) : null}
               </label>
@@ -153,20 +164,18 @@ export function FillBlankSection({ section }: { section: FillBlankType }) {
             {score} / {section.items.length}
           </span>
         ) : null}
-        {section.items.some((item) => item.options?.length) ? (
-          <button
-            type="button"
-            className="lw-mini-btn"
-            onClick={() => {
-              setAnswers(
-                section.items.map((item) => item.correctAnswers[0] ?? ""),
-              );
-              setChecked(true);
-            }}
-          >
-            Show answers
-          </button>
-        ) : null}
+        <button
+          type="button"
+          className="lw-mini-btn"
+          onClick={() => {
+            setAnswers(
+              section.items.map((item) => item.correctAnswers[0] ?? ""),
+            );
+            setChecked(true);
+          }}
+        >
+          Show answers
+        </button>
         <button
           type="button"
           className="lw-mini-btn"
