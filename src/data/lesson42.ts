@@ -493,24 +493,7 @@ export const orderWrite42 = [
   },
 ] as const;
 
-/** Part 2 travel data moved to content/lessons/lesson-43/activities.ts */
-export {
-  travelChunks,
-  travelSentences,
-  travelPics,
-  travelMatchOptions,
-  transportVerbGroups,
-  transportPhrases2a,
-  travelGaps2b,
-  leaveOpposite,
-  timDonnaTable,
-  heardQuestions3b,
-  grammarDoGaps,
-  doSoundPairs,
-  travelQuestions,
-  doYouAlts,
-  writeQuestions42,
-} from "../content/lessons/lesson-43/activities";
+/** Part 2 travel data lives in content/lessons/lesson-43/activities.ts (import there directly). */
 
 /** HW42 · places & directions chunks (student weak spots) */
 export const placeDirectionChunks42 = [
