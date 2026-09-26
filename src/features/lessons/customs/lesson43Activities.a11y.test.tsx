@@ -80,10 +80,12 @@ describe("VocabFlipSection", () => {
     expect(card).toHaveAttribute("aria-pressed", "false");
 
     card.focus();
+    expect(card).toHaveFocus();
     await user.keyboard("{Enter}");
     expect(card).toHaveAttribute("aria-pressed", "true");
     expect(card).toHaveAccessibleName(/English: by bus\. Press to hide/i);
 
+    expect(card).toHaveFocus();
     await user.keyboard(" ");
     expect(card).toHaveAttribute("aria-pressed", "false");
   });
@@ -125,6 +127,8 @@ describe("PhotoSentenceMatchSection", () => {
     await user.click(screen.getByRole("button", { name: "Check" }));
 
     const status = screen.getByRole("status");
-    expect(status).toHaveTextContent(/You got \d+ out of \d+ correct/i);
+    expect(status).toHaveTextContent(/You got 1 out of 2 correct/i);
+    expect(screen.getByText("Correct")).toBeInTheDocument();
+    expect(screen.getByText("Not answered")).toBeInTheDocument();
   });
 });

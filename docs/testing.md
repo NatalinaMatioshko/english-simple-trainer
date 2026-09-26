@@ -89,3 +89,12 @@ test("opens Lesson 43 from catalog", async ({ page }) => {
 - VocabFlip / TickList / PhotoSentenceMatch accessible behavior
 - SectionRenderer unknown type / unknown custom key / valid custom
 - E2E: L37 redirect, L43 load, HW round-trip, catalog, VocabFlip keyboard, mobile no horizontal overflow
+
+## Playwright skip note
+
+One case is **skipped on desktop Chromium by design**, not because it is broken:
+
+- Title: `mobile: Lesson 43 has no horizontal document overflow`
+- Runs only in the `mobile-chrome` project (Pixel 5 viewport).
+- Skip reason in code: `Mobile-only viewport check; skipped on desktop Chromium by design`
+- Expectation when you run `npm run test:e2e`: **11 passed, 1 skipped** (the desktop duplicate of that mobile-only test).

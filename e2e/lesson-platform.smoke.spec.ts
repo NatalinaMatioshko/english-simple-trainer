@@ -17,10 +17,15 @@ test.describe("content-driven lesson smoke", () => {
 
   test("Lesson 43 → HW43 → back to lesson", async ({ page }) => {
     await page.goto("/lessons/43");
+    await expect(page).toHaveURL(/\/lessons\/43\/?$/);
     await page.getByRole("link", { name: /HW43/i }).first().click();
     await expect(page).toHaveURL(/\/hw-43\/?$/);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await page.getByRole("link", { name: /Lesson 43/i }).click();
     await expect(page).toHaveURL(/\/lessons\/43\/?$/);
+    await expect(
+      page.getByRole("heading", { level: 1, name: /A long journey/i }),
+    ).toBeVisible();
   });
 
   test("Lessons catalog opens Lesson 43", async ({ page }) => {
@@ -39,6 +44,7 @@ test.describe("content-driven lesson smoke", () => {
       .getByRole("button")
       .first();
     await card.focus();
+    await expect(card).toBeFocused();
     await expect(card).toHaveAttribute("aria-pressed", "false");
     await page.keyboard.press("Enter");
     await expect(card).toHaveAttribute("aria-pressed", "true");
@@ -49,9 +55,11 @@ test.describe("content-driven lesson smoke", () => {
   test("mobile: Lesson 43 has no horizontal document overflow", async ({
     page,
   }, testInfo) => {
+    // Intentionally mobile-only: desktop Chromium is skipped (not a failing test).
+    // Horizontal overflow is the regression we care about at ~Pixel 5 width.
     test.skip(
       testInfo.project.name !== "mobile-chrome",
-      "Overflow check is for the mobile project only",
+      "Mobile-only viewport check; skipped on desktop Chromium by design",
     );
     await page.goto("/lessons/43");
     await expect(
