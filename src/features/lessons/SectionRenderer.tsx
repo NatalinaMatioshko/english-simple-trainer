@@ -35,7 +35,7 @@ export function SectionRenderer({ section }: { section: LessonSection }) {
       const Custom = getCustomSectionComponent(section.componentKey);
       if (!Custom) {
         return (
-          <section id={section.id} className="lw-block panel">
+          <section id={section.id} className="lw-block panel" role="alert">
             <p className="lw-section-desc">
               Unknown custom section: <code>{section.componentKey}</code>
             </p>
@@ -45,8 +45,20 @@ export function SectionRenderer({ section }: { section: LessonSection }) {
       return createElement(Custom, { section });
     }
     default: {
-      const _exhaustive: never = section;
-      return _exhaustive;
+      // Runtime guard for bad/legacy payloads (keeps the switch exhaustive for TS).
+      const unexpected = section as { id?: string; type?: string };
+      return (
+        <section
+          id={unexpected.id}
+          className="lw-block panel"
+          role="alert"
+        >
+          <p className="lw-section-desc">
+            Unknown section type:{" "}
+            <code>{String(unexpected.type ?? "unknown")}</code>
+          </p>
+        </section>
+      );
     }
   }
 }
