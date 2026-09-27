@@ -898,6 +898,197 @@ export const lessonAnalyses: LessonAnalysis[] = [
     takeaway:
       "Урок 42 був продуктивним для повторення: час, графік, дні, prepositions, listening. Але мотивація Петра вже просить рух уперед. Найкращий наступний крок: короткий review → Past Simple with yesterday → проста особиста історія. Так збережеш систему й він відчує новий рівень.",
   },
+  {
+    id: "43",
+    title: "A long journey · Past Simple start",
+    topic: "travel · Do you…? · Past Simple preview · yesterday",
+    lessonPath: "/lessons/43",
+    lead:
+      "Урок 43 став реальним стартом Past Simple, на який Петро чекав: він порівняв I work / I worked, спробував розповісти про вчорашній день і впізнав кілька потрібних йому неправильних дієслів. Водночас значна частина заняття пішла на повторення транспорту, а в поясненні минулого часу з’явилися неточності, які варто виправити до наступного уроку.",
+    signal:
+      "Аналіз за наданою транскрипцією: деякі репліки передані нечітко, тому точність відповідей у вправах, яких повністю не видно, не оцінюється.",
+    covered: [
+      "transport · cycle · take a taxi · walk home · leave home",
+      "Do you…? · listening",
+      "arrive at work · go to work · go home",
+      "Past Simple preview",
+      "today / yesterday",
+      "regular -ed · irregular verbs",
+      "I was at work / I worked",
+      "went · had · got up · played · watched",
+    ],
+    result: [
+      "почав упізнавати й утворювати Past Simple з опорою (ще не самостійна швидка розповідь про вчора);",
+      "переніс знайому дію в минуле: I work → I worked;",
+      "з підказками дійшов до I went to work, I had breakfast, I played video games, I watched TV;",
+      "розрізняє was і дію, якщо показати контраст I was at work / I worked;",
+      "помітив особливості irregular: read → read, cut → cut, drink → drank;",
+      "транспортні chunks частково тримаються, хоча ще плутає cycle/circle, work/walk і прийменники.",
+    ],
+    strengths: [
+      {
+        title: "Past Simple з опорою",
+        tone: "ok",
+        quote: "I work → I worked · I went to work · I had breakfast · I played video games · I watched TV",
+        text: "Він уже переносить знайому дію в минуле. Це хороший початок, хоча самостійної швидкої розповіді про вчора ще не було.",
+      },
+      {
+        title: "was vs дія",
+        tone: "ok",
+        quote: "I was at work / I worked",
+        text: "Розрізняє was і дію, якщо показати контраст. Пара прямо пов’язана з його давньою проблемою — коли потрібне to be, а коли звичайне дієслово. Її варто зробити центральною на наступному уроці.",
+      },
+      {
+        title: "Irregular · увага до форми",
+        tone: "ok",
+        text: "Реакція на read → read з іншою вимовою, cut → cut та drink → drank показує увагу до форми, а не лише до перекладу.",
+      },
+      {
+        title: "Змістові питання",
+        tone: "tip",
+        text: "Ставить змістові питання: чому arrive at work, а не arrive to work; чи можна drive a boat. Це залученість, але також сигнал: коли таких питань багато, основна ціль уроку легко відсувається.",
+      },
+      {
+        title: "Транспорт · частково тримається",
+        tone: "tip",
+        text: "У транспортному блоці вже впізнавав cycle to work, take a taxi, walk home, leave home, хоча ще плутав cycle/circle, work/walk і прийменники.",
+      },
+    ],
+    gaps: [
+      {
+        title: "Past Simple ще з опорою",
+        tone: "warn",
+        text: "Прогрес є, але точніше сказати так: Петро почав упізнавати й утворювати Past Simple з опорою, а не вже засвоїв минулий час. Потрібна коротка самостійна історія про вчора без карток.",
+      },
+      {
+        title: "Занадто широкий перший список дієслів",
+        tone: "warn",
+        text: "Урок дав і багато regular, і довгий ряд irregular, і згадку про третю форму. Для першого заняття вистачило б worked, played, watched, cooked плюс was/were, went, had, got up. Решту — як необов’язкові картки.",
+      },
+      {
+        title: "Транспорт і питання з do зайняли час",
+        tone: "warn",
+        text: "Петро вже наприкінці попереднього уроку очікував минулий час. Цього разу транспорт, listening і питання з do зайняли стільки уваги, що до Past Simple перейшли, коли вже потрібно було пришвидшуватися. П’ятихвилинного повторення go to work / arrive at work / go home було б достатньо.",
+      },
+    ],
+    corrections: [
+      {
+        title: "«Учора о 3-й — це Past Continuous»",
+        tone: "warn",
+        text: "Не обов’язково. Час at 3 сам по собі не визначає форму. Інакше Петро може вирішити, що будь-яка точна година автоматично вимагає Past Continuous.",
+        pairHead: { left: "Past Simple", right: "Past Continuous" },
+        pairs: [
+          {
+            left: "Yesterday at 3 p.m., I finished work.",
+            right: "О третій я закінчив роботу.",
+          },
+          {
+            left: "Yesterday at 3 p.m., I was working.",
+            right: "О третій я ще працював.",
+          },
+        ],
+        bullets: [
+          "I finished work at 3 yesterday — дія відбулася в конкретний час.",
+          "I was working at 3 yesterday — дія тривала в той момент.",
+          "На наступному уроці коротко: «Другу форму (Continuous) пройдемо пізніше. Сьогодні — що сталося вчора.»",
+        ],
+      },
+      {
+        title: "Третя форма й I have gone",
+        tone: "warn",
+        text: "Не варто поки пояснювати третю форму як «почав іти о п’ятій і досі йду». Це не значення I have gone. Петрові зараз потрібні лише дві колонки: go → went, drink → drank. Третю форму краще відкласти.",
+      },
+      {
+        title: "good / well / better",
+        tone: "tip",
+        text: "Це не послідовність «добре → краще → найкраще». Для його прикладу достатньо: I slept well — я добре спав; I felt better — я почувався краще.",
+      },
+      {
+        title: "arrive to work",
+        tone: "warn",
+        text: "Правильно arrive at work; для міста — arrive in Kyiv; із home прийменник не потрібен: arrive home. Це сполучуваність слова arrive, а не загальне правило «якщо рух завершився, завжди at».",
+        pairHead: { left: "Chunk", right: "Значення" },
+        pairs: [
+          { left: "arrive at work", right: "прибути на роботу" },
+          { left: "arrive in Kyiv", right: "прибути в Київ" },
+          { left: "arrive home", right: "прибути додому" },
+        ],
+      },
+      {
+        title: "I travel to work",
+        tone: "tip",
+        text: "Фраза можлива, але для звичайної щоденної дороги простіше й природніше: I go to work by taxi або I take a taxi to work.",
+      },
+      {
+        title: "go to work / go home",
+        tone: "ok",
+        text: "Дві готові моделі. Home тут не потребує to: I went home. Так само I arrived home.",
+        bullets: [
+          "I go to work. → I went to work.",
+          "I go home. → I went home.",
+          "I arrived home.",
+        ],
+      },
+    ],
+    teacherGood: [
+      "Взяла для Past Simple не випадкові слова, а вчорашній день Петра: прокинувся, поснідав, пішов на роботу, стриг клієнта, пограв, ліг спати — контекст із практичним сенсом.",
+      "Добре спрацювали картки й контраст today / yesterday: для першого знайомства з правильними та неправильними дієсловами це зрозуміліше за великий список правил.",
+    ],
+    teacherImprove: [
+      "Почати нову тему раніше: 5 хв повторення go to work / arrive at work / go home — і одразу Past Simple.",
+      "Скоротити перший список дієслів: worked, played, watched, cooked + was/were, went, had, got up.",
+      "Дати завершити одну коротку розповідь: «Скажи п’ять речень про вчора без карток.»",
+      "Відділити вимову від значення: спочатку «що було вчора?»; -ed і read /red/ — окремим коротким блоком (кілька варіантів вимови -ed).",
+    ],
+    nextGoal:
+      "What did you do yesterday? — вузький урок без нового транспорту й без Past Continuous.",
+    nextGrammar: [
+      "I am at work → I was at work · I work → I worked",
+      "work → worked · play → played · watch → watched",
+      "get up → got up · have → had · go → went",
+      "Yesterday I got up… I had breakfast. I went to… I worked… In the evening, I…",
+    ],
+    nextFlow: [
+      {
+        time: "5 хв",
+        title: "Контраст",
+        text: "I am at work → I was at work; I work → I worked. Нехай Петро сам пояснить різницю між «був на роботі» та «працював».",
+      },
+      {
+        time: "10 хв",
+        title: "Шість активних дієслів",
+        text: "work → worked; play → played; watch → watched; get up → got up; have → had; go → went. Для його життя цього вже достатньо.",
+      },
+      {
+        time: "10 хв",
+        title: "Контрольовані речення",
+        text: "Ти кажеш every day → I work. Ти кажеш yesterday → I worked. Так само з play, watch, go.",
+      },
+      {
+        time: "15 хв",
+        title: "Історія про вчора",
+        text: "Рамка: Yesterday I got up at… I had breakfast. I went to… I worked… In the evening, I… Спочатку з карткою, потім друга спроба з меншою опорою.",
+      },
+      {
+        time: "10 хв",
+        title: "Listening / reading",
+        text: "Одна історія про вчора з трьома питаннями: When did he get up? Where did he go? What did he do in the evening? Питання з did поки для розуміння, не вимагати вільно будувати.",
+      },
+      {
+        time: "5 хв",
+        title: "Exit check",
+        text: "Три самостійні речення про вчора: одне з was, одне з -ed, одне з неправильним дієсловом.",
+      },
+    ],
+    homework: [
+      "Не довгий список форм — шість перемішаних українських речень про вчора.",
+      "Голосове 30–40 сек: «Мій учорашній день» без підказок.",
+    ],
+    resultHeading: "Успіхи Петра",
+    takeawayHeading: "Підсумок",
+    takeaway:
+      "Ти нарешті дала Петру тему, до якої він прагнув, і вдало прив’язала її до його життя. Наступний крок — не розширювати Past Simple, а дати йому відчути перший успіх: самостійно розповісти коротку, зрозумілу історію про вчора.",
+  },
 ];
 
 export function getLessonAnalysis(id: string): LessonAnalysis | undefined {
