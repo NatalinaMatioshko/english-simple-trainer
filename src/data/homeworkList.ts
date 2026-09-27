@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "44": "/images/lesson44/tea.jpg",
   "43": "/images/lesson42/travel-e-train.png",
   "42": "/images/lesson42/cover.jpg",
   "41": "/images/lesson41/cover.jpg",
@@ -37,6 +38,29 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "44",
+    title: "Food and drink",
+    href: "/hw-44",
+    tasks: [
+      {
+        type: "text",
+        text: "Flashcards: 14 food & drink words (UA→EN)",
+      },
+      {
+        type: "text",
+        text: "Frequency scale: never / sometimes / always",
+      },
+      {
+        type: "text",
+        text: "Write true-for-you sentences with frequency adverbs",
+      },
+      {
+        type: "text",
+        text: "How often…? word-order questions",
+      },
+    ],
+  },
   {
     id: "43",
     title: "A long journey",

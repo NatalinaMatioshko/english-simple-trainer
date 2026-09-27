@@ -8,6 +8,8 @@ import { Lesson38WordMapSection } from "./customs/Lesson38WordMapSection";
 import { NativeAudioSection } from "./customs/NativeAudioSection";
 import { PhotoGallerySection } from "./customs/PhotoGallerySection";
 import { PhotoSentenceMatchSection } from "./customs/PhotoSentenceMatchSection";
+import { FrequencyScaleSection } from "./customs/FrequencyScaleSection";
+import { WriteListsSection } from "./customs/WriteListsSection";
 import { SameOrDifferentSection } from "./customs/SameOrDifferentSection";
 import { TensePreviewSection } from "./customs/TensePreviewSection";
 import { TickListSection } from "./customs/TickListSection";
@@ -52,6 +54,8 @@ export const customSectionComponents: Record<
   "lesson38-grammar-have-got": Lesson38GrammarHaveGotSection,
   "lesson38-friend-speak": Lesson38FriendSpeakSection,
   "photo-sentence-match": PhotoSentenceMatchSection,
+  "frequency-scale": FrequencyScaleSection,
+  "write-lists": WriteListsSection,
   "vocab-flip": VocabFlipSection,
   "tick-list": TickListSection,
   "verb-table": VerbTableSection,

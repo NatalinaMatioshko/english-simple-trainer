@@ -39,7 +39,7 @@ describe("lessonService", () => {
     vi.restoreAllMocks();
   });
 
-  it.each(["36", "37", "38", "43"])(
+  it.each(["36", "37", "38", "43", "44"])(
     "getLessonById returns published lesson %s",
     async (id) => {
       const lesson = await getLessonById(id);
@@ -91,7 +91,7 @@ describe("lessonService", () => {
     expect(published.length).toBeGreaterThan(0);
     expect(published.every((e) => e.status === "published")).toBe(true);
     expect(published.map((e) => e.id)).toEqual(
-      expect.arrayContaining(["36", "37", "38", "43"]),
+      expect.arrayContaining(["36", "37", "38", "43", "44"]),
     );
   });
 });

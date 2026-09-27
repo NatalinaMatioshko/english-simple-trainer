@@ -61,6 +61,7 @@ Use the numeric string id consistently: `"37"` → route `/lessons/37`, legacy `
 - **37** — speaking/static + custom pictures
 - **38** — audio, photo gallery, WordMap, grammar box, homework-fix, matching via MC groups
 - **43** — A long journey (from L42 Part 2): photo-sentence-match, vocab-flip, tick-list, native-audio, Do you…?
+- **44** — Food and drink (Unit 5C): photo-sentence-match, same-or-different, tick-list, frequency-scale, How often…? word order
 
 ## Custom keys in use
 
@@ -79,6 +80,8 @@ Use the numeric string id consistently: `"37"` → route `/lessons/37`, legacy `
 | `tick-list` | Checkbox “tick what you hear / true” list |
 | `same-or-different` | Pronunciation same/different with blue highlights |
 | `tense-preview` | Visual tense intro: lead + contrast + rule cards |
+| `frequency-scale` | never→always scale with select gaps + fixed labels |
+| `write-lists` | Labeled textareas for “make a list…” tasks |
 
 ## When to use `custom`
 

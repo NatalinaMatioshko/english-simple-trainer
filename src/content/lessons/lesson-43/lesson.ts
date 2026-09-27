@@ -54,7 +54,7 @@ export const lesson43: Lesson = {
   ],
   route: "/lessons/43",
   prevLessonPath: "/lesson-42",
-  nextLessonPath: "/lessons",
+  nextLessonPath: "/lessons/44",
   navLinks: [
     { label: "← Back to lessons", path: "/lessons" },
     { label: "← Lesson 42", path: "/lesson-42", ghost: true },

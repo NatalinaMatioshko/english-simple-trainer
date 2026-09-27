@@ -15,6 +15,27 @@ test.describe("content-driven lesson smoke", () => {
     ).toBeVisible();
   });
 
+  test("/lesson-44 redirects to /lessons/44", async ({ page }) => {
+    await page.goto("/lesson-44");
+    await expect(page).toHaveURL(/\/lessons\/44\/?$/);
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Food and drink/i }),
+    ).toBeVisible();
+  });
+
+  test("Lesson 44 → HW44 → back to lesson", async ({ page }) => {
+    await page.goto("/lessons/44");
+    await expect(page).toHaveURL(/\/lessons\/44\/?$/);
+    await page.getByRole("link", { name: /HW44/i }).first().click();
+    await expect(page).toHaveURL(/\/hw-44\/?$/);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await page.getByRole("link", { name: /Lesson 44/i }).click();
+    await expect(page).toHaveURL(/\/lessons\/44\/?$/);
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Food and drink/i }),
+    ).toBeVisible();
+  });
+
   test("Lesson 43 → HW43 → back to lesson", async ({ page }) => {
     await page.goto("/lessons/43");
     await expect(page).toHaveURL(/\/lessons\/43\/?$/);

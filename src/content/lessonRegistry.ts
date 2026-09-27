@@ -88,6 +88,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson43;
     },
   },
+  {
+    id: "44",
+    number: 44,
+    title: "Food and drink",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 44,
+    status: "published",
+    estimatedMinutes: 55,
+    hasHomework: true,
+    topic: "food · drink · frequency adverbs · How often…?",
+    description:
+      "Unit 5C: food and drink vocabulary, Present Simple with frequency adverbs, and a short healthy-habits speaking survey with your teacher.",
+    route: "/lessons/44",
+    legacyRoute: "/lesson-44",
+    homeworkPath: "/hw-44",
+    load: async () => {
+      const mod = await import("./lessons/lesson-44/lesson");
+      return mod.lesson44;
+    },
+  },
 ];
 
 export function getRegistryEntry(

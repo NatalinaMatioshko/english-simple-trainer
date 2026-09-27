@@ -69,7 +69,9 @@ const Lesson41 = lazy(() => import("../pages/Lesson41"));
 const HW41 = lazy(() => import("../pages/HW41"));
 const HW42 = lazy(() => import("../pages/HW42"));
 const HW43 = lazy(() => import("../pages/HW43"));
+const HW44 = lazy(() => import("../pages/HW44"));
 const Lesson42 = lazy(() => import("../pages/Lesson42"));
+const Lesson44 = lazy(() => import("../pages/Lesson44"));
 const LessonPage = lazy(() => import("../features/lessons/LessonPage"));
 const A1LevelTest = lazy(() => import("../pages/A1LevelTest"));
 const ExtraResources = lazy(() => import("../pages/ExtraResources"));
@@ -149,7 +151,9 @@ function AppRoutes() {
           <Route path="/hw-41" element={<HW41 />} />
           <Route path="/hw-42" element={<HW42 />} />
           <Route path="/hw-43" element={<HW43 />} />
+          <Route path="/hw-44" element={<HW44 />} />
           <Route path="/lesson-42" element={<Lesson42 />} />
+          <Route path="/lesson-44" element={<Lesson44 />} />
           <Route path="/a1-level-test" element={<A1LevelTest />} />
           <Route path="/self-study" element={<SelfStudyReview />} />
           <Route path="/about-me" element={<AboutMePage />} />

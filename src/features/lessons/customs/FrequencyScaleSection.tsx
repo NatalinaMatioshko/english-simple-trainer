@@ -1,0 +1,146 @@
+import { useState } from "react";
+import type { CustomSection } from "../../../types/lesson";
+import { drillSelClass } from "../../../components/lesson31/drillSelClass";
+
+type GapStep = {
+  type: "gap";
+  id: string;
+  /** Shown under the select, e.g. "0%" */
+  percent?: string;
+  answer: string;
+};
+
+type FixedStep = { type: "fixed"; label: string };
+
+type Props = {
+  /** Left-to-right markers; use type gap | fixed */
+  steps?: Array<GapStep | FixedStep>;
+  options?: string[];
+};
+
+/** Visual 0–100% frequency adverb scale with select gaps. */
+export function FrequencyScaleSection({
+  section,
+}: {
+  section: CustomSection;
+}) {
+  const props = (section.props ?? {}) as Props;
+  const steps = props.steps ?? [];
+  const options = props.options ?? [
+    "never",
+    "sometimes",
+    "often",
+    "usually",
+    "always",
+  ];
+  const gaps = steps.filter((s): s is GapStep => s.type === "gap");
+  const [ans, setAns] = useState<Record<string, string>>({});
+  const [checked, setChecked] = useState(false);
+  const score = gaps.filter((g) => (ans[g.id] ?? "") === g.answer).length;
+
+  return (
+    <section id={section.id} className="lw-block panel">
+      <div className="lw-section-head">
+        {section.kicker ? <p className="page-kicker">{section.kicker}</p> : null}
+        <h2>{section.title}</h2>
+        {section.description ? (
+          <p className="lw-section-desc">{section.description}</p>
+        ) : null}
+      </div>
+
+      <div className="lw-freq-scale" role="group" aria-label="Frequency scale">
+        <div className="lw-freq-scale-bar" aria-hidden="true" />
+        <div className="lw-freq-scale-steps">
+          {steps.map((step) => {
+            if (step.type === "fixed") {
+              return (
+                <div key={`fixed-${step.label}`} className="lw-freq-step is-fixed">
+                  <strong>{step.label}</strong>
+                </div>
+              );
+            }
+            const val = ans[step.id] ?? "";
+            return (
+              <div key={step.id} className="lw-freq-step">
+                {step.percent ? (
+                  <span className="lw-freq-percent">{step.percent}</span>
+                ) : (
+                  <span className="lw-freq-percent lw-freq-percent--spacer">
+                    &nbsp;
+                  </span>
+                )}
+                <select
+                  value={val}
+                  onChange={(e) => {
+                    setChecked(false);
+                    setAns((prev) => ({ ...prev, [step.id]: e.target.value }));
+                  }}
+                  className={drillSelClass(checked, val, step.answer)}
+                  aria-label={`Frequency gap ${step.id}${step.percent ? ` (${step.percent})` : ""}`}
+                >
+                  <option value="">—</option>
+                  {options.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+                {checked ? (
+                  <span
+                    className={
+                      val === step.answer
+                        ? "lw-item-status is-ok"
+                        : "lw-item-status is-err"
+                    }
+                  >
+                    {val === step.answer ? "Correct" : step.answer}
+                  </span>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="lw-actions">
+        <button
+          type="button"
+          className="lw-check-btn"
+          onClick={() => setChecked(true)}
+        >
+          Check
+        </button>
+        {checked ? (
+          <span className="lw-muted" aria-hidden="true">
+            {score} / {gaps.length}
+          </span>
+        ) : null}
+        <button
+          type="button"
+          className="lw-mini-btn"
+          onClick={() => {
+            const next: Record<string, string> = {};
+            for (const g of gaps) next[g.id] = g.answer;
+            setAns(next);
+            setChecked(true);
+          }}
+        >
+          Show answers
+        </button>
+        <button
+          type="button"
+          className="lw-mini-btn"
+          onClick={() => {
+            setAns({});
+            setChecked(false);
+          }}
+        >
+          Reset
+        </button>
+      </div>
+      <p className="lw-a11y-feedback" role="status" aria-live="polite">
+        {checked ? `You got ${score} out of ${gaps.length} correct.` : ""}
+      </p>
+    </section>
+  );
+}
