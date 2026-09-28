@@ -157,8 +157,9 @@
 /* Vocabulary flip cards */
 .l22-vocab-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
   gap: 0.75rem;
+  align-items: stretch;
 }
 
 .l22-vocab-card {
@@ -167,14 +168,18 @@
   background: transparent;
   padding: 0;
   cursor: pointer;
-  min-height: 140px;
+  min-height: 168px;
+  height: 100%;
   text-align: left;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
 .l22-vocab-inner {
   position: relative;
   width: 100%;
-  min-height: 140px;
+  min-height: 168px;
+  height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -191,12 +196,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  padding: 1rem 0.75rem;
+  justify-content: space-between;
+  gap: 0.3rem;
+  padding: 0.7rem 0.65rem 0.55rem;
   border-radius: 16px;
   border: 1px solid var(--color-border);
   text-align: center;
+  overflow: hidden;
 }
 
 .l22-vocab-front {
@@ -216,6 +222,7 @@
 }
 
 .l22-vocab-label {
+  flex-shrink: 0;
   font-size: 0.68rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -223,31 +230,41 @@
   opacity: 0.75;
 }
 
-.l22-vocab-front strong {
+.l22-vocab-front strong,
+.l22-vocab-back strong {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  max-width: 100%;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: clamp(0.82rem, 2.4vw, 1.05rem);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.l22-vocab-front strong {
   color: var(--color-text);
-  line-height: 1.25;
 }
 
 .l22-vocab-back strong {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
   color: #fff;
-  line-height: 1.25;
 }
 
 .l22-vocab-back em {
-  font-size: 0.78rem;
-  line-height: 1.45;
+  flex-shrink: 0;
+  font-size: 0.74rem;
+  line-height: 1.35;
   opacity: 0.92;
   font-style: normal;
 }
 
 .l22-vocab-hint {
+  flex-shrink: 0;
   font-size: 0.72rem;
   color: var(--color-text-muted);
-  margin-top: 0.25rem;
 }
 
 .l22-vocab-card:hover .l22-vocab-front {

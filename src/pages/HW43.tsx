@@ -19,6 +19,7 @@ import {
 import { speakEnglish } from "../utils/speech";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
+import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson42.css";
 
@@ -457,7 +458,11 @@ export default function HW43() {
           <p className="page-kicker">Submit</p>
           <h2>Send to your teacher</h2>
         </div>
-        <label className="lesson22-section-desc" htmlFor="hw43-notes">
+        <label
+          className="lesson22-section-desc"
+          htmlFor="hw43-notes"
+          style={{ display: "block" }}
+        >
           Notes (optional):
         </label>
         <textarea

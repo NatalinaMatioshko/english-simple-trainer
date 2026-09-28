@@ -2,10 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { CheckBar } from "../components/lesson38/L38Ui";
-import { drillSelClass } from "../components/lesson31/drillSelClass";
 import {
   foodWords,
-  frequencyAdverbs,
   frequencyScaleGaps,
   howOftenWordOrder,
   personalFrequencyStems,
@@ -14,6 +12,7 @@ import { foodUa } from "../content/lessons/lesson-44/vocabulary";
 import { speakEnglish } from "../utils/speech";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
+import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson42.css";
 
@@ -52,8 +51,8 @@ export default function HW44() {
 
   const [scaleAns, setScaleAns] = useState<Record<string, string>>({});
   const [scaleChecked, setScaleChecked] = useState(false);
-  const scaleScore = frequencyScaleGaps.filter(
-    (g) => (scaleAns[g.id] ?? "") === g.answer,
+  const scaleScore = frequencyScaleGaps.filter((g) =>
+    textOk(scaleAns[g.id] ?? "", [g.answer]),
   ).length;
 
   const [freqWrite, setFreqWrite] = useState(() =>
@@ -165,42 +164,41 @@ export default function HW44() {
           <p className="page-kicker">2 · Frequency scale</p>
           <h2>never → always</h2>
           <p className="lesson22-section-desc">
-            Fill the three gaps (0% · middle · 100%). often and usually are already
-            on the classroom scale.
+            Write all five frequency adverbs from 0% to 100% (never → always).
           </p>
         </div>
         <div className="l42-gap-list">
-          {frequencyScaleGaps.map((g) => (
-            <div key={g.id} className="l42-gap-row">
-              <span className="l42-gap-num">{g.id}</span>
-              <label className="l42-gap-line">
-                {g.percent ? `${g.percent}: ` : "middle: "}
-                <select
-                  value={scaleAns[g.id] ?? ""}
-                  onChange={(e) => {
-                    setScaleChecked(false);
-                    setScaleAns((prev) => ({
-                      ...prev,
-                      [g.id]: e.target.value,
-                    }));
-                  }}
-                  className={drillSelClass(
-                    scaleChecked,
-                    scaleAns[g.id] ?? "",
-                    g.answer,
-                  )}
-                  aria-label={`Scale gap ${g.id}`}
-                >
-                  <option value="">—</option>
-                  {frequencyAdverbs.map((adv) => (
-                    <option key={adv} value={adv}>
-                      {adv}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-          ))}
+          {frequencyScaleGaps.map((g) => {
+            const val = scaleAns[g.id] ?? "";
+            const ok = textOk(val, [g.answer]);
+            return (
+              <div key={g.id} className="l42-gap-row">
+                <span className="l42-gap-num">{g.id}</span>
+                <label className="l42-gap-line">
+                  {g.percent}:{" "}
+                  <input
+                    type="text"
+                    className={inputCls(scaleChecked, val, ok)}
+                    value={val}
+                    onChange={(e) => {
+                      setScaleChecked(false);
+                      setScaleAns((prev) => ({
+                        ...prev,
+                        [g.id]: e.target.value,
+                      }));
+                    }}
+                    placeholder="write the adverb…"
+                    aria-label={`Scale ${g.percent}`}
+                    autoComplete="off"
+                    spellCheck={false}
+                  />
+                </label>
+                {scaleChecked && !ok ? (
+                  <span className="hw35-tip">{g.answer}</span>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
         <CheckBar
           checked={scaleChecked}
@@ -298,7 +296,11 @@ export default function HW44() {
           <p className="page-kicker">Submit</p>
           <h2>Send to your teacher</h2>
         </div>
-        <label className="lesson22-section-desc" htmlFor="hw44-notes">
+        <label
+          className="lesson22-section-desc"
+          htmlFor="hw44-notes"
+          style={{ display: "block" }}
+        >
           Notes (optional):
         </label>
         <textarea

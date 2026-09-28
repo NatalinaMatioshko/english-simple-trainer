@@ -8,7 +8,8 @@
  * - Photo→word map: visual match to textbook photos (tea vs coffee: #1 milky mug = tea, #14 black coffee).
  * - Pronunciation pair 1 marked “different” in SB; pairs 2–7 = BrE vowel check (not in printed key).
  * - Blue letters follow SB screenshot (coffee ee/tea ea; sugar ar; chocolate a / cakes a).
- * - Frequency scale gaps 1–3 = never / sometimes / always; “often” & “usually” printed on page.
+ * - Frequency scale (lesson Ex.5): gaps never / sometimes / always; often & usually printed.
+ *   HW44 asks students to write all five adverbs on the scale.
  * - Tom R12: full Basil+Tom audioscript; ticks include sugar + chicken (named in audio).
  * - R10 transcript: food words in photo order 1–14. R11 transcript: word pairs.
  * - p.154 survey table: NOT in materials → soft speaking only.
@@ -268,13 +269,15 @@ export const radioSentences5 = [
 export const tomModelLines = radioSentences5.map((s) => s.text);
 
 /**
- * Ex.5 frequency scale gaps (printed page shows often + usually already filled).
- * Order on scale: never (0%) → sometimes → often → usually → always (100%).
+ * HW frequency scale — write all five adverbs (0% → 100%).
+ * Lesson page Ex.5 keeps often/usually printed; HW asks for the full scale.
  */
 export const frequencyScaleGaps = [
   { id: "1", percent: "0%", answer: "never" },
-  { id: "2", percent: "", answer: "sometimes" },
-  { id: "3", percent: "100%", answer: "always" },
+  { id: "2", percent: "50%", answer: "sometimes" },
+  { id: "3", percent: "70%", answer: "often" },
+  { id: "4", percent: "80%", answer: "usually" },
+  { id: "5", percent: "100%", answer: "always" },
 ] as const;
 
 export const frequencyAdverbs = [
