@@ -6,6 +6,7 @@ import { Lesson38FriendSpeakSection } from "./customs/Lesson38FriendSpeakSection
 import { Lesson38GrammarHaveGotSection } from "./customs/Lesson38GrammarHaveGotSection";
 import { Lesson38WordMapSection } from "./customs/Lesson38WordMapSection";
 import { NativeAudioSection } from "./customs/NativeAudioSection";
+import { NativeVideoSection } from "./customs/NativeVideoSection";
 import { PhotoGallerySection } from "./customs/PhotoGallerySection";
 import { PhotoSentenceMatchSection } from "./customs/PhotoSentenceMatchSection";
 import { FrequencyScaleSection } from "./customs/FrequencyScaleSection";
@@ -54,6 +55,7 @@ export const customSectionComponents: Record<
   "homework-fix": HomeworkFixSection,
   "photo-gallery": PhotoGallerySection,
   "native-audio": NativeAudioSection,
+  "native-video": NativeVideoSection,
   "lesson38-word-map": Lesson38WordMapSection,
   "lesson38-grammar-have-got": Lesson38GrammarHaveGotSection,
   "lesson38-friend-speak": Lesson38FriendSpeakSection,

@@ -2,6 +2,7 @@ import type { Lesson } from "../../../types/lesson";
 import {
   SOUND_U5,
   IMG44,
+  VIDEO44,
   foodWords,
   foodPhotoMatch,
   foodSoundPairs,
@@ -87,6 +88,8 @@ export const lesson44: Lesson = {
     { href: "#l44-audio-r16", label: "5a Check" },
     { href: "#l44-practice", label: "5b Practise" },
     { href: "#l44-roleplay", label: "6 Roleplay" },
+    { href: "#l44-extra-posters", label: "Extra" },
+    { href: "#l44-extra-videos", label: "Videos" },
     { href: "#l44-exit", label: "Exit" },
   ],
   sections: [
@@ -555,6 +558,64 @@ export const lesson44: Lesson = {
         "How much is that?",
       ],
       note: "A (café worker): What would you like? B (you): I’d like …, please.",
+    },
+    {
+      type: "custom",
+      id: "l44-extra-posters",
+      kicker: "Extra",
+      title: "More food vocabulary",
+      description: "Look at the posters. Useful words for food, drink and measures.",
+      componentKey: "photo-gallery",
+      props: {
+        wideGrid: true,
+        images: [
+          {
+            id: "measures",
+            src: IMG44("measures.jpg"),
+            caption: "Measures",
+            alt: "Poster: Measures — a cup of tea, bottle of oil, kilo of bananas and other containers",
+            wide: true,
+            fit: "contain",
+            emoji: "📏",
+          },
+          {
+            id: "food-names",
+            src: IMG44("food-names.jpg"),
+            caption: "Food names in English",
+            alt: "Poster: Food Names in English — pizza, burger, coffee, cake and more",
+            wide: true,
+            fit: "contain",
+            emoji: "🍽️",
+          },
+        ],
+      },
+    },
+    {
+      type: "custom",
+      id: "l44-extra-videos",
+      kicker: "Extra",
+      title: "Watch the videos",
+      description: "Food vocabulary videos — watch and listen.",
+      componentKey: "native-video",
+      props: {
+        videos: [
+          {
+            id: "v1",
+            src: VIDEO44("food-1.mp4"),
+            title: "Video 1",
+          },
+          {
+            id: "v2",
+            src: VIDEO44("food-2.mp4"),
+            title: "Video 2",
+          },
+          {
+            id: "v3",
+            src: VIDEO44("food-3.mp4"),
+            title: "Video 3",
+          },
+        ],
+      },
     },
     {
       type: "text",

@@ -195,6 +195,16 @@
   background: color-mix(in srgb, var(--color-surface) 80%, #dceef8);
 }
 
+.l38-photo-grid--wide .l38-photo-card--contain {
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.l38-photo-grid--wide .l38-photo-card--contain img {
+  width: 100%;
+  image-rendering: auto;
+}
+
 .l38-photo-grid--wide {
   grid-template-columns: 1fr;
 }

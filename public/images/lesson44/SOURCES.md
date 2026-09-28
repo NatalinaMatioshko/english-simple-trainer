@@ -35,5 +35,7 @@ Unsplash License: https://unsplash.com/license (free use with attribution apprec
 | File | Note |
 |------|------|
 | menu.png | Illustrated café menu from Unit 5D page (user-provided crop) |
+| measures.jpg | Vocabulary poster: Measures (a cup of tea, bottle of oil…) — user-provided |
+| food-names.jpg | Vocabulary poster: Food Names in English — user-provided |
 
 Photo→word map (#1–14) follows textbook exercise numbers; images are illustrative stand-ins.

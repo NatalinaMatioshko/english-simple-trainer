@@ -22,6 +22,9 @@ export const SOUND_U5 = (r: number) =>
 export const IMG44 = (file: string) =>
   `${import.meta.env.BASE_URL}images/lesson44/${file}`;
 
+export const VIDEO44 = (file: string) =>
+  `${import.meta.env.BASE_URL}videos/lesson44/${file}`;
+
 export const foodWords = [
   "bread",
   "cakes",
