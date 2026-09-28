@@ -18,6 +18,7 @@ Downloaded 2026-09-26. Prefer clear single-subject food/drink for A1 matching.
 | meat.jpg | photo-1558030006-450675393462 |
 | chicken.jpg | photo-1598103442097-8b74394b95c6 |
 | coffee.jpg | photo-1509042239860-f550ce710b93 |
+| cafe-friends.jpg | photo-1543269865-cbf427effbad (friends at a café table) |
 
 Unsplash License: https://unsplash.com/license (free use with attribution appreciated).
 
@@ -28,5 +29,11 @@ Unsplash License: https://unsplash.com/license (free use with attribution apprec
 | sugar.jpg | Würfelzucker -- 2018 -- 3561.jpg |
 | chocolate.jpg | Chocolate.jpg |
 | cheese.jpg | Cheese.jpg |
+
+## User / textbook asset
+
+| File | Note |
+|------|------|
+| menu.png | Illustrated café menu from Unit 5D page (user-provided crop) |
 
 Photo→word map (#1–14) follows textbook exercise numbers; images are illustrative stand-ins.

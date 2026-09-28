@@ -498,6 +498,14 @@
   margin: 0.65rem 0 0.5rem;
 }
 
+@media (min-width: 640px) {
+  .l42-heard-list--cols {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem 0.75rem;
+  }
+}
+
 .l42-heard-row {
   display: flex;
   flex-wrap: wrap;

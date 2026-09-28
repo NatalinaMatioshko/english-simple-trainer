@@ -13,14 +13,28 @@ type Props = {
   items?: TickItem[];
   tipCorrect?: string;
   tipWrong?: string;
+  /** Shuffle item order once on mount (listening tick lists) */
+  shuffle?: boolean;
 };
+
+function shuffleItems<T>(items: T[]): T[] {
+  const next = [...items];
+  for (let i = next.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [next[i], next[j]] = [next[j], next[i]];
+  }
+  return next;
+}
 
 /** Tick / checkbox list with check feedback (listening “what do you hear”). */
 export function TickListSection({ section }: { section: CustomSection }) {
   const props = (section.props ?? {}) as Props;
-  const items = props.items ?? [];
   const tipCorrect = props.tipCorrect ?? "You hear this";
   const tipWrong = props.tipWrong ?? "Not in the audio";
+  const [items] = useState(() => {
+    const source = props.items ?? [];
+    return props.shuffle ? shuffleItems(source) : source;
+  });
   const [tick, setTick] = useState<Record<string, boolean>>({});
   const [checked, setChecked] = useState(false);
 
@@ -38,7 +52,11 @@ export function TickListSection({ section }: { section: CustomSection }) {
           <p className="lw-section-desc">{section.description}</p>
         ) : null}
       </div>
-      <div className="l42-heard-list" role="group" aria-label={section.title}>
+      <div
+        className={`l42-heard-list${items.length > 8 ? " l42-heard-list--cols" : ""}`}
+        role="group"
+        aria-label={section.title}
+      >
         {items.map((item) => {
           const on = Boolean(tick[item.id]);
           const match = on === item.correct;
@@ -65,7 +83,8 @@ export function TickListSection({ section }: { section: CustomSection }) {
                 aria-describedby={checked ? statusId : undefined}
               />
               <span>
-                {item.id}. {item.label}
+                {/^\d+$/.test(item.id) ? `${item.id}. ` : ""}
+                {item.label}
               </span>
               {checked ? (
                 <span

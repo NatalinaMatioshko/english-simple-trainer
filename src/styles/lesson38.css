@@ -186,6 +186,15 @@
   background: #dceef8;
 }
 
+/* Full illustration (e.g. café menu) — never crop */
+.l38-photo-card--contain img {
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center top;
+  background: color-mix(in srgb, var(--color-surface) 80%, #dceef8);
+}
+
 .l38-photo-grid--wide {
   grid-template-columns: 1fr;
 }
@@ -202,6 +211,10 @@
   .l38-photo-card--wide img {
     height: auto;
     max-height: 32rem;
+  }
+
+  .l38-photo-card--contain img {
+    max-height: none;
   }
 }
 

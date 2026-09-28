@@ -6,17 +6,33 @@ type ListItem = {
   label: string;
   example?: string;
   placeholder?: string;
+  /** How many blank bullet lines to show (default 5) */
+  slots?: number;
 };
 
 type Props = {
   lists?: ListItem[];
 };
 
-/** Two (or more) labeled textareas for “make a list” tasks. */
+/** Labeled bullet lists with one input per line (“make a list” tasks). */
 export function WriteListsSection({ section }: { section: CustomSection }) {
   const props = (section.props ?? {}) as Props;
   const lists = props.lists ?? [];
-  const [vals, setVals] = useState<Record<string, string>>({});
+  const [vals, setVals] = useState<Record<string, string[]>>({});
+
+  function linesFor(item: ListItem): string[] {
+    const n = Math.max(1, item.slots ?? 5);
+    const current = vals[item.id] ?? [];
+    return Array.from({ length: n }, (_, i) => current[i] ?? "");
+  }
+
+  function setLine(listId: string, index: number, value: string, slots: number) {
+    setVals((prev) => {
+      const next = Array.from({ length: slots }, (_, i) => prev[listId]?.[i] ?? "");
+      next[index] = value;
+      return { ...prev, [listId]: next };
+    });
+  }
 
   return (
     <section id={section.id} className="lw-block panel">
@@ -28,30 +44,61 @@ export function WriteListsSection({ section }: { section: CustomSection }) {
         ) : null}
       </div>
       <div className="lw-write-lists">
-        {lists.map((item) => (
-          <label key={item.id} className="lw-write-list">
-            <span className="lw-write-list-label">
-              {item.label}
-              {item.example ? (
-                <>
-                  {" "}
-                  <em className="lw-write-list-eg">{item.example}</em>
-                </>
-              ) : null}
-            </span>
-            <textarea
-              className="lw-textarea"
-              rows={3}
-              value={vals[item.id] ?? ""}
-              onChange={(e) =>
-                setVals((prev) => ({ ...prev, [item.id]: e.target.value }))
-              }
-              placeholder={item.placeholder ?? "Write here…"}
-              aria-label={item.label}
-            />
-          </label>
-        ))}
+        {lists.map((item) => {
+          const slots = Math.max(1, item.slots ?? 5);
+          const lines = linesFor(item);
+          return (
+            <div key={item.id} className="lw-write-list">
+              <p className="lw-write-list-label">
+                {item.label}
+                {item.example ? (
+                  <>
+                    {" "}
+                    <em className="lw-write-list-eg">e.g. {item.example}</em>
+                  </>
+                ) : null}
+              </p>
+              <ul className="lw-write-list-bullets" aria-label={item.label}>
+                {lines.map((line, i) => (
+                  <li key={`${item.id}-${i}`}>
+                    <span className="lw-write-list-dot" aria-hidden="true">
+                      •
+                    </span>
+                    <input
+                      type="text"
+                      className="lw-write-list-input"
+                      value={line}
+                      onChange={(e) =>
+                        setLine(item.id, i, e.target.value, slots)
+                      }
+                      placeholder={
+                        i === 0 && item.placeholder
+                          ? item.placeholder
+                          : "…"
+                      }
+                      aria-label={`${item.label} item ${i + 1}`}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
       </div>
+      <div className="lw-actions">
+        <button
+          type="button"
+          className="lw-mini-btn"
+          onClick={() => setVals({})}
+        >
+          Reset
+        </button>
+      </div>
+      {section.note ? (
+        <p className="lw-section-desc" style={{ marginTop: "0.75rem" }}>
+          <strong>Model.</strong> {section.note}
+        </p>
+      ) : null}
     </section>
   );
 }

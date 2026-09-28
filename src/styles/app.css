@@ -103,6 +103,17 @@ input {
   min-height: 100vh;
 }
 
+/* Shared section label — must stay in the global bundle (not only pages.css),
+   otherwise /lessons/:id refresh misses the orange accent until Lessons is visited. */
+.page-kicker {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
 .site-layout {
   min-height: 100vh;
 }

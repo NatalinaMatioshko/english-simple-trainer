@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import type { CustomSection } from "../../../types/lesson";
 import { drillSelClass } from "../../../components/lesson31/drillSelClass";
 
@@ -12,13 +12,46 @@ type GapStep = {
 
 type FixedStep = { type: "fixed"; label: string };
 
+type ScaleSentence = {
+  id: string;
+  text: string;
+  /** Words to bold in the sentence (gap answers on the page) */
+  bold?: string[];
+};
+
 type Props = {
   /** Left-to-right markers; use type gap | fixed */
   steps?: Array<GapStep | FixedStep>;
   options?: string[];
+  /** Sentences a–d shown under the diagram (same exercise) */
+  sentences?: ScaleSentence[];
 };
 
-/** Visual 0–100% frequency adverb scale with select gaps. */
+function renderWithBold(text: string, bold: string[] = []): ReactNode {
+  if (bold.length === 0) return text;
+  const escaped = bold
+    .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|");
+  if (!escaped) return text;
+  const re = new RegExp(`\\b(${escaped})\\b`, "gi");
+  const nodes: ReactNode[] = [];
+  let last = 0;
+  let m: RegExpExecArray | null;
+  let key = 0;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) nodes.push(text.slice(last, m.index));
+    nodes.push(
+      <strong key={`b-${key++}`} className="lw-freq-bold">
+        {m[0]}
+      </strong>,
+    );
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes;
+}
+
+/** Visual 0–100% frequency adverb scale with select gaps + source sentences. */
 export function FrequencyScaleSection({
   section,
 }: {
@@ -26,6 +59,7 @@ export function FrequencyScaleSection({
 }) {
   const props = (section.props ?? {}) as Props;
   const steps = props.steps ?? [];
+  const sentences = props.sentences ?? [];
   const options = props.options ?? [
     "never",
     "sometimes",
@@ -69,6 +103,9 @@ export function FrequencyScaleSection({
                     &nbsp;
                   </span>
                 )}
+                <span className="lw-freq-gap-n" aria-hidden="true">
+                  {step.id}
+                </span>
                 <select
                   value={val}
                   onChange={(e) => {
@@ -101,6 +138,17 @@ export function FrequencyScaleSection({
           })}
         </div>
       </div>
+
+      {sentences.length > 0 ? (
+        <ol className="lw-freq-sentences" aria-label="Sentences from the radio programme">
+          {sentences.map((s) => (
+            <li key={s.id}>
+              <span className="lw-freq-sent-id">{s.id}</span>{" "}
+              {renderWithBold(s.text, s.bold)}
+            </li>
+          ))}
+        </ol>
+      ) : null}
 
       <div className="lw-actions">
         <button

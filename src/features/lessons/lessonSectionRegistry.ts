@@ -9,8 +9,12 @@ import { NativeAudioSection } from "./customs/NativeAudioSection";
 import { PhotoGallerySection } from "./customs/PhotoGallerySection";
 import { PhotoSentenceMatchSection } from "./customs/PhotoSentenceMatchSection";
 import { FrequencyScaleSection } from "./customs/FrequencyScaleSection";
+import { FrequencyGrammarSection } from "./customs/FrequencyGrammarSection";
+import { LineOrderSection } from "./customs/LineOrderSection";
+import { PhraseMatchSection } from "./customs/PhraseMatchSection";
 import { WriteListsSection } from "./customs/WriteListsSection";
 import { SameOrDifferentSection } from "./customs/SameOrDifferentSection";
+import { StressSyllableSection } from "./customs/StressSyllableSection";
 import { TensePreviewSection } from "./customs/TensePreviewSection";
 import { TickListSection } from "./customs/TickListSection";
 import { VerbTableSection } from "./customs/VerbTableSection";
@@ -55,12 +59,16 @@ export const customSectionComponents: Record<
   "lesson38-friend-speak": Lesson38FriendSpeakSection,
   "photo-sentence-match": PhotoSentenceMatchSection,
   "frequency-scale": FrequencyScaleSection,
+  "frequency-grammar": FrequencyGrammarSection,
   "write-lists": WriteListsSection,
   "vocab-flip": VocabFlipSection,
   "tick-list": TickListSection,
   "verb-table": VerbTableSection,
   "same-or-different": SameOrDifferentSection,
+  "stress-syllable": StressSyllableSection,
   "tense-preview": TensePreviewSection,
+  "phrase-match": PhraseMatchSection,
+  "line-order": LineOrderSection,
 };
 
 export function getCustomSectionComponent(componentKey: string) {

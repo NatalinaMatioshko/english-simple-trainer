@@ -5,12 +5,17 @@ import "../../../styles/lesson38.css";
 
 type GalleryImage = {
   id: string;
-  file: string;
-  emoji: string;
+  /** Legacy L38: filename under images/lesson38/ */
+  file?: string;
+  /** Full URL (preferred for other lessons) */
+  src?: string;
+  emoji?: string;
   caption: string;
   note?: string;
   alt?: string;
   wide?: boolean;
+  /** `contain` = show full image (menus); default cover crops to fill */
+  fit?: "cover" | "contain";
 };
 
 type Props = {
@@ -18,20 +23,36 @@ type Props = {
   wideGrid?: boolean;
 };
 
+function resolveSrc(img: GalleryImage): string | undefined {
+  if (img.src) return img.src;
+  if (img.file) return IMG38(img.file);
+  return undefined;
+}
+
 function PhotoCard({
   file,
-  emoji,
+  src,
+  emoji = "📷",
   caption,
   note,
   alt,
   wide,
+  fit = "cover",
 }: GalleryImage) {
   const [broken, setBroken] = useState(false);
   const label = alt ?? caption;
+  const url = resolveSrc({ id: "", file, src, caption });
+  const classes = [
+    "l38-photo-card",
+    wide ? "l38-photo-card--wide" : "",
+    fit === "contain" ? "l38-photo-card--contain" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <figure className={`l38-photo-card${wide ? " l38-photo-card--wide" : ""}`}>
-      {broken ? (
+    <figure className={classes}>
+      {broken || !url ? (
         <div className="l38-photo-face">
           <span aria-hidden="true">{emoji}</span>
           <strong>{caption}</strong>
@@ -39,7 +60,7 @@ function PhotoCard({
         </div>
       ) : (
         <img
-          src={IMG38(file)}
+          src={url}
           alt={label}
           onError={() => setBroken(true)}
         />
