@@ -109,6 +109,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson44;
     },
   },
+  {
+    id: "45",
+    number: 45,
+    title: "Good and bad habits",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 45,
+    status: "published",
+    estimatedMinutes: 60,
+    hasHomework: true,
+    topic: "habits · time expressions · Present Simple he/she/it",
+    description:
+      "Match time expressions to pictures, read about Erica and Tina, then talk about another person’s good and bad habits with he/she + -s.",
+    route: "/lessons/45",
+    legacyRoute: "/lesson-45",
+    homeworkPath: "/hw-45",
+    load: async () => {
+      const mod = await import("./lessons/lesson-45/lesson");
+      return mod.lesson45;
+    },
+  },
 ];
 
 export function getRegistryEntry(

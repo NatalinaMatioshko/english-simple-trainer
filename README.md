@@ -27,9 +27,9 @@ No shop / paywall chrome — teal-on-paper teaching UI only.
 
 ## Features
 
-- **Roadmap** — curriculum overview (lessons 1–64); current class is **Lesson 44 · Food and drink**
+- **Roadmap** — curriculum overview (lessons 1–64); current class is **Lesson 45 · Good and bad habits**
 - **Lessons 15–44** — full interactive pages (speaking, vocab, listening, grammar, reading); L36–38 and L43–44 are content-driven
-- **Homework** — `/hw-25`…`/hw-44`; older `/homework/:id` still used for early lessons
+- **Homework** — `/hw-25`…`/hw-45`; older `/homework/:id` still used for early lessons
 - **Vocab** — dictionary with IPA + Web Speech pronunciation
 - **Trainer** — conjugation + question builder, then 50 core verbs; practice decks and scored quizzes
 - **A1 Level Test** — separate check at `/a1-level-test`
@@ -248,10 +248,12 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/lessons` | Lessons catalog |
 | `/lessons/43` | A long journey · Past Simple start |
 | `/lessons/44` | Food and drink · Order in a café |
+| `/lessons/45` | Good and bad habits |
 | `/lesson-42` | My week (Unit 5A) |
 | `/hw-42` | Homework · Lesson 42 |
 | `/hw-43` | Homework · Lesson 43 |
 | `/hw-44` | Homework · Lesson 44 |
+| `/hw-45` | Homework · Lesson 45 |
 | `/admin/analyses` | Teacher: lesson analyses |
 | `/admin/analyses/44` | Analysis · Lesson 44 |
 | `/a1-level-test` | A1 Level Test |

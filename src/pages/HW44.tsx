@@ -131,7 +131,7 @@ export default function HW44() {
     textOk(travelAns[g.id] ?? "", [g.answer]),
   ).length;
 
-  const [fixAns, setFixAns] = useState(() =>
+  const [fixAns, setFixAns] = useState<Record<string, string>>(() =>
     Object.fromEntries(travelFixItems.map((x) => [x.id, x.wrong])),
   );
   const [fixChecked, setFixChecked] = useState(false);
@@ -566,13 +566,13 @@ export default function HW44() {
               <label key={q.id} className="l42-q-row">
                 <span>
                   {q.id}. {q.scramble}
-                  {q.example ? " · example" : ""}
+                  {"example" in q && q.example ? " · example" : ""}
                 </span>
                 <input
                   type="text"
                   className={inputCls(weekChecked, val, ok)}
                   value={val}
-                  disabled={Boolean(q.example)}
+                  disabled={"example" in q && Boolean(q.example)}
                   onChange={(e) => {
                     setWeekChecked(false);
                     setWeekAns((p) => ({ ...p, [q.id]: e.target.value }));
@@ -613,13 +613,13 @@ export default function HW44() {
               <label key={q.id} className="l42-q-row">
                 <span>
                   {q.id}. {q.positive}
-                  {q.example ? " · example" : ""}
+                  {"example" in q && q.example ? " · example" : ""}
                 </span>
                 <input
                   type="text"
                   className={inputCls(negChecked, val, ok)}
                   value={val}
-                  disabled={Boolean(q.example)}
+                  disabled={"example" in q && Boolean(q.example)}
                   onChange={(e) => {
                     setNegChecked(false);
                     setNegAns((p) => ({ ...p, [q.id]: e.target.value }));
@@ -759,7 +759,7 @@ export default function HW44() {
                       type="text"
                       className={inputCls(travelChecked, val, ok)}
                       value={val}
-                      disabled={Boolean(g.example)}
+                      disabled={"example" in g && Boolean(g.example)}
                       onChange={(e) => {
                         setTravelChecked(false);
                         setTravelAns((p) => ({ ...p, [g.id]: e.target.value }));
@@ -768,7 +768,7 @@ export default function HW44() {
                       aria-label={`Travel gap ${g.id}`}
                     />{" "}
                     {g.after}
-                    {g.example ? " · example" : ""}
+                    {"example" in g && g.example ? " · example" : ""}
                   </span>
                   {travelChecked && !ok ? (
                     <span className="hw35-tip">{g.answer}</span>

@@ -15,6 +15,27 @@ test.describe("content-driven lesson smoke", () => {
     ).toBeVisible();
   });
 
+  test("/lesson-45 redirects to /lessons/45", async ({ page }) => {
+    await page.goto("/lesson-45");
+    await expect(page).toHaveURL(/\/lessons\/45\/?$/);
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Good and bad habits/i }),
+    ).toBeVisible();
+  });
+
+  test("Lesson 45 → HW45 → back to lesson", async ({ page }) => {
+    await page.goto("/lessons/45");
+    await expect(page).toHaveURL(/\/lessons\/45\/?$/);
+    await page.getByRole("link", { name: /HW45/i }).first().click();
+    await expect(page).toHaveURL(/\/hw-45\/?$/);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await page.getByRole("link", { name: /Lesson 45/i }).click();
+    await expect(page).toHaveURL(/\/lessons\/45\/?$/);
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Good and bad habits/i }),
+    ).toBeVisible();
+  });
+
   test("/lesson-44 redirects to /lessons/44", async ({ page }) => {
     await page.goto("/lesson-44");
     await expect(page).toHaveURL(/\/lessons\/44\/?$/);

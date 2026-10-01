@@ -62,6 +62,7 @@ Use the numeric string id consistently: `"37"` → route `/lessons/37`, legacy `
 - **38** — audio, photo gallery, WordMap, grammar box, homework-fix, matching via MC groups
 - **43** — A long journey (from L42 Part 2): photo-sentence-match, vocab-flip, tick-list, native-audio, Do you…?
 - **44** — Food and drink + Order in a café (Unit 5C–5D): photo match, frequency-scale, How often…?, café phrase-match / line-order, native video
+- **45** — Good and bad habits: time expressions match A–G, Erica/Tina reading, he/she + -s grammar, ending sounds, speaking
 
 ## Custom keys in use
 

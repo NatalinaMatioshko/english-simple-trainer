@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "45": "/images/lesson45/erica-cycle.png",
   "44": "/images/lesson44/tea.jpg",
   "43": "/images/lesson42/travel-e-train.png",
   "42": "/images/lesson42/cover.jpg",
@@ -38,6 +39,37 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "45",
+    title: "Good and bad habits",
+    href: "/hw-45",
+    tasks: [
+      {
+        type: "text",
+        text: "Flashcards: time expressions (UA→EN)",
+      },
+      {
+        type: "text",
+        text: "Match pictures A–G to habit sentences",
+      },
+      {
+        type: "text",
+        text: "Complete sentences with time expressions",
+      },
+      {
+        type: "text",
+        text: "I → she transformations",
+      },
+      {
+        type: "text",
+        text: "he/she Present Simple gaps + ending sounds /s/ /z/ /ɪz/",
+      },
+      {
+        type: "text",
+        text: "Write about a friend’s good and bad habits",
+      },
+    ],
+  },
   {
     id: "44",
     title: "Food and drink",

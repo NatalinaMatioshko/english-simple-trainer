@@ -80,10 +80,10 @@ const completedPath: StageSummary[] = [
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 45–48",
-    title: "Habits, housework, skills, requests",
+    range: "Lessons 46–48",
+    title: "Housework, skills, requests",
     summary:
-      "Talk about another person’s habits (he/she + -s), housework questions with does, can / can’t for skills, then make polite requests.",
+      "Housework questions with does, can / can’t for skills, then make polite requests.",
   },
   {
     range: "Lessons 49–52",
@@ -664,19 +664,21 @@ const roadmapLessons: Lesson[] = [
     listening: "R10–R16: Tom’s habits · café dialogue",
     review: "Past Simple bridge (L43); Present Simple -s",
     category: "food",
-    status: "current",
+    status: "completed",
     route: "/lessons/44",
   },
   {
     id: 45,
     title: "Good and bad habits",
     grammar: "Present Simple he/she/it · time expressions",
-    vocabulary: "always, usually, often, sometimes, never · morning / evening routines",
+    vocabulary:
+      "in the morning, in the afternoon, in the evening, at night, at the weekend, every day, every week · habit",
     speaking: "Talk about another person’s habits with your teacher",
     listening: "Verb endings /s/ /z/ /ɪz/ · habit dialogues",
-    review: "Frequency (L44); he/she + -s (L28)",
+    review: "Frequency (L44); he/she + -s",
     category: "general",
-    status: "next",
+    status: "current",
+    route: "/lessons/45",
   },
   {
     id: 46,
@@ -1128,8 +1130,8 @@ export default function RoadmapSection() {
               <p className="roadmap-mini-label">Full timeline</p>
               <h3>Lessons 1–64</h3>
               <p>
-                Interactive lessons are live through Food and drink · Order in a
-                café (Lesson 44). Lessons 45–64 are the planned path ahead.
+                Interactive lessons are live through Good and bad habits (Lesson
+                45). Lessons 46–64 are the planned path ahead.
               </p>
             </div>
 

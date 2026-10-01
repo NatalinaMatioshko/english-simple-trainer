@@ -48,7 +48,7 @@ export const lesson44: Lesson = {
   route: "/lessons/44",
   legacyRoute: "/lesson-44",
   prevLessonPath: "/lessons/43",
-  nextLessonPath: "/lessons",
+  nextLessonPath: "/lessons/45",
   navLinks: [
     { label: "← Back to lessons", path: "/lessons" },
     { label: "← Lesson 43", path: "/lessons/43", ghost: true },
