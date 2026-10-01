@@ -54,9 +54,9 @@ const completedPath: StageSummary[] = [
   },
   {
     range: "Lessons 21–25",
-    title: "Can, review, and Unit 1A",
+    title: "Can, review, and countries",
     summary:
-      "Combined can / can't, Present Simple review, articles a / an, describing people, then Roadmap A1 Unit 1A — countries, nationalities, and be with I / you / we / they.",
+      "Combined can / can't, Present Simple review, articles a / an, describing people, then countries, nationalities, and be with I / you / we / they.",
   },
   {
     range: "Lessons 26–30",
@@ -70,14 +70,38 @@ const completedPath: StageSummary[] = [
     summary:
       "There is / are and places in town, WH-questions and was / were, flats, adjectives with a Present continuous preview, directions, Present Simple daily verbs, then speaking: I work every day / I am working now.",
   },
+  {
+    range: "Lessons 38–44",
+    title: "Have got, time, week, Past Simple, food",
+    summary:
+      "Have / has got and travel pack, dos and don’ts, telling the time, My week + travel chunks, Past Simple preview (yesterday), then Food and drink with frequency adverbs and ordering in a café.",
+  },
 ];
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 42–44",
-    title: "My week, then ability & continuous",
+    range: "Lessons 45–48",
+    title: "Habits, housework, skills, requests",
     summary:
-      "My week (Unit 5 routines + travel), then Vote for me! (can / can't) and A quiet life? (Present continuous).",
+      "Talk about another person’s habits (he/she + -s), housework questions with does, can / can’t for skills, then make polite requests.",
+  },
+  {
+    range: "Lessons 49–52",
+    title: "Places, was/were, tickets",
+    summary:
+      "Wh- questions about places, good days with was/were and dates, ask how events were, then buy travel tickets.",
+  },
+  {
+    range: "Lessons 53–56",
+    title: "Past Simple stories",
+    summary:
+      "Regular and irregular Past Simple, questions about holidays, then greet people in real situations.",
+  },
+  {
+    range: "Lessons 57–64",
+    title: "Photos, hobbies, plans",
+    summary:
+      "Family photos and object pronouns, hobbies with like + -ing, study habits with because, goals with would like, then going to plans, seasons, and invitations.",
   },
 ];
 
@@ -383,7 +407,7 @@ const roadmapLessons: Lesson[] = [
     speaking:
       "Introduce yourself and others; roleplay conference conversations; describe where people are from.",
     listening:
-      "Roadmap A1 R1–R15: country names, stress patterns, introductions, nationalities",
+      "R1–R15: country names, stress patterns, introductions, nationalities",
     review: "to be basics, lesson 24 descriptions, articles, simple questions.",
     category: "general",
     status: "completed",
@@ -460,7 +484,7 @@ const roadmapLessons: Lesson[] = [
       "Family · jobs · nationalities · appearance · routine · objects · numbers · days of the week · shop phrases (full review)",
     speaking:
       "15 topic stations + personal profile; family/jobs photos; describe a person",
-    listening: "R4 Unit 2 — Yasemin & Tara family photo (comprehension)",
+    listening: "R4 — Yasemin & Tara family photo (comprehension)",
     review: "Numbers + question words (L29); ALL Lessons 1–29 topics: identity → shop English",
     category: "general",
     status: "completed",
@@ -473,7 +497,7 @@ const roadmapLessons: Lesson[] = [
     vocabulary: "places in town: café, park, station, supermarket, school…",
     speaking: "Describe your town to the teacher; find differences on the map",
     listening: "there's / isn't / are / aren't; place-name stress",
-    review: "a / an; be; Unit 3A",
+    review: "a / an; be; places in town",
     category: "general",
     status: "completed",
     route: "/lesson-31",
@@ -502,7 +526,7 @@ const roadmapLessons: Lesson[] = [
     speaking:
       "Ask about a flat; answer Ukrainian prompts in English; choose a holiday flat",
     listening: "intonation for Is there…?; Jakub & William flat conversation",
-    review: "There is/are (L31); Unit 3B",
+    review: "There is/are (L31); flats and rooms",
     category: "general",
     status: "completed",
     route: "/lesson-33",
@@ -517,7 +541,7 @@ const roadmapLessons: Lesson[] = [
     speaking:
       "Describe towns; What are they doing? gaps; describe picture scenes to the teacher",
     listening: "R12 adjective sentences; R13 adjective + noun stress",
-    review: "There is/are (L31–33); Unit 3C + PC preview",
+    review: "There is/are (L31–33); PC preview",
     category: "general",
     status: "completed",
     route: "/lesson-34",
@@ -529,7 +553,7 @@ const roadmapLessons: Lesson[] = [
     vocabulary: "places in town; streets; go straight on, turn left/right, go past, next to",
     speaking: "Give directions from the train station; guess the place",
     listening: "R14 route; R15 useful phrases; R16 three conversations",
-    review: "Unit 3D · there is/are (L31–33)",
+    review: "Directions · there is/are (L31–33)",
     category: "general",
     status: "completed",
     route: "/lesson-35",
@@ -541,7 +565,7 @@ const roadmapLessons: Lesson[] = [
     vocabulary: "wake up, get dressed, teach, fix, sell, eat, read, play soccer",
     speaking: "Talk about morning, work, lunch and weekend with the teacher",
     listening: "ELLLO A1-04 four conversations (YouTube quiz)",
-    review: "Present Simple (L28); Unit 3D directions (L35)",
+    review: "Present Simple (L28); directions (L35)",
     category: "general",
     status: "completed",
     route: "/lesson-36",
@@ -565,7 +589,7 @@ const roadmapLessons: Lesson[] = [
     grammar: "have / has got (+ −); I've / He's contractions",
     vocabulary: "hair, eyes, beard, in his/her 20s",
     speaking: "Describe yourself and a friend with your teacher",
-    listening: "Unit 4 R1–R2: describing people, contractions",
+    listening: "R1–R2: describing people, contractions",
     review: "Describing people (L24); now vs every day (L37)",
     category: "people",
     status: "completed",
@@ -577,7 +601,7 @@ const roadmapLessons: Lesson[] = [
     grammar: "Have / Has … got?; Yes, I have / No, I haven't",
     vocabulary: "bag, passport, tickets, camera, money",
     speaking: "Ask Have you got…? Talk about what is in your bag.",
-    listening: "Unit 4 R3–R5: travel, Sam & Zara",
+    listening: "R3–R5: travel, Sam & Zara",
     review: "have / has got (L38); objects (L29)",
     category: "people",
     status: "completed",
@@ -589,7 +613,7 @@ const roadmapLessons: Lesson[] = [
     grammar: "Imperatives: Visit… / Don't go…",
     vocabulary: "try, go to, visit, take, drink, see; London & Rome",
     speaking: "Give dos and don'ts for London / your city to your teacher",
-    listening: "Unit 4 R9–R10: verb phrases, imperative stress",
+    listening: "R9–R10: verb phrases, imperative stress",
     review: "Have you got…? (L39); describing people writing (L38 HW)",
     category: "people",
     status: "completed",
@@ -601,7 +625,7 @@ const roadmapLessons: Lesson[] = [
     grammar: "Telling the time: o'clock · past · to · quarter · half",
     vocabulary: "What time is it? / It's at…; digital clocks",
     speaking: "Ask and answer about clocks with your teacher",
-    listening: "Unit 4 R11–R12: time dialogues · useful phrases",
+    listening: "R11–R12: time dialogues · useful phrases",
     review: "Dos and don'ts (L40); numbers",
     category: "general",
     status: "completed",
@@ -613,32 +637,254 @@ const roadmapLessons: Lesson[] = [
     grammar: "Present Simple I/you/we/they · Do you…?",
     vocabulary: "everyday activities; days; go by bus · leave · arrive",
     speaking: "Describe your week and how you travel — with your teacher",
-    listening: "Unit 5 R1–R8: week schedule · Mari · travel",
+    listening: "R1–R8: week schedule · Mari · travel",
     review: "Time (L41); days; Present Simple routines",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lesson-42",
   },
   {
     id: 43,
-    title: "Vote for me!",
-    grammar: "can / can't",
-    vocabulary: "verb phrases (buy a newspaper, send an email…)",
-    speaking: "What can you do? — short presentation to the teacher",
-    listening: "can / can't sentence stress",
-    review: "Unit 6A · ability",
+    title: "A long journey · Past Simple start",
+    grammar: "Past Simple preview: yesterday · -ed · went / had / got up",
+    vocabulary: "travel chunks: leave · arrive · take a taxi · walk home",
+    speaking: "Say five sentences about yesterday with your teacher",
+    listening: "Travel · Do you…? dialogues",
+    review: "My week (L42); Present Simple routines",
+    category: "transport",
+    status: "completed",
+    route: "/lessons/43",
+  },
+  {
+    id: 44,
+    title: "Food and drink · Order in a café",
+    grammar: "Frequency adverbs · he/she + -s · café phrases (I’d like…)",
+    vocabulary: "tea, coffee, bread, eggs, cheese, fish, meat, salad, sandwiches…",
+    speaking: "Talk about food habits; order food and a drink in a café",
+    listening: "R10–R16: Tom’s habits · café dialogue",
+    review: "Past Simple bridge (L43); Present Simple -s",
+    category: "food",
+    status: "current",
+    route: "/lessons/44",
+  },
+  {
+    id: 45,
+    title: "Good and bad habits",
+    grammar: "Present Simple he/she/it · time expressions",
+    vocabulary: "always, usually, often, sometimes, never · morning / evening routines",
+    speaking: "Talk about another person’s habits with your teacher",
+    listening: "Verb endings /s/ /z/ /ɪz/ · habit dialogues",
+    review: "Frequency (L44); he/she + -s (L28)",
     category: "general",
     status: "next",
   },
   {
-    id: 44,
-    title: "A quiet life?",
-    grammar: "Present continuous — be + verb + -ing (full unit)",
-    vocabulary: "noise verbs; action phrases",
-    speaking: "Describe what people are doing now",
-    listening: "/ŋ/; present continuous in context",
-    review: "PC speaking (L37); later unit",
+    id: 46,
+    title: "Jobs around the house",
+    grammar: "Present Simple questions: Does he/she…?",
+    vocabulary: "housework: cook, clean, wash, tidy, do the shopping…",
+    speaking: "Ask and answer about things people often do at home",
+    listening: "Strong and weak does · short housework talks",
+    review: "Habits (L45); does / doesn’t",
     category: "general",
+    status: "next",
+  },
+  {
+    id: 47,
+    title: "Skills",
+    grammar: "can / can’t for ability",
+    vocabulary: "skills: swim, drive, cook, speak, play…",
+    speaking: "Ask and answer about things you can and can’t do",
+    listening: "Strong and weak can · ability dialogues",
+    review: "can / can’t (L21); housework questions (L46)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 48,
+    title: "English in action · Make requests",
+    grammar: "Can I…? / Can you…? · polite requests",
+    vocabulary: "open, close, help, pass, wait, come in…",
+    speaking: "Make and respond to requests with your teacher",
+    listening: "Request dialogues · intonation",
+    review: "Skills · can / can’t (L47)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 49,
+    title: "Questions",
+    grammar: "Wh- questions (Where / What / Who / How…)",
+    vocabulary: "places · asking for information",
+    speaking: "Ask and answer about a place with your teacher",
+    listening: "Intonation in questions · place dialogues",
+    review: "WH-questions (L32); requests (L48)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 50,
+    title: "A good day",
+    grammar: "was / were · there was / there were",
+    vocabulary: "months · dates · good-day phrases",
+    speaking: "Talk about good days in the past",
+    listening: "wasn’t / weren’t · event descriptions",
+    review: "was/were preview (L32); Past Simple bridge (L43)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 51,
+    title: "How was it?",
+    grammar: "was / were questions · there was / were questions",
+    vocabulary: "adjectives for events: great, awful, interesting, boring…",
+    speaking: "Ask and answer about past events",
+    listening: "Strong and weak was / were · event chats",
+    review: "A good day (L50)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 52,
+    title: "English in action · Buy travel tickets",
+    grammar: "Ticket phrases · How much…? · single / return",
+    vocabulary: "train, bus, ticket, platform, departure…",
+    speaking: "Buy tickets in a role-play with your teacher",
+    listening: "Ticket-office dialogues",
+    review: "Travel (L43); How was it? (L51)",
+    category: "transport",
+    status: "next",
+  },
+  {
+    id: 53,
+    title: "When I was young",
+    grammar: "Past Simple regular verbs (-ed)",
+    vocabulary: "verb phrases about childhood / school",
+    speaking: "Give a short talk about when you were young",
+    listening: "-ed endings /t/ /d/ /ɪd/",
+    review: "was/were (L50–51); regular -ed (L43)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 54,
+    title: "You had a bad day",
+    grammar: "Past Simple irregular verbs · didn’t",
+    vocabulary: "common irregulars: had, went, saw, bought, left…",
+    speaking: "Talk about a bad day with your teacher",
+    listening: "Silent letter in didn’t · bad-day stories",
+    review: "When I was young (L53); irregular preview (L43)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 55,
+    title: "Good places",
+    grammar: "Past Simple questions (Did you…?)",
+    vocabulary: "holiday activities: swim, visit, stay, travel…",
+    speaking: "Talk about a holiday",
+    listening: "Linking sounds · holiday dialogues",
+    review: "Irregular Past (L54)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 56,
+    title: "English in action · Greet people",
+    grammar: "Hello / Hi / Nice to meet you · How are you?",
+    vocabulary: "greeting and leave-taking phrases",
+    speaking: "Greet people in short role-plays",
+    listening: "Greeting dialogues",
+    review: "Good places (L55); social English",
+    category: "people",
+    status: "next",
+  },
+  {
+    id: 57,
+    title: "Family photos",
+    grammar: "Object pronouns (me, him, her, us, them)",
+    vocabulary: "prepositions of place: next to, behind, in front of…",
+    speaking: "Talk about the people in a photo",
+    listening: "Weak object pronouns · photo descriptions",
+    review: "Family (L27); describing people (L38)",
+    category: "people",
+    status: "next",
+  },
+  {
+    id: 58,
+    title: "Hobbies",
+    grammar: "like / enjoy / love / hate + -ing",
+    vocabulary: "hobbies: reading, swimming, cooking, gaming…",
+    speaking: "Ask and answer about things you like doing",
+    listening: "Weak -ing · hobby chats",
+    review: "Family photos (L57); everyday activities",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 59,
+    title: "Study habits",
+    grammar: "why / because",
+    vocabulary: "learning a language · study phrases",
+    speaking: "Ask and answer about study habits",
+    listening: "because in short answers · study talks",
+    review: "Hobbies (L58)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 60,
+    title: "English in action · Suggestions",
+    grammar: "Let’s… / Why don’t we…? · responding to suggestions",
+    vocabulary: "free-time suggestions",
+    speaking: "Make and respond to suggestions with your teacher",
+    listening: "Suggestion dialogues",
+    review: "Study habits (L59)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 61,
+    title: "Goals",
+    grammar: "would like / would love to",
+    vocabulary: "dreams and wishes · collocations",
+    speaking: "Ask and answer about dreams and wishes",
+    listening: "’d like · goal dialogues",
+    review: "Suggestions (L60)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 62,
+    title: "Party time",
+    grammar: "be going to (plans)",
+    vocabulary: "party vocabulary: invite, decorate, bring, celebrate…",
+    speaking: "Talk about plans for a party",
+    listening: "going to · party plans",
+    review: "Goals (L61)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 63,
+    title: "My plans",
+    grammar: "be going to questions",
+    vocabulary: "seasons · time expressions for the year",
+    speaking: "Ask and answer about plans for the year",
+    listening: "Linking words · plan dialogues",
+    review: "Party time (L62)",
+    category: "general",
+    status: "next",
+  },
+  {
+    id: 64,
+    title: "English in action · Invitations",
+    grammar: "Would you like to…? · Yes, I’d love to / Sorry, I can’t",
+    vocabulary: "invitation phrases",
+    speaking: "Make and respond to invitations with your teacher",
+    listening: "Invitation dialogues",
+    review: "My plans (L63); course wrap-up speaking",
+    category: "people",
     status: "next",
   },
 ];
@@ -811,11 +1057,12 @@ export default function RoadmapSection() {
     <section className="roadmap-layout">
       <aside className="roadmap-sidebar panel">
         <p className="page-kicker">Learning path</p>
-        <h2>Roadmap for Lessons 1–43</h2>
+        <h2>Roadmap for Lessons 1–64</h2>
         <p className="roadmap-lead">
           The course moves from self-introduction and <strong>to be</strong> to
-          daily routines, countries, jobs, shopping, transport, health, and
-          stronger real-life speaking.
+          daily routines, town English, have got, time and the week, a first
+          Past Simple step, food and café English — then habits, skills,
+          past stories, hobbies, and future plans.
         </p>
 
         <div className="roadmap-current">
@@ -835,9 +1082,9 @@ export default function RoadmapSection() {
           <h3>Course logic</h3>
           <p>
             First the student learns who they are, then what they do every day,
-            then where and when things happen. Now the course contrasts habits
-            with actions happening now, before ability and fuller continuous
-            speaking.
+            then where and when things happen. Next come habits and skills,
+            stronger Past Simple stories, photos and hobbies, then goals and
+            plans with going to.
           </p>
         </div>
       </aside>
@@ -879,10 +1126,10 @@ export default function RoadmapSection() {
           <section className="roadmap-block">
             <div className="roadmap-block-head">
               <p className="roadmap-mini-label">Full timeline</p>
-              <h3>Lessons 1–43</h3>
+              <h3>Lessons 1–64</h3>
               <p>
-                This is the complete course line from the first lesson through
-                Unit 3 (live) and planned Units 4–5.
+                Interactive lessons are live through Food and drink · Order in a
+                café (Lesson 44). Lessons 45–64 are the planned path ahead.
               </p>
             </div>
 

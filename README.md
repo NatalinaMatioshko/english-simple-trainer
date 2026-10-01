@@ -8,18 +8,18 @@ Built with **React 19 + Vite 8 + TypeScript**, deployed to **GitHub Pages**.
 
 ## Interface
 
-The site is now a **learning-platform shell**, not a loose stack of pages:
+The site is a **learning-platform shell**:
 
 ![Updated learning platform — Roadmap home](docs/screenshots/platform-roadmap.png)
 
-*Platform update: the home page is a full **Roadmap** hub — hero, quick links (Trainer / Lessons / Homework), Learning Path with the current lesson, lesson cards with status tags, and progress (“Що ми вже пройшли”).*
+*Home is a full **Roadmap** hub — hero, Learning Path with the current lesson, lesson cards with status tags, and “Що ми вже пройшли”.*
 
-- **Home (`/`)** is the **Roadmap**: hero, Learning Path, full 1–40 timeline, then “what we have already covered”
-- **Desktop** — sticky top bar (`simple trainer.` / brand) + nav (Roadmap, Trainer, Lessons, Vocab, Homework) and teacher account controls
-- **Mobile** — bottom nav; the long lesson timeline **folds** behind a Roadmap toggle so you can reach the covered-topics map without scrolling 40 cards
+- **Home (`/`)** is the **Roadmap**: hero, Learning Path (lessons 1–64), then covered-topics map
+- **Desktop** — sticky top bar + nav (Roadmap, Trainer, Lessons, Vocab, Homework) and teacher account controls
+- **Mobile** — bottom nav; the long lesson timeline **folds** behind a Roadmap toggle
 - **Lessons / Homework** catalogs use **cover cubes** (latest numbered lesson is current; earlier ones are dimmed)
 - Lesson pages keep a **contents rail** on wide screens and a “Зміст уроку” drawer on smaller ones
-- **Cabinet** lives at `/cabinet` (student dashboard). `/roadmap` redirects to `/`
+- **Cabinet** lives at `/cabinet` (student / teacher dashboard). `/roadmap` redirects to `/`
 
 No shop / paywall chrome — teal-on-paper teaching UI only.
 
@@ -27,15 +27,15 @@ No shop / paywall chrome — teal-on-paper teaching UI only.
 
 ## Features
 
-- **Roadmap** — curriculum overview (lessons 1–40), current / completed / next status; current class is **Lesson 38**
-- **Lessons 15–38** — full interactive pages (speaking, vocab, listening, grammar, reading)
-- **Homework** — `/hw-25`…`/hw-38`; older `/homework/:id` still used for early lessons
+- **Roadmap** — curriculum overview (lessons 1–64); current class is **Lesson 44 · Food and drink**
+- **Lessons 15–44** — full interactive pages (speaking, vocab, listening, grammar, reading); L36–38 and L43–44 are content-driven
+- **Homework** — `/hw-25`…`/hw-44`; older `/homework/:id` still used for early lessons
 - **Vocab** — dictionary with IPA + Web Speech pronunciation
 - **Trainer** — conjugation + question builder, then 50 core verbs; practice decks and scored quizzes
 - **A1 Level Test** — separate check at `/a1-level-test`
 - **Extra resources** — infographics / worksheets
 - **Self-study / About me** — writing practice saved to Firestore
-- **Admin** — teacher view of homework submissions (Google Sign-In)
+- **Admin** — teacher view of homework submissions + lesson analyses (Google Sign-In)
 - **Theme** — light / dark
 
 Lessons are written for **one student + one teacher**. Classroom phrases such as “Work in pairs” are rewritten for that format.
@@ -57,7 +57,15 @@ Lessons are written for **one student + one teacher**. Classroom phrases such as
 | 35 | Unit 3D · English in action: directions |
 | 36 | Present Simple · daily verbs (ELLLO video) |
 | 37 | Present continuous speaking: *I work every day* / *I am working now* |
-| 38 | Unit 4A–4B · *You've got a friend* / *Have you got it?* · have/has got |
+| 38 | Unit 4A · *You've got a friend* · have/has got |
+| 39 | Unit 4B · *Have you got it?* · pack a bag |
+| 40 | Unit 4C · Dos and don'ts |
+| 41 | Unit 4D · What's the time? |
+| 42 | Unit 5A · My week · days · travel |
+| 43 | A long journey · Past Simple start (yesterday) |
+| 44 | Unit 5C–5D · Food and drink · Order in a café **(current)** |
+
+**Next (planned):** 45 Good and bad habits · 46 Jobs around the house · 47 Skills (can/can’t) · 48 Make requests · 49–52 places & was/were & tickets · 53–56 Past Simple stories · 57–64 photos, hobbies, goals, going to, invitations
 
 ---
 
@@ -199,12 +207,14 @@ Publish after editing.
 ```
 src/
   app/            # React Router (App.tsx)
-  components/     # Layout shell (sidebar, topbar), practice cards, roadmap, vocab UI, …
+  components/     # Layout shell, practice cards, roadmap, vocab UI, …
+  content/        # Content-driven lessons (registry + lesson-XX/)
   context/        # Theme + Auth (email/password + Google)
-  data/           # Vocab, verbs, lesson data, HW review decks, practice tasks
-  hooks/          # Quiz / practice hooks (useScoredQuiz, …)
-  pages/          # Roadmap home, Cabinet, Lessons, Lesson15–38, HW25–38, Vocab, Trainer, Admin…
-  services/       # Firestore helpers (e.g. writingSubmissions)
+  data/           # Vocab, verbs, lesson catalog, analyses, HW lists, …
+  features/       # Lesson workspace, section renderers, customs
+  hooks/          # Quiz / practice hooks
+  pages/          # Roadmap home, Cabinet, Lessons, HW, Vocab, Trainer, Admin…
+  services/       # Firestore helpers
   styles/         # Global + app shell + per-lesson CSS
   types/          # Shared TypeScript types
   utils/          # App nav, shuffle, text helpers, speech (TTS)
@@ -212,6 +222,7 @@ src/
 public/
   images/         # Lesson posters, vocab photos, extras
   sounds/         # Unit audio (Roadmap A1 SB R-tracks) + UI sounds
+  videos/         # Local lesson videos (e.g. lesson44/)
 ```
 
 ---
@@ -233,22 +244,16 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | Path | Page |
 |------|------|
 | `/` | Roadmap (home) |
-| `/cabinet` | Student cabinet |
+| `/cabinet` | Student / teacher cabinet |
 | `/lessons` | Lessons catalog |
-| `/lesson-31` | My town (Unit 3A) |
-| `/lesson-32` | WH-questions · was/were |
-| `/lesson-33` | Is there wifi? (Unit 3B) |
-| `/lesson-34` | It's expensive! (Unit 3C) |
-| `/lesson-35` | Directions (Unit 3D) |
-| `/lesson-36` | Present Simple daily verbs |
-| `/lesson-37` | Present continuous · now vs every day |
-| `/lesson-38` | You've got a friend · Have you got it? (Unit 4A–4B) |
-| `/hw-31` | Homework · Lesson 31 |
-| `/hw-34` | Homework · Lesson 34 |
-| `/hw-35` | Homework · Lesson 35 (Unit 3 check) |
-| `/hw-36` | Homework · Lesson 36 (Present Simple daily verbs) |
-| `/hw-37` | Homework · Lesson 37 (translate + Test-English) |
-| `/hw-38` | Homework · Lesson 38 (have / has got) |
+| `/lessons/43` | A long journey · Past Simple start |
+| `/lessons/44` | Food and drink · Order in a café |
+| `/lesson-42` | My week (Unit 5A) |
+| `/hw-42` | Homework · Lesson 42 |
+| `/hw-43` | Homework · Lesson 43 |
+| `/hw-44` | Homework · Lesson 44 |
+| `/admin/analyses` | Teacher: lesson analyses |
+| `/admin/analyses/44` | Analysis · Lesson 44 |
 | `/a1-level-test` | A1 Level Test |
 | `/extra-resources` | Extra infographics |
 | `/vocab` | Vocabulary (student words persist after login) |

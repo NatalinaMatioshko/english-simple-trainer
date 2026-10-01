@@ -49,7 +49,7 @@ export const homeworkByLesson = [
       },
       {
         type: "text",
-        text: "Frequency scale: never / sometimes / always",
+        text: "Frequency scale: write never → always (all five)",
       },
       {
         type: "text",
@@ -58,6 +58,18 @@ export const homeworkByLesson = [
       {
         type: "text",
         text: "How often…? word-order questions",
+      },
+      {
+        type: "text",
+        text: "Check and reflect: days, routine match, word order, negatives",
+      },
+      {
+        type: "text",
+        text: "Check and reflect: travel crossword + verbs, fix questions",
+      },
+      {
+        type: "text",
+        text: "Check and reflect: food unscramble / odd one out + frequency order · Reflect 1–5",
       },
     ],
   },

@@ -1458,6 +1458,16 @@ export const coveredTopics: CoveredCategory[] = [
         to: "/lesson-29",
         lesson: "L29",
       },
+      {
+        text: "Past Simple preview: yesterday · -ed · went / had / got up",
+        to: "/lessons/43",
+        lesson: "L43",
+      },
+      {
+        text: "frequency adverbs: always / usually / often / sometimes / never",
+        to: "/lessons/44",
+        lesson: "L44",
+      },
     ],
   },
   {
@@ -1506,6 +1516,16 @@ export const coveredTopics: CoveredCategory[] = [
         text: "food: pizza, coffee, fried potatoes, fast food",
         to: "/lesson-22",
         lesson: "L22",
+      },
+      {
+        text: "food & drink: tea, bread, eggs, cheese, fish, meat, salad, sandwiches…",
+        to: "/lessons/44",
+        lesson: "L44",
+      },
+      {
+        text: "travel chunks: leave · arrive · take a taxi · walk home",
+        to: "/lessons/43",
+        lesson: "L43",
       },
     ],
   },
@@ -1684,7 +1704,10 @@ export const coveredTopics: CoveredCategory[] = [
       { text: "зовнішність", to: "/lesson-24", lesson: "L24" },
       { text: "хобі", to: "/lesson-22", lesson: "L22" },
       { text: "улюблена їжа", to: "/lesson-22", lesson: "L22" },
+      { text: "харчові звички · How often…?", to: "/lessons/44", lesson: "L44" },
+      { text: "замовлення в кафе", to: "/lessons/44", lesson: "L44" },
       { text: "короткі історії про людей", to: "/lesson-26", lesson: "L26" },
+      { text: "вчорашній день (Past Simple start)", to: "/lessons/43", lesson: "L43" },
     ],
   },
 ];
