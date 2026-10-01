@@ -103,4 +103,8 @@ describe("lessonService", () => {
         .map((e) => e.id),
     );
   });
+
+  it('includes published Lesson 45 (guards against dropping "45" from registry)', () => {
+    expect(publishedLessonIds).toContain("45");
+  });
 });
