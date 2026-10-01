@@ -312,6 +312,28 @@
   cursor: not-allowed;
 }
 
+.lw-external-links {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.lw-external-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.lw-external-link:hover {
+  color: color-mix(in srgb, var(--color-primary) 75%, black);
+}
+
 .lw-mini-btn {
   display: inline-flex;
   align-items: center;

@@ -60,6 +60,8 @@ export type TextSection = LessonSectionBase & {
   /** Optional short model lines shown as cards */
   bullets?: string[];
   note?: string;
+  /** Optional external practice links (e.g. Test-English) */
+  links?: Array<{ href: string; label: string }>;
 };
 
 export type VocabularySection = LessonSectionBase & {

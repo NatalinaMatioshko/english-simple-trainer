@@ -44,6 +44,22 @@ export function TextSection({ section }: { section: TextSectionType }) {
           </p>
         </blockquote>
       ) : null}
+      {section.links && section.links.length > 0 ? (
+        <ul className="lw-external-links">
+          {section.links.map((link) => (
+            <li key={link.href}>
+              <a
+                className="lw-external-link"
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </section>
   );
 }
