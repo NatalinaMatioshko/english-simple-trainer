@@ -30,6 +30,25 @@ npm run test:e2e:install
 npm run test:e2e
 ```
 
+## CI (GitHub Actions)
+
+Workflow: [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) — runs on **pull_request** to `main`.
+
+| Job | Commands |
+|---|---|
+| Typecheck · Vitest · Build | `npx tsc -b` · `npm test` · `npm run build` |
+| Playwright E2E | `npx playwright install --with-deps chromium` · Playwright smoke |
+
+- Node **22** (same major as [deploy.yml](../.github/workflows/deploy.yml); satisfies `jsdom` engines `^22.22.2 \|\| …`).
+- Firebase: **placeholder** `VITE_FIREBASE_*` only (same idea as `playwright.config.ts`). No production secrets; no Firestore writes.
+- On E2E failure, CI uploads `playwright-report/` and `test-results/` as an artifact.
+
+### Lint (not a CI gate yet)
+
+`npm run lint` still reports known repo-wide debt (~17 errors). **Full ESLint is intentionally not a required CI check.** Do not disable rules globally to force green CI. After a focused lint-cleanup PR, add `npm run lint` as a separate gate.
+
+Deploy to GitHub Pages stays in `deploy.yml` (`push` to `main` only) and is unchanged by this workflow.
+
 ## Layout
 
 - `src/**/*.test.ts(x)` — colocated unit/component tests
