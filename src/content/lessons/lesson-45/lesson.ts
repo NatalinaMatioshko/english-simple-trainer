@@ -59,6 +59,7 @@ export const lesson45: Lesson = {
     { href: "#l45-prepare", label: "9 Notes" },
     { href: "#l45-speak", label: "10 Speak" },
     { href: "#l45-exit", label: "Exit" },
+    { href: "#l45-extra", label: "Extra" },
   ],
   sections: [
     {
@@ -315,6 +316,23 @@ export const lesson45: Lesson = {
         "She goes to the gym every day.",
         "He doesn’t take the bus.",
         "They watch TV in the evening. → He watches TV in the evening.",
+      ],
+    },
+    {
+      type: "text",
+      id: "l45-extra",
+      kicker: "Extra",
+      title: "Practice on Test-English",
+      body: "Optional reading and writing about daily routines.",
+      links: [
+        {
+          href: "https://test-english.com/reading/a1/daily-routines-sportswoman/",
+          label: "Daily routines of a sportswoman — A1 Reading ↗",
+        },
+        {
+          href: "https://test-english.com/writing/a1/writing-about-my-daily-routine/",
+          label: "Writing about my daily routine — A1 Writing ↗",
+        },
       ],
     },
     {
