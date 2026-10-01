@@ -1,6 +1,9 @@
-import { createElement } from "react";
+import { createElement, Suspense } from "react";
 import type { LessonSection } from "../../types/lesson";
-import { getCustomSectionComponent } from "./lessonSectionRegistry";
+import {
+  isKnownCustomSectionKey,
+  lazyCustomSectionComponents,
+} from "./lessonSectionRegistry";
 import { FillBlankSection } from "./sections/FillBlankSection";
 import { HomeworkLinkSection } from "./sections/HomeworkLinkSection";
 import { MultipleChoiceGroupSection } from "./sections/MultipleChoiceGroupSection";
@@ -10,6 +13,14 @@ import { TextSection } from "./sections/TextSection";
 import { VocabularySection } from "./sections/VocabularySection";
 import { WordOrderSection } from "./sections/WordOrderSection";
 import { WritingPromptSection } from "./sections/WritingPromptSection";
+
+function CustomSectionFallback({ id }: { id: string }) {
+  return (
+    <section id={id} className="lw-block panel" aria-busy="true">
+      <p className="lw-section-desc">Loading exercise…</p>
+    </section>
+  );
+}
 
 export function SectionRenderer({ section }: { section: LessonSection }) {
   switch (section.type) {
@@ -32,8 +43,7 @@ export function SectionRenderer({ section }: { section: LessonSection }) {
     case "homeworkLink":
       return <HomeworkLinkSection section={section} />;
     case "custom": {
-      const Custom = getCustomSectionComponent(section.componentKey);
-      if (!Custom) {
+      if (!isKnownCustomSectionKey(section.componentKey)) {
         return (
           <section id={section.id} className="lw-block panel" role="alert">
             <p className="lw-section-desc">
@@ -42,7 +52,13 @@ export function SectionRenderer({ section }: { section: LessonSection }) {
           </section>
         );
       }
-      return createElement(Custom, { section });
+      // Components are created once in lessonSectionRegistry (React.lazy per key).
+      const LazyCustom = lazyCustomSectionComponents[section.componentKey];
+      return (
+        <Suspense fallback={<CustomSectionFallback id={section.id} />}>
+          {createElement(LazyCustom, { section })}
+        </Suspense>
+      );
     }
     default: {
       // Runtime guard for bad/legacy payloads (keeps the switch exhaustive for TS).
