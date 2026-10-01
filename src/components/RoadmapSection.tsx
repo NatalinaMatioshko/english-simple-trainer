@@ -262,7 +262,7 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 15,
-    title: "Present Simple + adverbs of frequency",
+    title: "Present Simple + Adverbs of frequency",
     grammar: "always, usually, often, sometimes, never",
     vocabulary: "routine + frequency expressions",
     speaking: "Say how often you do everyday actions.",
@@ -274,7 +274,7 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 16,
-    title: "Present Simple practice",
+    title: "Present Simple Practice",
     grammar: "do / does questions and short answers",
     vocabulary: "routine, family, home and work actions",
     speaking: "Ask and answer questions about your routine.",
@@ -286,7 +286,7 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 17,
-    title: "Present Simple + speaking video",
+    title: "Present Simple + Speaking Video",
     grammar: "Present Simple review with questions and prepositions",
     vocabulary: "daily routine, place, time, movement",
     speaking: "Talk about your day in clearer connected sentences.",
@@ -298,7 +298,7 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 18,
-    title: "in / on / at / to in real-life contexts",
+    title: "in / on / at / to",
     grammar: "Prepositions of time, place, and movement",
     vocabulary: "home, work, gym, town, morning, Monday",
     speaking: "Build 8 short sentences about routine and movement.",
@@ -310,7 +310,7 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 19,
-    title: "Do / make + visual practice",
+    title: "Do expressions",
     grammar:
       "Common collocations with do and make, with continued preposition review",
     vocabulary:
@@ -387,7 +387,7 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 24,
-    title: "Describing people",
+    title: "Describing People",
     grammar: "Adjectives, has got / is, simple descriptive structures",
     vocabulary: "tall, short, friendly, quiet, funny, dark hair, glasses",
     speaking: "Describe a person from the video or from your life (5–6 sentences).",
@@ -568,7 +568,7 @@ const roadmapLessons: Lesson[] = [
     review: "Present Simple (L28); directions (L35)",
     category: "general",
     status: "completed",
-    route: "/lesson-36",
+    route: "/lessons/36",
   },
   {
     id: 37,
@@ -581,7 +581,7 @@ const roadmapLessons: Lesson[] = [
     review: "Present Simple daily verbs (L36); PC preview (L34). Extra practice on HW37.",
     category: "general",
     status: "completed",
-    route: "/lesson-37",
+    route: "/lessons/37",
   },
   {
     id: 38,
@@ -590,10 +590,10 @@ const roadmapLessons: Lesson[] = [
     vocabulary: "hair, eyes, beard, in his/her 20s",
     speaking: "Describe yourself and a friend with your teacher",
     listening: "R1–R2: describing people, contractions",
-    review: "Describing people (L24); now vs every day (L37)",
+    review: "Describing People (L24); now vs every day (L37)",
     category: "people",
     status: "completed",
-    route: "/lesson-38",
+    route: "/lessons/38",
   },
   {
     id: 39,
@@ -645,7 +645,7 @@ const roadmapLessons: Lesson[] = [
   },
   {
     id: 43,
-    title: "A long journey · Past Simple start",
+    title: "A long journey",
     grammar: "Past Simple preview: yesterday · -ed · went / had / got up",
     vocabulary: "travel chunks: leave · arrive · take a taxi · walk home",
     speaking: "Say five sentences about yesterday with your teacher",
