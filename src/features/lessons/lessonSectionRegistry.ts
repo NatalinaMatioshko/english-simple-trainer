@@ -1,78 +1,121 @@
-import type { ComponentType } from "react";
-import type { CustomSection, LessonSection } from "../../types/lesson";
-import { HomeworkFixSection } from "./customs/HomeworkFixSection";
-import { Lesson37Pictures } from "./customs/Lesson37Pictures";
-import { Lesson38FriendSpeakSection } from "./customs/Lesson38FriendSpeakSection";
-import { Lesson38GrammarHaveGotSection } from "./customs/Lesson38GrammarHaveGotSection";
-import { Lesson38WordMapSection } from "./customs/Lesson38WordMapSection";
-import { NativeAudioSection } from "./customs/NativeAudioSection";
-import { NativeVideoSection } from "./customs/NativeVideoSection";
-import { PhotoGallerySection } from "./customs/PhotoGallerySection";
-import { PhotoSentenceMatchSection } from "./customs/PhotoSentenceMatchSection";
-import { FrequencyScaleSection } from "./customs/FrequencyScaleSection";
-import { FrequencyGrammarSection } from "./customs/FrequencyGrammarSection";
-import { LineOrderSection } from "./customs/LineOrderSection";
-import { PhraseMatchSection } from "./customs/PhraseMatchSection";
-import { WriteListsSection } from "./customs/WriteListsSection";
-import { SameOrDifferentSection } from "./customs/SameOrDifferentSection";
-import { StressSyllableSection } from "./customs/StressSyllableSection";
-import { TensePreviewSection } from "./customs/TensePreviewSection";
-import { TickListSection } from "./customs/TickListSection";
-import { VerbTableSection } from "./customs/VerbTableSection";
-import { VocabFlipSection } from "./customs/VocabFlipSection";
-import { YoutubeVideoSection } from "./customs/YoutubeVideoSection";
-import { FillBlankSection } from "./sections/FillBlankSection";
-import { HomeworkLinkSection } from "./sections/HomeworkLinkSection";
-import { MultipleChoiceGroupSection } from "./sections/MultipleChoiceGroupSection";
-import { MultipleChoiceSection } from "./sections/MultipleChoiceSection";
-import { SpeakingPromptSection } from "./sections/SpeakingPromptSection";
-import { TextSection } from "./sections/TextSection";
-import { VocabularySection } from "./sections/VocabularySection";
-import { WordOrderSection } from "./sections/WordOrderSection";
-import { WritingPromptSection } from "./sections/WritingPromptSection";
+import { lazy, type ComponentType, type LazyExoticComponent } from "react";
+import type { CustomSection } from "../../types/lesson";
 
-type SectionProps<T extends LessonSection> = { section: T };
+type CustomSectionComponent = ComponentType<{ section: CustomSection }>;
 
-export const builtInSectionComponents = {
-  text: TextSection,
-  vocabulary: VocabularySection,
-  multipleChoice: MultipleChoiceSection,
-  multipleChoiceGroup: MultipleChoiceGroupSection,
-  fillBlank: FillBlankSection,
-  wordOrder: WordOrderSection,
-  speakingPrompt: SpeakingPromptSection,
-  writingPrompt: WritingPromptSection,
-  homeworkLink: HomeworkLinkSection,
-} as const;
-
-/** Custom UI keyed by componentKey in lesson data (never store components in JSON). */
-export const customSectionComponents: Record<
+/**
+ * Custom UI keyed by componentKey in lesson data.
+ * Loaders stay static so unknown keys can be detected without fetching;
+ * each module is downloaded only when that key is rendered.
+ */
+export const customSectionLoaders: Record<
   string,
-  ComponentType<SectionProps<CustomSection>>
+  () => Promise<{ default: CustomSectionComponent }>
 > = {
-  "lesson37-pictures": Lesson37Pictures,
-  "youtube-video": YoutubeVideoSection,
-  "homework-fix": HomeworkFixSection,
-  "photo-gallery": PhotoGallerySection,
-  "native-audio": NativeAudioSection,
-  "native-video": NativeVideoSection,
-  "lesson38-word-map": Lesson38WordMapSection,
-  "lesson38-grammar-have-got": Lesson38GrammarHaveGotSection,
-  "lesson38-friend-speak": Lesson38FriendSpeakSection,
-  "photo-sentence-match": PhotoSentenceMatchSection,
-  "frequency-scale": FrequencyScaleSection,
-  "frequency-grammar": FrequencyGrammarSection,
-  "write-lists": WriteListsSection,
-  "vocab-flip": VocabFlipSection,
-  "tick-list": TickListSection,
-  "verb-table": VerbTableSection,
-  "same-or-different": SameOrDifferentSection,
-  "stress-syllable": StressSyllableSection,
-  "tense-preview": TensePreviewSection,
-  "phrase-match": PhraseMatchSection,
-  "line-order": LineOrderSection,
+  "lesson37-pictures": () =>
+    import("./customs/Lesson37Pictures").then((m) => ({
+      default: m.Lesson37Pictures,
+    })),
+  "youtube-video": () =>
+    import("./customs/YoutubeVideoSection").then((m) => ({
+      default: m.YoutubeVideoSection,
+    })),
+  "homework-fix": () =>
+    import("./customs/HomeworkFixSection").then((m) => ({
+      default: m.HomeworkFixSection,
+    })),
+  "photo-gallery": () =>
+    import("./customs/PhotoGallerySection").then((m) => ({
+      default: m.PhotoGallerySection,
+    })),
+  "native-audio": () =>
+    import("./customs/NativeAudioSection").then((m) => ({
+      default: m.NativeAudioSection,
+    })),
+  "native-video": () =>
+    import("./customs/NativeVideoSection").then((m) => ({
+      default: m.NativeVideoSection,
+    })),
+  "lesson38-word-map": () =>
+    import("./customs/Lesson38WordMapSection").then((m) => ({
+      default: m.Lesson38WordMapSection,
+    })),
+  "lesson38-grammar-have-got": () =>
+    import("./customs/Lesson38GrammarHaveGotSection").then((m) => ({
+      default: m.Lesson38GrammarHaveGotSection,
+    })),
+  "lesson38-friend-speak": () =>
+    import("./customs/Lesson38FriendSpeakSection").then((m) => ({
+      default: m.Lesson38FriendSpeakSection,
+    })),
+  "photo-sentence-match": () =>
+    import("./customs/PhotoSentenceMatchSection").then((m) => ({
+      default: m.PhotoSentenceMatchSection,
+    })),
+  "frequency-scale": () =>
+    import("./customs/FrequencyScaleSection").then((m) => ({
+      default: m.FrequencyScaleSection,
+    })),
+  "frequency-grammar": () =>
+    import("./customs/FrequencyGrammarSection").then((m) => ({
+      default: m.FrequencyGrammarSection,
+    })),
+  "write-lists": () =>
+    import("./customs/WriteListsSection").then((m) => ({
+      default: m.WriteListsSection,
+    })),
+  "vocab-flip": () =>
+    import("./customs/VocabFlipSection").then((m) => ({
+      default: m.VocabFlipSection,
+    })),
+  "tick-list": () =>
+    import("./customs/TickListSection").then((m) => ({
+      default: m.TickListSection,
+    })),
+  "verb-table": () =>
+    import("./customs/VerbTableSection").then((m) => ({
+      default: m.VerbTableSection,
+    })),
+  "same-or-different": () =>
+    import("./customs/SameOrDifferentSection").then((m) => ({
+      default: m.SameOrDifferentSection,
+    })),
+  "stress-syllable": () =>
+    import("./customs/StressSyllableSection").then((m) => ({
+      default: m.StressSyllableSection,
+    })),
+  "tense-preview": () =>
+    import("./customs/TensePreviewSection").then((m) => ({
+      default: m.TensePreviewSection,
+    })),
+  "phrase-match": () =>
+    import("./customs/PhraseMatchSection").then((m) => ({
+      default: m.PhraseMatchSection,
+    })),
+  "line-order": () =>
+    import("./customs/LineOrderSection").then((m) => ({
+      default: m.LineOrderSection,
+    })),
 };
 
-export function getCustomSectionComponent(componentKey: string) {
-  return customSectionComponents[componentKey];
+/** Stable React.lazy components — created once at module load, not during render. */
+export const lazyCustomSectionComponents: Record<
+  string,
+  LazyExoticComponent<CustomSectionComponent>
+> = Object.fromEntries(
+  Object.entries(customSectionLoaders).map(([key, loader]) => [
+    key,
+    lazy(loader),
+  ]),
+);
+
+export function isKnownCustomSectionKey(componentKey: string): boolean {
+  return Object.prototype.hasOwnProperty.call(
+    customSectionLoaders,
+    componentKey,
+  );
+}
+
+export function getLazyCustomSectionComponent(componentKey: string) {
+  return lazyCustomSectionComponents[componentKey] ?? null;
 }

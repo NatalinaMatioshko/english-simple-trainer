@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
@@ -41,7 +41,7 @@ describe("SectionRenderer", () => {
     expect(screen.getByText("does-not-exist-key")).toBeInTheDocument();
   });
 
-  it("renders a registered custom section by componentKey", () => {
+  it("renders a registered custom section by componentKey", async () => {
     const section: CustomSection = {
       type: "custom",
       id: "x3",
@@ -55,9 +55,13 @@ describe("SectionRenderer", () => {
 
     render(wrap(<SectionRenderer section={section} />));
 
-    expect(
-      screen.getByRole("heading", { name: "Flip practice" }),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Loading exercise/i)).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("heading", { name: "Flip practice" }),
+      ).toBeInTheDocument();
+    });
     expect(
       screen.getByRole("button", { name: /вчора/i }),
     ).toBeInTheDocument();

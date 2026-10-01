@@ -66,7 +66,7 @@ Use the numeric string id consistently: `"37"` → route `/lessons/37`, legacy `
 
 ## Custom keys in use
 
-Keys must match [`lessonSectionRegistry.ts`](../features/lessons/lessonSectionRegistry.ts) → `customSectionComponents`.
+Keys must match [`lessonSectionRegistry.ts`](../features/lessons/lessonSectionRegistry.ts) → `customSectionLoaders` (lazy-loaded by key).
 
 | componentKey | Scope | Purpose |
 |--------------|-------|---------|
@@ -97,7 +97,7 @@ Keys must match [`lessonSectionRegistry.ts`](../features/lessons/lessonSectionRe
 Use `custom` + `componentKey` when the exercise needs unique React (audio players, zoom figures, drag-and-drop, etc.).
 
 1. Implement a component under `features/lessons/customs/`.
-2. Register it in `lessonSectionRegistry.ts` → `customSectionComponents`.
+2. Register it in `lessonSectionRegistry.ts` → `customSectionLoaders` (dynamic `import()`).
 3. Reference only the string key from lesson data — never store React elements in content.
 
 ## lessonService API
