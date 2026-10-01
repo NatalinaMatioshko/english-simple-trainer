@@ -79,6 +79,17 @@ test.describe("content-driven lesson smoke", () => {
     ).toBeVisible();
   });
 
+  test("Lessons catalog opens Lesson 45", async ({ page }) => {
+    await page.goto("/lessons");
+    await page
+      .getByRole("link", { name: /45\.\s*Good and bad habits/i })
+      .click();
+    await expect(page).toHaveURL(/\/lessons\/45\/?$/);
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Good and bad habits/i }),
+    ).toBeVisible();
+  });
+
   test("Lesson 43 VocabFlip works with keyboard", async ({ page }) => {
     await page.goto("/lessons/43");
     const card = page

@@ -66,23 +66,31 @@ Use the numeric string id consistently: `"37"` → route `/lessons/37`, legacy `
 
 ## Custom keys in use
 
-| componentKey | Purpose |
-|--------------|---------|
-| `youtube-video` | YouTube embed (`props.videoId`) |
-| `lesson37-pictures` | Zoom figures for L37 |
-| `homework-fix` | Warm-up “fix the mistakes” with groups/hints |
-| `photo-gallery` | Photo grid (`props.images`, alt, emoji fallback) |
-| `native-audio` | Public-URL `<audio controls>` (no autoplay) |
-| `lesson38-word-map` | Word map mind-map (data via props) |
-| `lesson38-grammar-have-got` | Interactive have/has got grammar box |
-| `lesson38-friend-speak` | Prepare notes + speak models for L38 |
-| `photo-sentence-match` | Photo grid + select match to sentences |
-| `vocab-flip` | UA↔EN flip cards |
-| `tick-list` | Checkbox “tick what you hear / true” list |
-| `same-or-different` | Pronunciation same/different with blue highlights |
-| `tense-preview` | Visual tense intro: lead + contrast + rule cards |
-| `frequency-scale` | never→always scale with select gaps + fixed labels |
-| `write-lists` | Labeled textareas for “make a list…” tasks |
+Keys must match [`lessonSectionRegistry.ts`](../features/lessons/lessonSectionRegistry.ts) → `customSectionComponents`.
+
+| componentKey | Scope | Purpose |
+|--------------|-------|---------|
+| `youtube-video` | reusable | YouTube embed (`props.videoId`) |
+| `native-audio` | reusable | Public-URL `<audio controls>` (no autoplay) |
+| `native-video` | reusable | `<video controls>` from public URL |
+| `photo-gallery` | reusable | Photo grid (`props.images`, alt, emoji fallback) |
+| `homework-fix` | reusable | Warm-up “fix the mistakes” with groups/hints |
+| `photo-sentence-match` | reusable | Photo grid + select match to sentences |
+| `vocab-flip` | reusable | UA↔EN flip cards |
+| `tick-list` | reusable | Checkbox “tick what you hear / true” list |
+| `same-or-different` | reusable | Pronunciation same/different with blue highlights |
+| `tense-preview` | reusable | Visual tense intro: lead + contrast + rule cards |
+| `frequency-scale` | reusable | never→always scale with select gaps + fixed labels |
+| `frequency-grammar` | reusable | Grammar box with tap choices + Check / Reset (frequency or he/she -s) |
+| `write-lists` | reusable | Labeled textareas for “make a list…” tasks |
+| `verb-table` | reusable | Present Simple table with tap cells |
+| `stress-syllable` | reusable | Stress / syllable tap drill |
+| `phrase-match` | reusable | Match phrase halves or café lines |
+| `line-order` | reusable | Put lines in order (tap or drag) |
+| `lesson37-pictures` | lesson-specific | Zoom figures for L37 |
+| `lesson38-word-map` | lesson-specific | Word map mind-map (data via props) |
+| `lesson38-grammar-have-got` | lesson-specific | Interactive have/has got grammar box |
+| `lesson38-friend-speak` | lesson-specific | Prepare notes + speak models for L38 |
 
 ## When to use `custom`
 
