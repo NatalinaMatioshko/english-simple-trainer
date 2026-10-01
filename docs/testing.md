@@ -117,3 +117,11 @@ One case is **skipped on desktop Chromium by design**, not because it is broken:
 - Runs only in the `mobile-chrome` project (Pixel 5 viewport).
 - Skip reason in code: `Mobile-only viewport check; skipped on desktop Chromium by design`
 - Expectation when you run `npm run test:e2e`: **11 passed, 1 skipped** (the desktop duplicate of that mobile-only test).
+
+## Manual QA (mobile)
+
+Not reliably automatable in CI:
+
+- Soft keyboard open on `/hw-45` / `/login` — confirm dock + scroll-to-top do not trap inputs; scroll the focused field into view above the dock.
+- Physical iPhone safe-area (home indicator) with scroll-to-top visible after scrolling a long lesson.
+

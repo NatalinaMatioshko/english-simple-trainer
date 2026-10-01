@@ -200,8 +200,12 @@ input {
 
 .scroll-top-btn {
   position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
+  right: max(1.25rem, env(safe-area-inset-right, 0px));
+  /* Above MobileNav on narrow screens; desktop keeps a simple corner offset */
+  bottom: max(
+    1.25rem,
+    calc(var(--mobile-dock-offset, 0px) + var(--mobile-fab-gap, 0px))
+  );
   z-index: 60;
   width: 3rem;
   height: 3rem;

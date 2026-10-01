@@ -6,6 +6,7 @@
   --mn-bg: var(--color-surface);
   --mn-ink: var(--color-text);
   --mn-accent: var(--color-primary);
+  --mobile-nav-count: 6;
 
   display: none;
   position: relative;
@@ -127,7 +128,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: calc(100% / 5);
+  width: calc(100% / var(--mobile-nav-count, 6));
   height: var(--mn-size);
   list-style: none;
   pointer-events: none;
@@ -154,8 +155,23 @@
   opacity: 0;
 }
 
+/*
+ * Shared dock clearance for fixed MobileNav + floating controls.
+ * Keep scroll-top / content padding in sync via these variables.
+ */
 @media (max-width: 900px) {
+  :root {
+    --mobile-nav-bar-height: 58px;
+    --mobile-nav-edge-pad: 0.45rem;
+    --mobile-dock-offset: calc(
+      var(--mobile-nav-edge-pad) + var(--mobile-nav-bar-height) +
+        var(--mobile-nav-edge-pad) + env(safe-area-inset-bottom, 0px)
+    );
+    --mobile-fab-gap: 0.75rem;
+  }
+
   .mobile-nav {
+    --mn-size: var(--mobile-nav-bar-height);
     display: block;
     position: fixed;
     left: 0;
@@ -164,7 +180,8 @@
     z-index: 40;
     max-width: none;
     margin: 0;
-    padding: 0.45rem 0.75rem calc(0.45rem + env(safe-area-inset-bottom));
+    padding: var(--mobile-nav-edge-pad) 0.75rem
+      calc(var(--mobile-nav-edge-pad) + env(safe-area-inset-bottom, 0px));
     background: color-mix(in srgb, var(--color-bg) 92%, transparent);
     backdrop-filter: blur(8px);
   }
@@ -176,8 +193,11 @@
 }
 
 @media (max-width: 540px) {
+  :root {
+    --mobile-nav-bar-height: 52px;
+  }
+
   .mobile-nav {
-    --mn-size: 52px;
     --mn-pad: 40px;
   }
 

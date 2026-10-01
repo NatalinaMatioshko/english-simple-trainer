@@ -594,7 +594,9 @@
   }
 
   .app-content {
-    padding: 0.85rem 0.85rem 6.5rem;
+    /* Clear fixed MobileNav (+ safe-area) with shared --mobile-dock-offset */
+    padding: 0.85rem 0.85rem
+      calc(var(--mobile-dock-offset, 6.5rem) + 1.25rem);
   }
 }
 
