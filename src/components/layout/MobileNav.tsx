@@ -12,7 +12,15 @@ export function MobileNav() {
   const hasActive = activeIndex >= 0;
 
   return (
-    <nav className="mobile-nav" aria-label="Мобільна навігація">
+    <nav
+      className="mobile-nav"
+      aria-label="Мобільна навігація"
+      style={
+        {
+          "--mobile-nav-count": mobileNavItems.length,
+        } as CSSProperties
+      }
+    >
       <ul className="mobile-nav-list">
         {mobileNavItems.map((item, index) => {
           const active = hasActive && index === activeIndex;
