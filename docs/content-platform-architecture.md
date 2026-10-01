@@ -84,15 +84,18 @@ Local implementation today; swap for Firestore behind the same signatures later.
 | `text` | `body`; optional `bullets`, `note` | `TextSection` | L36 remember/exit; L37 contrast/exit; L38 read/contractions/exit | Explanations, goals, model lines | **stable / reusable** |
 | `vocabulary` | `items[]` (`id`, `term`, optional `gloss`) | `VocabularySection` | L37 six verbs | Any short word list | **stable / reusable** |
 | `multipleChoice` | `prompt`, `options`, `correctAnswer` | `MultipleChoiceSection` | (available; L36+ prefer group) | Single quiz item | **stable / reusable** |
-| `multipleChoiceGroup` | `items[]`; optional `chips` | `MultipleChoiceGroupSection` | L36 listen; L38 who/labels/match | Listening banks, photo match via selects | **stable / reusable** |
+| `multipleChoiceGroup` | `items[]`; optional `chips` | `MultipleChoiceGroupSection` | L36 listen; L38 who/labels/match; L45 /s/ /z/ /ɪz/ endings | Listening banks, photo match via selects | **stable / reusable** |
 | `fillBlank` | `items[]` (`before`/`after`/`correctAnswers`); optional `options`, `choiceMode` | `FillBlankSection` | L36 gaps; L38 has/have buttons | Gap drills, alt-choice | **stable / reusable** |
 | `wordOrder` | `items[]` (`scramble`, `parts`, `answer`) | `WordOrderSection` | L36; L38 Sofia | Scramble sentences | **stable / reusable** |
 | `speakingPrompt` | `prompts[]`; optional `models`, `note` | `SpeakingPromptSection` | L36; L37 | Teacher–student speak lists | **stable / reusable** |
 | `writingPrompt` | `prompt`; optional `placeholder` | `WritingPromptSection` | available | Free writing on lesson page | **stable / reusable** |
 | `homeworkLink` | `path`, `label`; optional `summary` | `HomeworkLinkSection` | L36–38 | Exit → existing HW route | **stable / reusable** |
 | `youtube-video` *(custom)* | `props.videoId`, optional `iframeTitle` | `YoutubeVideoSection` | L36; L38 | ELLLO / listening quiz embeds | **reusable custom** |
-| `native-audio` *(custom)* | `props.src`, labels; optional `transcriptLines` | `NativeAudioSection` | L38 R1/R2 | Unit tracks from public/Storage URLs | **reusable custom** |
-| `photo-gallery` *(custom)* | `props.images[]` (file, alt, emoji…) | `PhotoGallerySection` | L38 | Unit photo grids / matching context | **reusable custom** |
+| `native-audio` *(custom)* | `props.src`, labels; optional `transcriptLines` | `NativeAudioSection` | L38; L43–45 listening | Unit tracks from public/Storage URLs | **reusable custom** |
+| `native-video` *(custom)* | `props.src`, labels | `NativeVideoSection` | L44 café video | Short unit clips from public URLs | **reusable custom** |
+| `photo-gallery` *(custom)* | `props.images[]` (file, alt, emoji…) | `PhotoGallerySection` | L38; L44–45 | Unit photo grids / matching context | **reusable custom** |
+| `frequency-grammar` *(custom)* | `props` examples + tap `choices` | `FrequencyGrammarSection` | L44 How often; L45 he/she -s | Grammar boxes with alt buttons | **reusable custom** |
+| `photo-sentence-match`, `vocab-flip`, `write-lists`, … | lesson data via `props` | keyed customs | L43–45 (see `src/content/README.md`) | Interactive drills shared across recent lessons | **reusable custom** |
 | `homework-fix` *(custom)* | `props.groups`, `props.lines` | `HomeworkFixSection` | L38 | L40+ warm-up fix banks | **reusable custom** |
 | `custom` *(generic)* | `componentKey`, optional `props` | keyed in `customSectionComponents` | L37 pictures; L38 word-map, grammar, friend-speak | Any unique UI | **escape hatch** |
 

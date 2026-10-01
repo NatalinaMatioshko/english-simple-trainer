@@ -8,6 +8,12 @@ import {
 } from "./lessonService";
 import type { LessonRegistryEntry } from "../../types/lesson";
 
+/** Published ids from registry — new published lessons are covered without editing this list. */
+const publishedLessonIds = lessonRegistry
+  .filter((e) => e.status === "published")
+  .map((e) => e.id)
+  .sort((a, b) => Number(a) - Number(b));
+
 describe("lessonRegistry", () => {
   it("has unique lesson ids", () => {
     const ids = lessonRegistry.map((e) => e.id);
@@ -39,7 +45,7 @@ describe("lessonService", () => {
     vi.restoreAllMocks();
   });
 
-  it.each(["36", "37", "38", "43", "44"])(
+  it.each(publishedLessonIds)(
     "getLessonById returns published lesson %s",
     async (id) => {
       const lesson = await getLessonById(id);
@@ -91,7 +97,10 @@ describe("lessonService", () => {
     expect(published.length).toBeGreaterThan(0);
     expect(published.every((e) => e.status === "published")).toBe(true);
     expect(published.map((e) => e.id)).toEqual(
-      expect.arrayContaining(["36", "37", "38", "43", "44"]),
+      lessonRegistry
+        .filter((e) => e.status === "published")
+        .sort((a, b) => a.order - b.order)
+        .map((e) => e.id),
     );
   });
 });
