@@ -1,0 +1,85 @@
+# PR quality gates: typecheck, unit tests, build, Playwright smoke.
+# Deploy remains in deploy.yml (push to main only). Full eslint is not a gate yet
+# (known repo-wide lint debt; see docs/testing.md).
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+# Placeholder Vite/Firebase env for build + Playwright webServer.
+# Matches playwright.config.ts demo values — never production secrets.
+env:
+  VITE_FIREBASE_API_KEY: demo-api-key
+  VITE_FIREBASE_AUTH_DOMAIN: demo.firebaseapp.com
+  VITE_FIREBASE_PROJECT_ID: demo-project
+  VITE_FIREBASE_STORAGE_BUCKET: demo-project.appspot.com
+  VITE_FIREBASE_MESSAGING_SENDER_ID: "123456789012"
+  VITE_FIREBASE_APP_ID: "1:123456789012:web:abcdef"
+
+jobs:
+  quality:
+    name: Typecheck · Vitest · Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          # Same major as deploy.yml; satisfies jsdom engines (^22.22.2 || …)
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc -b
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+  e2e:
+    name: Playwright E2E
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright smoke
+        run: npx playwright test --reporter=list,html
+
+      - name: Upload Playwright artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
