@@ -143,6 +143,34 @@
   flex-shrink: 0;
 }
 
+.app-topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-shrink: 0;
+}
+
+.app-sidebar-tools {
+  display: none;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.app-sidebar-theme {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.55rem;
+  padding: 0.35rem 0.15rem;
+}
+
+.app-sidebar-theme-label {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
 .app-topbar-cta {
   display: inline-flex;
   align-items: center;
@@ -247,6 +275,11 @@
   border-top: 1px solid var(--color-border);
 }
 
+.app-sidebar-account {
+  display: grid;
+  gap: 0.55rem;
+}
+
 .app-sidebar-user {
   margin: 0;
   font-size: 0.85rem;
@@ -279,6 +312,51 @@
   display: inline-flex;
   align-items: center;
   text-decoration: none;
+}
+
+.app-sidebar-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  background: #2b2924;
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.app-sidebar-cta:hover {
+  background: #1d1c18;
+}
+
+[data-theme="dark"] .app-sidebar-cta {
+  background: #ece7df;
+  color: #171614;
+}
+
+[data-theme="dark"] .app-sidebar-cta:hover {
+  background: #fff;
+}
+
+.app-sidebar-cta--ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+}
+
+.app-sidebar-cta--ghost:hover {
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+[data-theme="dark"] .app-sidebar-cta--ghost {
+  background: transparent;
+  color: var(--color-primary);
 }
 
 .app-main {
@@ -475,17 +553,17 @@
   .app-topbar-menu-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    justify-content: center;
     flex-shrink: 0;
+    width: 2.3rem;
+    height: 2.3rem;
     min-height: 2.3rem;
-    padding: 0.3rem 0.7rem 0.3rem 0.55rem;
+    padding: 0;
     border: 1px solid var(--color-border);
     border-radius: 999px;
     background: var(--color-surface);
     color: var(--color-primary);
     font: inherit;
-    font-size: 0.88rem;
-    font-weight: 800;
     cursor: pointer;
   }
 
@@ -583,10 +661,14 @@
     font-size: 1rem;
   }
 
+  /* Theme + cabinet/login in drawer; Zoom stays top-right (circle only) */
+  .app-topbar-tools,
   .app-topbar-cta {
-    min-height: 2.3rem;
-    padding: 0.3rem 0.85rem;
-    font-size: 0.8rem;
+    display: none;
+  }
+
+  .app-sidebar-tools {
+    display: flex;
   }
 
   .app-sidebar {

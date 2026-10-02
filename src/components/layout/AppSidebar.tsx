@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { appNavItems, isAppNavActive } from "../../utils/appNav";
 import { AppNavIcon } from "./AppNavIcon";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function AppSidebar({
   pathname,
@@ -89,12 +90,21 @@ export function AppSidebar({
       </nav>
 
       <div className="app-sidebar-footer">
+        <div className="app-sidebar-tools">
+          <div className="app-sidebar-theme">
+            <span className="app-sidebar-theme-label">Тема</span>
+            <ThemeToggle />
+          </div>
+        </div>
         {!loading && user ? (
           <div className="app-sidebar-account">
             <p className="app-sidebar-user">
               {displayName}
               {isTeacher ? <span>вчитель</span> : null}
             </p>
+            <Link className="app-sidebar-cta" to="/cabinet">
+              {isTeacher ? "Кабінет вчителя" : "Кабінет"}
+            </Link>
             <button
               type="button"
               className="app-sidebar-auth-btn"
@@ -104,7 +114,7 @@ export function AppSidebar({
             </button>
           </div>
         ) : !loading ? (
-          <Link className="app-sidebar-auth-btn app-sidebar-auth-btn--link" to="/login">
+          <Link className="app-sidebar-cta app-sidebar-cta--ghost" to="/login">
             Увійти
           </Link>
         ) : (
