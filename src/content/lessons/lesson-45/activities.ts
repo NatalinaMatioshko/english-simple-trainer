@@ -279,3 +279,38 @@ export const habitSpeakPrompts = [
   "Tell your teacher three bad habits for the same person.",
   "Use he or she + -s / doesn't + verb.",
 ] as const;
+
+/** Extra video · third person singular (he / she + -s). */
+export const VIDEO_ID = "1mKeXz5Bf7c";
+
+export const videoQuiz = [
+  {
+    id: "v1",
+    prompt: "Where does his mother work?",
+    options: [
+      "at a shop in the mall",
+      "at a university",
+      "at home",
+    ],
+    correctAnswer: "at a shop in the mall",
+  },
+  {
+    id: "v2",
+    prompt: "Who does her brother call every week?",
+    options: ["his friends", "their mom", "his teacher"],
+    correctAnswer: "their mom",
+  },
+  {
+    id: "v3",
+    prompt: "What sport does her daughter play?",
+    options: ["football", "tennis", "volleyball"],
+    correctAnswer: "volleyball",
+  },
+  {
+    id: "v4",
+    prompt: "What does Brad Pitt play in the movie?",
+    options: ["a teacher", "a policeman", "a student"],
+    correctAnswer: "a policeman",
+  },
+] as const;
+

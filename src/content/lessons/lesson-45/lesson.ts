@@ -13,6 +13,8 @@ import {
   heSheGaps,
   endingSoundItems,
   habitSpeakPrompts,
+  VIDEO_ID,
+  videoQuiz,
 } from "./activities";
 import { lesson45Homework } from "./homework";
 import { timeFlashcards } from "./vocabulary";
@@ -60,6 +62,8 @@ export const lesson45: Lesson = {
     { href: "#l45-speak", label: "10 Speak" },
     { href: "#l45-exit", label: "Exit" },
     { href: "#l45-extra", label: "Extra" },
+    { href: "#l45-video", label: "Video" },
+    { href: "#l45-video-quiz", label: "Video quiz" },
   ],
   sections: [
     {
@@ -334,6 +338,32 @@ export const lesson45: Lesson = {
           label: "Writing about my daily routine — A1 Writing ↗",
         },
       ],
+    },
+    {
+      type: "custom",
+      id: "l45-video",
+      kicker: "Extra · Video",
+      title: "Third person singular · he / she",
+      description:
+        "Watch the video with your teacher. Four short conversations use he / she + -s.",
+      componentKey: "youtube-video",
+      props: {
+        videoId: VIDEO_ID,
+        iframeTitle: "Lesson six — third person singular (he / she)",
+      },
+    },
+    {
+      type: "multipleChoiceGroup",
+      id: "l45-video-quiz",
+      kicker: "Extra · Video quiz",
+      title: "Answer from the video",
+      description: "Listen again and choose the correct answer.",
+      items: videoQuiz.map((q) => ({
+        id: q.id,
+        prompt: q.prompt,
+        options: [...q.options],
+        correctAnswer: q.correctAnswer,
+      })),
     },
     {
       type: "homeworkLink",
