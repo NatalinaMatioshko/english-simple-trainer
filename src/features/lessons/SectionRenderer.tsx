@@ -1,5 +1,6 @@
 import { createElement, Suspense } from "react";
 import type { LessonSection } from "../../types/lesson";
+import { CustomSectionErrorBoundary } from "./CustomSectionErrorBoundary";
 import {
   isKnownCustomSectionKey,
   lazyCustomSectionComponents,
@@ -55,9 +56,14 @@ export function SectionRenderer({ section }: { section: LessonSection }) {
       // Components are created once in lessonSectionRegistry (React.lazy per key).
       const LazyCustom = lazyCustomSectionComponents[section.componentKey];
       return (
-        <Suspense fallback={<CustomSectionFallback id={section.id} />}>
-          {createElement(LazyCustom, { section })}
-        </Suspense>
+        <CustomSectionErrorBoundary
+          sectionId={section.id}
+          componentKey={section.componentKey}
+        >
+          <Suspense fallback={<CustomSectionFallback id={section.id} />}>
+            {createElement(LazyCustom, { section })}
+          </Suspense>
+        </CustomSectionErrorBoundary>
       );
     }
     default: {
