@@ -1,7 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { ThemeToggle } from "./ThemeToggle";
+import { ZoomMeetingLink } from "./ZoomMeetingLink";
 import { appNavItems, getPageContext, isAppNavActive } from "../../utils/appNav";
+import "../../styles/zoomMeetingLink.css";
 
 export function AppTopbar({
   menuOpen,
@@ -24,6 +26,7 @@ export function AppTopbar({
         <button
           type="button"
           className="app-topbar-menu-btn"
+          aria-label="Меню"
           aria-expanded={menuOpen}
           aria-controls="app-sidebar"
           onClick={onMenuToggle}
@@ -39,7 +42,6 @@ export function AppTopbar({
               </svg>
             )}
           </span>
-          Меню
         </button>
 
         <Link to="/" className="app-topbar-brand">
@@ -94,7 +96,10 @@ export function AppTopbar({
         </div>
 
         <div className="app-topbar-actions">
-          <ThemeToggle />
+          <ZoomMeetingLink />
+          <div className="app-topbar-tools">
+            <ThemeToggle />
+          </div>
           {!loading &&
             (user ? (
               <Link className="app-topbar-cta" to="/cabinet">

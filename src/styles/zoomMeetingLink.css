@@ -1,0 +1,141 @@
+/* Zoom meeting quick link — circular icon, expands to pill on hover (desktop) */
+
+.zoom-meeting-link {
+  --zoom-border: #7eb8d8;
+  --zoom-label: #f0c28a;
+  --zoom-bg: color-mix(in srgb, #5a2a2a 72%, #1a1514);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  height: 2.35rem;
+  min-width: 2.35rem;
+  padding: 0 0.55rem;
+  border: 1.5px solid var(--zoom-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-surface-2) 55%, #141210);
+  color: #f4f1ea;
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    min-width 0.22s ease,
+    padding 0.22s ease,
+    gap 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.zoom-meeting-link-icon {
+  display: grid;
+  place-items: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  flex-shrink: 0;
+}
+
+.zoom-meeting-link-icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.zoom-meeting-link-label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: var(--zoom-label);
+  transition:
+    max-width 0.22s ease,
+    opacity 0.18s ease,
+    margin 0.22s ease;
+}
+
+/* Desktop topbar: expand on hover / keyboard focus */
+.zoom-meeting-link--topbar:hover,
+.zoom-meeting-link--topbar:focus-visible {
+  min-width: 9.75rem;
+  gap: 0.45rem;
+  padding: 0 0.9rem 0 0.7rem;
+  background: var(--zoom-bg);
+  border-color: #e8a090;
+}
+
+.zoom-meeting-link--topbar:hover .zoom-meeting-link-label,
+.zoom-meeting-link--topbar:focus-visible .zoom-meeting-link-label {
+  max-width: 8rem;
+  opacity: 1;
+}
+
+.zoom-meeting-link--topbar:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Mobile: keep Zoom as a compact circle (no expand) */
+@media (max-width: 900px) {
+  .zoom-meeting-link--topbar:hover,
+  .zoom-meeting-link--topbar:focus-visible {
+    min-width: 2.35rem;
+    gap: 0;
+    padding: 0 0.55rem;
+    background: color-mix(in srgb, var(--color-surface-2) 55%, #141210);
+    border-color: var(--zoom-border);
+  }
+
+  .zoom-meeting-link--topbar:hover .zoom-meeting-link-label,
+  .zoom-meeting-link--topbar:focus-visible .zoom-meeting-link-label {
+    max-width: 0;
+    opacity: 0;
+  }
+
+  [data-theme="light"] .zoom-meeting-link--topbar:hover,
+  [data-theme="light"] .zoom-meeting-link--topbar:focus-visible {
+    background: color-mix(in srgb, var(--color-surface) 88%, #2a2220);
+  }
+}
+
+/* Sidebar / drawer: always show label */
+.zoom-meeting-link--sidebar {
+  width: 100%;
+  min-height: 2.55rem;
+  height: auto;
+  min-width: 0;
+  gap: 0.55rem;
+  padding: 0.45rem 0.85rem;
+  justify-content: flex-start;
+  background: var(--zoom-bg);
+  border-color: #e8a090;
+}
+
+.zoom-meeting-link--sidebar .zoom-meeting-link-label {
+  max-width: none;
+  opacity: 1;
+}
+
+[data-theme="light"] .zoom-meeting-link {
+  background: color-mix(in srgb, var(--color-surface) 88%, #2a2220);
+  color: #1a1514;
+}
+
+[data-theme="light"] .zoom-meeting-link--topbar:hover,
+[data-theme="light"] .zoom-meeting-link--topbar:focus-visible,
+[data-theme="light"] .zoom-meeting-link--sidebar {
+  background: color-mix(in srgb, #5a2a2a 18%, var(--color-surface));
+  color: #1a1514;
+}
+
+[data-theme="light"] .zoom-meeting-link-label {
+  color: color-mix(in srgb, #b45309 70%, #1a1514);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom-meeting-link,
+  .zoom-meeting-link-label {
+    transition: none;
+  }
+}
