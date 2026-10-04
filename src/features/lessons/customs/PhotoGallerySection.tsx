@@ -21,6 +21,8 @@ type GalleryImage = {
 type Props = {
   images?: GalleryImage[];
   wideGrid?: boolean;
+  /** Smaller cards that do not stretch to full panel width */
+  compact?: boolean;
 };
 
 function resolveSrc(img: GalleryImage): string | undefined {
@@ -78,6 +80,14 @@ export function PhotoGallerySection({ section }: { section: CustomSection }) {
   const props = (section.props ?? {}) as Props;
   const images = props.images ?? [];
   const wideGrid = props.wideGrid === true;
+  const compact = props.compact === true;
+  const gridClass = [
+    "l38-photo-grid",
+    wideGrid ? "l38-photo-grid--wide" : "",
+    compact ? "l38-photo-grid--compact" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <section id={section.id} className="lw-block panel">
@@ -88,9 +98,7 @@ export function PhotoGallerySection({ section }: { section: CustomSection }) {
           <p className="lw-section-desc">{section.description}</p>
         ) : null}
       </div>
-      <div
-        className={`l38-photo-grid${wideGrid ? " l38-photo-grid--wide" : ""}`}
-      >
+      <div className={gridClass}>
         {images.map((img) => (
           <PhotoCard key={img.id} {...img} />
         ))}

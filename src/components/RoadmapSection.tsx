@@ -677,7 +677,7 @@ const roadmapLessons: Lesson[] = [
     listening: "Verb endings /s/ /z/ /ɪz/ · habit dialogues",
     review: "Frequency (L44); he/she + -s",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lessons/45",
   },
   {
@@ -689,7 +689,8 @@ const roadmapLessons: Lesson[] = [
     listening: "Strong and weak does · short housework talks",
     review: "Habits (L45); does / doesn’t",
     category: "general",
-    status: "next",
+    status: "current",
+    route: "/lessons/46",
   },
   {
     id: 47,
@@ -1130,8 +1131,8 @@ export default function RoadmapSection() {
               <p className="roadmap-mini-label">Full timeline</p>
               <h3>Lessons 1–64</h3>
               <p>
-                Interactive lessons are live through Good and bad habits (Lesson
-                45). Lessons 46–64 are the planned path ahead.
+                Interactive lessons are live through Jobs around the house
+                (Lesson 46). Lessons 47–64 are the planned path ahead.
               </p>
             </div>
 

@@ -209,6 +209,35 @@
   grid-template-columns: 1fr;
 }
 
+/* Compact chore / portrait cards — fixed small width, not full panel */
+.l38-photo-grid--compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-start;
+}
+
+.l38-photo-grid--compact .l38-photo-card {
+  width: 11.5rem;
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+
+.l38-photo-grid--compact .l38-photo-card img,
+.l38-photo-grid--compact .l38-photo-card--contain img {
+  width: 100%;
+  height: 9.5rem;
+  max-height: 9.5rem;
+  object-fit: contain;
+  object-position: center;
+}
+
+.l38-photo-grid--compact .l38-photo-card figcaption {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
 @media (min-width: 720px) {
   .l38-photo-grid--wide {
     grid-template-columns: 1fr 1fr;
@@ -225,6 +254,16 @@
 
   .l38-photo-card--contain img {
     max-height: none;
+  }
+
+  .l38-photo-grid--compact .l38-photo-card {
+    width: 12.5rem;
+  }
+
+  .l38-photo-grid--compact .l38-photo-card img,
+  .l38-photo-grid--compact .l38-photo-card--contain img {
+    height: 10.5rem;
+    max-height: 10.5rem;
   }
 }
 
