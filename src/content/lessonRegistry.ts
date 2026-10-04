@@ -130,6 +130,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson45;
     },
   },
+  {
+    id: "46",
+    number: 46,
+    title: "Jobs around the house",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 46,
+    status: "published",
+    estimatedMinutes: 65,
+    hasHomework: true,
+    topic: "housework · Present Simple questions Does he/she…?",
+    description:
+      "Match housework phrases to pictures, listen about Albert and Bella, then ask Does he/she…? questions.",
+    route: "/lessons/46",
+    legacyRoute: "/lesson-46",
+    homeworkPath: "/hw-46",
+    load: async () => {
+      const mod = await import("./lessons/lesson-46/lesson");
+      return mod.lesson46;
+    },
+  },
 ];
 
 export function getRegistryEntry(

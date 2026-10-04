@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "46": "/images/lesson46/chore-a-cook.png",
   "45": "/images/lesson45/erica-cycle.png",
   "44": "/images/lesson44/tea.jpg",
   "43": "/images/lesson42/travel-e-train.png",
@@ -39,6 +40,33 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "46",
+    title: "Jobs around the house",
+    href: "/hw-46",
+    tasks: [
+      {
+        type: "text",
+        text: "Flashcards: housework phrases (UA→EN)",
+      },
+      {
+        type: "text",
+        text: "Match pictures A–H to housework phrases",
+      },
+      {
+        type: "text",
+        text: "Complete collocations: clean / cook / feed / wash",
+      },
+      {
+        type: "text",
+        text: "Albert or Bella? · Do / does gaps",
+      },
+      {
+        type: "text",
+        text: "Write about home jobs + Does…? questions",
+      },
+    ],
+  },
   {
     id: "45",
     title: "Good and bad habits",
