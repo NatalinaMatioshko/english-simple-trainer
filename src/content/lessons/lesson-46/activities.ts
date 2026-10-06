@@ -76,6 +76,140 @@ export const choreMatchPhrases = [
   { value: "8", label: "wash the dishes" },
 ] as const;
 
+/** HW46 · picture → English phrase flashcards */
+export const chorePhotoFlashcards = chorePhotoMatch.map((pic) => {
+  const phrase =
+    choreMatchPhrases.find((p) => p.value === pic.answer)?.label ?? "";
+  return {
+    id: pic.id,
+    file: pic.file,
+    alt: pic.alt,
+    phrase,
+    speak: phrase,
+  };
+});
+
+/** HW46 · household chores poster · picture → English phrase */
+export const posterChoreMatch = [
+  {
+    id: "1",
+    file: "poster-make-the-bed.png",
+    alt: "A boy makes the bed",
+    answer: "make the bed",
+  },
+  {
+    id: "2",
+    file: "poster-do-the-laundry.png",
+    alt: "A man does the laundry at a washing machine",
+    answer: "do the laundry",
+  },
+  {
+    id: "3",
+    file: "poster-do-the-dishes.png",
+    alt: "A woman washes a plate at the sink",
+    answer: "do the dishes",
+  },
+  {
+    id: "4",
+    file: "poster-do-the-ironing.png",
+    alt: "A woman irons clothes on an ironing board",
+    answer: "do the ironing",
+  },
+  {
+    id: "5",
+    file: "poster-fold-the-laundry.png",
+    alt: "A man folds a t-shirt",
+    answer: "fold the laundry",
+  },
+  {
+    id: "6",
+    file: "poster-vacuum.png",
+    alt: "A boy vacuums the floor",
+    answer: "vacuum",
+  },
+  {
+    id: "7",
+    file: "poster-hang-out-the-clothes.png",
+    alt: "A girl hangs clothes on a clothesline",
+    answer: "hang out the clothes",
+  },
+  {
+    id: "8",
+    file: "poster-take-out-the-rubbish.png",
+    alt: "A boy takes out the rubbish to a recycling bin",
+    answer: "take out the rubbish",
+  },
+  {
+    id: "9",
+    file: "poster-water-the-plants.png",
+    alt: "A boy waters a plant with a watering can",
+    answer: "water the plants",
+  },
+  {
+    id: "10",
+    file: "poster-mop-the-floor.png",
+    alt: "A woman mops the floor",
+    answer: "mop the floor",
+  },
+  {
+    id: "11",
+    file: "poster-sweep-the-floor.png",
+    alt: "Two children sweep the floor with brooms",
+    answer: "sweep the floor",
+  },
+  {
+    id: "12",
+    file: "poster-mow-the-lawn.png",
+    alt: "A man mows the lawn",
+    answer: "mow the lawn",
+  },
+  {
+    id: "13",
+    file: "poster-feed-the-dog.png",
+    alt: "A boy feeds a dog",
+    answer: "feed the dog",
+  },
+  {
+    id: "14",
+    file: "poster-rake-the-leaves.png",
+    alt: "A boy rakes autumn leaves",
+    answer: "rake the leaves",
+  },
+  {
+    id: "15",
+    file: "poster-dust-the-furniture.png",
+    alt: "A boy dusts a dresser with a duster",
+    answer: "dust the furniture",
+  },
+] as const;
+
+export const posterChorePhrases = [
+  { value: "make the bed", label: "make the bed" },
+  { value: "do the laundry", label: "do the laundry" },
+  { value: "do the dishes", label: "do the dishes" },
+  { value: "do the ironing", label: "do the ironing" },
+  { value: "fold the laundry", label: "fold the laundry" },
+  { value: "vacuum", label: "vacuum" },
+  { value: "hang out the clothes", label: "hang out the clothes" },
+  { value: "take out the rubbish", label: "take out the rubbish" },
+  { value: "water the plants", label: "water the plants" },
+  { value: "mop the floor", label: "mop the floor" },
+  { value: "sweep the floor", label: "sweep the floor" },
+  { value: "mow the lawn", label: "mow the lawn" },
+  { value: "feed the dog", label: "feed the dog" },
+  { value: "rake the leaves", label: "rake the leaves" },
+  { value: "dust the furniture", label: "dust the furniture" },
+] as const;
+
+/** HW46 · poster picture → English phrase flashcards */
+export const posterChoreFlashcards = posterChoreMatch.map((pic) => ({
+  id: pic.id,
+  file: pic.file,
+  alt: pic.alt,
+  phrase: pic.answer,
+  speak: pic.answer,
+}));
+
 /** Ex.2 · who does which jobs (from the pictures) */
 export const peopleJobs = [
   {
@@ -129,6 +263,204 @@ export const collocationGaps = [
     before: "",
     after: "the car / the cups / the dishes",
     answers: ["wash"],
+  },
+] as const;
+
+/**
+ * HW46 · go / make / do + articles (a / the / —)
+ * Short learner note + interactive practice.
+ */
+export const goMakeDoArticleNotes = [
+  {
+    label: "do the + chore",
+    text: "do the laundry, do the dishes, do the ironing, do the washing — the = звичайна домашня робота (відома справа), не “a laundry”.",
+  },
+  {
+    label: "a / an",
+    text: "один / якийсь: make a coffee, wash a plate. Порівняй: wash a plate vs do the dishes (увесь посуд).",
+  },
+  {
+    label: "Фіксовані фрази",
+    text: "go shopping (часто без артикля —), make coffee / make the bed, vacuum, mop the floor, take out the rubbish.",
+  },
+] as const;
+
+/** Options for article gaps: a / the / no article */
+export const goMakeDoArticleOptions = ["a", "the", "—"] as const;
+
+/** Choose a / the / — (no article) */
+export const goMakeDoArticleGaps = [
+  {
+    id: "art1",
+    before: "I do",
+    after: "laundry on Sundays.",
+    answer: "the",
+    tipUa: "звичайна домашня робота → do the laundry",
+  },
+  {
+    id: "art2",
+    before: "She does",
+    after: "dishes after dinner.",
+    answer: "the",
+    tipUa: "увесь посуд як робота → do the dishes",
+  },
+  {
+    id: "art3",
+    before: "He makes",
+    after: "bed every morning.",
+    answer: "the",
+    tipUa: "фіксована фраза → make the bed",
+  },
+  {
+    id: "art4",
+    before: "Can you make",
+    after: "coffee, please?",
+    answer: "—",
+    tipUa: "часто без артикля → make coffee",
+  },
+  {
+    id: "art5",
+    before: "I’d like",
+    after: "coffee, please.",
+    answer: "a",
+    tipUa: "одна порція / один напій → a coffee",
+  },
+  {
+    id: "art6",
+    before: "We go",
+    after: "shopping at the weekend.",
+    answer: "—",
+    tipUa: "go shopping — без артикля",
+  },
+  {
+    id: "art7",
+    before: "Please mop",
+    after: "floor.",
+    answer: "the",
+    tipUa: "конкретна підлога в домі → the floor",
+  },
+  {
+    id: "art8",
+    before: "Wash",
+    after: "plate for the baby.",
+    answer: "a",
+    tipUa: "одна тарілка → a plate (не do the dishes)",
+  },
+  {
+    id: "art9",
+    before: "Can you take out",
+    after: "rubbish?",
+    answer: "the",
+    tipUa: "сміття як звичайна робота → take out the rubbish",
+  },
+  {
+    id: "art10",
+    before: "Mum does",
+    after: "ironing in the evening.",
+    answer: "the",
+    tipUa: "звичайна робота → do the ironing",
+  },
+] as const;
+
+/** Complete with go / make / do */
+export const goMakeDoVerbGaps = [
+  {
+    id: "gmd1",
+    before: "",
+    after: "shopping",
+    answers: ["go"],
+  },
+  {
+    id: "gmd2",
+    before: "",
+    after: "coffee",
+    answers: ["make"],
+  },
+  {
+    id: "gmd3",
+    before: "",
+    after: "the bed",
+    answers: ["make"],
+  },
+  {
+    id: "gmd4",
+    before: "",
+    after: "the laundry",
+    answers: ["do"],
+  },
+  {
+    id: "gmd5",
+    before: "",
+    after: "the dishes",
+    answers: ["do"],
+  },
+  {
+    id: "gmd6",
+    before: "",
+    after: "the ironing",
+    answers: ["do"],
+  },
+  {
+    id: "gmd7",
+    before: "",
+    after: "the washing",
+    answers: ["do"],
+  },
+] as const;
+
+/** Choose the correct housework phrase */
+export const goMakeDoChoose = [
+  {
+    id: "ch1",
+    prompt: "I need clean clothes.",
+    options: ["go shopping", "do the laundry", "make coffee"],
+    answer: "do the laundry",
+  },
+  {
+    id: "ch2",
+    prompt: "The kitchen sink is full of plates.",
+    options: ["do the dishes", "make the bed", "go shopping"],
+    answer: "do the dishes",
+  },
+  {
+    id: "ch3",
+    prompt: "The bed is messy.",
+    options: ["do the bed", "make the bed", "go the bed"],
+    answer: "make the bed",
+  },
+  {
+    id: "ch4",
+    prompt: "We need food from the shops.",
+    options: ["do shopping", "make shopping", "go shopping"],
+    answer: "go shopping",
+  },
+  {
+    id: "ch5",
+    prompt: "Would you like a hot drink?",
+    options: ["make coffee", "do coffee", "go coffee"],
+    answer: "make coffee",
+  },
+  {
+    id: "ch6",
+    prompt: "The floor is dirty.",
+    options: ["mop the floor", "make the floor", "do the floor"],
+    answer: "mop the floor",
+  },
+  {
+    id: "ch7",
+    prompt: "The bin is full.",
+    options: [
+      "take out the rubbish",
+      "make the rubbish",
+      "do the rubbish",
+    ],
+    answer: "take out the rubbish",
+  },
+  {
+    id: "ch8",
+    prompt: "There is dust on the carpet.",
+    options: ["vacuum", "make vacuum", "do vacuum"],
+    answer: "vacuum",
   },
 ] as const;
 

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import WordOrderBoard, {
   initWordOrderRows,
@@ -105,16 +105,7 @@ export default function HW40() {
               don&apos;ts for your city.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lesson-40">
-              ← Lesson 40
-            </Link>
-            <Link className="lesson22-back-link" to="/homework">
-              ← Homework
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>Visit / Don&apos;t go</span>

@@ -41,9 +41,6 @@ export default function ReviewMaterialPage() {
         <p className="page-subtitle">{material.blurb}</p>
         <p className="review-hub-topic">{material.topic}</p>
         <div className="review-hub-actions">
-          <Link className="action-btn secondary" to="/review">
-            ← Усі матеріали
-          </Link>
           {isPrepGeo ? (
             <a className="action-btn primary" href="#review-practice">
               До вправ ↓

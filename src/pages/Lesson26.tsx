@@ -634,9 +634,6 @@ export default function Lesson26() {
               <li>pronunciation: stress in job words.</li>
             </ul>
           </div>
-          <Link className="lesson22-back-link" to="/lessons">
-            ← Back to lessons
-          </Link>
         </div>
         <div className="lesson22-hero-chips">
           <span>She's a doctor</span>

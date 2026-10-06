@@ -102,17 +102,6 @@ function LessonPageInner({ lessonId }: { lessonId: string }) {
               <p className="lw-topic-pill">{lesson.topic}</p>
             ) : null}
           </div>
-          <div className="lw-nav-col">
-            {(lesson.navLinks ?? []).map((link) => (
-              <Link
-                key={link.path + link.label}
-                className={`lw-back-link${link.ghost ? " lw-back-link--ghost" : ""}`}
-                to={link.path}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
         </div>
         {lesson.chips && lesson.chips.length > 0 ? (
           <div className="lw-chips">

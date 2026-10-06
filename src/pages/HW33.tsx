@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+
 import {
   dialogueGapsB,
   grammarBoxB,
@@ -137,16 +137,7 @@ export default function HW33() {
               <strong>Is there / Are there</strong>, intonation, conversation.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lesson-33">
-              ← Lesson 33
-            </Link>
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>Brighton flat</span>

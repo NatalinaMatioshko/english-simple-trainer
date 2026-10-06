@@ -5,6 +5,8 @@ import "../styles/homeworkSubmit.css";
 type Props = {
   lessonId: string;
   writing: string;
+  /** Extra text appended after writing validation (e.g. survey summary). */
+  appendix?: string;
   /** In-app quiz finished (e.g. ScoredQuizCard) */
   quizDone?: boolean;
   quizScore?: number;
@@ -17,6 +19,7 @@ type Props = {
 export function HomeworkSubmit({
   lessonId,
   writing,
+  appendix = "",
   quizDone = false,
   quizScore,
   showListeningCheck = true,
@@ -35,6 +38,8 @@ export function HomeworkSubmit({
 
     const name = studentName.trim();
     const text = writing.trim();
+    const extra = appendix.trim();
+    const fullWriting = extra ? `${text}\n\n${extra}` : text;
 
     if (name.length < 2) {
       setError("Вкажи своє ім’я (мінімум 2 літери).");
@@ -50,7 +55,7 @@ export function HomeworkSubmit({
       await saveHomeworkAnswer({
         studentName: name,
         lessonId,
-        writing: text,
+        writing: fullWriting,
         testDone: showListeningCheck ? testDone : false,
         quizDone,
         quizScore,

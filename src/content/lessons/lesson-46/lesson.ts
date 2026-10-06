@@ -48,6 +48,7 @@ export const lesson46: Lesson = {
   flow: [
     { href: "#l46-intro", label: "Intro" },
     { href: "#l46-vocab", label: "Vocab" },
+    { href: "#l46-the-tip", label: "Порада" },
     { href: "#l46-match", label: "1 Match" },
     { href: "#l46-audio-r4", label: "1b Listen" },
     { href: "#l46-people", label: "2 People" },
@@ -86,6 +87,19 @@ export const lesson46: Lesson = {
       props: {
         cards: choreFlashcards,
       },
+    },
+    {
+      type: "text",
+      id: "l46-the-tip",
+      kicker: "Порада",
+      title: "the чи a?",
+      description: "Чому в домашніх справах часто the.",
+      body: "У домашніх справах часто кажемо the, бо це звичайна / конкретна річ у домі (the bed — ліжко, на якому спиш; the dishes — посуд після вечері). a — якийсь / один / неконкретний. the — обидва знають, про що мова (наша собака, цей посуд). Деякі фрази фіксовані з the: make the bed, do the laundry, take out the rubbish.",
+      bullets: [
+        "make the bed (твоє ліжко вдома) · buy a bed (якесь ліжко в магазині)",
+        "feed the dog (наша собака) · I saw a dog (якась собака)",
+        "wash the dishes · wash a plate",
+      ],
     },
     {
       type: "custom",
@@ -321,7 +335,7 @@ export const lesson46: Lesson = {
       title: "Homework",
       path: "/hw-46",
       label: "HW46 →",
-      summary: "Housework match · Does…? gaps · write about home jobs",
+      summary: "UA→EN cards · picture cards · Does…? gaps · write",
     },
   ],
 };

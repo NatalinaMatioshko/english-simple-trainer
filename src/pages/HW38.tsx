@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import {
   hw38Possessives,
@@ -178,16 +178,7 @@ export default function HW38() {
               Потім напиши про себе і друга.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons/38">
-              ← Lesson 38
-            </Link>
-            <Link className="lesson22-back-link" to="/homework">
-              ← Homework
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>I&apos;ve got / Has he got…?</span>

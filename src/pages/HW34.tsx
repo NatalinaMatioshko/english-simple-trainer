@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+
 import {
   lesson31Images,
   prepareTownsC,
@@ -144,16 +144,7 @@ export default function HW34() {
               .
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lesson-34">
-              ← Lesson 34
-            </Link>
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>Word order</span>

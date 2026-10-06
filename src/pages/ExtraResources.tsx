@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "../styles/pages.css";
 
 const IMG = (name: string) => `${import.meta.env.BASE_URL}images/${name}`;
@@ -106,14 +105,6 @@ const visualMaterials = [
 export default function ExtraResources() {
   return (
     <div className="page-shell">
-      <div className="page-top-actions">
-        <Link className="back-link back-home-btn" to="/lessons">
-          ← Lessons
-        </Link>
-        <Link className="back-link" to="/review">
-          Review &amp; rules →
-        </Link>
-      </div>
 
       <header className="page-hero panel">
         <p className="page-kicker">Extra resources</p>

@@ -228,22 +228,7 @@ export default function Lesson40() {
               <strong>Visit…</strong> / <strong>Don&apos;t go…</strong>
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-39"
-            >
-              ← Lesson 39
-            </Link>
-            <Link className="lesson22-back-link" to="/hw-40">
-              HW40 →
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>Fix HW writing</span>

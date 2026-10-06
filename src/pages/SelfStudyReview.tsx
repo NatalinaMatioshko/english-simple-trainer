@@ -722,14 +722,6 @@ export default function SelfStudyReview() {
               Progress: {sectionsDone} / 9 blocks · {progressPct}%
             </p>
           </div>
-          <div className="self-study-nav">
-            <Link className="self-study-link" to="/lessons">
-              ← Lessons
-            </Link>
-            <Link className="self-study-link self-study-link--ghost" to="/">
-              Roadmap
-            </Link>
-          </div>
         </div>
         <div className="self-study-chips">
           <span>I am</span>

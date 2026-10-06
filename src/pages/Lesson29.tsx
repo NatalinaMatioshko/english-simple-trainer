@@ -1464,16 +1464,7 @@ export default function Lesson29() {
               <span className="chip">In a shop</span>
             </div>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/hw-29">
-              Homework → Lesson 29
-            </Link>
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-          </div>
+
         </div>
       </section>
 

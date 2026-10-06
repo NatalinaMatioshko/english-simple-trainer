@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import YouTubeLessons from "../components/YouTubeLessons";
 import Lesson17Dialogues from "../components/Lesson17Dialogues";
 import Lesson17Quiz from "../components/Lesson17Quiz";
@@ -10,12 +9,6 @@ export default function Lesson17() {
   return (
     <div className="page-shell">
       <header className="page-hero panel lesson-hero">
-        <div className="lesson-topbar">
-          <Link className="back-home-link" to="/">
-            ← Home
-          </Link>
-        </div>
-
         <p className="page-kicker">Lesson 17</p>
         <h1>Present Simple + Speaking</h1>
         <p className="page-subtitle">

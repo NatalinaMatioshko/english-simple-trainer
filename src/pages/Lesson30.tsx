@@ -836,19 +836,7 @@ export default function Lesson30() {
               <li>побачити сильні й слабкі теми для наступного циклу.</li>
             </ul>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/hw-30">
-              Homework 30 →
-            </Link>
-            <Link className="lesson22-back-link" to="/a1-level-test">
-              A1 Level Test →
-            </Link>
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>{topicStations.length} topic stations</span>

@@ -45,16 +45,7 @@ export default function HW27() {
               Writing · Listening · Flashcards L25–27 · Test L25–27.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lesson-27">
-              ← Lesson 27
-            </Link>
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>countries</span>

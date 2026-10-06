@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import type { ChangeEvent, SubmitEvent } from "react";
-import { Link } from "react-router-dom";
+
 import "./AboutMePage.css";
 import { fillInBlankTasks, profiles, sentenceOrderTasks } from "./data";
 import { saveAboutMeSubmission } from "../../services/writingSubmissions";
@@ -218,14 +218,6 @@ export const AboutMePage = () => {
           family and appearance. Read examples, do exercises and write about
           yourself.
         </p>
-        <div className="about-me-page__hero-nav">
-          <Link className="about-me-page__nav-btn" to="/lesson-20">
-            ← Lesson 20
-          </Link>
-          <Link className="about-me-page__nav-btn about-me-page__nav-btn--ghost" to="/">
-            Home
-          </Link>
-        </div>
       </section>
 
       <section className="about-me-page__card">

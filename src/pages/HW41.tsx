@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
 import {
@@ -263,16 +263,7 @@ export default function HW41() {
               schedule · reflect.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lesson-41">
-              ← Lesson 41
-            </Link>
-            <Link className="lesson22-back-link" to="/homework">
-              ← Homework
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>word map</span>

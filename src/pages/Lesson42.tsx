@@ -221,31 +221,7 @@ export default function Lesson42() {
               <Link to="/lessons/43">Lesson 43</Link>.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-41"
-            >
-              ← Lesson 41
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/hw-42"
-            >
-              HW 42 →
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/vocab"
-            >
-              Vocab →
-            </Link>
-          </div>
+
         </div>
         <div className="l42-hero-media">
           <img src={IMG42("mari-train.jpg")} alt="Mari on the bus" />

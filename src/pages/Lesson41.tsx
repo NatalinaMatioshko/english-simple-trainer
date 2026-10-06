@@ -107,28 +107,7 @@ export default function Lesson41() {
               <em>o&apos;clock · past · to · quarter · half</em>.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-40"
-            >
-              ← Lesson 40
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-42"
-            >
-              Lesson 42 →
-            </Link>
-            <Link className="lesson22-back-link" to="/hw-41">
-              HW41 →
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>What time is it?</span>

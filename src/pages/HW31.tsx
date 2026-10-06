@@ -240,16 +240,7 @@ export default function HW31() {
               перетягуванням (EN → UA). Лексика уроку 31 і повторення.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lesson-31">
-              ← Lesson 31
-            </Link>
-            <Link className="lesson22-back-link" to="/homework">
-              ← Homework
-            </Link>
-          </div>
+          
         </div>
         <div className="lesson22-hero-chips">
           <span>crossword</span>

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+
 import {
   adjGaps,
   chooseAlt,
@@ -201,16 +201,7 @@ export default function HW35() {
               кімнати й речі, прикметники та питання.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lesson-35">
-              ← Lesson 35
-            </Link>
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>Places in town</span>

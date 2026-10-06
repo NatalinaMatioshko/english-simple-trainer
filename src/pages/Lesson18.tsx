@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+
 import "../styles/lesson18.css";
 
 type FlashcardItem = {
@@ -326,9 +326,7 @@ export default function Lesson18() {
             </div>
           </div>
 
-          <Link to="/" className="lesson18-back-link">
-            ← Back to roadmap
-          </Link>
+          
         </div>
 
         <div className="lesson18-hero-chips">
