@@ -458,9 +458,6 @@ export default function HW25() {
           Виконай домашні завдання. Перевір себе за допомогою кнопок "Check
           answers".
         </p>
-        <Link className="lesson22-back-link" to="/lesson-25">
-          ← Back to Lesson 25
-        </Link>
       </section>
 
       {/* ── Grammar practice: form of be ────────────────────── */}

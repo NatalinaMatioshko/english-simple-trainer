@@ -403,6 +403,112 @@
   margin-top: 0.65rem;
 }
 
+/* Writing prompts: label + textarea stack (HW45 / HW46) */
+.l26-block {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 1rem 0 0;
+}
+
+.l26-block + .l26-block {
+  margin-top: 1.25rem;
+}
+
+.l26-label {
+  display: block;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.l26-textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 12px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.l26-textarea:focus {
+  outline: 2px solid rgba(15, 118, 110, 0.35);
+  border-color: #0f766e;
+}
+
+/* HW46 end-of-homework difficulty survey */
+.hw46-survey-list {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.hw46-survey-row {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 12px;
+  background: var(--color-surface-2, #fff);
+}
+
+.hw46-survey-title {
+  font-weight: 600;
+  font-size: var(--text-sm, 0.95rem);
+  line-height: 1.4;
+}
+
+.hw46-survey-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.hw46-survey-btn {
+  appearance: none;
+  margin: 0;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 999px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.hw46-survey-btn:hover {
+  border-color: #0f766e;
+}
+
+.hw46-survey-btn.is-selected {
+  background: #0f766e;
+  border-color: #0f766e;
+  color: #fff;
+}
+
+@media (min-width: 640px) {
+  .hw46-survey-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem 1rem;
+  }
+}
+
 .hw27-textarea {
   display: block;
   width: 100%;

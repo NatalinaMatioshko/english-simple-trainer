@@ -179,11 +179,6 @@ export default function Lesson32() {
     isFixOk(fixAns[l.id] ?? "", l.answers),
   ).length;
 
-
-
-
-
-
   return (
     <div className="lesson22-page">
       <section className="lesson22-hero panel">
@@ -202,31 +197,7 @@ export default function Lesson32() {
             </p>
 
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-31"
-            >
-              ← Lesson 31
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-33"
-            >
-              Lesson 33 →
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/vocab"
-            >
-              Vocab →
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>Who is he?</span>

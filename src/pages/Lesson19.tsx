@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+
 import Lesson19Cards from "./Lesson19Cards";
 import "../styles/lesson19.css";
 
@@ -386,14 +386,6 @@ export default function Lesson19() {
   return (
     <div className="lesson19-page">
       <div className="lesson19-shell">
-        <div className="lesson19-topbar">
-          <Link className="lesson19-link" to="/lessons">
-            ← Back to lessons
-          </Link>
-          <Link className="lesson19-link" to="/lesson-18">
-            Open Lesson 18
-          </Link>
-        </div>
 
         <header className="lesson19-hero">
           <span className="lesson19-badge">Lesson 19 • Do expressions</span>

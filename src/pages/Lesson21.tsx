@@ -339,17 +339,6 @@ export default function Lesson21() {
               permission — with drills, listening, and task-based speaking.
             </p>
           </div>
-          <div className="lesson21-nav">
-            <Link className="lesson21-back-link" to="/">
-              ← Roadmap
-            </Link>
-            <Link
-              className="lesson21-back-link lesson21-back-link--ghost"
-              to="/lessons"
-            >
-              All lessons
-            </Link>
-          </div>
         </div>
         <div className="lesson21-hero-chips">
           <span>He works</span>

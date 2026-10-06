@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { CheckBar } from "../components/lesson38/L38Ui";
 import Unit5AudioBlock from "../components/Unit5AudioBlock";
@@ -139,14 +139,7 @@ export default function HW43() {
               Travel phrases, transport chunks, and Past Simple verb flashcards.
             </p>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <Link className="lesson22-back-link" to="/lessons/43">
-              ← Lesson 43
-            </Link>
-            <Link className="lesson22-back-link" to="/homework">
-              ← Homework
-            </Link>
-          </div>
+
         </div>
       </section>
 

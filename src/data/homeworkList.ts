@@ -51,7 +51,15 @@ export const homeworkByLesson = [
       },
       {
         type: "text",
-        text: "Match pictures A–H to housework phrases",
+        text: "Picture flashcards: lesson images A–H → English phrase",
+      },
+      {
+        type: "text",
+        text: "Poster flashcards: household chores pictures → English phrase",
+      },
+      {
+        type: "text",
+        text: "Picture test: household chores poster → English phrase",
       },
       {
         type: "text",
@@ -59,11 +67,19 @@ export const homeworkByLesson = [
       },
       {
         type: "text",
-        text: "Albert or Bella? · Do / does gaps",
+        text: "go / make / do + a / the / — (note + practice)",
+      },
+      {
+        type: "text",
+        text: "Do / does / doesn’t gaps",
       },
       {
         type: "text",
         text: "Write about home jobs + Does…? questions",
+      },
+      {
+        type: "text",
+        text: "Mini survey: rate each task Легко / Нормально / Складно",
       },
     ],
   },

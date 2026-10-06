@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { VocabSection } from "../components/vocab/VocabSection";
 import "../styles/app.css";
 
@@ -14,14 +13,6 @@ export default function VocabPage() {
               Таблиця, флешкартки і свої слова. Після входу учня нові слова
               зберігаються на платформі — вчитель їх теж бачить.
             </p>
-          </div>
-          <div className="vocab-page-nav">
-            <Link className="vocab-page-link" to="/trainer">
-              ← Trainer
-            </Link>
-            <Link className="vocab-page-link vocab-page-link--ghost" to="/">
-              Roadmap
-            </Link>
           </div>
         </div>
         <div className="chips">

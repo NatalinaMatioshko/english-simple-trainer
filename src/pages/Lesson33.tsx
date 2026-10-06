@@ -573,7 +573,6 @@ function PartBanner({
   );
 }
 
-
 export default function Lesson33() {
   const [vocabB, setVocabB] = useState<number[]>([]);
 
@@ -703,31 +702,7 @@ export default function Lesson33() {
               <strong>How many</strong>.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-32"
-            >
-              ← Lesson 32
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-34"
-            >
-              Lesson 34 →
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/vocab"
-            >
-              Vocab →
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>Is there wifi?</span>

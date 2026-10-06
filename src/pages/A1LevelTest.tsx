@@ -50,9 +50,6 @@ export default function A1LevelTest() {
                   : "Завантаження…"}
             </p>
           </div>
-          <Link className="hw30-immersive-exit" to="/lesson-30">
-            ← Lesson 30
-          </Link>
         </div>
         <div
           className="progress hw30-immersive-progress"

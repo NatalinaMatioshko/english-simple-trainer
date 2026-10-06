@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { CheckBar } from "../components/lesson38/L38Ui";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
@@ -244,19 +244,7 @@ export default function HW44() {
               travel, food)
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons/44">
-              ← Lesson 44
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/homework"
-            >
-              ← Homework list
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-flow" style={{ marginTop: "1rem" }}>
           <a href="#hw44-cards">Flashcards</a>

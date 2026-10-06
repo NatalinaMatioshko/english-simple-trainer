@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { hw37Links, hw37Translate } from "../data/hw37";
 import "../styles/lesson22.css";
@@ -65,16 +65,7 @@ export default function HW37() {
               Continuous і прикметники). Потім зроби вправи на Test-English.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons/37">
-              ← Lesson 37
-            </Link>
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>every day vs now</span>

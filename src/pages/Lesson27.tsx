@@ -653,9 +653,6 @@ export default function Lesson27() {
               <li>reading: short chunks about Cristina's family.</li>
             </ul>
           </div>
-          <Link className="lesson22-back-link" to="/lessons">
-            ← Back to lessons
-          </Link>
         </div>
         <div className="lesson22-hero-chips">
           <span>I'm a doctor</span>

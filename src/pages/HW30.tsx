@@ -87,19 +87,7 @@ export default function HW30() {
               Quick correction · Reflect (confidence 1–5).
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lesson-30">
-              ← Lesson 30
-            </Link>
-            <Link className="lesson22-back-link" to="/a1-level-test">
-              A1 Level Test →
-            </Link>
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>go phrases</span>

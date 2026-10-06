@@ -271,6 +271,51 @@
   border-color: var(--color-primary);
 }
 
+/* Picture → English flashcards (HW46+) */
+.l22-vocab-card--photo,
+.l22-vocab-card--photo .l22-vocab-inner {
+  min-height: 13.25rem;
+  height: 13.25rem;
+}
+
+.l22-vocab-card--photo .l22-vocab-front {
+  padding: 0.45rem;
+  justify-content: flex-start;
+  gap: 0.3rem;
+}
+
+.l22-vocab-card--photo .l22-vocab-front img {
+  display: block;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, var(--color-surface) 70%, #dceef8);
+}
+
+.l22-vocab-card--photo .l22-vocab-back {
+  justify-content: center;
+  padding: 0.75rem 0.65rem;
+}
+
+.l22-vocab-card--photo .l22-vocab-back strong {
+  font-size: clamp(0.78rem, 2.2vw, 0.98rem);
+}
+
+/* HW46 poster picture test — keep illustrations uncropped */
+.hw46-poster-grid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.hw46-poster-grid .l42-pic-card img {
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  background: color-mix(in srgb, var(--color-surface-2) 80%, #e8f4fc);
+}
+
 /* Pronunciation block */
 .l22-pron-grid {
   display: grid;

@@ -154,10 +154,6 @@ export default function Lesson20() {
               person — a friend, family member, or colleague.
             </p>
           </div>
-          <div className="lesson20-nav">
-            <Link className="lesson20-back-link" to="/lessons">← Lessons</Link>
-            <Link className="lesson20-back-link lesson20-back-link--ghost" to="/">Home</Link>
-          </div>
         </div>
         <div className="lesson20-hero-chips">
           <span>He works</span>

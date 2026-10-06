@@ -26,10 +26,11 @@ test.describe("content-driven lesson smoke", () => {
   test("Lesson 45 → HW45 → back to lesson", async ({ page }) => {
     await page.goto("/lessons/45");
     await expect(page).toHaveURL(/\/lessons\/45\/?$/);
+    // Bottom homework action (top page-to-page nav was removed; sidebar remains)
     await page.getByRole("link", { name: /HW45/i }).first().click();
     await expect(page).toHaveURL(/\/hw-45\/?$/);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await page.getByRole("link", { name: /Lesson 45/i }).click();
+    await page.goto("/lessons/45");
     await expect(page).toHaveURL(/\/lessons\/45\/?$/);
     await expect(
       page.getByRole("heading", { level: 1, name: /Good and bad habits/i }),
@@ -50,7 +51,7 @@ test.describe("content-driven lesson smoke", () => {
     await page.getByRole("link", { name: /HW44/i }).first().click();
     await expect(page).toHaveURL(/\/hw-44\/?$/);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await page.getByRole("link", { name: /Lesson 44/i }).click();
+    await page.goto("/lessons/44");
     await expect(page).toHaveURL(/\/lessons\/44\/?$/);
     await expect(
       page.getByRole("heading", { level: 1, name: /Food and drink/i }),
@@ -63,7 +64,7 @@ test.describe("content-driven lesson smoke", () => {
     await page.getByRole("link", { name: /HW43/i }).first().click();
     await expect(page).toHaveURL(/\/hw-43\/?$/);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await page.getByRole("link", { name: /Lesson 43/i }).click();
+    await page.goto("/lessons/43");
     await expect(page).toHaveURL(/\/lessons\/43\/?$/);
     await expect(
       page.getByRole("heading", { level: 1, name: /A long journey/i }),

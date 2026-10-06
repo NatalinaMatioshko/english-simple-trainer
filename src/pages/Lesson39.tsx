@@ -41,7 +41,6 @@ function setAt(list: string[], index: number, value: string): string[] {
   return next;
 }
 
-
 function GrammarGap({
   n,
   value,
@@ -172,25 +171,7 @@ export default function Lesson39() {
               <strong>Yes, I have</strong> / <strong>No, I haven&apos;t</strong>.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-38"
-            >
-              ← Lesson 38
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/hw-39"
-            >
-              HW39 →
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>Have you got…?</span>

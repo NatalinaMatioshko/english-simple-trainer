@@ -600,31 +600,7 @@ export default function Lesson34() {
               <strong>am / is / are + -ing</strong> with picture exercises.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-33"
-            >
-              ← Lesson 33
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-35"
-            >
-              Lesson 35 →
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/vocab"
-            >
-              Vocab →
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>a quiet town</span>

@@ -107,7 +107,7 @@ test("opens Lesson 43 from catalog", async ({ page }) => {
 - lessonService / lessonRegistry published IDs, uniqueness, not-found, unpublished gate
 - VocabFlip / TickList / PhotoSentenceMatch accessible behavior
 - SectionRenderer unknown type / unknown custom key / valid custom
-- E2E: L37 redirect, L43 load, HW round-trip, catalog, VocabFlip keyboard, mobile no horizontal overflow
+- E2E: L37 redirect, L43 load, HW round-trip via bottom homework action + direct return, catalog, VocabFlip keyboard, mobile no horizontal overflow
 
 ## Playwright skip note
 

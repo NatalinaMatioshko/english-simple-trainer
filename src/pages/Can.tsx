@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+
 import "../styles/lesson19.css";
 
 type SortItem = {
@@ -223,9 +223,7 @@ export default function Lesson19() {
             </p>
           </div>
 
-          <Link to="/" className="lesson19-back-link">
-            ← Back to roadmap
-          </Link>
+          
         </div>
 
         <div className="lesson19-hero-chips">

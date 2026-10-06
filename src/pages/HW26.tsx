@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
@@ -241,14 +241,7 @@ export default function HW26() {
               Practice: transform · three drills · listen and complete (R8).
             </p>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <Link className="lesson22-back-link" to="/lesson-26">
-              ← Lesson 26
-            </Link>
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>He's / She's / It's</span>

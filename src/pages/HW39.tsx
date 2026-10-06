@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { makeQuestions, speakBagPrompts } from "../data/lesson39";
 import "../styles/lesson22.css";
@@ -69,16 +69,7 @@ export default function HW39() {
               Write the questions, then write what you have got in your bag.
             </p>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lesson-39">
-              ← Lesson 39
-            </Link>
-            <Link className="lesson22-back-link" to="/homework">
-              ← Homework
-            </Link>
-          </div>
+
         </div>
       </section>
 

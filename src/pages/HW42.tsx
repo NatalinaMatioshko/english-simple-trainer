@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
 import { CheckBar } from "../components/lesson38/L38Ui";
@@ -43,7 +43,6 @@ function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (value.trim()) return "l22-gap-input is-err";
   return "l22-gap-input";
 }
-
 
 export default function HW42() {
   const [pdIndex, setPdIndex] = useState(0);
@@ -172,23 +171,7 @@ export default function HW42() {
               місця й напрямки. Travel → HW43.
             </p>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            <Link className="lesson22-back-link" to="/homework">
-              ← Homework
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-42"
-            >
-              ← Lesson 42
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/review/preposition-geometry"
-            >
-              Review · in/on/at →
-            </Link>
-          </div>
+
         </div>
       </section>
 

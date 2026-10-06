@@ -309,7 +309,6 @@ export default function Lesson31() {
   const [placeStressChecked, setPlaceStressChecked] = useState(false);
   const [showWriteSample, setShowWriteSample] = useState(false);
 
-
   const placeToLetter = Object.fromEntries(
     Object.entries(mapAns).map(([letter, place]) => [place, letter]),
   ) as Record<string, string>;
@@ -490,31 +489,7 @@ export default function Lesson31() {
               </li>
             </ul>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-          >
-            <Link className="lesson22-back-link" to="/lessons">
-              ← Back to lessons
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/vocab"
-            >
-              Vocab →
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/trainer"
-            >
-              Trainer →
-            </Link>
-            <Link
-              className="lesson22-back-link lesson22-back-link--ghost"
-              to="/lesson-32"
-            >
-              Lesson 32 →
-            </Link>
-          </div>
+
         </div>
         <div className="lesson22-hero-chips">
           <span>There&apos;s a park</span>
