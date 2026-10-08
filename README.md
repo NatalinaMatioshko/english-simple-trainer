@@ -27,9 +27,9 @@ No shop / paywall chrome — teal-on-paper teaching UI only.
 
 ## Features
 
-- **Roadmap** — curriculum overview (lessons 1–64); current class is **Lesson 46 · Jobs around the house**
+- **Roadmap** — curriculum overview (lessons 1–64); current class is **Lesson 47 · Skills**
 - **Lessons 15–46** — full interactive pages (speaking, vocab, listening, grammar, reading); L36–38 and L43–46 are content-driven
-- **Homework** — `/hw-25`…`/hw-46`; older `/homework/:id` still used for early lessons
+- **Homework** — `/hw-25`…`/hw-47`; older `/homework/:id` still used for early lessons
 - **Vocab** — dictionary with IPA + Web Speech pronunciation
 - **Trainer** — conjugation + question builder, then 50 core verbs; practice decks and scored quizzes
 - **A1 Level Test** — separate check at `/a1-level-test`
@@ -65,7 +65,8 @@ Lessons are written for **one student + one teacher**. Classroom phrases such as
 | 43 | A long journey · Past Simple start (yesterday) |
 | 44 | Unit 5C–5D · Food and drink · Order in a café |
 | 45 | Unit 6A · Good and bad habits |
-| 46 | Unit 6B · Jobs around the house **(current)** |
+| 46 | Unit 6B · Jobs around the house |
+| 47 | Unit 6C · Skills **(current)** |
 
 **Next (planned):** 47 Skills (can/can’t) · 48 Make requests · 49–52 places & was/were & tickets · 53–56 Past Simple stories · 57–64 photos, hobbies, goals, going to, invitations
 
@@ -252,12 +253,14 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/lessons/44` | Food and drink · Order in a café |
 | `/lessons/45` | Good and bad habits |
 | `/lessons/46` | Jobs around the house |
+| `/lessons/47` | Skills |
 | `/lesson-42` | My week (Unit 5A) |
 | `/hw-42` | Homework · Lesson 42 |
 | `/hw-43` | Homework · Lesson 43 |
 | `/hw-44` | Homework · Lesson 44 |
 | `/hw-45` | Homework · Lesson 45 |
 | `/hw-46` | Homework · Lesson 46 |
+| `/hw-47` | Homework · Lesson 47 |
 | `/admin/analyses` | Teacher: lesson analyses |
 | `/admin/analyses/44` | Analysis · Lesson 44 |
 | `/a1-level-test` | A1 Level Test |

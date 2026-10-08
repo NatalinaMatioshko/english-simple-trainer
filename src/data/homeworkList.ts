@@ -41,6 +41,33 @@ export function homeworkHref(
 
 export const homeworkByLesson = [
   {
+    id: "47",
+    title: "Skills",
+    href: "/hw-47",
+    tasks: [
+      {
+        type: "text",
+        text: "Flashcards: skills phrases (UA→EN)",
+      },
+      {
+        type: "text",
+        text: "Picture flashcards: lesson images A–L → English skill",
+      },
+      {
+        type: "text",
+        text: "can / can’t for ability (gap fill)",
+      },
+      {
+        type: "text",
+        text: "Write about things you can and can’t do",
+      },
+      {
+        type: "text",
+        text: "Questions with can for jobs",
+      },
+    ],
+  },
+  {
     id: "46",
     title: "Jobs around the house",
     href: "/hw-46",

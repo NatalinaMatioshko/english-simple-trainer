@@ -151,6 +151,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson46;
     },
   },
+  {
+    id: "47",
+    number: 47,
+    title: "Skills",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 47,
+    status: "published",
+    estimatedMinutes: 70,
+    hasHomework: true,
+    topic: "skills · can / can’t for ability",
+    description:
+      "Match skills to photos, listen about Gloria, then ask Can you…? and write club questions.",
+    route: "/lessons/47",
+    legacyRoute: "/lesson-47",
+    homeworkPath: "/hw-47",
+    load: async () => {
+      const mod = await import("./lessons/lesson-47/lesson");
+      return mod.lesson47;
+    },
+  },
 ];
 
 export function getRegistryEntry(

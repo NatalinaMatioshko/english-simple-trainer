@@ -689,7 +689,7 @@ const roadmapLessons: Lesson[] = [
     listening: "Strong and weak does · short housework talks",
     review: "Habits (L45); does / doesn’t",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lessons/46",
   },
   {
@@ -701,7 +701,8 @@ const roadmapLessons: Lesson[] = [
     listening: "Strong and weak can · ability dialogues",
     review: "can / can’t (L21); housework questions (L46)",
     category: "general",
-    status: "next",
+    status: "current",
+    route: "/lessons/47",
   },
   {
     id: 48,
