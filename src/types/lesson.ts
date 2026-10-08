@@ -123,6 +123,8 @@ export type SpeakingPromptSection = LessonSectionBase & {
   prompts: string[];
   /** Shown as secondary line under each prompt when parallel */
   models?: string[];
+  /** When true, models stay hidden until the student taps “Підказка”. */
+  hideModels?: boolean;
   note?: string;
 };
 

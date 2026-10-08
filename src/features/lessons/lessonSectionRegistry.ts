@@ -68,6 +68,10 @@ export const customSectionLoaders: Record<
     import("./customs/VocabFlipSection").then((m) => ({
       default: m.VocabFlipSection,
     })),
+  "image-vocab-flip": () =>
+    import("./customs/ImageVocabFlipSection").then((m) => ({
+      default: m.ImageVocabFlipSection,
+    })),
   "tick-list": () =>
     import("./customs/TickListSection").then((m) => ({
       default: m.TickListSection,
@@ -95,6 +99,14 @@ export const customSectionLoaders: Record<
   "line-order": () =>
     import("./customs/LineOrderSection").then((m) => ({
       default: m.LineOrderSection,
+    })),
+  "job-site-mock": () =>
+    import("./customs/JobSiteMockSection").then((m) => ({
+      default: m.JobSiteMockSection,
+    })),
+  "club-notebook": () =>
+    import("./customs/ClubNotebookSection").then((m) => ({
+      default: m.ClubNotebookSection,
     })),
 };
 
