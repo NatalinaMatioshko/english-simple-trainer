@@ -1270,6 +1270,361 @@ export const lessonAnalyses: LessonAnalysis[] = [
     takeaway:
       "Урок 44 не був порожнім — Петро слухав, аналізував і говорив про їжу в кількох контекстах. Але його відчуття наприкінці варто почути: наступного разу дай менше окремих активностей і більше часу на один завершений діалог або розповідь, яку він зможе повторити самостійно.",
   },
+  {
+    id: "45",
+    title: "Good and bad habits",
+    topic: "habits · Present Simple · frequency · reading chunks · daily routine",
+    lessonPath: "/lessons/45",
+    lead:
+      "Урок 45 був змістовним і сильним у трьох речах: звички та Present Simple, reading chunks і читання довшого тексту про розклад дня. Але фокус знову трохи розширився: минулий час, вимова, прислівники частотності, транспорт, daily routine, reading strategy і навіть майбутня самостійна практика.",
+    signal:
+      "Найважливіший результат: Петро краще бачить Present Simple як мову звичок і починає читати не по одному слову, а смисловими блоками. Йому зараз потрібні не ще більше пояснень, а короткі повторювані практики з конкретною метою: один час, один словниковий блок, один фінальний speaking output.",
+    covered: [
+      "habits vs hobbies",
+      "Present Simple · he/she/it + -s",
+      "frequency adverbs · always / usually / often / sometimes / never",
+      "time prepositions · in the morning / at night / at the weekend",
+      "Tom’s food habits · listening",
+      "reading chunks · Janet / daily routine",
+      "pronunciation · th (довгий блок)",
+      "food · café · transport · will (preview)",
+    ],
+    result: [
+      "краще розрізняє звичку й дію зараз: I drink coffee every morning · I am working now;",
+      "розуміє habit не як hobby: habit = повторювана дія; hobby = що любить у вільний час;",
+      "бачить he/she/it + -s: she drinks · she watches · she goes · she doesn’t study;",
+      "витягнув gist про Тома: never coffee · always tea · often cakes · usually chocolate · sometimes fish/salad · often meat;",
+      "сам помітив: «Коли я читав чанками, я краще розумію»;",
+      "у listening частіше ловить контекст (evening/night, routine, food, transport), а не кожне слово.",
+    ],
+    strengths: [
+      {
+        title: "Habit ≠ hobby",
+        tone: "ok",
+        text: "Спочатку сплутав habit і hobby, але після прикладів (I drink coffee every morning, I brush my teeth…) зрозумів різницю. Це важливий концепт для Present Simple.",
+      },
+      {
+        title: "he/she/it + -s",
+        tone: "ok",
+        quote:
+          "She drinks coffee. · She goes to bed. · She doesn’t watch TV.",
+        text: "Не завжди дає форму одразу сам, але вже розуміє чому she drinks / watches / goes / studies / doesn’t study. Правило знав і раніше — тепер краще зв’язок із speaking.",
+        bullets: [
+          "He watches TV.",
+          "She washes her hands.",
+          "She takes the bus.",
+          "She doesn’t study.",
+        ],
+      },
+      {
+        title: "Frequency adverbs · Том",
+        tone: "ok",
+        text: "У діалозі про Тома витягнув основний зміст і контекст для never / sometimes / often / usually / always.",
+        bullets: [
+          "never drinks coffee",
+          "always drinks tea in the morning",
+          "never has sugar in tea",
+          "often eats cakes · usually eats chocolate",
+          "sometimes eats fish or salad · often eats meat",
+        ],
+      },
+      {
+        title: "Reading chunks",
+        tone: "ok",
+        quote: "Коли я читав чанками, я краще розумію.",
+        text: "Дуже цінна рефлексія: chunks допомагають не лише вимові, а розумінню. Уже може читати блоками: She wakes up. · She runs for an hour. · She goes to bed at nine.",
+      },
+      {
+        title: "Listening · gist first",
+        tone: "tip",
+        text: "Почав ловити контекст замість дослівного перекладу: evening vs night, school/work/routine, food, transport, що на картинці. Для нього listening краще працює через gist first.",
+      },
+    ],
+    gaps: [
+      {
+        title: "Відкрите «назвати звичку»",
+        tone: "warn",
+        text: "Коли питання надто відкрите (Can you name a good habit?), губиться. Краще вибір або 4 картинки: drink water / eat breakfast / sleep late / drink coffee before breakfast — спочатку обрати, потім сказати речення.",
+      },
+      {
+        title: "Прийменники часу",
+        tone: "warn",
+        text: "Плутає in the night / at night, in the evening, at the weekend, on Wednesdays, every week. Потрібні готові pairs, не загальні пояснення.",
+        pairHead: { left: "Правильно", right: "Не використовуємо тут" },
+        pairs: [
+          { left: "in the morning", right: "at the morning" },
+          { left: "in the evening", right: "on the evening" },
+          { left: "at night", right: "in the night" },
+          { left: "on Monday", right: "at Monday" },
+          { left: "at the weekend", right: "on the weekend (не основний BrE)" },
+          { left: "every week", right: "every weeks" },
+        ],
+      },
+      {
+        title: "«Standard routine» vs власний досвід",
+        tone: "tip",
+        quote: "Я не йду в понеділок. · Може це вихідний.",
+        text: "Він мислить реально — це не помилка. Для picture task задай рамку: “For this picture task, imagine a typical office worker. What does he usually do?” — опис персонажа, не тест його життя.",
+      },
+      {
+        title: "Текст про Janet · занадто важкий для A1",
+        tone: "warn",
+        text: "Багато нової лексики (athlete, meditation, occasionally, typically, falls asleep…). Учень не може одночасно читати, розуміти, вимовляти, перекладати й аналізувати grammar. Краще 5–6 речень як core або extra reading.",
+      },
+      {
+        title: "Занадто багато мікротем",
+        tone: "warn",
+        text: "Habits, Present Simple, frequency, time prepositions, th, daily routine, Tom, café, will, transport, endings, Janet… Навіть цікаві блоки не дають відчуття завершеного результату. Розділити на коротші уроки (45A habits+Tom · 45B routine+chunks · 45C café).",
+      },
+    ],
+    corrections: [
+      {
+        title: "at night, не in the night",
+        tone: "tip",
+        text: "Активна A1-модель: in the morning / afternoon / evening · at night · I sleep at night. In the night можливе про конкретну ніч (I heard a noise in the night) — зараз не розширювати.",
+      },
+      {
+        title: "every week, не every weeks",
+        tone: "warn",
+        text: "Every + однина: every day · every week · every month. He goes to the gym every week.",
+      },
+      {
+        title: "Порядок frequency adverb",
+        tone: "tip",
+        text: "Subject + adverb + verb: Tom always drinks tea. · Tom never drinks coffee. З be — після: Tom is always tired.",
+        pairs: [
+          { left: "Tom never drinks coffee.", right: "Tom drinks never coffee." },
+          { left: "Tom is always tired.", right: "Tom always is tired." },
+        ],
+      },
+      {
+        title: "I never have sugar in my tea",
+        tone: "ok",
+        text: "Природна A1-модель. Також: I never add sugar to my tea. / I don’t drink tea with sugar. Достатньо однієї активної фрази.",
+      },
+      {
+        title: "fish",
+        tone: "tip",
+        text: "Як їжа: I eat fish. Рахунок: one fish / two fish. Fishes не вводити зараз.",
+      },
+      {
+        title: "will як «просто додати»",
+        tone: "warn",
+        text: "Preview ок, але не як завершена система майбутнього. Краще: “Later we’ll study future. Today, if you need one simple sentence, I will eat — but we are not studying it today.”",
+      },
+    ],
+    teacherGood: [
+      "Тримаєш принцип «не перекладати дослівно» — chunks замість механічного перекладу кожного слова.",
+      "Персональні приклади (вода, кава, барбершоп, графік) сильніші за абстрактні фрази з підручника.",
+      "Стратегія reading chunks методично сильна; учню не треба перекладати кожен блок, якщо зміст уже зрозумілий.",
+      "Підкреслила його власну рефлексію про chunks — це підвищує мотивацію.",
+    ],
+    teacherImprove: [
+      "Менше нових мікротем на одному уроці; одна граматична ціль → короткий словник → одна speaking task → видимий результат.",
+      "На початку прямо: “Today’s main goal: talk about habits with always, usually, often, sometimes, never.” Наприкінці: три звички (always / often / never).",
+      "Не виправляти th надто довго — 3 chunks (the morning / evening / weekend) і далі; фонетику в окремі flashcards/shadowing.",
+      "Не вводити future побіжно як «просту» систему, поки Past Simple ще нестабільний.",
+    ],
+    nextGoal:
+      "Петро може сказати 5 правдивих речень: I always… · I usually… · I often… · I sometimes… · I never…",
+    nextGrammar: [
+      "I always drink water in the morning.",
+      "I usually work at a barbershop.",
+      "I often play video games in the evening.",
+      "I sometimes study English at the weekend.",
+      "I never drink coffee at night.",
+    ],
+    nextFlow: [
+      {
+        time: "5 хв",
+        title: "Ціль уроку",
+        text: "Озвучити мету: п’ять речень із always / usually / often / sometimes / never. Без нових часів.",
+      },
+      {
+        time: "8 хв",
+        title: "Маленький словник",
+        text: "Лише: drink water/coffee · eat breakfast · go to bed late · watch TV · play video games · go to the gym · study English · walk · read.",
+      },
+      {
+        time: "12 хв",
+        title: "Drill + особисті речення",
+        text: "Спочатку модель, потім його правда. Не відкриті «назвіть звичку» — вибір або картинки.",
+      },
+      {
+        time: "10 хв",
+        title: "Фінальний speaking без опори",
+        text: "П’ять речень підряд. Підкреслити, що саме вийшло.",
+      },
+      {
+        time: "5 хв",
+        title: "Exit",
+        text: "What was easy? What was difficult? Одне підсумкове речення + конкретне ДЗ.",
+      },
+    ],
+    homework: [
+      "5 правдивих речень: always / usually / often / sometimes / never.",
+      "Коротке голосове: My good and bad habits (~30–40 с).",
+    ],
+    resultHeading: "Успіхи Петра",
+    takeawayHeading: "Підсумок",
+    takeaway:
+      "Урок 45 не був невдалим: Петро працював із реальними темами, повторював Present Simple, упізнавав adverbs of frequency і покращував reading chunks. Відчуття «багато, але не все встигаємо» закономірне. Для нього менше різних вправ за урок, але більше повторення однієї моделі дадуть сильніший прогрес.",
+  },
+  {
+    id: "46",
+    title: "Jobs around the house",
+    topic: "housework · Does he/she…? · Present Continuous contrast · listening",
+    lessonPath: "/lessons/46",
+    lead:
+      "Урок 46 був корисним як housework + Present Simple questions, але без достатньо чіткої однієї фінальної speaking-цілі: лексика побутових справ, listening, do/does, Present Continuous, linked speech, артиклі, possessives і коротко попередні помилки. Учень зрозумів зміст і називав справи, але через поспіх наприкінці не встиг нормально закріпити speaking.",
+    signal:
+      "Найцінніша тема — не лише housework vocabulary, а розрізнення: What does she do around the house? (регулярно) · What is she doing now? (зараз). Потрібен другий короткий цикл, де він сам скаже 5–6 завершених речень.",
+    covered: [
+      "housework · clean / cook / feed / wash / laundry / dishes / beds",
+      "Present Simple questions · do / does",
+      "Present Continuous contrast · am/is/are + -ing",
+      "listening · linked speech · What jobs does he do…?",
+      "articles · the in chore chunks",
+      "pronunciation · th",
+      "possessives / extras наприкінці (розмитий фокус)",
+    ],
+    result: [
+      "розуміє I clean (звичка) vs I am cleaning (зараз);",
+      "впізнає/активує housework: cook dinner · clean the bathroom · feed the dog · do the laundry/washing · do the dishes · make the beds · go shopping · vacuum;",
+      "бачить структуру питання: Do you…? · How often do you…? · після does — base verb (Does she clean? не cleans);",
+      "починає ловити linked speech у What jobs around the house does he do?;",
+      "формулює, що є неясності, навіть якщо питання «на потім»;",
+      "не встиг відчути завершений speaking output про свої home jobs.",
+    ],
+    strengths: [
+      {
+        title: "Present Simple vs Continuous",
+        tone: "ok",
+        quote: "I clean. · I am cleaning.",
+        text: "Побачив різницю звички/факту й дії зараз — хороший перенос попередніх уроків.",
+      },
+      {
+        title: "Housework vocabulary",
+        tone: "ok",
+        text: "Швидко засвоїв або згадав основні фрази. Важливо, що міг сказати: у його житті справи можуть бути іншими, ніж у підручнику.",
+        bullets: [
+          "cook dinner",
+          "clean the bathroom",
+          "feed the dog",
+          "do the laundry / washing",
+          "do the dishes · make the beds",
+        ],
+      },
+      {
+        title: "Питання з do / does",
+        tone: "ok",
+        quote: "Does she clean? · How often do you talk to your friend?",
+        text: "У моменті плутається, але принцип уже впізнає: після does — базове дієслово.",
+      },
+      {
+        title: "Linked speech",
+        tone: "tip",
+        text: "Розбір What jobs around the house does he do? корисний: jobs around зливається. Йому потрібно ловити смислові блоки, а не чекати окремі слова.",
+      },
+    ],
+    gaps: [
+      {
+        title: "Механічна PS → PC без контексту",
+        tone: "warn",
+        text: "Перетворення Does she clean…? → Is she cleaning…? без картинки/сценарію виглядає як перестановка слів. Давай контекст: sponge in her hand → What is she doing now? Потім: Every Saturday… Does she clean…?",
+      },
+      {
+        title: "do the washing vs do the laundry",
+        tone: "tip",
+        text: "Обидва існують. Для активного словника залиш один основний: do the laundry (+ окремо do the dishes). Не вимагати обидва washing/laundry одночасно.",
+      },
+      {
+        title: "Артиклі під кінець уроку",
+        tone: "warn",
+        text: "do the laundry — чому the? Краще як chunk: do the laundry · do the dishes · make the bed · clean the bathroom · feed the dog. Не відкривати довгий артиклевий розбір, коли часу вже мало.",
+      },
+      {
+        title: "th знову забрав час",
+        tone: "warn",
+        text: "Для A1 достатньо зрозумілості й кількох chunks (the morning / evening / weekend / bathroom). Не зупиняти основну граматику й speaking на довгій фонетиці.",
+      },
+      {
+        title: "Немає однієї speaking-цілі + поспіх наприкінці",
+        tone: "warn",
+        text: "Урок завершився ДЗ і «питання пізніше». Краще 3 хв на easy/difficult + один підсумковий sentence. Extras (clothes, possessives, phone call) уже не підтримували мету.",
+      },
+    ],
+    corrections: [
+      {
+        title: "Homework 45 is complete",
+        tone: "tip",
+        text: "Природніше для учня: I have completed homework 45. або Homework 45 is finished. Homework 45 is complete можливе, але формальніше. Не правило «-ed = прикметник» (The door is open, не opened для стану).",
+      },
+      {
+        title: "What jobs does he do around the house?",
+        tone: "tip",
+        text: "around the house уточнює jobs («які домашні справи»), а не «уточнення до does». Структура: What jobs · does · he · do · around the house?",
+      },
+      {
+        title: "talk to a friend",
+        tone: "ok",
+        text: "Давати як chunk: talk to my friend / teacher / a client — без довгого розбору «говорити до».",
+      },
+      {
+        title: "vacuum the floor",
+        tone: "tip",
+        text: "Правильно: I vacuum the floor. Для A1 також ок I clean the floor. Vacuum — корисне додаткове слово, не обов’язкове в активному speech одразу.",
+      },
+      {
+        title: "Chore chunks з the",
+        tone: "ok",
+        text: "Some home expressions already come with the. Learn as one chunk: do the laundry, do the dishes, make the bed(s), clean the bathroom, feed the dog.",
+      },
+    ],
+    teacherGood: [
+      "Реальні приклади учня (готує / прибирає / миє / пере / собака) — правильний one-to-one вибір.",
+      "Grammar + listening разом: do/does не лише з таблиці, а в природнішому темпі.",
+      "Давала час подумати: підмет → do/does → дієслово → картинка → звичка vs зараз.",
+    ],
+    teacherImprove: [
+      "На початку: “Today you will tell me what housework you usually do and what somebody is doing now.” Наприкінці — його 4–5 речень.",
+      "Не вводити нову тему, коли вже мало часу; завершити role-play / speaking recap із housework.",
+      "Нову лексику спочатку як chunks і speaking; артиклі — окремим review, коли фрази вже знайомі.",
+      "Залишити ≥3 хв на exit: easy / difficult / один правильний sentence / конкретне ДЗ.",
+    ],
+    nextGoal:
+      "Petro can say what he usually does at home, what he never does, and what another person is doing now.",
+    nextGrammar: [
+      "I usually cook dinner. · I sometimes do the dishes. · I never do the laundry.",
+      "I clean the bathroom. · I make the bed. · I feed the dog.",
+      "My friend does the washing. · She is cleaning the bathroom now. · He is feeding the dog now.",
+    ],
+    nextFlow: [
+      {
+        time: "15–20 хв",
+        title: "Housework speaking review (урок 47 warm-up)",
+        text: "Не нова велика тема. 4 картинки → Thomas cooks… · Isabella does the laundry… · Milada feeds the dog… · Right now, Thomas is doing the dishes.",
+      },
+      {
+        time: "8 хв",
+        title: "Про себе",
+        text: "I usually… · I sometimes… · I never… · Right now, I am…",
+      },
+      {
+        time: "5 хв",
+        title: "Exit",
+        text: "Підсумок без нових слів. Підкреслити 2–3 речення, які він уже вміє сказати сам.",
+      },
+    ],
+    homework: [
+      "5 правдивих речень: 2× usually/always · 2× sometimes/never · 1× Present Continuous.",
+      "Коротке голосове: What do you do at home?",
+    ],
+    resultHeading: "Успіхи Петра",
+    takeawayHeading: "Підсумок",
+    takeaway:
+      "Урок 46 логічний за матеріалом: housework дає знайомі дієслова, природні do/does і контраст із Present Continuous. Але потрібен другий короткий цикл без нових слів, де Петро сам говорить 5–6 завершених речень — щоб тема стала його мовою, а не списком у словнику.",
+  },
 ];
 
 export function getLessonAnalysis(id: string): LessonAnalysis | undefined {
