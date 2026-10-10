@@ -14,7 +14,7 @@ The site is a **learning-platform shell**:
 
 *Home is a full **Roadmap** hub — hero, Learning Path with the current lesson, lesson cards with status tags, and “Що ми вже пройшли”.*
 
-- **Home (`/`)** is the **Roadmap**: hero, Learning Path (lessons 1–64), then covered-topics map
+- **Home (`/`)** is the **Roadmap**: hero, Learning Path (lessons 1–66), then covered-topics map
 - **Desktop** — sticky top bar + nav (Roadmap, Trainer, Lessons, Vocab, Homework) and teacher account controls
 - **Mobile** — bottom nav; the long lesson timeline **folds** behind a Roadmap toggle
 - **Lessons / Homework** catalogs use **cover cubes** (latest numbered lesson is current; earlier ones are dimmed)
@@ -27,9 +27,9 @@ No shop / paywall chrome — teal-on-paper teaching UI only.
 
 ## Features
 
-- **Roadmap** — curriculum overview (lessons 1–64); current class is **Lesson 47 · Skills**
+- **Roadmap** — curriculum overview (lessons 1–66); current class is **Lesson 47 · Skills**
 - **Lessons 15–46** — full interactive pages (speaking, vocab, listening, grammar, reading); L36–38 and L43–46 are content-driven
-- **Homework** — `/hw-25`…`/hw-47`; older `/homework/:id` still used for early lessons
+- **Homework** — `/hw-25`…`/hw-49`; older `/homework/:id` still used for early lessons
 - **Vocab** — dictionary with IPA + Web Speech pronunciation
 - **Trainer** — conjugation + question builder, then 50 core verbs; practice decks and scored quizzes
 - **A1 Level Test** — separate check at `/a1-level-test`
@@ -67,8 +67,10 @@ Lessons are written for **one student + one teacher**. Classroom phrases such as
 | 45 | Unit 6A · Good and bad habits |
 | 46 | Unit 6B · Jobs around the house |
 | 47 | Unit 6C · Skills **(current)** |
+| 48 | Review · My week (Present) |
+| 49 | Review · Yesterday (Past Simple) |
 
-**Next (planned):** 47 Skills (can/can’t) · 48 Make requests · 49–52 places & was/were & tickets · 53–56 Past Simple stories · 57–64 photos, hobbies, goals, going to, invitations
+**Next (planned):** 50 Make requests · 51 Wh-questions (day & work) · 52–53 was/were · 54 tickets · 55–66 Past stories, photos, hobbies, goals, going to, invitations
 
 ---
 
@@ -254,6 +256,8 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/lessons/45` | Good and bad habits |
 | `/lessons/46` | Jobs around the house |
 | `/lessons/47` | Skills |
+| `/lessons/48` | Review · My week |
+| `/lessons/49` | Review · Yesterday |
 | `/lesson-42` | My week (Unit 5A) |
 | `/hw-42` | Homework · Lesson 42 |
 | `/hw-43` | Homework · Lesson 43 |
@@ -261,6 +265,8 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/hw-45` | Homework · Lesson 45 |
 | `/hw-46` | Homework · Lesson 46 |
 | `/hw-47` | Homework · Lesson 47 |
+| `/hw-48` | Homework · Lesson 48 |
+| `/hw-49` | Homework · Lesson 49 |
 | `/admin/analyses` | Teacher: lesson analyses |
 | `/admin/analyses/44` | Analysis · Lesson 44 |
 | `/a1-level-test` | A1 Level Test |

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import LessonNumberKicker from "../../components/LessonNumberKicker";
+import { useAuth } from "../../context/AuthContext";
 import type { Lesson } from "../../types/lesson";
 import { LessonRenderer } from "./LessonRenderer";
 import {
@@ -16,6 +17,7 @@ type LoadState =
   | { status: "error"; message: string };
 
 function LessonPageInner({ lessonId }: { lessonId: string }) {
+  const { isTeacher } = useAuth();
   const [state, setState] = useState<LoadState>({ status: "loading" });
 
   useEffect(() => {
@@ -90,6 +92,9 @@ function LessonPageInner({ lessonId }: { lessonId: string }) {
   }
 
   const { lesson } = state;
+  const flowItems = (lesson.flow ?? []).filter(
+    (item) => !item.teacherOnly || isTeacher,
+  );
 
   return (
     <div className="lw-page">
@@ -112,10 +117,10 @@ function LessonPageInner({ lessonId }: { lessonId: string }) {
         ) : null}
       </section>
 
-      {lesson.flow && lesson.flow.length > 0 ? (
+      {flowItems.length > 0 ? (
         <section className="lw-block panel">
           <div className="lw-flow">
-            {lesson.flow.map((item) => (
+            {flowItems.map((item) => (
               <a key={item.href} href={item.href}>
                 {item.label}
               </a>

@@ -41,6 +41,31 @@ export function homeworkHref(
 
 export const homeworkByLesson = [
   {
+    id: "49",
+    title: "Review · Yesterday",
+    href: "/hw-49",
+    tasks: [
+      { type: "text", text: "Flashcards: yesterday phrases (UA→EN)" },
+      { type: "text", text: "Today → yesterday bridge" },
+      { type: "text", text: "Write 6–8 sentences “Yesterday” (underline Past verbs)" },
+      { type: "text", text: "Answer 5 past questions" },
+      { type: "text", text: "Voice: My yesterday (~45s)" },
+    ],
+  },
+  {
+    id: "48",
+    title: "Review · My week",
+    href: "/hw-48",
+    tasks: [
+      { type: "text", text: "Flashcards: week chunks (UA→EN)" },
+      { type: "text", text: "Do / Does question drill" },
+      { type: "text", text: "Fill weekly schedule" },
+      { type: "text", text: "Write 8 sentences “My week”" },
+      { type: "text", text: "Write 4 questions for the teacher" },
+      { type: "text", text: "Voice: My week (40–60s)" },
+    ],
+  },
+  {
     id: "47",
     title: "Skills",
     href: "/hw-47",

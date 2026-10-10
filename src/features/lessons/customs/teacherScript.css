@@ -1,0 +1,76 @@
+.l48-teacher-script {
+  border: 1px dashed color-mix(in srgb, var(--color-accent) 55%, var(--color-border));
+  background: color-mix(in srgb, var(--color-accent) 8%, var(--color-surface-2, #fff));
+}
+
+.l48-teacher-goal {
+  margin: 0.35rem 0 0.85rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm, 0.5rem);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.l48-teacher-blocks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.l48-teacher-blocks > li {
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-sm, 0.5rem);
+  background: var(--color-surface-2, #fff);
+  border: 1px solid var(--color-border);
+}
+
+.l48-teacher-block-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem 0.65rem;
+  margin-bottom: 0.35rem;
+}
+
+.l48-teacher-time {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+}
+
+.l48-teacher-blocks ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.25rem;
+  color: var(--color-text);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.l48-teacher-subhead {
+  margin: 0.85rem 0 0.35rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.l48-teacher-tips ul,
+.l48-teacher-hw ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}

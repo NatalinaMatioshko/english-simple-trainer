@@ -52,6 +52,8 @@ export type LessonSectionBase = {
   title: string;
   kicker?: string;
   description?: string;
+  /** When true, section is rendered only for the teacher account. */
+  teacherOnly?: boolean;
 };
 
 export type TextSection = LessonSectionBase & {
@@ -191,7 +193,7 @@ export type Lesson = {
   prevLessonPath?: string;
   nextLessonPath?: string;
   navLinks?: LessonNavLink[];
-  flow?: Array<{ href: string; label: string }>;
+  flow?: Array<{ href: string; label: string; teacherOnly?: boolean }>;
   sections: LessonSection[];
   homework?: HomeworkMeta;
 };
