@@ -108,6 +108,10 @@ export const customSectionLoaders: Record<
     import("./customs/ClubNotebookSection").then((m) => ({
       default: m.ClubNotebookSection,
     })),
+  "teacher-script": () =>
+    import("./customs/TeacherScriptSection").then((m) => ({
+      default: m.TeacherScriptSection,
+    })),
 };
 
 /** Stable React.lazy components — created once at module load, not during render. */

@@ -172,6 +172,48 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson47;
     },
   },
+  {
+    id: "48",
+    number: 48,
+    title: "Review · My week",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 48,
+    status: "published",
+    estimatedMinutes: 55,
+    hasHomework: true,
+    topic: "Present Simple review · week · Does…?",
+    description:
+      "Talk about your week: on/in/at, he/she + -s, doesn’t, and short Does…? questions.",
+    route: "/lessons/48",
+    legacyRoute: "/lesson-48",
+    homeworkPath: "/hw-48",
+    load: async () => {
+      const mod = await import("./lessons/lesson-48/lesson");
+      return mod.lesson48;
+    },
+  },
+  {
+    id: "49",
+    number: 49,
+    title: "Review · Yesterday",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 49,
+    status: "published",
+    estimatedMinutes: 55,
+    hasHomework: true,
+    topic: "Past Simple review · yesterday story",
+    description:
+      "Tell your yesterday in 5–7 sentences with was, went, had, got up, worked.",
+    route: "/lessons/49",
+    legacyRoute: "/lesson-49",
+    homeworkPath: "/hw-49",
+    load: async () => {
+      const mod = await import("./lessons/lesson-49/lesson");
+      return mod.lesson49;
+    },
+  },
 ];
 
 export function getRegistryEntry(
