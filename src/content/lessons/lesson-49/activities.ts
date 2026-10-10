@@ -347,14 +347,14 @@ export const scenarioHomePastModels = [
   "I usually cook. Yesterday I cooked chicken.",
 ] as const;
 
-export const scenarioBagSkillsPrompts = [
+export const scenarioFoodSkillsPrompts = [
   "Yesterday with food: I had breakfast. I drank… I ate… In the evening I had…",
   "Ask: What did you have for breakfast yesterday? Did you drink coffee?",
   "Skills + past (light): Can you cook? Did you cook yesterday? Can you drive? Did you drive yesterday?",
   "Café memory: Yesterday I went to a café. I had… It was…",
 ] as const;
 
-export const scenarioBagSkillsModels = [
+export const scenarioFoodSkillsModels = [
   "Yesterday I had breakfast at eight. I drank tea. I ate eggs.",
   "What did you have for breakfast? — I had coffee and bread.",
   "Can you cook? — Yes, I can. Did you cook yesterday? — Yes, I did.",
