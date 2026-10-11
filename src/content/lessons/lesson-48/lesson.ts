@@ -78,19 +78,9 @@ export const lesson48: Lesson = {
       kicker: "Тільки для вчителя",
       title: "Сценарій уроку",
       description:
-        "Видно лише з учительного акаунта (VITE_TEACHER_EMAIL). Учень цей блок не бачить.",
+        "Повний сценарій: що робити, що говорити, що очікувати. Лише акаунт вчителя.",
       componentKey: "teacher-script",
-      props: {
-        heading: lesson48TeacherScript.heading,
-        goal: lesson48TeacherScript.goal,
-        blocks: lesson48TeacherScript.blocks.map((b) => ({
-          time: b.time,
-          title: b.title,
-          lines: [...b.lines],
-        })),
-        tips: [...lesson48TeacherScript.tips],
-        homework: [...lesson48TeacherScript.homework],
-      },
+      props: { ...lesson48TeacherScript },
     },
     {
       type: "text",
