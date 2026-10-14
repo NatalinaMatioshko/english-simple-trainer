@@ -1625,6 +1625,343 @@ export const lessonAnalyses: LessonAnalysis[] = [
     takeaway:
       "Урок 46 логічний за матеріалом: housework дає знайомі дієслова, природні do/does і контраст із Present Continuous. Але потрібен другий короткий цикл без нових слів, де Петро сам говорить 5–6 завершених речень — щоб тема стала його мовою, а не списком у словнику.",
   },
+  {
+    id: "47",
+    title: "Skills · can / can’t",
+    topic: "ability · Can you…? · jobs & clubs · pronunciation side-tracks",
+    lessonPath: "/lessons/47",
+    lead:
+      "Урок 47 добре виконав основну функцію: повторити can / can’t через реальні вміння, а не лише через вправи. Петро зрозумів базову модель can + base verb, зміг будувати короткі відповіді й почав переносити її на знайомі ситуації: cooking, swimming, driving, housework, sport, food club і computer club. Водночас урок став ширшим, ніж потрібно: make/cook/bake, одяг, BrE/AmE, шотландський акцент, відео з жартом, вимова -ing і кілька лексичних блоків — через це фінальний speaking outcome не був чітко закритий.",
+    signal:
+      "Головний результат є: I can… / I can’t… / Can you…? · Yes, I can. / No, I can’t. Далі — один фінальний monologue what I can / can’t do, без accent lesson усередині topic lesson.",
+    covered: [
+      "can / can’t · ability",
+      "Can you…? · Yes, I can. / No, I can’t.",
+      "can + base verb (без -s / -ing / to)",
+      "skills · cook / swim / drive / draw / sew / play football",
+      "jobs & clubs · taxi / hotel / sport / food / computer",
+      "make / cook / bake (побічно)",
+      "pronunciation · can vs can’t · BrE/AmE · -ing · extras",
+    ],
+    result: [
+      "I can swim. · I can drive. · I can cook. · I can make a cake. · I can draw. · I can play football.",
+      "I can’t sew.",
+      "Can you drive? · Yes, I can. · No, I can’t.",
+      "розуміє can = можу / вмію і Can I…? = можна мені;",
+      "бачить правило: після can дієслово не змінюється;",
+      "переносить can на професії й клуби;",
+      "помічає слабке can у швидкій мові (listening).",
+    ],
+    strengths: [
+      {
+        title: "Два значення can",
+        tone: "ok",
+        quote: "can = можу / вмію · Can I…? = можна мені",
+        text: "На початку сам згадав ability і permission/request. Для поточного рівня цього достатньо: I can swim. · Can I ask you something?",
+      },
+      {
+        title: "Головна форма: can + base verb",
+        tone: "ok",
+        quote: "I can cook. · She can cook. · They can cook.",
+        text: "Зрозумів найважливіше: після can не додаємо -s, -ing і to. Не She can cooks. · не I can cooking. · не He can to cook. Це також допомагає з попередніми труднощами he/she + -s, to + verb і -ing.",
+      },
+      {
+        title: "Професії та життєві ситуації",
+        tone: "ok",
+        text: "Не залишилися на картинках: taxi driver, hotel worker, sport / food / computer club — хороша персоналізація й functional speaking.",
+        bullets: [
+          "що може taxi driver / hotel worker;",
+          "що можна робити у sport / food / computer club.",
+        ],
+      },
+      {
+        title: "Listening: weak can",
+        tone: "tip",
+        quote: "What can you do? · You can actually…",
+        text: "Помітив, що в швидкій мові can майже «пролітає». Корисно для listening: слова звучать не завжди як у словнику.",
+      },
+    ],
+    gaps: [
+      {
+        title: "BrE / AmE can vs can’t",
+        tone: "warn",
+        text: "Блок вимови став заплутаним (американці «не кажуть t», can’t ≈ can, треба «обрати» акцент). Зараз не вимагати British vs American identity. Достатньо: can у ствердженні часто слабке · can’t у запереченні наголошене. Головне — щоб слухач чув різницю.",
+        bullets: [
+          "BrE can’t ≈ /kɑːnt/ («каант»)",
+          "AmE can’t ≈ /kænt/ («кент»)",
+          "I can swim. vs I can’t swim.",
+        ],
+      },
+      {
+        title: "Cook / make / bake",
+        tone: "tip",
+        text: "Правильно дати make a cake · bake a cake · cook dinner · boil potatoes. Не формулювати жорстко, що cook a cake «не кажуть взагалі» — менш природно, ніж make/bake, але в контексті можливе. Для A1 активні chunks достатньо.",
+        bullets: [
+          "I can cook dinner.",
+          "I can make a cake. · I can bake a cake.",
+          "I can boil potatoes.",
+        ],
+      },
+      {
+        title: "Занадто багато pronunciation на один урок",
+        tone: "warn",
+        text: "swim · white · very · close · -ing · train · Scottish accent · BrE/AmE — цікаво, але для can/can’t забагато. Ціль: I can swim, but I can’t drive. Вимову краще в короткий окремий блок або флеш-картки.",
+      },
+      {
+        title: "Відкриті / неприродні питання для клубів",
+        tone: "warn",
+        quote: "Can you choose new employees?",
+        text: "Такі питання гублять логіку. Краще чіткі реальні вміння.",
+        bullets: [
+          "Taxi: Can you drive? · use a map? · talk to people?",
+          "Hotel: Can you speak English? · help guests? · answer the phone?",
+          "Food club: Can you cook? · make a salad? · clean after cooking?",
+          "Computer club: Can you use a computer? · play video games? · send an email?",
+        ],
+      },
+      {
+        title: "Немає чіткого фінального speaking output",
+        tone: "warn",
+        text: "Було багато хороших питань, але бракувало mini-task наприкінці: 5× I can… + 3× I can’t… + 3× Can you…? до вчителя. Без цього урок відчувається як відповіді на окремі питання, а не «я вмію говорити про skills».",
+      },
+    ],
+    corrections: [
+      {
+        title: "Один орієнтир вимови, не «обери акцент»",
+        tone: "tip",
+        text: "Краще: ми орієнтуємося на British English у словнику, але ти маєш розуміти й American. Головне — говорити чітко, а не ідеально копіювати акцент. Не створювати тривогу «хто ти — British чи American».",
+      },
+      {
+        title: "Accent / joke video = bonus 2′",
+        tone: "tip",
+        text: "Шотландський жарт і feather/steel веселі, але відводять від can/can’t. Лишати лише якщо основну speaking-ціль уже закрито.",
+      },
+      {
+        title: "Активні food chunks",
+        tone: "ok",
+        text: "I can cook dinner. · I can make / bake a cake. · I can boil potatoes. Не розгортати окремий grammar урок про cook vs make.",
+      },
+    ],
+    teacherGood: [
+      "Урок комунікативний: can не як суха таблиця — одразу питання й відповіді про реальні вміння.",
+      "Кілька разів повернулася до формули: після can нічого не змінюється — правильний пріоритет для Петра.",
+      "Ролі й ситуації (taxi, hotel, clubs) — сильний матеріал; наступного разу краще одна ситуація глибше, ніж усі поверхнево.",
+      "Почула запит на окремі pronunciation tasks і записала його.",
+    ],
+    teacherImprove: [
+      "На початку: “Today you will say five things you can do and three things you can’t do. Then ask me three Can you…? questions.”",
+      "Наприкінці — його monologue: I can cook / swim / cut hair / use a computer / speak a little English. I can’t drive / sew / ride a horse.",
+      "Не змішувати topic lesson з accent lesson; відео — лише 2′ bonus після speaking-цілі.",
+      "Менше про «правильний акцент»; більше про зрозумілість і один стабільний орієнтир.",
+      "Не залишати speaking без завершення: один фінальний mini-task обов’язковий.",
+    ],
+    nextGoal:
+      "Speaking project My Week and My Skills: розклад тижня + що вміє / не вміє + вихідні. Потім L49 — Yesterday (Past Simple story).",
+    nextGrammar: [
+      "I work from Tuesday to Thursday. · I work at a barbershop. · I usually start work at ten.",
+      "My days off are Monday and Friday. · At the weekend, I sometimes play video games and study English.",
+      "I can cut hair and cook dinner. · I can use a computer. · I can’t drive a car.",
+    ],
+    nextFlow: [
+      {
+        time: "L48 · 60′",
+        title: "My Week and My Skills (speaking project)",
+        text: "Не «ще один review». Фінал: тиждень + skills в одному monologue. Повторити Present Simple, days, frequency, at/on/in, can/can’t, jobs, hobbies, time.",
+      },
+      {
+        time: "L49 · 60′",
+        title: "Yesterday",
+        text: "Коротка історія про вчора: was · got up · had · went · worked · played/watched. Один чіткий Past Simple outcome.",
+      },
+    ],
+    homework: [
+      "5× I can… і 3× I can’t… (правдиві).",
+      "3 питання Can you…? для вчителя.",
+      "Коротке голосове: What can you do?",
+    ],
+    resultHeading: "Головний результат",
+    takeawayHeading: "Підсумок",
+    takeaway:
+      "Урок 47 був корисним і загалом успішним: Петро зрозумів базову граматику can/can’t, працював із питаннями й переносив їх на реальні вміння. Найбільший потенціал — role-play і speaking about skills. Основне покращення на майбутнє: одна граматична ціль + один словниковий блок + один фінальний speaking output. Для can/can’t цим output мав би бути короткий monologue: what I can do / what I can’t do.",
+  },
+  {
+    id: "48",
+    title: "Review · My week",
+    topic: "Present Simple · week · WH-questions · do/does · speaking overload",
+    lessonPath: "/lessons/48",
+    lead:
+      "Урок 48 добре виконав роль speaking-review: ви повторили Present Simple, days, frequency, work routine, WH-questions, do/does, Present Continuous і can. Найсильніша частина — персоналізовані питання про роботу, графік, звички й день. Але урок знову був перевантажений мікротемами (L47, timetable, at/on/in, how many, listen to, get, can, PC, ідіома, future preview, історія про ноутбук) — прогрес у moment-to-moment speaking є, а один чіткий фінальний монолог “My week” до кінця не сформувався.",
+    signal:
+      "WH-questions і реальний розклад уже краще. Далі — менше тем, більше завершеного output: 8 речень My week без підказок, потім L49 = Yesterday.",
+    covered: [
+      "Present Simple · work week · days off",
+      "WH-questions · do / does",
+      "frequency · time · at / on / in",
+      "work vs job · barbershop routine",
+      "Present Continuous questions (побічно)",
+      "can · listen to · how many (мікротеми)",
+      "idiom / travel / laptop story (стороннє)",
+    ],
+    result: [
+      "швидше будує WH-questions з опорою: Where / What / When / Why / How often / What time / How many / How do they get…;",
+      "починає відрізняти звичну дію й дію зараз: What do you…? vs What are you doing now?;",
+      "розуміє Who is calling you? (who = підмет) хоча б через розбір;",
+      "структура тижня: My week starts on Tuesday · ends on Sunday · I work from Tue to Thu · at the weekend · days off Mon & Fri · start/finish at…;",
+      "work (дієслово) vs job (іменник): I am a barber · I work at a barbershop · I have a job · I start work at ten;",
+      "швидша реакція в другій половині (напр. What time do you wake up?) — це теж прогрес.",
+    ],
+    strengths: [
+      {
+        title: "Більше правильних WH-questions",
+        tone: "ok",
+        text: "Найпомітніший прогрес: з опорою самостійно доходить до WH + auxiliary + subject + verb. Раніше плутав do/does, am/is/are з ordinary verbs і порядок слів.",
+        bullets: [
+          "Where do you live? · What do you usually eat for breakfast?",
+          "When do they go to the gym? · Why does she study English?",
+          "How often does he make coffee? · What time does your workday start?",
+          "What music do you listen to? · How many books does she read a year?",
+          "How do they get to work? · Where does your sister work?",
+          "What are you doing now? · Why is she drinking coffee right now? · Who is calling you?",
+        ],
+      },
+      {
+        title: "Головний підмет у Who is calling you?",
+        tone: "tip",
+        quote: "Who is calling you?",
+        text: "Спочатку тягнув питання навколо you, потім зрозумів: головний герой — who (невідома людина). Для A1 складно (немає do/does), але сам розбір — хороший крок. Далі — через 2–3 пари-приклади, без довгого аналізу «хто підмет».",
+      },
+      {
+        title: "Структура тижня",
+        tone: "ok",
+        text: "Саме та speaking-ціль, яку планували для review: будні, вихідні, час початку/кінця роботи.",
+        bullets: [
+          "My week starts on Tuesday. · My week ends on Sunday.",
+          "I work from Tuesday to Thursday. · I work at the weekend.",
+          "My days off are Monday and Friday.",
+          "I start work at ten. · I finish work at…",
+        ],
+      },
+      {
+        title: "work vs job",
+        tone: "ok",
+        text: "Розібрали: I am a barber. · I work at a barbershop. · I have a job. · I start work at ten. Це закриває помилки на кшталт I start job / I work a barber.",
+      },
+      {
+        title: "Швидша реакція",
+        tone: "ok",
+        quote: "What time do you wake up?",
+        text: "У другій половині питання йшли швидше. Важливо підкреслювати: швидкість реакції — теж прогрес, не лише «безпомилковість».",
+      },
+    ],
+    gaps: [
+      {
+        title: "Days / days off / on ще не автоматичні",
+        tone: "warn",
+        text: "Плутає My day off is… / My days off are… · on Monday and Friday · Mondays · at the weekend · on the week · in a week / per week. Потрібна одна стабільна система.",
+        pairHead: { left: "Хоче сказати", right: "Модель" },
+        pairs: [
+          { left: "один вихідний", right: "My day off is Monday." },
+          { left: "два вихідні", right: "My days off are Monday and Friday." },
+          { left: "не працюю по понеділках", right: "I don’t work on Mondays." },
+          { left: "з вівторка по четвер", right: "I work from Tuesday to Thursday." },
+          { left: "на вихідних (загалом)", right: "I work at the weekend." },
+          { left: "скільки днів на тиждень?", right: "How many days a week do you work?" },
+        ],
+        bullets: [
+          "I work at the weekend. ≠ I work every weekend. ≠ I work on Sundays.",
+        ],
+      },
+      {
+        title: "Порядок у довгих питаннях",
+        tone: "warn",
+        text: "Схему знає, але губиться на довгих питаннях. Не пояснювати всі WH знову — одна «доріжка»: Question word + do/does + subject + verb + extra.",
+        bullets: [
+          "What time + does + your workday + start?",
+          "How often + does + he + make coffee?",
+          "What music + do + you + listen to?",
+        ],
+      },
+      {
+        title: "listen to як chunk",
+        tone: "tip",
+        quote: "What music do you listen?",
+        text: "Закріпити: listen to music · listen to me · listen to your teacher · What music do you listen to? Не пояснювати через «говорити до музики» — один словниковий блок.",
+      },
+      {
+        title: "Who is calling you? — без надмірного аналізу",
+        tone: "tip",
+        text: "Достатньо: He is calling you. → Who is calling you? + 2–3 пари: Who is cooking? · Who is talking? · Who is calling Anna?",
+      },
+      {
+        title: "Немає фінального монологу My week",
+        tone: "warn",
+        text: "Багато speaking moment-to-moment, але під кінець не було чіткого: «Ось твоя розповідь про тиждень без підказок» (8 речень).",
+      },
+    ],
+    corrections: [
+      {
+        title: "finish work / finish cooking",
+        tone: "warn",
+        text: "Природно: What time do you finish work? · What time do they finish cooking? Finish to cook — не основна модель. Зараз не розводити правило «два дієслова + to/-ing» — він ще плутає to + verb і -ing.",
+      },
+      {
+        title: "Pattern замість «хто головний?»",
+        tone: "tip",
+        text: "Для What time does your workday start? швидше: My workday starts at ten. → What time does your workday start? Техніка «хто головний?» інколи перетворює просте питання на довгий розбір.",
+      },
+      {
+        title: "Сторонні блоки після speaking",
+        tone: "tip",
+        text: "Ідіома kill two birds with one stone і довга історія про ноутбук — теплий контакт, але краще останні 2′ після фінального speaking task.",
+      },
+    ],
+    teacherGood: [
+      "Реально ~70% speaking: тиждень, робочі дні, days off, час, барбер, звички, їжа, зал, музика, книги, сестра, дзвінки — напрям, якого просив учень.",
+      "Використала його реальний розклад (Tue–Thu, barbershop, Mon & Fri off, start at ten) — ефективніше за абстрактного офісного працівника.",
+      "Давала шанс спробувати ще раз («Спробуй ще раз» · «Хто тут головний?» · «Не поспішай» · «Ти почав правильно») — сильна сторона методики.",
+      "Відмічала конкретний прогрес («Це було дуже швидко» · «Красавчик») — важливо, бо він часто сумнівається («не може так звучати»).",
+    ],
+    teacherImprove: [
+      "Не починати review з великого L47 / jobs / friends / destination / how far… Одразу: “Today’s goal: tell me about your real week and ask me about mine.” Перші 10′ — 5 коротких питань про schedule.",
+      "В одному уроці не повторювати «весь світ» (can, appearance, possessives, PC, idiom, travel, future preview, laptop). Під кінець — обов’язковий monologue без підказок.",
+      "Менше «головного героя» на кожному питанні — більше готових pattern-пар.",
+      "Не змішувати finish work / finish cooking / finish to cook зараз.",
+      "Сторонні блоки — лише після фінального speaking.",
+    ],
+    nextGoal:
+      "Закрити My week: 8 речень без підказок. Потім L49 — вузький Yesterday (Past Simple story), не великий review.",
+    nextGrammar: [
+      "My week starts on… · I work from… to… · I work at…",
+      "I usually start work at… · I finish work at… · My days off are…",
+      "At the weekend, I… · I usually / often / sometimes / never…",
+    ],
+    nextFlow: [
+      {
+        time: "Якщо ще L48",
+        title: "Tell me about your week in 8 sentences",
+        text: "Опора: starts on… · work from…to… · work at… · start/finish at… · days off… · weekend… · frequency. Потім лише 3 correction points: on Mondays / at the weekend · I work at a barbershop · What time does… start?",
+      },
+      {
+        time: "L49 · 60′",
+        title: "Yesterday (вузько)",
+        text: "5′: What days do you work? What do you do at the weekend? → одразу What did you do yesterday? Фінал: got up · had · went · worked · watched/played · went to bed. Закрити дірку після L43–44: Past як історія, не окремі форми.",
+      },
+      {
+        time: "Формула далі",
+        title: "5 → 10 → 30 → 10",
+        text: "5′ review → 10′ потрібні форми → 30′ speaking around one topic → 10′ final monologue → короткий feedback.",
+      },
+    ],
+    homework: [
+      "Написати 8 речень My week (підкреслити days / at·on·in / frequency).",
+      "Voice 40–60 с: Tell me about your week.",
+      "4 питання про тиждень учителя (What time / How often / Do you… / What do you…).",
+    ],
+    resultHeading: "Що учень уже вміє",
+    takeawayHeading: "Підсумок",
+    takeaway:
+      "Урок 48 був хорошим за кількістю speaking: Петро говорив, ставив питання й пробував структури. Прогрес у WH-questions і do/does відчутний. Наступний крок — менше тем за урок, більше завершеного output. Найефективніша формула зараз: 5′ review → 10′ форми → 30′ speaking around one topic → 10′ final monologue → короткий feedback.",
+  },
 ];
 
 export function getLessonAnalysis(id: string): LessonAnalysis | undefined {
