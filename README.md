@@ -29,7 +29,7 @@ No shop / paywall chrome — teal-on-paper teaching UI only.
 
 - **Roadmap** — curriculum overview (lessons 1–66); current class is **Lesson 47 · Skills**
 - **Lessons 15–46** — full interactive pages (speaking, vocab, listening, grammar, reading); L36–38 and L43–46 are content-driven
-- **Homework** — `/hw-25`…`/hw-49`; older `/homework/:id` still used for early lessons
+- **Homework** — `/hw-25`…`/hw-50`; older `/homework/:id` still used for early lessons
 - **Vocab** — dictionary with IPA + Web Speech pronunciation
 - **Trainer** — conjugation + question builder, then 50 core verbs; practice decks and scored quizzes
 - **A1 Level Test** — separate check at `/a1-level-test`
@@ -258,6 +258,7 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/lessons/47` | Skills |
 | `/lessons/48` | Review · My week |
 | `/lessons/49` | Review · Yesterday |
+| `/lessons/50` | English in action · Make requests |
 | `/lesson-42` | My week (Unit 5A) |
 | `/hw-42` | Homework · Lesson 42 |
 | `/hw-43` | Homework · Lesson 43 |
@@ -267,6 +268,7 @@ Config is loaded from `VITE_FIREBASE_*` env vars (see `.env.example`). The web `
 | `/hw-47` | Homework · Lesson 47 |
 | `/hw-48` | Homework · Lesson 48 |
 | `/hw-49` | Homework · Lesson 49 |
+| `/hw-50` | Homework · Lesson 50 |
 | `/admin/analyses` | Teacher: lesson analyses |
 | `/admin/analyses/44` | Analysis · Lesson 44 |
 | `/a1-level-test` | A1 Level Test |

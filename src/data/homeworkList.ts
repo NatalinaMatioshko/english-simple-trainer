@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "50": "/images/lesson50/req-a-dishes.png",
   "46": "/images/lesson46/chore-a-cook.png",
   "45": "/images/lesson45/erica-cycle.png",
   "44": "/images/lesson44/tea.jpg",
@@ -40,6 +41,18 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "50",
+    title: "Make requests",
+    href: "/hw-50",
+    tasks: [
+      { type: "text", text: "Flashcards: request chunks (UA→EN)" },
+      { type: "text", text: "Remember 6 housework jobs from the pictures" },
+      { type: "text", text: "Complete the 4 dialogues (Can I / Can you)" },
+      { type: "text", text: "Write 3× Can you…? and 3× Can I…?" },
+      { type: "text", text: "Voice: ask for help at home (40–60s)" },
+    ],
+  },
   {
     id: "49",
     title: "Review · Yesterday",
