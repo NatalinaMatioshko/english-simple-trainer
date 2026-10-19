@@ -214,6 +214,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson49;
     },
   },
+  {
+    id: "50",
+    number: 50,
+    title: "English in action · Make requests",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 50,
+    status: "published",
+    estimatedMinutes: 60,
+    hasHomework: true,
+    topic: "Can I…? / Can you…? · polite requests",
+    description:
+      "Make and answer polite requests with housework pictures and short role-plays.",
+    route: "/lessons/50",
+    legacyRoute: "/lesson-50",
+    homeworkPath: "/hw-50",
+    load: async () => {
+      const mod = await import("./lessons/lesson-50/lesson");
+      return mod.lesson50;
+    },
+  },
 ];
 
 export function getRegistryEntry(

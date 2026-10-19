@@ -40,11 +40,12 @@ export const lesson49: Lesson = {
   route: "/lessons/49",
   legacyRoute: "/lesson-49",
   prevLessonPath: "/lessons/48",
-  nextLessonPath: "/lessons",
+  nextLessonPath: "/lessons/50",
   navLinks: [
     { label: "← Back to lessons", path: "/lessons" },
     { label: "← Lesson 48", path: "/lessons/48", ghost: true },
     { label: "HW49 →", path: "/hw-49", ghost: true },
+    { label: "Lesson 50 →", path: "/lessons/50", ghost: true },
   ],
   homework: lesson49Homework,
   flow: [
