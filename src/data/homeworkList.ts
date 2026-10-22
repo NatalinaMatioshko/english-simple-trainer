@@ -46,11 +46,10 @@ export const homeworkByLesson = [
     title: "Make requests",
     href: "/hw-50",
     tasks: [
-      { type: "text", text: "Flashcards: request chunks (UA→EN)" },
-      { type: "text", text: "Remember 6 housework jobs from the pictures" },
-      { type: "text", text: "Complete the 4 dialogues (Can I / Can you)" },
-      { type: "text", text: "Write 3× Can you…? and 3× Can I…?" },
-      { type: "text", text: "Voice: ask for help at home (40–60s)" },
+      { type: "text", text: "Chunks: request language flashcards (UA→EN)" },
+      { type: "text", text: "Test: write English for each chunk" },
+      { type: "text", text: "3 · Who agrees — Tom or Ana? (listen 6.17)" },
+      { type: "text", text: "5a · Complete the conversations" },
     ],
   },
   {
