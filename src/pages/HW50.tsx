@@ -1,11 +1,9 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { CheckBar } from "../components/lesson38/L38Ui";
-import { drillSelClass } from "../components/lesson31/drillSelClass";
 import {
   requestDialogueGaps,
-  tomAnaWhoAgrees,
-  SOUND_U6,
+  requestMatchPhrases,
 } from "../content/lessons/lesson-50/activities";
 import { requestFlashcards } from "../content/lessons/lesson-50/vocabulary";
 import { speakEnglish } from "../utils/speech";
@@ -19,20 +17,12 @@ function normText(s: string): string {
     .toLowerCase()
     .replace(/[\u2018\u2019\u02bc']/g, "'")
     .replace(/\s+/g, " ")
-    .replace(/[.!?…]+$/g, "")
-    .replace(/\s*\/\s*/g, " / ");
+    .replace(/[.!?]+$/, "");
 }
 
 function textOk(value: string, answers: readonly string[]): boolean {
   const v = normText(value);
-  if (!v) return false;
-  return answers.some((a) => {
-    const n = normText(a);
-    if (n === v) return true;
-    // Accept either side of "Sure. / No problem."
-    const parts = n.split(" / ").map((p) => p.trim()).filter(Boolean);
-    return parts.includes(v);
-  });
+  return v !== "" && answers.some((a) => normText(a) === v);
 }
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
@@ -42,16 +32,7 @@ function inputCls(checked: boolean, value: string, ok: boolean): string {
   return "l22-gap-input";
 }
 
-function shuffle<T>(items: readonly T[]): T[] {
-  const next = [...items];
-  for (let i = next.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [next[i], next[j]] = [next[j], next[i]];
-  }
-  return next;
-}
-
-/** Homework for Lesson 50 — chunks + Tom/Ana + dialogues 5a. */
+/** Homework for Lesson 50 — Make requests. */
 export default function HW50() {
   const [flip, setFlip] = useState<number[]>([]);
   const toggleFlip = (idx: number) => {
@@ -62,24 +43,14 @@ export default function HW50() {
     });
   };
 
-  const quizCards = useMemo(() => shuffle(requestFlashcards), []);
-  const [quizAns, setQuizAns] = useState<Record<string, string>>({});
-  const [quizChecked, setQuizChecked] = useState(false);
-  const quizScore = quizCards.filter((c) =>
-    textOk(quizAns[c.back] ?? "", [c.back]),
-  ).length;
-
-  const [taAns, setTaAns] = useState<Record<string, string>>({});
-  const [taChecked, setTaChecked] = useState(false);
-  const taScore = tomAnaWhoAgrees.filter(
-    (q) => (taAns[q.id] ?? "") === q.correctAnswer,
-  ).length;
-
   const [gapAns, setGapAns] = useState<Record<string, string>>({});
   const [gapChecked, setGapChecked] = useState(false);
   const gapScore = requestDialogueGaps.filter((g) =>
     textOk(gapAns[g.id] ?? "", [g.answer]),
   ).length;
+
+  const [writeReq, setWriteReq] = useState("");
+  const [writeAns, setWriteAns] = useState("");
 
   return (
     <div className="page">
@@ -87,16 +58,13 @@ export default function HW50() {
         <p className="page-kicker">Homework · Lesson 50</p>
         <h1>Make requests</h1>
         <p className="lead">
-          Chunks · Tom / Ana · complete the conversations (5a).
+          Flashcards · dialogues · 6 written requests · voice 40–60s.
         </p>
 
         <section id="hw50-cards" className="lesson22-block panel">
           <div className="lesson22-section-head">
-            <p className="page-kicker">1 · Chunks</p>
-            <h2>Request language</h2>
-            <p className="lead">
-              Tap UA → EN if you need extra support.
-            </p>
+            <p className="page-kicker">1 · Flashcards</p>
+            <h2>Request chunks</h2>
           </div>
           <div className="l22-vocab-grid" style={{ marginTop: "0.65rem" }}>
             {requestFlashcards.map((card, idx) => {
@@ -109,158 +77,41 @@ export default function HW50() {
                   onClick={() => toggleFlip(idx)}
                   aria-pressed={isFlipped}
                 >
-                  <div className="l22-vocab-inner">
-                    <div className="l22-vocab-face l22-vocab-front">
-                      <span className="l22-vocab-label">Українською</span>
-                      <strong>{card.front}</strong>
-                    </div>
-                    <div className="l22-vocab-face l22-vocab-back">
-                      <span className="l22-vocab-label">English</span>
-                      <strong>{card.back}</strong>
-                    </div>
-                  </div>
+                  <span className="l22-vocab-front">{card.front}</span>
+                  <span className="l22-vocab-back">{card.back}</span>
                 </button>
               );
             })}
           </div>
         </section>
 
-        <section id="hw50-quiz" className="lesson22-block panel">
+        <section id="hw50-jobs" className="lesson22-block panel">
           <div className="lesson22-section-head">
-            <p className="page-kicker">2 · Test</p>
-            <h2>UA → EN</h2>
-            <p className="lead">
-              Write the English chunk. Check with the flashcards if you need to.
-            </p>
+            <p className="page-kicker">2 · Jobs</p>
+            <h2>Remember the six jobs</h2>
           </div>
-          <ol className="l22-gap-list">
-            {quizCards.map((card) => {
-              const val = quizAns[card.back] ?? "";
-              const ok = textOk(val, [card.back]);
-              return (
-                <li key={card.back}>
-                  <span>{card.front} → </span>
-                  <input
-                    className={inputCls(quizChecked, val, ok)}
-                    style={{ width: "min(100%, 22rem)" }}
-                    value={val}
-                    onChange={(e) => {
-                      setQuizChecked(false);
-                      setQuizAns((prev) => ({
-                        ...prev,
-                        [card.back]: e.target.value,
-                      }));
-                    }}
-                    aria-label={`English for: ${card.front}`}
-                  />
-                </li>
-              );
-            })}
+          <ol className="l22-list">
+            {requestMatchPhrases.map((p) => (
+              <li key={p.value}>{p.label}</li>
+            ))}
           </ol>
-          <CheckBar
-            checked={quizChecked}
-            score={quizScore}
-            total={quizCards.length}
-            onCheck={() => setQuizChecked(true)}
-            onReset={() => {
-              setQuizAns({});
-              setQuizChecked(false);
-            }}
-          />
-        </section>
-
-        <section id="hw50-tom-ana" className="lesson22-block panel">
-          <div className="lesson22-section-head">
-            <p className="page-kicker">3 · Who agrees — Tom or Ana?</p>
-            <h2>Listen again</h2>
-            <p className="lead">
-              Who agrees to do the jobs? Write T (Tom) or A (Ana).
-            </p>
-          </div>
-          <div className="l25-audio-item" style={{ marginBottom: "0.85rem" }}>
-            <div className="l25-audio-meta">
-              <span className="l25-audio-num">6.17</span>
-              <div className="l25-audio-info">
-                <span className="l25-audio-ex">3</span>
-                <span className="l25-audio-title">Tom and Ana · requests</span>
-              </div>
-            </div>
-            <audio
-              controls
-              className="l25-audio-ctrl"
-              src={SOUND_U6(17)}
-              preload="none"
-              aria-label="6.17 Tom and Ana requests"
-            />
-          </div>
-          <ol className="l22-gap-list">
-            {tomAnaWhoAgrees.map((q) => {
-              const value = taAns[q.id] ?? "";
-              return (
-                <li key={q.id}>
-                  <label>
-                    <span>{q.prompt} → </span>
-                    <select
-                      value={value}
-                      className={drillSelClass(
-                        taChecked,
-                        value,
-                        q.correctAnswer,
-                      )}
-                      onChange={(e) => {
-                        setTaChecked(false);
-                        setTaAns((prev) => ({
-                          ...prev,
-                          [q.id]: e.target.value,
-                        }));
-                      }}
-                      aria-label={q.prompt}
-                    >
-                      <option value="">—</option>
-                      {q.options.map((o) => (
-                        <option key={o} value={o}>
-                          {o}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                </li>
-              );
-            })}
-          </ol>
-          <CheckBar
-            checked={taChecked}
-            score={taScore}
-            total={tomAnaWhoAgrees.length}
-            onCheck={() => setTaChecked(true)}
-            onReset={() => {
-              setTaAns({});
-              setTaChecked(false);
-            }}
-          />
         </section>
 
         <section id="hw50-gaps" className="lesson22-block panel">
           <div className="lesson22-section-head">
-            <p className="page-kicker">5a</p>
-            <h2>Complete the conversations</h2>
-            <p className="lead">
-              Use phrases from the Useful phrases box.
-            </p>
+            <p className="page-kicker">3 · Dialogues</p>
+            <h2>Complete the phrases</h2>
           </div>
-          <p className="l22-muted" style={{ marginBottom: "0.65rem" }}>
-            Can I · Can you · Sure · Yes, you can · I’m sorry, I can’t · I’m
-            sorry, you can’t
-          </p>
           <div className="l22-gap-list">
             {requestDialogueGaps.map((g) => {
               const value = gapAns[g.id] ?? "";
+              const ok = textOk(value, [g.answer]);
               return (
                 <label key={g.id} className="l22-gap-row">
                   <span>
                     {g.before}
-                    <select
-                      className={drillSelClass(gapChecked, value, g.answer)}
+                    <input
+                      className={inputCls(gapChecked, value, ok)}
                       value={value}
                       onChange={(e) => {
                         setGapChecked(false);
@@ -269,15 +120,9 @@ export default function HW50() {
                           [g.id]: e.target.value,
                         }));
                       }}
+                      placeholder="…"
                       aria-label={`Gap ${g.id}`}
-                    >
-                      <option value="">—</option>
-                      {g.options.map((o) => (
-                        <option key={o} value={o}>
-                          {o}
-                        </option>
-                      ))}
-                    </select>
+                    />
                     {g.after}
                   </span>
                 </label>
@@ -296,17 +141,51 @@ export default function HW50() {
           />
         </section>
 
+        <section id="hw50-write" className="lesson22-block panel">
+          <div className="lesson22-section-head">
+            <p className="page-kicker">4 · Write</p>
+            <h2>Six requests</h2>
+          </div>
+          <p className="lead">
+            Write 3× Can you…, please? and 3× Can I…, please?
+          </p>
+          <textarea
+            className="l22-textarea"
+            rows={6}
+            value={writeReq}
+            onChange={(e) => setWriteReq(e.target.value)}
+            placeholder={"Can you wash the dishes, please?\nCan I use your pen, please?"}
+          />
+          <p className="lead" style={{ marginTop: "0.85rem" }}>
+            Write answers to these two requests:
+          </p>
+          <p className="l22-muted">
+            1) Can you walk the dog, please? · 2) Can I watch TV at 8 o’clock?
+          </p>
+          <textarea
+            className="l22-textarea"
+            rows={3}
+            value={writeAns}
+            onChange={(e) => setWriteAns(e.target.value)}
+            placeholder={"1) Sure. / I’m sorry, I can’t.\n2) Yes, you can. / I’m sorry, you can’t."}
+          />
+        </section>
+
+        <section id="hw50-voice" className="lesson22-block panel">
+          <div className="lesson22-section-head">
+            <p className="page-kicker">5 · Voice</p>
+            <h2>Ask for help at home (40–60s)</h2>
+          </div>
+          <p className="lead">
+            Record: three Can you…? requests about housework, and two Can I…?
+            requests. Then imagine answers.
+          </p>
+        </section>
+
         <HomeworkSubmit
           lessonId="50"
-          writing={[
-            `Tom/Ana: ${tomAnaWhoAgrees
-              .map((q) => `${q.id}=${taAns[q.id] || "—"}`)
-              .join(", ")}`,
-            `Chunks quiz: ${quizScore}/${quizCards.length}`,
-            `Dialogues 5a: ${gapScore}/${requestDialogueGaps.length}`,
-          ].join("\n")}
-          quizDone={quizChecked && taChecked && gapChecked}
-          quizScore={quizScore + taScore + gapScore}
+          writing={[writeReq, writeAns].filter(Boolean).join("\n\n")}
+          quizDone={gapChecked}
         />
       </div>
     </div>
