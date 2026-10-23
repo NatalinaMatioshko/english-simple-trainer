@@ -235,6 +235,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson50;
     },
   },
+  {
+    id: "51",
+    number: 51,
+    title: "Questions · A nice place",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 51,
+    status: "published",
+    estimatedMinutes: 60,
+    hasHomework: true,
+    topic: "Wh-questions · places and nature words",
+    description:
+      "Nature words and directions, wh-questions about a place, then tell your teacher about a nice place in your country.",
+    route: "/lessons/51",
+    legacyRoute: "/lesson-51",
+    homeworkPath: "/hw-51",
+    load: async () => {
+      const mod = await import("./lessons/lesson-51/lesson");
+      return mod.lesson51;
+    },
+  },
 ];
 
 export function getRegistryEntry(
