@@ -76,6 +76,7 @@ const HW47 = lazy(() => import("../pages/HW47"));
 const HW48 = lazy(() => import("../pages/HW48"));
 const HW49 = lazy(() => import("../pages/HW49"));
 const HW50 = lazy(() => import("../pages/HW50"));
+const HW51 = lazy(() => import("../pages/HW51"));
 const Lesson42 = lazy(() => import("../pages/Lesson42"));
 const Lesson44 = lazy(() => import("../pages/Lesson44"));
 const Lesson45 = lazy(() => import("../pages/Lesson45"));
@@ -84,6 +85,7 @@ const Lesson47 = lazy(() => import("../pages/Lesson47"));
 const Lesson48 = lazy(() => import("../pages/Lesson48"));
 const Lesson49 = lazy(() => import("../pages/Lesson49"));
 const Lesson50 = lazy(() => import("../pages/Lesson50"));
+const Lesson51 = lazy(() => import("../pages/Lesson51"));
 const LessonPage = lazy(() => import("../features/lessons/LessonPage"));
 const A1LevelTest = lazy(() => import("../pages/A1LevelTest"));
 const ExtraResources = lazy(() => import("../pages/ExtraResources"));
@@ -170,6 +172,7 @@ function AppRoutes() {
           <Route path="/hw-48" element={<HW48 />} />
           <Route path="/hw-49" element={<HW49 />} />
           <Route path="/hw-50" element={<HW50 />} />
+          <Route path="/hw-51" element={<HW51 />} />
           <Route path="/lesson-42" element={<Lesson42 />} />
           <Route path="/lesson-44" element={<Lesson44 />} />
           <Route path="/lesson-45" element={<Lesson45 />} />
@@ -178,6 +181,7 @@ function AppRoutes() {
           <Route path="/lesson-48" element={<Lesson48 />} />
           <Route path="/lesson-49" element={<Lesson49 />} />
           <Route path="/lesson-50" element={<Lesson50 />} />
+          <Route path="/lesson-51" element={<Lesson51 />} />
           <Route path="/a1-level-test" element={<A1LevelTest />} />
           <Route path="/self-study" element={<SelfStudyReview />} />
           <Route path="/about-me" element={<AboutMePage />} />
