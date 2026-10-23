@@ -112,6 +112,10 @@ export const customSectionLoaders: Record<
     import("./customs/TeacherScriptSection").then((m) => ({
       default: m.TeacherScriptSection,
     })),
+  "category-table": () =>
+    import("./customs/CategoryTableSection").then((m) => ({
+      default: m.CategoryTableSection,
+    })),
 };
 
 /** Stable React.lazy components — created once at module load, not during render. */

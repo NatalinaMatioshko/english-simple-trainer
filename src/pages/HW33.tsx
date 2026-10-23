@@ -243,6 +243,16 @@ export default function HW33() {
           r={6}
           exercise="3B · 7a"
           title="Is there / Are there — intonation"
+          transcript={
+            <ol>
+              <li>Is there a bathroom?</li>
+              <li>Yes, there is.</li>
+              <li>Are there two beds?</li>
+              <li>Yes, there are.</li>
+              <li>How many rooms are there?</li>
+              <li>There are four rooms.</li>
+            </ol>
+          }
         />
         <div className="l26-drill-list" style={{ marginTop: "0.85rem" }}>
           {intonationB.map((item, i) => (

@@ -193,8 +193,23 @@ export const foodSoundPairs = [
   },
 ] as const;
 
-/** 1b · 5.10 listen and repeat — words in photo order 1–14 */
-export const foodListenRepeatLines = foodPhotoMatch.map((p) => p.answer);
+/** 1b · 5.10 listen and repeat — words in the order of the audio */
+export const foodListenRepeatLines = [
+  "bread",
+  "cakes",
+  "cheese",
+  "chicken",
+  "chocolate",
+  "coffee",
+  "eggs",
+  "fish",
+  "meat",
+  "milk",
+  "salad",
+  "sandwiches",
+  "sugar",
+  "tea",
+] as const;
 
 /** 2 · 5.11 transcript lines (word pairs) */
 export const foodSoundTranscriptLines = foodSoundPairs.map(

@@ -143,19 +143,20 @@ export const lesson51: Lesson = {
       },
     },
     {
-      type: "multipleChoiceGroup",
+      type: "custom",
       id: "l51-table",
       kicker: "2",
-      title: "Complete the table",
+      title: "Complete the table with the words in Exercise 1a",
       description:
-        "Put the words from Exercise 1a in the table: water, land, plants, air or directions?",
-      chips: [...placeCategories],
-      items: placeTableQuiz.map((q) => ({
-        id: q.id,
-        prompt: q.prompt,
-        options: [...placeCategories],
-        correctAnswer: q.correctAnswer,
-      })),
+        "Tap a word, then tap “+ here” in the right column. Tap a word in the table to move it.",
+      componentKey: "category-table",
+      props: {
+        categories: placeCategories.map((c) => ({ id: c, label: c, icon: c })),
+        words: placeWordBox.map((w) => ({
+          word: w,
+          answer: placeTableQuiz.find((q) => q.prompt === w)?.correctAnswer ?? "",
+        })),
+      },
     },
     {
       type: "fillBlank",
@@ -331,7 +332,7 @@ export const lesson51: Lesson = {
       kicker: "10b · Speak",
       title: "Ask and answer about the place",
       description:
-        "First your teacher asks you about your place. Then you ask your teacher about their place.",
+        "Make a full question from each prompt and ask your teacher about their place. Then your teacher asks you. Hint = the question + an example answer.",
       prompts: [...placeInterviewPrompts],
       models: [...placeInterviewModels],
       hideModels: true,

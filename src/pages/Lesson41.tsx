@@ -26,6 +26,27 @@ import "../styles/lesson41.css";
 
 const VIDEO_ID = "pSRbZkQH04A";
 
+/** 4.11 transcript — four short conversations */
+const r11Transcript = (
+  <ol>
+    <li>
+      A: Excuse me, what time is it? — B: Three o&apos;clock. — A: Thank you.
+    </li>
+    <li>
+      A: What time is it? — B: It&apos;s quarter past six. — A: Quarter to
+      six? — B: No! Six fifteen.
+    </li>
+    <li>
+      A: What time is it, Alex? — B: Er, it&apos;s half past eleven. — A:
+      Sorry, eleven thirty? — B: Yeah. — A: Oh no! I&apos;m late!
+    </li>
+    <li>
+      A: What time is our train? — B: It&apos;s at quarter to eleven. — A:
+      Quarter past eleven? — B: No. Ten forty-five. — A: Oh, OK.
+    </li>
+  </ol>
+);
+
 type DayCard = (typeof daysFlashcards)[number];
 
 function setAt(list: string[], index: number, value: string): string[] {
@@ -203,6 +224,7 @@ export default function Lesson41() {
           r={11}
           exercise="4D · 4.11"
           title="What time is it? — four short conversations"
+          transcript={r11Transcript}
         />
         <div className="l26-drill-list l41-select-list l41-select-list--clock" style={{ marginTop: "1rem" }}>
           {listenMatch.map((item, i) => (
@@ -268,6 +290,7 @@ export default function Lesson41() {
           r={11}
           exercise="4D · 4.11"
           title="Same audio — complete the gaps"
+          transcript={r11Transcript}
         />
         {dialogueGaps.map((conv, i) => {
           const gapLine = conv.lines.find((l) => "gap" in l && l.gap);
@@ -377,6 +400,27 @@ export default function Lesson41() {
           r={12}
           exercise="4D · 4.12"
           title="Useful phrases — listen and repeat"
+          transcript={
+            <>
+              <p>
+                <strong>Asking for the time:</strong> What time is it?
+              </p>
+              <p>
+                <strong>Saying the time:</strong> It&apos;s four o&apos;clock. ·
+                It&apos;s five past four. · It&apos;s quarter past four. ·
+                It&apos;s half past four. · It&apos;s twenty to five. ·
+                It&apos;s quarter to five. · It&apos;s five to five.
+              </p>
+              <p>
+                <strong>Asking for the time of things:</strong> What time is the
+                train to London?
+              </p>
+              <p>
+                <strong>Saying the time of things:</strong> It&apos;s at seven
+                forty-five.
+              </p>
+            </>
+          }
         />
 
         <div className="l26-drill-list l41-select-list" style={{ marginTop: "1rem" }}>

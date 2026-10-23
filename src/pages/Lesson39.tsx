@@ -259,6 +259,12 @@ export default function Lesson39() {
           r={3}
           exercise="4B · R3"
           title="Listen and repeat: bag, passport, tickets, sunglasses…"
+          transcript={
+            <p>
+              bag · bottle of water · camera · coat · credit card · food · keys
+              · money · passport · phone · sunglasses · tickets
+            </p>
+          }
         />
       </section>
 
@@ -380,6 +386,31 @@ export default function Lesson39() {
           title="Zara and Sam · Have you got your camera?"
           transcript={
             <>
+              <p>
+                <strong>Zara:</strong> OK, Sam. Are you and Fifi ready for your
+                trip?
+              </p>
+              <p>
+                <strong>Sam:</strong> Oh, yes! Two weeks in Brazil! Woo-hoo!
+              </p>
+              <p>
+                <strong>Zara:</strong> And have you got everything?
+              </p>
+              <p>
+                <strong>Sam:</strong> Yes, yes, I have.
+              </p>
+              <p>
+                <strong>Zara:</strong> Have you got your passport?
+              </p>
+              <p>
+                <strong>Sam:</strong> Yes, I have.
+              </p>
+              <p>
+                <strong>Zara:</strong> Money?
+              </p>
+              <p>
+                <strong>Sam:</strong> Yes, Zara, I&apos;ve got money. Duh!
+              </p>
               <p>
                 <strong>Zara:</strong> OK … Have you got your camera?
               </p>
@@ -673,6 +704,12 @@ export default function Lesson39() {
           r={5}
           exercise="4B · 4.5"
           title="Have you got…? Yes, I have. / Has it got…? Yes, it has."
+          transcript={
+            <ol>
+              <li>Have you got your ticket? — Yes, I have.</li>
+              <li>Has it got a restaurant? — Yes, it has.</li>
+            </ol>
+          }
         />
         <div className="l39-sd">
           {sameOrDifferent.map((item, i) => {

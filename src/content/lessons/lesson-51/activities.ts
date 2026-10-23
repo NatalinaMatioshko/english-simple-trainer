@@ -517,23 +517,23 @@ export const placeNotesLists = [
 
 /** Ex.10b · ask and answer with the teacher (both directions) */
 export const placeInterviewPrompts = [
-  "What (is the name of the place)?",
-  "Where (is it)?",
-  "When (do you visit)?",
-  "Who (do you go with)?",
-  "How many (rivers are there)?",
-  "How much (is a train ticket)?",
-  "How do you spell (it)?",
+  "What … ? → the name",
+  "Where … ?",
+  "When … ? → visit",
+  "Who … ? → go with",
+  "How many … ? → rivers",
+  "How much … ? → a train ticket",
+  "How … ? → spell",
 ] as const;
 
 export const placeInterviewModels = [
-  "What is the name of the place?",
-  "Where is it?",
-  "When do you visit?",
-  "Who do you go with?",
-  "How many rivers are there?",
-  "How much is a train ticket?",
-  "How do you spell it?",
+  "What is the name of the place? — It’s Yaremche.",
+  "Where is it? — It’s in the west of Ukraine.",
+  "When do you visit? — In summer.",
+  "Who do you go with? — With my family.",
+  "How many rivers are there? — One, the Prut.",
+  "How much is a train ticket? — About 600 hryvnias.",
+  "How do you spell it? — Y-A-R-E-M-C-H-E.",
 ] as const;
 
 /** Final · tell your teacher about your place (no notes) */

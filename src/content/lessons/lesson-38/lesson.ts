@@ -176,6 +176,12 @@ export const lesson38: Lesson = {
         title:
           "Listen and repeat the words in bold: blonde hair, blue eyes, in her 50s…",
         ariaLabel: "Unit 4 track R1 — describing people vocabulary",
+        transcriptLines: [
+          "1. blonde hair · blue eyes · in her fifties",
+          "2. red hair · in his forties",
+          "3. brown hair · green eyes · in her twenties",
+          "4. grey hair · a beard",
+        ],
       },
     },
     {

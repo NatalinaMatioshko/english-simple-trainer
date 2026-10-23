@@ -82,8 +82,8 @@ export const pictureJobsModels = [
 
 /** 6.17 transcript (teacher / optional student reveal) */
 export const requestR17Transcript = [
-  "1. Look at the dog. — Can you walk him, please? — Sure.",
-  "2. The bathroom. — Can you clean it? — I’m sorry, I can’t. I’m late. — OK. I can clean it later.",
+  "1. Look at the dog! — Yeah… — Can you walk him, please? — Sure!",
+  "2. Ugh! The bathroom! — Yeah. — Can you clean it? — I’m sorry, I can’t. I’m late! — OK. I can clean it later. — Thank you.",
   "3. Are you busy? — No, not really. — Can you do the washing? — Sure, I can do that.",
   "4. We haven’t got any food. — Can you go to the supermarket? — Sure. — Can I use your bike, please? — I’m sorry, you can’t. It’s at my office. — No problem.",
   "5. My taxi is here. — Can you make the bed, please? — Yes, I can. — See you later. Bye.",

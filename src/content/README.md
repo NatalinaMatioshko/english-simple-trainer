@@ -87,6 +87,7 @@ Keys must match [`lessonSectionRegistry.ts`](../features/lessons/lessonSectionRe
 | `stress-syllable` | reusable | Stress / syllable tap drill |
 | `phrase-match` | reusable | Match phrase halves or café lines |
 | `line-order` | reusable | Put lines in order (tap or drag) |
+| `category-table` | reusable | Sort words into labelled columns with icons (tap word → column) + Check |
 | `lesson37-pictures` | lesson-specific | Zoom figures for L37 |
 | `lesson38-word-map` | lesson-specific | Word map mind-map (data via props) |
 | `lesson38-grammar-have-got` | lesson-specific | Interactive have/has got grammar box |
