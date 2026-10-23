@@ -109,6 +109,15 @@ export const lesson45: Lesson = {
         trackLabel: "6.1",
         title: "Time expressions · habits",
         exercise: "1b",
+        transcriptLines: [
+          "1. in the morning",
+          "2. every day",
+          "3. in the evening",
+          "4. at the weekend",
+          "5. in the afternoon",
+          "6. at night",
+          "7. every week",
+        ],
       },
     },
     {
@@ -245,6 +254,10 @@ export const lesson45: Lesson = {
         trackLabel: "6.2",
         title: "Verb endings /s/ /z/ /ɪz/",
         exercise: "7a",
+        transcriptLines: [
+          "arrives · finishes · goes · puts · starts",
+          "studies · uses · walks · watches · wears",
+        ],
       },
     },
     {

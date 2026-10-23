@@ -786,6 +786,15 @@ export default function Lesson40() {
           r={9}
           exercise="4C · 4.9"
           title="try, go to, visit, take, drink, see"
+          transcript={
+            <ol>
+              <li>try</li>
+              <li>go to · visit</li>
+              <li>take</li>
+              <li>drink</li>
+              <li>see</li>
+            </ol>
+          }
         />
       </section>
 
@@ -1021,6 +1030,14 @@ export default function Lesson40() {
           r={10}
           exercise="4C · 4.10"
           title="Don't go… / Try… / Drink… — sentence stress"
+          transcript={
+            <ol>
+              <li>Don&apos;t go to Notting Hill.</li>
+              <li>Try Polish food.</li>
+              <li>Drink coffee in a café.</li>
+              <li>Don&apos;t take photos.</li>
+            </ol>
+          }
         />
         <div className="l40-stress-list">
           {stressPatterns.map((item, i) => {

@@ -260,6 +260,33 @@ export default function Lesson35() {
           r={14}
           exercise="3D · 2a"
           title="Asking for directions — where are they?"
+          transcript={
+            <>
+              <p>A: Hi, David! Where are you?</p>
+              <p>David: I&apos;m at the restaurant.</p>
+              <p>A: Where is it?</p>
+              <p>David: It&apos;s on Main Street. Where are you now?</p>
+              <p>A: I&apos;m at the station.</p>
+              <p>David: OK. Go down Station Road and turn right at the hotel.</p>
+              <p>A: Turn right at the hotel.</p>
+              <p>
+                David: Yes. Then go straight on. Go past the hotel and the café,
+                then turn left.
+              </p>
+              <p>A: Go past the hotel and the café and turn left.</p>
+              <p>
+                David: That&apos;s right! The restaurant is next to a bank, on
+                the right.
+              </p>
+              <p>A: On the right. OK. Is it a Thai restaurant?</p>
+              <p>
+                David: No. The Thai restaurant was busy. I&apos;m in the Polish
+                restaurant.
+              </p>
+              <p>A: OK. See you soon!</p>
+              <p>David: Bye!</p>
+            </>
+          }
         />
         <div className="l26-drill-list" style={{ marginTop: "0.85rem" }}>
           {listenWhere.map((q, i) => (
@@ -432,6 +459,22 @@ export default function Lesson35() {
           r={15}
           exercise="3D · 3"
           title="Useful phrases — directions"
+          transcript={
+            <ol>
+              <li>Excuse me, where&apos;s the cinema, please?</li>
+              <li>It&apos;s on Park Street.</li>
+              <li>Go down Main Street.</li>
+              <li>Go past the bank.</li>
+              <li>Turn right after the big house.</li>
+              <li>It&apos;s on the right.</li>
+              <li>Is there a supermarket near here?</li>
+              <li>Yes, there&apos;s one on Station Road.</li>
+              <li>Go straight on.</li>
+              <li>Turn left at the bookshop.</li>
+              <li>The supermarket is on the right.</li>
+              <li>It&apos;s next to a restaurant.</li>
+            </ol>
+          }
         />
         <div className="l35-phrase-box">
           {usefulPhrases.map((g) => (
@@ -543,6 +586,28 @@ export default function Lesson35() {
           r={16}
           exercise="3D · 4a"
           title="Directions — three conversations"
+          transcript={
+            <ol>
+              <li>
+                A: Excuse me, is there a supermarket near here? — B: Yes,
+                there&apos;s one on Station Road. Go straight on, go past the
+                Turkish restaurant, and the supermarket is on the left. — A:
+                Thank you. — B: You&apos;re welcome.
+              </li>
+              <li>
+                A: Excuse me. Where&apos;s the cinema, please? — B: It&apos;s on
+                Park Street. Go down Station Road, turn right after the park,
+                go past the school and the cinema is on the left. — A: Thanks.
+                — B: No problem.
+              </li>
+              <li>
+                A: Excuse me, is there a bookshop near here? — B: Yes,
+                there&apos;s one on Market Street. Go straight on, go past the
+                supermarket and turn right onto Market Street. The bookshop is
+                on the right. — A: Thank you. — B: No problem.
+              </li>
+            </ol>
+          }
         />
         {conversations.map((c) => (
           <div key={c.id} className="l35-conv">

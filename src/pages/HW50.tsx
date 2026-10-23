@@ -4,6 +4,7 @@ import { CheckBar } from "../components/lesson38/L38Ui";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
 import {
   requestDialogueGaps,
+  requestR17Transcript,
   tomAnaWhoAgrees,
   SOUND_U6,
 } from "../content/lessons/lesson-50/activities";
@@ -71,6 +72,7 @@ export default function HW50() {
 
   const [taAns, setTaAns] = useState<Record<string, string>>({});
   const [taChecked, setTaChecked] = useState(false);
+  const [taScriptOpen, setTaScriptOpen] = useState(false);
   const taScore = tomAnaWhoAgrees.filter(
     (q) => (taAns[q.id] ?? "") === q.correctAnswer,
   ).length;
@@ -192,6 +194,22 @@ export default function HW50() {
               preload="none"
               aria-label="6.17 Tom and Ana requests"
             />
+            <button
+              type="button"
+              className="l25-cr-mini-btn"
+              onClick={() => setTaScriptOpen((v) => !v)}
+            >
+              {taScriptOpen ? "Hide transcript" : "Transcript"}
+            </button>
+            {taScriptOpen ? (
+              <div className="l25-details-body">
+                <ol>
+                  {requestR17Transcript.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ol>
+              </div>
+            ) : null}
           </div>
           <ol className="l22-gap-list">
             {tomAnaWhoAgrees.map((q) => {
