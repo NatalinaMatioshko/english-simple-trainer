@@ -4,6 +4,8 @@ import {
   IMG51,
   placePhotoMatch,
   placeWordBox,
+  placeWordsTranscript,
+  fatmaDanTranscript,
   placeCategories,
   placeTableQuiz,
   chooseAlternatives,
@@ -56,6 +58,7 @@ export const lesson51: Lesson = {
   flow: [
     { href: "#l51-teacher", label: "Сценарій", teacherOnly: true },
     { href: "#l51-intro", label: "Goal" },
+    { href: "#l51-cards", label: "Flashcards" },
     { href: "#l51-photos", label: "1a Photos" },
     { href: "#l51-audio-1", label: "1b Repeat" },
     { href: "#l51-table", label: "2 Table" },
@@ -98,6 +101,16 @@ export const lesson51: Lesson = {
     },
     {
       type: "custom",
+      id: "l51-cards",
+      kicker: "Words",
+      title: "Flashcards · places and nature",
+      description:
+        "Look at the picture and say the word. Tap the card to check. Then do Exercise 1a.",
+      componentKey: "image-vocab-flip",
+      props: { cards: placePictureCards },
+    },
+    {
+      type: "custom",
       id: "l51-photos",
       kicker: "1a",
       title: "Match photos A–O with the words",
@@ -126,16 +139,8 @@ export const lesson51: Lesson = {
         trackLabel: "Audio 1",
         title: "Places and nature",
         exercise: "1b",
+        transcriptLines: [...placeWordsTranscript],
       },
-    },
-    {
-      type: "custom",
-      id: "l51-cards",
-      kicker: "1b · Cards",
-      title: "Picture → word",
-      description: "Tap a picture. Say the word, then check.",
-      componentKey: "image-vocab-flip",
-      props: { cards: placePictureCards },
     },
     {
       type: "multipleChoiceGroup",
@@ -189,6 +194,7 @@ export const lesson51: Lesson = {
         trackLabel: "Audio 2",
         title: "Fatma and Dan · a nice place",
         exercise: "5",
+        transcriptLines: [...fatmaDanTranscript],
       },
     },
     {

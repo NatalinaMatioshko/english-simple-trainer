@@ -121,6 +121,35 @@ export const placeWordBox = [
   "west",
 ] as const;
 
+/** Audio 1 · words read in word-box order */
+export const placeWordsTranscript = [
+  "clouds · east · a field · flowers · a hill",
+  "an island · a lake · a mountain · north · a river",
+  "the sea · the sky · south · trees · west",
+] as const;
+
+/** Audio 2 · Fatma and Dan (full conversation) */
+export const fatmaDanTranscript = [
+  "Dan: OK, so there’s this place, and I love it. It’s the Lake District.",
+  "Fatma: Sorry, what’s the name of the place?",
+  "Dan: The Lake District.",
+  "Fatma: Hmm, how do you spell that?",
+  "Dan: L-A-K-E D-I-S-T-R-I-C-T.",
+  "Fatma: Ah, OK. Where is it?",
+  "Dan: In the north of England.",
+  "Fatma: And what do you like about it?",
+  "Dan: Well, there are mountains and lakes. It’s very beautiful and quiet.",
+  "Fatma: Lovely. How many lakes are there?",
+  "Dan: Erm, sixteen, I think.",
+  "Fatma: Sixteen? Wow. When do you usually go there?",
+  "Dan: In June or July.",
+  "Fatma: And who do you go with?",
+  "Dan: Sometimes with my friends, sometimes with my wife.",
+  "Fatma: Great. And how much is a train ticket from London?",
+  "Dan: Ah, quite expensive. Sometimes tickets are £100. But there is also a bus. We often take that.",
+  "Fatma: Good to know.",
+] as const;
+
 /** Ex.2 · complete the table */
 export const placeCategories = [
   "water",
