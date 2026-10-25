@@ -5,6 +5,7 @@ import {
   lessons,
   type LessonEntry,
 } from "../data/lessons";
+import { assetUrl } from "../utils/assetUrl";
 import "../styles/pages.css";
 
 export default function Lessons() {
@@ -52,7 +53,7 @@ export default function Lessons() {
             >
               <span className="catalog-cube-media" aria-hidden="true">
                 {cover ? (
-                  <img src={cover} alt="" />
+                  <img src={assetUrl(cover)} alt="" />
                 ) : (
                   <span className="catalog-cube-fallback">
                     {lesson.practiceOnly ? "P" : lesson.id}

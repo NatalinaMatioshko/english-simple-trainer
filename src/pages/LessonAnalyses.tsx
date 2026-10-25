@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { TeacherOnly } from "../components/auth/TeacherOnly";
 import { hasLessonAnalysis } from "../data/lessonAnalyses";
 import { lessonCovers, lessons } from "../data/lessons";
+import { assetUrl } from "../utils/assetUrl";
 import "../styles/pages.css";
 
 export default function LessonAnalyses() {
@@ -28,7 +29,7 @@ export default function LessonAnalyses() {
               <>
                 <span className="catalog-cube-media" aria-hidden="true">
                   {cover ? (
-                    <img src={cover} alt="" />
+                    <img src={assetUrl(cover)} alt="" />
                   ) : (
                     <span className="catalog-cube-fallback">{lesson.id}</span>
                   )}

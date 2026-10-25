@@ -4,6 +4,7 @@ import {
   homeworkCovers,
   homeworkHref,
 } from "../data/homeworkList";
+import { assetUrl } from "../utils/assetUrl";
 import "../styles/pages.css";
 
 export default function Homework() {
@@ -28,7 +29,7 @@ export default function Homework() {
             >
               <span className="catalog-cube-media" aria-hidden="true">
                 {cover ? (
-                  <img src={cover} alt="" />
+                  <img src={assetUrl(cover)} alt="" />
                 ) : (
                   <span className="catalog-cube-fallback">{lesson.id}</span>
                 )}
