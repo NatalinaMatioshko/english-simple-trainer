@@ -9,6 +9,7 @@ import {
   SOUND_U6,
 } from "../content/lessons/lesson-50/activities";
 import { requestFlashcards } from "../content/lessons/lesson-50/vocabulary";
+import { shuffle } from "../utils/array";
 import { speakEnglish } from "../utils/speech";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
@@ -41,15 +42,6 @@ function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (ok) return "l22-gap-input is-ok";
   if (value.trim()) return "l22-gap-input is-err";
   return "l22-gap-input";
-}
-
-function shuffle<T>(items: readonly T[]): T[] {
-  const next = [...items];
-  for (let i = next.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [next[i], next[j]] = [next[j], next[i]];
-  }
-  return next;
 }
 
 /** Homework for Lesson 50 — chunks + Tom/Ana + dialogues 5a. */

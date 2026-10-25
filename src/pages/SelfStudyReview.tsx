@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { LoginRequiredNote } from "../components/auth/LoginRequiredNote";
 import { useAuth } from "../context/AuthContext";
 import { saveAboutMeSubmission } from "../services/writingSubmissions";
+import { shuffle } from "../utils/array";
 import "../styles/selfStudy.css";
 
 type McItem = {
@@ -377,10 +378,6 @@ function loadWritingDraft() {
 }
 
 type WordToken = { word: string; uid: number };
-
-function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
 
 function initBuilderStates(): Record<number, { pool: WordToken[]; placed: WordToken[] }> {
   return Object.fromEntries(

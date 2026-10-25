@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { shuffle } from "../utils/array";
 import "../styles/lesson17.css";
 
 type Pair = {
@@ -29,8 +30,6 @@ const imgPath = (fileName: string) =>
   `${import.meta.env.BASE_URL}images/${fileName}`;
 
 const matchSound = `${import.meta.env.BASE_URL}sounds/match.mp3`;
-
-const shuffle = <T,>(array: T[]) => [...array].sort(() => Math.random() - 0.5);
 
 const buildDeck = () =>
   shuffle(

@@ -6,19 +6,16 @@ import { fillInBlankTasks, profiles, sentenceOrderTasks } from "./data";
 import { saveAboutMeSubmission } from "../../services/writingSubmissions";
 import { useAuth } from "../../context/AuthContext";
 import { LoginRequiredNote } from "../auth/LoginRequiredNote";
+import { shuffle } from "../../utils/array";
 import type { WritingSubmission } from "./types";
 
 type WordToken = { word: string; uid: number };
 type TaskState = { pool: WordToken[]; placed: WordToken[] };
 
-function shuffleArray<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
-
 function initTaskStates(): Record<number, TaskState> {
   return Object.fromEntries(
     sentenceOrderTasks.map((task) => {
-      const pool = shuffleArray(
+      const pool = shuffle(
         task.words.map((word, idx) => ({ word, uid: task.id * 100 + idx })),
       );
       return [task.id, { pool, placed: [] }];
@@ -119,7 +116,7 @@ export const AboutMePage = () => {
   const resetTask = (taskId: number) => {
     setTaskStates((prev) => {
       const task = sentenceOrderTasks.find((t) => t.id === taskId)!;
-      const pool = shuffleArray(
+      const pool = shuffle(
         task.words.map((word, idx) => ({ word, uid: taskId * 100 + idx })),
       );
       return { ...prev, [taskId]: { pool, placed: [] } };
