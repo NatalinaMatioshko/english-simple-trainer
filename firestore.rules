@@ -1,21 +1,45 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Replace PLACEHOLDER with the same email as VITE_TEACHER_EMAIL
+    // ⚠️ BEFORE PUBLISHING THESE RULES: replace TEACHER_EMAIL_PLACEHOLDER@example.com
+    // with the real teacher email (the same value as VITE_TEACHER_EMAIL, lowercase).
+    // With the placeholder left in, nobody is the teacher: reading and reviewing
+    // submissions will be denied.
     function isTeacher() {
-      return request.auth != null
-        && request.auth.token.email == 'YOUR_TEACHER_EMAIL@gmail.com';
+      return signedIn()
+        && request.auth.token.email == 'TEACHER_EMAIL_PLACEHOLDER@example.com'
+        && request.auth.token.email_verified == true;
     }
 
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // Teacher may only flip the review flag; reviewedAt must be serverTimestamp().
     function teacherReviewOnly() {
       return isTeacher()
         && request.resource.data.diff(resource.data).affectedKeys()
-          .hasOnly(['reviewed', 'reviewedAt']);
+          .hasOnly(['reviewed', 'reviewedAt'])
+        && request.resource.data.reviewed is bool
+        && request.resource.data.reviewedAt == request.time;
+    }
+
+    // String field with a maximum length (field must exist).
+    function strMax(data, field, max) {
+      return data[field] is string && data[field].size() <= max;
     }
 
     match /homeworkAnswers/{id} {
-      allow create: if
-        request.resource.data.studentName is string
+      // Shape written by src/services/homeworkAnswers.ts (quizScore is optional).
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly([
+          'studentName', 'lessonId', 'writing', 'testDone', 'quizDone',
+          'quizScore', 'createdAt'
+        ])
+        && request.resource.data.keys().hasAll([
+          'studentName', 'lessonId', 'writing', 'testDone', 'quizDone', 'createdAt'
+        ])
+        && request.resource.data.studentName is string
         && request.resource.data.studentName.size() >= 2
         && request.resource.data.studentName.size() <= 80
         && request.resource.data.lessonId is string
@@ -27,10 +51,10 @@ service cloud.firestore {
         && request.resource.data.testDone is bool
         && request.resource.data.quizDone is bool
         && (!('quizScore' in request.resource.data)
-            || request.resource.data.quizScore is int)
-        && request.resource.data.keys().hasAll([
-          'studentName', 'lessonId', 'writing', 'testDone', 'quizDone', 'createdAt'
-        ]);
+            || (request.resource.data.quizScore is int
+                && request.resource.data.quizScore >= 0
+                && request.resource.data.quizScore <= 1000))
+        && request.resource.data.createdAt == request.time;
 
       allow read, list: if isTeacher();
       allow update: if teacherReviewOnly();
@@ -38,14 +62,32 @@ service cloud.firestore {
     }
 
     match /writingSubmissions/{id} {
-      allow create: if
-        request.resource.data.name is string
+      // Shape written by src/services/writingSubmissions.ts
+      // (about-me and self-study always send all ten fields;
+      // createdAt is a client ISO string, serverCreatedAt is serverTimestamp()).
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly([
+          'name', 'age', 'country', 'city', 'hair', 'eyes',
+          'text', 'createdAt', 'page', 'serverCreatedAt'
+        ])
+        && request.resource.data.keys().hasAll([
+          'name', 'age', 'country', 'city', 'hair', 'eyes',
+          'text', 'createdAt', 'page', 'serverCreatedAt'
+        ])
+        && request.resource.data.name is string
         && request.resource.data.name.size() >= 1
         && request.resource.data.name.size() <= 80
         && request.resource.data.text is string
         && request.resource.data.text.size() >= 1
         && request.resource.data.text.size() <= 8000
-        && request.resource.data.page in ['about-me', 'self-study'];
+        && request.resource.data.page in ['about-me', 'self-study']
+        && strMax(request.resource.data, 'age', 20)
+        && strMax(request.resource.data, 'country', 80)
+        && strMax(request.resource.data, 'city', 80)
+        && strMax(request.resource.data, 'hair', 80)
+        && strMax(request.resource.data, 'eyes', 80)
+        && strMax(request.resource.data, 'createdAt', 40)
+        && request.resource.data.serverCreatedAt == request.time;
 
       allow read, list: if isTeacher();
       allow update: if teacherReviewOnly();

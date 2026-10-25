@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { LoginRequiredNote } from "./auth/LoginRequiredNote";
+import { useAuth } from "../context/AuthContext";
 import { saveHomeworkAnswer } from "../services/homeworkAnswers";
 import "../styles/homeworkSubmit.css";
 
@@ -26,6 +28,7 @@ export function HomeworkSubmit({
   title = "Надіслати домашнє",
   description = "Текст береться з поля вище. Додай ім’я і натисни «Надіслати».",
 }: Props) {
+  const { user, loading } = useAuth();
   const [studentName, setStudentName] = useState("");
   const [testDone, setTestDone] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -35,6 +38,11 @@ export function HomeworkSubmit({
   const handleSubmit = async () => {
     setError("");
     setSuccess("");
+
+    if (!user) {
+      setError("Увійди, щоб надіслати домашнє завдання.");
+      return;
+    }
 
     const name = studentName.trim();
     const text = writing.trim();
@@ -77,48 +85,59 @@ export function HomeworkSubmit({
         <p className="hw-submit__desc">{description}</p>
       </div>
 
-      <label className="hw-submit__field">
-        <span>Твоє ім’я</span>
-        <input
-          type="text"
-          value={studentName}
-          onChange={(e) => setStudentName(e.target.value)}
-          placeholder="Olena"
-          autoComplete="name"
-          disabled={saving || Boolean(success)}
+      {loading ? (
+        <p className="hw-submit__meta">Перевіряю вхід…</p>
+      ) : !user ? (
+        <LoginRequiredNote
+          className="hw-submit__err"
+          message="Увійди, щоб надіслати домашнє завдання."
         />
-      </label>
+      ) : (
+        <>
+          <label className="hw-submit__field">
+            <span>Твоє ім’я</span>
+            <input
+              type="text"
+              value={studentName}
+              onChange={(e) => setStudentName(e.target.value)}
+              placeholder="Olena"
+              autoComplete="name"
+              disabled={saving || Boolean(success)}
+            />
+          </label>
 
-      {showListeningCheck && (
-        <label className="hw-submit__check">
-          <input
-            type="checkbox"
-            checked={testDone}
-            onChange={(e) => setTestDone(e.target.checked)}
-            disabled={saving || Boolean(success)}
-          />
-          <span>Listening / external test — зроблено</span>
-        </label>
+          {showListeningCheck && (
+            <label className="hw-submit__check">
+              <input
+                type="checkbox"
+                checked={testDone}
+                onChange={(e) => setTestDone(e.target.checked)}
+                disabled={saving || Boolean(success)}
+              />
+              <span>Listening / external test — зроблено</span>
+            </label>
+          )}
+
+          <p className="hw-submit__meta">
+            Quiz in app:{" "}
+            <strong>{quizDone ? "Done" : "Not finished yet"}</strong>
+            {quizDone && typeof quizScore === "number" ? ` · score ${quizScore}` : ""}
+          </p>
+
+          <div className="hw-submit__actions">
+            <button
+              type="button"
+              className="action-btn primary"
+              onClick={() => void handleSubmit()}
+              disabled={saving || Boolean(success)}
+            >
+              {saving ? "Надсилаю…" : success ? "Надіслано" : "Надіслати вчителю"}
+            </button>
+            {success && <p className="hw-submit__ok">{success}</p>}
+            {error && <p className="hw-submit__err">{error}</p>}
+          </div>
+        </>
       )}
-
-      <p className="hw-submit__meta">
-        Quiz in app:{" "}
-        <strong>{quizDone ? "Done" : "Not finished yet"}</strong>
-        {quizDone && typeof quizScore === "number" ? ` · score ${quizScore}` : ""}
-      </p>
-
-      <div className="hw-submit__actions">
-        <button
-          type="button"
-          className="action-btn primary"
-          onClick={() => void handleSubmit()}
-          disabled={saving || Boolean(success)}
-        >
-          {saving ? "Надсилаю…" : success ? "Надіслано" : "Надіслати вчителю"}
-        </button>
-        {success && <p className="hw-submit__ok">{success}</p>}
-        {error && <p className="hw-submit__err">{error}</p>}
-      </div>
     </div>
   );
 }

@@ -4,6 +4,8 @@ import type { ChangeEvent, SubmitEvent } from "react";
 import "./AboutMePage.css";
 import { fillInBlankTasks, profiles, sentenceOrderTasks } from "./data";
 import { saveAboutMeSubmission } from "../../services/writingSubmissions";
+import { useAuth } from "../../context/AuthContext";
+import { LoginRequiredNote } from "../auth/LoginRequiredNote";
 import type { WritingSubmission } from "./types";
 
 type WordToken = { word: string; uid: number };
@@ -45,6 +47,7 @@ const initialForm: FormState = {
 };
 
 export const AboutMePage = () => {
+  const { user, loading: authLoading } = useAuth();
   const [form, setForm] = useState<FormState>(initialForm);
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
@@ -175,6 +178,11 @@ export const AboutMePage = () => {
     e.preventDefault();
     setSaveError("");
     setSuccessMessage("");
+
+    if (!user) {
+      setSaveError("Увійди, щоб зберегти текст.");
+      return;
+    }
 
     const finalText = form.text.trim() || generatedPreview.trim();
 
@@ -685,11 +693,18 @@ export const AboutMePage = () => {
             </p>
           )}
 
+          {!authLoading && !user && (
+            <LoginRequiredNote
+              className="about-me-page__message about-me-page__message--error"
+              message="Увійди, щоб зберегти текст."
+            />
+          )}
+
           <div className="about-me-page__actions">
             <button
               type="submit"
               className="about-me-page__primary-btn"
-              disabled={isSaving}
+              disabled={isSaving || !user}
             >
               {isSaving ? "Saving..." : "Save writing"}
             </button>

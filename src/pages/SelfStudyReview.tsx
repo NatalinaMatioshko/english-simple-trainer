@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type Dispatch, type SetStateAction } from "react";
 import { Link } from "react-router-dom";
+import { LoginRequiredNote } from "../components/auth/LoginRequiredNote";
+import { useAuth } from "../context/AuthContext";
 import { saveAboutMeSubmission } from "../services/writingSubmissions";
 import "../styles/selfStudy.css";
 
@@ -481,6 +483,7 @@ export default function SelfStudyReview() {
 
   const [aboutMeText, setAboutMeText] = useState(() => loadWritingDraft().aboutMe);
   const [familyText, setFamilyText] = useState(() => loadWritingDraft().family);
+  const { user, loading: authLoading } = useAuth();
   const [writingSaved, setWritingSaved] = useState(false);
   const [isSavingWriting, setIsSavingWriting] = useState(false);
   const [writingError, setWritingError] = useState("");
@@ -641,6 +644,11 @@ export default function SelfStudyReview() {
   const handleSaveWriting = async () => {
     setWritingError("");
     setWritingSuccess("");
+
+    if (!user) {
+      setWritingError("Увійди, щоб зберегти результат.");
+      return;
+    }
 
     if (!writingDone) {
       setWritingError(
@@ -1317,11 +1325,17 @@ export default function SelfStudyReview() {
           </p>
         </div>
 
+        {!authLoading && !user && (
+          <LoginRequiredNote
+            className="ss-writing-status error"
+            message="Увійди, щоб зберегти результат."
+          />
+        )}
         <div className="ss-actions">
           <button
             type="button"
             className="ss-btn"
-            disabled={isSavingWriting}
+            disabled={isSavingWriting || !user}
             onClick={handleSaveWriting}
           >
             {isSavingWriting ? "Saving…" : "Send to teacher"}
