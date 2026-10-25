@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { shuffle } from "../utils/array";
 
 import "../styles/lesson18.css";
 
@@ -209,10 +210,6 @@ const pairCardsBase: PairCard[] = [
   { id: 7, text: "to", pairKey: "to-work" },
   { id: 8, text: "work", pairKey: "to-work" },
 ];
-
-function shuffle<T>(array: T[]) {
-  return [...array].sort(() => Math.random() - 0.5);
-}
 
 export default function Lesson18() {
   const pageRef = useRef<HTMLDivElement | null>(null);
