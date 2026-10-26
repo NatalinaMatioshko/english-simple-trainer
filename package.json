@@ -13,7 +13,7 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "test:e2e:install": "playwright install chromium",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build -- --base=/english-simple-trainer/",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {

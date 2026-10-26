@@ -1,8 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-export default defineConfig(({ command }) => ({
+// base defaults to "/" (Vercel, dev server, e2e).
+// GitHub Pages builds pass --base=/english-simple-trainer/ (see deploy.yml and predeploy).
+export default defineConfig({
   plugins: [react()],
-  // GitHub Pages serves the app under /english-simple-trainer/; dev server and e2e stay at /
-  base: command === "build" ? "/english-simple-trainer/" : "/",
-}));
+});
