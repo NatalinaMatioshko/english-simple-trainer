@@ -16,18 +16,12 @@ import {
 import { timeFlashcards } from "../content/lessons/lesson-45/vocabulary";
 import { speakEnglish } from "../utils/speech";
 import { matchesAnyAnswer } from "../utils/text";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson42.css";
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
-}
 
 /** Homework for Lesson 45 — Good and bad habits. */
 export default function HW45() {
@@ -183,7 +177,7 @@ export default function HW45() {
                     {g.before}{" "}
                     <input
                       type="text"
-                      className={inputCls(timeChecked, value, ok)}
+                      className={gapInputClass(timeChecked, value, ok)}
                       value={value}
                       onChange={(e) => {
                         setTimeChecked(false);
@@ -225,7 +219,7 @@ export default function HW45() {
                     {g.before}{" "}
                     <input
                       type="text"
-                      className={inputCls(sheChecked, value, ok)}
+                      className={gapInputClass(sheChecked, value, ok)}
                       value={value}
                       onChange={(e) => {
                         setSheChecked(false);
@@ -270,7 +264,7 @@ export default function HW45() {
                     {g.before}{" "}
                     <input
                       type="text"
-                      className={inputCls(gapChecked, value, ok)}
+                      className={gapInputClass(gapChecked, value, ok)}
                       value={value}
                       onChange={(e) => {
                         setGapChecked(false);

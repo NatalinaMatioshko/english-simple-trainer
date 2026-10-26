@@ -8,17 +8,11 @@ import {
   hw38WritePrompts,
 } from "../data/hw38";
 import { matchesAnyAnswer } from "../utils/text";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson35.css";
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
-}
 
 function TranslateBlock({
   items,
@@ -57,7 +51,7 @@ function TranslateBlock({
                   next[i] = e.target.value;
                   setAns(next);
                 }}
-                className={inputCls(checked, val, ok)}
+                className={gapInputClass(checked, val, ok)}
                 placeholder="English…"
                 aria-label={`${aria} ${i + 1}`}
               />

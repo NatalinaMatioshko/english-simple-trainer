@@ -11,17 +11,11 @@ import {
 import { skillFlashcards } from "../content/lessons/lesson-47/vocabulary";
 import { speakEnglish } from "../utils/speech";
 import { matchesAnyAnswer } from "../utils/text";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson42.css";
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
-}
 
 /** Homework for Lesson 47 — Skills. */
 export default function HW47() {
@@ -173,7 +167,7 @@ export default function HW47() {
                 <li key={g.id}>
                   {g.before ? <span>{g.before} </span> : null}
                   <input
-                    className={inputCls(gapChecked, val, ok)}
+                    className={gapInputClass(gapChecked, val, ok)}
                     value={val}
                     onChange={(e) => {
                       setGapChecked(false);

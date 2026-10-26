@@ -18,6 +18,7 @@ import {
 } from "../data/lesson41";
 import { shuffle } from "../utils/array";
 import { matchesAnyAnswer } from "../utils/text";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -54,13 +55,6 @@ function setAt(list: string[], index: number, value: string): string[] {
   const next = [...list];
   next[index] = value;
   return next;
-}
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
 }
 
 export default function Lesson41() {
@@ -303,7 +297,7 @@ export default function Lesson41() {
                               setAt(prev, i, e.target.value),
                             );
                           }}
-                          className={inputCls(
+                          className={gapInputClass(
                             gapChecked,
                             gapAns[i],
                             ok,
@@ -517,7 +511,7 @@ export default function Lesson41() {
                     setWriteChecked(false);
                     setWriteAns((prev) => setAt(prev, i, e.target.value));
                   }}
-                  className={inputCls(writeChecked, val, ok)}
+                  className={gapInputClass(writeChecked, val, ok)}
                   placeholder="It's …"
                   aria-label={`Write time ${item.digital}`}
                 />

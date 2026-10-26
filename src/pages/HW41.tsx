@@ -21,19 +21,13 @@ import {
   type Hw41WriteTopic,
 } from "../data/hw41";
 import { matchesAnyAnswer } from "../utils/text";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson35.css";
 import "../styles/hw41.css";
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
-}
 
 /** Slot positions (% of map) — match textbook: arrows out from each hub */
 const SLOT_POS: Record<Hw41MapBin, { x: number; y: number }[]> = {
@@ -647,7 +641,7 @@ export default function HW41() {
                 </span>
                 <input
                   type="text"
-                  className={inputCls(orderChecked, val, ok)}
+                  className={gapInputClass(orderChecked, val, ok)}
                   value={val}
                   onChange={(e) => {
                     setOrderChecked(false);
@@ -831,7 +825,7 @@ export default function HW41() {
                             [pic.n]: e.target.value,
                           }));
                         }}
-                        className={inputCls(holidayChecked, val, ok)}
+                        className={gapInputClass(holidayChecked, val, ok)}
                         placeholder={pic.doIt ? "Take / Try / Go to…" : "Don't…"}
                         aria-label={`Holiday tip ${pic.n}`}
                       />
@@ -920,7 +914,7 @@ export default function HW41() {
                         next[i] = e.target.value;
                         setWriteAns(next);
                       }}
-                      className={inputCls(writeChecked, val, ok)}
+                      className={gapInputClass(writeChecked, val, ok)}
                       placeholder="English…"
                       aria-label={`Translate ${item.id}`}
                     />
@@ -998,7 +992,7 @@ export default function HW41() {
                     next[i] = e.target.value;
                     setSchedAns(next);
                   }}
-                  className={inputCls(schedChecked, val, ok)}
+                  className={gapInputClass(schedChecked, val, ok)}
                   placeholder="English…"
                   aria-label={`Schedule translate ${item.id}`}
                 />

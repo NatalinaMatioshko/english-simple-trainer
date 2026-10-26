@@ -18,6 +18,7 @@ import WordOrderBoard, {
   initWordOrderRows,
 } from "../components/lesson31/WordOrderBoard";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -38,13 +39,6 @@ function normText(s: string): string {
 function textOk(value: string, answers: readonly string[]): boolean {
   const v = normText(value);
   return v !== "" && answers.some((a) => normText(a) === v);
-}
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
 }
 
 function wordOrderScore(
@@ -252,7 +246,7 @@ export default function HW35() {
                     next[i] = e.target.value;
                     setPlaceAns(next);
                   }}
-                  className={inputCls(placeChecked, val, ok)}
+                  className={gapInputClass(placeChecked, val, ok)}
                   placeholder="word"
                   aria-label={`Place ${p.n}`}
                 />
@@ -412,7 +406,7 @@ export default function HW35() {
                     next[i] = e.target.value;
                     setFixAns(next);
                   }}
-                  className={inputCls(fixChecked, val, ok)}
+                  className={gapInputClass(fixChecked, val, ok)}
                   placeholder="Write the correct sentence…"
                   aria-label={`Correct sentence ${f.n}`}
                 />
@@ -578,7 +572,7 @@ export default function HW35() {
                         [key]: e.target.value,
                       }));
                     }}
-                    className={`${inputCls(classChecked, val, ok)} hw35-q-input`}
+                    className={`${gapInputClass(classChecked, val, ok)} hw35-q-input`}
                     placeholder="___"
                     aria-label={`Question ${q.n} word ${i + 1}`}
                     disabled={q.example}
@@ -669,7 +663,7 @@ export default function HW35() {
                     next[i] = e.target.value;
                     setAdjAns(next);
                   }}
-                  className={inputCls(adjChecked, val, ok)}
+                  className={gapInputClass(adjChecked, val, ok)}
                   placeholder={g.hint}
                   aria-label={`Adjective ${g.n}`}
                   disabled={g.example}
@@ -746,7 +740,7 @@ export default function HW35() {
                       next[i] = e.target.value;
                       setRewriteAns(next);
                     }}
-                    className={inputCls(rewriteChecked, val, ok)}
+                    className={gapInputClass(rewriteChecked, val, ok)}
                     placeholder={`${r.start} …`}
                     aria-label={`Rewrite ${r.n}`}
                     disabled={r.example}

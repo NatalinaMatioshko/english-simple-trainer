@@ -8,16 +8,10 @@ import {
 import { weekFlashcards } from "../content/lessons/lesson-48/vocabulary";
 import { speakEnglish } from "../utils/speech";
 import { matchesAnyAnswer } from "../utils/text";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
-}
 
 /** Homework for Lesson 48 — My week speaking project. */
 export default function HW48() {
@@ -94,7 +88,7 @@ export default function HW48() {
                 <li key={d.id}>
                   <span>{d.cue} → </span>
                   <input
-                    className={inputCls(qChecked, val, ok)}
+                    className={gapInputClass(qChecked, val, ok)}
                     style={{ width: "min(100%, 22rem)" }}
                     value={val}
                     list={`hw48-d-${d.id}`}
