@@ -22,6 +22,7 @@ import {
   weekSchedule,
 } from "../data/lesson42";
 import { speakEnglish } from "../utils/speech";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -38,20 +39,6 @@ function U5ListTranscript({ lines }: { lines: readonly string[] }) {
       ))}
     </ol>
   );
-}
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
 }
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
@@ -152,7 +139,7 @@ export default function Lesson42() {
   const [gapAns, setGapAns] = useState(() => Array(weekGaps.length).fill(""));
   const [gapChecked, setGapChecked] = useState(false);
   const gapScore = weekGaps.filter((g, i) =>
-    textOk(gapAns[i], g.answers),
+    matchesAnyAnswer(gapAns[i], g.answers),
   ).length;
 
   const [mariAns, setMariAns] = useState(() =>
@@ -160,7 +147,7 @@ export default function Lesson42() {
   );
   const [mariChecked, setMariChecked] = useState(false);
   const mariScore = mariQuestions.filter((q, i) =>
-    textOk(mariAns[i], q.answers),
+    matchesAnyAnswer(mariAns[i], q.answers),
   ).length;
 
   const [onAtAns, setOnAtAns] = useState(() =>
@@ -199,7 +186,7 @@ export default function Lesson42() {
   );
   const [orderChecked, setOrderChecked] = useState(false);
   const orderScore = orderWrite42.filter((item, i) =>
-    textOk(orderAns[i], item.answers),
+    matchesAnyAnswer(orderAns[i], item.answers),
   ).length;
 
   const [trueWrite, setTrueWrite] = useState(() => Array(3).fill(""));
@@ -547,7 +534,7 @@ export default function Lesson42() {
 
         <div className="l42-gap-list">
           {weekGaps.map((g, i) => {
-            const ok = textOk(gapAns[i], g.answers);
+            const ok = matchesAnyAnswer(gapAns[i], g.answers);
             return (
               <div key={g.day} className="l42-gap-row">
                 <span className="l42-gap-num">{i + 1}</span>
@@ -696,12 +683,12 @@ export default function Lesson42() {
                 className={inputCls(
                   mariChecked,
                   mariAns[i],
-                  textOk(mariAns[i], q.answers),
+                  matchesAnyAnswer(mariAns[i], q.answers),
                 )}
                 placeholder="English…"
                 aria-label={`Mari Q${q.id}`}
               />
-              {mariChecked && !textOk(mariAns[i], q.answers) && (
+              {mariChecked && !matchesAnyAnswer(mariAns[i], q.answers) && (
                 <span className="hw35-tip">{q.answers[0]}</span>
               )}
             </div>
@@ -1006,7 +993,7 @@ export default function Lesson42() {
         <div className="l42-q-list">
           {orderWrite42.map((item, i) => {
             const val = orderAns[i];
-            const ok = textOk(val, item.answers);
+            const ok = matchesAnyAnswer(val, item.answers);
             return (
               <label key={item.scramble} className="l42-q-row">
                 <span>

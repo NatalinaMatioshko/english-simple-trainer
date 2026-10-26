@@ -7,23 +7,10 @@ import {
 } from "../content/lessons/lesson-48/activities";
 import { weekFlashcards } from "../content/lessons/lesson-48/vocabulary";
 import { speakEnglish } from "../utils/speech";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -46,7 +33,7 @@ export default function HW48() {
   const [qAns, setQAns] = useState<Record<string, string>>({});
   const [qChecked, setQChecked] = useState(false);
   const qScore = doDoesDrill.filter((d) =>
-    textOk(qAns[d.id] ?? "", [d.answer]),
+    matchesAnyAnswer(qAns[d.id] ?? "", [d.answer]),
   ).length;
 
   const [schedule, setSchedule] = useState("");
@@ -102,7 +89,7 @@ export default function HW48() {
           <ol className="l22-gap-list">
             {doDoesDrill.map((d) => {
               const val = qAns[d.id] ?? "";
-              const ok = textOk(val, [d.answer]);
+              const ok = matchesAnyAnswer(val, [d.answer]);
               return (
                 <li key={d.id}>
                   <span>{d.cue} → </span>

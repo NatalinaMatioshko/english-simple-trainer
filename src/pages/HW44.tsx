@@ -27,26 +27,13 @@ import {
   weekWordOrder,
 } from "../data/hw44";
 import { speakEnglish } from "../utils/speech";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson35.css";
 import "../styles/lesson42.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -80,7 +67,7 @@ export default function HW44() {
   const [scaleAns, setScaleAns] = useState<Record<string, string>>({});
   const [scaleChecked, setScaleChecked] = useState(false);
   const scaleScore = frequencyScaleGaps.filter((g) =>
-    textOk(scaleAns[g.id] ?? "", [g.answer]),
+    matchesAnyAnswer(scaleAns[g.id] ?? "", [g.answer]),
   ).length;
 
   const [freqWrite, setFreqWrite] = useState(() =>
@@ -92,13 +79,13 @@ export default function HW44() {
   );
   const [orderChecked, setOrderChecked] = useState(false);
   const orderScore = howOftenWordOrder.filter((q, i) =>
-    textOk(orderAns[i], [q.answer]),
+    matchesAnyAnswer(orderAns[i], [q.answer]),
   ).length;
 
   const [daysAns, setDaysAns] = useState<Record<string, string>>({});
   const [daysChecked, setDaysChecked] = useState(false);
   const daysScore = daysOfWeek.filter((d) =>
-    textOk(daysAns[d.id] ?? "", [d.answer]),
+    matchesAnyAnswer(daysAns[d.id] ?? "", [d.answer]),
   ).length;
 
   const [matchAns, setMatchAns] = useState<Record<string, string>>({});
@@ -110,25 +97,25 @@ export default function HW44() {
   const [weekAns, setWeekAns] = useState(() => initFilled(weekWordOrder));
   const [weekChecked, setWeekChecked] = useState(false);
   const weekScore = weekWordOrder.filter((q) =>
-    textOk(weekAns[q.id] ?? "", [q.answer]),
+    matchesAnyAnswer(weekAns[q.id] ?? "", [q.answer]),
   ).length;
 
   const [negAns, setNegAns] = useState(() => initFilled(makeNegative));
   const [negChecked, setNegChecked] = useState(false);
   const negScore = makeNegative.filter((q) =>
-    textOk(negAns[q.id] ?? "", [q.answer]),
+    matchesAnyAnswer(negAns[q.id] ?? "", [q.answer]),
   ).length;
 
   const [crossAns, setCrossAns] = useState<Record<string, string>>({});
   const [crossChecked, setCrossChecked] = useState(false);
   const crossScore = travelCrossword.filter((c) =>
-    textOk(crossAns[c.id] ?? "", [c.answer]),
+    matchesAnyAnswer(crossAns[c.id] ?? "", [c.answer]),
   ).length;
 
   const [travelAns, setTravelAns] = useState(() => initFilled(travelVerbGaps));
   const [travelChecked, setTravelChecked] = useState(false);
   const travelScore = travelVerbGaps.filter((g) =>
-    textOk(travelAns[g.id] ?? "", [g.answer]),
+    matchesAnyAnswer(travelAns[g.id] ?? "", [g.answer]),
   ).length;
 
   const [fixAns, setFixAns] = useState<Record<string, string>>(() =>
@@ -136,13 +123,13 @@ export default function HW44() {
   );
   const [fixChecked, setFixChecked] = useState(false);
   const fixScore = travelFixItems.filter((x) =>
-    textOk(fixAns[x.id] ?? "", [x.answer]),
+    matchesAnyAnswer(fixAns[x.id] ?? "", [x.answer]),
   ).length;
 
   const [foodAns, setFoodAns] = useState<Record<string, string>>({});
   const [foodChecked, setFoodChecked] = useState(false);
   const foodScore = foodUnscramble.filter((f) =>
-    textOk(foodAns[f.id] ?? "", [f.answer]),
+    matchesAnyAnswer(foodAns[f.id] ?? "", [f.answer]),
   ).length;
 
   const [oddAns, setOddAns] = useState<Record<string, string>>({});
@@ -154,7 +141,7 @@ export default function HW44() {
   const [freqOrderAns, setFreqOrderAns] = useState<Record<string, string>>({});
   const [freqOrderChecked, setFreqOrderChecked] = useState(false);
   const freqOrderScore = freqWordOrder.filter((q) =>
-    textOk(freqOrderAns[q.id] ?? "", q.answers),
+    matchesAnyAnswer(freqOrderAns[q.id] ?? "", q.answers),
   ).length;
 
   const [reflect, setReflect] = useState(() =>
@@ -304,7 +291,7 @@ export default function HW44() {
         <div className="l42-gap-list">
           {frequencyScaleGaps.map((g) => {
             const val = scaleAns[g.id] ?? "";
-            const ok = textOk(val, [g.answer]);
+            const ok = matchesAnyAnswer(val, [g.answer]);
             return (
               <div key={g.id} className="l42-gap-row">
                 <span className="l42-gap-num">{g.id}</span>
@@ -387,7 +374,7 @@ export default function HW44() {
         <div className="l42-q-list">
           {howOftenWordOrder.map((q, i) => {
             const val = orderAns[i];
-            const ok = textOk(val, [q.answer]);
+            const ok = matchesAnyAnswer(val, [q.answer]);
             return (
               <label key={q.id} className="l42-q-row">
                 <span>
@@ -445,7 +432,7 @@ export default function HW44() {
         <div className="l42-gap-list">
           {daysOfWeek.map((d) => {
             const val = daysAns[d.id] ?? "";
-            const ok = textOk(val, [d.answer]);
+            const ok = matchesAnyAnswer(val, [d.answer]);
             return (
               <div key={d.id} className="l42-gap-row">
                 <span className="l42-gap-num">{d.id}</span>
@@ -549,7 +536,7 @@ export default function HW44() {
         <div className="l42-q-list">
           {weekWordOrder.map((q) => {
             const val = weekAns[q.id] ?? "";
-            const ok = textOk(val, [q.answer]);
+            const ok = matchesAnyAnswer(val, [q.answer]);
             return (
               <label key={q.id} className="l42-q-row">
                 <span>
@@ -596,7 +583,7 @@ export default function HW44() {
         <div className="l42-q-list">
           {makeNegative.map((q) => {
             const val = negAns[q.id] ?? "";
-            const ok = textOk(val, [q.answer]);
+            const ok = matchesAnyAnswer(val, [q.answer]);
             return (
               <label key={q.id} className="l42-q-row">
                 <span>
@@ -645,7 +632,7 @@ export default function HW44() {
         <div className="l42-gap-list">
           {travelCrossword.map((c) => {
             const val = crossAns[c.id] ?? "";
-            const ok = textOk(val, [c.answer]);
+            const ok = matchesAnyAnswer(val, [c.answer]);
             return (
               <div key={c.id} className="l42-gap-row">
                 <span className="l42-gap-num">{c.id}</span>
@@ -699,8 +686,8 @@ export default function HW44() {
               if (g.id === "4a") {
                 const leave = travelAns["4a"] ?? "";
                 const arrive = travelAns["4b"] ?? "";
-                const leaveOk = textOk(leave, ["leave"]);
-                const arriveOk = textOk(arrive, ["arrive"]);
+                const leaveOk = matchesAnyAnswer(leave, ["leave"]);
+                const arriveOk = matchesAnyAnswer(arrive, ["arrive"]);
                 return (
                   <label key="4" className="l42-q-row">
                     <span>4.</span>
@@ -738,7 +725,7 @@ export default function HW44() {
                 );
               }
               const val = travelAns[g.id] ?? "";
-              const ok = textOk(val, [g.answer]);
+              const ok = matchesAnyAnswer(val, [g.answer]);
               return (
                 <label key={g.id} className="l42-q-row">
                   <span>
@@ -790,7 +777,7 @@ export default function HW44() {
         <div className="l42-q-list">
           {travelFixItems.map((x) => {
             const val = fixAns[x.id] ?? "";
-            const ok = textOk(val, [x.answer]);
+            const ok = matchesAnyAnswer(val, [x.answer]);
             return (
               <label key={x.id} className="l42-q-row">
                 <span>
@@ -851,7 +838,7 @@ export default function HW44() {
         <div className="l42-gap-list">
           {foodUnscramble.map((f) => {
             const val = foodAns[f.id] ?? "";
-            const ok = textOk(val, [f.answer]);
+            const ok = matchesAnyAnswer(val, [f.answer]);
             return (
               <div key={f.id} className="l42-gap-row">
                 <span className="l42-gap-num">{f.id}</span>
@@ -953,7 +940,7 @@ export default function HW44() {
         <div className="l42-q-list">
           {freqWordOrder.map((q) => {
             const val = freqOrderAns[q.id] ?? "";
-            const ok = textOk(val, q.answers);
+            const ok = matchesAnyAnswer(val, q.answers);
             return (
               <label key={q.id} className="l42-q-row">
                 <span>

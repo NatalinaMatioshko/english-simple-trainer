@@ -10,24 +10,11 @@ import {
 } from "../content/lessons/lesson-47/activities";
 import { skillFlashcards } from "../content/lessons/lesson-47/vocabulary";
 import { speakEnglish } from "../utils/speech";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson42.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -58,7 +45,7 @@ export default function HW47() {
   const [gapAns, setGapAns] = useState<Record<string, string>>({});
   const [gapChecked, setGapChecked] = useState(false);
   const gapScore = canGrammarGaps.filter((g) =>
-    textOk(gapAns[g.id] ?? "", g.answers),
+    matchesAnyAnswer(gapAns[g.id] ?? "", g.answers),
   ).length;
 
   const [writeCan, setWriteCan] = useState("");
@@ -181,7 +168,7 @@ export default function HW47() {
           <ol className="l22-gap-list">
             {canGrammarGaps.map((g) => {
               const val = gapAns[g.id] ?? "";
-              const ok = textOk(val, g.answers);
+              const ok = matchesAnyAnswer(val, g.answers);
               return (
                 <li key={g.id}>
                   {g.before ? <span>{g.before} </span> : null}

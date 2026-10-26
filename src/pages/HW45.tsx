@@ -15,25 +15,12 @@ import {
 } from "../content/lessons/lesson-45/activities";
 import { timeFlashcards } from "../content/lessons/lesson-45/vocabulary";
 import { speakEnglish } from "../utils/speech";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson42.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -64,19 +51,19 @@ export default function HW45() {
   const [timeAns, setTimeAns] = useState<Record<string, string>>({});
   const [timeChecked, setTimeChecked] = useState(false);
   const timeScore = timeExprGaps.filter((g) =>
-    textOk(timeAns[g.id] ?? "", g.answers),
+    matchesAnyAnswer(timeAns[g.id] ?? "", g.answers),
   ).length;
 
   const [sheAns, setSheAns] = useState<Record<string, string>>({});
   const [sheChecked, setSheChecked] = useState(false);
   const sheScore = iToSheGaps.filter((g) =>
-    textOk(sheAns[g.id] ?? "", g.answers),
+    matchesAnyAnswer(sheAns[g.id] ?? "", g.answers),
   ).length;
 
   const [gapAns, setGapAns] = useState<Record<string, string>>({});
   const [gapChecked, setGapChecked] = useState(false);
   const gapScore = heSheGaps.filter((g) =>
-    textOk(gapAns[g.id] ?? "", g.answers),
+    matchesAnyAnswer(gapAns[g.id] ?? "", g.answers),
   ).length;
 
   const [soundAns, setSoundAns] = useState<Record<string, string>>({});
@@ -189,7 +176,7 @@ export default function HW45() {
           <div className="l22-gap-list">
             {timeExprGaps.map((g) => {
               const value = timeAns[g.id] ?? "";
-              const ok = textOk(value, g.answers);
+              const ok = matchesAnyAnswer(value, g.answers);
               return (
                 <label key={g.id} className="l22-gap-row">
                   <span>
@@ -231,7 +218,7 @@ export default function HW45() {
           <div className="l22-gap-list">
             {iToSheGaps.map((g) => {
               const value = sheAns[g.id] ?? "";
-              const ok = textOk(value, g.answers);
+              const ok = matchesAnyAnswer(value, g.answers);
               return (
                 <label key={g.id} className="l22-gap-row">
                   <span>
@@ -276,7 +263,7 @@ export default function HW45() {
           <div className="l22-gap-list">
             {heSheGaps.map((g) => {
               const value = gapAns[g.id] ?? "";
-              const ok = textOk(value, g.answers);
+              const ok = matchesAnyAnswer(value, g.answers);
               return (
                 <label key={g.id} className="l22-gap-row">
                   <span>

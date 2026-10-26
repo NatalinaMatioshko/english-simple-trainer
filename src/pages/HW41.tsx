@@ -20,26 +20,13 @@ import {
   type Hw41MapBin,
   type Hw41WriteTopic,
 } from "../data/hw41";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson35.css";
 import "../styles/hw41.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -164,18 +151,18 @@ export default function HW41() {
     (g, i) => !g.example && haveAns[i] === g.answer,
   ).length;
   const orderScore = wordOrder41.filter((item, i) =>
-    textOk(orderAns[i], [item.answer]),
+    matchesAnyAnswer(orderAns[i], [item.answer]),
   ).length;
   const altScore = chooseAlt41.filter((g, i) => altAns[i] === g.answer).length;
   const holidayItems = holidayPics.filter((p) => !p.example);
   const holidayScore = holidayItems.filter((p) =>
-    textOk(holidayAns[p.n] ?? "", p.answers),
+    matchesAnyAnswer(holidayAns[p.n] ?? "", p.answers),
   ).length;
   const writeScore = writeGrammar41.filter((item, i) =>
-    textOk(writeAns[i], item.answers),
+    matchesAnyAnswer(writeAns[i], item.answers),
   ).length;
   const schedScore = scheduleTranslate41.filter((item, i) =>
-    textOk(schedAns[i], item.answers),
+    matchesAnyAnswer(schedAns[i], item.answers),
   ).length;
   const reflectDone = reflect.every((v) => v !== "");
   const trueDone = trueAns.filter((t) => t.trim().length > 3).length >= 4;
@@ -652,7 +639,7 @@ export default function HW41() {
         <div className="hw41-true-list">
           {wordOrder41.map((item, i) => {
             const val = orderAns[i];
-            const ok = textOk(val, [item.answer]);
+            const ok = matchesAnyAnswer(val, [item.answer]);
             return (
               <label key={item.answer} className="hw41-true-row">
                 <span>
@@ -806,11 +793,11 @@ export default function HW41() {
             const val = holidayAns[pic.n] ?? "";
             const ok =
               pic.example ||
-              (holidayChecked && textOk(val, pic.answers));
+              (holidayChecked && matchesAnyAnswer(val, pic.answers));
             const showErr =
               !pic.example &&
               holidayChecked &&
-              !textOk(val, pic.answers);
+              !matchesAnyAnswer(val, pic.answers);
             return (
               <div key={pic.n} className="hw41-holiday-card">
                 <div className="hw41-holiday-media">
@@ -918,7 +905,7 @@ export default function HW41() {
               {writeGrammar41.map((item, i) => {
                 if (item.topic !== topic) return null;
                 const val = writeAns[i] ?? "";
-                const ok = textOk(val, item.answers);
+                const ok = matchesAnyAnswer(val, item.answers);
                 return (
                   <div key={item.id} className="hw35-fix-row">
                     <p className="hw35-fix-wrong">
@@ -996,7 +983,7 @@ export default function HW41() {
         <div className="l26-drill-list">
           {scheduleTranslate41.map((item, i) => {
             const val = schedAns[i] ?? "";
-            const ok = textOk(val, item.answers);
+            const ok = matchesAnyAnswer(val, item.answers);
             return (
               <div key={item.id} className="hw35-fix-row">
                 <p className="hw35-fix-wrong">
