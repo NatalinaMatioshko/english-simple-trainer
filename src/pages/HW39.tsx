@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { makeQuestions, speakBagPrompts } from "../data/lesson39";
 import { matchesAnyAnswer } from "../utils/text";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -16,13 +17,6 @@ function answersFor(item: (typeof makeQuestions)[number]): string[] {
   const main = item.answer;
   const noYour = main.replace("Has your ", "Has ");
   return noYour === main ? [main] : [main, noYour];
-}
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
 }
 
 export default function HW39() {
@@ -96,7 +90,7 @@ export default function HW39() {
                     next[i] = e.target.value;
                     setQAns(next);
                   }}
-                  className={inputCls(qChecked, val, ok)}
+                  className={gapInputClass(qChecked, val, ok)}
                   placeholder="Have / Has … got …?"
                   aria-label={`Question ${i + 2}`}
                 />

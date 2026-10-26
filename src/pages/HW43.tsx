@@ -18,18 +18,12 @@ import {
 } from "../content/lessons/lesson-43/pastSimple";
 import { speakEnglish } from "../utils/speech";
 import { matchesAnyAnswer } from "../utils/text";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson42.css";
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
-}
 
 function U5ListTranscript({ lines }: { lines: readonly string[] }) {
   return (
@@ -207,7 +201,7 @@ export default function HW43() {
                       next[i] = e.target.value;
                       setGap2bAns(next);
                     }}
-                    className={inputCls(gap2bChecked, gap2bAns[i], ok)}
+                    className={gapInputClass(gap2bChecked, gap2bAns[i], ok)}
                     style={{ width: "6.5rem" }}
                     aria-label={`Travel gap ${g.id}`}
                   />{" "}

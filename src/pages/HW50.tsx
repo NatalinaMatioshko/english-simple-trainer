@@ -11,6 +11,7 @@ import {
 import { requestFlashcards } from "../content/lessons/lesson-50/vocabulary";
 import { shuffle } from "../utils/array";
 import { speakEnglish } from "../utils/speech";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -35,13 +36,6 @@ function textOk(value: string, answers: readonly string[]): boolean {
     const parts = n.split(" / ").map((p) => p.trim()).filter(Boolean);
     return parts.includes(v);
   });
-}
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
 }
 
 /** Homework for Lesson 50 — chunks + Tom/Ana + dialogues 5a. */
@@ -135,7 +129,7 @@ export default function HW50() {
                 <li key={card.back}>
                   <span>{card.front} → </span>
                   <input
-                    className={inputCls(quizChecked, val, ok)}
+                    className={gapInputClass(quizChecked, val, ok)}
                     style={{ width: "min(100%, 22rem)" }}
                     value={val}
                     onChange={(e) => {

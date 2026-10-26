@@ -9,6 +9,7 @@ import {
 } from "../content/lessons/lesson-51/activities";
 import { placeFlashcards } from "../content/lessons/lesson-51/vocabulary";
 import { speakEnglish } from "../utils/speech";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -25,13 +26,6 @@ function normText(s: string): string {
 function textOk(value: string, answers: readonly string[]): boolean {
   const v = normText(value);
   return v !== "" && answers.some((a) => normText(a) === v);
-}
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
 }
 
 /** Homework for Lesson 51 — places · question words · questions · writing. */
@@ -164,7 +158,7 @@ export default function HW51() {
               return (
                 <li key={q.id}>
                   <input
-                    className={inputCls(qChecked, val, ok)}
+                    className={gapInputClass(qChecked, val, ok)}
                     style={{ width: "min(100%, 22rem)" }}
                     value={val}
                     onChange={(e) => {

@@ -28,19 +28,13 @@ import {
 } from "../data/hw44";
 import { speakEnglish } from "../utils/speech";
 import { matchesAnyAnswer } from "../utils/text";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson35.css";
 import "../styles/lesson42.css";
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
-}
 
 function initFilled<T extends { id: string; example?: boolean; answer: string }>(
   items: readonly T[],
@@ -299,7 +293,7 @@ export default function HW44() {
                   {g.percent}:{" "}
                   <input
                     type="text"
-                    className={inputCls(scaleChecked, val, ok)}
+                    className={gapInputClass(scaleChecked, val, ok)}
                     value={val}
                     onChange={(e) => {
                       setScaleChecked(false);
@@ -382,7 +376,7 @@ export default function HW44() {
                 </span>
                 <input
                   type="text"
-                  className={inputCls(orderChecked, val, ok)}
+                  className={gapInputClass(orderChecked, val, ok)}
                   value={val}
                   onChange={(e) => {
                     setOrderChecked(false);
@@ -440,7 +434,7 @@ export default function HW44() {
                   {d.hint}{" "}
                   <input
                     type="text"
-                    className={inputCls(daysChecked, val, ok)}
+                    className={gapInputClass(daysChecked, val, ok)}
                     value={val}
                     onChange={(e) => {
                       setDaysChecked(false);
@@ -545,7 +539,7 @@ export default function HW44() {
                 </span>
                 <input
                   type="text"
-                  className={inputCls(weekChecked, val, ok)}
+                  className={gapInputClass(weekChecked, val, ok)}
                   value={val}
                   disabled={"example" in q && Boolean(q.example)}
                   onChange={(e) => {
@@ -592,7 +586,7 @@ export default function HW44() {
                 </span>
                 <input
                   type="text"
-                  className={inputCls(negChecked, val, ok)}
+                  className={gapInputClass(negChecked, val, ok)}
                   value={val}
                   disabled={"example" in q && Boolean(q.example)}
                   onChange={(e) => {
@@ -640,7 +634,7 @@ export default function HW44() {
                   {c.clue} · <code>{c.hint}</code>{" "}
                   <input
                     type="text"
-                    className={inputCls(crossChecked, val, ok)}
+                    className={gapInputClass(crossChecked, val, ok)}
                     value={val}
                     onChange={(e) => {
                       setCrossChecked(false);
@@ -695,7 +689,7 @@ export default function HW44() {
                       I{" "}
                       <input
                         type="text"
-                        className={inputCls(travelChecked, leave, leaveOk)}
+                        className={gapInputClass(travelChecked, leave, leaveOk)}
                         value={leave}
                         onChange={(e) => {
                           setTravelChecked(false);
@@ -707,7 +701,7 @@ export default function HW44() {
                       home at 8 o&apos;clock and{" "}
                       <input
                         type="text"
-                        className={inputCls(travelChecked, arrive, arriveOk)}
+                        className={gapInputClass(travelChecked, arrive, arriveOk)}
                         value={arrive}
                         onChange={(e) => {
                           setTravelChecked(false);
@@ -732,7 +726,7 @@ export default function HW44() {
                     {g.id}. {g.before}{" "}
                     <input
                       type="text"
-                      className={inputCls(travelChecked, val, ok)}
+                      className={gapInputClass(travelChecked, val, ok)}
                       value={val}
                       disabled={"example" in g && Boolean(g.example)}
                       onChange={(e) => {
@@ -785,7 +779,7 @@ export default function HW44() {
                 </span>
                 <input
                   type="text"
-                  className={inputCls(fixChecked, val, ok)}
+                  className={gapInputClass(fixChecked, val, ok)}
                   value={val}
                   onChange={(e) => {
                     setFixChecked(false);
@@ -846,7 +840,7 @@ export default function HW44() {
                   {f.letters} → {f.start}____{" "}
                   <input
                     type="text"
-                    className={inputCls(foodChecked, val, ok)}
+                    className={gapInputClass(foodChecked, val, ok)}
                     value={val}
                     onChange={(e) => {
                       setFoodChecked(false);
@@ -948,7 +942,7 @@ export default function HW44() {
                 </span>
                 <input
                   type="text"
-                  className={inputCls(freqOrderChecked, val, ok)}
+                  className={gapInputClass(freqOrderChecked, val, ok)}
                   value={val}
                   onChange={(e) => {
                     setFreqOrderChecked(false);

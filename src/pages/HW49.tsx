@@ -9,16 +9,10 @@ import {
 import { yesterdayFlashcards } from "../content/lessons/lesson-49/vocabulary";
 import { speakEnglish } from "../utils/speech";
 import { matchesAnyAnswer } from "../utils/text";
+import { gapInputClass } from "../components/lesson31/gapInputClass";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
-
-function inputCls(checked: boolean, value: string, ok: boolean): string {
-  if (!checked) return "l22-gap-input";
-  if (ok) return "l22-gap-input is-ok";
-  if (value.trim()) return "l22-gap-input is-err";
-  return "l22-gap-input";
-}
 
 /** Homework for Lesson 49 — Yesterday speaking project. */
 export default function HW49() {
@@ -100,7 +94,7 @@ export default function HW49() {
                 <li key={g.id}>
                   <span>{g.before} </span>
                   <input
-                    className={inputCls(bridgeChecked, val, ok)}
+                    className={gapInputClass(bridgeChecked, val, ok)}
                     value={val}
                     list={`hw49-b-${g.id}`}
                     onChange={(e) => {
@@ -152,7 +146,7 @@ export default function HW49() {
                     {g.ua}
                   </span>
                   <input
-                    className={inputCls(trChecked, val, ok)}
+                    className={gapInputClass(trChecked, val, ok)}
                     style={{ width: "min(100%, 28rem)", marginTop: "0.35rem" }}
                     value={val}
                     onChange={(e) => {
