@@ -7,24 +7,11 @@ import {
   hw38Translate,
   hw38WritePrompts,
 } from "../data/hw38";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson35.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -48,14 +35,14 @@ function TranslateBlock({
   setChecked: (v: boolean) => void;
   aria: string;
 }) {
-  const score = items.filter((item, i) => textOk(ans[i] ?? "", item.answers))
+  const score = items.filter((item, i) => matchesAnyAnswer(ans[i] ?? "", item.answers))
     .length;
   return (
     <>
       <div className="l26-drill-list">
         {items.map((item, i) => {
           const val = ans[i] ?? "";
-          const ok = checked && textOk(val, item.answers);
+          const ok = checked && matchesAnyAnswer(val, item.answers);
           return (
             <div key={item.id} className="hw35-fix-row">
               <p className="hw35-fix-wrong">
@@ -134,13 +121,13 @@ export default function HW38() {
   const [aboutFriend, setAboutFriend] = useState("");
 
   const translateScore = hw38Translate.filter((item, i) =>
-    textOk(translateAns[i] ?? "", item.answers),
+    matchesAnyAnswer(translateAns[i] ?? "", item.answers),
   ).length;
   const qScore = hw38Questions.filter((item, i) =>
-    textOk(qAns[i] ?? "", item.answers),
+    matchesAnyAnswer(qAns[i] ?? "", item.answers),
   ).length;
   const posScore = hw38Possessives.filter((item, i) =>
-    textOk(posAns[i] ?? "", item.answers),
+    matchesAnyAnswer(posAns[i] ?? "", item.answers),
   ).length;
   const quizScore = translateScore + qScore + posScore;
   const writing = [aboutMe, aboutFriend].filter((s) => s.trim()).join("\n\n");

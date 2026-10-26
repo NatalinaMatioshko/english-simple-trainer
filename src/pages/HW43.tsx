@@ -17,25 +17,12 @@ import {
   pastRegularVerbs,
 } from "../content/lessons/lesson-43/pastSimple";
 import { speakEnglish } from "../utils/speech";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson42.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -91,7 +78,7 @@ export default function HW43() {
   );
   const [gap2bChecked, setGap2bChecked] = useState(false);
   const gap2bScore = travelGaps2b.filter((g, i) =>
-    textOk(gap2bAns[i], g.answers),
+    matchesAnyAnswer(gap2bAns[i], g.answers),
   ).length;
 
   const [transportFlip, setTransportFlip] = useState<number[]>([]);
@@ -205,7 +192,7 @@ export default function HW43() {
         </p>
         <div className="l42-gap-list">
           {travelGaps2b.map((g, i) => {
-            const ok = textOk(gap2bAns[i], g.answers);
+            const ok = matchesAnyAnswer(gap2bAns[i], g.answers);
             return (
               <div key={g.id} className="l42-gap-row">
                 <span className="l42-gap-num">{g.id}</span>

@@ -17,6 +17,7 @@ import {
   writeTimes,
 } from "../data/lesson41";
 import { shuffle } from "../utils/array";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -55,20 +56,6 @@ function setAt(list: string[], index: number, value: string): string[] {
   return next;
 }
 
-function normTime(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function answerOk(value: string, answers: readonly string[]): boolean {
-  const v = normTime(value);
-  return v !== "" && answers.some((a) => normTime(a) === v);
-}
-
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
   if (ok) return "l22-gap-input is-ok";
@@ -94,7 +81,7 @@ export default function Lesson41() {
   const gapScore = dialogueGaps.filter((item, i) => {
     const gapLine = item.lines.find((l) => "gap" in l && l.gap);
     if (!gapLine || !("answers" in gapLine)) return false;
-    return answerOk(gapAns[i] ?? "", gapLine.answers);
+    return matchesAnyAnswer(gapAns[i] ?? "", gapLine.answers);
   }).length;
 
   const [phraseAns, setPhraseAns] = useState(() =>
@@ -110,7 +97,7 @@ export default function Lesson41() {
   );
   const [writeChecked, setWriteChecked] = useState(false);
   const writeScore = writeTimes.filter((item, i) =>
-    answerOk(writeAns[i] ?? "", item.answers),
+    matchesAnyAnswer(writeAns[i] ?? "", item.answers),
   ).length;
 
   return (
@@ -296,7 +283,7 @@ export default function Lesson41() {
           const gapLine = conv.lines.find((l) => "gap" in l && l.gap);
           const answers =
             gapLine && "answers" in gapLine ? gapLine.answers : [];
-          const ok = gapChecked && answerOk(gapAns[i] ?? "", answers);
+          const ok = gapChecked && matchesAnyAnswer(gapAns[i] ?? "", answers);
           return (
             <div key={conv.n} className="l41-dialogue">
               <p className="l41-dialogue-title">Conversation {conv.n}</p>
@@ -517,7 +504,7 @@ export default function Lesson41() {
         <div className="l26-drill-list">
           {writeTimes.map((item, i) => {
             const val = writeAns[i] ?? "";
-            const ok = writeChecked && answerOk(val, item.answers);
+            const ok = writeChecked && matchesAnyAnswer(val, item.answers);
             return (
               <div key={item.id} className="hw35-fix-row">
                 <p className="hw35-fix-wrong">

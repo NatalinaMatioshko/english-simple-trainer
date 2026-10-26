@@ -17,25 +17,12 @@ import {
   weekGaps,
 } from "../data/lesson42";
 import { speakEnglish } from "../utils/speech";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson31.css";
 import "../styles/lesson42.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -70,7 +57,7 @@ export default function HW42() {
   const [gapAns, setGapAns] = useState(() => Array(weekGaps.length).fill(""));
   const [gapChecked, setGapChecked] = useState(false);
   const gapScore = weekGaps.filter((g, i) =>
-    textOk(gapAns[i], g.answers),
+    matchesAnyAnswer(gapAns[i], g.answers),
   ).length;
 
   const [meWrite, setMeWrite] = useState(() =>
@@ -89,7 +76,7 @@ export default function HW42() {
   );
   const [orderChecked, setOrderChecked] = useState(false);
   const orderScore = orderWrite42.filter((item, i) =>
-    textOk(orderAns[i], item.answers),
+    matchesAnyAnswer(orderAns[i], item.answers),
   ).length;
 
   const [placeFlip, setPlaceFlip] = useState<number[]>([]);
@@ -332,7 +319,7 @@ export default function HW42() {
         </div>
         <div className="l42-gap-list">
           {weekGaps.map((g, i) => {
-            const ok = textOk(gapAns[i], g.answers);
+            const ok = matchesAnyAnswer(gapAns[i], g.answers);
             return (
               <div key={g.day} className="l42-gap-row">
                 <span className="l42-gap-num">{i + 1}</span>
@@ -625,7 +612,7 @@ export default function HW42() {
         <div className="l42-q-list">
           {orderWrite42.map((item, i) => {
             const val = orderAns[i];
-            const ok = textOk(val, item.answers);
+            const ok = matchesAnyAnswer(val, item.answers);
             return (
               <label key={item.scramble} className="l42-q-row">
                 <span>

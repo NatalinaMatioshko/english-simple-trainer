@@ -2,24 +2,11 @@ import { useMemo, useState } from "react";
 
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { hw37Links, hw37Translate } from "../data/hw37";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson35.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -37,7 +24,7 @@ export default function HW37() {
   const [draft, setDraft] = useState("");
 
   const translateScore = hw37Translate.filter((item, i) =>
-    textOk(translateAns[i] ?? "", item.answers),
+    matchesAnyAnswer(translateAns[i] ?? "", item.answers),
   ).length;
   const translateFilled = translateAns.filter((a) => a.trim().length > 0)
     .length;
@@ -99,7 +86,7 @@ export default function HW37() {
         <div className="l26-drill-list">
           {hw37Translate.map((item, i) => {
             const val = translateAns[i] ?? "";
-            const ok = translateChecked && textOk(val, item.answers);
+            const ok = translateChecked && matchesAnyAnswer(val, item.answers);
             return (
               <div key={item.id} className="hw35-fix-row">
                 <p className="hw35-fix-wrong">

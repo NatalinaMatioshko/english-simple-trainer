@@ -8,23 +8,10 @@ import {
 } from "../content/lessons/lesson-49/activities";
 import { yesterdayFlashcards } from "../content/lessons/lesson-49/vocabulary";
 import { speakEnglish } from "../utils/speech";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -47,13 +34,13 @@ export default function HW49() {
   const [bridgeAns, setBridgeAns] = useState<Record<string, string>>({});
   const [bridgeChecked, setBridgeChecked] = useState(false);
   const bridgeScore = bridgeGaps.filter((g) =>
-    textOk(bridgeAns[g.id] ?? "", g.answers),
+    matchesAnyAnswer(bridgeAns[g.id] ?? "", g.answers),
   ).length;
 
   const [trAns, setTrAns] = useState<Record<string, string>>({});
   const [trChecked, setTrChecked] = useState(false);
   const trScore = yesterdayTranslate.filter((g) =>
-    textOk(trAns[g.id] ?? "", g.answers),
+    matchesAnyAnswer(trAns[g.id] ?? "", g.answers),
   ).length;
 
   const [writeStory, setWriteStory] = useState("");
@@ -108,7 +95,7 @@ export default function HW49() {
           <ol className="l22-gap-list">
             {bridgeGaps.map((g) => {
               const val = bridgeAns[g.id] ?? "";
-              const ok = textOk(val, g.answers);
+              const ok = matchesAnyAnswer(val, g.answers);
               return (
                 <li key={g.id}>
                   <span>{g.before} </span>
@@ -158,7 +145,7 @@ export default function HW49() {
           <ol className="l22-gap-list">
             {yesterdayTranslate.map((g) => {
               const val = trAns[g.id] ?? "";
-              const ok = textOk(val, g.answers);
+              const ok = matchesAnyAnswer(val, g.answers);
               return (
                 <li key={g.id}>
                   <span className="l26-label" style={{ display: "block" }}>

@@ -20,24 +20,11 @@ import {
 } from "../content/lessons/lesson-46/activities";
 import { choreFlashcards } from "../content/lessons/lesson-46/vocabulary";
 import { speakEnglish } from "../utils/speech";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
 import "../styles/lesson42.css";
-
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
-function textOk(value: string, answers: readonly string[]): boolean {
-  const v = normText(value);
-  return v !== "" && answers.some((a) => normText(a) === v);
-}
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
   if (!checked) return "l22-gap-input";
@@ -107,7 +94,7 @@ export default function HW46() {
   const [colAns, setColAns] = useState<Record<string, string>>({});
   const [colChecked, setColChecked] = useState(false);
   const colScore = collocationGaps.filter((g) =>
-    textOk(colAns[g.id] ?? "", g.answers),
+    matchesAnyAnswer(colAns[g.id] ?? "", g.answers),
   ).length;
 
   const [artAns, setArtAns] = useState(() =>
@@ -121,7 +108,7 @@ export default function HW46() {
   const [gmdAns, setGmdAns] = useState<Record<string, string>>({});
   const [gmdChecked, setGmdChecked] = useState(false);
   const gmdScore = goMakeDoVerbGaps.filter((g) =>
-    textOk(gmdAns[g.id] ?? "", g.answers),
+    matchesAnyAnswer(gmdAns[g.id] ?? "", g.answers),
   ).length;
 
   const [chooseAns, setChooseAns] = useState(() =>
@@ -136,7 +123,7 @@ export default function HW46() {
   const [gapChecked, setGapChecked] = useState(false);
   const gapItems = [...listenQuestionGaps, ...doesGrammarGaps.slice(0, 4)];
   const gapScore = gapItems.filter((g) =>
-    textOk(gapAns[g.id] ?? "", g.answers),
+    matchesAnyAnswer(gapAns[g.id] ?? "", g.answers),
   ).length;
 
   const [writeJobs, setWriteJobs] = useState("");
@@ -389,7 +376,7 @@ export default function HW46() {
           <ol className="l22-gap-list">
             {collocationGaps.map((g) => {
               const val = colAns[g.id] ?? "";
-              const ok = textOk(val, g.answers);
+              const ok = matchesAnyAnswer(val, g.answers);
               return (
                 <li key={g.id}>
                   <input
@@ -505,7 +492,7 @@ export default function HW46() {
           <ol className="l22-gap-list">
             {goMakeDoVerbGaps.map((g) => {
               const val = gmdAns[g.id] ?? "";
-              const ok = textOk(val, g.answers);
+              const ok = matchesAnyAnswer(val, g.answers);
               return (
                 <li key={g.id}>
                   <input
@@ -599,7 +586,7 @@ export default function HW46() {
           <ol className="l22-gap-list">
             {gapItems.map((g) => {
               const val = gapAns[g.id] ?? "";
-              const ok = textOk(val, g.answers);
+              const ok = matchesAnyAnswer(val, g.answers);
               return (
                 <li key={g.id}>
                   {g.before ? <span>{g.before} </span> : null}

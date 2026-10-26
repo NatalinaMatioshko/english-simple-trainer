@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { makeQuestions, speakBagPrompts } from "../data/lesson39";
+import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -11,24 +12,10 @@ import "../styles/lesson35.css";
 const exampleQuestion = makeQuestions[0];
 const writeQuestions = makeQuestions.slice(1);
 
-function normText(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ")
-    .replace(/[.!?]+$/, "");
-}
-
 function answersFor(item: (typeof makeQuestions)[number]): string[] {
   const main = item.answer;
   const noYour = main.replace("Has your ", "Has ");
   return noYour === main ? [main] : [main, noYour];
-}
-
-function textOk(value: string, item: (typeof makeQuestions)[number]): boolean {
-  const v = normText(value);
-  return v !== "" && answersFor(item).some((a) => normText(a) === v);
 }
 
 function inputCls(checked: boolean, value: string, ok: boolean): string {
@@ -46,7 +33,7 @@ export default function HW39() {
   const [bagText, setBagText] = useState("");
 
   const qScore = writeQuestions.filter((item, i) =>
-    textOk(qAns[i] ?? "", item),
+    matchesAnyAnswer(qAns[i] ?? "", answersFor(item)),
   ).length;
 
   const checks = useMemo(
@@ -94,7 +81,7 @@ export default function HW39() {
           </div>
           {writeQuestions.map((item, i) => {
             const val = qAns[i] ?? "";
-            const ok = qChecked && textOk(val, item);
+            const ok = qChecked && matchesAnyAnswer(val, answersFor(item));
             return (
               <div key={item.scramble} className="hw35-fix-row">
                 <p className="hw35-fix-wrong">
