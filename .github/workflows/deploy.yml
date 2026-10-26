@@ -32,7 +32,8 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        # Pages serves the app under /english-simple-trainer/ (Vercel uses the default /)
+        run: npm run build -- --base=/english-simple-trainer/
         env:
           VITE_TEACHER_EMAIL: ${{ secrets.VITE_TEACHER_EMAIL }}
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
