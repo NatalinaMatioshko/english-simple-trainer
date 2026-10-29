@@ -1,0 +1,83 @@
+/* month-calendar · calendar on a screen (platform colours) */
+
+.mc-screen {
+  max-width: 34rem;
+  margin-top: 0.5rem;
+  padding: 0.9rem 0.9rem 1rem;
+  border-radius: 0.9rem;
+  border: 0.55rem solid var(--color-text);
+  background: var(--color-surface-2);
+}
+
+.mc-bar {
+  height: 1.1rem;
+  border-radius: 0.2rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.mc-band {
+  height: 1.1rem;
+  margin: 0.5rem 0 0.7rem;
+  border-radius: 0.2rem;
+  background: var(--color-primary);
+}
+
+.mc-row {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.3rem;
+}
+
+.mc-row + .mc-row {
+  margin-top: 0.8rem;
+}
+
+.mc-month {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.mc-label {
+  padding: 0.25rem 0.1rem;
+  border: 0;
+  border-radius: 0.2rem;
+  background: var(--color-accent);
+  color: #1d1a12;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.mc-label:hover {
+  filter: brightness(1.08);
+}
+
+.mc-label:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.mc-lines {
+  display: grid;
+  gap: 0.28rem;
+  padding: 0.35rem 0.15rem 0;
+}
+
+.mc-lines span {
+  display: block;
+  height: 0.3rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-text-muted) 22%, var(--color-surface-2));
+}
+
+@media (max-width: 30rem) {
+  .mc-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 0.6rem;
+  }
+}

@@ -1,0 +1,52 @@
+/* match-grid · compact letter + prompt + select table (platform colours) */
+
+.mg-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.9rem;
+  margin: 0.25rem 0 0.9rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--color-accent) 16%, var(--color-surface));
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.mg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  gap: 0.4rem 1.25rem;
+}
+
+.mg-col {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+  align-content: start;
+}
+
+.mg-cell {
+  display: grid;
+  grid-template-columns: 1.1rem 1.8rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mg-id {
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.mg-label {
+  font-weight: 700;
+  text-align: right;
+}
+
+.mg-cell .lw-select,
+.mg-cell .lw-gap-input {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}

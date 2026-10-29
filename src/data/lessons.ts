@@ -363,6 +363,7 @@ export const lessonCovers: Record<string, string> = {
   "49": "/images/lesson46/chore-a-cook.png",
   "50": "/images/lesson50/req-a-dishes.png",
   "51": "/images/lesson51/place-g-island.png",
+  "52": "/images/lesson52/good-day-3-party.png",
   extra: "/images/everyday-actions.png",
   review: "/images/at-work.webp",
 };

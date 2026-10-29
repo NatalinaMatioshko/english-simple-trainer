@@ -116,6 +116,22 @@ export const customSectionLoaders: Record<
     import("./customs/CategoryTableSection").then((m) => ({
       default: m.CategoryTableSection,
     })),
+  "lettered-reading": () =>
+    import("./customs/LetteredReadingSection").then((m) => ({
+      default: m.LetteredReadingSection,
+    })),
+  "month-calendar": () =>
+    import("./customs/MonthCalendarSection").then((m) => ({
+      default: m.MonthCalendarSection,
+    })),
+  "match-grid": () =>
+    import("./customs/MatchGridSection").then((m) => ({
+      default: m.MatchGridSection,
+    })),
+  "highlight-sentences": () =>
+    import("./customs/HighlightSentencesSection").then((m) => ({
+      default: m.HighlightSentencesSection,
+    })),
 };
 
 /** Stable React.lazy components — created once at module load, not during render. */
