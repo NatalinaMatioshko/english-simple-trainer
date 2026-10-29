@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "52": "/images/lesson52/good-day-3-party.png",
   "51": "/images/lesson51/place-g-island.png",
   "50": "/images/lesson50/req-a-dishes.png",
   "46": "/images/lesson46/chore-a-cook.png",
@@ -42,6 +43,17 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "52",
+    title: "A good day",
+    href: "/hw-52",
+    tasks: [
+      { type: "text", text: "Flashcards: months and ordinal numbers (UA→EN)" },
+      { type: "text", text: "Choose was / wasn’t / were / weren’t" },
+      { type: "text", text: "Write the dates in words: 12th March → the twelfth of March" },
+      { type: "text", text: "Write about 2–3 good days (5–7 sentences)" },
+    ],
+  },
   {
     id: "51",
     title: "A nice place",

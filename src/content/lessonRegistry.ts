@@ -256,6 +256,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson51;
     },
   },
+  {
+    id: "52",
+    number: 52,
+    title: "A good day",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 52,
+    status: "published",
+    estimatedMinutes: 60,
+    hasHomework: true,
+    topic: "was / were · there was / there were · months and dates",
+    description:
+      "David’s five good days, months and ordinal numbers, was / were, then tell your teacher about your good days.",
+    route: "/lessons/52",
+    legacyRoute: "/lesson-52",
+    homeworkPath: "/hw-52",
+    load: async () => {
+      const mod = await import("./lessons/lesson-52/lesson");
+      return mod.lesson52;
+    },
+  },
 ];
 
 export function getRegistryEntry(

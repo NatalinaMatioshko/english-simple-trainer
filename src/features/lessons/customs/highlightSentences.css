@@ -1,0 +1,53 @@
+/* highlight-sentences · numbered sentences with tappable highlighted words */
+
+.hs-list {
+  margin: 0.25rem 0 0;
+  padding-left: 1.4rem;
+  display: grid;
+  gap: 0.55rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.hs-row {
+  padding-left: 0.2rem;
+}
+
+.hs-text {
+  margin-right: 0.4rem;
+}
+
+.hs-word {
+  display: inline;
+  margin: 0;
+  padding: 0 0.15rem;
+  border: 0;
+  border-bottom: 2px dotted currentColor;
+  border-radius: 0.2rem;
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.hs-word:hover {
+  background: color-mix(in srgb, var(--color-primary) 22%, transparent);
+}
+
+.hs-word:focus-visible,
+.hs-say:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.hs-say {
+  padding: 0.05rem 0.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface-2);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  vertical-align: middle;
+  cursor: pointer;
+}
