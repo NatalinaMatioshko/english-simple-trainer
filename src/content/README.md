@@ -91,6 +91,7 @@ Keys must match [`lessonSectionRegistry.ts`](../features/lessons/lessonSectionRe
 | `lettered-reading` | reusable | Reading text as a card: title band, subtitle, lettered paragraphs (A–E) with bold leads |
 | `month-calendar` | reusable | Months as a calendar on a screen; tap a month to hear it |
 | `match-grid` | reusable | Compact grid: letter + prompt + select or typed answer (`mode: "type"`) per cell, word box above, Check / Show / Reset |
+| `word-drag-match` | reusable | Word box + one gap per prompt: drag a word to the gap, or tap word → tap gap; Check / Show / Reset |
 | `highlight-sentences` | reusable | Numbered sentences with highlighted words; tap a word or 🔊 to hear it (speech synthesis) |
 | `lesson37-pictures` | lesson-specific | Zoom figures for L37 |
 | `lesson38-word-map` | lesson-specific | Word map mind-map (data via props) |

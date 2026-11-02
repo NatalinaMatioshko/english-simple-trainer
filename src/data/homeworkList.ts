@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "53": "/images/lesson53/listen-a-mountain.png",
   "52": "/images/lesson52/good-day-3-party.png",
   "51": "/images/lesson51/place-g-island.png",
   "50": "/images/lesson50/req-a-dishes.png",
@@ -43,6 +44,18 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "53",
+    title: "How was it?",
+    href: "/hw-53",
+    tasks: [
+      { type: "text", text: "Flashcards: 16 adjectives (UA→EN)" },
+      { type: "text", text: "Write the opposite: The bus isn’t fast. It’s slow." },
+      { type: "text", text: "Mini-dialogues: was / wasn’t / were / weren’t" },
+      { type: "text", text: "Make questions: your weekend / good? → Was your weekend good?" },
+      { type: "text", text: "Write about your last weekend or holiday (5–7 sentences)" },
+    ],
+  },
   {
     id: "52",
     title: "A good day",
