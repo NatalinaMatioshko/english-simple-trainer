@@ -128,6 +128,10 @@ export const customSectionLoaders: Record<
     import("./customs/MatchGridSection").then((m) => ({
       default: m.MatchGridSection,
     })),
+  "word-drag-match": () =>
+    import("./customs/WordDragMatchSection").then((m) => ({
+      default: m.WordDragMatchSection,
+    })),
   "highlight-sentences": () =>
     import("./customs/HighlightSentencesSection").then((m) => ({
       default: m.HighlightSentencesSection,

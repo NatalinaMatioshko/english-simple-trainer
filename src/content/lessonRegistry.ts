@@ -277,6 +277,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson52;
     },
   },
+  {
+    id: "53",
+    number: 53,
+    title: "How was it?",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 53,
+    status: "published",
+    estimatedMinutes: 60,
+    hasHomework: true,
+    topic: "was / were questions · there was / there were questions · adjectives",
+    description:
+      "Adjectives and their opposites, three short conversations, was / were questions, then ask and answer about your day, weekend and holiday.",
+    route: "/lessons/53",
+    legacyRoute: "/lesson-53",
+    homeworkPath: "/hw-53",
+    load: async () => {
+      const mod = await import("./lessons/lesson-53/lesson");
+      return mod.lesson53;
+    },
+  },
 ];
 
 export function getRegistryEntry(
