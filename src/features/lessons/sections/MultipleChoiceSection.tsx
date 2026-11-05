@@ -1,5 +1,16 @@
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import type { MultipleChoiceSection as MCType } from "../../../types/lesson";
+
+const GRID_STYLE: CSSProperties = {
+  gridTemplateColumns: "repeat(auto-fill, minmax(5.5rem, 1fr))",
+};
+
+const SQUARE_STYLE: CSSProperties = {
+  aspectRatio: "1",
+  padding: "0.25rem",
+  textAlign: "center",
+};
 
 export function MultipleChoiceSection({ section }: { section: MCType }) {
   const [selected, setSelected] = useState<string | null>(null);
@@ -16,7 +27,11 @@ export function MultipleChoiceSection({ section }: { section: MCType }) {
         ) : null}
       </div>
       <p className="lw-mc-prompt">{section.prompt}</p>
-      <div className="lw-mc-options" role="group">
+      <div
+        className="lw-mc-options"
+        role="group"
+        style={section.optionsGrid ? GRID_STYLE : undefined}
+      >
         {section.options.map((opt) => {
           const on = selected === opt;
           let cls = "lw-mc-btn";
@@ -28,6 +43,7 @@ export function MultipleChoiceSection({ section }: { section: MCType }) {
               key={opt}
               type="button"
               className={cls}
+              style={section.optionsGrid ? SQUARE_STYLE : undefined}
               onClick={() => {
                 setChecked(false);
                 setSelected(opt);

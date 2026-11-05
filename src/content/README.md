@@ -46,7 +46,7 @@ Use the numeric string id consistently: `"37"` → route `/lessons/37`, legacy `
 |------|-----------------|----------|
 | `text` | `body`, optional `bullets`, `note` | Explanation, checklist, contrast copy |
 | `vocabulary` | `items[]` (`term`, optional `gloss`) | Word lists |
-| `multipleChoice` | `prompt`, `options`, `correctAnswer` | Single quiz item |
+| `multipleChoice` | `prompt`, `options`, `correctAnswer`, optional `optionsGrid` (squares for short options) | Single quiz item |
 | `multipleChoiceGroup` | `items[]` with prompt/options/correctAnswer | Quiz banks (listening, grammar) |
 | `fillBlank` | `items[]` with `before`/`after`/`correctAnswers` (+ optional `options` for select) | Gap fills |
 | `wordOrder` | `items[]` with scramble/parts/answer | Drag/tap sentence builder |
@@ -97,6 +97,7 @@ Keys must match [`lessonSectionRegistry.ts`](../features/lessons/lessonSectionRe
 | `lesson38-word-map` | lesson-specific | Word map mind-map (data via props) |
 | `lesson38-grammar-have-got` | lesson-specific | Interactive have/has got grammar box |
 | `lesson38-friend-speak` | lesson-specific | Prepare notes + speak models for L38 |
+| `lesson54-board` | lesson-specific | L54 information board: one image at full width |
 
 ## When to use `custom`
 

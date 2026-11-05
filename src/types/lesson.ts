@@ -77,6 +77,8 @@ export type MultipleChoiceSection = LessonSectionBase & {
   options: string[];
   correctAnswer: string;
   explanation?: string;
+  /** Short options as a grid of squares instead of rows */
+  optionsGrid?: boolean;
 };
 
 export type FillBlankSection = LessonSectionBase & {

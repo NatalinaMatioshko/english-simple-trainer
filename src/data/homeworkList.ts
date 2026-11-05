@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "54": "/images/lesson54/trains-to-heathrow.png",
   "53": "/images/lesson53/listen-a-mountain.png",
   "52": "/images/lesson52/good-day-3-party.png",
   "51": "/images/lesson51/place-g-island.png",
@@ -44,6 +45,18 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "54",
+    title: "Buy travel tickets",
+    href: "/hw-54",
+    tasks: [
+      { type: "text", text: "Flashcards: words for the station (UA→EN)" },
+      { type: "text", text: "Read the board and complete the sentences" },
+      { type: "text", text: "Complete a conversation: a ticket to Oxford" },
+      { type: "text", text: "Make sentences: what time / next train / Cardiff?" },
+      { type: "text", text: "Write a conversation: a ticket to Swansea (8–10 lines)" },
+    ],
+  },
   {
     id: "53",
     title: "How was it?",
