@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 592" width="680" height="592" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="Departure board at Paddington Station">
+  <rect width="680" height="592" rx="8" fill="#1f1b1c"/>
+  <rect x="16" y="16" width="648" height="92" rx="4" fill="#3d3a18"/>
+  <text x="340" y="74" text-anchor="middle" font-size="34" fill="#f4f1dc">Welcome to Paddington Station</text>
+  <g font-size="20" fill="#b9b48c">
+    <text x="84" y="152">Time</text>
+    <text x="186" y="152">To</text>
+    <text x="448" y="152" text-anchor="middle">Platform</text>
+    <text x="548" y="152">Arrives</text>
+  </g>
+  <rect x="16" y="170" width="648" height="52" rx="4" fill="#3d3a18"/>
+  <rect x="26" y="179" width="34" height="34" rx="3" fill="#2d6280"/>
+  <text x="43" y="205" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">1</text>
+  <text x="84" y="206" font-size="28" fill="#e9e4b8">9.13</text>
+  <text x="186" y="206" font-size="28" font-weight="700" fill="#f7d93a">Cardiff</text>
+  <text x="448" y="206" font-size="28" text-anchor="middle" fill="#e9e4b8">3</text>
+  <text x="548" y="206" font-size="28" fill="#e9e4b8">10.25</text>
+  <rect x="16" y="228" width="648" height="52" rx="4" fill="#3d3a18"/>
+  <rect x="26" y="237" width="34" height="34" rx="3" fill="#2d6280"/>
+  <text x="43" y="263" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">2</text>
+  <text x="84" y="264" font-size="28" fill="#e9e4b8">9.17</text>
+  <text x="186" y="264" font-size="28" font-weight="700" fill="#f7d93a">Oxford</text>
+  <text x="448" y="264" font-size="28" text-anchor="middle" fill="#e9e4b8">2</text>
+  <text x="548" y="264" font-size="28" fill="#e9e4b8">10.05</text>
+  <rect x="16" y="286" width="648" height="52" rx="4" fill="#3d3a18"/>
+  <rect x="26" y="295" width="34" height="34" rx="3" fill="#2d6280"/>
+  <text x="43" y="321" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">3</text>
+  <text x="84" y="322" font-size="28" fill="#e9e4b8">9.20</text>
+  <text x="186" y="322" font-size="28" font-weight="700" fill="#f7d93a">Bath</text>
+  <text x="448" y="322" font-size="28" text-anchor="middle" fill="#e9e4b8">7</text>
+  <text x="548" y="322" font-size="28" fill="#e9e4b8">12.15</text>
+  <rect x="16" y="344" width="648" height="52" rx="4" fill="#3d3a18"/>
+  <rect x="26" y="353" width="34" height="34" rx="3" fill="#2d6280"/>
+  <text x="43" y="379" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">4</text>
+  <text x="84" y="380" font-size="28" fill="#e9e4b8">9.25</text>
+  <text x="186" y="380" font-size="28" font-weight="700" fill="#f7d93a">Heathrow</text>
+  <text x="448" y="380" font-size="28" text-anchor="middle" fill="#e9e4b8">5</text>
+  <text x="548" y="380" font-size="28" fill="#e9e4b8">10.25</text>
+  <rect x="16" y="402" width="648" height="52" rx="4" fill="#3d3a18"/>
+  <rect x="26" y="411" width="34" height="34" rx="3" fill="#2d6280"/>
+  <text x="43" y="437" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">5</text>
+  <text x="84" y="438" font-size="28" fill="#e9e4b8">9.30</text>
+  <text x="186" y="438" font-size="28" font-weight="700" fill="#f7d93a">Bath</text>
+  <text x="448" y="438" font-size="28" text-anchor="middle" fill="#e9e4b8">7</text>
+  <text x="548" y="438" font-size="28" fill="#e9e4b8">10.55</text>
+  <rect x="16" y="460" width="648" height="52" rx="4" fill="#3d3a18"/>
+  <rect x="26" y="469" width="34" height="34" rx="3" fill="#2d6280"/>
+  <text x="43" y="495" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">6</text>
+  <text x="84" y="496" font-size="28" fill="#e9e4b8">9.45</text>
+  <text x="186" y="496" font-size="28" font-weight="700" fill="#f7d93a">Swansea</text>
+  <text x="448" y="496" font-size="28" text-anchor="middle" fill="#e9e4b8">1</text>
+  <text x="548" y="496" font-size="28" fill="#e9e4b8">12.25</text>
+  <rect x="16" y="518" width="648" height="52" rx="4" fill="#3d3a18"/>
+  <rect x="26" y="527" width="34" height="34" rx="3" fill="#2d6280"/>
+  <text x="43" y="553" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">7</text>
+  <text x="84" y="554" font-size="28" fill="#e9e4b8">9.53</text>
+  <text x="186" y="554" font-size="28" font-weight="700" fill="#f7d93a">Heathrow</text>
+  <text x="448" y="554" font-size="28" text-anchor="middle" fill="#e9e4b8">5</text>
+  <text x="548" y="554" font-size="28" fill="#e9e4b8">10.15</text>
+</svg>

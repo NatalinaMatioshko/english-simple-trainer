@@ -298,6 +298,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson53;
     },
   },
+  {
+    id: "54",
+    number: 54,
+    title: "English in action · Buy travel tickets",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 54,
+    status: "published",
+    estimatedMinutes: 60,
+    hasHomework: true,
+    topic: "buy travel tickets · single / return · What time…? · Which platform…?",
+    description:
+      "Read a station board, listen to Jeff and Helena buy train tickets, learn the useful phrases, then buy a ticket with your teacher.",
+    route: "/lessons/54",
+    legacyRoute: "/lesson-54",
+    homeworkPath: "/hw-54",
+    load: async () => {
+      const mod = await import("./lessons/lesson-54/lesson");
+      return mod.lesson54;
+    },
+  },
 ];
 
 export function getRegistryEntry(
