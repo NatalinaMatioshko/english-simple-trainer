@@ -190,6 +190,34 @@
   line-height: 1.45;
 }
 
+/* SB-style reading box (e.g. L55 · 1b) */
+.lw-reading-passage {
+  margin-top: 0.65rem;
+  max-width: 40rem;
+  padding: 1.05rem 1.2rem;
+  border-radius: 0.65rem;
+  border: 1px solid #e5b8b8;
+  background: linear-gradient(180deg, #fdf4f4 0%, #f6e6e6 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.lw-reading-passage p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+:root[data-theme="dark"] .lw-reading-passage {
+  border-color: color-mix(in srgb, #e5b8b8 45%, var(--color-border));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, #f6e6e6 12%, var(--color-surface)),
+    color-mix(in srgb, #f6e6e6 6%, var(--color-surface-2))
+  );
+  box-shadow: none;
+}
+
 .lw-preview-lead {
   margin: 0.35rem 0 1rem;
   padding: 0.9rem 1rem;

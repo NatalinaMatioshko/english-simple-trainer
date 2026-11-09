@@ -45,7 +45,7 @@ export const lesson43: Lesson = {
   hasHomework: true,
   topic: "travel · Do you…? · leave / arrive · Past Simple preview",
   description:
-    "How you travel to work: match photos, leave/arrive, Do you…?, Tim & Donna listening, speaking, and a soft Past Simple (yesterday) preview.",
+    "Як ти їздиш на роботу: фото, leave/arrive, Do you…?, слухання Tim і Donna, говоріння й м’який вступ у Past Simple (yesterday).",
   chips: [
     "by bus / train",
     "leave · arrive",
@@ -87,10 +87,10 @@ export const lesson43: Lesson = {
       id: "l43-intro",
       kicker: "Travel",
       title: "A long journey",
-      description: "Talk about how you travel to work / university.",
+      description: "Поговори, як ти їздиш на роботу / до університету.",
       body: "",
       bullets: travelSentences.map((s) => `${s.n}. ${s.text}`),
-      note: "1a Match photos A–G with sentences 1–7 below.",
+      note: "1a Поєднай фото A–G із реченнями 1–7 нижче.",
     },
     {
       type: "custom",
@@ -131,7 +131,7 @@ export const lesson43: Lesson = {
       id: "l43-vocab",
       kicker: "Vocab",
       title: "Flip UA → English",
-      description: "Tap a card. Then say the English phrase with your teacher.",
+      description: "Натисни картку. Потім скажи англійську фразу з учителем.",
       componentKey: "vocab-flip",
       props: {
         cards: travelChunks.map((c) => ({
@@ -148,9 +148,9 @@ export const lesson43: Lesson = {
       kicker: "1c · Speaking",
       title: "True for you?",
       description:
-        "Which sentences in 1a are true for you? Tell your teacher.",
+        "Які речення в 1a правдиві для тебе? Скажи учителю.",
       prompts: travelSentences.map((s) => s.text),
-      note: "Say: This is true for me. / This isn't true for me.",
+      note: "Скажи: This is true for me. / This isn't true for me.",
     },
     {
       type: "fillBlank",
@@ -158,7 +158,7 @@ export const lesson43: Lesson = {
       kicker: "2a · Verbs",
       title: "Complete transport phrases",
       description:
-        "Complete phrases 1–3 with verb groups a–c. Use Exercise 1a to help you.",
+        "Доповни фрази 1–3 групами дієслів a–c. Допоможе вправа 1a.",
       chips: transportVerbGroups.map((g) => `${g.id}. ${g.label}`),
       items: transportPhrases2a.map((g) => ({
         id: `p2a-${g.id}`,
@@ -185,7 +185,7 @@ export const lesson43: Lesson = {
       id: "l43-2c",
       kicker: "2c · Opposite",
       title: "Opposite of leave",
-      description: "Read the sentences in 2b again. What is the opposite of leave?",
+      description: "Перечитай речення з 2b. Яке протилежне слово до leave?",
       items: [
         {
           id: "opp-leave",
@@ -227,7 +227,7 @@ export const lesson43: Lesson = {
       id: "l43-heard",
       kicker: "3b · Listening",
       title: "Tick the questions you hear",
-      description: "Listen again. Tick only the questions from the audio.",
+      description: "Послухай ще раз. Постав галочки лише на питання з аудіо.",
       componentKey: "tick-list",
       props: {
         items: heardQuestions3b.map((item) => ({
@@ -242,7 +242,7 @@ export const lesson43: Lesson = {
       id: "l43-grammar",
       kicker: "4 · Grammar",
       title: "Present simple questions: I / you / we / they",
-      description: "Read and complete the grammar box. Use Exercise 3b to help you.",
+      description: "Прочитай і заповни grammar box. Допоможе вправа 3b.",
       items: grammarDoGaps.map((g) => ({
         id: `do-${g.id}`,
         before: g.before || `(${g.id})`,
@@ -256,7 +256,7 @@ export const lesson43: Lesson = {
       kicker: "5 · Pronunciation",
       title: "Do / do · same or different?",
       description:
-        "Listen. Do the words in blue sound the same or different? Tip: in questions Do is often weak (/də/); in answers do is strong (/duː/).",
+        "Послухай. Слова синім — однаково чи ні? Підказка: у питаннях Do часто слабке (/də/), у відповідях — сильне (/duː/).",
       componentKey: "native-audio",
       props: {
         src: SOUND_U5(6),
@@ -273,7 +273,7 @@ export const lesson43: Lesson = {
       kicker: "5 · Check",
       title: "Same or different?",
       description:
-        "Do the words in blue sound the same or different?",
+        "Чи однаково звучать слова, виділені синім?",
       componentKey: "same-or-different",
       props: {
         tip: "Tip: у питанні Do часто слабке (/də/), у відповіді do — сильне (/duː/).",
@@ -484,7 +484,7 @@ export const lesson43: Lesson = {
         "Лише прочитай і спробуй зрозуміти текст. Не перекладай кожне слово.",
       body: "",
       bullets: [...pastReadTaskLines],
-      note: "Ask your teacher: What did you understand?",
+      note: "Запитай учителя: What did you understand?",
     },
     {
       type: "speakingPrompt",
@@ -522,7 +522,7 @@ export const lesson43: Lesson = {
       title: "HW43",
       path: "/hw-43",
       label: "HW43 →",
-      summary: "Travel phrases, gaps, and transport chunks.",
+      summary: "Фрази подорожей, прогалини й transport chunks.",
     },
   ],
 };

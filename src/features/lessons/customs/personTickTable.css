@@ -1,0 +1,120 @@
+/* person-tick-table · SB-style Who… grid (platform colours) */
+
+.ptt-scroll {
+  overflow-x: auto;
+  margin-top: 0.35rem;
+}
+
+.ptt-table {
+  width: 100%;
+  min-width: 18rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.92rem;
+}
+
+.ptt-th {
+  padding: 0.55rem 0.65rem;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-primary) 14%, var(--color-surface));
+  color: var(--color-text);
+}
+
+.ptt-th--prompt {
+  text-align: left;
+  min-width: 9.5rem;
+}
+
+.ptt-th--person {
+  min-width: 4.5rem;
+}
+
+.ptt-row.is-ok .ptt-prompt {
+  border-color: color-mix(in srgb, var(--lw-ok, #2a9d4b) 45%, var(--color-border));
+}
+
+.ptt-row.is-err .ptt-prompt {
+  border-color: color-mix(in srgb, var(--lw-err, #c0392b) 45%, var(--color-border));
+}
+
+.ptt-prompt {
+  padding: 0.5rem 0.65rem;
+  font-weight: 600;
+  text-align: left;
+  vertical-align: middle;
+  border: 1px solid var(--color-border);
+  border-right: none;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.ptt-num {
+  display: inline-block;
+  min-width: 1.25rem;
+  margin-right: 0.35rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--color-primary) 70%, var(--color-text));
+}
+
+.ptt-cell {
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.35rem;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+}
+
+.ptt-cell.is-ok {
+  background: color-mix(in srgb, var(--lw-ok, #2a9d4b) 12%, var(--color-surface));
+}
+
+.ptt-cell.is-err {
+  background: color-mix(in srgb, var(--lw-err, #c0392b) 10%, var(--color-surface));
+}
+
+.ptt-tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0.35rem;
+  cursor: pointer;
+}
+
+.ptt-tick input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.ptt-tick-mark {
+  display: grid;
+  place-items: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 0.35rem;
+  border: 2px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  background: var(--color-surface);
+  transition: border-color 0.12s, background 0.12s;
+}
+
+.ptt-tick input:checked + .ptt-tick-mark {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface));
+}
+
+.ptt-tick input:checked + .ptt-tick-mark::after {
+  content: "✓";
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.ptt-tick input:focus-visible + .ptt-tick-mark {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

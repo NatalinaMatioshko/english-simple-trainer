@@ -33,7 +33,7 @@ export const lesson38: Lesson = {
   hasHomework: true,
   topic: "Unit 4A · have / has got · describe people",
   description:
-    "Unit 4A: describe people with have/has got, match photos, and talk about a friend.",
+    "Unit 4A: describe people з have/has got, поєднай фото й поговори про друга.",
   chips: ["have got / has got", "hair · eyes · age", "I've got / He's got"],
   legacyRoute: "/lesson-38",
   route: "/lessons/38",
@@ -84,7 +84,7 @@ export const lesson38: Lesson = {
       kicker: "1 · 4A Reading",
       title: "You've got a friend",
       description:
-        "Read the profile and look at the photos. Which person is Luca? Which person is Mehmet?",
+        "Прочитай профіль і подивись фото. Хто Luca? Хто Mehmet?",
       body: "",
       bullets: [...lucaText],
     },
@@ -124,7 +124,7 @@ export const lesson38: Lesson = {
       kicker: "2 · Vocabulary",
       title: "Match the labels",
       description:
-        "Look at the numbers on the photos. Match 1–7 with the words in the box.",
+        "Подивись числа на фото. Поєднай 1–7 зі словами в блоці.",
       chips: [...labelBank],
       items: photoLabels.map((item) => ({
         id: `label-${item.n}`,
@@ -139,7 +139,7 @@ export const lesson38: Lesson = {
       kicker: "3a · Photos A–D",
       title: "Look at the photos",
       description:
-        "Match descriptions 1–4 with photos A–D. Then listen and repeat the words in bold.",
+        "Поєднай описи 1–4 із фото A–D. Потім послухай і повтори слова, виділені жирним.",
       componentKey: "photo-gallery",
       props: {
         images: matchPhotos.map((p) => ({
@@ -190,7 +190,7 @@ export const lesson38: Lesson = {
       kicker: "3c · Word map",
       title: "Add more words",
       description:
-        "Watch the map appear. Then tap a new word and tap colours or the body. Discuss extra words with your teacher.",
+        "Подивись, як з’являється map. Натисни нове слово й кольори або тіло. Додаткові слова — з учителем.",
       componentKey: "lesson38-word-map",
       props: {
         fixed: wordMapFixed,
@@ -202,7 +202,7 @@ export const lesson38: Lesson = {
       id: "l38-grammar",
       kicker: "Grammar",
       title: "have / has got",
-      description: "5 Read and complete the grammar box.",
+      description: "Прочитай і заповни grammar box.",
       componentKey: "lesson38-grammar-have-got",
       props: {
         items: grammarPlusMinus,
@@ -214,7 +214,7 @@ export const lesson38: Lesson = {
       kicker: "6a · Contractions",
       title: "Listen to the sentences",
       description:
-        "Notice the pronunciation of the words in blue. Then listen again and repeat (6b).",
+        "Вимова слів, виділених синім. Потім ще раз послухай і повтори (6b).",
       body: "",
       bullets: contractionListen.map(
         (item) => `${item.contraction} ${item.rest}`,
@@ -257,7 +257,7 @@ export const lesson38: Lesson = {
       kicker: "8 · Sentences",
       title: "Sofia and Jules",
       description:
-        "8 Look at the picture and make sentences using the prompts.",
+        "Подивись на картинку й склади речення за підказками.",
       componentKey: "photo-gallery",
       props: {
         images: [
@@ -323,13 +323,13 @@ export const lesson38: Lesson = {
       kicker: "Video · 4B",
       title: "Listening quiz · adjectives",
       description:
-        "Watch the video with your teacher. The 4B vocabulary is in Lesson 39.",
+        "Відео з учителем. Лексика 4B — у уроці 39.",
       componentKey: "youtube-video",
       props: {
         videoId: VIDEO_ID,
         iframeTitle: "Beginner English Listening Quiz — Adjectives",
       },
-      note: "Continue in Lesson 39 · Have you got it?",
+      note: "Далі урок 39 · Have you got it?",
     },
     {
       type: "text",
@@ -349,7 +349,7 @@ export const lesson38: Lesson = {
       title: "HW38",
       path: "/hw-38",
       label: "HW38 →",
-      summary: "Practice have/has got, possessives, and write about a friend.",
+      summary: "Відпрацювання have/has got, присвійних і письмо про друга.",
     },
   ],
 };

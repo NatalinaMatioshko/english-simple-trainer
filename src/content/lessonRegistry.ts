@@ -59,7 +59,7 @@ export const lessonRegistry: LessonRegistryEntry[] = [
     hasHomework: true,
     topic: "have / has got · describe people",
     description:
-      "Unit 4A: describe people with have/has got, match photos, and talk about a friend.",
+      "Unit 4A: describe people з have/has got, поєднай фото й поговори про друга.",
     legacyRoute: "/lesson-38",
     route: "/lessons/38",
     homeworkPath: "/hw-38",
@@ -80,7 +80,7 @@ export const lessonRegistry: LessonRegistryEntry[] = [
     hasHomework: true,
     topic: "travel · Do you…? · leave / arrive · Past Simple preview",
     description:
-      "How you travel to work: match photos, leave/arrive, Do you…?, Tim & Donna listening, speaking, and a soft Past Simple (yesterday) preview.",
+      "Як ти їздиш на роботу: фото, leave/arrive, Do you…?, слухання Tim і Donna, говоріння й м’який вступ у Past Simple (yesterday).",
     route: "/lessons/43",
     homeworkPath: "/hw-43",
     load: async () => {
@@ -100,7 +100,7 @@ export const lessonRegistry: LessonRegistryEntry[] = [
     hasHomework: true,
     topic: "food · drink · frequency · order food and a drink",
     description:
-      "Food and drink vocabulary, frequency adverbs, then order food and a drink in a café.",
+      "Лексика їжі й напоїв, наречення частоти, потім замовлення в кафе.",
     route: "/lessons/44",
     legacyRoute: "/lesson-44",
     homeworkPath: "/hw-44",
@@ -121,7 +121,7 @@ export const lessonRegistry: LessonRegistryEntry[] = [
     hasHomework: true,
     topic: "habits · time expressions · Present Simple he/she/it",
     description:
-      "Match time expressions to pictures, read about Erica and Tina, then talk about another person’s good and bad habits with he/she + -s.",
+      "Поєднай часові вирази з картинками, прочитай про Erica і Tina, потім говори про звички іншої людини з he/she + -s.",
     route: "/lessons/45",
     legacyRoute: "/lesson-45",
     homeworkPath: "/hw-45",
@@ -247,7 +247,7 @@ export const lessonRegistry: LessonRegistryEntry[] = [
     hasHomework: true,
     topic: "Wh-questions · places and nature words",
     description:
-      "Nature words and directions, wh-questions about a place, then tell your teacher about a nice place in your country.",
+      "Слова про природу й напрямки, wh-питання про місце, потім розкажи учителю про гарне місце у своїй країні.",
     route: "/lessons/51",
     legacyRoute: "/lesson-51",
     homeworkPath: "/hw-51",
@@ -289,7 +289,7 @@ export const lessonRegistry: LessonRegistryEntry[] = [
     hasHomework: true,
     topic: "was / were questions · there was / there were questions · adjectives",
     description:
-      "Adjectives and their opposites, three short conversations, was / were questions, then ask and answer about your day, weekend and holiday.",
+      "Прикметники й протилежності, три короткі діалоги, питання was / were, потім питання й відповіді про день, вихідні й відпустку.",
     route: "/lessons/53",
     legacyRoute: "/lesson-53",
     homeworkPath: "/hw-53",
@@ -310,13 +310,34 @@ export const lessonRegistry: LessonRegistryEntry[] = [
     hasHomework: true,
     topic: "buy travel tickets · single / return · What time…? · Which platform…?",
     description:
-      "Read a station board, listen to Jeff and Helena buy train tickets, learn the useful phrases, then buy a ticket with your teacher.",
+      "Прочитай табло на станції, послухай Jeff і Helena, вивчи корисні фрази, потім «купи» квиток разом із учителем.",
     route: "/lessons/54",
     legacyRoute: "/lesson-54",
     homeworkPath: "/hw-54",
     load: async () => {
       const mod = await import("./lessons/lesson-54/lesson");
       return mod.lesson54;
+    },
+  },
+  {
+    id: "55",
+    number: 55,
+    title: "When I was young",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 55,
+    status: "published",
+    estimatedMinutes: 65,
+    hasHomework: true,
+    topic: "Past Simple regular verbs (-ed) · childhood · school",
+    description:
+      "Дитячі фото, verb phrases, текст School days, Past Simple -ed, потім розкажи учителю, яким ти був/була малим.",
+    route: "/lessons/55",
+    legacyRoute: "/lesson-55",
+    homeworkPath: "/hw-55",
+    load: async () => {
+      const mod = await import("./lessons/lesson-55/lesson");
+      return mod.lesson55;
     },
   },
 ];

@@ -51,7 +51,7 @@ export default function HW47() {
         <p className="page-kicker">Homework · Lesson 47</p>
         <h1>Skills</h1>
         <p className="lead">
-          Skill phrases · can / can’t · write about what you can do.
+          Фрази навичок · can / can’t · письмо про те, що ти вмієш.
         </p>
 
         <section id="hw47-cards" className="lesson22-block panel">

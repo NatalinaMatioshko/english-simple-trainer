@@ -38,7 +38,7 @@ export const lesson54: Lesson = {
   hasHomework: true,
   topic: "buy travel tickets · single / return · What time…? · Which platform…?",
   description:
-    "Read a station board, listen to Jeff and Helena buy train tickets, learn the useful phrases, then buy a ticket with your teacher.",
+    "Прочитай табло на станції, послухай Jeff і Helena, вивчи корисні фрази, потім «купи» квиток разом із учителем.",
   chips: [
     "What time is the next train?",
     "Is that a single or a return?",
@@ -47,7 +47,7 @@ export const lesson54: Lesson = {
   route: "/lessons/54",
   legacyRoute: "/lesson-54",
   prevLessonPath: "/lessons/53",
-  nextLessonPath: "/lessons",
+  nextLessonPath: "/lessons/55",
   navLinks: [
     { label: "← Back to lessons", path: "/lessons" },
     { label: "← Lesson 53", path: "/lessons/53", ghost: true },
@@ -78,7 +78,7 @@ export const lesson54: Lesson = {
       kicker: "Review · Opposites",
       title: "Match the adjectives with their opposites",
       description:
-        "Lesson 53, Exercise 1. Drag each word to its opposite. On a phone: tap a word, then tap the gap.",
+        "Урок 53, вправа 1. Перетягни кожне слово до протилежного. На телефоні: натисни слово, потім — на прогалину.",
       componentKey: "word-drag-match",
       props: {
         items: reviewOpposites.map((a) => ({ ...a })),
@@ -90,7 +90,7 @@ export const lesson54: Lesson = {
       id: "l54-review-questions",
       kicker: "Review · Questions",
       title: "Make questions using the prompts",
-      description: "Lesson 53, Exercise 9a.",
+      description: "Урок 53, вправа 9a.",
       items: reviewQuestions.map((q) => ({
         id: q.id,
         before: q.prompt,
@@ -105,12 +105,12 @@ export const lesson54: Lesson = {
       type: "text",
       id: "l54-intro",
       title: "English in action",
-      description: "Goal of the lesson.",
-      body: "Today you buy travel tickets.",
+      description: "Мета уроку.",
+      body: "Сьогодні «купуєш» проїзні квитки.",
       bullets: [
-        "Read: an information board at a station",
-        "Listen: Jeff and Helena buy train tickets",
-        "Speak: buy a ticket with your teacher",
+        "Читання: інформаційне табло на станції",
+        "Слухання: Jeff і Helena купують квитки на потяг",
+        "Говоріння: купівля квитка з учителем",
       ],
     },
     {
@@ -136,7 +136,7 @@ export const lesson54: Lesson = {
       kicker: "1 · Flashcards",
       title: "Words for the station",
       description:
-        "Say the English, then tap the card to check. You hear it in a computer voice, not the recording.",
+        "Скажи англійською, потім натисни картку, щоб перевірити. Чуєш комп’ютерний голос, не запис.",
       componentKey: "vocab-flip",
       props: { cards: ticketFlashcards.map((c) => ({ ...c })) },
     },
@@ -170,7 +170,7 @@ export const lesson54: Lesson = {
       id: "l54-tickets",
       kicker: "2b",
       title: "The tickets",
-      description: "Listen again.",
+      description: "Послухай ще раз.",
       componentKey: "photo-gallery",
       props: {
         compact: true,
@@ -213,8 +213,8 @@ export const lesson54: Lesson = {
       type: "multipleChoice",
       id: "l54-not-used",
       kicker: "3a",
-      title: "Listen again. Which sentence do the speakers not use?",
-      description: "The speakers do not use one sentence from the box.",
+      title: "Послухай ще раз. Which sentence do the speakers not use?",
+      description: "Один рядок із блоку мовці не використовують.",
       prompt: "Customer sentences:",
       options: [...customerPhrases],
       correctAnswer: NOT_USED_PHRASE,
@@ -224,7 +224,7 @@ export const lesson54: Lesson = {
       id: "l54-order",
       kicker: "3a",
       title: "Put the sentences in the order that you hear them",
-      description: "Tap the sentences in order. Listen to Audio 15 again if you need to.",
+      description: "Натисни речення в тому порядку, в якому чуєш. За потреби знову Audio 15.",
       componentKey: "line-order",
       props: { items: heardOrder },
     },
@@ -247,7 +247,7 @@ export const lesson54: Lesson = {
       id: "l54-helena-info",
       kicker: "4a",
       title: "Helena’s train is to Heathrow",
-      description: "Use the information board, the Useful phrases and the ticket prices.",
+      description: "Користуйся табло, блоком Useful phrases і цінами квитків.",
       componentKey: "lesson54-board",
       props: { src: IMG54("paddington-board.svg"), alt: BOARD_ALT },
     },
@@ -276,7 +276,7 @@ export const lesson54: Lesson = {
       kicker: "4a",
       title: "Read the prompts and make a conversation",
       description:
-        "Say each line with your teacher. Open the hint only to check. Then listen to Audio 17.",
+        "Промовляй кожен рядок із учителем. Підказку відкривай лише для перевірки. Потім Audio 17.",
       prompts: [...helenaPrompts],
       models: [...helenaModels],
       hideModels: true,
@@ -307,7 +307,7 @@ export const lesson54: Lesson = {
       id: "l54-exit",
       kicker: "Exit",
       title: "Now I can buy a travel ticket.",
-      body: "You read an information board, listened to Jeff and Helena, and practised the useful phrases.",
+      body: "Ти прочитав/прочитала табло, послухав/послухала Jeff і Helena й відпрацював/відпрацювала корисні фрази.",
       bullets: [
         "What time is the next train to Heathrow, please?",
         "A ticket for the fast train to Heathrow, please.",
@@ -321,7 +321,8 @@ export const lesson54: Lesson = {
       title: "Homework",
       path: "/hw-54",
       label: "HW54 →",
-      summary: "Ticket words · read the board · a ticket to Oxford · make questions · write a conversation",
+      summary:
+        "Слова для квитків · табло · квиток до Oxford · питання · письмовий діалог",
     },
   ],
 };

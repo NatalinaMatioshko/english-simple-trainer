@@ -267,11 +267,11 @@ export const requestDialogueGaps = [
 
 /** Ex.5b · practise dialogues with teacher */
 export const practiseDialoguePrompts = [
-  "Dialogue 1: You are A. Ask your teacher to clean the living room.",
+  "Діалог 1: ти A. Попроси учителя прибрати вітальню (Can you…?).",
   "Dialogue 2: You are A. Ask to use the computer.",
   "Dialogue 3: You are A. Ask to watch TV at 8.",
-  "Dialogue 4: You are A. Ask your teacher to cook on Monday.",
-  "Now swap: you are B. Answer your teacher’s requests.",
+  "Діалог 4: ти A. Попроси учителя готувати в понеділок.",
+  "Тепер ти B. Відповідай на прохання учителя.",
 ] as const;
 
 /** Ex.6a · situations (one student + teacher) */
@@ -295,7 +295,7 @@ export const roleplayModels = [
 export const finalRequestPrompts = [
   "Make 3 Can you…? requests (from the pictures or class).",
   "Make 2 Can I…? requests (permission).",
-  "Answer your teacher’s 3 requests: Sure / No problem / I’m sorry, I can’t / I’m sorry, you can’t.",
+  "Відповідай на 3 прохання учителя: Sure / No problem / I’m sorry, I can’t / I’m sorry, you can’t.",
 ] as const;
 
 export const finalRequestModels = [

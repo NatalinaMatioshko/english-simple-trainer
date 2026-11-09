@@ -1,0 +1,86 @@
+/* school-days-reading · SB Ex.5 layout (platform colours) */
+
+.sdr-card {
+  margin-top: 0.5rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  background: var(--color-surface);
+}
+
+.sdr-banner {
+  margin: 0;
+  padding: 0.7rem 1rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.sdr-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.65rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.sdr-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.55rem;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+}
+
+.sdr-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.sdr-name {
+  margin: 0 0 0.45rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+
+.sdr-text {
+  margin: 0;
+  line-height: 1.55;
+  color: var(--color-text);
+  font-size: 0.98rem;
+}
+
+.sdr-photo {
+  flex: 0 0 auto;
+  margin: 0;
+  align-self: center;
+  width: min(7.5rem, 28vw);
+}
+
+.sdr-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.35rem;
+  object-fit: cover;
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+}
+
+@media (max-width: 520px) {
+  .sdr-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sdr-photo {
+    width: min(10rem, 70%);
+    margin: 0.25rem auto 0;
+  }
+}

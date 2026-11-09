@@ -212,7 +212,7 @@ export const helenaTranscript = helenaModels.map(
 );
 
 export const practisePrompts = [
-  "Practise the conversation with your teacher. You are Helena.",
+  "Відпрацюй діалог з учителем. Ти — Helena.",
   "Now change: you are the assistant.",
 ] as const;
 

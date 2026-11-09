@@ -2,7 +2,7 @@
  * Images: public/images/lesson46/
  * Audio: public/sounds/Unit_6/RM_A1_SB_U6_R*.mp3
  *
- * Goal: ask and answer about things people often do.
+ * Мета: питати й відповідати про те, що люди часто роблять.
  * Grammar: Present Simple questions he/she/it (Does…?).
  * Vocabulary: jobs around the house.
  */
@@ -708,10 +708,10 @@ export const questionPrompts = [
 ] as const;
 
 export const houseworkSpeakPrompts = [
-  "Ask your teacher: Does he/she cook dinner?",
+  "Запитай учителя: Does he/she cook dinner?",
   "Ask: Who cleans the bathroom in your family?",
   "Ask: How often does he/she walk the dog / do the washing?",
-  "Tell your teacher two jobs you do around the house.",
+  "Два види робіт удома — скажи учителю.",
 ] as const;
 
 /** Extra video · third person singular (he / she + -s). */

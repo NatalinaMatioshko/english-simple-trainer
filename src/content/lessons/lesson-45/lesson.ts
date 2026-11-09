@@ -29,7 +29,7 @@ export const lesson45: Lesson = {
   hasHomework: true,
   topic: "habits · time expressions · Present Simple he/she/it",
   description:
-    "Match time expressions to pictures, read about Erica and Tina, then talk about another person’s good and bad habits with he/she + -s.",
+    "Поєднай часові вирази з картинками, прочитай про Erica і Tina, потім говори про звички іншої людини з he/she + -s.",
   chips: ["in the morning", "he/she + -s", "doesn't + verb"],
   route: "/lessons/45",
   legacyRoute: "/lesson-45",
@@ -66,15 +66,15 @@ export const lesson45: Lesson = {
       type: "text",
       id: "l45-intro",
       title: "Good and bad habits",
-      description: "Goal: talk about another person’s habits.",
-      body: "Today we practise time expressions (in the morning, every day, at the weekend…) and Present Simple with he / she / it: She walks. She doesn’t take the bus.",
+      description: "Мета: говорити про звички іншої людини.",
+      body: "Сьогодні відпрацьовуємо часові вирази й Present Simple з he / she / it: She walks. She doesn’t take the bus.",
     },
     {
       type: "custom",
       id: "l45-time-cards",
       kicker: "Vocabulary",
       title: "Time expressions",
-      description: "Tap: Ukrainian → English.",
+      description: "Tap: українською → англійською.",
       componentKey: "vocab-flip",
       props: {
         cards: timeFlashcards,
@@ -86,7 +86,7 @@ export const lesson45: Lesson = {
       kicker: "1a",
       title: "Match the pictures and the sentences",
       description:
-        "Choose the sentence for each picture. Look at the time words in bold in your head: in the morning, every day, in the evening…",
+        "Речення для кожної картинки. Уяви жирні часові слова: in the morning, every day, in the evening…",
       componentKey: "photo-sentence-match",
       props: {
         options: habitMatchSentences.map((s) => ({ ...s })),
@@ -125,7 +125,7 @@ export const lesson45: Lesson = {
       id: "l45-time-gaps",
       kicker: "3",
       title: "Complete the sentences",
-      description: `Use a time expression: ${timeExpressions.join(" · ")}. Answers can be true for you.`,
+      description: `Використай часовий вираз: ${timeExpressions.join(" · ")}. Відповіді можуть бути правдою про тебе.`,
       items: timeExprGaps.map((g) => ({
         id: g.id,
         before: g.before,
@@ -139,7 +139,7 @@ export const lesson45: Lesson = {
       id: "l45-read-photos",
       kicker: "4a",
       title: "Two friends",
-      description: "Look at the photos. Who has good habits? Who has bad habits?",
+      description: "Подивись на фото. У кого хороші, у кого погані звички?",
       componentKey: "photo-gallery",
       props: {
         images: [
@@ -192,7 +192,7 @@ export const lesson45: Lesson = {
       kicker: "5",
       title: "I → she",
       description:
-        "Change the sentences to she. Remember: she walks / she doesn’t take…",
+        "Зміни речення на she. Пам’ятай: she walks / she doesn’t take…",
       items: iToSheGaps.map((g) => ({
         id: g.id,
         before: g.before,
@@ -206,7 +206,7 @@ export const lesson45: Lesson = {
       kicker: "6",
       title: "Present Simple · he / she / it",
       description:
-        "Most verbs: add -s (arrives). study → studies. watch / go / finish → watches / goes / finishes. Negative: doesn’t + base verb.",
+        "Більшість дієслів: -s (arrives). study → studies. Заперечення: doesn’t + базове дієслово.",
       componentKey: "frequency-grammar",
       props: {
         boxTitle: "Present simple · he / she / it",
@@ -265,7 +265,7 @@ export const lesson45: Lesson = {
       id: "l45-sounds",
       kicker: "7",
       title: "Which sound: /s/, /z/ or /ɪz/?",
-      description: "Choose the ending sound for each verb.",
+      description: "Обери кінцевий звук для кожного дієслова.",
       items: endingSoundItems.map((item) => ({
         id: item.id,
         prompt: item.prompt,
@@ -279,7 +279,7 @@ export const lesson45: Lesson = {
       kicker: "8",
       title: "Complete with the correct form",
       description:
-        "Write the verb in Present Simple (he/she). Use doesn’t + verb when you need a negative.",
+        "Дієслово в Present Simple (he/she). Заперечення: doesn’t + дієслово.",
       items: heSheGaps.map((g) => ({
         id: g.id,
         before: g.before,
@@ -293,7 +293,7 @@ export const lesson45: Lesson = {
       kicker: "9",
       title: "Prepare · notes about a friend",
       description:
-        "Write notes about one friend or family member: good habits and bad habits.",
+        "Нотатки про друга чи родича: хороші й погані звички.",
       componentKey: "write-lists",
       props: {
         lists: [
@@ -315,16 +315,16 @@ export const lesson45: Lesson = {
       id: "l45-speak",
       kicker: "10",
       title: "Speak to your teacher",
-      description: "Use your notes. Say he / she + -s and doesn’t + verb.",
+      description: "Користуйся нотатками. Скажи he / she + -s і doesn’t + дієслово.",
       prompts: [...habitSpeakPrompts],
-      note: "Model: My friend Petro walks to work. He doesn’t drink coffee. He always watches TV in the evening.",
+      note: "Зразок: My friend Petro walks to work. He doesn’t drink coffee. …",
     },
     {
       type: "text",
       id: "l45-exit",
       kicker: "Exit",
       title: "Today you can…",
-      body: "use time expressions; say what another person does / doesn’t do; talk about good and bad habits.",
+      body: "часові вирази; що робить / не робить інша людина; хороші й погані звички.",
       bullets: [
         "She goes to the gym every day.",
         "He doesn’t take the bus.",
@@ -336,7 +336,7 @@ export const lesson45: Lesson = {
       id: "l45-extra",
       kicker: "Extra",
       title: "Practice on Test-English",
-      body: "Optional reading and writing about daily routines.",
+      body: "Додаткове читання й письмо про щоденні рутини.",
       links: [
         {
           href: "https://test-english.com/reading/a1/daily-routines-sportswoman/",
@@ -354,7 +354,7 @@ export const lesson45: Lesson = {
       title: "Homework",
       path: "/hw-45",
       label: "HW45 →",
-      summary: "Time expressions · he/she gaps · write about a friend",
+      summary: "Часові вирази · прогалини he/she · письмо про друга",
     },
   ],
 };

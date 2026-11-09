@@ -159,7 +159,7 @@ export const similarSentencesList = [
 ] as const;
 
 export const similarSentencesPrompts = [
-  "Read your sentences to your teacher.",
+  "Прочитай учителю свої речення.",
 ] as const;
 
 export const similarSentencesModels = [
@@ -308,7 +308,7 @@ export const hankDonnaGaps = [
 ] as const;
 
 export const hankDonnaPrompts = [
-  "Read the dialogue with your teacher. You are Donna.",
+  "Прочитай діалог з учителем. Ти — Donna.",
   "Now change: you are Hank.",
 ] as const;
 
@@ -343,8 +343,8 @@ export const makeQuestions = [
 ] as const;
 
 export const askAnswerPrompts = [
-  "Ask your teacher the six questions from Exercise 9a.",
-  "Now your teacher asks you. Give a short answer and one more sentence.",
+  "Задай учителю шість питань з вправи 9a.",
+  "Тепер учитель питає тебе. Дай коротку відповідь і ще одне речення.",
 ] as const;
 
 export const askAnswerModels = [
@@ -375,15 +375,15 @@ export const pastEventNotes = [
 export const teacherQuestionsList = [
   {
     id: "qs",
-    label: "Questions for your teacher about their day / weekend / holiday",
+    label: "Питання учителю про день / вихідні / відпустку",
     example: "How was your holiday? · Was it hot? · Was it expensive?",
     slots: 5,
   },
 ] as const;
 
 export const pastEventsPrompts = [
-  "Ask your teacher about their day, weekend and holiday. Use your questions from Exercise 10b.",
-  "Now your teacher asks you. Answer with your notes from Exercise 10a.",
+  "Запитай учителя про день, вихідні й відпустку. Використай питання з вправи 10b.",
+  "Тепер учитель питає тебе. Відповідай з нотатками з вправи 10a.",
 ] as const;
 
 export const pastEventsModels = [

@@ -798,6 +798,7 @@ const roadmapLessons: Lesson[] = [
     review: "was/were (L52–53); regular -ed (L43)",
     category: "general",
     status: "next",
+    route: "/lessons/55",
   },
   {
     id: 56,

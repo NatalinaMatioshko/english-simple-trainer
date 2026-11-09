@@ -34,7 +34,7 @@ export const lesson50: Lesson = {
   hasHomework: true,
   topic: "Can I…? / Can you…? · polite requests · housework",
   description:
-    "Unit 6D: listen to Tom and Ana, practise Can I…? / Can you…?, then make requests with your teacher.",
+    "Unit 6D: послухай Tom і Ana, відпрацюй Can I…? / Can you…?, потім роби прохання з учителем.",
   chips: ["Can you…, please?", "Can I…, please?", "Sure. / I’m sorry, I can’t."],
   route: "/lessons/50",
   legacyRoute: "/lesson-50",
@@ -80,8 +80,8 @@ export const lesson50: Lesson = {
       type: "text",
       id: "l50-intro",
       title: "Make requests",
-      description: "Goal from the book.",
-      body: "Today you make polite requests and answer them. Listen to Tom and Ana in their flat, then practise with your teacher.",
+      description: "Мета з підручника.",
+      body: "Сьогодні ввічливо просиш і відповідаєш. Послухай Tom і Ana в квартирі, потім відпрацюй з учителем.",
       bullets: [
         "Can you…, please? — ask someone to do something.",
         "Can I…, please? — ask for permission.",
@@ -94,7 +94,7 @@ export const lesson50: Lesson = {
       kicker: "1",
       title: "Tom and Ana’s flat",
       description:
-        "Look at the pictures. What jobs around the house can you see?",
+        "Подивись на картинки. Які домашні справи бачиш?",
       componentKey: "photo-gallery",
       props: {
         images: requestPhotoMatch.map((p) => ({
@@ -111,7 +111,7 @@ export const lesson50: Lesson = {
       id: "l50-jobs",
       kicker: "1 · Speak",
       title: "Name the jobs",
-      description: "Tell your teacher the job for each picture. No ready sentence yet.",
+      description: "Скажи учителю, яку роботу показує кожне фото. Готового речення ще немає.",
       prompts: [...pictureJobsSpeak],
       models: [...pictureJobsModels],
       hideModels: true,
@@ -121,7 +121,7 @@ export const lesson50: Lesson = {
       id: "l50-match",
       kicker: "1 · Check",
       title: "Match the pictures and the jobs",
-      description: "Choose the job for each picture A–F.",
+      description: "Обери роботу для кожної картинки A–F.",
       componentKey: "photo-sentence-match",
       props: {
         images: requestPhotoMatch.map((p) => ({
@@ -142,7 +142,7 @@ export const lesson50: Lesson = {
       kicker: "2 · 6.17",
       title: "Listen · Tom and Ana",
       description:
-        "Listen and match conversations 1–6 with pictures A–F in Exercise 1.",
+        "Послухай і поєднай діалоги 1–6 із картинками A–F з вправи 1.",
       componentKey: "native-audio",
       props: {
         src: SOUND_U6(17),
@@ -157,7 +157,7 @@ export const lesson50: Lesson = {
       id: "l50-listen-match",
       kicker: "2",
       title: "Match conversations 1–6 → pictures A–F",
-      description: "Listen again if you need to.",
+      description: "За потреби послухай ще раз.",
       items: listenMatchConversations.map((q) => ({
         id: q.id,
         prompt: q.prompt,
@@ -171,7 +171,7 @@ export const lesson50: Lesson = {
       kicker: "3",
       title: "Who agrees — Tom or Ana?",
       description:
-        "Listen again. Who agrees to do the jobs? Write T (Tom) or A (Ana).",
+        "Послухай ще раз. Who agrees to do the jobs? Write T (Tom) or A (Ana).",
       items: tomAnaWhoAgrees.map((q) => ({
         id: q.id,
         prompt: q.prompt,
@@ -184,7 +184,7 @@ export const lesson50: Lesson = {
       id: "l50-phrases",
       kicker: "4 · Useful phrases",
       title: "Make requests · say yes / no",
-      description: "Read the box. Then listen again (6.17) for Exercise 4a.",
+      description: "Прочитай блок. Потім знову 6.17 для вправи 4a.",
       body: "Making requests · Saying yes · Saying no",
       bullets: [
         "Can I (use your bike), please?",
@@ -192,14 +192,14 @@ export const lesson50: Lesson = {
         "Yes, you can. · Yes, I can. · Sure. · No problem.",
         "I’m sorry, I can’t. · I’m sorry, you can’t.",
       ],
-      note: "Can I = permission for me. Can you = I ask you to do it.",
+      note: "Can I = дозвіл для мене. Can you = прошу тебе зробити.",
     },
     {
       type: "multipleChoiceGroup",
       id: "l50-how-many",
       kicker: "4a",
       title: "How many requests?",
-      description: "Listen to 6.17 again. How many requests do the speakers make?",
+      description: "Знову 6.17. Скільки прохань роблять мовці?",
       items: howManyRequestsQuiz.map((q) => ({
         id: q.id,
         prompt: q.prompt,
@@ -212,7 +212,7 @@ export const lesson50: Lesson = {
       id: "l50-audio-18",
       kicker: "4b · 6.18",
       title: "Listen and repeat",
-      description: "Repeat the useful phrases with your teacher.",
+      description: "Повтори корисні фрази з учителем.",
       componentKey: "native-audio",
       props: {
         src: SOUND_U6(18),
@@ -227,7 +227,7 @@ export const lesson50: Lesson = {
       id: "l50-chunks",
       kicker: "Chunks",
       title: "Request language",
-      description: "Tap UA → EN if you need extra support.",
+      description: "Tap: українською → англійською, якщо потрібна підтримка.",
       componentKey: "vocab-flip",
       props: { cards: requestFlashcards },
     },
@@ -236,7 +236,7 @@ export const lesson50: Lesson = {
       id: "l50-dialogues",
       kicker: "5a",
       title: "Complete the conversations",
-      description: "Use phrases from the Useful phrases box.",
+      description: "Використай фрази з блоку Useful phrases.",
       chips: [
         "Can I",
         "Can you",
@@ -260,9 +260,9 @@ export const lesson50: Lesson = {
       kicker: "5b",
       title: "Practise the conversations",
       description:
-        "Take turns with your teacher (not pairs). Read dialogues 1–4 aloud.",
+        "По черзі з учителем (не в парах). Прочитай діалоги 1–4 вголос.",
       prompts: [...practiseDialoguePrompts],
-      note: "You are A, then swap — you are B.",
+      note: "Ти A, потім міняєшся — ти B.",
     },
     {
       type: "speakingPrompt",
@@ -270,29 +270,29 @@ export const lesson50: Lesson = {
       kicker: "6a",
       title: "Think of some requests",
       description:
-        "Choose 2–3 situations. Make requests with your teacher. Take turns.",
+        "Обери 2–3 ситуації. Роби прохання з учителем. По черзі.",
       prompts: [...roleplayPrompts],
       models: [...roleplayModels],
       hideModels: true,
-      note: "Not group work — you and your teacher change roles.",
+      note: "Не групова робота — ти й учитель міняєтесь ролями.",
     },
     {
       type: "speakingPrompt",
       id: "l50-final",
       kicker: "Final",
       title: "5 requests + answers",
-      description: "No cards. Make requests, then answer your teacher.",
+      description: "Без карток. Роби прохання, потім відповідай учителю.",
       prompts: [...finalRequestPrompts],
       models: [...finalRequestModels],
       hideModels: true,
-      note: "Delayed correction only on 3: Can I/Can you · please · I’m sorry, I/you can’t.",
+      note: "Виправлення лише по 3: Can I/Can you · please · I’m sorry, I/you can’t.",
     },
     {
       type: "text",
       id: "l50-exit",
       kicker: "Exit",
       title: "Now I can make requests.",
-      body: "You listened to Tom and Ana, used Can I…? / Can you…?, and practised real situations.",
+      body: "Ти послухав Tom і Ana, використав Can I…? / Can you…? і відпрацював реальні ситуації.",
       bullets: [
         "Can you…, please? · Can I…, please?",
         "Sure. · No problem.",
@@ -305,7 +305,7 @@ export const lesson50: Lesson = {
       title: "Homework",
       path: "/hw-50",
       label: "HW50 →",
-      summary: "Chunks + test · Tom/Ana · dialogues 5a",
+      summary: "Chunks + тест · Tom/Ana · діалоги 5a",
     },
   ],
 };

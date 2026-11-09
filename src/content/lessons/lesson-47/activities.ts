@@ -2,7 +2,7 @@
  * Images: public/images/lesson47/
  * Audio: public/sounds/Unit_6/RM_A1_SB_U6_R{13–16}.mp3
  *
- * Goal: ask and answer about things you can and can’t do.
+ * Мета: питати й відповідати про те, що ти вмієш і не вмієш.
  * Grammar: can / can’t for ability.
  * Vocabulary: skills.
  */
@@ -399,7 +399,7 @@ export const VIDEO_ID = "o4fIGY9cWVc";
 
 export const videoDiscussPrompts = [
   "Watch again if you need to. Who do you hear — I, you, he, she, we, they?",
-  "Tell your teacher three sentences from the video. Use he or she.",
-  "Ask your teacher: Who is he? Who is she? What do they do?",
-  "Now about you: What can you do? What can’t you do? Tell your teacher.",
+  "Три речення з відео — скажи учителю. he або she.",
+  "Запитай учителя: Who is he? Who is she? What do they do?",
+  "Про тебе: What can you do? What can’t you do? Скажи учителю.",
 ] as const;
