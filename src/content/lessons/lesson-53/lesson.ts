@@ -47,7 +47,7 @@ export const lesson53: Lesson = {
   hasHomework: true,
   topic: "was / were questions · there was / there were questions · adjectives",
   description:
-    "Adjectives and their opposites, three short conversations, was / were questions, then ask and answer about your day, weekend and holiday.",
+    "Прикметники й протилежності, три короткі діалоги, питання was / were, потім питання й відповіді про день, вихідні й відпустку.",
   chips: ["How was it?", "Was it hot? — Yes, it was.", "Were there a lot of people?"],
   route: "/lessons/53",
   legacyRoute: "/lesson-53",
@@ -85,7 +85,7 @@ export const lesson53: Lesson = {
       id: "l53-review-ordinals",
       kicker: "Review · Numbers",
       title: "Write the word for each number",
-      description: "Lesson 52, Exercise 3a. Write the word from the box for each number.",
+      description: "Урок 52, вправа 3a. Напиши слово з блоку для кожного числа.",
       componentKey: "match-grid",
       props: {
         box: [...reviewOrdinalBox],
@@ -103,7 +103,7 @@ export const lesson53: Lesson = {
       id: "l53-review-was-were",
       kicker: "Review · was / were",
       title: "Choose the correct alternatives",
-      description: "Lesson 52, Exercise 8.",
+      description: "Урок 52, вправа 8.",
       items: reviewChooseWasWere.map((c) => ({
         id: c.id,
         before: c.before,
@@ -119,8 +119,8 @@ export const lesson53: Lesson = {
       type: "text",
       id: "l53-intro",
       title: "How was it?",
-      description: "Goal of the lesson.",
-      body: "Today you ask and answer about past events.",
+      description: "Мета уроку.",
+      body: "Сьогодні питаєш і відповідаєш про події в минулому.",
       bullets: [
         "Grammar: was / were (questions) · there was / were (questions)",
         "Vocabulary: adjectives — cold / hot, fast / slow…",
@@ -133,7 +133,7 @@ export const lesson53: Lesson = {
       kicker: "1 · Vocabulary",
       title: "Match adjectives 1–8 with their opposites",
       description:
-        "Drag each word from the box to its opposite. On a phone: tap a word, then tap the gap. Tap a filled gap to take the word back.",
+        "Перетягни слово з блоку до протилежного. На телефоні: слово → прогалина. Натисни заповнену прогалину, щоб повернути слово.",
       componentKey: "word-drag-match",
       props: {
         items: adjectiveItems.map((a) => ({ ...a })),
@@ -146,7 +146,7 @@ export const lesson53: Lesson = {
       kicker: "1 · Flashcards",
       title: "Adjectives",
       description:
-        "Say the English word, then tap the card to check. You hear the word in a computer voice, not the recording.",
+        "Скажи англійське слово, потім натисни картку. Чуєш комп’ютерний голос, не запис.",
       componentKey: "vocab-flip",
       props: { cards: adjectiveFlashcards.map((c) => ({ ...c })) },
     },
@@ -170,7 +170,7 @@ export const lesson53: Lesson = {
       kicker: "2 · Say it",
       title: "Say the opposites",
       description:
-        "Tap a word or 🔊 to hear it again (computer voice, not the recording).",
+        "Слово або 🔊 — почути знову (комп’ютерний голос, не запис).",
       componentKey: "highlight-sentences",
       props: { sentences: adjectivePairSentences },
     },
@@ -210,7 +210,7 @@ export const lesson53: Lesson = {
       id: "l53-audio-13",
       kicker: "5a · Audio 13",
       title: "Listen to three conversations",
-      description: "Listen and match conversations 1–3 with photos A–C.",
+      description: "Послухай і поєднай діалоги 1–3 із фото A–C.",
       componentKey: "native-audio",
       props: {
         src: AUDIO53(13),
@@ -256,7 +256,7 @@ export const lesson53: Lesson = {
       kicker: "6 · Grammar",
       title: "was / were (questions) · there was / were (questions)",
       description:
-        "Read the grammar box and choose the correct alternatives. Also in the box: Were we / they with you? — Yes, we / they were. / No, we / they weren’t. · What was it about? · What food was there at the party?",
+        "Прочитай grammar box і обери правильні варіанти. Also in the box: Were we / they with you? — Yes, we / they were. / No, we / they weren’t. · What was it about? · What food was there at the party?",
       items: grammarQuestionGaps.map((g) => ({
         id: g.id,
         before: g.before,
@@ -271,7 +271,7 @@ export const lesson53: Lesson = {
       id: "l53-audio-14",
       kicker: "7a · Audio 14",
       title: "Listen to four conversations",
-      description: "Notice the pronunciation of was and were.",
+      description: "Зверни увагу на вимову was і were.",
       componentKey: "native-audio",
       props: {
         src: AUDIO53(14),
@@ -287,7 +287,7 @@ export const lesson53: Lesson = {
       kicker: "7a–b",
       title: "Notice was and were — then repeat",
       description:
-        "Questions and answers from conversations 1–4. Listen to Audio 14 again and repeat. Tap a highlighted word or 🔊 to hear it (computer voice).",
+        "Питання й відповіді з діалогів 1–4. Знову Audio 14 і повтор. Натисни підсвічене слово або 🔊 (комп’ютерний голос).",
       componentKey: "highlight-sentences",
       props: { sentences: wasWereDialogueSentences.map((s) => ({ ...s })) },
     },
@@ -339,7 +339,7 @@ export const lesson53: Lesson = {
       id: "l53-prepare",
       kicker: "10a · Prepare",
       title: "Make notes about past events",
-      description: "Words only, not sentences.",
+      description: "Лише слова, не речення.",
       componentKey: "write-lists",
       props: { lists: pastEventNotes.map((l) => ({ ...l })) },
     },
@@ -365,7 +365,7 @@ export const lesson53: Lesson = {
       id: "l53-exit",
       kicker: "Exit",
       title: "Now I can ask and answer about past events.",
-      body: "You learned adjectives and their opposites, listened to three conversations and asked was / were questions.",
+      body: "Ти вивчив прикметники й протилежності, послухав три діалоги й поставив питання was / were.",
       bullets: [
         "How was your weekend? — It was great.",
         "Was it hot? — Yes, it was. · Were you cold? — No, I wasn’t.",
@@ -378,7 +378,7 @@ export const lesson53: Lesson = {
       title: "Homework",
       path: "/hw-53",
       label: "HW53 →",
-      summary: "Adjectives · opposites · was / were dialogues · questions · write about your weekend or holiday",
+      summary: "Прикметники · протилежності · діалоги was / were · питання · письмо про вихідні чи відпустку",
     },
   ],
 };

@@ -347,8 +347,8 @@ export const familyBirthdaysList = [
 ] as const;
 
 export const familyBirthdayPrompts = [
-  "Tell your teacher about two people in your family: whose birthday is it, and when?",
-  "Ask your teacher: When is your birthday?",
+  "Розкажи учителю про двох у сім’ї: чий день народження й коли?",
+  "Запитай учителя: When is your birthday?",
 ] as const;
 
 export const familyBirthdayModels = [
@@ -444,7 +444,7 @@ export const trueForYouWasWere = [
 ] as const;
 
 export const compareSentencesPrompts = [
-  "Read your seven sentences to your teacher.",
+  "Прочитай учителю сім речень.",
   "Your teacher reads their sentences. Which ones are the same?",
 ] as const;
 
@@ -491,7 +491,7 @@ export const teacherDaysNotes = [
 ] as const;
 
 export const retellPrompts = [
-  "Tell your teacher’s good days back to your teacher — use he / she.",
+  "Перекажи учителю його/її good days — використай he / she.",
   "Say when, where and who with for each day.",
   "Finish: It was amazing / great / really good.",
 ] as const;

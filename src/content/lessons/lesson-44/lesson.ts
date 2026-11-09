@@ -43,7 +43,7 @@ export const lesson44: Lesson = {
   hasHomework: true,
   topic: "food · drink · frequency · order food and a drink",
   description:
-    "Food and drink vocabulary, frequency adverbs, then order food and a drink in a café.",
+    "Лексика їжі й напоїв, наречення частоти, потім замовлення в кафе.",
   chips: ["never → always", "How often…?", "I’d like…, please"],
   route: "/lessons/44",
   legacyRoute: "/lesson-44",
@@ -97,15 +97,15 @@ export const lesson44: Lesson = {
       type: "text",
       id: "l44-intro",
       title: "Food and drink",
-      description: "Goal: talk about healthy habits with frequency adverbs.",
-      body: "Today we learn food and drink words, listen to Tom, and practise always / usually / often / sometimes / never. Then we order food and a drink in a café.",
+      description: "Мета: говорити про звички з нареченнями частоти.",
+      body: "Сьогодні вчимо слова їжі й напоїв, слухаємо Tom і відпрацьовуємо always / usually / often / sometimes / never. Потім замовляємо в кафе.",
     },
     {
       type: "custom",
       id: "l44-vocab",
       kicker: "Vocabulary",
       title: "Food and drink words",
-      description: "Tap a card: Ukrainian → English. Hear the English word.",
+      description: "Натисни картку: українською → англійською. Почуй англійське слово.",
       componentKey: "vocab-flip",
       props: {
         cards: foodFlashcards,
@@ -116,7 +116,7 @@ export const lesson44: Lesson = {
       id: "l44-match",
       kicker: "1a",
       title: "Match the photos and the words",
-      description: "Choose the word for each photo. Then listen and check (5.10).",
+      description: "Обери слово для кожного фото. Потім послухай і перевір (5.10).",
       componentKey: "photo-sentence-match",
       props: {
         images: foodPhotoMatch.map((p) => ({
@@ -147,7 +147,7 @@ export const lesson44: Lesson = {
       id: "l44-audio-r11",
       kicker: "2 · 5.11",
       title: "Listen to the words",
-      description: "Do the sounds in blue sound the same or different?",
+      description: "Чи однаково звучать виділені синім звуки?",
       componentKey: "native-audio",
       props: {
         src: SOUND_U5(11),
@@ -163,7 +163,7 @@ export const lesson44: Lesson = {
       kicker: "2",
       title: "Same or different?",
       description:
-        "Listen to the words. Do the sounds in blue sound the same or different?",
+        "Послухай слова. Чи однаково звучать виділені синім?",
       componentKey: "same-or-different",
       props: {
         items: foodSoundPairs.map((p) => ({ ...p })),
@@ -174,7 +174,7 @@ export const lesson44: Lesson = {
       id: "l44-healthy",
       kicker: "3",
       title: "Make a list of food and drink",
-      description: "Make a list of food and drink which is:",
+      description: "Склади список їжі й напоїв, які:",
       componentKey: "write-lists",
       props: {
         lists: [
@@ -201,7 +201,7 @@ export const lesson44: Lesson = {
       kicker: "4 · 5.12",
       title: "Listen to a radio programme",
       description:
-        "a Tick the food and drink they talk about.  b Listen again. What does Tom eat and drink?",
+        "a Tick the food and drink they talk about.  b Послухай ще раз. What does Tom eat and drink?",
       componentKey: "native-audio",
       props: {
         src: SOUND_U5(12),
@@ -226,8 +226,8 @@ export const lesson44: Lesson = {
       type: "custom",
       id: "l44-tom-eat",
       kicker: "b",
-      title: "Listen again. What does Tom eat and drink?",
-      description: "Write what Tom eats and drinks.",
+      title: "Послухай ще раз. What does Tom eat and drink?",
+      description: "Напиши, що їсть і пиє Tom.",
       componentKey: "write-lists",
       props: {
         lists: [
@@ -240,7 +240,7 @@ export const lesson44: Lesson = {
           },
         ],
       },
-      note: "Model: tea (always) · no coffee · no sugar · cakes (often) · chocolate (usually) · fish/salad (sometimes) · meat/chicken (often)",
+      note: "Зразок: tea (always) · no coffee · … · meat/chicken (often)",
     },
     {
       type: "custom",
@@ -248,7 +248,7 @@ export const lesson44: Lesson = {
       kicker: "5",
       title: "Complete the diagram",
       description:
-        "Read sentences a–d from the radio programme. Complete the diagram with the words in bold.",
+        "Прочитай речення a–d з радіопрограми. Заповни діаграму жирними словами.",
       componentKey: "frequency-scale",
       props: {
         options: [...frequencyAdverbs],
@@ -271,7 +271,7 @@ export const lesson44: Lesson = {
       id: "l44-grammar",
       kicker: "6 · Grammar",
       title: "Present simple with frequency adverbs",
-      description: "Read the grammar box and choose the correct alternatives.",
+      description: "Прочитай grammar box і обери правильні варіанти.",
       componentKey: "frequency-grammar",
       props: {
         boxTitle: "Present simple with frequency adverbs",
@@ -289,7 +289,7 @@ export const lesson44: Lesson = {
       kicker: "7 · 5.13",
       title: "Listen and underline the stressed syllables",
       description:
-        "a Listen and underline the stressed syllables in the words in blue.  b Listen again and repeat.",
+        "a Підкресли наголос у словах синім. b Послухай ще раз і повтори.",
       componentKey: "native-audio",
       props: {
         src: SOUND_U5(13),
@@ -304,7 +304,7 @@ export const lesson44: Lesson = {
       id: "l44-stress",
       kicker: "a",
       title: "Underline the stressed syllables",
-      description: "Tap the stressed syllable(s) in the blue words.",
+      description: "Натисни на наголошений склад(и) у словах, виділених синім.",
       componentKey: "stress-syllable",
       props: {
         items: frequencyStressItems.map((item) => ({
@@ -334,7 +334,7 @@ export const lesson44: Lesson = {
       kicker: "8a",
       title: "Complete the sentences with frequency adverbs",
       description:
-        "Complete the sentences with frequency adverbs so they are true for you. Write the words.",
+        "Доповни речення нареченнями частоти так, щоб вони були правдою про тебе. Напиши слова.",
       chips: [...frequencyAdverbs],
       items: personalFrequencyGaps.map((g) => ({
         id: g.id,
@@ -348,7 +348,7 @@ export const lesson44: Lesson = {
       id: "l44-personal-b",
       kicker: "8b",
       title: "Compare your answers",
-      description: "Compare your answers with your teacher.",
+      description: "Порівняй свої відповіді з учителем.",
       prompts: ["I sometimes have cakes for breakfast!"],
     },
     {
@@ -368,7 +368,7 @@ export const lesson44: Lesson = {
       id: "l44-speak-qa",
       kicker: "9b",
       title: "Ask and answer the questions",
-      description: "Ask your teacher and answer the questions in Exercise 9a.",
+      description: "Запитай учителя й відповідай на питання з вправи 9a.",
       prompts: howOftenWordOrder.map((q) => q.answer),
       note: "A: How often do you have breakfast at work? B: I never have breakfast at work. I always have breakfast at home.",
     },
@@ -378,7 +378,7 @@ export const lesson44: Lesson = {
       id: "l44-part2",
       kicker: "Part 2",
       title: "English in action",
-      description: "Goal: order food and a drink.",
+      description: "Мета: замовити їжу й напій.",
       body: "",
     },
     {
@@ -406,7 +406,7 @@ export const lesson44: Lesson = {
       id: "l44-menu",
       kicker: "1",
       title: "Look at the menu",
-      description: "What food and drinks has the café got?",
+      description: "Яку їжу й напої є в кафе?",
       componentKey: "photo-gallery",
       props: {
         wideGrid: true,
@@ -428,7 +428,7 @@ export const lesson44: Lesson = {
       id: "l44-audio-r14",
       kicker: "2 · 5.14",
       title: "Listen and tick Ela’s food and drink",
-      description: "Listen and tick Ela’s food and drink on the menu in Exercise 1.",
+      description: "Послухай і відміть їжу й напої Ela в меню з вправи 1.",
       componentKey: "native-audio",
       props: {
         src: SOUND_U5(14),
@@ -456,7 +456,7 @@ export const lesson44: Lesson = {
       id: "l44-ela-gaps",
       kicker: "3",
       title: "Listen again and complete the conversation",
-      description: "Write the missing words.",
+      description: "Допиши пропущені слова.",
       items: elaDialogueGaps.map((g) => ({
         id: g.id,
         before: g.before,
@@ -470,7 +470,7 @@ export const lesson44: Lesson = {
       kicker: "4a",
       title: "Useful phrases",
       description:
-        "Match 1–5 with a–e in the Useful phrases box. Then listen and check your answers.",
+        "Поєднай 1–5 з a–e у Useful phrases. Потім послухай і перевір.",
       componentKey: "phrase-match",
       props: {
         leftHeading: "Café worker",
@@ -513,7 +513,7 @@ export const lesson44: Lesson = {
       kicker: "5a",
       title: "Put the conversation in the correct order",
       description:
-        "Tap the lines in the correct order. Then listen and check your answers.",
+        "Натисни рядки в правильному порядку. Потім послухай і перевір.",
       componentKey: "line-order",
       props: {
         startId: "g",
@@ -540,7 +540,7 @@ export const lesson44: Lesson = {
       kicker: "5b",
       title: "Practise the conversation",
       description:
-        "Practise the conversation with your teacher. Take turns: you are the customer, then the café worker.",
+        "Відпрацюй діалог з учителем. По черзі: ти клієнт, потім працівник кафе.",
       prompts: [...cafeR16Transcript],
     },
     {
@@ -549,7 +549,7 @@ export const lesson44: Lesson = {
       kicker: "6",
       title: "Roleplay a conversation in a café",
       description:
-        "Roleplay a conversation in a café with your teacher. Order food and a drink. Use the menu in Exercise 1.",
+        "Відіграй діалог у кафе з учителем. Замов їжу й напій. Меню — у вправі 1.",
       prompts: [
         "I’d like a cheese sandwich, please.",
         "White bread, please. / Brown bread, please.",
@@ -564,7 +564,7 @@ export const lesson44: Lesson = {
       id: "l44-extra-posters",
       kicker: "Extra",
       title: "More food vocabulary",
-      description: "Look at the posters. Useful words for food, drink and measures.",
+      description: "Подивись на плакати. Корисні слова про їжу, напої й міри.",
       componentKey: "photo-gallery",
       props: {
         wideGrid: true,
@@ -595,7 +595,7 @@ export const lesson44: Lesson = {
       id: "l44-extra-videos",
       kicker: "Extra",
       title: "Watch the videos",
-      description: "Food vocabulary videos — watch and listen.",
+      description: "Відео з лексикою їжі — дивись і слухай.",
       componentKey: "native-video",
       props: {
         videos: [
@@ -637,7 +637,7 @@ export const lesson44: Lesson = {
       title: "HW44",
       path: "/hw-44",
       label: "HW44 →",
-      summary: "Food flashcards, frequency practice, How often…?",
+      summary: "Flashcards їжі, частота, How often…?",
     },
   ],
 };

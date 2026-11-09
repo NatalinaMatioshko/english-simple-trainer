@@ -5,7 +5,7 @@ import "./categoryTable.css";
 type Category = {
   id: string;
   label: string;
-  /** Built-in icon key: water · land · plants · air · directions */
+  /** Built-in icon key: water · land · plants · air · directions · travel · watch · live · play · talk */
   icon?: string;
 };
 
@@ -68,6 +68,44 @@ function CategoryIcon({ icon }: { icon?: string }) {
         <svg {...common}>
           <circle cx="12" cy="12" r="8.5" />
           <path d="M12 6.5l2 5.5-2 5.5-2-5.5z" />
+        </svg>
+      );
+    case "travel":
+      return (
+        <svg {...common}>
+          <rect x="3" y="8" width="18" height="9" rx="2" />
+          <path d="M3 12h18" />
+          <circle cx="7" cy="18" r="1.8" fill="currentColor" stroke="none" />
+          <circle cx="17" cy="18" r="1.8" fill="currentColor" stroke="none" />
+          <path d="M6 8V6h12v2" />
+        </svg>
+      );
+    case "watch":
+      return (
+        <svg {...common}>
+          <rect x="4" y="6" width="16" height="11" rx="1.5" />
+          <path d="M8 20h8" />
+          <path d="M10 20v-3M14 20v-3" />
+        </svg>
+      );
+    case "live":
+      return (
+        <svg {...common}>
+          <path d="M4 11l8-6 8 6v9H4z" />
+          <path d="M10 20v-6h4v6" />
+        </svg>
+      );
+    case "play":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="7.5" />
+          <path d="M10.5 9.5v5l4.5-2.5z" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case "talk":
+      return (
+        <svg {...common}>
+          <path d="M5 6h14a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
         </svg>
       );
     default:

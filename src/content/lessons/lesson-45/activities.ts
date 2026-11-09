@@ -275,7 +275,7 @@ export const endingSoundItems = [
 ] as const;
 
 export const habitSpeakPrompts = [
-  "Choose a friend or family member. Tell your teacher three good habits.",
+  "Обери друга чи родича. Скажи учителю три хороші звички.",
   "Tell your teacher three bad habits for the same person.",
   "Use he or she + -s / doesn't + verb.",
 ] as const;

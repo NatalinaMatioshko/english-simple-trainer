@@ -1,0 +1,85 @@
+/* Lesson 55 · SB word map (8A Ex.2a) */
+
+.l55-wordmap {
+  position: relative;
+  width: 100%;
+  max-width: 36rem;
+  margin: 0.5rem auto 1rem;
+  aspect-ratio: 1 / 0.92;
+  min-height: 16rem;
+}
+
+.l55-wordmap-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.l55-wordmap-line {
+  stroke: color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
+  stroke-width: 0.65;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.l55-wordmap-hub {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: clamp(4.5rem, 18vw, 6.5rem);
+  height: clamp(4.5rem, 18vw, 6.5rem);
+  padding: 0.35rem;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+  color: var(--color-text);
+  font-weight: 800;
+  line-height: 1.15;
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--color-text) 8%, transparent);
+  z-index: 2;
+}
+
+.l55-wordmap-num {
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--color-primary) 80%, var(--color-text));
+}
+
+.l55-wordmap-verb {
+  font-size: 0.88rem;
+  text-transform: lowercase;
+}
+
+.l55-wordmap-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  max-width: min(9rem, 38vw);
+  padding: 0;
+  text-align: center;
+  color: var(--color-text);
+  font-size: clamp(0.68rem, 2.8vw, 0.82rem);
+  font-weight: 650;
+  line-height: 1.25;
+  text-shadow:
+    0 0 6px var(--color-surface),
+    0 0 4px var(--color-surface);
+  z-index: 1;
+}
+
+@media (max-width: 480px) {
+  .l55-wordmap {
+    max-width: 100%;
+    min-height: 19rem;
+  }
+
+  .l55-wordmap-label {
+    max-width: min(7.5rem, 42vw);
+    font-size: 0.66rem;
+  }
+}

@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "55": "/images/lesson55/photo-a-bike.png",
   "54": "/images/lesson54/trains-to-heathrow.png",
   "53": "/images/lesson53/listen-a-mountain.png",
   "52": "/images/lesson52/good-day-3-party.png",
@@ -46,6 +47,21 @@ export function homeworkHref(
 
 export const homeworkByLesson = [
   {
+    id: "55",
+    title: "When I was young",
+    href: "/hw-55",
+    tasks: [
+      { type: "text", text: "Flashcards: verb phrases (UA→EN)" },
+      { type: "text", text: "Word map: travel / watch / live / play / talk" },
+      { type: "text", text: "Sort verbs: /t/ · /d/ · /ɪd/" },
+      { type: "text", text: "Past Simple: school sentences (8a)" },
+      {
+        type: "text",
+        text: "Write: 4 childhood sentences (2 true, 2 false) + short talk (5–7 sentences)",
+      },
+    ],
+  },
+  {
     id: "54",
     title: "Buy travel tickets",
     href: "/hw-54",
@@ -55,6 +71,11 @@ export const homeworkByLesson = [
       { type: "text", text: "Complete a conversation: a ticket to Oxford" },
       { type: "text", text: "Make sentences: what time / next train / Cardiff?" },
       { type: "text", text: "Write a conversation: a ticket to Swansea (8–10 lines)" },
+      {
+        type: "text",
+        text: "Check and reflect: compass · places · WH-questions · months · was/were · adjectives",
+      },
+      { type: "text", text: "Reflect 1–5: place · good days · past events · travel tickets" },
     ],
   },
   {

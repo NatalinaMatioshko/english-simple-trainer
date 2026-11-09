@@ -67,7 +67,7 @@ export const lesson37: Lesson = {
       description: "Прочитай два речення вголос. Потім скажи їх викладачу.",
       body: "",
       bullets: ["I work every day.", "I am working now."],
-      note: "Remember. every day / usually / often → Present Simple. now / right now / at the moment → am / is / are + -ing.",
+      note: "Пам’ятай: every day / usually / often → Present Simple. now / right now / at the moment → am / is / are + -ing.",
     },
     {
       type: "vocabulary",
@@ -83,7 +83,7 @@ export const lesson37: Lesson = {
       kicker: "3 · Speak",
       title: "Time markers",
       description:
-        "Take turns with your teacher. Викладач каже маркер — ти кажеш речення з одним із шести дієслів.",
+        "По черзі з учителем. Учитель каже маркер — ти будуєш речення з одним із шести дієслів.",
       prompts: markerPrompts,
       note: "usually / often / always / sometimes / never — перед дієсловом. every day — в кінці. Model: Teacher: usually → You: I usually read. Teacher: right now → You: I am sitting right now.",
     },
@@ -93,9 +93,9 @@ export const lesson37: Lesson = {
       kicker: "4 · Speak",
       title: "The same verb twice",
       description:
-        "Take turns with your teacher. Для кожного дієслова скажи два речення.",
+        "По черзі з учителем. Для кожного дієслова скажи два речення.",
       prompts: sameVerbPrompts,
-      note: "Model. You: I drink every day. I am drinking now. Teacher: I talk every day. I am talking now.",
+      note: "Зразок. You: I drink every day. I am drinking now. Teacher: I talk every day. I am talking now.",
     },
     {
       type: "speakingPrompt",
@@ -105,7 +105,7 @@ export const lesson37: Lesson = {
       description:
         "Прочитай питання вголос і відповідай правдою. Потім запитай викладача.",
       prompts: [...lesson37AskPrompts],
-      note: "Model. Teacher: What do you do every day? You: I work every day. I read every day. Teacher: What are you doing now? You: I am sitting. I am talking.",
+      note: "Зразок. Teacher: What do you do every day? … Teacher: What are you doing now? …",
     },
     {
       type: "speakingPrompt",
@@ -115,7 +115,7 @@ export const lesson37: Lesson = {
       description:
         "Подивись на себе і на викладача. Скажи, що відбувається зараз.",
       prompts: [...lesson37LookPrompts],
-      note: "Then contrast. I sit at my desk every day. I am sitting now.",
+      note: "Потім контраст. I sit at my desk every day. I am sitting now.",
     },
     {
       type: "custom",
@@ -125,7 +125,7 @@ export const lesson37: Lesson = {
       description:
         "Дві картки в ряд — натисни, щоб збільшити. Ліва: відповідай викладачу на питання. Права: скажи 10 речень про зараз (am / is / are + -ing).",
       componentKey: "lesson37-pictures",
-      note: "Speak with your teacher. Full sentences. Left: They are in the kitchen. They are cooking. Right: They are playing football. She is reading a book. Then contrast: I cook every day. They are cooking now.",
+      note: "Говори з учителем. Повні речення. Ліва картка: They are in the kitchen… Потім контраст: I cook every day. They are cooking now.",
     },
     {
       type: "text",
@@ -134,10 +134,10 @@ export const lesson37: Lesson = {
       title: "Can you…?",
       body: "",
       bullets: [
-        "Say the contrast: I work every day. I am working now.",
-        "Do the same with 3 more verbs (eat, drink, read, talk, sit).",
-        "Ask your teacher: What are you doing now?",
-        "Use a marker: usually / often / right now / at the moment.",
+        "Скажи контраст: I work every day. I am working now.",
+        "Те саме з ще 3 дієслами (eat, drink, read, talk, sit).",
+        "Запитай учителя: What are you doing now?",
+        "Використай маркер: usually / often / right now / at the moment.",
       ],
     },
     {

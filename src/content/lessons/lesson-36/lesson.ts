@@ -71,7 +71,7 @@ export const lesson36: Lesson = {
       kicker: "Grammar",
       title: "Remember",
       body: "",
-      note: "I / you / we / they + verb: I get up. They play soccer. Questions: What do you do? · When do you get up? Negative: I don't work at a shop.",
+      note: "I / you / we / they + дієслово: I get up… Питання: What do you do? · When do you get up? Заперечення: I don't work at a shop.",
     },
     {
       type: "multipleChoiceGroup",
@@ -134,7 +134,7 @@ export const lesson36: Lesson = {
       description:
         "Прочитай питання вголос і відповідай про себе. Потім запитай викладача.",
       prompts: [...speakPrompts],
-      note: "Model. Teacher: What do you do in the morning? You: I wake up, I take a shower and I eat breakfast. Teacher: When do you get up? You: I get up at seven.",
+      note: "Зразок. Teacher: What do you do in the morning? … Teacher: When do you get up? …",
     },
     {
       type: "text",

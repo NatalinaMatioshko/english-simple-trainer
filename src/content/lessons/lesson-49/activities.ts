@@ -321,7 +321,7 @@ export const hwPastQuestions = [
  */
 export const scenarioWorkDayPrompts = [
   "Tell yesterday at work: I went to work. I was at work. I worked… I finished at…",
-  "Ask your teacher: Did you work yesterday? What time did you start? Were you tired?",
+  "Запитай учителя: Did you work yesterday? What time did you start? Were you tired?",
   "Contrast: What do you usually do at work? What did you do yesterday at work?",
   "One client story (simple): Yesterday I had a client. He/She wanted… I cut…",
 ] as const;
@@ -336,7 +336,7 @@ export const scenarioWorkDayModels = [
 export const scenarioHomePastPrompts = [
   "Yesterday at home: Did you cook? Did you clean? Did you watch TV?",
   "Tell 4 sentences: Yesterday I cooked… / I didn’t clean… / I watched… / I went to bed at…",
-  "Ask your teacher: What did you do at home yesterday evening?",
+  "Запитай учителя: What did you do at home yesterday evening?",
   "Habits vs yesterday: I usually cook. Yesterday I cooked pasta. / Yesterday I didn’t cook.",
 ] as const;
 
@@ -364,7 +364,7 @@ export const scenarioFoodSkillsModels = [
 export const scenarioWeekendPastPrompts = [
   "Last weekend / yesterday evening free time: Where did you go? Who did you see?",
   "Use was/were: I was at home. I was tired. My friend was… We were…",
-  "Ask your teacher 3 past questions: What did you do? Where did you go? Were you busy?",
+  "Задай учителю 3 питання в минулому: What did you do? Where did you go? Were you busy?",
   "Mini story (5 sentences) with no cards: got up → had → went/stayed → evening → bed.",
 ] as const;
 

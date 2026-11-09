@@ -18,7 +18,15 @@ export function TextSection({ section }: { section: TextSectionType }) {
           <p className="lw-section-desc">{section.description}</p>
         ) : null}
       </div>
-      {section.body ? <p className="lw-section-desc">{section.body}</p> : null}
+      {section.body ? (
+        section.readingBox ? (
+          <div className="lw-reading-passage" role="region" aria-label="Reading text">
+            <p>{section.body}</p>
+          </div>
+        ) : (
+          <p className="lw-section-desc">{section.body}</p>
+        )
+      ) : null}
       {contrastPair ? (
         <div className="lw-contrast-row">
           {contrastPair.map((card) => (

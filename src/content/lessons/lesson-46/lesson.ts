@@ -33,7 +33,7 @@ export const lesson46: Lesson = {
   hasHomework: true,
   topic: "housework · Present Simple questions Does he/she…?",
   description:
-    "Match housework phrases to pictures, listen about Albert and Bella, then ask Does he/she…? questions with your teacher.",
+    "Поєднай фрази про домашні справи з картинками, послухай Albert і Bella, потім питай Does he/she…? з учителем.",
   chips: ["clean / cook / wash", "Does he…?", "Yes, she does."],
   route: "/lessons/46",
   legacyRoute: "/lesson-46",
@@ -70,8 +70,8 @@ export const lesson46: Lesson = {
       type: "text",
       id: "l46-intro",
       title: "Jobs around the house",
-      description: "Goal: ask and answer about things people often do.",
-      body: "Today we learn housework phrases and Present Simple questions with he / she / it: Does she clean the bathroom? Yes, she does.",
+      description: "Мета: питати й відповідати про те, що люди часто роблять.",
+      body: "Сьогодні вчимо фрази про домашні справи й питання Present Simple з he / she / it: Does she clean the bathroom? Yes, she does.",
       bullets: [
         "Grammar: Does he/she…? · Yes, he does. / No, she doesn’t.",
         "Vocabulary: clean, cook, feed, wash, walk the dog, do the washing…",
@@ -82,7 +82,7 @@ export const lesson46: Lesson = {
       id: "l46-vocab",
       kicker: "Vocabulary",
       title: "Housework phrases",
-      description: "Tap: Ukrainian → English.",
+      description: "Tap: українською → англійською.",
       componentKey: "vocab-flip",
       props: {
         cards: choreFlashcards,
@@ -106,7 +106,7 @@ export const lesson46: Lesson = {
       id: "l46-match",
       kicker: "1a",
       title: "Match the pictures and the phrases",
-      description: "Choose the phrase for each picture A–H.",
+      description: "Обери фразу для кожної картинки A–H.",
       componentKey: "photo-sentence-match",
       props: {
         options: choreMatchPhrases.map((s) => ({ ...s })),
@@ -138,7 +138,7 @@ export const lesson46: Lesson = {
       kicker: "2",
       title: "Jobs each person does",
       description:
-        "Look at the pictures again. Say sentences about Thomas, Masaru, Isabella and Milada. Use he / she + -s.",
+        "Знову подивись на картинки. Скажи речення про Thomas, Masaru, Isabella і Milada. he / she + -s.",
       componentKey: "photo-gallery",
       props: {
         compact: true,
@@ -157,16 +157,16 @@ export const lesson46: Lesson = {
       kicker: "2 · Speak",
       title: "Say the sentences aloud",
       description:
-        "Look at the pictures. Tell your teacher what each person does. Use he / she + -s.",
+        "Подивись на картинки. Скажи учителю, що робить кожна людина. Використай he / she + -s.",
       prompts: peopleJobs.map((p) => `${p.name}: …`),
-      note: "Example: Thomas cleans the bathroom and…",
+      note: "Приклад: Thomas cleans the bathroom and…",
     },
     {
       type: "fillBlank",
       id: "l46-collocations",
       kicker: "3",
       title: "Complete the phrases",
-      description: "Use verbs from Exercise 1a: clean, cook, feed, wash.",
+      description: "Дієслова з вправи 1a: clean, cook, feed, wash.",
       items: collocationGaps.map((g) => ({
         id: g.id,
         before: g.before || "___",
@@ -180,7 +180,7 @@ export const lesson46: Lesson = {
       kicker: "4a · 6.5",
       title: "Listen · Albert and Bella",
       description:
-        "Listen to the conversation. Who does the jobs around the house?",
+        "Послухай діалог. Хто робить справи вдома?",
       componentKey: "native-audio",
       props: {
         src: SOUND_U6(5),
@@ -195,7 +195,7 @@ export const lesson46: Lesson = {
       id: "l46-albert-bella",
       kicker: "4a",
       title: "Who does the jobs?",
-      description: "Choose Albert or Bella for each job.",
+      description: "Обери Albert або Bella для кожної справи.",
       items: albertBellaJobs.map((item) => ({
         id: item.id,
         prompt: item.prompt,
@@ -208,7 +208,7 @@ export const lesson46: Lesson = {
       id: "l46-questions",
       kicker: "4b",
       title: "Complete the questions",
-      description: "Listen again if you need to. Write Do or does.",
+      description: "За потреби послухай ще раз. Write Do or does.",
       items: listenQuestionGaps.map((g) => ({
         id: g.id,
         before: g.before ? `${g.before} ` : "",
@@ -222,7 +222,7 @@ export const lesson46: Lesson = {
       kicker: "5",
       title: "Present simple questions: he / she / it",
       description:
-        "Complete the grammar box. Use Does / does / doesn’t. + Yes, she does. − No, she doesn’t. Wh- + does + he/she + verb…?",
+        "Заповни grammar box. Does / does / doesn’t. + Yes, she does. − No, she doesn’t. Wh- + does + he/she + дієслово…?",
       items: doesGrammarGaps.map((g) => ({
         id: g.id,
         before: g.before ? `${g.before} ` : "",
@@ -236,7 +236,7 @@ export const lesson46: Lesson = {
       kicker: "6 · 6.6",
       title: "Pronunciation · does",
       description:
-        "Listen and notice does in questions and short answers. Then repeat with your teacher.",
+        "Послухай і зверни увагу на does у питаннях і коротких відповідях. Потім повтори з учителем.",
       componentKey: "native-audio",
       props: {
         src: SOUND_U6(6),
@@ -252,7 +252,7 @@ export const lesson46: Lesson = {
       kicker: "7",
       title: "Nicholas and Chloe · choose the correct form",
       description:
-        "Chloe talks about her dog, Ronaldo. Tap the correct word in each line.",
+        "Chloe про свого пса Ronaldo. Натисни правильне слово в кожному рядку.",
       componentKey: "frequency-grammar",
       props: {
         boxTitle: "Present simple · do / does + verb",
@@ -274,7 +274,7 @@ export const lesson46: Lesson = {
       id: "l46-order",
       kicker: "8a",
       title: "Make questions",
-      description: "Put the words in order. Use do / does where you need them.",
+      description: "Постав слова в правильному порядку. Використай do / does, де треба.",
       items: questionPrompts.map((item) => ({
         scramble: item.scramble,
         parts: [...item.parts],
@@ -287,16 +287,16 @@ export const lesson46: Lesson = {
       kicker: "8b · Speak",
       title: "Ask and answer with your teacher",
       description:
-        "Use the questions from 8a about a friend or family member. Take turns with your teacher.",
+        "Використай питання з 8a про друга чи родича. По черзі з учителем.",
       prompts: [...houseworkSpeakPrompts],
-      note: "Model: Does your friend live in a flat? — Yes, he does. Who does he live with? — He lives with his parents.",
+      note: "Зразок: Does your friend live in a flat? — Yes, he does. …",
     },
     {
       type: "text",
       id: "l46-exit",
       kicker: "Exit",
       title: "Today you can…",
-      body: "name jobs around the house; ask Does he/she…?; answer Yes, he does. / No, she doesn’t.",
+      body: "назви домашні справи; питай Does he/she…?; відповідай Yes, he does. / No, she doesn’t.",
       bullets: [
         "Does she clean the bathroom? — Yes, she does.",
         "What jobs does he do around the house?",
@@ -309,7 +309,7 @@ export const lesson46: Lesson = {
       kicker: "Extra · Video",
       title: "Third person singular · he / she",
       description:
-        "Watch the video with your teacher. Four short conversations use he / she + -s.",
+        "Подивись відео з учителем. Чотири короткі діалоги з he / she + -s.",
       componentKey: "youtube-video",
       props: {
         videoId: VIDEO_ID,
@@ -321,7 +321,7 @@ export const lesson46: Lesson = {
       id: "l46-video-quiz",
       kicker: "Extra · Video quiz",
       title: "Answer from the video",
-      description: "Listen again and choose the correct answer.",
+      description: "Послухай ще раз і обери правильну відповідь.",
       items: videoQuiz.map((q) => ({
         id: q.id,
         prompt: q.prompt,
@@ -335,7 +335,7 @@ export const lesson46: Lesson = {
       title: "Homework",
       path: "/hw-46",
       label: "HW46 →",
-      summary: "UA→EN cards · picture cards · Does…? gaps · write",
+      summary: "Картки UA→EN · picture cards · прогалини Does…? · письмо",
     },
   ],
 };

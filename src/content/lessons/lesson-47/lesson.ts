@@ -37,7 +37,7 @@ export const lesson47: Lesson = {
   hasHomework: true,
   topic: "skills · can / can’t for ability",
   description:
-    "Match skills to photos, listen about Gloria’s abilities, practise can / can’t, then write club questions in a notebook and speak with your teacher.",
+    "Поєднай навички з фото, послухай про Gloria, відпрацюй can / can’t, запиши питання для клубів і поговори з учителем.",
   chips: ["Can you…?", "Yes, I can.", "No, I can’t."],
   route: "/lessons/47",
   legacyRoute: "/lesson-47",
@@ -79,7 +79,7 @@ export const lesson47: Lesson = {
       id: "l47-intro",
       title: "Skills",
       description: "Unit 6C",
-      body: "Goal: ask and answer about things you can and can’t do.",
+      body: "Мета: питати й відповідати про те, що ти вмієш і не вмієш.",
       bullets: [
         "Grammar: can / can’t for ability",
         "Vocabulary: skills",
@@ -90,7 +90,7 @@ export const lesson47: Lesson = {
       id: "l47-vocab",
       kicker: "Vocabulary",
       title: "Skill phrases",
-      description: "Tap: Ukrainian → English.",
+      description: "Tap: українською → англійською.",
       componentKey: "vocab-flip",
       props: {
         cards: skillFlashcards,
@@ -101,7 +101,7 @@ export const lesson47: Lesson = {
       id: "l47-match",
       kicker: "1a",
       title: "Match photos A–L with skills 1–12",
-      description: "Choose the skill for each picture.",
+      description: "Обери навичку для кожної картинки.",
       componentKey: "photo-sentence-match",
       props: {
         options: skillMatchPhrases.map((s) => ({ ...s })),
@@ -132,7 +132,7 @@ export const lesson47: Lesson = {
       id: "l47-audio-r14",
       kicker: "1c · 6.14",
       title: "Listen · which activities?",
-      description: "Listen. Which activities do you hear?",
+      description: "Послухай. Які активності чуєш?",
       componentKey: "native-audio",
       props: {
         src: SOUND_U6(14),
@@ -165,7 +165,7 @@ export const lesson47: Lesson = {
       id: "l47-website",
       kicker: "2a",
       title: "Look at the website. What does it do?",
-      description: "Discuss with your teacher.",
+      description: "Обговори з учителем.",
       componentKey: "job-site-mock",
       props: {
         siteName: "ChooseYourJob.com",
@@ -195,7 +195,7 @@ export const lesson47: Lesson = {
       kicker: "2b · 6.15",
       title: "Listen · Yusuf and Gloria",
       description:
-        "Listen to the conversation. Tick the things Gloria can do.",
+        "Послухай діалог. Відміть, що вміє Gloria.",
       componentKey: "native-audio",
       props: {
         src: SOUND_U6(15),
@@ -210,7 +210,7 @@ export const lesson47: Lesson = {
       id: "l47-gloria",
       kicker: "2c",
       title: "What can Gloria do?",
-      description: "Tick the skills Gloria can do. (use a computer is ticked in the book.)",
+      description: "Постав галочки: що вміє Gloria. (use a computer уже відмічено в книзі.)",
       componentKey: "tick-list",
       props: {
         items: gloriaSkillTicks.map((t) => ({ ...t })),
@@ -224,7 +224,7 @@ export const lesson47: Lesson = {
       kicker: "3",
       title: "can / can’t for ability",
       description:
-        "Read the grammar box and choose the correct alternatives. After can / can’t we use the base verb (sing, not sings). + Yes, I can. − No, I can’t.",
+        "Прочитай grammar box і обери правильні варіанти. After can / can’t we use the base verb (sing, not sings). + Yes, I can. − No, I can’t.",
       chips: ["can", "can't", "base verb"],
       items: canGrammarGaps.map((g) => ({
         id: g.id,
@@ -241,7 +241,7 @@ export const lesson47: Lesson = {
       kicker: "4a · 6.16",
       title: "Pronunciation · can / can’t",
       description:
-        "Listen. Do the words in blue sound the same or different?",
+        "Послухай. Чи однаково звучають слова, виділені синім?",
       componentKey: "native-audio",
       props: {
         src: SOUND_U6(16),
@@ -256,7 +256,7 @@ export const lesson47: Lesson = {
       id: "l47-same-diff",
       kicker: "4a",
       title: "Same or different?",
-      description: "Listen again if you need to. Then repeat with your teacher (4b).",
+      description: "За потреби послухай ще раз. Потім повтори з учителем (4b).",
       componentKey: "same-or-different",
       props: {
         items: canSoundPairs.map((p) => ({ ...p })),
@@ -269,7 +269,7 @@ export const lesson47: Lesson = {
       kicker: "5",
       title: "Interview · computer club teacher",
       description:
-        "Read the interview for a computer club teacher and choose the correct alternatives.",
+        "Прочитай інтерв’ю для вчителя комп’ютерного клубу й обери правильні варіанти.",
       componentKey: "frequency-grammar",
       props: {
         boxTitle: "can / can’t · questions and short answers",
@@ -286,11 +286,11 @@ export const lesson47: Lesson = {
       kicker: "6a · Prepare",
       title: "Write three questions with can for each job",
       description:
-        "Look at the jobs. Say or write three Can you…? questions for each. Then ask your teacher (6b).",
+        "Подивись на професії. Скажи або напиши по три Can you…? для кожної. Потім запитай учителя (6b).",
       prompts: jobCanModels.map((j) => `${j.job}: … / … / …`),
       models: jobCanModels.map((j) => j.models.join(" · ")),
       hideModels: true,
-      note: "Example: taxi driver → Can you drive?",
+      note: "Приклад: taxi driver → Can you drive?",
     },
     {
       type: "custom",
@@ -298,7 +298,7 @@ export const lesson47: Lesson = {
       kicker: "7 · Prepare",
       title: "Questions for club teachers",
       description:
-        "Read the information. Write questions for the club teachers in the notebook. Type on each line.",
+        "Прочитай інформацію. Напиши в зошит питання для вчителів клубів. По рядку в полі.",
       componentKey: "club-notebook",
       props: {
         heading: "Questions for club teachers",
@@ -315,7 +315,7 @@ export const lesson47: Lesson = {
       id: "l47-youglish",
       kicker: "Pronunciation",
       title: "can / can’t · YouGlish",
-      body: "Open each link. Listen and repeat. Practise with your teacher if you need help.",
+      body: "Відкрий кожне посилання. Послухай і повтори. За потреби відпрацюй з учителем.",
       links: [
         {
           href: "https://youglish.com/pronounce/can/english",
@@ -333,16 +333,16 @@ export const lesson47: Lesson = {
       kicker: "8 · Speak",
       title: "Ask and answer with your teacher",
       description:
-        "Use your notebook questions. Ask your teacher. Who is a good teacher for each club?",
+        "Використай питання з зошита. Запитай учителя. Хто підійде викладачем для кожного клубу?",
       prompts: [...skillSpeakPrompts],
-      note: "Model: Can you run? — Yes, I can. / No, I can’t.",
+      note: "Зразок: Can you run? — Yes, I can. / No, I can’t.",
     },
     {
       type: "text",
       id: "l47-exit",
       kicker: "Exit",
       title: "Today you can…",
-      body: "name skills; ask Can you…?; answer Yes, I can. / No, I can’t.; say what you can and can’t do.",
+      body: "назви навички; питай Can you…?; Yes, I can. / No, I can’t.; скажи, що вмієш і не вмієш.",
       bullets: [
         "Can you swim? — Yes, I can.",
         "I can cook fish. I can’t drive.",
@@ -355,7 +355,7 @@ export const lesson47: Lesson = {
       kicker: "Extra · Video",
       title: "Listening quiz · subject pronouns",
       description:
-        "Watch the video with your teacher. Listen for I / you / he / she / we / they.",
+        "Подивись відео з учителем. Слухай I / you / he / she / we / they.",
       componentKey: "youtube-video",
       props: {
         videoId: VIDEO_ID,
@@ -367,16 +367,16 @@ export const lesson47: Lesson = {
       id: "l47-video-talk",
       kicker: "Extra · Discuss",
       title: "Talk about the video",
-      description: "Discuss the questions with your teacher.",
+      description: "Обговори питання з учителем.",
       prompts: [...videoDiscussPrompts],
-      note: "Use can / can’t too: What can he do? What can you do?",
+      note: "Також can / can’t: What can he do? What can you do?",
     },
     {
       type: "custom",
       id: "l47-clothes",
       kicker: "Extra · Vocabulary",
       title: "Clothes",
-      description: "Tap: Ukrainian → English. Then say what you wear today.",
+      description: "Tap: українською → англійською. Then say what you wear today.",
       componentKey: "vocab-flip",
       props: {
         cards: clothesFlashcards,
@@ -387,7 +387,7 @@ export const lesson47: Lesson = {
       id: "l47-clothes-pics",
       kicker: "Extra · Vocabulary",
       title: "Clothes · pictures",
-      description: "Tap a picture to flip. Say the English word.",
+      description: "Натисни картинку, щоб перевернути. Скажи англійське слово.",
       componentKey: "image-vocab-flip",
       props: {
         cards: clothesPictureFlashcards,
@@ -399,7 +399,7 @@ export const lesson47: Lesson = {
       title: "Homework",
       path: "/hw-47",
       label: "HW47 →",
-      summary: "Skills match · can/can’t · write about abilities",
+      summary: "Поєднання навичок · can/can’t · письмо про вміння",
     },
   ],
 };

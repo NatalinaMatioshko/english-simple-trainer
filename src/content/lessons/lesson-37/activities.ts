@@ -3,8 +3,8 @@
 export const lesson37AskPrompts = [
   "What do you do every day?",
   "What are you doing now?",
-  "What do I do every day? (ask your teacher)",
-  "What am I doing now? (ask your teacher)",
+  "What do I do every day? (запитай учителя)",
+  "What am I doing now? (запитай учителя)",
 ] as const;
 
 export const lesson37LookPrompts = [

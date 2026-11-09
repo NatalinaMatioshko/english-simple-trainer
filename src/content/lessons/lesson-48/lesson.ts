@@ -38,7 +38,7 @@ export const lesson48: Lesson = {
   hasHomework: true,
   topic: "My week · Present Simple · do/does · frequency · work schedule",
   description:
-    "Speaking project: build your real week, ask and answer about schedules, then tell your week in 8–10 sentences.",
+    "Speaking-проєкт: реальний тиждень, питання про розклад, потім 8–10 речень про свій тиждень.",
   chips: ["Do you…?", "Does he…?", "I usually…", "from… to…"],
   route: "/lessons/48",
   legacyRoute: "/lesson-48",
@@ -86,11 +86,11 @@ export const lesson48: Lesson = {
       type: "text",
       id: "l48-intro",
       title: "My week · speaking project",
-      description: "One clear goal. ~70% speaking.",
-      body: "Today you build your real week in Present Simple. No Past Simple. No long new vocabulary. No phonetics block.",
+      description: "Одна чітка мета. ~70% говоріння.",
+      body: "Сьогодні будуєш свій реальний тиждень у Present Simple. Без Past Simple, без довгої нової лексики й без блоку фонетики.",
       bullets: [
         "Tell your week in 8–10 sentences (no cards at the end).",
-        "Ask your teacher 3–4 questions about her week.",
+        "Задай учителю 3–4 питання про її/його тиждень.",
         "Focus: do/does · he/she + -s · on/in/at · at work / go to work / go home.",
       ],
     },
@@ -99,7 +99,7 @@ export const lesson48: Lesson = {
       id: "l48-chunks",
       kicker: "0–2 · Chunks",
       title: "Week language",
-      description: "Tap UA → EN. Keep these ready for speaking.",
+      description: "Tap: українською → англійською. Тримай ці слова напоготові для говоріння.",
       componentKey: "vocab-flip",
       props: { cards: weekFlashcards },
     },
@@ -109,9 +109,9 @@ export const lesson48: Lesson = {
       kicker: "0–7 · Warm-up",
       title: "Your week · day by day",
       description:
-        "Not “Tell me about your week” yet. Answer one question at a time. Teacher writes keywords only.",
+        "Ще не «Tell me about your week». Відповідай по одному питанню. Учитель пише лише ключові слова.",
       prompts: [...dayWarmUpPrompts],
-      note: "Days: Mon–Sun. After 3–4 answers: “Good. Now we are making your real weekly schedule.”",
+      note: "Дні Mon–Sun. Після 3–4 відповідей: «Good. Now we are making your real weekly schedule.»",
     },
     {
       type: "custom",
@@ -119,7 +119,7 @@ export const lesson48: Lesson = {
       kicker: "7–15 · Quick drill",
       title: "Do / Does…?",
       description:
-        "Make the question. After does → base verb. Then short answers: Yes, I do. / No, he doesn’t.",
+        "Склади питання. Після does — базове дієслово. Короткі відповіді: Yes, I do. / No, he doesn’t.",
       componentKey: "frequency-grammar",
       props: {
         boxTitle: "you → Do · he/she → Does",
@@ -151,9 +151,9 @@ export const lesson48: Lesson = {
       kicker: "15–25 · Build",
       title: "Build your weekly schedule",
       description:
-        "Teacher table: Day · Work/day off · Time · Activity. You say short facts. Teacher writes keywords — not full sentences for you.",
+        "Таблиця учителя: Day · Work/day off · Time · Activity. Ти — короткі факти. Учитель пише ключові слова, не повні речення за тебе.",
       prompts: [...scheduleBuildPrompts],
-      note: "Real week: barbershop days, days off, start/finish times, evening habits.",
+      note: "Реальний тиждень: робочі дні, вихідні, час початку/кінця, вечірні звички.",
     },
     {
       type: "speakingPrompt",
@@ -161,7 +161,7 @@ export const lesson48: Lesson = {
       kicker: "25–35 · Frequency",
       title: "Five true sentences",
       description:
-        "Cards: always · usually · often · sometimes · never. Make five true sentences about your week.",
+        "Картки: always · usually · often · sometimes · never. П’ять правдивих речень про свій тиждень.",
       prompts: [...frequencySpeakPrompts],
       models: [...frequencySpeakModels],
       hideModels: true,
@@ -172,7 +172,7 @@ export const lesson48: Lesson = {
       id: "l48-be-freq",
       kicker: "be + frequency",
       title: "I often work · I am often tired",
-      description: "With normal verbs: adverb before the verb. With be: after am/is/are.",
+      description: "Звичайні дієслова: наречення перед дієсловом. З be: після am/is/are.",
       componentKey: "frequency-grammar",
       props: {
         boxTitle: "usually / often · verb vs be",
@@ -195,25 +195,25 @@ export const lesson48: Lesson = {
       kicker: "35–45 · Role-play",
       title: "New colleague asks you",
       description:
-        "Teacher: “I am your new colleague. I want to know your schedule.” Answer. Then swap roles.",
+        "Учитель: «I am your new colleague…» — відповідай. Потім міняєтесь ролями.",
       prompts: [...colleagueAskYou],
-      note: "Short answers OK: Yes, I do. / No, I don’t. / From Tuesday to Thursday.",
+      note: "Короткі відповіді OK: Yes, I do. / No, I don’t. / From Tuesday to Thursday.",
     },
     {
       type: "speakingPrompt",
       id: "l48-ask",
       kicker: "35–45 · Your turn",
       title: "Ask your teacher (min. 3)",
-      description: "You ask. Teacher answers. Minimum three questions.",
+      description: "Ти питаєш — учитель відповідає. Мінімум три питання.",
       prompts: [...youAskTeacher],
-      note: "Must ask at least 3. More is better.",
+      note: "Постав щонайменше 3 питання. Більше — краще.",
     },
     {
       type: "text",
       id: "l48-maria",
       kicker: "45–52 · Reading",
       title: "Someone else’s week · Maria",
-      description: "Very short text. Then answer the quiz.",
+      description: "Дуже короткий текст. Потім відповідай на quiz.",
       body: mariaWeekText.join(" "),
       bullets: [
         "Tell your teacher one difference: your week vs Maria’s week.",
@@ -224,7 +224,7 @@ export const lesson48: Lesson = {
       id: "l48-quiz",
       kicker: "45–52 · Check",
       title: "Maria · questions",
-      description: "Choose the correct answer.",
+      description: "Обери правильну відповідь.",
       items: mariaQuiz.map((q) => ({
         id: q.id,
         prompt: q.prompt,
@@ -238,19 +238,19 @@ export const lesson48: Lesson = {
       kicker: "52–60 · Final output",
       title: "My week · 8–10 sentences",
       description:
-        "Hide the schedule table (or keep only day names). Speak without full model sentences.",
+        "Сховай таблицю розкладу (або лиши лише дні). Говори без повних зразкових речень.",
       prompts: [...weekFinalPrompts],
       models: [...weekFinalModels],
       hideModels: true,
-      note: "Delayed correction only on 3 things: he/she + -s · on/in/at · do/does.",
+      note: "Виправлення лише по 3 речах: he/she + -s · on/in/at · do/does.",
     },
     {
       type: "text",
       id: "l48-sc-intro",
       kicker: "Extra · Speaking scenarios",
       title: "Practice L30–47 with your teacher",
-      description: "Pick 1–2 scenarios (about 5 minutes each). Present Simple only — no Past story here.",
-      body: "Recycle: there is/are · town · have got · describing people · can/can’t · food habits · café · housework · Does…?",
+      description: "Обери 1–2 сценарії (по ~5 хв). Лише Present Simple — без Past-історії тут.",
+      body: "Повтор: there is/are · town · have got · describing people · can/can’t · їжа · café · housework · Does…?",
       bullets: [
         "Teacher and student take turns.",
         "Use short answers: Yes, I do. / No, I don’t. / Yes, there is. / Yes, I can.",
@@ -262,11 +262,11 @@ export const lesson48: Lesson = {
       kicker: "Scenario A · Town (L31–35)",
       title: "My town · Is there…?",
       description:
-        "Places in town, there is/are, and very simple directions. Ask and answer with your teacher.",
+        "Місця в місті, there is/are і прості напрямки. Питай і відповідай з учителем.",
       prompts: [...scenarioTownPrompts],
       models: [...scenarioTownModels],
       hideModels: true,
-      note: "L31–35 recycle. Keep directions short.",
+      note: "Повтор L31–35. Напрямки — коротко.",
     },
     {
       type: "speakingPrompt",
@@ -274,11 +274,11 @@ export const lesson48: Lesson = {
       kicker: "Scenario B · Friend / bag (L38–39, L47)",
       title: "Have you got…? · Can you…?",
       description:
-        "Describe a person, talk about your bag, and ask one can/can’t question.",
+        "Опиши людину, поговори про сумку й постав одне питання can/can’t.",
       prompts: [...scenarioFriendPrompts],
       models: [...scenarioFriendModels],
       hideModels: true,
-      note: "L38–39 + light L47. Short answers: Yes, I have. / No, I haven’t. / Yes, I can.",
+      note: "Повтор L38–39 + трохи L47. Короткі відповіді: Yes, I have. / No, I haven’t. / Yes, I can.",
     },
     {
       type: "speakingPrompt",
@@ -286,11 +286,11 @@ export const lesson48: Lesson = {
       kicker: "Scenario C · Café (L44–45)",
       title: "Food habits · order in a café",
       description:
-        "Habits with usually/never, then a short café role-play with your teacher.",
+        "Звички з usually/never, потім короткий role-play у кафе з учителем.",
       prompts: [...scenarioCafePrompts],
       models: [...scenarioCafeModels],
       hideModels: true,
-      note: "L44–45. Swap roles: customer ↔ waiter.",
+      note: "L44–45. Міняєтесь ролями: customer ↔ waiter.",
     },
     {
       type: "speakingPrompt",
@@ -298,18 +298,18 @@ export const lesson48: Lesson = {
       kicker: "Scenario D · Home (L45–46)",
       title: "Housework · Does he/she…?",
       description:
-        "Home jobs, Does…? questions, and one mini contrast: every Saturday vs now.",
+        "Домашні справи, питання Does…? і один міні-контраст: every Saturday vs now.",
       prompts: [...scenarioHomePrompts],
       models: [...scenarioHomeModels],
       hideModels: true,
-      note: "L45–46. One verb for PS vs PC only.",
+      note: "L45–46. Одне дієслово: PS vs PC.",
     },
     {
       type: "text",
       id: "l48-exit",
       kicker: "Exit",
       title: "Now I can talk about my week.",
-      body: "You built a real schedule, answered a colleague, asked questions, and told your week.",
+      body: "Ти склав реальний розклад, відповів колезі, поставив питання й розказав свій тиждень.",
       bullets: [
         "I work from … to … · I work at …",
         "I usually… · I often… · At the weekend, I…",
@@ -322,7 +322,7 @@ export const lesson48: Lesson = {
       title: "Homework",
       path: "/hw-48",
       label: "HW48 →",
-      summary: "Schedule · 8 sentences · voice 40–60s · 4 questions",
+      summary: "Розклад · 8 речень · голос 40–60 с · 4 питання",
     },
   ],
 };

@@ -43,7 +43,7 @@ export const lesson51: Lesson = {
   hasHomework: true,
   topic: "Wh-questions · places and nature words",
   description:
-    "Nature words and directions, listen to Fatma and Dan, make wh-questions, then tell your teacher about a nice place in your country.",
+    "Слова природи й напрямки, Fatma і Dan, wh-питання, потім розкажи учителю про гарне місце у своїй країні.",
   chips: ["Where is it?", "When do you go there?", "How many lakes are there?"],
   route: "/lessons/51",
   legacyRoute: "/lesson-51",
@@ -91,8 +91,8 @@ export const lesson51: Lesson = {
       type: "text",
       id: "l51-intro",
       title: "Ask and answer about a place",
-      description: "Goal of the lesson.",
-      body: "Today you learn words for places and nature, ask wh-questions about a place, and at the end tell your teacher about a nice place in your country.",
+      description: "Мета уроку.",
+      body: "Сьогодні вчиш слова про місця й природу, ставиш wh-питання про місце й наприкінці розказуєш учителю про гарне місце у своїй країні.",
       bullets: [
         "Vocabulary: the sea, a mountain, a lake, a river… · north, south, east, west",
         "Grammar: wh-questions — What? Where? When? Who? How? How much? How many?",
@@ -105,7 +105,7 @@ export const lesson51: Lesson = {
       kicker: "Words",
       title: "Flashcards · places and nature",
       description:
-        "Look at the picture and say the word. Tap the card to check. Then do Exercise 1a.",
+        "Подивись на картинку й скажи слово. Натисни картку, щоб перевірити. Then do Exercise 1a.",
       componentKey: "image-vocab-flip",
       props: { cards: placePictureCards },
     },
@@ -115,7 +115,7 @@ export const lesson51: Lesson = {
       kicker: "1a",
       title: "Match photos A–O with the words",
       description:
-        "Look at the photos. Choose a word from the box for each photo. For the compass, look at the letter.",
+        "На кожне фото — слово з блоку. Для компаса дивись на букву.",
       componentKey: "photo-sentence-match",
       props: {
         images: placePhotoMatch.map((p) => ({
@@ -132,7 +132,7 @@ export const lesson51: Lesson = {
       id: "l51-audio-1",
       kicker: "1b · Audio 1",
       title: "Listen and repeat",
-      description: "Listen and repeat the words. Then repeat with your teacher.",
+      description: "Послухай і повтори слова. Потім повтори з учителем.",
       componentKey: "native-audio",
       props: {
         src: AUDIO51(1),
@@ -148,7 +148,7 @@ export const lesson51: Lesson = {
       kicker: "2",
       title: "Complete the table with the words in Exercise 1a",
       description:
-        "Tap a word, then tap “+ here” in the right column. Tap a word in the table to move it.",
+        "Натисни слово, потім «+ here» у правому стовпчику. Слово в таблиці — щоб перенести.",
       componentKey: "category-table",
       props: {
         categories: placeCategories.map((c) => ({ id: c, label: c, icon: c })),
@@ -163,7 +163,7 @@ export const lesson51: Lesson = {
       id: "l51-choose",
       kicker: "3",
       title: "Choose the correct alternatives",
-      description: "Tap the correct word.",
+      description: "Натисни правильне слово.",
       items: chooseAlternatives.map((c) => ({
         id: c.id,
         before: c.before,
@@ -179,7 +179,7 @@ export const lesson51: Lesson = {
       kicker: "4",
       title: "Your town or city",
       description:
-        "Complete the sentences about your town or city. Use the words from Exercise 2. Then read them to your teacher.",
+        "Доповни речення про своє місто. Слова з вправи 2. Потім прочитай їх учителю.",
       componentKey: "write-lists",
       props: { lists: myTownFrames.map((f) => ({ ...f })) },
     },
@@ -188,7 +188,7 @@ export const lesson51: Lesson = {
       id: "l51-audio-2",
       kicker: "5a · Audio 2",
       title: "Listen · Fatma and Dan",
-      description: "Listen to Fatma and Dan. Where is the place that Dan talks about?",
+      description: "Послухай Fatma і Dan. Про яке місце говорить Dan?",
       componentKey: "native-audio",
       props: {
         src: AUDIO51(2),
@@ -215,7 +215,7 @@ export const lesson51: Lesson = {
       id: "l51-match",
       kicker: "5b",
       title: "Match questions 1–8 with answers a–h",
-      description: "Listen again. Choose the answer for each question.",
+      description: "Послухай ще раз. Обери відповідь на кожне питання.",
       items: placeQuestionsMatch.map((q) => ({
         id: q.id,
         prompt: q.prompt,
@@ -230,7 +230,7 @@ export const lesson51: Lesson = {
       kicker: "6 · Grammar",
       title: "Wh-questions",
       description:
-        "Choose the correct alternative. Use the questions from Exercise 5b to help you.",
+        "Обери правильний варіант. Допоможуть питання з вправи 5b.",
       items: whGrammarBox.map((g) => ({
         id: g.id,
         before: g.before,
@@ -246,7 +246,7 @@ export const lesson51: Lesson = {
       kicker: "7a · Audio 3",
       title: "Listen · intonation",
       description:
-        "Listen to the questions. Notice the intonation: does the voice go up ↑ or down ↓? Then listen again and repeat.",
+        "Послухай питання. Інтонація: голос ↑ чи ↓? Потім ще раз послухай і повтори.",
       componentKey: "native-audio",
       props: {
         src: AUDIO51(3),
@@ -273,7 +273,7 @@ export const lesson51: Lesson = {
       id: "l51-intonation-rule",
       kicker: "7b",
       title: "Listen again and repeat",
-      body: "Wh-questions usually go down ↓. Yes / no questions usually go up ↑.",
+      body: "Wh-питання зазвичай ↓. Так/ні питання зазвичай ↑.",
       bullets: [
         "When do you go there? ↓",
         "Do you go there in June? ↑",
@@ -284,7 +284,7 @@ export const lesson51: Lesson = {
       id: "l51-make",
       kicker: "8a",
       title: "Make questions using the prompts",
-      description: "Put the words in order. Add is / are / do where you need them.",
+      description: "Постав слова в правильному порядку. Додай is / are / do, де треба.",
       items: promptQuestions.map((q) => ({
         scramble: q.scramble,
         parts: [...q.parts],
@@ -297,7 +297,7 @@ export const lesson51: Lesson = {
       kicker: "8b · Speak",
       title: "A nice place in your country",
       description:
-        "Think of a nice place in your country. Your teacher asks the questions from 8a — you answer.",
+        "Подумай про гарне місце в Україні. Учитель ставить питання з 8a — ти відповідаєш.",
       prompts: [...askPlacePrompts],
       models: [...askPlaceModels],
       hideModels: true,
@@ -307,7 +307,7 @@ export const lesson51: Lesson = {
       id: "l51-underlined",
       kicker: "9",
       title: "Make questions for the answers",
-      description: "Write a question for the part in [brackets].",
+      description: "Напиши питання для частини в [дужках].",
       items: underlinedAnswers.map((u) => ({
         id: u.id,
         before: "",
@@ -322,7 +322,7 @@ export const lesson51: Lesson = {
       kicker: "10a · Prepare",
       title: "Another nice place",
       description:
-        "Think of another nice place to visit in your country. Make notes — words only, not sentences.",
+        "Подумай про ще одне гарне місце. Нотатки — лише слова, не речення.",
       componentKey: "write-lists",
       props: { lists: placeNotesLists.map((l) => ({ ...l })) },
     },
@@ -332,7 +332,7 @@ export const lesson51: Lesson = {
       kicker: "10b · Speak",
       title: "Ask and answer about the place",
       description:
-        "Make a full question from each prompt and ask your teacher about their place. Then your teacher asks you. Hint = the question + an example answer.",
+        "З кожної підказки склади питання й запитай учителя про його/її місце. Потім учитель питає тебе. Hint = питання + зразок відповіді.",
       prompts: [...placeInterviewPrompts],
       models: [...placeInterviewModels],
       hideModels: true,
@@ -342,11 +342,11 @@ export const lesson51: Lesson = {
       id: "l51-final",
       kicker: "11 · Final",
       title: "Tell your teacher about your place",
-      description: "No notes. Speak for about one minute.",
+      description: "Без нотаток. Говори близько хвилини.",
       prompts: [...tellPlacePrompts],
       models: [...tellPlaceModels],
       hideModels: true,
-      note: "Correction after you finish: question word order · in the north of … · a / an / the.",
+      note: "Виправлення після завершення: порядок слів у питанні · in the north of … · a / an / the.",
     },
     {
       type: "writingPrompt",
@@ -364,7 +364,7 @@ export const lesson51: Lesson = {
       id: "l51-exit",
       kicker: "Exit",
       title: "Now I can ask and answer about a place.",
-      body: "You learned words for places, matched questions and answers, and asked and answered wh-questions.",
+      body: "Ти вивчив слова місць, поєднав питання й відповіді й поставив wh-питання.",
       bullets: [
         "What’s the name of the place? · Where is it?",
         "When do you go there? · Who do you go with?",
@@ -377,7 +377,7 @@ export const lesson51: Lesson = {
       title: "Homework",
       path: "/hw-51",
       label: "HW51 →",
-      summary: "Place words · question words · questions · write about a nice place",
+      summary: "Слова місць · питальні слова · питання · письмо про гарне місце",
     },
   ],
 };

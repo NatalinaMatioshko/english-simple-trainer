@@ -5,5 +5,5 @@ export const lesson37Homework: HomeworkMeta = {
   path: "/hw-37",
   label: "HW37",
   summary:
-    "Translate UA→EN (Present Simple / Continuous) and Test-English practice links.",
+    "Переклад UA→EN (Present Simple / Continuous) і посилання Test-English.",
 };

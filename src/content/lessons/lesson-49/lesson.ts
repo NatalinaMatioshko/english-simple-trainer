@@ -35,7 +35,7 @@ export const lesson49: Lesson = {
   hasHomework: true,
   topic: "Yesterday story · Past Simple · was/were · core verbs",
   description:
-    "Speaking project: tell your yesterday — morning → evening — with was, got up, had, went, worked, played/watched.",
+    "Speaking-проєкт: розкажи про вчора — ранок → вечір — з was, got up, had, went, worked, played/watched.",
   chips: ["was", "got up", "went", "worked", "Did you…?"],
   route: "/lessons/49",
   legacyRoute: "/lesson-49",
@@ -84,8 +84,8 @@ export const lesson49: Lesson = {
       type: "text",
       id: "l49-intro",
       title: "Yesterday · speaking project",
-      description: "One clear goal. ~70% speaking.",
-      body: "Today you tell a real yesterday story. No Past Continuous. No third form. No big irregular list.",
+      description: "Одна чітка мета. ~70% говоріння.",
+      body: "Сьогодні розповідаєш справжню історію про вчора. Без Past Continuous, без третьої форми й без довгого списку неправильних дієслів.",
       bullets: [
         "Tell your yesterday in a short story (morning → evening).",
         "Answer: What did you do? Where did you go? Did you work? Were you tired?",
@@ -98,7 +98,7 @@ export const lesson49: Lesson = {
       kicker: "0–5 · Warm-up",
       title: "Today → yesterday",
       description:
-        "Feel the contrast. Don’t explain all of did yet — hear today vs yesterday.",
+        "Відчуй контраст. Ще не пояснюй усе про did — почуй today vs yesterday.",
       chips: ["was", "worked", "went", "had"],
       items: bridgeGaps.map((g) => ({
         id: g.id,
@@ -115,7 +115,7 @@ export const lesson49: Lesson = {
       kicker: "5–15 · Key verbs",
       title: "Six past phrases",
       description:
-        "Only these for speaking today. Tap UA → EN.",
+        "Лише це для говоріння сьогодні. Tap: UA → EN.",
       componentKey: "vocab-flip",
       props: { cards: yesterdayFlashcards },
     },
@@ -125,7 +125,7 @@ export const lesson49: Lesson = {
       kicker: "5–15 · Drill",
       title: "Today I… · Yesterday you…",
       description:
-        "Teacher: “Today I go to work. Yesterday?” Student: “Yesterday you went to work.”",
+        "Учитель: «Today I go to work. Yesterday?» — Student: «Yesterday you went to work.»",
       componentKey: "frequency-grammar",
       props: {
         boxTitle: "Today → Yesterday",
@@ -148,16 +148,16 @@ export const lesson49: Lesson = {
       kicker: "15–25 · Timeline",
       title: "Morning → afternoon → evening → night",
       description:
-        "Teacher asks. You answer. If you don’t remember, use a choice (next block).",
+        "Учитель питає — ти відповідаєш. Якщо не пам’ятаєш, обери варіант (наступний блок).",
       prompts: [...timelineAskPrompts],
-      note: "Timeline on screen/board. Keywords only — not full written sentences for the student.",
+      note: "Timeline на екрані. Лише ключові слова — не повні речення для учня.",
     },
     {
       type: "speakingPrompt",
       id: "l49-help",
       kicker: "If you freeze",
       title: "Choose A or B",
-      description: "Stay in the story. Don’t stop for a long grammar talk.",
+      description: "Залишайся в історії. Не зупиняйся на довгій граматиці.",
       prompts: [...timelineChoiceHelp],
     },
     {
@@ -166,7 +166,7 @@ export const lesson49: Lesson = {
       kicker: "25–35 · Controlled story",
       title: "Fill, then say the whole story",
       description:
-        "Yesterday I ___ up at ___. I ___ breakfast. Then I ___ to ___. … First insert forms aloud, then tell the full text.",
+        "Yesterday I ___ up at ___. … Спочатку встав форми вголос, потім розкажи повний текст.",
       items: controlledStoryGaps.map((g) => ({
         id: g.id,
         before: `${g.before} `,
@@ -181,7 +181,7 @@ export const lesson49: Lesson = {
       id: "l49-mark",
       kicker: "35–43 · Reading",
       title: "Mark’s yesterday",
-      description: "Short text. Then quiz. Then: Is Mark’s yesterday similar to yours?",
+      description: "Короткий текст. Потім quiz. Потім: чи схоже вчорашнє Mark на твоє?",
       body: markText.join(" "),
     },
     {
@@ -202,7 +202,7 @@ export const lesson49: Lesson = {
       kicker: "43–52 · Attempt 1",
       title: "Your yesterday",
       description:
-        "Use the timeline. Don’t read full sentences. Teacher does not interrupt for 45–60 seconds. Max 3 notes for correction.",
+        "Користуйся timeline. Не читай повні речення. Учитель не перебиває 45–60 с. Максимум 3 правки.",
       prompts: [...yesterdaySpeakPrompts],
       models: [...yesterdaySpeakModels],
       hideModels: true,
@@ -214,7 +214,7 @@ export const lesson49: Lesson = {
       kicker: "52–56 · Delayed correction",
       title: "Only three fixes",
       description:
-        "Fix the pattern, then say the full correct sentence. Only: was worked → worked · goed → went · have yesterday → had.",
+        "Виправ форму, потім скажи повне правильне речення. Лише: was worked → worked · goed → went · have yesterday → had.",
       componentKey: "frequency-grammar",
       props: {
         boxTitle: "Choose the correct sentence",
@@ -237,12 +237,12 @@ export const lesson49: Lesson = {
       kicker: "56–60 · Attempt 2",
       title: "Your yesterday · again",
       description:
-        "Second attempt without the full template. Feel the success.",
+        "Друга спроба без повного шаблону. Відчуй успіх.",
       prompts: [
         "Tell your yesterday again: morning → evening.",
         "Use: was · got up · had · went · worked · played/watched.",
       ],
-      note: "Teacher: “Today you used was, got up, had, went, worked, played/watched. You can already tell a real story about yesterday.”",
+      note: "Учитель: «Today you used was, got up…» — ти вже можеш розказати справжню історію про вчора.",
     },
     {
       type: "text",
@@ -250,8 +250,8 @@ export const lesson49: Lesson = {
       kicker: "Extra · Speaking scenarios",
       title: "Practice L30–47 through yesterday",
       description:
-        "Pick 1–2 scenarios (~5 min each). Past Simple is the spine; Present only as contrast (usually vs yesterday).",
-      body: "Recycle: work day · home jobs · food/café · can/can’t (light) · was/were · Did you…?",
+        "Обери 1–2 сценарії (~5 хв). Основа — Past Simple; Present лише як контраст (usually vs yesterday).",
+      body: "Повтор: work day · home jobs · food/café · can/can’t · was/were · Did you…?",
       bullets: [
         "Short answers: Yes, I did. / No, I didn’t. / Yes, I was. / No, I wasn’t.",
         "Do not open Past Continuous or a big irregular list.",
@@ -263,11 +263,11 @@ export const lesson49: Lesson = {
       kicker: "Scenario A · Work day (L42–43, L46)",
       title: "Yesterday at work",
       description:
-        "Tell your work day yesterday. Contrast with what you usually do. Ask your teacher about her yesterday at work.",
+        "Розкажи робочий день учора. Контраст із тим, що зазвичай робиш. Запитай учителя про її/його вчорашній робочий день.",
       prompts: [...scenarioWorkDayPrompts],
       models: [...scenarioWorkDayModels],
       hideModels: true,
-      note: "L42–43 recycle + work chunks.",
+      note: "Повтор L42–43 + work chunks.",
     },
     {
       type: "speakingPrompt",
@@ -275,11 +275,11 @@ export const lesson49: Lesson = {
       kicker: "Scenario B · Home (L45–46)",
       title: "Yesterday at home",
       description:
-        "Housework and free time yesterday. Use Did you…? and usually vs yesterday.",
+        "Домашні справи й вільний час учора. Did you…? і usually vs yesterday.",
       prompts: [...scenarioHomePastPrompts],
       models: [...scenarioHomePastModels],
       hideModels: true,
-      note: "L45–46 in the past.",
+      note: "L45–46 у минулому.",
     },
     {
       type: "speakingPrompt",
@@ -287,11 +287,11 @@ export const lesson49: Lesson = {
       kicker: "Scenario C · Food & skills (L44, L47)",
       title: "Breakfast · café · can you…?",
       description:
-        "Food yesterday + one light can/can’t bridge. Optional: yesterday in a café.",
+        "Їжа вчора + легкий міст can/can’t. Додатково: вчора в кафе.",
       prompts: [...scenarioFoodSkillsPrompts],
       models: [...scenarioFoodSkillsModels],
       hideModels: true,
-      note: "L44 + light L47. Keep can/can’t to 1–2 questions.",
+      note: "Повтор L44 + трохи L47. can/can’t — 1–2 питання.",
     },
     {
       type: "speakingPrompt",
@@ -299,18 +299,18 @@ export const lesson49: Lesson = {
       kicker: "Scenario D · Free time (L32, L41–43)",
       title: "Evening / weekend past",
       description:
-        "was/were + free-time story. Ask your teacher three past questions, then a 5-sentence mini story with no cards.",
+        "was/were + історія вільного часу. Три питання учителю в минулому, потім міні-історія з 5 речень без карток.",
       prompts: [...scenarioWeekendPastPrompts],
       models: [...scenarioWeekendPastModels],
       hideModels: true,
-      note: "L32 was/were + L41–43 time story.",
+      note: "Повтор L32 was/were + L41–43 time story.",
     },
     {
       type: "text",
       id: "l49-exit",
       kicker: "Exit",
       title: "Now I can talk about yesterday.",
-      body: "You told a real past story. That is the win — not a perfect list of irregular verbs.",
+      body: "Ти розказав справжню історію в минулому. Перемога в цьому — не в ідеальному списку неправильних дієслів.",
       bullets: [
         "Yesterday I got up… I had breakfast. I went…",
         "I was at work. / I worked…",
@@ -323,7 +323,7 @@ export const lesson49: Lesson = {
       title: "Homework",
       path: "/hw-49",
       label: "HW49 →",
-      summary: "6–8 sentences · voice ~45s · 5 questions",
+      summary: "6–8 речень · голос ~45 с · 5 питання",
     },
   ],
 };

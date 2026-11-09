@@ -120,6 +120,10 @@ export const customSectionLoaders: Record<
     import("./customs/LetteredReadingSection").then((m) => ({
       default: m.LetteredReadingSection,
     })),
+  "school-days-reading": () =>
+    import("./customs/SchoolDaysReadingSection").then((m) => ({
+      default: m.SchoolDaysReadingSection,
+    })),
   "month-calendar": () =>
     import("./customs/MonthCalendarSection").then((m) => ({
       default: m.MonthCalendarSection,
@@ -132,6 +136,10 @@ export const customSectionLoaders: Record<
     import("./customs/Lesson54BoardSection").then((m) => ({
       default: m.Lesson54BoardSection,
     })),
+  "lesson55-word-map": () =>
+    import("./customs/Lesson55WordMapSection").then((m) => ({
+      default: m.Lesson55WordMapSection,
+    })),
   "word-drag-match": () =>
     import("./customs/WordDragMatchSection").then((m) => ({
       default: m.WordDragMatchSection,
@@ -139,6 +147,10 @@ export const customSectionLoaders: Record<
   "highlight-sentences": () =>
     import("./customs/HighlightSentencesSection").then((m) => ({
       default: m.HighlightSentencesSection,
+    })),
+  "person-tick-table": () =>
+    import("./customs/PersonTickTableSection").then((m) => ({
+      default: m.PersonTickTableSection,
     })),
 };
 

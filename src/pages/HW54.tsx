@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
+import { Hw54CheckReflect, type Hw54CrStats } from "../components/Hw54CheckReflect";
 import { CheckBar } from "../components/lesson38/L38Ui";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
 import { gapInputClass } from "../components/lesson31/gapInputClass";
@@ -46,22 +47,34 @@ export default function HW54() {
   ).length;
 
   const [writing, setWriting] = useState("");
+  const [cr, setCr] = useState<Hw54CrStats>({
+    allChecked: false,
+    reflectDone: false,
+    score: 0,
+    total: 0,
+  });
+  const onCrStats = useCallback((stats: Hw54CrStats) => setCr(stats), []);
 
+  const lessonQuizDone = boardChecked && dlgChecked && qChecked;
+  const lessonScore = boardScore + dlgScore + qScore;
   return (
     <div className="page">
       <div className="container">
         <p className="page-kicker">Homework · Lesson 54</p>
         <h1>Buy travel tickets</h1>
         <p className="lead">
-          Ticket words · read the board · a ticket to Oxford · make questions ·
-          write a conversation.
+          Слова для квитків · табло · діалог · питання · письмо · Check and
+          reflect (Unit 7).
+        </p>
+        <p className="l22-muted" style={{ marginTop: "0.5rem" }}>
+          <a href="#hw54-cr">Jump to Check and reflect →</a>
         </p>
 
         <section id="hw54-cards" className="lesson22-block panel">
           <div className="lesson22-section-head">
             <p className="page-kicker">1 · Flashcards</p>
             <h2>Words for the station</h2>
-            <p className="lead">Say the English first, then tap to check.</p>
+            <p className="lead">Спочатку скажи англійською, потім натисни, щоб перевірити.</p>
           </div>
           <div className="l22-vocab-grid" style={{ marginTop: "0.65rem" }}>
             {ticketFlashcards.map((card, idx) => {
@@ -141,7 +154,7 @@ export default function HW54() {
           <div className="lesson22-section-head">
             <p className="page-kicker">3 · A ticket to Oxford</p>
             <h2>Complete the conversation</h2>
-            <p className="lead">Use each word once.</p>
+            <p className="lead">Кожне слово — один раз.</p>
           </div>
           <ol className="l22-gap-list">
             {hwDialogueGaps.map((d) => {
@@ -250,11 +263,14 @@ export default function HW54() {
           />
         </section>
 
+        <Hw54CheckReflect onStats={onCrStats} />
+
         <HomeworkSubmit
           lessonId="54"
           writing={writing}
-          quizDone={boardChecked && dlgChecked && qChecked}
-          quizScore={boardScore + dlgScore + qScore}
+          quizDone={lessonQuizDone && cr.allChecked && cr.reflectDone}
+          quizScore={lessonScore + cr.score}
+          description="Перевір урок (tasks 1–4), Check and reflect, reflect 1–5, напиши діалог — потім надішли."
         />
       </div>
     </div>

@@ -59,6 +59,8 @@ export type LessonSectionBase = {
 export type TextSection = LessonSectionBase & {
   type: "text";
   body: string;
+  /** Book-style highlighted reading box (e.g. 8A Ex.1b). */
+  readingBox?: boolean;
   /** Optional short model lines shown as cards */
   bullets?: string[];
   note?: string;
