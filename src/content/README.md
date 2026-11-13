@@ -64,6 +64,7 @@ Use the numeric string id consistently: `"37"` → route `/lessons/37`, legacy `
 - **44** — Food and drink + Order in a café (Unit 5C–5D): photo match, frequency-scale, How often…?, café phrase-match / line-order, native video
 - **45** — Good and bad habits: time expressions match A–G, Erica/Tina reading, he/she + -s grammar, ending sounds, speaking
 - **55** — When I was young (Unit 8A): childhood photos, verb word map, School days, Past Simple -ed, speaking
+- **56** — You had a bad day (Unit 8B): irregular past, didn't, Carla's day, tell the teacher about a bad day
 
 ## Custom keys in use
 
@@ -100,6 +101,7 @@ Keys must match [`lessonSectionRegistry.ts`](../features/lessons/lessonSectionRe
 | `lesson38-friend-speak` | lesson-specific | Prepare notes + speak models for L38 |
 | `lesson54-board` | lesson-specific | L54 information board: one image at full width |
 | `lesson55-word-map` | lesson-specific | L55 8A verb phrase word map (Ex.2a) |
+| `lesson56-story` | lesson-specific | L56 bad-day story cards and Carla photos |
 
 ## When to use `custom`
 

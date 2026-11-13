@@ -1,5 +1,6 @@
 /** Lesson 55 — When I was young (Unit 8A)
- * Audio: Unit_8 RM_A1_SB_U8_R1 (word map), R7 (Ex.7a · -ed endings)
+ * Audio: Unit_8 RM_A1_SB_U8_R1 (word map), R2 (worked / stayed / started), R3 (-ed list).
+ * R7 is the Saturday story in lesson 56, not this -ed drill.
  * Images: public/images/lesson55/
  */
 
@@ -298,16 +299,26 @@ export const edSortWords = [
   { word: "started", answer: "id" },
 ] as const;
 
-/** Unit 8 Recording 7 · Ex.7a (-ed endings) — Pearson audioscript */
+/** Unit 8 Recording 2 · the three -ed sounds. */
+export const edModelTranscript = ["worked", "stayed", "started"] as const;
+
+/** Unit 8 Recording 3 · -ed endings. These five are what the file says. */
 export const edSoundTranscript = [
-  "1 visited",
-  "2 played",
-  "3 watched",
-  "4 cooked",
-  "5 wanted",
-  "6 cleaned",
-  "7 worked",
-  "8 started",
+  "visited",
+  "played",
+  "watched",
+  "cooked",
+  "wanted",
+] as const;
+
+/** Unit 8 Recording 4 · Ex.8a. Wording is what the recording says. */
+export const schoolListenTranscript = [
+  "At school, my lessons started at 9 o'clock in the morning.",
+  "I travelled to school by train.",
+  "I cleaned my dad's car every weekend.",
+  "I didn't like my English teacher at school.",
+  "At school I played sports every day.",
+  "I often studied in a café after school.",
 ] as const;
 
 /* ------------------------------------------------------------------ */

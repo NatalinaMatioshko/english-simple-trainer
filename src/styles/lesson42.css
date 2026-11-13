@@ -431,6 +431,12 @@
   object-fit: cover;
 }
 
+.l42-pic-grid--contain .l42-pic-card img {
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background: color-mix(in srgb, var(--color-surface) 80%, #dceef8);
+}
+
 .l42-verb-groups {
   display: flex;
   flex-wrap: wrap;
