@@ -5,6 +5,8 @@ type VideoItem = {
   src: string;
   title?: string;
   caption?: string;
+  /** Phone-shaped 9:16 clip. Keeps the frame tall instead of stretching it wide. */
+  portrait?: boolean;
 };
 
 type Props = {
@@ -34,7 +36,11 @@ export function NativeVideoSection({ section }: { section: CustomSection }) {
               </p>
             ) : null}
             <video
-              className="lw-native-video-el"
+              className={
+                v.portrait
+                  ? "lw-native-video-el lw-native-video-el--portrait"
+                  : "lw-native-video-el"
+              }
               src={v.src}
               controls
               playsInline

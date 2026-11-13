@@ -340,6 +340,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson55;
     },
   },
+  {
+    id: "56",
+    number: 56,
+    title: "You had a bad day",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 56,
+    status: "published",
+    estimatedMinutes: 60,
+    hasHomework: true,
+    topic: "Past Simple irregular verbs · didn't · a bad day",
+    description:
+      "Історія про поганий день, неправильні дієслова, текст про Карлу, потім розкажи учителю про свій поганий день.",
+    route: "/lessons/56",
+    legacyRoute: "/lesson-56",
+    homeworkPath: "/hw-56",
+    load: async () => {
+      const mod = await import("./lessons/lesson-56/lesson");
+      return mod.lesson56;
+    },
+  },
 ];
 
 export function getRegistryEntry(

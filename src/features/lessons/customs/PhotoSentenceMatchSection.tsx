@@ -14,6 +14,8 @@ type MatchImage = {
 type Props = {
   images?: MatchImage[];
   options?: MatchOption[];
+  /** `contain` shows the whole illustration; default crops to fill. */
+  fit?: "cover" | "contain";
 };
 
 /** Photo grid with per-image select → sentence / label match (reusable). */
@@ -25,6 +27,7 @@ export function PhotoSentenceMatchSection({
   const props = (section.props ?? {}) as Props;
   const images = props.images ?? [];
   const options = props.options ?? [];
+  const contain = props.fit === "contain";
   const [ans, setAns] = useState(() => Array(images.length).fill(""));
   const [checked, setChecked] = useState(false);
   const score = images.filter((img, i) => ans[i] === String(img.answer)).length;
@@ -38,7 +41,9 @@ export function PhotoSentenceMatchSection({
           <p className="lw-section-desc">{section.description}</p>
         ) : null}
       </div>
-      <div className="l42-pic-grid l42-travel-pic-grid">
+      <div
+        className={`l42-pic-grid l42-travel-pic-grid${contain ? " l42-pic-grid--contain" : ""}`}
+      >
         {images.map((pic, i) => {
           const value = ans[i] ?? "";
           const isCorrect = value === String(pic.answer);

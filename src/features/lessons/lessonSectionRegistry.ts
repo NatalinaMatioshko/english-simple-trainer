@@ -140,6 +140,10 @@ export const customSectionLoaders: Record<
     import("./customs/Lesson55WordMapSection").then((m) => ({
       default: m.Lesson55WordMapSection,
     })),
+  "lesson56-story": () =>
+    import("./customs/Lesson56StorySection").then((m) => ({
+      default: m.Lesson56StorySection,
+    })),
   "word-drag-match": () =>
     import("./customs/WordDragMatchSection").then((m) => ({
       default: m.WordDragMatchSection,
