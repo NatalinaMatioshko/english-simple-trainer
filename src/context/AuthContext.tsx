@@ -8,23 +8,23 @@ import {
 } from "react";
 import { FirebaseError } from "firebase/app";
 import {
-  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signInWithPopup,
   signOut,
   updateProfile,
   type User,
 } from "firebase/auth";
 import { auth } from "../firebase";
+import {
+  completeGoogleRedirect,
+  signInWithGoogleAccount,
+} from "../lib/googleSignIn";
 
 const TEACHER_EMAIL = (
   import.meta.env.VITE_TEACHER_EMAIL as string | undefined
 )?.trim()
   .toLowerCase();
-
-const googleProvider = new GoogleAuthProvider();
 
 export function isTeacherEmail(email: string | null | undefined): boolean {
   if (!email || !TEACHER_EMAIL) return false;
@@ -43,6 +43,8 @@ type AuthContextType = {
   ) => Promise<void>;
   signInWithEmail: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
+  /** Set when a Google redirect returns without a user (mobile sign-in). */
+  googleSignInError: unknown;
   logOut: () => Promise<void>;
 };
 
@@ -51,6 +53,12 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function authErrorMessage(err: unknown): string {
   const code = err instanceof FirebaseError ? err.code : "";
   const haystack = `${code} ${err instanceof Error ? err.message : ""}`.toLowerCase();
+  if (
+    haystack.includes("disallowed_useragent") ||
+    haystack.includes("disallowed-useragent")
+  ) {
+    return "Google не дозволяє вхід у вбудованому браузері. Відкрий сайт у Safari або Chrome.";
+  }
   if (
     haystack.includes("referer") ||
     haystack.includes("referrer") ||
@@ -79,7 +87,13 @@ export function authErrorMessage(err: unknown): string {
     case "auth/cancelled-popup-request":
       return "Вікно входу закрито. Спробуй ще раз.";
     case "auth/popup-blocked":
-      return "Браузер заблокував вікно. Дозволь pop-up.";
+      return "Браузер заблокував вікно входу. Дозволь pop-up або відкрий сайт у Safari чи Chrome.";
+    case "auth/redirect-cancelled-by-user":
+      return "Вхід скасовано. Спробуй ще раз.";
+    case "auth/redirect-operation-pending":
+      return "Вхід уже відкривається. Зачекай або онови сторінку.";
+    case "auth/web-storage-unsupported":
+      return "Браузер не зберігає вхід. Вимкни приватний режим або відкрий сайт у Safari чи Chrome.";
     default:
       return err instanceof Error
         ? err.message.slice(0, 160)
@@ -90,13 +104,36 @@ export function authErrorMessage(err: unknown): string {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [googleSignInError, setGoogleSignInError] = useState<unknown>(null);
 
   useEffect(() => {
+    let alive = true;
+    let sawAuth = false;
+    let redirectSettled = false;
+
     const unsub = onAuthStateChanged(auth, (next) => {
+      if (!alive) return;
+      sawAuth = true;
       setUser(next);
-      setLoading(false);
+      if (next) setGoogleSignInError(null);
+      if (redirectSettled) setLoading(false);
     });
-    return unsub;
+
+    // Phones return here after Google. Wait for that result before showing
+    // a signed-out screen, or the redirect login looks like it failed.
+    void completeGoogleRedirect(auth)
+      .catch((err) => {
+        if (alive) setGoogleSignInError(err);
+      })
+      .finally(() => {
+        redirectSettled = true;
+        if (alive && sawAuth) setLoading(false);
+      });
+
+    return () => {
+      alive = false;
+      unsub();
+    };
   }, []);
 
   const isTeacher = isTeacherEmail(user?.email);
@@ -125,11 +162,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
       signInWithEmail: (email, password) =>
         signInWithEmailAndPassword(auth, email.trim(), password).then(() => undefined),
-      signInWithGoogle: () =>
-        signInWithPopup(auth, googleProvider).then(() => undefined),
+      signInWithGoogle: async () => {
+        setGoogleSignInError(null);
+        await signInWithGoogleAccount(auth);
+      },
+      googleSignInError,
       logOut: () => signOut(auth),
     }),
-    [user, loading, isTeacher, displayName],
+    [user, loading, isTeacher, displayName, googleSignInError],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

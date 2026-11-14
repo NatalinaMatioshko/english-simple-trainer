@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { StudentAuthCard } from "../components/auth/StudentAuthCard";
+import { Loader } from "../components/Loader";
 import { useAuth } from "../context/AuthContext";
 import "../styles/pages.css";
 
@@ -13,6 +14,14 @@ export default function LoginPage() {
       navigate(isTeacher ? "/cabinet" : "/vocab", { replace: true });
     }
   }, [loading, user, isTeacher, navigate]);
+
+  if (loading || user) {
+    return (
+      <div className="page-shell">
+        <Loader label="Перевіряю вхід…" />
+      </div>
+    );
+  }
 
   return (
     <div className="page-shell">
