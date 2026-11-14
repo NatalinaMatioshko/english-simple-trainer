@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
-import { HomeworkSubmit } from "../components/HomeworkSubmit";
-import { Hw54CheckReflect, type Hw54CrStats } from "../components/Hw54CheckReflect";
+import { useState } from "react";
+import { HwBlockSubmit } from "../components/HwBlockSubmit";
+import { Hw54CheckReflect } from "../components/Hw54CheckReflect";
 import { CheckBar } from "../components/lesson38/L38Ui";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
 import { gapInputClass } from "../components/lesson31/gapInputClass";
@@ -15,6 +15,7 @@ import {
 import { ticketFlashcards } from "../content/lessons/lesson-54/vocabulary";
 import { speakEnglish } from "../utils/speech";
 import { matchesAnyAnswer } from "../utils/text";
+import { useDraftState } from "../utils/useDraftState";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
@@ -30,33 +31,26 @@ export default function HW54() {
     });
   };
 
-  const [boardAns, setBoardAns] = useState<Record<string, string>>({});
-  const [boardChecked, setBoardChecked] = useState(false);
+  const [boardAns, setBoardAns] = useDraftState<Record<string, string>>(
+    "hw54-board",
+    {},
+  );
+  const [boardChecked, setBoardChecked] = useDraftState("hw54-board-checked", false);
   const boardScore = hwBoardGaps.filter((g) =>
     matchesAnyAnswer(boardAns[g.id] ?? "", g.answers),
   ).length;
 
-  const [dlgAns, setDlgAns] = useState<Record<string, string>>({});
-  const [dlgChecked, setDlgChecked] = useState(false);
+  const [dlgAns, setDlgAns] = useDraftState<Record<string, string>>("hw54-dialogue", {});
+  const [dlgChecked, setDlgChecked] = useDraftState("hw54-dialogue-checked", false);
   const dlgScore = hwDialogueGaps.filter((d) => (dlgAns[d.id] ?? "") === d.answer).length;
 
-  const [qAns, setQAns] = useState<Record<string, string>>({});
-  const [qChecked, setQChecked] = useState(false);
+  const [qAns, setQAns] = useDraftState<Record<string, string>>("hw54-questions", {});
+  const [qChecked, setQChecked] = useDraftState("hw54-questions-checked", false);
   const qScore = hwQuestions.filter((q) =>
     matchesAnyAnswer(qAns[q.id] ?? "", q.answers),
   ).length;
 
-  const [writing, setWriting] = useState("");
-  const [cr, setCr] = useState<Hw54CrStats>({
-    allChecked: false,
-    reflectDone: false,
-    score: 0,
-    total: 0,
-  });
-  const onCrStats = useCallback((stats: Hw54CrStats) => setCr(stats), []);
-
-  const lessonQuizDone = boardChecked && dlgChecked && qChecked;
-  const lessonScore = boardScore + dlgScore + qScore;
+  const [writing, setWriting] = useDraftState("hw54-writing", "");
   return (
     <div className="page">
       <div className="container">
@@ -64,7 +58,8 @@ export default function HW54() {
         <h1>Buy travel tickets</h1>
         <p className="lead">
           Слова для квитків · табло · діалог · питання · письмо · Check and
-          reflect (Unit 7).
+          reflect (Unit 7). Кожен блок зберігається в цьому браузері і
+          надсилається окремо.
         </p>
         <p className="l22-muted" style={{ marginTop: "0.5rem" }}>
           <a href="#hw54-cr">Jump to Check and reflect →</a>
@@ -148,6 +143,17 @@ export default function HW54() {
               setBoardChecked(false);
             }}
           />
+          <HwBlockSubmit
+            lessonId="54"
+            blockTitle="2 The board"
+            checked={boardChecked}
+            score={boardScore}
+            total={hwBoardGaps.length}
+            lines={hwBoardGaps.map((g) => {
+              const val = (boardAns[g.id] ?? "").trim();
+              return val ? `${g.before} ${val}${g.after}` : "";
+            })}
+          />
         </section>
 
         <section id="hw54-dialogue" className="lesson22-block panel">
@@ -195,6 +201,17 @@ export default function HW54() {
               setDlgChecked(false);
             }}
           />
+          <HwBlockSubmit
+            lessonId="54"
+            blockTitle="3 A ticket to Oxford"
+            checked={dlgChecked}
+            score={dlgScore}
+            total={hwDialogueGaps.length}
+            lines={hwDialogueGaps.map((d) => {
+              const val = (dlgAns[d.id] ?? "").trim();
+              return val ? `${d.before} ${val} ${d.after}` : "";
+            })}
+          />
         </section>
 
         <section id="hw54-questions" className="lesson22-block panel">
@@ -240,6 +257,17 @@ export default function HW54() {
               setQChecked(false);
             }}
           />
+          <HwBlockSubmit
+            lessonId="54"
+            blockTitle="4 Sentences"
+            checked={qChecked}
+            score={qScore}
+            total={hwQuestions.length}
+            lines={hwQuestions.map((q) => {
+              const val = (qAns[q.id] ?? "").trim();
+              return val ? `${q.prompt} → ${val}` : "";
+            })}
+          />
         </section>
 
         <section id="hw54-write" className="lesson22-block panel">
@@ -261,17 +289,14 @@ export default function HW54() {
               "You: Excuse me. What time is the next train to Swansea, please?\nAssistant: …"
             }
           />
+          <HwBlockSubmit
+            lessonId="54"
+            blockTitle="5 A ticket to Swansea"
+            lines={[writing.trim()]}
+          />
         </section>
 
-        <Hw54CheckReflect onStats={onCrStats} />
-
-        <HomeworkSubmit
-          lessonId="54"
-          writing={writing}
-          quizDone={lessonQuizDone && cr.allChecked && cr.reflectDone}
-          quizScore={lessonScore + cr.score}
-          description="Перевір урок (tasks 1–4), Check and reflect, reflect 1–5, напиши діалог — потім надішли."
-        />
+        <Hw54CheckReflect />
       </div>
     </div>
   );

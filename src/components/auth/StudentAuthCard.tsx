@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { authErrorMessage, useAuth } from "../../context/AuthContext";
+import { isEmbeddedWebView } from "../../lib/googleSignIn";
 import "../../styles/studentAuth.css";
 
 type Mode = "login" | "register";
@@ -9,13 +10,19 @@ export function StudentAuthCard({
 }: {
   onSuccess?: () => void;
 }) {
-  const { registerWithEmail, signInWithEmail, signInWithGoogle } = useAuth();
+  const { registerWithEmail, signInWithEmail, signInWithGoogle, googleSignInError } =
+    useAuth();
+  const embeddedHint = isEmbeddedWebView()
+    ? "Вхід через Google часто не працює у браузері всередині Telegram, Instagram чи Facebook. Відкрий це посилання в Safari або Chrome."
+    : "";
   const [mode, setMode] = useState<Mode>("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const shownError =
+    error || (googleSignInError ? authErrorMessage(googleSignInError) : "");
 
   const run = async (fn: () => Promise<void>) => {
     setError("");
@@ -103,7 +110,7 @@ export function StudentAuthCard({
             required
           />
         </label>
-        {error && <p className="student-auth-error">{error}</p>}
+        {shownError && <p className="student-auth-error">{shownError}</p>}
         <button type="submit" className="action-btn primary" disabled={busy}>
           {busy
             ? "Зачекай…"
@@ -112,6 +119,7 @@ export function StudentAuthCard({
               : "Увійти"}
         </button>
       </form>
+      {embeddedHint && <p className="student-auth-lead">{embeddedHint}</p>}
       <button
         type="button"
         className="action-btn secondary student-auth-google"

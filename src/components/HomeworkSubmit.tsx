@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoginRequiredNote } from "./auth/LoginRequiredNote";
 import { useAuth } from "../context/AuthContext";
 import { saveHomeworkAnswer } from "../services/homeworkAnswers";
 import "../styles/homeworkSubmit.css";
+
+const STUDENT_NAME_KEY = "hw-student-name";
+
+function readSavedName(): string {
+  try {
+    return localStorage.getItem(STUDENT_NAME_KEY) ?? "";
+  } catch {
+    return "";
+  }
+}
 
 type Props = {
   lessonId: string;
@@ -14,8 +24,16 @@ type Props = {
   quizScore?: number;
   /** Show checkbox for external listening / Test-English task */
   showListeningCheck?: boolean;
+  /** Show the "Quiz in app" line. */
+  showQuizStatus?: boolean;
   title?: string;
   description?: string;
+  buttonLabel?: string;
+  /** Minimum trimmed writing length. Default 10. */
+  minWritingLength?: number;
+  emptyMessage?: string;
+  /** Tighter layout for a submit control under one task. */
+  compact?: boolean;
 };
 
 export function HomeworkSubmit({
@@ -25,15 +43,24 @@ export function HomeworkSubmit({
   quizDone = false,
   quizScore,
   showListeningCheck = true,
+  showQuizStatus = true,
   title = "Надіслати домашнє",
   description = "Текст береться з поля вище. Додай ім’я і натисни «Надіслати».",
+  buttonLabel = "Надіслати вчителю",
+  minWritingLength = 10,
+  emptyMessage = "Напиши текст у полі вище (хоча б кілька речень), потім надішли.",
+  compact = false,
 }: Props) {
   const { user, loading } = useAuth();
-  const [studentName, setStudentName] = useState("");
+  const [studentName, setStudentName] = useState(readSavedName);
   const [testDone, setTestDone] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    setSuccess("");
+  }, [writing]);
 
   const handleSubmit = async () => {
     setError("");
@@ -53,9 +80,14 @@ export function HomeworkSubmit({
       setError("Вкажи своє ім’я (мінімум 2 літери).");
       return;
     }
-    if (text.length < 10) {
-      setError("Напиши текст у полі вище (хоча б кілька речень), потім надішли.");
+    if (text.length < minWritingLength) {
+      setError(emptyMessage);
       return;
+    }
+    try {
+      localStorage.setItem(STUDENT_NAME_KEY, name);
+    } catch {
+      /* ignore quota / private mode */
     }
 
     try {
@@ -78,7 +110,7 @@ export function HomeworkSubmit({
   };
 
   return (
-    <div className="hw-submit">
+    <div className={compact ? "hw-submit hw-submit--compact" : "hw-submit"}>
       <div className="hw-submit__head">
         <p className="page-kicker">Send to teacher</p>
         <h3 className="hw-submit__title">{title}</h3>
@@ -118,11 +150,13 @@ export function HomeworkSubmit({
             </label>
           )}
 
-          <p className="hw-submit__meta">
-            Quiz in app:{" "}
-            <strong>{quizDone ? "Done" : "Not finished yet"}</strong>
-            {quizDone && typeof quizScore === "number" ? ` · score ${quizScore}` : ""}
-          </p>
+          {showQuizStatus && (
+            <p className="hw-submit__meta">
+              Quiz in app:{" "}
+              <strong>{quizDone ? "Done" : "Not finished yet"}</strong>
+              {quizDone && typeof quizScore === "number" ? ` · score ${quizScore}` : ""}
+            </p>
+          )}
 
           <div className="hw-submit__actions">
             <button
@@ -131,7 +165,7 @@ export function HomeworkSubmit({
               onClick={() => void handleSubmit()}
               disabled={saving || Boolean(success)}
             >
-              {saving ? "Надсилаю…" : success ? "Надіслано" : "Надіслати вчителю"}
+              {saving ? "Надсилаю…" : success ? "Надіслано" : buttonLabel}
             </button>
             {success && <p className="hw-submit__ok">{success}</p>}
             {error && <p className="hw-submit__err">{error}</p>}

@@ -1,14 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { FirebaseError } from "firebase/app";
 import { collection, getDocs, query } from "firebase/firestore";
-import {
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
-  type User,
-} from "firebase/auth";
-import { auth, db } from "../firebase";
+import { db } from "../firebase";
+import { useAuth } from "../context/AuthContext";
+import { isEmbeddedWebView } from "../lib/googleSignIn";
 import { Loader } from "../components/Loader";
 import {
   markSubmissionReviewed,
@@ -18,8 +13,6 @@ import "../styles/pages.css";
 import "../styles/adminSubmissions.css";
 
 const TEACHER_EMAIL = import.meta.env.VITE_TEACHER_EMAIL as string | undefined;
-
-const provider = new GoogleAuthProvider();
 
 type AuthPhase = "loading" | "signed-out" | "wrong-account" | "ready";
 type SourceFilter = "all" | "homework" | "writing";
@@ -90,7 +83,22 @@ function signInErrorMessage(err: unknown): string {
     return "Sign-in popup was closed. Try again.";
   }
   if (code === "auth/popup-blocked") {
-    return "Sign-in popup was blocked. Allow popups and try again.";
+    return "Sign-in popup was blocked. Allow popups, or open the site in Safari or Chrome.";
+  }
+  if (code === "auth/redirect-cancelled-by-user") {
+    return "Google sign-in was cancelled. Try again.";
+  }
+  if (code === "auth/redirect-operation-pending") {
+    return "Google sign-in is already opening. Wait, or refresh the page.";
+  }
+  if (code === "auth/web-storage-unsupported") {
+    return "This browser cannot store the sign-in. Turn off private mode, or open the site in Safari or Chrome.";
+  }
+  if (
+    haystack.includes("disallowed_useragent") ||
+    haystack.includes("disallowed-useragent")
+  ) {
+    return "Google blocks sign-in inside an in-app browser. Open this site in Safari or Chrome.";
   }
   if (
     haystack.includes("requested action is invalid") ||
@@ -111,8 +119,14 @@ function signInErrorMessage(err: unknown): string {
 }
 
 export default function AdminSubmissions() {
-  const [phase, setPhase] = useState<AuthPhase>("loading");
-  const [user, setUser] = useState<User | null>(null);
+  const { user, loading, logOut, signInWithGoogle, googleSignInError } = useAuth();
+  const phase: AuthPhase = loading
+    ? "loading"
+    : !user
+      ? "signed-out"
+      : TEACHER_EMAIL && user.email !== TEACHER_EMAIL
+        ? "wrong-account"
+        : "ready";
   const [items, setItems] = useState<FeedItem[]>([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [error, setError] = useState("");
@@ -123,23 +137,6 @@ export default function AdminSubmissions() {
   const [lessonFilter, setLessonFilter] = useState("all");
   const [reviewingId, setReviewingId] = useState<string | null>(null);
   const [actionError, setActionError] = useState("");
-
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => {
-      setUser(u);
-      setError("");
-      if (!u) {
-        setPhase("signed-out");
-        setItems([]);
-      } else if (TEACHER_EMAIL && u.email !== TEACHER_EMAIL) {
-        setPhase("wrong-account");
-        setItems([]);
-      } else {
-        setPhase("ready");
-      }
-    });
-    return unsub;
-  }, []);
 
   useEffect(() => {
     if (phase !== "ready") return;
@@ -275,13 +272,19 @@ export default function AdminSubmissions() {
   const handleSignIn = async () => {
     setSignInError("");
     try {
-      await signInWithPopup(auth, provider);
+      await signInWithGoogle();
     } catch (err) {
       setSignInError(signInErrorMessage(err));
     }
   };
 
-  const handleSignOut = () => void signOut(auth);
+  const handleSignOut = () => void logOut();
+  const embeddedHint = isEmbeddedWebView()
+    ? "Google sign-in often fails inside Telegram, Instagram, or Facebook. Open this page in Safari or Chrome."
+    : "";
+  const visibleSignInError =
+    signInError ||
+    (googleSignInError ? signInErrorMessage(googleSignInError) : "");
 
   const handleMarkReviewed = async (item: FeedItem) => {
     setActionError("");
@@ -318,12 +321,15 @@ export default function AdminSubmissions() {
           </p>
         </header>
         <section className="panel">
+          {embeddedHint && (
+            <p className="page-subtitle">{embeddedHint}</p>
+          )}
           <button className="action-btn primary" onClick={handleSignIn}>
             Sign in with Google
           </button>
-          {signInError && (
+          {visibleSignInError && (
             <p className="homework-error" style={{ marginTop: "0.75rem" }}>
-              {signInError}
+              {visibleSignInError}
             </p>
           )}
         </section>

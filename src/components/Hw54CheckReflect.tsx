@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
+import { HwBlockSubmit } from "./HwBlockSubmit";
 import { CheckBar } from "./lesson38/L38Ui";
 import { drillSelClass } from "./lesson31/drillSelClass";
 import { gapInputClass } from "./lesson31/gapInputClass";
@@ -17,6 +18,7 @@ import {
   vocabAlternatives,
 } from "../content/lessons/lesson-54/hwCheckReflect";
 import { matchesAnyAnswer } from "../utils/text";
+import { useDraftState } from "../utils/useDraftState";
 import "../styles/lesson25.css";
 import "../styles/lesson35.css";
 
@@ -28,7 +30,7 @@ export type Hw54CrStats = {
 };
 
 type Props = {
-  onStats: (stats: Hw54CrStats) => void;
+  onStats?: (stats: Hw54CrStats) => void;
 };
 
 function CompassRose() {
@@ -63,37 +65,38 @@ function CompassRose() {
 
 /** Unit 7 Check and reflect · embedded in HW54 */
 export function Hw54CheckReflect({ onStats }: Props) {
-  const [compassAns, setCompassAns] = useState<Record<string, string>>({});
-  const [compassChecked, setCompassChecked] = useState(false);
+  const [compassAns, setCompassAns] = useDraftState<Record<string, string>>("hw54-cr-compass", {});
+  const [compassChecked, setCompassChecked] = useDraftState("hw54-cr-compass-checked", false);
 
-  const [vocabAns, setVocabAns] = useState<Record<string, string>>({});
-  const [vocabChecked, setVocabChecked] = useState(false);
+  const [vocabAns, setVocabAns] = useDraftState<Record<string, string>>("hw54-cr-vocab", {});
+  const [vocabChecked, setVocabChecked] = useDraftState("hw54-cr-vocab-checked", false);
 
-  const [timeAns, setTimeAns] = useState<Record<string, string>>({});
-  const [timeChecked, setTimeChecked] = useState(false);
+  const [timeAns, setTimeAns] = useDraftState<Record<string, string>>("hw54-cr-time", {});
+  const [timeChecked, setTimeChecked] = useDraftState("hw54-cr-time-checked", false);
 
-  const [qOrderAns, setQOrderAns] = useState<Record<string, string>>({});
-  const [qOrderChecked, setQOrderChecked] = useState(false);
+  const [qOrderAns, setQOrderAns] = useDraftState<Record<string, string>>("hw54-cr-qorder", {});
+  const [qOrderChecked, setQOrderChecked] = useDraftState("hw54-cr-qorder-checked", false);
 
-  const [qMatchAns, setQMatchAns] = useState<Record<string, string>>({});
-  const [qMatchChecked, setQMatchChecked] = useState(false);
+  const [qMatchAns, setQMatchAns] = useDraftState<Record<string, string>>("hw54-cr-qmatch", {});
+  const [qMatchChecked, setQMatchChecked] = useDraftState("hw54-cr-qmatch-checked", false);
 
-  const [monthAns, setMonthAns] = useState<Record<string, string>>({});
-  const [monthChecked, setMonthChecked] = useState(false);
+  const [monthAns, setMonthAns] = useDraftState<Record<string, string>>("hw54-cr-months", {});
+  const [monthChecked, setMonthChecked] = useDraftState("hw54-cr-months-checked", false);
 
-  const [ordAns, setOrdAns] = useState<Record<string, string>>({});
-  const [ordChecked, setOrdChecked] = useState(false);
+  const [ordAns, setOrdAns] = useDraftState<Record<string, string>>("hw54-cr-dates", {});
+  const [ordChecked, setOrdChecked] = useDraftState("hw54-cr-dates-checked", false);
 
-  const [wasAns, setWasAns] = useState<Record<string, string>>({});
-  const [wasChecked, setWasChecked] = useState(false);
+  const [wasAns, setWasAns] = useDraftState<Record<string, string>>("hw54-cr-was", {});
+  const [wasChecked, setWasChecked] = useDraftState("hw54-cr-was-checked", false);
 
-  const [adjAns, setAdjAns] = useState<Record<string, string>>({});
-  const [adjChecked, setAdjChecked] = useState(false);
+  const [adjAns, setAdjAns] = useDraftState<Record<string, string>>("hw54-cr-adj", {});
+  const [adjChecked, setAdjChecked] = useDraftState("hw54-cr-adj-checked", false);
 
-  const [pastQAns, setPastQAns] = useState<Record<string, string>>({});
-  const [pastQChecked, setPastQChecked] = useState(false);
+  const [pastQAns, setPastQAns] = useDraftState<Record<string, string>>("hw54-cr-pastq", {});
+  const [pastQChecked, setPastQChecked] = useDraftState("hw54-cr-pastq-checked", false);
 
-  const [reflect, setReflect] = useState(() =>
+  const [reflect, setReflect] = useDraftState<string[]>(
+    "hw54-cr-reflect",
     Array(reflectStatements54.length).fill(""),
   );
 
@@ -191,7 +194,7 @@ export function Hw54CheckReflect({ onStats }: Props) {
   const reflectDone = reflect.every((r) => r !== "");
 
   useEffect(() => {
-    onStats({ allChecked, reflectDone, score: totalScore, total: totalItems });
+    onStats?.({ allChecked, reflectDone, score: totalScore, total: totalItems });
   }, [allChecked, reflectDone, onStats, totalItems, totalScore]);
 
   return (
@@ -202,7 +205,7 @@ export function Hw54CheckReflect({ onStats }: Props) {
           <h2>Unit 7 review</h2>
           <p className="lesson22-section-desc">
             Compass · places · time words · questions · months · was/were · adjectives.
-            Після Check заповни Reflect.
+            Кожну групу можна надіслати окремо.
           </p>
         </div>
       </section>
@@ -326,6 +329,42 @@ export function Hw54CheckReflect({ onStats }: Props) {
             setTimeChecked(false);
           }}
         />
+        <HwBlockSubmit
+          lessonId="54"
+          blockTitle="Check 1 · places and time"
+          checked={compassChecked && vocabChecked && timeChecked}
+          score={compassScore + vocabScore + timeScore}
+          total={totals.compass + totals.vocab + totals.time}
+          lines={[
+            ...headed(
+              "1a Compass",
+              compassGaps.map((g) => {
+                const val = (compassAns[g.id] ?? "").trim();
+                return val ? `${g.hint} → ${val}` : "";
+              }),
+            ),
+            ...headed(
+              "1b Places",
+              vocabAlternatives.map((item) => {
+                const bits = item.parts.map((part, pi) => {
+                  const choice =
+                    pi < item.answer.length
+                      ? (vocabAns[`${item.id}-${pi}`] ?? "").trim()
+                      : "";
+                  return choice ? `${part} ${choice}` : "";
+                });
+                return bits.some(Boolean) ? bits.filter(Boolean).join(" · ") : "";
+              }),
+            ),
+            ...headed(
+              "1c Time words",
+              timeWordGaps.map((g) => {
+                const val = (timeAns[g.id] ?? "").trim();
+                return val ? `${g.before} ${val} ${g.after}` : "";
+              }),
+            ),
+          ]}
+        />
       </section>
 
       <section className="lesson22-block panel">
@@ -405,6 +444,31 @@ export function Hw54CheckReflect({ onStats }: Props) {
             setQMatchChecked(false);
           }}
         />
+        <HwBlockSubmit
+          lessonId="54"
+          blockTitle="Check 2 · questions"
+          checked={qOrderChecked && qMatchChecked}
+          score={qOrderScore + qMatchScore}
+          total={totals.qOrder + totals.qMatch}
+          lines={[
+            ...headed(
+              "2a Word order",
+              questionWordOrder.map((q) => {
+                const val = (
+                  "example" in q && q.example ? q.answers[0] : (qOrderAns[q.id] ?? "")
+                ).trim();
+                return val ? `${q.scramble} → ${val}` : "";
+              }),
+            ),
+            ...headed(
+              "2b Match",
+              questionMatchAnswers.map((m) => {
+                const val = (qMatchAns[m.id] ?? "").trim();
+                return val ? `${m.id}. ${m.label} → ${val}` : "";
+              }),
+            ),
+          ]}
+        />
       </section>
 
       <section className="lesson22-block panel">
@@ -471,6 +535,29 @@ export function Hw54CheckReflect({ onStats }: Props) {
             setOrdAns({});
             setOrdChecked(false);
           }}
+        />
+        <HwBlockSubmit
+          lessonId="54"
+          blockTitle="Check 3 · months and dates"
+          checked={monthChecked && ordChecked}
+          score={monthScore + ordScore}
+          total={totals.month + totals.ord}
+          lines={[
+            ...headed(
+              "3a Months",
+              monthGaps.map((m) => {
+                const val = (monthAns[m.id] ?? "").trim();
+                return val ? `${m.hint} → ${val}` : "";
+              }),
+            ),
+            ...headed(
+              "3b Dates",
+              ordinalWords.map((o) => {
+                const val = (ordAns[o.id] ?? "").trim();
+                return val ? `${o.prompt} → ${val}` : "";
+              }),
+            ),
+          ]}
         />
       </section>
 
@@ -582,6 +669,42 @@ export function Hw54CheckReflect({ onStats }: Props) {
             setPastQChecked(false);
           }}
         />
+        <HwBlockSubmit
+          lessonId="54"
+          blockTitle="Check 4 · was/were, adjectives, questions"
+          checked={wasChecked && adjChecked && pastQChecked}
+          score={wasScore + adjScore + pastQScore}
+          total={totals.was + totals.adj + totals.pastQ}
+          lines={[
+            ...headed(
+              "4 was / were",
+              holidayWasWere.map((g) => {
+                const val = (
+                  "example" in g && g.example ? "was" : (wasAns[g.id] ?? "")
+                ).trim();
+                return val ? `${g.before} ${val} ${g.after}` : "";
+              }),
+            ),
+            ...headed(
+              "5 Adjectives",
+              adjectiveChoices.map((a) => {
+                const val = (adjAns[a.id] ?? "").trim();
+                return val
+                  ? `${a.before} ${val}${"after" in a && a.after ? ` ${a.after}` : ""}`
+                  : "";
+              }),
+            ),
+            ...headed(
+              "6a Past questions",
+              pastQuestionOrder.map((q) => {
+                const val = (
+                  "example" in q && q.example ? q.answers[0] : (pastQAns[q.id] ?? "")
+                ).trim();
+                return val ? `${q.scramble} → ${val}` : "";
+              }),
+            ),
+          ]}
+        />
       </section>
 
       <section id="hw54-reflect" className="lesson22-block panel">
@@ -612,9 +735,23 @@ export function Hw54CheckReflect({ onStats }: Props) {
             </label>
           ))}
         </div>
+        <HwBlockSubmit
+          lessonId="54"
+          blockTitle="Reflect"
+          checked={reflectDone}
+          lines={reflectStatements54.map((statement, i) => {
+            const val = (reflect[i] ?? "").trim();
+            return val ? `${statement}: ${val}` : "";
+          })}
+        />
       </section>
   </>
   );
+}
+
+function headed(title: string, lines: string[]): string[] {
+  const filled = lines.filter(Boolean);
+  return filled.length ? [title, ...filled] : [];
 }
 
 function CrSectionHead({
