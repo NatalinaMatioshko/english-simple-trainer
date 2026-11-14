@@ -45,8 +45,9 @@ export default function RoadmapPage() {
             />
           </h1>
           <p className="page-subtitle">
-            A simple learning hub for routines, Past Simple, food and drink,
-            frequency adverbs, café English, and speaking practice.
+            A simple learning hub. Live lessons now go through a bad day in
+            the Past Simple: irregular verbs, didn’t, and a short story for
+            the teacher.
           </p>
         </div>
         <FaceButton />

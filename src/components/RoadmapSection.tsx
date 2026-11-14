@@ -76,32 +76,20 @@ const completedPath: StageSummary[] = [
     summary:
       "Have / has got and travel pack, dos and don’ts, telling the time, My week + travel chunks, Past Simple preview (yesterday), then Food and drink with frequency adverbs and ordering in a café.",
   },
+  {
+    range: "Lessons 45–56",
+    title: "Habits, places, and Past Simple",
+    summary:
+      "Habits and housework, can / can’t, a week review, yesterday, polite requests, a nice place, good days and dates, how was it, train tickets, regular -ed, then a bad day with irregular verbs.",
+  },
 ];
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 46–48",
-    title: "Housework, skills, requests",
+    range: "Lessons 58–65",
+    title: "Greetings, photos, hobbies, plans",
     summary:
-      "Housework questions with does, can / can’t for skills, then make polite requests.",
-  },
-  {
-    range: "Lessons 49–52",
-    title: "Places, was/were, tickets",
-    summary:
-      "Wh- questions about places, good days with was/were and dates, ask how events were, then buy travel tickets.",
-  },
-  {
-    range: "Lessons 53–56",
-    title: "Past Simple stories",
-    summary:
-      "Regular and irregular Past Simple, questions about holidays, then greet people in real situations.",
-  },
-  {
-    range: "Lessons 57–64",
-    title: "Photos, hobbies, plans",
-    summary:
-      "Family photos and object pronouns, hobbies with like + -ing, study habits with because, goals with would like, then going to plans, seasons, and invitations.",
+      "Greet people, family photos and object pronouns, hobbies with like + -ing, study habits with because, suggestions, goals with would like, then going to plans, seasons, and invitations.",
   },
 ];
 
@@ -701,7 +689,7 @@ const roadmapLessons: Lesson[] = [
     listening: "Strong and weak can · ability dialogues",
     review: "can / can’t (L21); housework questions (L46)",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lessons/47",
   },
   {
@@ -713,7 +701,7 @@ const roadmapLessons: Lesson[] = [
     listening: "Quick time drill · teacher Q&A",
     review: "Habits (L45); housework questions (L46); skills (L47)",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lessons/48",
   },
   {
@@ -725,7 +713,7 @@ const roadmapLessons: Lesson[] = [
     listening: "Story check with teacher",
     review: "Past Simple start (L43); My week (L48)",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lessons/49",
   },
   {
@@ -737,7 +725,7 @@ const roadmapLessons: Lesson[] = [
     listening: "Request dialogues · role-play",
     review: "can / can’t (L47); housework (L46); Yesterday story (L49)",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lessons/50",
   },
   {
@@ -749,7 +737,7 @@ const roadmapLessons: Lesson[] = [
     listening: "Fatma and Dan · question intonation ↑ ↓",
     review: "WH-questions (L32); there is / are (L31); My week (L48)",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lessons/51",
   },
   {
@@ -761,7 +749,7 @@ const roadmapLessons: Lesson[] = [
     listening: "David’s year · wasn’t / weren’t",
     review: "Places & questions (L51); Yesterday story (L49); was/were preview (L32)",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lessons/52",
   },
   {
@@ -773,7 +761,7 @@ const roadmapLessons: Lesson[] = [
     listening: "Three short conversations · was / were in questions and answers",
     review: "Ordinal numbers and was / were (L52)",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lessons/53",
   },
   {
@@ -785,7 +773,7 @@ const roadmapLessons: Lesson[] = [
     listening: "Jeff and Helena at the station · useful phrases",
     review: "Opposites and was / were questions (L53)",
     category: "transport",
-    status: "next",
+    status: "completed",
     route: "/lessons/54",
   },
   {
@@ -797,7 +785,7 @@ const roadmapLessons: Lesson[] = [
     listening: "-ed endings /t/ /d/ /ɪd/",
     review: "was/were (L52–53); regular -ed (L43)",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lessons/55",
   },
   {
@@ -809,19 +797,20 @@ const roadmapLessons: Lesson[] = [
     listening: "Silent letter in didn’t · bad-day stories",
     review: "When I was young (L55); irregular preview (L43)",
     category: "general",
-    status: "next",
+    status: "completed",
     route: "/lessons/56",
   },
   {
     id: 57,
-    title: "Good places",
-    grammar: "Past Simple questions (Did you…?)",
-    vocabulary: "holiday activities: swim, visit, stay, travel…",
-    speaking: "Talk about a holiday",
-    listening: "Linking sounds · holiday dialogues",
-    review: "Irregular Past (L56)",
+    title: "You had a bad day",
+    grammar: "Past Simple irregular verbs · didn’t",
+    vocabulary: "common irregulars: had, went, saw, bought, left…",
+    speaking: "Talk about a bad day with your teacher",
+    listening: "Silent letter in didn’t · bad-day stories",
+    review: "Same tasks as Lesson 56, without the opening video",
     category: "general",
-    status: "next",
+    status: "current",
+    route: "/lessons/57",
   },
   {
     id: 58,
@@ -830,7 +819,7 @@ const roadmapLessons: Lesson[] = [
     vocabulary: "greeting and leave-taking phrases",
     speaking: "Greet people in short role-plays",
     listening: "Greeting dialogues",
-    review: "Good places (L57); social English",
+    review: "Bad day (L56–57); social English",
     category: "people",
     status: "next",
   },
@@ -1163,8 +1152,9 @@ export default function RoadmapSection() {
               <p className="roadmap-mini-label">Full timeline</p>
               <h3>Lessons 1–64</h3>
               <p>
-                Interactive lessons are live through Jobs around the house
-                (Lesson 46). Lessons 47–64 are the planned path ahead.
+                Interactive lessons are live through You had a bad day
+                (Lesson 57). Lesson 57 repeats Lesson 56 without the opening
+                video. Lessons 58–65 are the planned path ahead.
               </p>
             </div>
 

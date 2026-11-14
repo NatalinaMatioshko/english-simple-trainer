@@ -1,12 +1,9 @@
 import { useState } from "react";
 import type { FillBlankSection as FillBlankType } from "../../../types/lesson";
+import { normalizeAnswer } from "../../../utils/text";
 
 function norm(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc']/g, "'")
-    .replace(/\s+/g, " ");
+  return normalizeAnswer(s);
 }
 
 function selClass(checked: boolean, value: string, ok: boolean): string {

@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "57": "/images/lesson56/panel-a.png",
   "56": "/images/lesson56/panel-a.png",
   "55": "/images/lesson55/photo-a-bike.png",
   "54": "/images/lesson54/trains-to-heathrow.png",
@@ -47,6 +48,19 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "57",
+    title: "You had a bad day",
+    href: "/hw-57",
+    tasks: [
+      { type: "text", text: "Pictures A–L: say the sentence, then check" },
+      { type: "text", text: "Flashcards: irregular verbs (UA → past simple)" },
+      { type: "text", text: "Write the past form: get up, go, see, buy…" },
+      { type: "text", text: "Complete sentences with irregular past verbs" },
+      { type: "text", text: "Carla: did she, or didn't she?" },
+      { type: "text", text: "Write about a bad day (6–8 sentences, with didn't)" },
+    ],
+  },
   {
     id: "56",
     title: "You had a bad day",
