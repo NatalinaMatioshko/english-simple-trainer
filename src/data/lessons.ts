@@ -368,6 +368,7 @@ export const lessonCovers: Record<string, string> = {
   "54": "/images/lesson54/trains-to-heathrow.png",
   "55": "/images/lesson55/photo-a-bike.png",
   "56": "/images/lesson56/panel-a.png",
+  "57": "/images/lesson56/panel-a.png",
   extra: "/images/everyday-actions.png",
   review: "/images/at-work.webp",
 };

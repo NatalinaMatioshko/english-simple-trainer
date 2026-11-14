@@ -975,3 +975,27 @@ details[open] .l25-details-toggle::after {
   .l25-stress-table { grid-template-columns: repeat(3, 1fr); }
   .l25-stress-table > .l25-stress-col:nth-child(n+4) { grid-column: span 1; }
 }
+
+/* Homework writing box (HW55–57). Without this the field stays the browser default: ~180px, monospace. */
+.l25-writing-area {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 42rem;
+  margin: 0.85rem 0 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 12px;
+  background: var(--color-surface, #fff);
+  color: var(--color-text, inherit);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.55;
+  resize: vertical;
+  min-height: 12rem;
+}
+
+.l25-writing-area:focus {
+  outline: 2px solid rgba(15, 118, 110, 0.35);
+  border-color: #0f766e;
+}
