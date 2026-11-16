@@ -1,15 +1,101 @@
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { CheckBar } from "../components/lesson38/L38Ui";
 import { drillSelClass } from "../components/lesson31/drillSelClass";
 import { gapInputClass } from "../components/lesson31/gapInputClass";
 import { hwCarlaChoices, hwPastType, hwSentenceGaps, storyPhotos } from "../content/lessons/lesson-56/activities";
 import { irregularVerbCards } from "../content/lessons/lesson-56/vocabulary";
+import {
+  hw57ArticleTranslate,
+  hw57NegativeTranslate,
+  hw57PastTranslate,
+  hw57SentenceTranslate,
+  type TranslateItem,
+} from "../content/lessons/lesson-57/hwTranslate";
 import { speakEnglish } from "../utils/speech";
 import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
 import "../styles/lesson25.css";
 import "../styles/lesson26.css";
+
+function verbPairAnswers(back: string): string[] {
+  const [infinitive, past] = back.split(" → ");
+  if (!past) return [back];
+  return [
+    back,
+    `${infinitive} -> ${past}`,
+    `${infinitive} - ${past}`,
+    `${infinitive}, ${past}`,
+    `${infinitive} ${past}`,
+    past,
+  ];
+}
+
+const verbTest: TranslateItem[] = irregularVerbCards.map((card, index) => ({
+  id: `v${index + 1}`,
+  prompt: card.front,
+  answers: verbPairAnswers(card.back),
+}));
+
+function scoreOf(
+  items: readonly TranslateItem[],
+  answers: Record<string, string>,
+): number {
+  return items.filter((item) =>
+    matchesAnyAnswer(answers[item.id] ?? "", item.answers),
+  ).length;
+}
+
+function answerLines(
+  title: string,
+  items: readonly TranslateItem[],
+  answers: Record<string, string>,
+): string {
+  const rows = items
+    .map((item) => {
+      const value = (answers[item.id] ?? "").trim();
+      return value ? `${item.prompt} → ${value}` : "";
+    })
+    .filter(Boolean);
+  return rows.length ? `${title}\n${rows.join("\n")}` : "";
+}
+
+function TranslateList({
+  items,
+  answers,
+  checked,
+  onChange,
+}: {
+  items: readonly TranslateItem[];
+  answers: Record<string, string>;
+  checked: boolean;
+  onChange: (id: string, value: string) => void;
+}) {
+  return (
+    <ol className="hw57-translate">
+      {items.map((item, index) => {
+        const value = answers[item.id] ?? "";
+        const ok = matchesAnyAnswer(value, item.answers);
+        return (
+          <li key={item.id}>
+            <span>
+              {index + 1}. {item.prompt}
+            </span>
+            <input
+              value={value}
+              onChange={(event) => onChange(item.id, event.target.value)}
+              className={gapInputClass(checked, value, ok)}
+              aria-label={item.prompt}
+            />
+            {checked && value.trim() && !ok ? (
+              <span className="hw57-key">{item.answers[0]}</span>
+            ) : null}
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
 
 /** Homework for Lesson 57 — same tasks as Lesson 56, without the lesson video. */
 export default function HW57() {
@@ -49,7 +135,47 @@ export default function HW57() {
     (item) => (carlaAns[item.id] ?? "") === item.answer,
   ).length;
 
+  const [verbAns, setVerbAns] = useState<Record<string, string>>({});
+  const [verbChecked, setVerbChecked] = useState(false);
+  const verbScore = scoreOf(verbTest, verbAns);
+
+  const [sentAns, setSentAns] = useState<Record<string, string>>({});
+  const [sentChecked, setSentChecked] = useState(false);
+  const sentScore = scoreOf(hw57SentenceTranslate, sentAns);
+
+  const [pastWriteAns, setPastWriteAns] = useState<Record<string, string>>({});
+  const [pastWriteChecked, setPastWriteChecked] = useState(false);
+  const pastWriteScore = scoreOf(hw57PastTranslate, pastWriteAns);
+
+  const [artAns, setArtAns] = useState<Record<string, string>>({});
+  const [artChecked, setArtChecked] = useState(false);
+  const artScore = scoreOf(hw57ArticleTranslate, artAns);
+
+  const [negAns, setNegAns] = useState<Record<string, string>>({});
+  const [negChecked, setNegChecked] = useState(false);
+  const negScore = scoreOf(hw57NegativeTranslate, negAns);
+
   const [writing, setWriting] = useState("");
+
+  const setField =
+    (
+      setter: Dispatch<SetStateAction<Record<string, string>>>,
+      unlock: () => void,
+    ) =>
+    (id: string, value: string) => {
+      unlock();
+      setter((prev) => ({ ...prev, [id]: value }));
+    };
+
+  const appendix = [
+    answerLines("2 · Verb test", verbTest, verbAns),
+    answerLines("2b · Sentences", hw57SentenceTranslate, sentAns),
+    answerLines("4b · Past", hw57PastTranslate, pastWriteAns),
+    answerLines("4c · Articles", hw57ArticleTranslate, artAns),
+    answerLines("4d · Negatives", hw57NegativeTranslate, negAns),
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 
   return (
     <div className="page">
@@ -127,6 +253,33 @@ export default function HW57() {
           </div>
         </section>
 
+        <section id="hw57-verb-test" className="lesson22-block panel">
+          <div className="lesson22-section-head">
+            <p className="page-kicker">2 · Test</p>
+            <h2>Irregular verbs</h2>
+            <p className="lead">
+              Напиши пару англійською: get up → got up. Можна через кому або лише
+              форму минулого часу.
+            </p>
+          </div>
+          <TranslateList
+            items={verbTest}
+            answers={verbAns}
+            checked={verbChecked}
+            onChange={setField(setVerbAns, () => setVerbChecked(false))}
+          />
+          <CheckBar
+            checked={verbChecked}
+            score={verbScore}
+            total={verbTest.length}
+            onCheck={() => setVerbChecked(true)}
+            onReset={() => {
+              setVerbChecked(false);
+              setVerbAns({});
+            }}
+          />
+        </section>
+
         <section id="hw57-past" className="lesson22-block panel">
           <div className="lesson22-section-head">
             <p className="page-kicker">3 · Past form</p>
@@ -202,6 +355,32 @@ export default function HW57() {
           />
         </section>
 
+        <section id="hw57-sentences-ua" className="lesson22-block panel">
+          <div className="lesson22-section-head">
+            <p className="page-kicker">2b · Writing</p>
+            <h2>Complete the sentences</h2>
+            <p className="lead">
+              Переклади речення англійською. Дієслово — в Past Simple.
+            </p>
+          </div>
+          <TranslateList
+            items={hw57SentenceTranslate}
+            answers={sentAns}
+            checked={sentChecked}
+            onChange={setField(setSentAns, () => setSentChecked(false))}
+          />
+          <CheckBar
+            checked={sentChecked}
+            score={sentScore}
+            total={hw57SentenceTranslate.length}
+            onCheck={() => setSentChecked(true)}
+            onReset={() => {
+              setSentChecked(false);
+              setSentAns({});
+            }}
+          />
+        </section>
+
         <section id="hw57-carla" className="lesson22-block panel">
           <div className="lesson22-section-head">
             <p className="page-kicker">5 · Carla</p>
@@ -246,6 +425,84 @@ export default function HW57() {
           />
         </section>
 
+        <section id="hw57-past-write" className="lesson22-block panel">
+          <div className="lesson22-section-head">
+            <p className="page-kicker">4b · Writing</p>
+            <h2>Write the sentence in the past</h2>
+            <p className="lead">Переклади англійською в Past Simple.</p>
+          </div>
+          <TranslateList
+            items={hw57PastTranslate}
+            answers={pastWriteAns}
+            checked={pastWriteChecked}
+            onChange={setField(setPastWriteAns, () => setPastWriteChecked(false))}
+          />
+          <CheckBar
+            checked={pastWriteChecked}
+            score={pastWriteScore}
+            total={hw57PastTranslate.length}
+            onCheck={() => setPastWriteChecked(true)}
+            onReset={() => {
+              setPastWriteChecked(false);
+              setPastWriteAns({});
+            }}
+          />
+        </section>
+
+        <section id="hw57-articles" className="lesson22-block panel">
+          <div className="lesson22-section-head">
+            <p className="page-kicker">4c · Writing</p>
+            <h2>Add a, an or the</h2>
+            <p className="lead">
+              Переклади англійською і додай a, an або the. an — перед a, e, i, o, u.
+              the — цей конкретний предмет або місце.
+            </p>
+          </div>
+          <TranslateList
+            items={hw57ArticleTranslate}
+            answers={artAns}
+            checked={artChecked}
+            onChange={setField(setArtAns, () => setArtChecked(false))}
+          />
+          <CheckBar
+            checked={artChecked}
+            score={artScore}
+            total={hw57ArticleTranslate.length}
+            onCheck={() => setArtChecked(true)}
+            onReset={() => {
+              setArtChecked(false);
+              setArtAns({});
+            }}
+          />
+        </section>
+
+        <section id="hw57-negatives" className="lesson22-block panel">
+          <div className="lesson22-section-head">
+            <p className="page-kicker">4d · Writing</p>
+            <h2>Make the sentences negative</h2>
+            <p className="lead">
+              Переклади заперечення: didn't + дієслово без минулої форми. Артикль
+              лишається.
+            </p>
+          </div>
+          <TranslateList
+            items={hw57NegativeTranslate}
+            answers={negAns}
+            checked={negChecked}
+            onChange={setField(setNegAns, () => setNegChecked(false))}
+          />
+          <CheckBar
+            checked={negChecked}
+            score={negScore}
+            total={hw57NegativeTranslate.length}
+            onCheck={() => setNegChecked(true)}
+            onReset={() => {
+              setNegChecked(false);
+              setNegAns({});
+            }}
+          />
+        </section>
+
         <section id="hw57-write" className="lesson22-block panel">
           <div className="lesson22-section-head">
             <p className="page-kicker">6 · Writing</p>
@@ -267,8 +524,27 @@ export default function HW57() {
         <HomeworkSubmit
           lessonId="57"
           writing={writing}
-          quizDone={pastChecked && gapChecked && carlaChecked}
-          quizScore={pastScore + gapScore + carlaScore}
+          appendix={appendix}
+          quizDone={
+            pastChecked &&
+            gapChecked &&
+            carlaChecked &&
+            verbChecked &&
+            sentChecked &&
+            pastWriteChecked &&
+            artChecked &&
+            negChecked
+          }
+          quizScore={
+            pastScore +
+            gapScore +
+            carlaScore +
+            verbScore +
+            sentScore +
+            pastWriteScore +
+            artScore +
+            negScore
+          }
         />
       </div>
     </div>
