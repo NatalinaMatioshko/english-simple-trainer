@@ -1,6 +1,7 @@
 import { FirebaseError } from "firebase/app";
 import { describe, expect, it } from "vitest";
 import {
+  isAppleMobileWebKit,
   isEmbeddedWebView,
   prefersGoogleRedirect,
   shouldRetryGoogleWithRedirect,
@@ -53,11 +54,16 @@ const instagram: GoogleSignInEnv = {
 };
 
 describe("prefersGoogleRedirect", () => {
-  it("uses redirect on phones, tablets, and in-app browsers", () => {
-    expect(prefersGoogleRedirect(iphone)).toBe(true);
+  it("uses a popup on iPhone and iPad, because Safari drops the redirect session", () => {
+    expect(isAppleMobileWebKit(iphone)).toBe(true);
+    expect(isAppleMobileWebKit(ipadDesktopMode)).toBe(true);
+    expect(prefersGoogleRedirect(iphone)).toBe(false);
+    expect(prefersGoogleRedirect(ipadDesktopMode)).toBe(false);
+    expect(prefersGoogleRedirect(instagram)).toBe(false);
+  });
+
+  it("uses redirect on Android and non-Apple in-app browsers", () => {
     expect(prefersGoogleRedirect(android)).toBe(true);
-    expect(prefersGoogleRedirect(ipadDesktopMode)).toBe(true);
-    expect(prefersGoogleRedirect(instagram)).toBe(true);
   });
 
   it("keeps the popup on laptops, including a touchscreen Windows laptop", () => {

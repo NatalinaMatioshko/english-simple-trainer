@@ -94,6 +94,8 @@ export function authErrorMessage(err: unknown): string {
       return "Вхід уже відкривається. Зачекай або онови сторінку.";
     case "auth/web-storage-unsupported":
       return "Браузер не зберігає вхід. Вимкни приватний режим або відкрий сайт у Safari чи Chrome.";
+    case "auth/redirect-result-missing":
+      return "Google повернув на сторінку входу, але сесію не зберіг. На iPhone натисни «Увійти з Google» ще раз: має відкритись вікно, не нова сторінка. Якщо вікна немає, дозволь спливаючі вікна для цього сайту.";
     default:
       return err instanceof Error
         ? err.message.slice(0, 160)
