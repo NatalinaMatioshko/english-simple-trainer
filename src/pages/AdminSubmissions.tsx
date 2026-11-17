@@ -3,7 +3,7 @@ import { FirebaseError } from "firebase/app";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
-import { isEmbeddedWebView } from "../lib/googleSignIn";
+import { isAppleMobileWebKit, isEmbeddedWebView } from "../lib/googleSignIn";
 import { Loader } from "../components/Loader";
 import {
   markSubmissionReviewed,
@@ -93,6 +93,9 @@ function signInErrorMessage(err: unknown): string {
   }
   if (code === "auth/web-storage-unsupported") {
     return "This browser cannot store the sign-in. Turn off private mode, or open the site in Safari or Chrome.";
+  }
+  if (code === "auth/redirect-result-missing") {
+    return "Google returned to this page without a session. On iPhone, tap Google again so a window opens. If it does not, allow pop-ups for this site.";
   }
   if (
     haystack.includes("disallowed_useragent") ||
@@ -281,7 +284,9 @@ export default function AdminSubmissions() {
   const handleSignOut = () => void logOut();
   const embeddedHint = isEmbeddedWebView()
     ? "Google sign-in often fails inside Telegram, Instagram, or Facebook. Open this page in Safari or Chrome."
-    : "";
+    : isAppleMobileWebKit()
+      ? "On iPhone, Google opens in a window. If you land back on this page, allow pop-ups for this site."
+      : "";
   const visibleSignInError =
     signInError ||
     (googleSignInError ? signInErrorMessage(googleSignInError) : "");
