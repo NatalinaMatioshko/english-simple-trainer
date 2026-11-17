@@ -54,10 +54,11 @@ export const homeworkByLesson = [
     href: "/hw-57",
     tasks: [
       { type: "text", text: "Pictures A–L: say the sentence, then check" },
-      { type: "text", text: "Flashcards: irregular verbs (UA → past simple)" },
+      { type: "text", text: "Flashcards: irregular verbs, then write the English pair" },
       { type: "text", text: "Write the past form: get up, go, see, buy…" },
-      { type: "text", text: "Complete sentences with irregular past verbs" },
+      { type: "text", text: "Translate sentences into the past (UA → EN)" },
       { type: "text", text: "Carla: did she, or didn't she?" },
+      { type: "text", text: "Translate: past sentences, a/an/the, and didn't" },
       { type: "text", text: "Write about a bad day (6–8 sentences, with didn't)" },
     ],
   },
