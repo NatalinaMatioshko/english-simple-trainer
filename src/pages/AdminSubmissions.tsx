@@ -3,6 +3,7 @@ import { FirebaseError } from "firebase/app";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
+import { usesSameOriginGoogleAuth } from "../lib/authDomain";
 import { isAppleMobileWebKit, isEmbeddedWebView } from "../lib/googleSignIn";
 import { Loader } from "../components/Loader";
 import {
@@ -284,9 +285,11 @@ export default function AdminSubmissions() {
   const handleSignOut = () => void logOut();
   const embeddedHint = isEmbeddedWebView()
     ? "Google sign-in often fails inside Telegram, Instagram, or Facebook. Open this page in Safari or Chrome."
-    : isAppleMobileWebKit()
-      ? "On iPhone, Google opens in a window. If you land back on this page, allow pop-ups for this site."
-      : "";
+    : isAppleMobileWebKit() && usesSameOriginGoogleAuth()
+      ? "On iPhone, Google opens in this tab. After you choose an account, you come back here signed in."
+      : isAppleMobileWebKit()
+        ? "On iPhone, Google opens in a window. If you land back on this page, allow pop-ups for this site."
+        : "";
   const visibleSignInError =
     signInError ||
     (googleSignInError ? signInErrorMessage(googleSignInError) : "");

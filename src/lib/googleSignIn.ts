@@ -1,4 +1,5 @@
 import { FirebaseError } from "firebase/app";
+import { usesSameOriginGoogleAuth } from "./authDomain";
 import {
   GoogleAuthProvider,
   browserPopupRedirectResolver,
@@ -11,8 +12,8 @@ import {
 
 /**
  * Android and in-app browsers block `signInWithPopup`, so they use a same-tab
- * redirect. iPhone and iPad stay on the popup: Safari drops the redirect
- * session and sends the student back to login with no account.
+ * redirect. iPhone does too, but only when the auth helper is on this site.
+ * A popup on iPhone opens and Safari closes it immediately.
  */
 const MOBILE_UA =
   /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini|Mobile/i;
@@ -55,12 +56,7 @@ export function isEmbeddedWebView(
   return EMBEDDED_UA.test(env.userAgent);
 }
 
-/**
- * iPhone, iPad, and iPadOS "desktop" mode. Safari drops the Firebase redirect
- * session when the auth domain is firebaseapp.com, so the student lands back
- * on the login page with no account and no error. A popup keeps the sign-in
- * on this origin.
- */
+/** iPhone, iPad, and iPadOS "desktop" mode. */
 export function isAppleMobileWebKit(
   env: GoogleSignInEnv = readGoogleSignInEnv(),
 ): boolean {
@@ -70,8 +66,11 @@ export function isAppleMobileWebKit(
 
 export function prefersGoogleRedirect(
   env: GoogleSignInEnv = readGoogleSignInEnv(),
+  sameOriginAuth = usesSameOriginGoogleAuth(),
 ): boolean {
-  if (isAppleMobileWebKit(env)) return false;
+  // Popup on iPhone is closed by Safari before Google can finish.
+  // Same-tab redirect only works when `/__/auth` is served by this site.
+  if (isAppleMobileWebKit(env)) return sameOriginAuth;
   return MOBILE_UA.test(env.userAgent) || isEmbeddedWebView(env);
 }
 

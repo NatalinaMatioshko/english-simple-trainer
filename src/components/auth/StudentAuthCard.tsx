@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { authErrorMessage, useAuth } from "../../context/AuthContext";
+import { usesSameOriginGoogleAuth } from "../../lib/authDomain";
 import { isAppleMobileWebKit, isEmbeddedWebView } from "../../lib/googleSignIn";
 import "../../styles/studentAuth.css";
 
@@ -14,9 +15,11 @@ export function StudentAuthCard({
     useAuth();
   const embeddedHint = isEmbeddedWebView()
     ? "Вхід через Google часто не працює у браузері всередині Telegram, Instagram чи Facebook. Відкрий це посилання в Safari або Chrome."
-    : isAppleMobileWebKit()
-      ? "На iPhone Google відкривається у вікні. Якщо після натискання знову сторінка входу, дозволь спливаючі вікна для цього сайту."
-      : "";
+    : isAppleMobileWebKit() && usesSameOriginGoogleAuth()
+      ? "На iPhone відкриється сторінка Google. Після вибору акаунта тебе поверне сюди."
+      : isAppleMobileWebKit()
+        ? "На iPhone Google відкривається у вікні. Якщо після натискання знову сторінка входу, дозволь спливаючі вікна для цього сайту."
+        : "";
   const [mode, setMode] = useState<Mode>("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

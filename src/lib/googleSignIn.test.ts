@@ -1,5 +1,6 @@
 import { FirebaseError } from "firebase/app";
 import { describe, expect, it } from "vitest";
+import { resolveAuthDomain } from "./authDomain";
 import {
   isAppleMobileWebKit,
   isEmbeddedWebView,
@@ -54,12 +55,17 @@ const instagram: GoogleSignInEnv = {
 };
 
 describe("prefersGoogleRedirect", () => {
-  it("uses a popup on iPhone and iPad, because Safari drops the redirect session", () => {
+  it("uses a popup on iPhone when the auth helper is on another site", () => {
     expect(isAppleMobileWebKit(iphone)).toBe(true);
     expect(isAppleMobileWebKit(ipadDesktopMode)).toBe(true);
-    expect(prefersGoogleRedirect(iphone)).toBe(false);
-    expect(prefersGoogleRedirect(ipadDesktopMode)).toBe(false);
-    expect(prefersGoogleRedirect(instagram)).toBe(false);
+    expect(prefersGoogleRedirect(iphone, false)).toBe(false);
+    expect(prefersGoogleRedirect(ipadDesktopMode, false)).toBe(false);
+    expect(prefersGoogleRedirect(instagram, false)).toBe(false);
+  });
+
+  it("uses a same-tab redirect on iPhone when auth stays on this site", () => {
+    expect(prefersGoogleRedirect(iphone, true)).toBe(true);
+    expect(prefersGoogleRedirect(ipadDesktopMode, true)).toBe(true);
   });
 
   it("uses redirect on Android and non-Apple in-app browsers", () => {
@@ -70,6 +76,20 @@ describe("prefersGoogleRedirect", () => {
     expect(prefersGoogleRedirect(desktop)).toBe(false);
     expect(prefersGoogleRedirect(touchLaptop)).toBe(false);
     expect(prefersGoogleRedirect(mac)).toBe(false);
+  });
+});
+
+describe("resolveAuthDomain", () => {
+  const configured = "english-simple-trainer.firebaseapp.com";
+
+  it("uses this site only for iPhone on the Vercel production host", () => {
+    expect(
+      resolveAuthDomain(configured, "english-simple-trainer.vercel.app", true),
+    ).toBe("english-simple-trainer.vercel.app");
+    expect(
+      resolveAuthDomain(configured, "english-simple-trainer.vercel.app", false),
+    ).toBe(configured);
+    expect(resolveAuthDomain(configured, "localhost", true)).toBe(configured);
   });
 });
 
