@@ -77,19 +77,19 @@ const completedPath: StageSummary[] = [
       "Have / has got and travel pack, dos and don’ts, telling the time, My week + travel chunks, Past Simple preview (yesterday), then Food and drink with frequency adverbs and ordering in a café.",
   },
   {
-    range: "Lessons 45–56",
+    range: "Lessons 45–57",
     title: "Habits, places, and Past Simple",
     summary:
-      "Habits and housework, can / can’t, a week review, yesterday, polite requests, a nice place, good days and dates, how was it, train tickets, regular -ed, then a bad day with irregular verbs.",
+      "Habits and housework, can / can’t, a week review, yesterday, polite requests, a nice place, good days and dates, how was it, train tickets, regular -ed, then a bad day with irregular verbs. Lesson 57 repeats Lesson 56 without the opening video.",
   },
 ];
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 58–65",
-    title: "Greetings, photos, hobbies, plans",
+    range: "Lessons 59–65",
+    title: "Photos, hobbies, plans",
     summary:
-      "Greet people, family photos and object pronouns, hobbies with like + -ing, study habits with because, suggestions, goals with would like, then going to plans, seasons, and invitations.",
+      "Family photos and object pronouns, hobbies with like + -ing, study habits with because, suggestions, goals with would like, then going to plans, seasons, and invitations.",
   },
 ];
 
@@ -809,19 +809,20 @@ const roadmapLessons: Lesson[] = [
     listening: "Silent letter in didn’t · bad-day stories",
     review: "Same tasks as Lesson 56, without the opening video",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lessons/57",
   },
   {
     id: 58,
-    title: "English in action · Greet people",
-    grammar: "Hello / Hi / Nice to meet you · How are you?",
-    vocabulary: "greeting and leave-taking phrases",
-    speaking: "Greet people in short role-plays",
-    listening: "Greeting dialogues",
-    review: "Bad day (L56–57); social English",
-    category: "people",
-    status: "next",
+    title: "Good places",
+    grammar: "Past Simple questions · Did you…? · How are you?",
+    vocabulary: "holiday activities · greetings and goodbyes",
+    speaking: "Talk about a holiday, then greet your teacher",
+    listening: "did you linked · greeting phrases with the teacher",
+    review: "Bad day (L56–57); irregular verbs",
+    category: "general",
+    status: "current",
+    route: "/lessons/58",
   },
   {
     id: 59,
@@ -830,7 +831,7 @@ const roadmapLessons: Lesson[] = [
     vocabulary: "prepositions of place: next to, behind, in front of…",
     speaking: "Talk about the people in a photo",
     listening: "Weak object pronouns · photo descriptions",
-    review: "Family (L27); describing people (L38)",
+    review: "Good places and greetings (L58); family (L27)",
     category: "people",
     status: "next",
   },
@@ -1152,9 +1153,10 @@ export default function RoadmapSection() {
               <p className="roadmap-mini-label">Full timeline</p>
               <h3>Lessons 1–64</h3>
               <p>
-                Interactive lessons are live through You had a bad day
-                (Lesson 57). Lesson 57 repeats Lesson 56 without the opening
-                video. Lessons 58–65 are the planned path ahead.
+                Interactive lessons are live through Good places (Lesson 58):
+                holiday questions with Did you…?, then greetings. Lesson 57
+                repeats Lesson 56 without the opening video. Lessons 59–65 are
+                the planned path ahead.
               </p>
             </div>
 

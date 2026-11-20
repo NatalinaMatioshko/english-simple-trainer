@@ -45,9 +45,8 @@ export default function RoadmapPage() {
             />
           </h1>
           <p className="page-subtitle">
-            A simple learning hub. Live lessons now go through a bad day in
-            the Past Simple: irregular verbs, didn’t, and a short story for
-            the teacher.
+            A simple learning hub. Live lessons now go through Good places:
+            Did you…? questions about a holiday, then hello and how are you.
           </p>
         </div>
         <FaceButton />

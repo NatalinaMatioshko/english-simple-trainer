@@ -31,6 +31,9 @@ export function FillBlankSection({ section }: { section: FillBlankType }) {
     Array(section.items.length).fill(""),
   );
   const [checked, setChecked] = useState(false);
+  const [openExamples, setOpenExamples] = useState<Record<string, boolean>>(
+    {},
+  );
 
   const score = section.items.filter((item, i) =>
     item.correctAnswers.some((a) => norm(a) === norm(answers[i] ?? "")),
@@ -95,13 +98,14 @@ export function FillBlankSection({ section }: { section: FillBlankType }) {
             const ok = item.correctAnswers.some((a) => norm(a) === norm(val));
             const useSelect = Boolean(item.options?.length);
             const attempted = val.trim().length > 0;
+            const exampleOpen = Boolean(item.example && openExamples[item.id]);
             let inputCls = "lw-gap-input";
             if (item.wide) inputCls += " lw-gap-input--wide";
             if (checked && attempted && ok) inputCls += " is-ok";
             if (checked && attempted && !ok) inputCls += " is-err";
             return (
-              <label key={item.id} className="lw-gap-row">
-                <span className="lw-gap-line">
+              <div key={item.id} className="lw-gap-row">
+                <label className="lw-gap-line">
                   <strong>
                     {i + 1}. {item.before}
                   </strong>{" "}
@@ -139,11 +143,30 @@ export function FillBlankSection({ section }: { section: FillBlankType }) {
                     />
                   )}{" "}
                   {item.after}
-                </span>
+                  {item.example ? (
+                    <button
+                      type="button"
+                      className="lw-gap-example-btn"
+                      aria-expanded={exampleOpen}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        setOpenExamples((prev) => ({
+                          ...prev,
+                          [item.id]: !prev[item.id],
+                        }));
+                      }}
+                    >
+                      приклад
+                    </button>
+                  ) : null}
+                </label>
+                {exampleOpen ? (
+                  <span className="lw-gap-example">{item.example}</span>
+                ) : null}
                 {checked && attempted && !ok ? (
                   <span className="lw-tip">{item.correctAnswers[0]}</span>
                 ) : null}
-              </label>
+              </div>
             );
           })}
         </div>
@@ -179,6 +202,7 @@ export function FillBlankSection({ section }: { section: FillBlankType }) {
           onClick={() => {
             setAnswers(Array(section.items.length).fill(""));
             setChecked(false);
+            setOpenExamples({});
           }}
         >
           Reset

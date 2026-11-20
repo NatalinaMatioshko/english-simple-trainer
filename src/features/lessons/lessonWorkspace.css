@@ -208,6 +208,10 @@
   color: var(--color-text);
 }
 
+.lw-reading-passage strong {
+  font-weight: 700;
+}
+
 :root[data-theme="dark"] .lw-reading-passage {
   border-color: color-mix(in srgb, #e5b8b8 45%, var(--color-border));
   background: linear-gradient(
@@ -669,6 +673,33 @@
 .lw-gap-input.is-err {
   border-color: #dc2626;
   background: color-mix(in srgb, #ef4444 8%, var(--color-surface));
+}
+
+.lw-gap-example-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lw-gap-example-btn[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+  color: var(--color-primary);
+}
+
+.lw-gap-example {
+  display: block;
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--color-text-muted);
 }
 
 .lw-tip {

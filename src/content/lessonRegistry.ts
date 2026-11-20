@@ -382,6 +382,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson57;
     },
   },
+  {
+    id: "58",
+    number: 58,
+    title: "Good places",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 58,
+    status: "published",
+    estimatedMinutes: 70,
+    hasHomework: true,
+    topic: "Past Simple questions · holiday activities · greet people",
+    description:
+      "Фрази про відпустку, питання Did you…?, розповідь учителю про улюблене місце, потім привітатися і запитати про вихідні.",
+    route: "/lessons/58",
+    legacyRoute: "/lesson-58",
+    homeworkPath: "/hw-58",
+    load: async () => {
+      const mod = await import("./lessons/lesson-58/lesson");
+      return mod.lesson58;
+    },
+  },
 ];
 
 export function getRegistryEntry(

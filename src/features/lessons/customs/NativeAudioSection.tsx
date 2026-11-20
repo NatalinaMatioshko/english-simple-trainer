@@ -8,6 +8,9 @@ type Props = {
   exercise?: string;
   title?: string;
   ariaLabel?: string;
+  /** Printed lines under the player (questions to ask, not an answer key). */
+  body?: string;
+  bullets?: string[];
   transcriptLines?: string[];
 };
 
@@ -23,6 +26,8 @@ export function NativeAudioSection({ section }: { section: CustomSection }) {
   const title = props.title ?? section.title;
   const ariaLabel =
     props.ariaLabel ?? `${trackLabel}: ${title || section.title}`;
+  const body = props.body ?? "";
+  const bullets = props.bullets ?? [];
   const transcriptLines = props.transcriptLines ?? [];
   const [open, setOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -62,6 +67,16 @@ export function NativeAudioSection({ section }: { section: CustomSection }) {
             Audio file unavailable. Ask your teacher for track {trackLabel}.
           </p>
         )}
+        {body ? <p className="lw-section-desc">{body}</p> : null}
+        {bullets.length > 0 ? (
+          <ul className="lw-sentence-stack">
+            {bullets.map((line) => (
+              <li key={line} className="lw-sentence-line">
+                {line}
+              </li>
+            ))}
+          </ul>
+        ) : null}
         {transcriptLines.length > 0 ? (
           <>
             <button

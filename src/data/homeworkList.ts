@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "58": "/images/lesson58/photo-b.png",
   "57": "/images/lesson56/panel-a.png",
   "56": "/images/lesson56/panel-a.png",
   "55": "/images/lesson55/photo-a-bike.png",
@@ -48,6 +49,18 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "58",
+    title: "Good places",
+    href: "/hw-58",
+    tasks: [
+      { type: "text", text: "Flashcards: holiday activities (UA → EN)" },
+      { type: "text", text: "Write the present form: had, swam, went…" },
+      { type: "text", text: "Make questions: Where did you go?" },
+      { type: "text", text: "Greetings: Good morning, How are you?, See you later" },
+      { type: "text", text: "Write about a favourite holiday (5–7 sentences)" },
+    ],
+  },
   {
     id: "57",
     title: "You had a bad day",

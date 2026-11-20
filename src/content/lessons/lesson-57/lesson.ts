@@ -37,10 +37,11 @@ export const lesson57: Lesson = {
   route: "/lessons/57",
   legacyRoute: "/lesson-57",
   prevLessonPath: "/lessons/56",
-  nextLessonPath: "/lessons",
+  nextLessonPath: "/lessons/58",
   navLinks: [
     { label: "← Back to lessons", path: "/lessons" },
     { label: "← Lesson 56", path: "/lessons/56", ghost: true },
+    { label: "Lesson 58 →", path: "/lessons/58", ghost: true },
     { label: "HW57 →", path: "/hw-57", ghost: true },
   ],
   homework: lesson57Homework,
@@ -707,7 +708,7 @@ export const lesson57: Lesson = {
       body: "Ти розповів/розповіла про поганий день неправильними дієсловами Past Simple.",
       bullets: [
         "Домашка: HW57 → пари дієслів, речення, Карла, коротка письмова розповідь.",
-        "Далі: питання в минулому — Did you…?",
+        "Далі: Good places — Did you…? і вітання (урок 58).",
       ],
     },
   ],
