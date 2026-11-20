@@ -61,6 +61,8 @@ export type TextSection = LessonSectionBase & {
   body: string;
   /** Book-style highlighted reading box (e.g. 8A Ex.1b). */
   readingBox?: boolean;
+  /** Words in `body` shown in bold (whole words only). */
+  highlights?: string[];
   /** Optional short model lines shown as cards */
   bullets?: string[];
   note?: string;
@@ -98,6 +100,11 @@ export type FillBlankSection = LessonSectionBase & {
     choiceMode?: "select" | "buttons";
     /** Wider text input (sentence writing) */
     wide?: boolean;
+    /**
+     * Example sentence for this gap. Hidden until the student clicks «приклад».
+     * Stays separate from the correct-answer tip shown after Check.
+     */
+    example?: string;
   }>;
 };
 

@@ -1,4 +1,23 @@
+import type { ReactNode } from "react";
 import type { TextSection as TextSectionType } from "../../../types/lesson";
+
+function withHighlights(body: string, highlights: string[] | undefined): ReactNode {
+  if (!highlights?.length) return body;
+  const escaped = [...highlights]
+    .sort((a, b) => b.length - a.length)
+    .map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const pattern = new RegExp(`\\b(?:${escaped.join("|")})\\b`, "gi");
+  const nodes: ReactNode[] = [];
+  let last = 0;
+  for (const match of body.matchAll(pattern)) {
+    const index = match.index ?? 0;
+    if (index > last) nodes.push(body.slice(last, index));
+    nodes.push(<strong key={index}>{match[0]}</strong>);
+    last = index + match[0].length;
+  }
+  if (last < body.length) nodes.push(body.slice(last));
+  return nodes;
+}
 
 export function TextSection({ section }: { section: TextSectionType }) {
   const contrastPair =
@@ -21,7 +40,7 @@ export function TextSection({ section }: { section: TextSectionType }) {
       {section.body ? (
         section.readingBox ? (
           <div className="lw-reading-passage" role="region" aria-label="Reading text">
-            <p>{section.body}</p>
+            <p>{withHighlights(section.body, section.highlights)}</p>
           </div>
         ) : (
           <p className="lw-section-desc">{section.body}</p>
