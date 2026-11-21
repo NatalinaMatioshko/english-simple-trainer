@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Hw58CheckReflect } from "../components/Hw58CheckReflect";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { CheckBar } from "../components/lesson38/L38Ui";
 import { gapInputClass } from "../components/lesson31/gapInputClass";
@@ -84,7 +85,11 @@ export default function HW58() {
         <h1>Good places</h1>
         <p className="lead">
           Фрази про відпустку, питання Did you…?, коротке вітання і розповідь
-          про улюблене місце.
+          про улюблене місце. Нижче — Check and reflect: кожен блок
+          надсилається окремо.
+        </p>
+        <p className="lead">
+          <a href="#hw58-cr">Check and reflect →</a>
         </p>
 
         <section id="hw58-cards" className="lesson22-block panel">
@@ -265,7 +270,11 @@ export default function HW58() {
           quizDone={presentChecked && questionsChecked && greetChecked}
           quizScore={presentScore + questionScore + greetScore}
           showListeningCheck={false}
+          title="Надіслати: розповідь і вправи 1–4"
+          description="Це перша частина сторінки. Check and reflect нижче надсилається окремими блоками."
         />
+
+        <Hw58CheckReflect />
       </div>
     </div>
   );
