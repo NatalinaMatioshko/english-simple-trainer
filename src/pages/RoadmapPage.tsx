@@ -46,7 +46,8 @@ export default function RoadmapPage() {
           </h1>
           <p className="page-subtitle">
             A simple learning hub. Live lessons now go through Family photos:
-            prepositions of place, object pronouns, and people in a photo.
+            prepositions of place (UA→EN, below/under), object pronouns, people
+            in a photo. HW59 also asks you to fix your previous bad-day story.
           </p>
         </div>
         <FaceButton />

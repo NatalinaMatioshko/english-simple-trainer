@@ -56,8 +56,20 @@ export const homeworkByLesson = [
     href: "/hw-59",
     tasks: [
       { type: "text", text: "Flashcards: prepositions of place (UA → EN)" },
-      { type: "text", text: "Complete: on / in / next to / in front of…" },
-      { type: "text", text: "Subject → object cards, then Jenna & Miguel gaps" },
+      { type: "text", text: "Complete: on / in / next to / in front of… (short gaps)" },
+      {
+        type: "text",
+        text: "Translate place sentences UA → EN (with Check)",
+      },
+      {
+        type: "text",
+        text: "Mini-test: below / under / over / above (tip + gaps)",
+      },
+      { type: "text", text: "Subject → object flashcards" },
+      {
+        type: "text",
+        text: "Correct your previous homework (bad-day story) — choose the right option for each highlighted mistake",
+      },
       { type: "text", text: "Write about people in a photo (use him / her / them)" },
     ],
   },

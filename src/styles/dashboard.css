@@ -53,6 +53,16 @@
   font-size: 0.95rem;
 }
 
+.dash-task-list {
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.dash-task-list li {
+  line-height: 1.35;
+}
+
 .dash-card-actions {
   display: flex;
   flex-wrap: wrap;
