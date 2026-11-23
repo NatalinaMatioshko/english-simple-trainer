@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { ImageLightbox } from "../../../components/ImageLightbox";
 import type { CustomSection } from "../../../types/lesson";
 import { IMG38 } from "../../../data/lesson38";
+import "../lessonWorkspace.css";
 import "../../../styles/lesson38.css";
 
 type GalleryImage = {
@@ -23,6 +25,8 @@ type Props = {
   wideGrid?: boolean;
   /** Smaller cards that do not stretch to full panel width */
   compact?: boolean;
+  /** Default fit for images that omit their own `fit` */
+  fit?: "cover" | "contain";
 };
 
 function resolveSrc(img: GalleryImage): string | undefined {
@@ -42,6 +46,7 @@ function PhotoCard({
   fit = "cover",
 }: GalleryImage) {
   const [broken, setBroken] = useState(false);
+  const [open, setOpen] = useState(false);
   const label = alt ?? caption;
   const url = resolveSrc({ id: "", file, src, caption });
   const classes = [
@@ -61,11 +66,26 @@ function PhotoCard({
           {note ? <small>{note}</small> : null}
         </div>
       ) : (
-        <img
-          src={url}
-          alt={label}
-          onError={() => setBroken(true)}
-        />
+        <>
+          <button
+            type="button"
+            className="l38-photo-zoom"
+            onClick={() => setOpen(true)}
+            aria-label={`Open larger: ${label}`}
+          >
+            <img
+              src={url}
+              alt={label}
+              onError={() => setBroken(true)}
+            />
+          </button>
+          <ImageLightbox
+            src={url}
+            alt={label}
+            open={open}
+            onClose={() => setOpen(false)}
+          />
+        </>
       )}
       <figcaption>
         {caption}
@@ -81,6 +101,7 @@ export function PhotoGallerySection({ section }: { section: CustomSection }) {
   const images = props.images ?? [];
   const wideGrid = props.wideGrid === true;
   const compact = props.compact === true;
+  const defaultFit = props.fit;
   const gridClass = [
     "l38-photo-grid",
     wideGrid ? "l38-photo-grid--wide" : "",
@@ -99,8 +120,12 @@ export function PhotoGallerySection({ section }: { section: CustomSection }) {
         ) : null}
       </div>
       <div className={gridClass}>
-        {images.map((img) => (
-          <PhotoCard key={img.id} {...img} />
+        {images.map((img, index) => (
+          <PhotoCard
+            key={img.id || img.src || img.file || `photo-${index}`}
+            {...img}
+            fit={img.fit ?? defaultFit}
+          />
         ))}
       </div>
     </section>

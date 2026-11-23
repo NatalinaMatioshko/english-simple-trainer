@@ -46,10 +46,11 @@ export const lesson58: Lesson = {
   route: "/lessons/58",
   legacyRoute: "/lesson-58",
   prevLessonPath: "/lessons/57",
-  nextLessonPath: "/lessons",
+  nextLessonPath: "/lessons/59",
   navLinks: [
     { label: "← Back to lessons", path: "/lessons" },
     { label: "← Lesson 57", path: "/lessons/57", ghost: true },
+    { label: "Lesson 59 →", path: "/lessons/59", ghost: true },
     { label: "HW58 →", path: "/hw-58", ghost: true },
   ],
   homework: lesson58Homework,
@@ -586,7 +587,11 @@ export const lesson58: Lesson = {
       body: "Ти поставив/поставила питання про відпустку і привітався/привіталася.",
       bullets: [
         "Домашка: HW58 → фрази, Did you…?, вітання, коротка розповідь.",
-        "Далі: сімейні фото й object pronouns.",
+        "Далі: Family photos — object pronouns і прийменники місця (урок 59).",
+      ],
+      links: [
+        { href: "/lessons/59", label: "Lesson 59 →" },
+        { href: "/hw-58", label: "HW58 →" },
       ],
     },
   ],

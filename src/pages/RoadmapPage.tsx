@@ -45,8 +45,8 @@ export default function RoadmapPage() {
             />
           </h1>
           <p className="page-subtitle">
-            A simple learning hub. Live lessons now go through Good places:
-            Did you…? questions about a holiday, then hello and how are you.
+            A simple learning hub. Live lessons now go through Family photos:
+            prepositions of place, object pronouns, and people in a photo.
           </p>
         </div>
         <FaceButton />

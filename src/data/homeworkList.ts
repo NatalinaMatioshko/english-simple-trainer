@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "59": "/images/lesson59/family-wide.png",
   "58": "/images/lesson58/photo-b.png",
   "57": "/images/lesson56/panel-a.png",
   "56": "/images/lesson56/panel-a.png",
@@ -49,6 +50,17 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "59",
+    title: "Family photos",
+    href: "/hw-59",
+    tasks: [
+      { type: "text", text: "Flashcards: prepositions of place (UA → EN)" },
+      { type: "text", text: "Complete: on / in / next to / in front of…" },
+      { type: "text", text: "Subject → object cards, then Jenna & Miguel gaps" },
+      { type: "text", text: "Write about people in a photo (use him / her / them)" },
+    ],
+  },
   {
     id: "58",
     title: "Good places",

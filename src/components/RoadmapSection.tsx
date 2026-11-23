@@ -77,19 +77,19 @@ const completedPath: StageSummary[] = [
       "Have / has got and travel pack, dos and don’ts, telling the time, My week + travel chunks, Past Simple preview (yesterday), then Food and drink with frequency adverbs and ordering in a café.",
   },
   {
-    range: "Lessons 45–57",
+    range: "Lessons 45–58",
     title: "Habits, places, and Past Simple",
     summary:
-      "Habits and housework, can / can’t, a week review, yesterday, polite requests, a nice place, good days and dates, how was it, train tickets, regular -ed, then a bad day with irregular verbs. Lesson 57 repeats Lesson 56 without the opening video.",
+      "Habits and housework, can / can’t, a week review, yesterday, polite requests, a nice place, good days and dates, how was it, train tickets, regular -ed, a bad day with irregular verbs, then Good places with Did you…? and greetings. Lesson 57 repeats Lesson 56 without the opening video.",
   },
 ];
 
 const nextLessonsSummary: StageSummary[] = [
   {
-    range: "Lessons 59–65",
-    title: "Photos, hobbies, plans",
+    range: "Lessons 60–65",
+    title: "Hobbies, plans, invitations",
     summary:
-      "Family photos and object pronouns, hobbies with like + -ing, study habits with because, suggestions, goals with would like, then going to plans, seasons, and invitations.",
+      "Hobbies with like + -ing, study habits with because, suggestions, goals with would like, then going to plans, seasons, and invitations.",
   },
 ];
 
@@ -821,7 +821,7 @@ const roadmapLessons: Lesson[] = [
     listening: "did you linked · greeting phrases with the teacher",
     review: "Bad day (L56–57); irregular verbs",
     category: "general",
-    status: "current",
+    status: "completed",
     route: "/lessons/58",
   },
   {
@@ -833,7 +833,8 @@ const roadmapLessons: Lesson[] = [
     listening: "Weak object pronouns · photo descriptions",
     review: "Good places and greetings (L58); family (L27)",
     category: "people",
-    status: "next",
+    status: "current",
+    route: "/lessons/59",
   },
   {
     id: 60,
@@ -1153,9 +1154,9 @@ export default function RoadmapSection() {
               <p className="roadmap-mini-label">Full timeline</p>
               <h3>Lessons 1–64</h3>
               <p>
-                Interactive lessons are live through Good places (Lesson 58):
-                holiday questions with Did you…?, then greetings. Lesson 57
-                repeats Lesson 56 without the opening video. Lessons 59–65 are
+                Interactive lessons are live through Family photos (Lesson 59):
+                prepositions of place and object pronouns. Lesson 58 covers
+                holiday Did you…? questions and greetings. Lessons 60–65 are
                 the planned path ahead.
               </p>
             </div>
