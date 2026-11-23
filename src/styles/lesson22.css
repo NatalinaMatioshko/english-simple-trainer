@@ -646,6 +646,17 @@
   border-color: var(--color-primary);
 }
 
+/* Used by gapInputClass() — green/red after Check */
+.l22-gap-input.is-ok {
+  border-color: var(--color-success, #16a34a);
+  background: color-mix(in srgb, #22c55e 10%, var(--color-surface, #fff));
+}
+
+.l22-gap-input.is-err {
+  border-color: var(--color-error, #dc2626);
+  background: color-mix(in srgb, #ef4444 8%, var(--color-surface, #fff));
+}
+
 .l22-gap-ok {
   border-color: var(--color-success) !important;
   background: rgba(67, 122, 34, 0.12);

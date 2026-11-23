@@ -527,3 +527,321 @@ export const placePosterCards = [
     speak: "The fish is inside the bowl.",
   },
 ] as const;
+
+/**
+ * HW59 · mini tip + gaps: below / under / over / above.
+ * under ≈ directly beneath / covered; below ≈ lower than (level);
+ * over ≈ everyday «над»; above ≈ wall / sky / higher level.
+ */
+export const belowUnderMini = [
+  {
+    id: "bu1",
+    before: "The cat is",
+    after: "the table.",
+    answers: ["under"],
+  },
+  {
+    id: "bu2",
+    before: "Write your name",
+    after: "the line.",
+    answers: ["below"],
+  },
+  {
+    id: "bu3",
+    before: "The picture is",
+    after: "the sofa.",
+    answers: ["above"],
+  },
+  {
+    id: "bu4",
+    before: "The plane is flying",
+    after: "the city.",
+    answers: ["over"],
+  },
+  {
+    id: "bu5",
+    before: "It is two degrees",
+    after: "zero today.",
+    answers: ["below"],
+  },
+  {
+    id: "bu6",
+    before: "Put the blanket",
+    after: "the baby.",
+    answers: ["over"],
+  },
+  {
+    id: "bu7",
+    before: "My shoes are",
+    after: "the bed.",
+    answers: ["under"],
+  },
+  {
+    id: "bu8",
+    before: "Look! There is a bird",
+    after: "us in the sky.",
+    answers: ["above"],
+  },
+] as const;
+
+/** HW59 · UA → EN place sentences (checkable) — new contexts, not lesson photos. */
+export const placeUaTranslate = [
+  {
+    id: "t1",
+    ua: "Книга на парті.",
+    answers: ["The book is on the desk.", "The book is on the desk"],
+  },
+  {
+    id: "t2",
+    ua: "Ключі в кишені.",
+    answers: ["The keys are in the pocket.", "The keys are in the pocket"],
+  },
+  {
+    id: "t3",
+    ua: "Діти в школі.",
+    answers: ["The children are at school.", "The children are at school"],
+  },
+  {
+    id: "t4",
+    ua: "Магазин поруч із парком.",
+    answers: ["The shop is next to the park.", "The shop is next to the park"],
+  },
+  {
+    id: "t5",
+    ua: "Лампа над ліжком.",
+    answers: ["The lamp is above the bed.", "The lamp is above the bed"],
+  },
+  {
+    id: "t6",
+    ua: "Взуття під ліжком.",
+    answers: ["The shoes are below the bed.", "The shoes are below the bed"],
+  },
+  {
+    id: "t7",
+    ua: "Диван між вікнами.",
+    answers: [
+      "The sofa is between the windows.",
+      "The sofa is between the windows",
+    ],
+  },
+  {
+    id: "t8",
+    ua: "Автобус перед школою.",
+    answers: [
+      "The bus is in front of the school.",
+      "The bus is in front of the school",
+    ],
+  },
+  {
+    id: "t9",
+    ua: "Дерево за будинком.",
+    answers: ["The tree is behind the house.", "The tree is behind the house"],
+  },
+] as const;
+
+/**
+ * Student’s previous HW (bad-day story) — keep as written for wrong spans.
+ * HW59 section 3: choose the correct option for each highlighted gap.
+ */
+export type PetroBadDaySeg =
+  | { type: "text"; value: string }
+  | {
+      type: "gap";
+      id: string;
+      wrong: string;
+      options: readonly string[];
+      /** Preferred correct form (Show answers). */
+      answer: string;
+      /** Extra accepted forms for Check scoring. */
+      answers?: readonly string[];
+      /** Short A1-friendly why (shown after Check). */
+      explain: string;
+    };
+
+export const petroBadDayPassage: readonly PetroBadDaySeg[] = [
+  { type: "text", value: "Hello!\nMy name is Petro. I am a barber. Today " },
+  {
+    type: "gap",
+    id: "type",
+    wrong: "I'll  type",
+    options: ["I'll  type", "I'll write", "I'll talk", "I'll tell"],
+    answer: "I'll write",
+    explain: "write = писати текст; type = друкувати на клавіатурі",
+  },
+  {
+    type: "text",
+    value:
+      " about my fantasy bad day.\n\nI got up at eight forty. I was calm and took a shower, ",
+  },
+  {
+    type: "gap",
+    id: "understood",
+    wrong: "when I understood about my work day",
+    options: [
+      "when I understood about my work day",
+      "when I remembered my work day",
+      "when I thought about my work day",
+      "when I forgot my work day",
+    ],
+    answer: "when I remembered my work day",
+    explain: "remember = згадати; understand about так не кажуть",
+  },
+  {
+    type: "text",
+    value:
+      ". So I didn't have time for breakfast. I put breakfast in my bag. I took my phone. I wanted to ",
+  },
+  {
+    type: "gap",
+    id: "taxi",
+    wrong: "take taxi",
+    options: ["take taxi", "take a taxi", "take the taxi", "take taxis"],
+    answer: "take a taxi",
+    explain: "потрібен артикль a з countable noun (a taxi)",
+  },
+  {
+    type: "text",
+    value:
+      ", but it was so expensive. Then I ran to work at nine eleven, so I was ",
+  },
+  {
+    type: "gap",
+    id: "late",
+    wrong: "late to a meeting",
+    options: [
+      "late to a meeting",
+      "late for a meeting",
+      "late in a meeting",
+      "late at a meeting",
+    ],
+    answer: "late for a meeting",
+    explain: "late for = запізнитися на (не late to)",
+  },
+  {
+    type: "text",
+    value:
+      ". I felt bad. It was an important meeting for my team. I wanted to eat. Why did I forget my bag? I went to ",
+  },
+  {
+    type: "gap",
+    id: "restrant",
+    wrong: "restrant",
+    options: ["restrant", "restaurant", "restorant", "restraunt"],
+    answer: "restaurant",
+    explain: "spelling: restaurant",
+  },
+  { type: "text", value: " for a pizza. " },
+  {
+    type: "gap",
+    id: "there-was",
+    wrong: "There was lots of people",
+    options: [
+      "There was lots of people",
+      "There were lots of people",
+      "There were a lot of people",
+      "There was a lot of people",
+    ],
+    answer: "There were lots of people",
+    answers: ["There were lots of people", "There were a lot of people"],
+    explain: "people = plural → were (не was)",
+  },
+  {
+    type: "text",
+    value: ". I bought a pizza. I ate a pizza ",
+  },
+  {
+    type: "gap",
+    id: "desk",
+    wrong: "from desk",
+    options: ["from desk", "at my desk", "from my desk", "on desk"],
+    answer: "at my desk",
+    explain: "at my desk = за столом (не from desk)",
+  },
+  { type: "text", value: ". " },
+  {
+    type: "gap",
+    id: "bad-idea",
+    wrong: "It was bad idea",
+    options: [
+      "It was bad idea",
+      "It was a bad idea",
+      "It was the bad idea",
+      "It was bad ideas",
+    ],
+    answer: "It was a bad idea",
+    explain: "артикль a перед singular countable (a bad idea)",
+  },
+  {
+    type: "text",
+    value: ". Then I worked and worked, when I ",
+  },
+  {
+    type: "gap",
+    id: "clock",
+    wrong: "looked on clock",
+    options: [
+      "looked on clock",
+      "looked at the clock",
+      "looked in the clock",
+      "looked to the clock",
+    ],
+    answer: "looked at the clock",
+    explain: "look at = дивитися на (не look on)",
+  },
+  { type: "text", value: " it was too late. I " },
+  {
+    type: "gap",
+    id: "film",
+    wrong: "forgot about a film",
+    options: [
+      "forgot about a film",
+      "forgot about the film",
+      "forgot about film",
+      "forget about the film",
+    ],
+    answer: "forgot about the film",
+    explain: "the = конкретний фільм (який ми вже знаємо)",
+  },
+  { type: "text", value: " with my friend.\n" },
+  {
+    type: "gap",
+    id: "work-day",
+    wrong: "I forgot about work day",
+    options: [
+      "I forgot about work day",
+      "I forgot about my work day",
+      "I forgot about the work day",
+      "I forgot about a work day",
+    ],
+    answer: "I forgot about my work day",
+    explain: "my work day = мій робочий день (потрібен my)",
+  },
+  {
+    type: "text",
+    value:
+      ". I didn't take my bag with breakfast. I lost my shoes. I didn't meet my buddy.\n",
+  },
+  {
+    type: "gap",
+    id: "bad-day",
+    wrong: "It was bad, bad day",
+    options: [
+      "It was bad, bad day",
+      "It was a bad, bad day",
+      "It was the bad, bad day",
+      "It was bad bad day",
+    ],
+    answer: "It was a bad, bad day",
+    explain: "артикль a перед singular countable (a … day)",
+  },
+  { type: "text", value: "." },
+] as const;
+
+export const petroBadDayGaps = petroBadDayPassage.filter(
+  (seg): seg is Extract<PetroBadDaySeg, { type: "gap" }> => seg.type === "gap",
+);
+
+/** Full draft as the student wrote it (wrong spans kept). */
+export const petroBadDayDraft = petroBadDayPassage
+  .map((seg) => (seg.type === "text" ? seg.value : seg.wrong))
+  .join("");

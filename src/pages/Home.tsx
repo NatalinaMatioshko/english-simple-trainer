@@ -211,9 +211,16 @@ function TeacherCabinet({
           {latestHomework ? (
             <>
               <p className="dash-card-meta">{latestHomework.title}</p>
-              <p className="dash-card-copy">
-                Актуальне завдання з програми. Здані тексти — у «Роботах учнів».
-              </p>
+              <ul className="dash-card-copy dash-task-list">
+                {latestHomework.tasks
+                  .filter(
+                    (task): task is { type: "text"; text: string } =>
+                      task.type === "text" && "text" in task,
+                  )
+                  .map((task) => (
+                    <li key={task.text}>{task.text}</li>
+                  ))}
+              </ul>
               <Link
                 className="action-btn secondary"
                 to={homeworkHref(latestHomework)}
@@ -330,9 +337,16 @@ export default function Home() {
               <p className="dash-card-meta">
                 Lesson {latestHomework.id} · {latestHomework.title}
               </p>
-              <p className="dash-card-copy">
-                Це актуальне домашнє з програми, не персональний статус здачі.
-              </p>
+              <ul className="dash-card-copy dash-task-list">
+                {latestHomework.tasks
+                  .filter(
+                    (task): task is { type: "text"; text: string } =>
+                      task.type === "text" && "text" in task,
+                  )
+                  .map((task) => (
+                    <li key={task.text}>{task.text}</li>
+                  ))}
+              </ul>
               <Link className="action-btn primary" to={homeworkHref(latestHomework)}>
                 Відкрити HW {latestHomework.id}
               </Link>
