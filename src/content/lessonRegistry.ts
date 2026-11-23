@@ -403,6 +403,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson58;
     },
   },
+  {
+    id: "59",
+    number: 59,
+    title: "Family photos",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 59,
+    status: "published",
+    estimatedMinutes: 65,
+    hasHomework: true,
+    topic: "Object pronouns · prepositions of place · people in a photo",
+    description:
+      "Прийменники місця, object pronouns (me, him, her…), розмова з учителем про людей на сімейному фото.",
+    route: "/lessons/59",
+    legacyRoute: "/lesson-59",
+    homeworkPath: "/hw-59",
+    load: async () => {
+      const mod = await import("./lessons/lesson-59/lesson");
+      return mod.lesson59;
+    },
+  },
 ];
 
 export function getRegistryEntry(

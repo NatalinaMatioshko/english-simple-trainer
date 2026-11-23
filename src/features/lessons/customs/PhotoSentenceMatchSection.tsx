@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { ImageLightbox } from "../../../components/ImageLightbox";
 import type { CustomSection } from "../../../types/lesson";
 import { drillSelClass } from "../../../components/lesson31/drillSelClass";
+import "../lessonWorkspace.css";
 import "../../../styles/lesson42.css";
 
 type MatchOption = { value: string; label: string };
@@ -30,6 +32,9 @@ export function PhotoSentenceMatchSection({
   const contain = props.fit === "contain";
   const [ans, setAns] = useState(() => Array(images.length).fill(""));
   const [checked, setChecked] = useState(false);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(
+    null,
+  );
   const score = images.filter((img, i) => ans[i] === String(img.answer)).length;
 
   return (
@@ -50,7 +55,14 @@ export function PhotoSentenceMatchSection({
           const statusId = `${section.id}-match-${pic.id}-status`;
           return (
             <figure key={pic.id} className="l42-pic-card">
-              <img src={pic.src} alt={pic.alt} loading="lazy" />
+              <button
+                type="button"
+                className="l42-pic-zoom"
+                onClick={() => setLightbox({ src: pic.src, alt: pic.alt })}
+                aria-label={`Open larger: ${pic.alt}`}
+              >
+                <img src={pic.src} alt={pic.alt} loading="lazy" />
+              </button>
               <figcaption>
                 <strong>{pic.id}</strong>
                 <select
@@ -138,6 +150,14 @@ export function PhotoSentenceMatchSection({
           ? `You got ${score} out of ${images.length} correct.`
           : ""}
       </p>
+      {lightbox ? (
+        <ImageLightbox
+          src={lightbox.src}
+          alt={lightbox.alt}
+          open
+          onClose={() => setLightbox(null)}
+        />
+      ) : null}
     </section>
   );
 }

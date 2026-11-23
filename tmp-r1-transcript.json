@@ -1,0 +1,215 @@
+{
+  "small": {
+    "text": " Unit 9. Recording 1. a The bag is on the table. b The flowers are in the bag. c The man is at the hotel. d The bag is next to the chair. e The picture is above the table. f The table is below the picture. g The clock is between the computer and the books. h The cup is in front behind the cup.",
+    "chunks": [
+      {
+        "timestamp": [
+          0,
+          4.8
+        ],
+        "text": " Unit 9. Recording 1."
+      },
+      {
+        "timestamp": [
+          4.8,
+          7.06
+        ],
+        "text": " a"
+      },
+      {
+        "timestamp": [
+          7.06,
+          11.52
+        ],
+        "text": " The bag is on the table."
+      },
+      {
+        "timestamp": [
+          11.52,
+          13.88
+        ],
+        "text": " b"
+      },
+      {
+        "timestamp": [
+          13.88,
+          18.32
+        ],
+        "text": " The flowers are in the bag."
+      },
+      {
+        "timestamp": [
+          18.32,
+          20.84
+        ],
+        "text": " c"
+      },
+      {
+        "timestamp": [
+          20.84,
+          31.6
+        ],
+        "text": " The man is at the hotel. d The bag is next to the chair."
+      },
+      {
+        "timestamp": [
+          31.6,
+          47
+        ],
+        "text": " e The picture is above the table. f The table is below the picture. g"
+      },
+      {
+        "timestamp": [
+          47,
+          56
+        ],
+        "text": " The clock is between the computer and the books. h"
+      },
+      {
+        "timestamp": [
+          56,
+          67.08
+        ],
+        "text": " The cup is in front behind the cup."
+      }
+    ]
+  },
+  "medium": {
+    "text": " Unit 9, recording 1 A The bag is on the table B The flowers are in the bag C The man is at the hotel D The man is at the hotel. D The bag is next to the chair. E The picture is above the table. F The table is below the picture. G The clock is between the computer and the books. H The cup is in front of the cake. I The cake is behind the cup.",
+    "chunks": [
+      {
+        "timestamp": [
+          0,
+          3
+        ],
+        "text": " Unit 9, recording 1"
+      },
+      {
+        "timestamp": [
+          5,
+          6
+        ],
+        "text": " A"
+      },
+      {
+        "timestamp": [
+          7,
+          10
+        ],
+        "text": " The bag is on the table"
+      },
+      {
+        "timestamp": [
+          11,
+          12
+        ],
+        "text": " B"
+      },
+      {
+        "timestamp": [
+          13,
+          17
+        ],
+        "text": " The flowers are in the bag"
+      },
+      {
+        "timestamp": [
+          18,
+          19
+        ],
+        "text": " C"
+      },
+      {
+        "timestamp": [
+          20,
+          24
+        ],
+        "text": " The man is at the hotel"
+      },
+      {
+        "timestamp": [
+          25,
+          27
+        ],
+        "text": " D The man is at the hotel. D"
+      },
+      {
+        "timestamp": [
+          27,
+          32
+        ],
+        "text": " The bag is next to the chair."
+      },
+      {
+        "timestamp": [
+          32,
+          34
+        ],
+        "text": " E"
+      },
+      {
+        "timestamp": [
+          34,
+          39
+        ],
+        "text": " The picture is above the table."
+      },
+      {
+        "timestamp": [
+          39,
+          41
+        ],
+        "text": " F"
+      },
+      {
+        "timestamp": [
+          41,
+          45
+        ],
+        "text": " The table is below the picture."
+      },
+      {
+        "timestamp": [
+          45,
+          48
+        ],
+        "text": " G"
+      },
+      {
+        "timestamp": [
+          48,
+          54
+        ],
+        "text": " The clock is between the computer and the books."
+      },
+      {
+        "timestamp": [
+          54,
+          57
+        ],
+        "text": " H"
+      },
+      {
+        "timestamp": [
+          57,
+          61
+        ],
+        "text": " The cup is in front of the cake."
+      },
+      {
+        "timestamp": [
+          61,
+          64
+        ],
+        "text": " I"
+      },
+      {
+        "timestamp": [
+          64,
+          66.88
+        ],
+        "text": " The cake is behind the cup."
+      }
+    ]
+  }
+}
