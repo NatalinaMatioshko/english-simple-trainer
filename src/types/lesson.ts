@@ -113,6 +113,11 @@ export type MultipleChoiceGroupSection = LessonSectionBase & {
   type: "multipleChoiceGroup";
   /** Optional word box shown above the quiz */
   chips?: string[];
+  /**
+   * `select` = dropdown (default).
+   * `ab` = lettered a / b option buttons under each prompt (book-style).
+   */
+  choiceMode?: "select" | "ab";
   items: Array<{
     id: string;
     prompt: string;

@@ -156,6 +156,10 @@ export const customSectionLoaders: Record<
     import("./customs/PersonTickTableSection").then((m) => ({
       default: m.PersonTickTableSection,
     })),
+  "like-ing-grammar-box": () =>
+    import("./customs/LikeIngGrammarBoxSection").then((m) => ({
+      default: m.LikeIngGrammarBoxSection,
+    })),
 };
 
 /** Stable React.lazy components — created once at module load, not during render. */

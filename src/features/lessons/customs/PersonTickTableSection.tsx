@@ -4,12 +4,22 @@ import "./personTickTable.css";
 
 type Column = { id: string; label: string };
 type Row = { id: string; label: string; correctTicks: string[] };
+type TableBlock = { id: string; label: string; rows: Row[] };
 
 type Props = {
   columns?: Column[];
   rows?: Row[];
-  /** First column header (default Who…) */
+  /** First column header (default Who…) — single-table mode */
   promptHeader?: string;
+  /**
+   * Multiple named tables sharing the same columns
+   * (e.g. 1 Tania / 2 Kristoff preference grids).
+   */
+  tables?: TableBlock[];
+  /** Hide auto 1, 2, 3 on activity rows */
+  hideRowNumbers?: boolean;
+  /** At most one tick per row (radio-like) — good for preference columns */
+  singleTickPerRow?: boolean;
 };
 
 function setsEqual(a: Set<string>, b: Set<string>): boolean {
@@ -18,12 +28,27 @@ function setsEqual(a: Set<string>, b: Set<string>): boolean {
   return true;
 }
 
-/** Reading table: tick one or more people per question row. */
+function allRows(tables: TableBlock[], fallback: Row[]): Row[] {
+  if (tables.length > 0) return tables.flatMap((t) => t.rows);
+  return fallback;
+}
+
+/** Reading / listening table: tick columns per row. Supports one or more people tables. */
 export function PersonTickTableSection({ section }: { section: CustomSection }) {
   const props = (section.props ?? {}) as Props;
   const columns = props.columns ?? [];
-  const rows = props.rows ?? [];
+  const singleRows = props.rows ?? [];
+  const tables = props.tables ?? [];
   const promptHeader = props.promptHeader ?? "Who…";
+  const hideRowNumbers = Boolean(props.hideRowNumbers);
+  const singleTickPerRow = Boolean(props.singleTickPerRow);
+
+  const blocks: TableBlock[] =
+    tables.length > 0
+      ? tables
+      : [{ id: "main", label: promptHeader, rows: singleRows }];
+
+  const rows = useMemo(() => allRows(tables, singleRows), [tables, singleRows]);
 
   const correctByRow = useMemo(
     () =>
@@ -36,15 +61,24 @@ export function PersonTickTableSection({ section }: { section: CustomSection }) 
   const [ticks, setTicks] = useState<Record<string, Record<string, boolean>>>({});
   const [checked, setChecked] = useState(false);
 
-  const toggle = useCallback((rowId: string, colId: string) => {
-    setChecked(false);
-    const key = colId.toLowerCase();
-    setTicks((prev) => {
-      const row = { ...(prev[rowId] ?? {}) };
-      row[key] = !row[key];
-      return { ...prev, [rowId]: row };
-    });
-  }, []);
+  const toggle = useCallback(
+    (rowId: string, colId: string) => {
+      setChecked(false);
+      const key = colId.toLowerCase();
+      setTicks((prev) => {
+        const row = { ...(prev[rowId] ?? {}) };
+        const nextOn = !row[key];
+        if (singleTickPerRow) {
+          const cleared: Record<string, boolean> = {};
+          if (nextOn) cleared[key] = true;
+          return { ...prev, [rowId]: cleared };
+        }
+        row[key] = nextOn;
+        return { ...prev, [rowId]: row };
+      });
+    },
+    [singleTickPerRow],
+  );
 
   const selectedSet = (rowId: string): Set<string> => {
     const row = ticks[rowId] ?? {};
@@ -71,65 +105,71 @@ export function PersonTickTableSection({ section }: { section: CustomSection }) 
         ) : null}
       </div>
 
-      <div className="ptt-scroll">
-        <table className="ptt-table">
-          <thead>
-            <tr>
-              <th scope="col" className="ptt-th ptt-th--prompt">
-                {promptHeader}
-              </th>
-              {columns.map((col) => (
-                <th key={col.id} scope="col" className="ptt-th ptt-th--person">
-                  {col.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row, idx) => {
-              const ok = checked && isRowOk(row.id);
-              const wrong = checked && !isRowOk(row.id);
-              return (
-                <tr
-                  key={row.id}
-                  className={`ptt-row${wrong ? " is-err" : ""}${ok ? " is-ok" : ""}`}
-                >
-                  <th scope="row" className="ptt-prompt">
-                    <span className="ptt-num" aria-hidden="true">
-                      {idx + 1}
-                    </span>
-                    {row.label}
+      <div className="ptt-stack">
+        {blocks.map((block) => (
+          <div key={block.id} className="ptt-scroll">
+            <table className="ptt-table">
+              <thead>
+                <tr>
+                  <th scope="col" className="ptt-th ptt-th--prompt">
+                    {block.label}
                   </th>
-                  {columns.map((col) => {
-                    const colKey = col.id.toLowerCase();
-                    const on = Boolean(ticks[row.id]?.[colKey]);
-                    const cellOk =
-                      checked && (correctByRow[row.id]?.has(colKey) ? on : !on);
-                    const cellWrong = checked && !cellOk;
-                    return (
-                      <td
-                        key={col.id}
-                        className={`ptt-cell${cellWrong ? " is-err" : ""}${
-                          cellOk && on ? " is-ok" : ""
-                        }`}
-                      >
-                        <label className="ptt-tick">
-                          <input
-                            type="checkbox"
-                            checked={on}
-                            onChange={() => toggle(row.id, col.id)}
-                            aria-label={`${idx + 1} ${row.label} · ${col.label}`}
-                          />
-                          <span className="ptt-tick-mark" aria-hidden="true" />
-                        </label>
-                      </td>
-                    );
-                  })}
+                  {columns.map((col) => (
+                    <th key={col.id} scope="col" className="ptt-th ptt-th--person">
+                      {col.label}
+                    </th>
+                  ))}
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {block.rows.map((row, idx) => {
+                  const ok = checked && isRowOk(row.id);
+                  const wrong = checked && !isRowOk(row.id);
+                  return (
+                    <tr
+                      key={row.id}
+                      className={`ptt-row${wrong ? " is-err" : ""}${ok ? " is-ok" : ""}`}
+                    >
+                      <th scope="row" className="ptt-prompt">
+                        {hideRowNumbers ? null : (
+                          <span className="ptt-num" aria-hidden="true">
+                            {idx + 1}
+                          </span>
+                        )}
+                        {row.label}
+                      </th>
+                      {columns.map((col) => {
+                        const colKey = col.id.toLowerCase();
+                        const on = Boolean(ticks[row.id]?.[colKey]);
+                        const cellOk =
+                          checked && (correctByRow[row.id]?.has(colKey) ? on : !on);
+                        const cellWrong = checked && !cellOk;
+                        return (
+                          <td
+                            key={col.id}
+                            className={`ptt-cell${cellWrong ? " is-err" : ""}${
+                              cellOk && on ? " is-ok" : ""
+                            }`}
+                          >
+                            <label className="ptt-tick">
+                              <input
+                                type="checkbox"
+                                checked={on}
+                                onChange={() => toggle(row.id, col.id)}
+                                aria-label={`${row.label} · ${col.label}`}
+                              />
+                              <span className="ptt-tick-mark" aria-hidden="true" />
+                            </label>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        ))}
       </div>
 
       <div className="lw-actions">

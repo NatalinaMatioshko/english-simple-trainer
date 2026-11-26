@@ -41,10 +41,11 @@ export const lesson59: Lesson = {
   route: "/lessons/59",
   legacyRoute: "/lesson-59",
   prevLessonPath: "/lessons/58",
-  nextLessonPath: "/lessons",
+  nextLessonPath: "/lessons/60",
   navLinks: [
     { label: "← Back to lessons", path: "/lessons" },
     { label: "← Lesson 58", path: "/lessons/58", ghost: true },
+    { label: "Lesson 60 →", path: "/lessons/60", ghost: true },
     { label: "HW59 →", path: "/hw-59", ghost: true },
   ],
   homework: lesson59Homework,
@@ -586,10 +587,11 @@ export const lesson59: Lesson = {
       body: "Ти говорив про місце речей і людей на фото, і про me / him / her / us / them.",
       bullets: [
         "Домашнє: HW59 — прийменники (gaps + UA→EN + below/under), займенники, виправити попереднє ДЗ (bad day) і коротко про фото.",
-        "Далі: хобі з like + -ing (урок 60).",
+        "Далі: Hobbies — like / enjoy / love / hate + -ing (урок 60).",
       ],
       links: [
         { href: "/hw-59", label: "HW59 →" },
+        { href: "/lessons/60", label: "Lesson 60 →" },
         { href: "/lessons", label: "All lessons →" },
       ],
     },
