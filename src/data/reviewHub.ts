@@ -26,6 +26,19 @@ export const reviewMaterials: ReviewMaterial[] = [
     relatedHw: "/hw-42",
     relatedLesson: "/lesson-42",
   },
+  {
+    id: "present-simple-blueprint",
+    title: "Present Simple Blueprint",
+    topic: "Present Simple · routines · do / does",
+    level: "A1–A2",
+    blurb:
+      "Презентація-шпаргалка з Present Simple: форми, питання, заперечення та типові помилки. Відкрий, коли треба швидко повторити правило.",
+    pdfPath: "materials/present-simple-blueprint/Present_Simple_Blueprint.pdf",
+    pages: 11,
+    tags: ["present simple", "routines", "do/does", "visual"],
+    relatedHw: "/self-study",
+    relatedLesson: "/lesson-22",
+  },
 ];
 
 export function getReviewMaterial(id: string): ReviewMaterial | undefined {

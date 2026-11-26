@@ -1,0 +1,168 @@
+/* like-ing-grammar-box · Roadmap-style complete-the-box (platform colours) */
+
+.lig-box {
+  margin-top: 0.55rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.lig-label {
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  padding: 0.45rem 1rem;
+}
+
+.lig-block {
+  padding: 0.75rem 0.85rem 0.85rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.lig-block:first-of-type {
+  border-top: none;
+}
+
+.lig-heading {
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.lig-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lig-table {
+  width: 100%;
+  min-width: 22rem;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.lig-table th,
+.lig-table td {
+  padding: 0.42rem 0.55rem;
+  border: 1px solid var(--color-border);
+  vertical-align: middle;
+  background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface));
+}
+
+.lig-sign {
+  width: 2.1rem;
+  text-align: center;
+  font-weight: 900;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
+}
+
+.lig-sign--pos {
+  color: #166534;
+  background: color-mix(in srgb, #22c55e 12%, var(--color-surface));
+}
+
+.lig-sign--neg {
+  color: #991b1b;
+  background: color-mix(in srgb, #ef4444 10%, var(--color-surface));
+}
+
+.lig-subj {
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--color-surface);
+}
+
+.lig-verb {
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.lig-gap-cell {
+  white-space: nowrap;
+}
+
+.lig-n {
+  display: inline-block;
+  min-width: 0.9rem;
+  margin-right: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  vertical-align: super;
+  color: color-mix(in srgb, var(--color-primary) 75%, var(--color-text));
+}
+
+.lig-gap {
+  display: inline-block;
+  width: 6.5rem;
+  min-width: 5.25rem;
+  max-width: 8rem;
+  margin: 0 0.15rem;
+  padding: 0.28rem 0.4rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 0.88rem;
+}
+
+.lig-gap.is-ok {
+  border-color: #16a34a;
+  background: color-mix(in srgb, #22c55e 10%, var(--color-surface));
+}
+
+.lig-gap.is-err {
+  border-color: #dc2626;
+  background: color-mix(in srgb, #ef4444 8%, var(--color-surface));
+}
+
+.lig-ing-table td:first-child {
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--color-surface);
+  min-width: 9.5rem;
+}
+
+.lig-arrow {
+  margin: 0 0.25rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.lig-rule {
+  color: var(--color-text);
+}
+
+.lig-rule strong {
+  font-weight: 800;
+}
+
+.lig-u {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .lig-table {
+    min-width: 18.5rem;
+    font-size: 0.84rem;
+  }
+
+  .lig-gap {
+    width: 5.5rem;
+    min-width: 4.75rem;
+  }
+
+  .lig-block {
+    padding: 0.65rem 0.55rem 0.75rem;
+  }
+}

@@ -424,6 +424,27 @@ export const lessonRegistry: LessonRegistryEntry[] = [
       return mod.lesson59;
     },
   },
+  {
+    id: "60",
+    number: 60,
+    title: "Hobbies",
+    level: "A1",
+    moduleId: "a1-present",
+    order: 60,
+    status: "published",
+    estimatedMinutes: 65,
+    hasHomework: true,
+    topic: "like / enjoy / love / hate + -ing · hobbies",
+    description:
+      "Хобі та вподобання: like/enjoy/love/hate + -ing, розмова з учителем про те, що ти любиш робити.",
+    route: "/lessons/60",
+    legacyRoute: "/lesson-60",
+    homeworkPath: "/hw-60",
+    load: async () => {
+      const mod = await import("./lessons/lesson-60/lesson");
+      return mod.lesson60;
+    },
+  },
 ];
 
 export function getRegistryEntry(

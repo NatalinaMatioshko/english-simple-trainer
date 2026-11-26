@@ -1,8 +1,14 @@
-/* person-tick-table · SB-style Who… grid (platform colours) */
+/* person-tick-table · SB-style Who… / preference grid (platform colours) */
+
+.ptt-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 0.35rem;
+}
 
 .ptt-scroll {
   overflow-x: auto;
-  margin-top: 0.35rem;
 }
 
 .ptt-table {

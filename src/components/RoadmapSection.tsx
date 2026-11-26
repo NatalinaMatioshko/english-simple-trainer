@@ -833,7 +833,7 @@ const roadmapLessons: Lesson[] = [
     listening: "Weak object pronouns · photo descriptions",
     review: "Good places and greetings (L58); family (L27)",
     category: "people",
-    status: "current",
+    status: "completed",
     route: "/lessons/59",
   },
   {
@@ -845,7 +845,8 @@ const roadmapLessons: Lesson[] = [
     listening: "Weak -ing · hobby chats",
     review: "Family photos (L59); everyday activities",
     category: "general",
-    status: "next",
+    status: "current",
+    route: "/lessons/60",
   },
   {
     id: 61,
@@ -1154,10 +1155,9 @@ export default function RoadmapSection() {
               <p className="roadmap-mini-label">Full timeline</p>
               <h3>Lessons 1–64</h3>
               <p>
-                Interactive lessons are live through Family photos (Lesson 59):
-                prepositions of place and object pronouns. Lesson 58 covers
-                holiday Did you…? questions and greetings. Lessons 60–65 are
-                the planned path ahead.
+                Interactive lessons are live through Hobbies (Lesson 60):
+                like/enjoy/love/hate + -ing. Lesson 59 covers family photos
+                and object pronouns. Lessons 61–65 are the planned path ahead.
               </p>
             </div>
 

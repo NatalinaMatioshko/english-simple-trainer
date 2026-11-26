@@ -45,9 +45,9 @@ export default function RoadmapPage() {
             />
           </h1>
           <p className="page-subtitle">
-            A simple learning hub. Live lessons now go through Family photos:
-            prepositions of place (UA→EN, below/under), object pronouns, people
-            in a photo. HW59 also asks you to fix your previous bad-day story.
+            A simple learning hub. Live lessons now go through Hobbies: like /
+            enjoy / love / hate + -ing, hobby vocabulary, and weekend listening
+            with Tania and Kristoff.
           </p>
         </div>
         <FaceButton />

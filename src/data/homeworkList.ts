@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "60": "/images/lesson60/hobby-a.png",
   "59": "/images/lesson59/family-wide.png",
   "58": "/images/lesson58/photo-b.png",
   "57": "/images/lesson56/panel-a.png",
@@ -50,6 +51,23 @@ export function homeworkHref(
 }
 
 export const homeworkByLesson = [
+  {
+    id: "60",
+    title: "Hobbies",
+    href: "/hw-60",
+    tasks: [
+      { type: "text", text: "Flashcards: hobby phrases (UA → EN)" },
+      { type: "text", text: "Complete: watch / listen / play / read / do…" },
+      {
+        type: "text",
+        text: "like / enjoy / love / hate + -ing — write 5 sentences about you",
+      },
+      {
+        type: "text",
+        text: "Translate hobby sentences UA → EN (with Check)",
+      },
+    ],
+  },
   {
     id: "59",
     title: "Family photos",
