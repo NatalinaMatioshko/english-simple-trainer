@@ -45,9 +45,9 @@ export default function RoadmapPage() {
             />
           </h1>
           <p className="page-subtitle">
-            A simple learning hub. Live lessons now go through Hobbies: like /
-            enjoy / love / hate + -ing, hobby vocabulary, and weekend listening
-            with Tania and Kristoff.
+            A simple learning hub. Current self-study focus: Hobbies — like /
+            enjoy / love / hate + -ing. Open the self-study homework when there
+            is no live lesson.
           </p>
         </div>
         <FaceButton />

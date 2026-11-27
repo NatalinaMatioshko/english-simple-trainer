@@ -1,4 +1,5 @@
 export const homeworkCovers: Record<string, string> = {
+  "60-study": "/images/lesson60/hobby-a.png",
   "60": "/images/lesson60/hobby-a.png",
   "59": "/images/lesson59/family-wide.png",
   "58": "/images/lesson58/photo-b.png",
@@ -52,6 +53,38 @@ export function homeworkHref(
 
 export const homeworkByLesson = [
   {
+    id: "60-study",
+    title: "Hobbies · самостійно",
+    href: "/hw-60-study",
+    tasks: [
+      { type: "text", text: "Review + flashcards: hobbies / like + -ing" },
+      {
+        type: "text",
+        text: "Check & reflect: prepositions of place (with Check)",
+      },
+      {
+        type: "text",
+        text: "Check & reflect: object pronouns (with Check)",
+      },
+      {
+        type: "text",
+        text: "Check & reflect: verb collocations + tick true for you",
+      },
+      {
+        type: "text",
+        text: "love / hate / enjoy + -ing + extra -ing gaps (with Check)",
+      },
+      {
+        type: "text",
+        text: "Make 6 sentences + free writing about hobbies",
+      },
+      {
+        type: "text",
+        text: "UA → EN (hobbies, place, pronouns) + reflect 1–5",
+      },
+    ],
+  },
+  {
     id: "60",
     title: "Hobbies",
     href: "/hw-60",
@@ -61,6 +94,10 @@ export const homeworkByLesson = [
       {
         type: "text",
         text: "like / enjoy / love / hate + -ing — write 5 sentences about you",
+      },
+      {
+        type: "text",
+        text: "Mini-test: 15 questions (collocations + like + -ing), pass 11/15",
       },
       {
         type: "text",

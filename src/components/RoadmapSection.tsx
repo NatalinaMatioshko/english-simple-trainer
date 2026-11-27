@@ -1156,8 +1156,9 @@ export default function RoadmapSection() {
               <h3>Lessons 1–64</h3>
               <p>
                 Interactive lessons are live through Hobbies (Lesson 60):
-                like/enjoy/love/hate + -ing. Lesson 59 covers family photos
-                and object pronouns. Lessons 61–65 are the planned path ahead.
+                like/enjoy/love/hate + -ing. When there is no live class, use
+                the self-study homework (Hobbies · самостійно). Lessons 61–65
+                are the planned path ahead.
               </p>
             </div>
 
