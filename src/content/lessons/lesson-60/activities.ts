@@ -376,6 +376,107 @@ export const hobbyReadingBits = [
   },
 ] as const;
 
+/** HW60 · Mini-test · 15 questions (collocations + like + -ing). */
+export const hw60TestTasks = [
+  {
+    text: "Complete: I ______ a film on Friday evening.",
+    options: ["watch", "listen to", "do", "use"],
+    correct: "watch",
+  },
+  {
+    text: "Complete: She ______ music on the bus.",
+    options: ["plays", "listens to", "reads", "does"],
+    correct: "listens to",
+  },
+  {
+    text: "Complete: They ______ cards every weekend.",
+    options: ["watch", "read", "play", "use"],
+    correct: "play",
+  },
+  {
+    text: "Complete: He ______ a book in bed.",
+    options: ["reads", "watches", "plays", "does"],
+    correct: "reads",
+  },
+  {
+    text: "Complete: I ______ exercise in the morning.",
+    options: ["play", "watch", "do", "listen"],
+    correct: "do",
+  },
+  {
+    text: "Complete: We ______ the internet every day.",
+    options: ["watch", "use", "read", "play"],
+    correct: "use",
+  },
+  {
+    text: "Choose the correct sentence.",
+    options: [
+      "I like watch films.",
+      "I like watching films.",
+      "I like to watching films.",
+      "I liking watch films.",
+    ],
+    correct: "I like watching films.",
+  },
+  {
+    text: "Choose the correct sentence.",
+    options: [
+      "She enjoys to swim.",
+      "She enjoys swimming.",
+      "She enjoy swimming.",
+      "She enjoys swim.",
+    ],
+    correct: "She enjoys swimming.",
+  },
+  {
+    text: "Choose the correct sentence.",
+    options: [
+      "They hate cleaning the kitchen.",
+      "They hate clean the kitchen.",
+      "They hates cleaning the kitchen.",
+      "They hate to cleaning the kitchen.",
+    ],
+    correct: "They hate cleaning the kitchen.",
+  },
+  {
+    text: "Choose the correct question.",
+    options: [
+      "Do you like play football?",
+      "Does you like playing football?",
+      "Do you like playing football?",
+      "Do you liking playing football?",
+    ],
+    correct: "Do you like playing football?",
+  },
+  {
+    text: "I love ______ photos at the weekend.",
+    options: ["take", "taking", "to taking", "takes"],
+    correct: "taking",
+  },
+  {
+    text: "He doesn’t like ______ up early.",
+    options: ["get", "getting", "gets", "to getting"],
+    correct: "getting",
+  },
+  {
+    text: "What do you enjoy ______ in the evening?",
+    options: ["do", "doing", "does", "to do"],
+    correct: "doing",
+  },
+  {
+    text: "My children don’t like ______ by car.",
+    options: ["travel", "travelling", "travels", "to travelling"],
+    correct: "travelling",
+  },
+  {
+    text: "She loves ______ food from different countries.",
+    options: ["eat", "eating", "eats", "to eating"],
+    correct: "eating",
+  },
+] as const;
+
+export const hw60TestPassScore = 11;
+
 /** HW60 · UA → EN hobby sentences. */
 export const hobbyUaTranslate = [
   {

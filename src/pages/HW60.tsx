@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { HomeworkSubmit } from "../components/HomeworkSubmit";
 import { CheckBar } from "../components/lesson38/L38Ui";
 import { gapInputClass } from "../components/lesson31/gapInputClass";
+import { ScoredQuizCard } from "../components/practice/ScoredQuizCard";
 import {
   hobbyPhraseGaps,
   hobbyUaTranslate,
+  hw60TestPassScore,
+  hw60TestTasks,
 } from "../content/lessons/lesson-60/activities";
 import {
   hobbyFlashcards,
   likeIngFlashcards,
 } from "../content/lessons/lesson-60/vocabulary";
+import { useScoredQuiz } from "../hooks/useScoredQuiz";
+import type { QuizTask } from "../types/trainer";
 import { speakEnglish } from "../utils/speech";
 import { matchesAnyAnswer } from "../utils/text";
 import "../styles/lesson22.css";
@@ -30,6 +35,13 @@ export default function HW60() {
     if (!open) speakEnglish(speak);
     setList(open ? list.filter((i) => i !== idx) : [...list, idx]);
   };
+
+  const testTasks = useMemo(
+    () => hw60TestTasks.map((task): QuizTask => ({ ...task, options: [...task.options] })),
+    [],
+  );
+  const test = useScoredQuiz(testTasks, "hw60-test");
+  const testPassed = test.finished && test.score >= hw60TestPassScore;
 
   const [phrases, setPhrases] = useState<Record<string, string>>({});
   const [phrasesChecked, setPhrasesChecked] = useState(false);
@@ -52,7 +64,10 @@ export default function HW60() {
       return `${value} ${item.after}`.trim();
     }),
     "",
-    "2 · UA → EN",
+    "Mini-test",
+    `Score: ${test.score} / ${test.total}${test.finished ? (testPassed ? " · passed" : " · try again") : " · in progress"}`,
+    "",
+    "UA → EN",
     ...hobbyUaTranslate.map((item) => {
       const value = ua[item.id] ?? "";
       return `${item.ua} → ${value}`.trim();
@@ -204,9 +219,54 @@ export default function HW60() {
           />
         </section>
 
+        <section id="hw60-test" className="lesson22-block panel">
+          <div className="lesson22-section-head">
+            <p className="page-kicker">3 · Mini-test</p>
+            <h2>Hobbies · 15 questions</h2>
+            <p className="lead">
+              Collocations (watch / listen to / play…) і like / enjoy / love /
+              hate + -ing. Пройди всі 15. Залік від {hw60TestPassScore}/15.
+            </p>
+          </div>
+          <div
+            className="progress"
+            aria-label="Прогрес тесту HW60"
+            style={{ marginTop: "0.35rem" }}
+          >
+            <span style={{ width: test.progress }} />
+          </div>
+          <p className="muted" style={{ margin: "0.5rem 0 1rem" }}>
+            {test.answeredCount} / {test.total} · Бал: {test.score}
+            {test.finished
+              ? testPassed
+                ? " · залік ✓"
+                : " · ще потренуйся"
+              : ""}
+          </p>
+          <ScoredQuizCard
+            title="HW60 test"
+            subtitle="Обери правильну відповідь."
+            successText="Чудово! Hobbies і like + -ing закріплені."
+            retryText="Повтори флешкарти й спробуй ще раз."
+            passScore={hw60TestPassScore}
+            currentTask={test.currentTask}
+            finished={test.finished}
+            score={test.score}
+            selected={test.selected}
+            locked={test.locked}
+            options={test.options}
+            feedback={test.feedback}
+            handleAnswer={test.handleAnswer}
+            nextTask={test.nextTask}
+            restart={test.restart}
+            shuffleQuestions={test.shuffleQuestions}
+            total={test.total}
+          />
+        </section>
+
         <section id="hw60-ua" className="lesson22-block panel">
           <div className="lesson22-section-head">
-            <p className="page-kicker">3 · Translate</p>
+            <p className="page-kicker">4 · Translate</p>
             <h2>UA → EN</h2>
             <p className="lead">Переклади речення. Потім натисни Check.</p>
           </div>
@@ -250,8 +310,8 @@ export default function HW60() {
           lessonId="60"
           writing={writing}
           appendix={appendix}
-          quizDone={phrasesChecked && uaChecked}
-          quizScore={phrasesScore + uaScore}
+          quizDone={phrasesChecked && uaChecked && testPassed}
+          quizScore={phrasesScore + uaScore + test.score}
           showListeningCheck={false}
         />
       </div>
